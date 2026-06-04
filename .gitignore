@@ -1,0 +1,16 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Netlify
+.netlify/
+
+# Node (falls später ein Build-Step ergänzt wird)
+node_modules/
+npm-debug.log*
+
+# Lokale Entwürfe
+*.draft.html

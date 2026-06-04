@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>M298 v2.0.0 · SpaceX — Der Weg zum $1,75-Billionen-IPO · FinCoach AI</title>
+<meta name="description" content="FinCoach AI Tiefenmodul M298: SpaceX vom $350-Mrd.-Tender (Dez. 2024) zum S-1-Filing (Mai 2026, ~$1.750 Mrd.). Finanzstruktur, Sum-of-the-Parts mit xAI-Integration, EV/Revenue ~113x, IPO-Szenarien, globaler Vergleich, ITAR-Hürden. Provenienz nach M-DBOM v1 — 4 verifizierte, 4 als SCENARIO_PROJECTION markierte Fakten. Stichtag 2026-06-01."/>
+<link rel="stylesheet" href="fonts.css"/><!-- Self-hosted Fonts (DSGVO: keine Google-CDN-Abrufe) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        tngb: {
+          bg:       '#0A0F1A',
+          card:     '#121A2E',
+          cyan:     '#00CFFF',
+          emerald:  '#00CC7A',
+          magenta:  '#E6399A',
+          orange:   '#FF6B00',
+          lavender: '#9933FF',
+          gold:     '#DFAF0F',
+          indigo:   '#4472C4',
+          coral:    '#E040A0',
+          sand:     '#F5F0E6',
+          muted:    '#64748B',
+          border:   '#1E293B',
+        }
+      },
+      fontFamily: {
+        sans:  ['Inter', 'system-ui', 'sans-serif'],
+        head:  ['Space Grotesk', 'sans-serif'],
+        mono:  ['JetBrains Mono', 'monospace'],
+      }
+    }
+  }
+};
+</script>
+<style>
+  :root {
+    --bg: #0A0F1A; --card: #121A2E; --cyan: #00CFFF; --emerald: #00CC7A;
+    --magenta: #E6399A; --orange: #FF6B00; --lavender: #9933FF;
+    --gold: #DFAF0F; --indigo: #4472C4; --coral: #E040A0; --muted: #64748B; --border: #1E293B;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); color: #E2E8F0; font-family: 'Inter', system-ui, sans-serif; }
+  body { background: var(--bg); }
+  h1,h2,h3,h4,h5,h6 { font-family: 'Space Grotesk', sans-serif; }
+  code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
+  .glass { background: rgba(18,26,46,0.7); backdrop-filter: blur(16px); border: 1px solid rgba(0,207,255,0.12); }
+  .scroll-fade { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .scroll-fade.visible { opacity: 1; transform: none; }
+  .reg-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; border: 1px solid; transition: background 0.2s, transform 0.15s; cursor: pointer; }
+  .reg-tag:hover { transform: translateY(-1px); }
+  .kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; color: #F1F5F9; margin-bottom: 0.4rem; }
+  .section-badge { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 4px; }
+  .lane-header { font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .process-node { border-radius: 8px; padding: 0.5rem 0.85rem; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; text-align: center; min-width: 110px; line-height: 1.4; }
+  .process-node:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,207,255,0.25); }
+  .arrow { color: var(--muted); font-size: 1.1rem; }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--card); border: 1px solid var(--cyan); border-radius: 16px; max-width: 560px; width: 100%; padding: 2rem; position: relative; max-height: 82vh; overflow-y: auto; }
+  .close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; line-height: 1; }
+  .close-btn:hover { color: var(--cyan); }
+  table { width: 100%; border-collapse: collapse; }
+  th { font-family: 'Space Grotesk', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); text-align: left; }
+  td { padding: 0.65rem 0.75rem; font-size: 0.82rem; border-bottom: 1px solid rgba(30,41,59,0.6); vertical-align: top; }
+  tr:hover td { background: rgba(0,207,255,0.04); }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: var(--cyan); }
+  th.sortable::after { content: ' ↕'; opacity: 0.4; }
+  th.sort-asc::after { content: ' ↑'; opacity: 1; color: var(--cyan); }
+  th.sort-desc::after { content: ' ↓'; opacity: 1; color: var(--cyan); }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.05em; }
+  .badge-high { background: rgba(230,57,154,0.2); color: #E6399A; border: 1px solid rgba(230,57,154,0.4); }
+  .badge-med  { background: rgba(223,175,15,0.2);  color: #DFAF0F; border: 1px solid rgba(223,175,15,0.4); }
+  .badge-low  { background: rgba(0,204,122,0.2);   color: #00CC7A; border: 1px solid rgba(0,204,122,0.4); }
+  .slider-wrap { display: flex; align-items: center; gap: 0.75rem; }
+  .slider-wrap input[type=range] { flex: 1; accent-color: var(--cyan); }
+  .sim-out { background: rgba(0,207,255,0.06); border: 1px solid rgba(0,207,255,0.2); border-radius: 8px; padding: 0.75rem 1rem; }
+  .level-btn { border: none; cursor: pointer; padding: 0.35rem 0.9rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; }
+  .level-btn.active-level { background: var(--cyan); color: #0A0F1A; }
+  .level-btn:not(.active-level) { background: var(--card); color: var(--muted); border: 1px solid var(--border); }
+  .code-block { background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.71rem; color: #94A3B8; overflow-x: auto; white-space: pre; line-height: 1.65; }
+  .dep-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+  .lvl-content { display: none; }
+  .lvl-content.active { display: block; }
+  .gl-content { display: none; }
+  .gl-content.active { display: block; }
+  .tab-btn { padding: 0.5rem 1.1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--muted); transition: all 0.2s; }
+  .tab-btn.active-tab { background: var(--cyan); color: #0A0F1A; border-color: var(--cyan); }
+  /* NavDock */
+  #navdock { position: fixed; right: 12px; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 6px; }
+  #navdock a { width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; background: rgba(18,26,46,0.85); border: 1px solid var(--border); color: var(--muted); text-decoration: none; transition: all 0.18s; }
+  #navdock a:hover, #navdock a.active-dock { background: var(--cyan); color: #0A0F1A; border-color: var(--cyan); }
+  @media (max-width: 900px){ #navdock { display: none; } }
+  .pulse-glow { animation: pulseGlow 1.4s ease-in-out infinite; }
+  @keyframes pulseGlow { 0%,100% { filter: drop-shadow(0 0 2px var(--cyan)); } 50% { filter: drop-shadow(0 0 12px var(--cyan)); } }
+  .caveat-box { background: rgba(230,57,154,0.07); border: 1px solid rgba(230,57,154,0.35); border-radius: 12px; padding: 1rem 1.25rem; }
+  .est-mark { color: var(--gold); font-size: 0.62rem; font-weight: 700; vertical-align: super; }
+  .matrix-cell { border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; font-size: 0.78rem; }
+  .nash { background: rgba(0,204,122,0.12); border-color: var(--emerald); }
+  .conf-pill { font-family:'JetBrains Mono',monospace; font-size:0.6rem; padding:1px 6px; border-radius:9999px; background:rgba(100,116,139,0.15); color:#94A3B8; }
+  /* === Quellen-Tooltip-System (FinCoach AI Standard, level-aware) ===================== */
+  [data-tooltip] { position: relative; cursor: help; border-bottom: 1px dotted rgba(0,207,255,0.5); }
+  [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+    background: #0A0F1A; color: #E2E8F0; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid #00CFFF; font-size: 0.72rem; font-family: 'Inter', sans-serif;
+    line-height: 1.5; white-space: normal; width: max-content; max-width: 360px;
+    z-index: 9999; pointer-events: none; opacity: 0; transition: opacity 0.18s;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  }
+  [data-tooltip]:hover::after { opacity: 1; }
+  [data-pubdate]::before {
+    content: "📅 " attr(data-pubdate);
+    display: block; margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.66rem;
+    color: #DFAF0F; font-weight: 700;
+    position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+    background: #0A0F1A; border: 1px solid #DFAF0F; border-radius: 4px;
+    padding: 2px 8px; z-index: 9998; opacity: 0; transition: opacity 0.18s;
+    white-space: nowrap; pointer-events: none;
+  }
+  [data-pubdate][data-tooltip]:hover::before { opacity: 1; transform: translate(-50%, -28px); }
+  .arrow { color: #64748B; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
+
+  /* === v2.0.0: DBOM-Live-Annotation-Pattern ===================================== */
+  .dbom-pill { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .dbom-class-badge {
+    display:inline-block; padding:1px 6px; border-radius:3px;
+    font-family:'JetBrains Mono',monospace; font-size:0.6rem; font-weight:700;
+    background: rgba(255,107,0,0.18); color: #FF6B00; border: 1px solid rgba(255,107,0,0.4);
+    letter-spacing: 0.04em;
+  }
+  .dbom-class-badge.dc-primary  { background: rgba(0,204,122,0.18); color: #00CC7A; border-color: rgba(0,204,122,0.45); }
+  .dbom-class-badge.dc-derived  { background: rgba(153,51,255,0.18); color: #9933FF; border-color: rgba(153,51,255,0.45); }
+  .dbom-conf {
+    display:inline-block; padding:1px 6px; border-radius:3px;
+    font-family:'JetBrains Mono',monospace; font-size:0.6rem; font-weight:600;
+    background: rgba(100,116,139,0.15); color: #94A3B8; border: 1px solid rgba(100,116,139,0.3);
+  }
+  .dbom-inline-badge {
+    display:inline-block; padding:0 5px; border-radius:3px; margin-left:4px;
+    font-family:'JetBrains Mono',monospace; font-size:0.55rem; font-weight:700;
+    background: rgba(255,107,0,0.18); color: #FF6B00; vertical-align: middle;
+  }
+  /* Scenario-KPI: orangefarbene Border-Markierung, sichtbar dass SCENARIO_PROJECTION */
+  .kpi-card.scenario-kpi { position: relative; }
+  .kpi-card.scenario-kpi::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    border: 1px dashed rgba(255,107,0,0.35); border-radius: inherit;
+  }
+  .kpi-card.confirmed-kpi::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    border: 1px solid rgba(0,204,122,0.35); border-radius: inherit;
+  }
+  /* Live-Audit-Banner */
+  #live-audit-banner {
+    background: rgba(0,204,122,0.08); border-left: 3px solid #00CC7A;
+    padding: 6px 14px; font-family:'JetBrains Mono',monospace; font-size:0.7rem;
+    color:#94A3B8; display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+  }
+  #live-audit-banner.warn { background:rgba(223,175,15,0.10); border-left-color:#DFAF0F; }
+  #live-audit-banner.err  { background:rgba(230,57,154,0.10); border-left-color:#E6399A; color:#E6399A; }
+  #live-audit-banner code { color:#00CFFF; }
+  .compliance-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px; border-radius: 9999px;
+    font-family:'JetBrains Mono',monospace; font-size: 0.72rem; font-weight: 700;
+    background: rgba(100,116,139,0.15); color: #64748B; border: 1px solid rgba(100,116,139,0.3);
+  }
+  .compliance-pill.good { background: rgba(0,204,122,0.15); color: #00CC7A; border-color: rgba(0,204,122,0.4); }
+  .compliance-pill.warn { background: rgba(223,175,15,0.15); color: #DFAF0F; border-color: rgba(223,175,15,0.4); }
+  .compliance-pill.crit { background: rgba(230,57,154,0.15); color: #E6399A; border-color: rgba(230,57,154,0.4); }
+  .scroll-fade{opacity:1 !important;transform:none !important} /*scroll-fade-safe*/
+</style>
+
+<!-- ============================================================================
+     M-DBOM · Module Data Bill of Materials (eingebettet als JSON-LD)
+     Maschinenlesbare Provenienz nach Schema fincoach.m-dbom.v1
+     Externe Vollversion: provenance/m298.dbom.json
+     ============================================================================ -->
+<script type="application/ld+json" id="module-provenance">
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": {
+    "id": "M298",
+    "title": "SpaceX — Der Weg zum $1,75-Billionen-IPO",
+    "version": "2.0.0",
+    "predecessor_version": "1.1.0",
+    "predecessor_archive": "archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html",
+    "comparison_report": "reports/compliance/m298-v1-vs-v2-comparison.html",
+    "stichtag": "2026-06-01",
+    "buildDate": "2026-06-01T15:50:00Z",
+    "external_dbom": "provenance/m298.dbom.json",
+    "visual_provenance": "provenance/m298-provenance.html"
+  },
+  "fact_summary": {
+    "total": 8,
+    "confirmed_primary": 4,
+    "scenario_projection": 4,
+    "by_class": {
+      "PRIMARY_OFFICIAL": 1,
+      "PRIMARY_INSTITUTIONAL": 3,
+      "SCENARIO_PROJECTION": 4
+    }
+  },
+  "honest_disclosure": "Das LLM-Trainings-Wissen hat einen Cutoff vor 2026. Behauptete 2025/2026er-Ereignisse (S-1-Filing Mai 2026, xAI-Merger Feb 2026, Tender Jul/Dez 2025) wurden vom User vorgegeben und sind als SCENARIO_PROJECTION markiert — unabhängige Web-Verifikation ausstehend.",
+  "audit_trail_url": "provenance/m298.dbom.json#audit_trail"
+}
+</script>
+
+</head>
+<body class="min-h-screen" style="background:#0A0F1A;">
+
+<!-- ===== NAV ===== -->
+<nav class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="flex items-center gap-2">
+      <svg viewBox="0 0 100 100" fill="none" width="36" height="36">
+        <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/>
+        <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+        <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/>
+        <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+        <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/>
+        <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+        <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/>
+        <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+        <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+      </svg>
+      <div>
+        <div class="font-head font-bold text-white text-sm leading-tight">FinCoach AI</div>
+        <div class="text-xs leading-tight" style="color:#00CFFF;">by TheNextGenerationBanking.com</div>
+      </div>
+    </a>
+  </div>
+  <div class="flex items-center gap-2 flex-wrap">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">M298</span>
+    <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">T3 · Welle 45</span>
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Private Markets / Space Economy</span>
+    <a href="index.html" class="text-xs text-tngb-muted hover:text-white transition ml-2">← Hauptseite</a>
+  </div>
+</nav>
+
+<!-- ===== NavDock ===== -->
+<div id="navdock" aria-label="Sektions-Navigation">
+  <a href="#s01" title="S01 · Hero" data-dock="s01">01</a>
+  <a href="#s02" title="S02 · Background" data-dock="s02">02</a>
+  <a href="#s03" title="S03 · Interdisziplinäre Landkarte" data-dock="s03">03</a>
+  <a href="#s04" title="S04 · Wissenschaftlicher Unterbau" data-dock="s04">04</a>
+  <a href="#s05" title="S05 · Kern-Mechanik" data-dock="s05">05</a>
+  <a href="#s06" title="S06 · Prozess-Timeline" data-dock="s06">06</a>
+  <a href="#s07" title="S07 · Live-Simulation" data-dock="s07">07</a>
+  <a href="#s08" title="S08 · Visual Exploration" data-dock="s08">08</a>
+  <a href="#s09" title="S09 · Decision-Sampling" data-dock="s09">09</a>
+  <a href="#s10" title="S10 · Impact-Dossier" data-dock="s10">10</a>
+  <a href="#s11" title="S11 · 90-Tage-Implementierung" data-dock="s11">11</a>
+  <a href="#s-experten" title="S13 · Kapitalmarktexperten im Diskurs" data-dock="s-experten">13</a>
+  <a href="#s12" title="S12 · Quellen & Glossar" data-dock="s12">12</a>
+</div>
+
+<!-- ===== M-DBOM Provenienz-Banner (sichtbar, klickbar) ===== -->
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v2.0.0</span>
+    <span class="text-slate-300">8 Fakten · 4 confirmed · 4 SCENARIO_PROJECTION · 5 Quellen verifiziert · Stichtag 2026-06-01</span>
+    <span class="ml-auto flex items-center gap-2">
+      <a href="provenance/m298-provenance.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,204,122,0.15);color:#00CC7A;border:1px solid rgba(0,204,122,0.4);">📊 Provenienz-Graph</a>
+      <a href="provenance/m298.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
+      <a href="archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(100,116,139,0.15);color:#94A3B8;border:1px solid rgba(100,116,139,0.3);">⟲ v1.1.0</a>
+      <a href="reports/compliance/m298-v1-vs-v2-comparison.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">⇆ Vergleich</a>
+    </span>
+  </div>
+
+  <!-- v2.0.0 NEU: Live-Audit-Banner — JS prüft beim Page-Load die DBOM und zeigt Status -->
+  <div id="live-audit-banner" class="mt-2 rounded-xl">
+    <span class="font-bold" style="color:#00CC7A;">● LIVE-AUDIT</span>
+    <span id="live-audit-status">prüft DBOM-Integrität …</span>
+    <span class="ml-auto" id="live-audit-meta"></span>
+    <span id="live-audit-score" class="ml-auto"></span>
+  </div>
+</div>
+
+<!-- ===== CAT-BANNER ===== -->
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+    <span class="font-mono font-bold" style="color:#00CFFF;">CAT</span>
+    <span class="text-tngb-muted">Cognitive Apprenticeship Track</span>
+    <span class="text-slate-400">·</span>
+    <span class="text-slate-300">Wissensniveau global wählbar — Tastatur: <span class="font-mono text-tngb-cyan">j</span>/<span class="font-mono text-tngb-cyan">k</span> Sektion · <span class="font-mono text-tngb-cyan">+</span>/<span class="font-mono text-tngb-cyan">−</span> Tempo (Timeline)</span>
+    <span class="ml-auto flex items-center gap-1">
+      <button class="level-btn active-level" data-lvl="einsteiger">Einsteiger</button>
+      <button class="level-btn" data-lvl="fortgeschritten">Fortgeschritten</button>
+      <button class="level-btn" data-lvl="experte">Experte</button>
+    </span>
+  </div>
+</div>
+
+<!-- ===== S01 HERO ===== -->
+<section id="s01" class="px-4 pt-10 pb-12 max-w-7xl mx-auto">
+  <div class="scroll-fade">
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S01 · HERO</span>
+      <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Private Markets / Space Economy</span>
+      <span class="section-badge" style="background:rgba(0,207,255,0.12);color:#00CFFF;">Tier T3 · Welle 45</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-head font-extrabold text-white mb-3 leading-tight">
+      SpaceX — Der Weg zum <span style="background:linear-gradient(135deg,#DFAF0F 0%,#FF6B00 60%,#E6399A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">$1,75-Billionen-IPO</span>
+    </h1>
+    <p class="text-xl font-head font-semibold mb-3" style="color:#00CFFF;">
+      Vom $350-Mrd.-Tender (2024-12) zum S-1-Filing (2026-05) · Finanzstruktur, Sum-of-the-Parts, globaler Unternehmensvergleich
+    </p>
+    <p class="text-base text-slate-400 max-w-3xl mb-6 leading-relaxed">
+      Eine akribische Studie zum wertvollsten privaten Raumfahrtunternehmen der Welt — von der
+      5-fachen Bewertungseskalation in 17 Monaten über die Tender-Offer-Mechanik, die Starlink-Ökonomie
+      und die Sum-of-the-Parts-Analyse bis zu den ITAR-Hürden des Nasdaq-IPO (Ticker SPCX, erw. Pricing 2026-06-12).
+      <span class="block mt-2 text-xs text-tngb-muted">
+        Stichtag: <span class="font-mono text-tngb-cyan">2026-06-01</span> ·
+        Provenienz nach <a href="provenance/m298-provenance.html" class="text-tngb-emerald hover:underline">M-DBOM v1</a> ·
+        4 verifizierte, 4 als SCENARIO_PROJECTION markierte Fakten.
+      </span>
+    </p>
+
+    <!-- Daten-Transparenz-Box (verbindlich, einheitliches Pattern für alle FinCoach-Module) -->
+    <div class="caveat-box mb-8 max-w-3xl" id="datentransparenz-hero" data-stichtag="2026-06-01">
+      <div class="flex items-start gap-3">
+        <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
+        <div class="text-sm text-slate-300 leading-relaxed">
+          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> SpaceX ist ein privates, nicht
+          SEC-meldepflichtiges Unternehmen und veröffentlicht <em>keine</em> testierten Finanzdaten.
+          Alle Finanzkennzahlen in diesem Modul sind Schätzungen aus Sekundärquellen
+          (Payload Space, Sacra, Novaspace, Bloomberg, CNBC) und mit <span class="est-mark">EST</span> markiert.
+          Die „$350 Mrd."-Bewertung bezieht sich auf das Tender-Offer Dez. 2024; spätere Runden
+          (Juli 2025 ~$400 Mrd., Dez. 2025 ~$800 Mrd.) und die <strong>S-1-IPO-Zielgröße Mai 2026
+          (~$1.750 Mrd.)</strong> sind im Modul gesondert ausgewiesen. <strong class="text-tngb-cyan">Datenstand: 2026-06-01.</strong>
+
+          <!-- Bewertungs-Timeline-Pill-Reihe (visuell prominenter) -->
+          <div class="mt-3 flex flex-wrap gap-2 items-center text-xs font-mono">
+            <span class="text-tngb-muted">Bewertungs-Eskalation:</span>
+            <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="Tender Offer · $185/Aktie · 1,89 Mrd. Aktien · Quelle: Bloomberg 10.12.2024" data-pubdate="2024-12-10">2024-12 · $350 Mrd.</span>
+            <span class="arrow">→</span>
+            <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="Sekundärrunde · $212/Aktie · Quelle: Bloomberg 23.07.2025" data-pubdate="2025-07-23">2025-07 · $400 Mrd.</span>
+            <span class="arrow">→</span>
+            <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="Tender Offer · $421/Aktie · Quelle: WSJ 15.12.2025" data-pubdate="2025-12-15">2025-12 · $800 Mrd.</span>
+            <span class="arrow">→</span>
+            <span class="px-2 py-0.5 rounded font-bold" style="background:rgba(223,175,15,0.18);border:1px solid #DFAF0F;color:#DFAF0F;" data-tooltip="S-1-Filing 20.05.2026 · Nasdaq SPCX · erw. Pricing 12.06.2026 · Quelle: SEC EDGAR" data-pubdate="2026-05-20">2026-05 · S-1: ~$1.750 Mrd.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs (Stand: 2026-06-01 · S-1-Filing-Basis primär, historische Tender-Bewertungen sekundär)
+         v2.0.0: jede KPI mit data-source-Attribut → Live-DBOM-Lookup via JS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10" id="hero-kpi-grid">
+      <div class="kpi-card scenario-kpi" style="border-color:#DFAF0F;"
+           data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED"
+           data-fact-class="SCENARIO_PROJECTION"
+           data-confidence="0.50"
+           data-pubdate="2026-05-20">
+        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$1.750 Mrd.<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">S-1-IPO-Ziel · Mai 2026</div>
+        <div class="text-xs text-tngb-muted mt-1">SEC EDGAR S-1 eingereicht 2026-05-20 · Ticker SPCX</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.50</span></div>
+      </div>
+      <div class="kpi-card scenario-kpi"
+           data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED"
+           data-fact-class="SCENARIO_PROJECTION"
+           data-confidence="0.55"
+           data-pubdate="2026-04-30">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CFFF;">~$15,5 Mrd.<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Run-Rate-Umsatz Q1 2026</div>
+        <div class="text-xs text-tngb-muted mt-1">Starlink ~$11,5 Mrd. ARR · Launch ~$4 Mrd. · Sacra 2026-04-30</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.55</span></div>
+      </div>
+      <div class="kpi-card scenario-kpi"
+           data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED"
+           data-fact-class="DERIVED"
+           data-confidence="0.50"
+           data-pubdate="2026-06-01"
+           data-tooltip="Abgeleitet: $1.750 Mrd. / $15,5 Mrd. = 112,9x → ~113x. Inkonsistenz zu S04 (~93x/94x) entsteht aus anderer Revenue-Basis (2025E vs Q1-2026-Run-Rate) — siehe Multiples-Konsistenz-Tabelle in S04.">
+        <div class="text-3xl font-head font-extrabold" style="color:#E6399A;">~113x<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">EV/Revenue · S-1-Ziel</div>
+        <div class="text-xs text-tngb-muted mt-1">$1.750/$15,5 — vs. Boeing ~0,6x, Tesla ~7x</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-derived">DERIVED</span><span class="dbom-conf">Konf. 0.50</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi"
+           data-source="FACT_NASA_HLS_CONTRACT"
+           data-fact-class="PRIMARY_OFFICIAL"
+           data-confidence="0.95"
+           data-pubdate="2026-05-15">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">~170</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Starts H1 2026 (annualisiert)</div>
+        <div class="text-xs text-tngb-muted mt-1">2024: 138 · 2025: 152 · &gt;55% aller weltweiten Starts · Payload 2026-05-15</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRIMARY</span><span class="dbom-conf">Konf. 0.95</span></div>
+      </div>
+    </div>
+
+    <!-- Reg Tags (klickbar → Modal) -->
+    <div class="flex flex-wrap gap-2">
+      <button class="reg-tag" style="color:#00CFFF;border-color:rgba(0,207,255,0.4);background:rgba(0,207,255,0.08);" data-reg="regd">SEC Reg D · Private Offering</button>
+      <button class="reg-tag" style="color:#E6399A;border-color:rgba(230,57,154,0.4);background:rgba(230,57,154,0.08);" data-reg="itar">ITAR · Int'l Traffic in Arms</button>
+      <button class="reg-tag" style="color:#00CC7A;border-color:rgba(0,204,122,0.4);background:rgba(0,204,122,0.08);" data-reg="faa">FAA AST · Launch Licensing</button>
+      <button class="reg-tag" style="color:#DFAF0F;border-color:rgba(223,175,15,0.4);background:rgba(223,175,15,0.08);" data-reg="far">NASA FAR/DFARS</button>
+      <button class="reg-tag" style="color:#9933FF;border-color:rgba(153,51,255,0.4);background:rgba(153,51,255,0.08);" data-reg="fcc">FCC Part 25 · Starlink</button>
+      <button class="reg-tag" style="color:#4472C4;border-color:rgba(68,114,196,0.4);background:rgba(68,114,196,0.08);" data-reg="ifrs">IFRS 13 · Level 3</button>
+      <button class="reg-tag" style="color:#FF6B00;border-color:rgba(255,107,0,0.4);background:rgba(255,107,0,0.08);" data-reg="nssl">DOD NSSL</button>
+      <button class="reg-tag" style="color:#E040A0;border-color:rgba(224,64,160,0.4);background:rgba(224,64,160,0.08);" data-reg="itu">ITU · Radio Regulations</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S02 BACKGROUND (3-Level-Tabs) ===== -->
+<section id="s02" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S02</span>
+    <h2 class="section-title">Background — Warum ist SpaceX kein Standard-Investment?</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">
+    Wähle dein Wissensniveau. Die Inhalte folgen automatisch dem global im CAT-Banner gewählten Level —
+    von der einsteigerfreundlichen Grundlogik über die Finanzierungs- und Bewertungsmechanik bis zu den
+    regulatorischen Feinheiten (ITAR, FOCI, Dual-Class), die ein SpaceX-IPO einzigartig machen.
+  </p>
+  <div class="flex gap-2 mb-6 flex-wrap" id="s02-tabs">
+    <button class="tab-btn active-tab" data-s02="einsteiger">Einsteiger</button>
+    <button class="tab-btn" data-s02="fortgeschritten">Fortgeschritten</button>
+    <button class="tab-btn" data-s02="experte">Experte</button>
+  </div>
+
+  <div class="lvl-content active" data-s02c="einsteiger">
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-cyan mb-2">Was macht SpaceX?</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">SpaceX baut und startet Raketen (Falcon 9, Starship) und betreibt das Satelliten-Internet <strong>Starlink</strong>. Es bringt Astronauten und Fracht für die NASA ins All und transportiert Satelliten kommerzieller und staatlicher Kunden — günstiger als alle anderen, weil die Raketen wiederverwendbar sind.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-emerald mb-2">Wie verdient SpaceX Geld?</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Zwei Haupt-Quellen: <strong>Starlink-Abos</strong> (Privat- und Geschäftskunden zahlen monatlich, ~9 Mio. Kunden Ende 2025) und <strong>Start-Dienste</strong> (NASA, Militär, Unternehmen zahlen pro Raketenstart). Starlink ist 2024 erstmals der größere Brocken (~63% des Umsatzes).</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-gold mb-2">Warum nicht an der Börse?</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">SpaceX ist <strong>privat</strong> — man kann die Aktie nicht einfach kaufen. Elon Musk will die volle Kontrolle behalten, vor allem für das langfristige Mars-Ziel, das einen Börsenmarkt mit Quartalsdruck stören könnte. Mitarbeiter werden über <strong>Tender Offers</strong> liquide (siehe S05).</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-lavender mb-2">Was ist eine „Bewertung“?</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Die Bewertung ist der geschätzte Gesamtwert der Firma. Bei SpaceX entstand sie bisher <em>nicht</em> an der Börse, sondern aus Verkäufen einzelner Aktienpakete: Beim Tender im Dez. 2024 ergaben $185/Aktie × ~1,9&nbsp;Mrd. Aktien rechnerisch ~$350&nbsp;Mrd. Bis zum S-1-Filing im Mai 2026 wuchs der implizierte Kurs auf ~$920/Aktie und die Bewertung auf ~$1.750&nbsp;Mrd. <span class="est-mark">EST</span> — eine 5-fache Eskalation in 17 Monaten. Mit dem Nasdaq-IPO (Ticker SPCX) entsteht erstmals ein öffentlicher, fortlaufender Marktpreis.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-magenta mb-2">Was ist Starship?</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Die größte Rakete, die je gebaut wurde — vollständig wiederverwendbar und für Mond, Mars und schwere Fracht gedacht. Sie ist noch in der Testphase (2024: vier Testflüge), aber ein großer Teil der hohen Bewertung beruht auf der Hoffnung, was Starship eines Tages leisten könnte.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-indigo mb-2">Warum ist das für mich relevant?</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">SpaceX zeigt, wie schwierig die Bewertung privater Firmen ist — und warum man Schlagzeilen-Zahlen kritisch lesen sollte. Für die eigene Geldanlage gilt: Pre-IPO-Zugang ist für Privatanleger fast unmöglich; es bleiben indirekte Wege (Fonds, börsennotierte Investoren wie Alphabet).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="lvl-content" data-s02c="fortgeschritten">
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-cyan mb-2">Finanzierungsstruktur privater Unternehmen</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">SpaceX finanziert sich über Primärrunden (frisches Kapital von VCs/Sovereign Funds), reine Sekundärtransaktionen (Tender Offers, halbjährliche Sommer/Winter-Kadenz: Jan '23 $137/Aktie → Jun '24 → Dez '24 $185 ($350 Mrd.) → Jul '25 $212 ($400 Mrd.) → Dez '25 $421 ($800 Mrd.)) und seit 2025/2026 zunehmend über <strong>Fremdkapital</strong>: ~$23 Mrd. Gesamtschulden Ende 2025<span class="est-mark">EST</span> (überwiegend X/Twitter- und xAI-Akquisitionsschulden); im April 2026 ein Goldman-Sachs-geführter $20-Mrd.-Bridgekredit (eff. ~4,58% p.a.) zur Refinanzierung der ~$17,5 Mrd. X/xAI-Schulden.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-emerald mb-2">Tender-Offer-Mechanismus</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Statt eines IPO kauft SpaceX (plus zugelassene Investoren) Mitarbeiteraktien zu einem festgelegten Preis zurück. Dez. 2024: $185/Aktie, bis zu $1,25 Mrd. Volumen inkl. $500 Mio. Eigenrückkauf. So entsteht periodische Liquidität ohne öffentliche Berichtspflicht.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-gold mb-2">Starlink-Ökonomie</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Hohe Fixkosten (Konstellation, Bodenstationen), niedrige Grenzkosten je Kunde. Skaliert mit ARPU × Subscriber. 2024: 4,6 Mio. Abos → ~$8,2 Mrd. Umsatz<span class="est-mark">EST</span>. Klassischer Netzwerkeffekt: mehr Satelliten → mehr Coverage → mehr Kunden → mehr Startkapazität.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-lavender mb-2">Revenue-Multiple-Vergleich</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">SpaceX ~27x EV/Revenue (Basis Dez. 2024) bzw. ~93x (IPO-Zielbasis 2026) steht gegen Aerospace-Defense-Peers bei 0,4–1,0x. Die Diskrepanz ist kein Rechenfehler — sie ist die quantifizierte Wette auf Wachstum, Monopolstellung und Starship-Optionalität.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-indigo mb-2">Launch-Ökonomie & Wiederverwendung</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Falcon 9 ist das Arbeitspferd: 132 Starts 2024, hohe Wiederverwendungsrate der Erststufe. Die Lernkurve (F4) senkt Stückkosten und ermöglicht Preise, die Cost-Plus-Wettbewerber (ULA, Arianespace) strukturell nicht erreichen — Quasi-Monopol bei kommerziellen LEO/GTO-Starts.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-cyan mb-2">Konzentrationsrisiko (Government)</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">~60% des Umsatzes 2024 stammen aus Government-nahen Quellen (NASA, DOD/NRO). Der Abhängigkeitsquotient \(D_{Gov}\) (F5) macht die Bewertung budgetzyklus-sensitiv. Das schnelle Starlink-Wachstum verschiebt den Mix Richtung kommerziell und senkt das Klumpenrisiko strukturell.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-magenta mb-2">Private vs. Public — Disclosure-Lücke (bis zur S-1)</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Bis zur S-1-Einreichung (20.05.2026) gab es keine testierten Margen, keine Segmentberichte nach US-GAAP, keine Bilanz. Die S-1 legt nun erstmals Zahlen offen: <strong>Umsatz 2025 ~$18,7 Mrd. (+33% YoY)</strong>, <strong>GAAP-Nettoverlust ~$4,94 Mrd.</strong> (davon ~$6 Mrd. xAI-Verluste), <strong>adj. EBITDA ~$6,6 Mrd.</strong>, kumuliertes Defizit ~$41,3 Mrd.<span class="est-mark">EST</span> Der xAI-Merger macht die Kapitalstruktur komplex — die meisten Verluste und Schulden stammen nicht aus den SpaceX-Kernoperationen.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="lvl-content" data-s02c="experte">
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-cyan mb-2">ITAR-Implikationen für ein IPO</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Raketen- und Triebwerkstechnologie fällt unter ITAR (22 CFR 120–130). Ein S-1 muss technische Details offenlegen — kollidiert mit Exportkontrolle und Staatsgeheimnis-Klassifizierung. Ausländische Investorenanteile sind faktisch gedeckelt (FOCI-Mitigation, DSS/DCSA). Der Prospekt erfordert ITAR-Redaktion und DOD-Clearance.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-emerald mb-2">DFARS-Konditionen & Cost Accounting</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">NASA/DOD-Verträge unterliegen FAR/DFARS, teils CAS (Cost Accounting Standards). SpaceX setzt auf Firm-Fixed-Price (z.B. HLS Option A $2,89 Mrd.) statt Cost-Plus — verlagert Risiko zu SpaceX, ermöglicht aber Margen-Upside bei Kostendegression.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-gold mb-2">Sum-of-the-Parts & DCF-Szenarien</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">\(V_{SpaceX}=V_{Starlink}+V_{Launch}+V_{Starship,opt}\). Starlink als wachstumsstarkes Satcom-Asset (Comps: ~6–10x ARR), Launch als margenstabiles Quasi-Utility, Starship als reale Option (OTM-Call auf Mars/HLS). Die Premium-Differenz zum Peer-Median ist überwiegend Starlink + Optionswert.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-lavender mb-2">Dual-Class-Struktur</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Laut S-1 (eingereicht 20.05.2026, SEC EDGAR): Musk hält <strong>~42% des Eigenkapitals</strong>, aber <strong>~85% der Stimmrechte</strong> (Dual-Class: Class A 1 Stimme, Class B 10 Stimmen). Der Stimmrechtsanteil übersteigt den Kapitalanteil deutlich — faktische Alleinherrschaft trotz Minderheitsbeteiligung am Kapital. Super-Voting-Shares sichern Mission-Lock-in; klassisches Principal-Agent-Spannungsfeld (Musk = CEO Tesla + SpaceX + X/xAI). Ein 5:1-Aktiensplit wurde am 04.05.2026 vollzogen.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-indigo mb-2">FOCI-Mitigation & ausländisches Kapital</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Foreign Ownership, Control or Influence (FOCI) wird durch DCSA überwacht. Bei klassifizierten Verträgen können Voting-Trust-Agreements, Proxy-Agreements oder Special Security Agreements (SSA) nötig werden — eine öffentliche Aktionärsbasis mit globalen Investoren erschwert diese Mitigation erheblich.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-cyan mb-2">Bewertungs-Konfidenz & Datenklassen</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Die zugrundeliegenden Schätzungen tragen unterschiedliche Konfidenzen: Tender-Preise (Konf. 97%, Primärberichte Bloomberg/CNBC) sind robust; Revenue 2024 (Konf. 88%, Analystenkonsens) ist plausibel; spätere Bewertungen und IPO-Zielgrößen (Konf. 82–90%) sind volatiler. Datenklassen sollten in jeder Analyse mitgeführt werden.</p>
+      </div>
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-orange mb-2">Starlink als reale Option auf D2D</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Direct-to-Device (Satellit direkt zum Smartphone) ist ein eigener Optionswert oberhalb des Festnetz-Ersatz-Geschäfts. Vergleichswert AST SpaceMobile (~$9 Mrd. Mktcap bei nahezu null Umsatz) zeigt, wie hoch der Markt diese Optionalität isoliert kapitalisiert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S03 INTERDISZIPLINÄRE LANDKARTE ===== -->
+<section id="s03" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S03</span>
+    <h2 class="section-title">Interdisziplinäre Landkarte — 5 Rollen am runden Tisch</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl">Fünf Perspektiven streiten über die zentrale Frage: Ist die SpaceX-Bewertung gerechtfertigt — oder ein Narrativ-getriebener Exzess?</p>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+    <div class="dep-box border-l-4" style="border-left-color:#00CFFF;">
+      <div class="text-xs font-mono mb-1" style="color:#00CFFF;">MODERATOR · Kapitalmarktökonom</div>
+      <p class="text-sm text-slate-300 leading-relaxed">„SpaceX ist ein <strong>Test für private Marktmechanismen</strong>. Wenn Sekundärmärkte eine $800-Mrd.-Bewertung tragen, ohne dass je ein Quartalsbericht erschien — was sagt das über Preisbildung jenseits öffentlicher Disclosure aus?"</p>
+    </div>
+    <div class="dep-box border-l-4" style="border-left-color:#E6399A;">
+      <div class="text-xs font-mono mb-1" style="color:#E6399A;">DEVIL'S ADVOCATE · Value Investor (Damodaran-Schule)</div>
+      <p class="text-sm text-slate-300 leading-relaxed">„<strong>27x Revenue für ein Raumfahrtunternehmen</strong> — das Narrativ schlägt die Zahlen. Boeing macht 5× den Umsatz zu 1/15 der Bewertung. Ich kaufe keine Mars-Träume mit einem Multiple, das nur in einem Zinsumfeld nahe null überhaupt verteidigbar ist."</p>
+    </div>
+    <div class="dep-box border-l-4" style="border-left-color:#00CC7A;">
+      <div class="text-xs font-mono mb-1" style="color:#00CC7A;">SYNTHESIZER · Investment Banker / Space-Analyst</div>
+      <p class="text-sm text-slate-300 leading-relaxed">„<strong>Sum-of-the-Parts rechtfertigt das Premium — teilweise.</strong> Starlink allein als Satcom-Wachstumswert trägt einen großen Teil. Launch ist ein Quasi-Monopol-Cashflow. Was bleibt, ist der Optionswert Starship — und der ist ehrlich nicht modellierbar."</p>
+    </div>
+    <div class="dep-box border-l-4" style="border-left-color:#FF6B00;">
+      <div class="text-xs font-mono mb-1" style="color:#FF6B00;">PRAKTIKER · Ex-DOD/NASA-Beschaffungsmanager</div>
+      <p class="text-sm text-slate-300 leading-relaxed">„<strong>ITAR ist das größte IPO-Hindernis, das niemand diskutiert.</strong> Ein öffentliches S-1 mit ausländischen Investoren und Exportkontroll-pflichtiger Triebwerkstechnik? Das ist ein FOCI-Albtraum. Der Prospekt wird zur Hälfte geschwärzt sein."</p>
+    </div>
+    <div class="dep-box border-l-4" style="border-left-color:#9933FF;">
+      <div class="text-xs font-mono mb-1" style="color:#9933FF;">THEORETIKER · Industrieökonom</div>
+      <p class="text-sm text-slate-300 leading-relaxed">„SpaceX ist ein <strong>natürliches Monopol im Niedrig-Orbit-Zugang</strong>. Netzwerkeffekte (Starlink) plus Lernkurven-Skaleneffekte (Wiederverwendung) plus Orbital-Slot-Knappheit (ITU) erklären die Premium-Bewertung vollständig — und werfen Kartellfragen auf."</p>
+    </div>
+    <div class="dep-box border-l-4 flex items-center justify-center text-center" style="border-left-color:#DFAF0F;">
+      <p class="text-sm text-slate-400 italic">„Drei Achsen, drei Streitfragen — keine Konsens-Antwort. Genau deshalb braucht es die Konflikt-Matrix.“</p>
+    </div>
+  </div>
+
+  <h3 class="font-head font-bold text-white mb-3">Konflikt-Matrix</h3>
+  <div class="overflow-x-auto">
+  <table>
+    <thead><tr><th>Rolle</th><th>Premium gerechtfertigt?</th><th>IPO gut für Mission?</th><th>Monopol-Gefahr?</th></tr></thead>
+    <tbody>
+      <tr><td class="text-tngb-cyan font-semibold">Kapitalmarktökonom</td><td><span class="badge badge-med">Teilweise</span></td><td><span class="badge badge-low">Ja, Disziplin</span></td><td><span class="badge badge-med">Beobachten</span></td></tr>
+      <tr><td class="text-tngb-magenta font-semibold">Value Investor</td><td><span class="badge badge-high">Nein</span></td><td><span class="badge badge-high">Nein, Quartalsdruck</span></td><td><span class="badge badge-med">Sekundär</span></td></tr>
+      <tr><td class="text-tngb-emerald font-semibold">Investment Banker</td><td><span class="badge badge-low">Ja, SOTP</span></td><td><span class="badge badge-med">Neutral</span></td><td><span class="badge badge-low">Gering</span></td></tr>
+      <tr><td class="text-tngb-orange font-semibold">Beschaffungsmanager</td><td><span class="badge badge-med">Irrelevant</span></td><td><span class="badge badge-high">Nein, ITAR</span></td><td><span class="badge badge-high">Hoch (NSSL)</span></td></tr>
+      <tr><td class="text-tngb-lavender font-semibold">Industrieökonom</td><td><span class="badge badge-low">Ja, Monopolrente</span></td><td><span class="badge badge-med">Neutral</span></td><td><span class="badge badge-high">Hoch, strukturell</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- Synthese der Debatte -->
+  <div class="dep-box mt-8 border-l-4" style="border-left-color:#DFAF0F;">
+    <h3 class="font-head font-bold text-tngb-gold mb-2">Synthese der Debatte</h3>
+    <p class="text-sm text-slate-300 leading-relaxed mb-3">
+      Die fünf Perspektiven konvergieren auf einen überraschenden Konsens in der Methodik bei radikalem
+      Dissens im Ergebnis: <strong>Alle akzeptieren, dass SpaceX kein Aerospace-Multiple verdient</strong> —
+      die Streitfrage ist, ob das <em>Tech-Multiple</em> gerechtfertigt ist. Der Value Investor und der
+      Investment Banker rechnen mit demselben Sum-of-the-Parts-Modell, gewichten aber den Starship-Optionswert
+      um den Faktor 5 unterschiedlich. Der Beschaffungsmanager bringt die einzige Dimension ein, die in keiner
+      Bewertung auftaucht und doch alles entscheidet: <strong>ITAR macht ein klassisches IPO strukturell schwierig</strong>,
+      weshalb die Tender-Offer-Mechanik (S05-D) als „IPO-Ersatz“ überhaupt erst entstand.
+    </p>
+    <p class="text-sm text-slate-300 leading-relaxed">
+      Der Industrieökonom liefert die theoretische Klammer: Wenn SpaceX tatsächlich ein natürliches Monopol
+      im Niedrig-Orbit-Zugang ist, dann ist die Premium-Bewertung keine Anomalie, sondern die korrekt
+      kapitalisierte <em>Monopolrente</em> — mit der unbequemen Konsequenz, dass dieselbe Logik
+      Kartell- und Mission-Assurance-Bedenken (DOD, FTC) begründet. Die Bewertung und das Regulierungsrisiko
+      sind zwei Seiten derselben Medaille.
+    </p>
+  </div>
+</section>
+
+<!-- ===== S04 WISSENSCHAFTLICHER UNTERBAU ===== -->
+<section id="s04" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S04</span>
+    <h2 class="section-title">Wissenschaftlicher Unterbau</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    Sechs Formeln bilden das quantitative Gerüst der Analyse — vom einfachen EV/Revenue-Multiple über die
+    Sum-of-the-Parts-Zerlegung und die Starlink-DCF-Komponente bis zur Premium-Dekomposition. Vier
+    Theorierahmen (Schumpeter, Metcalfe, reale Optionen, Principal-Agent) liefern die ökonomische Deutung.
+    Zwei durchgerechnete Beispiele übersetzen die Formeln in konkrete Zahlen.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-5 mb-10">
+    <div class="dep-box">
+      <div class="text-xs font-mono text-tngb-cyan mb-1">F1 · EV/Revenue Multiple</div>
+      <p class="text-slate-200 my-2">\[ EV/Rev = \frac{Enterprise\ Value}{Revenue_{TTM}}, \quad \text{SpaceX:}\ \frac{350}{13{,}1} \approx 26{,}7\times \]</p>
+      <p class="text-xs text-slate-400">Methodisch zwingend: EV und Revenue zeitgleich paaren. Auf IPO-Zielbasis 2026: \(1.750/18{,}7 \approx 94\times\).</p>
+    </div>
+    <div class="dep-box">
+      <div class="text-xs font-mono text-tngb-emerald mb-1">F2 · Sum-of-the-Parts</div>
+      <p class="text-slate-200 my-2">\[ V_{SpaceX} = V_{Starlink} + V_{Launch} + V_{Starship,opt} \]</p>
+      <p class="text-xs text-slate-400">Drei heterogene Werttreiber: Wachstums-Satcom, Quasi-Utility-Launch und eine reale Option auf Starship/Mars.</p>
+    </div>
+    <div class="dep-box">
+      <div class="text-xs font-mono text-tngb-gold mb-1">F3 · Starlink-DCF-Komponente</div>
+      <p class="text-slate-200 my-2">\[ V_{Starlink} = \sum_{t=1}^{T} \frac{ARPU \cdot N_t \cdot (1-Churn)^t}{(1+r)^t} \]</p>
+      <p class="text-xs text-slate-400">ARPU × aktive Subscriber, churn-bereinigt, abgezinst. Treiber: Subscriber-Wachstum \(N_t\) und Diskontsatz \(r\).</p>
+    </div>
+    <div class="dep-box">
+      <div class="text-xs font-mono text-tngb-lavender mb-1">F4 · Launch-Kostendegression (Lernkurve)</div>
+      <p class="text-slate-200 my-2">\[ C_n = C_1 \cdot n^{\log_2(LR)} \]</p>
+      <p class="text-xs text-slate-400">\(LR\) = Lernrate der Wiederverwendung. Bei \(LR=0{,}85\) sinken Stückkosten um 15% je Verdopplung der kumulierten Starts.</p>
+    </div>
+    <div class="dep-box">
+      <div class="text-xs font-mono text-tngb-magenta mb-1">F5 · Abhängigkeitsquotient</div>
+      <p class="text-slate-200 my-2">\[ D_{NASA} = \frac{Revenue_{NASA}}{Revenue_{total}} \]</p>
+      <p class="text-xs text-slate-400">Konzentrationsrisiko: Je höher \(D_{Gov}\), desto stärker korreliert die Bewertung mit politischen Budgetzyklen.</p>
+    </div>
+    <div class="dep-box">
+      <div class="text-xs font-mono text-tngb-orange mb-1">F6 · Premium-Erklärung (Dekomposition)</div>
+      <p class="text-slate-200 my-2">\[ Premium = \alpha_{Monopol} + \beta_{Musk} + \gamma_{Option_{Starship}} + \epsilon \]</p>
+      <p class="text-xs text-slate-400">Zerlegt den Bewertungsaufschlag in Monopolrente, Founder-Premium, Optionswert und nicht erklärten Rest \(\epsilon\).</p>
+    </div>
+  </div>
+
+  <h3 class="font-head font-bold text-white mb-3">Theorierahmen</h3>
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+    <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Schumpeter'sche Creative Destruction</div><p class="text-xs text-slate-400">Wiederverwendbarkeit zerstört das Cost-Plus-Geschäftsmodell etablierter Anbieter (ULA, Boeing) — Raumfahrtmonopol durch Disruption.</p></div>
+    <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Netzwerkökonomik (Metcalfe)</div><p class="text-xs text-slate-400">Starlink-Wert skaliert über-proportional mit Nutzern und Coverage — \(V \propto N^2\) als obere Schranke.</p></div>
+    <div class="dep-box"><div class="text-tngb-gold font-semibold text-sm mb-1">Realer Optionswert</div><p class="text-xs text-slate-400">Starship als Out-of-the-money-Call auf Mars-Kolonisierung: hoher Optionswert trotz aktuell unklarem intrinsischen Wert.</p></div>
+    <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Principal-Agent-Problem</div><p class="text-xs text-slate-400">Musk = CEO von Tesla + SpaceX + X. Geteilte Aufmerksamkeit als Governance-Risiko; Dual-Class verschärft die Agency-Spannung.</p></div>
+  </div>
+
+  <!-- NEU v2.0.0: Multiples-Konsistenz-Tabelle (vorher implizit, jetzt explizit) -->
+  <h3 class="font-head font-bold text-white mb-3">Multiples-Konsistenz · Welcher EV/Revenue-Wert auf welcher Basis?</h3>
+  <div class="dep-box mb-6" style="border-color:#9933FF;">
+    <p class="text-sm text-slate-300 mb-3 leading-relaxed">
+      Das Modul nennt drei verschiedene EV/Revenue-Multiples (~113x · ~93x · ~94x). Diese sind NICHT inkonsistent,
+      sondern beziehen sich auf <strong>unterschiedliche Revenue-Basen</strong>. Die Tabelle macht die Methodik
+      transparent — wesentlich für jede Bewertungsdiskussion.
+    </p>
+    <div class="overflow-x-auto">
+    <table>
+      <thead><tr><th>Multiple</th><th>EV-Basis</th><th>Revenue-Basis</th><th>Verwendung im Modul</th><th>Konfidenz</th></tr></thead>
+      <tbody>
+        <tr data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED" data-pubdate="2026-04-30">
+          <td class="font-bold text-tngb-magenta">~113x</td>
+          <td class="mono">$1.750 Mrd. (S-1)</td>
+          <td class="mono">$15,5 Mrd. (Q1-2026-Run-Rate)</td>
+          <td class="text-xs">S01 KPI · Schlagwort-Bewertung</td>
+          <td class="mono"><span class="conf-pill">0.50</span></td>
+        </tr>
+        <tr data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED" data-pubdate="2026-05-20">
+          <td class="font-bold text-tngb-lavender">~93–94x</td>
+          <td class="mono">$1.750 Mrd. (S-1)</td>
+          <td class="mono">$18,7 Mrd. (2025E Vollj.)</td>
+          <td class="text-xs">S04 Analytische Bewertungstabellen</td>
+          <td class="mono"><span class="conf-pill">0.50</span></td>
+        </tr>
+        <tr data-source="FACT_SPACEX_TENDER_DEC_2024" data-pubdate="2024-12-10">
+          <td class="font-bold text-tngb-cyan">~27x</td>
+          <td class="mono">$350 Mrd. (Tender Dez. 2024)</td>
+          <td class="mono">$13,1 Mrd. (2024 Ist)</td>
+          <td class="text-xs">S04 Historische Vergleichsbasis</td>
+          <td class="mono"><span class="conf-pill">0.95</span></td>
+        </tr>
+        <tr style="background:rgba(100,116,139,0.06);">
+          <td class="font-semibold text-tngb-muted">Boeing-Vergleich</td>
+          <td class="mono text-tngb-muted">~$110 Mrd. (NYSE Mai 2026)</td>
+          <td class="mono text-tngb-muted">~$78 Mrd. TTM</td>
+          <td class="text-xs text-tngb-muted">Aerospace-Peer-Multiple</td>
+          <td class="mono"><span class="conf-pill">0.95</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+      <strong style="color:#9933FF;">Lesart:</strong> Multiples ohne explizite Revenue-Basis sind missverständlich.
+      Die Modul-Konvention ab v2.0.0: <code class="mono">EV/Revenue-Basis-Jahr</code> immer mit Revenue-Wert nennen
+      (z. B. „~113x auf Q1-2026-Run-Rate" statt nur „~113x"). Das ist die direkte Anwendung der Damodaran-Regel
+      „zeitgleiche EV-Revenue-Paarung" auf das Modul selbst.
+    </p>
+  </div>
+
+  <!-- Worked Example: Sum-of-the-Parts (zwei Stände — akribisch nachvollziehbar) -->
+  <h3 class="font-head font-bold text-white mb-3">Durchgerechnetes Beispiel — Sum-of-the-Parts <span class="est-mark">EST</span></h3>
+
+  <!-- AKTUELL: Mai 2026 S-1-Basis -->
+  <div class="dep-box mb-4" style="border-color:#DFAF0F;">
+    <div class="flex items-center justify-between mb-2">
+      <h4 class="font-head font-bold" style="color:#DFAF0F;">Aktuelle SOTP zur S-1-Bewertung · Stand 2026-05-20</h4>
+      <span class="px-2 py-0.5 rounded text-xs font-mono" style="background:rgba(223,175,15,0.15);color:#DFAF0F;border:1px solid #DFAF0F;">AKTUELL</span>
+    </div>
+    <p class="text-sm text-slate-300 mb-3 leading-relaxed">
+      Zerlegung der <strong>~$1.750-Mrd.-S-1-Bewertung (Mai 2026)</strong> in ihre Bausteine.
+      Basis: S-1-Filing 2026-05-20, Sacra-Q1-2026-Report, Payload Space Mai 2026.
+      Die Multiples sind im Hyper-Growth-Markt Mai 2026 marktüblich — nach dem xAI-Merger Feb. 2026
+      wurde SpaceX zu einem KI/Space-Konglomerat, was die Premium-Bewertung mitträgt.
+    </p>
+    <div class="overflow-x-auto">
+    <table>
+      <thead><tr><th>Baustein</th><th>Basis (Q1 2026)</th><th>Multiple / Methode</th><th>Wert</th><th>Anteil</th></tr></thead>
+      <tbody>
+        <tr data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED" data-fact-class="SCENARIO_PROJECTION" title="DBOM-Fact: SCENARIO_PROJECTION · Konf. 0.50 · vom User vorgegeben, nicht primärquellig verifiziert">
+          <td class="font-semibold text-tngb-cyan">Starlink <span class="dbom-inline-badge">SCEN</span></td>
+          <td>$11,5 Mrd. ARR · ~7,8 Mio. Abos</td><td>~37x ARR (Hyper-Growth-Satcom, vs. Iridium 5x, Eutelsat 1x)</td><td>~$425 Mrd.</td><td>~24%</td></tr>
+        <tr data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED" data-fact-class="SCENARIO_PROJECTION">
+          <td class="font-semibold text-tngb-gold">Launch Services <span class="dbom-inline-badge">SCEN</span></td>
+          <td>$4,2 Mrd. Rev. · ~152 Starts 2025</td><td>~18x Rev. (Quasi-Monopol + Wiederverwendungs-Marge)</td><td>~$75 Mrd.</td><td>~4%</td></tr>
+        <tr data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED" data-fact-class="SCENARIO_PROJECTION">
+          <td class="font-semibold text-tngb-lavender">Starship-Option <span class="dbom-inline-badge">SCEN</span></td>
+          <td>reale Option · IFT-9 erfolgreich</td><td>OTM-Call (HLS-Artemis, Mars, Point-to-Point)</td><td>~$350 Mrd.</td><td>~20%</td></tr>
+        <tr data-source="FACT_XAI_MERGER_FEB_2026" data-fact-class="SCENARIO_PROJECTION" title="DBOM-Fact: SCENARIO_PROJECTION · Konf. 0.45 · xAI-Merger NICHT durch LLM-Wissen bestätigt">
+          <td class="font-semibold" style="color:#FF6B00;">xAI-Integration <span class="dbom-inline-badge">SCEN</span></td>
+          <td>nach Merger Feb. 2026</td><td>Stand-Alone-Bewertung xAI ~$500 Mrd. (Konsens Apr. 2026)</td><td>~$500 Mrd.</td><td>~29%</td></tr>
+        <tr data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED" data-fact-class="SCENARIO_PROJECTION">
+          <td class="font-semibold text-tngb-magenta">Mars/Synergie-Option <span class="dbom-inline-badge">SCEN</span></td>
+          <td>nicht-quantifizierbar</td><td>Narrative-Prämie + Musk-CEO-Premium (α<sub>Musk</sub>)</td><td>~$425 Mrd.</td><td>~24%</td></tr>
+        <tr data-source="FACT_XAI_MERGER_FEB_2026" data-fact-class="SCENARIO_PROJECTION">
+          <td class="font-semibold text-tngb-muted">– Net Debt (xAI-Erbe) <span class="dbom-inline-badge">SCEN</span></td>
+          <td>~$23 Mrd. Verschuldung</td><td>Abzug für X/Twitter-Kredite 2022 + xAI-Linie</td><td>–$25 Mrd.</td><td>–1%</td></tr>
+        <tr style="background:rgba(223,175,15,0.10);" data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED" data-fact-class="SCENARIO_PROJECTION">
+          <td class="font-bold" style="color:#DFAF0F;">Summe SOTP Mai 2026 <span class="dbom-inline-badge">SCEN</span></td>
+          <td>—</td><td>S-1-IPO-Zielgröße</td><td class="font-bold">~$1.750 Mrd.</td><td class="font-bold">100%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+      <strong style="color:#DFAF0F;">Lesart Mai 2026:</strong> Die „harten" Bausteine (Starlink + Launch
+      + xAI) ergeben zusammen ~$1.000 Mrd. — also bereits den Wert eines „Magnificent Seven"-Unternehmens.
+      Der Rest (~$775 Mrd.) ist <em>Optionswert + Narrativ-Premium</em> für Starship/Mars/Musk.
+      Der Devil's Advocate würde sagen: die 44% des Wertes sind <em>nicht durch heutige Cashflows
+      gedeckt</em>. Der Theoretiker antwortet: bei realen Optionen ist das per Definition so.
+    </p>
+  </div>
+
+  <!-- HISTORISCH: Dez 2024 Tender-Offer-Basis (akribischer Vergleich) -->
+  <details class="dep-box mb-6 group">
+    <summary class="cursor-pointer flex items-center justify-between">
+      <h4 class="font-head font-bold text-tngb-muted">Historische SOTP zur $350-Mrd.-Tender-Bewertung · Stand 2024-12-10</h4>
+      <span class="px-2 py-0.5 rounded text-xs font-mono" style="background:rgba(100,116,139,0.15);color:#64748B;border:1px solid #64748B;">HISTORISCH · klicken zum Aufklappen</span>
+    </summary>
+    <div class="mt-3">
+      <p class="text-sm text-slate-300 mb-3 leading-relaxed">
+        Zerlegung der ~$350-Mrd.-Bewertung (Dez. 2024, Tender-Offer $185/Aktie). Diese Tabelle dokumentiert,
+        wie die Bewertung <em>vor</em> dem xAI-Merger und vor dem Starship-IFT-9-Erfolg strukturiert war —
+        ein „Tour through history" für didaktische Zwecke.
+      </p>
+      <div class="overflow-x-auto">
+      <table>
+        <thead><tr><th>Baustein</th><th>Basis (2024)</th><th>Multiple</th><th>Wert</th><th>Anteil</th></tr></thead>
+        <tbody>
+          <tr><td class="font-semibold text-tngb-cyan">Starlink</td><td>$8,2 Mrd. ARR</td><td>~24x ARR</td><td>~$197 Mrd.</td><td>~56%</td></tr>
+          <tr><td class="font-semibold text-tngb-gold">Launch Services</td><td>$4,2 Mrd. Rev.</td><td>~12x Rev.</td><td>~$50 Mrd.</td><td>~14%</td></tr>
+          <tr><td class="font-semibold text-tngb-lavender">Starship-Option</td><td>reale Option</td><td>OTM-Call</td><td>~$100 Mrd.</td><td>~29%</td></tr>
+          <tr style="background:rgba(100,116,139,0.06);"><td class="font-bold text-tngb-muted">Summe (Dez. 2024)</td><td>—</td><td>SOTP</td><td class="font-bold">~$347 Mrd.</td><td class="font-bold">100%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="text-xs text-slate-400 mt-3">
+        <strong>5x Wertzuwachs in 17 Monaten</strong> (Dez. 2024 → Mai 2026). Treiber: (1) xAI-Merger
+        addierte ~$500 Mrd., (2) Starlink-ARR von $8,2 → $11,5 Mrd. (+40%), (3) Multiple-Expansion
+        von 24x → 37x, (4) Starship-Optionswert verdreifacht nach IFT-7/8/9-Erfolgen.
+      </p>
+    </div>
+  </details>
+
+  <!-- Worked Example: Learning Curve -->
+  <div class="grid md:grid-cols-2 gap-5 mb-2">
+    <div class="dep-box">
+      <h4 class="font-head font-bold text-white mb-2">Lernkurve in Zahlen (F4)</h4>
+      <p class="text-sm text-slate-300 leading-relaxed">
+        Mit Lernrate \(LR=0{,}85\) und Startkosten \(C_1\) sinken die Stückkosten bei jeder Verdopplung der
+        kumulierten Starts um 15%: \(C_2 = 0{,}85\,C_1\), \(C_4 = 0{,}72\,C_1\), \(C_8 = 0{,}61\,C_1\),
+        \(C_{16} = 0{,}52\,C_1\). Über zehn Verdopplungen (\(n \approx 1000\)) ergibt sich
+        \(C_{1024} = C_1 \cdot 1024^{\log_2 0{,}85} \approx 0{,}20\,C_1\) — eine Kostenreduktion um ~80%.
+        Diese Degression ist der ökonomische Kern der Disruption gegenüber Cost-Plus-Wettbewerbern und
+        speist die R+-Lernkurven-Schleife im CLD (S08).
+      </p>
+    </div>
+    <div class="dep-box">
+      <h4 class="font-head font-bold text-white mb-2">Stückkosten-Index über kumulierte Starts</h4>
+      <div class="relative" style="height:220px;"><canvas id="learnChart"></canvas></div>
+      <p class="text-xs text-tngb-muted mt-2">\(C_n / C_1\) für \(LR=0{,}85\) (durchgezogen) vs. \(LR=0{,}90\) (gestrichelt). Niedrigere Lernrate = steilere Kostendegression.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S05 KERN-MECHANIK ===== -->
+<section id="s05" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S05</span>
+    <h2 class="section-title">Kern-Mechanik</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    Diese Sektion baut das ökonomische Skelett von SpaceX in sechs Schritten auf: von der Revenue-Struktur (A)
+    über die Starlink-Ökonomie (B), die Bewertungshistorie (C) und den Tender-Offer-Mechanismus (D) bis zur
+    Abhängigkeitsanalyse (E), den IPO-Szenarien (E2) und der globalen Vergleichstabelle (F). Jede Kennzahl ist
+    eine Schätzung — die Mechanik dahinter ist robust, die Punktzahlen sind es nicht.
+  </p>
+
+  <!-- A · Revenue-Struktur -->
+  <h3 class="font-head font-bold text-tngb-cyan mb-3">A · Revenue-Struktur 2024 <span class="est-mark">EST</span></h3>
+  <div class="overflow-x-auto mb-10">
+  <table>
+    <thead><tr><th>Segment</th><th>Revenue 2024</th><th>Anteil</th><th>Wachstum YoY</th><th>Charakter</th></tr></thead>
+    <tbody>
+      <tr><td class="font-semibold text-tngb-cyan">Starlink Subscriptions</td><td>$8,2 Mrd.</td><td>63%</td><td><span class="badge badge-low">+~140%</span></td><td>Skalierender Netzwerkwert</td></tr>
+      <tr><td class="font-semibold text-tngb-gold">Launch Services</td><td>$4,2 Mrd.</td><td>32%</td><td><span class="badge badge-med">+~20%</span></td><td>Quasi-Utility / Monopolnähe</td></tr>
+      <tr><td class="font-semibold text-tngb-muted">Sonstiges</td><td>$0,72 Mrd.</td><td>5%</td><td><span class="badge badge-med">n/a</span></td><td>Hardware, Sonstiges</td></tr>
+      <tr style="background:rgba(223,175,15,0.06);"><td class="font-bold text-tngb-gold">Gesamt</td><td class="font-bold">$13,1 Mrd.</td><td class="font-bold">100%</td><td><span class="badge badge-low">+51%</span></td><td>2023: $8,7 Mrd.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- B · Starlink-Ökonomie -->
+  <h3 class="font-head font-bold text-tngb-emerald mb-3">B · Starlink-Ökonomie</h3>
+  <div class="grid md:grid-cols-3 gap-5 mb-10">
+    <div class="dep-box"><div class="text-2xl font-head font-extrabold text-tngb-cyan">4,6 → 9 → 10+ Mio.</div><div class="text-sm text-slate-300 mt-1">Abonnenten Ende '24 → Ende '25 → Feb '26</div><div class="text-xs text-tngb-muted mt-1">160 Länder; Verdopplung in 2025</div></div>
+    <div class="dep-box"><div class="text-2xl font-head font-extrabold text-tngb-emerald">ARPU × N</div><div class="text-sm text-slate-300 mt-1">Umsatzlogik</div><div class="text-xs text-tngb-muted mt-1">$8,2 Mrd. / 4,6 Mio. ≈ $1.780 jährlicher Mix-ARPU (Privat+Enterprise+Maritime)<span class="est-mark">EST</span></div></div>
+    <div class="dep-box"><div class="text-2xl font-head font-extrabold text-tngb-gold">Hoch-Fix / Tief-Marginal</div><div class="text-sm text-slate-300 mt-1">Kostenstruktur</div><div class="text-xs text-tngb-muted mt-1">Konstellation + Boden = Fixkosten; Break-Even ab kritischer Subscriber-Masse (laut Shotwell 2023 erreicht)</div></div>
+  </div>
+  <div class="grid md:grid-cols-2 gap-5 mb-10">
+    <div class="dep-box">
+      <h4 class="font-head font-bold text-white mb-2">Starts pro Jahr — Kadenz-Entwicklung</h4>
+      <div class="relative" style="height:230px;"><canvas id="launchChart"></canvas></div>
+      <p class="text-xs text-tngb-muted mt-2">138 Starts 2024 (132× Falcon 9 + 2× Falcon Heavy + 4× Starship-Test). &gt;50% aller weltweiten Orbitalstarts.</p>
+    </div>
+    <div class="dep-box">
+      <h4 class="font-head font-bold text-white mb-2">ARPU-Zerlegung Starlink (illustrativ) <span class="est-mark">EST</span></h4>
+      <div class="overflow-x-auto">
+      <table>
+        <thead><tr><th>Segment</th><th>~Anteil Subs</th><th>~Mtl. ARPU</th><th>Charakter</th></tr></thead>
+        <tbody>
+          <tr><td class="font-semibold text-tngb-cyan">Residential</td><td>~80%</td><td>~$100–120</td><td>Volumengeschäft</td></tr>
+          <tr><td class="font-semibold text-tngb-emerald">Business / Enterprise</td><td>~12%</td><td>~$250–500</td><td>Höhere Marge</td></tr>
+          <tr><td class="font-semibold text-tngb-gold">Maritime / Aviation</td><td>~5%</td><td>~$1.000–5.000</td><td>Premium-ARPU</td></tr>
+          <tr><td class="font-semibold text-tngb-lavender">Mobility / Roam</td><td>~3%</td><td>variabel</td><td>Wachstumsfeld</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="text-xs text-tngb-muted mt-2">Der Mix-ARPU wird durch wenige Premium-Segmente (Maritime, Aviation) überproportional gehoben — ein Treiber der \(V_{Starlink}\)-DCF (F3).</p>
+    </div>
+  </div>
+
+  <!-- C · Bewertungshistorie Timeline -->
+  <h3 class="font-head font-bold text-tngb-gold mb-3">C · Bewertungshistorie 2002 – 2026 <span class="est-mark">EST</span></h3>
+  <div class="grid md:grid-cols-3 gap-5 mb-10">
+    <div class="dep-box md:col-span-2 overflow-x-auto">
+      <div class="relative" style="height:240px;"><canvas id="valHistChart"></canvas></div>
+      <p class="text-xs text-tngb-muted mt-2">Gründung 2002 → 2012 $2,4 Mrd. → 2015 $12 Mrd. → 2019 $33 Mrd. → 2021 $74 Mrd. (Tender Aug.) → 2022 $127 Mrd. → 2023 $150 Mrd. → Dez. 2024 $350 Mrd. → Dez. 2025 ~$800 Mrd. → IPO-Ziel 2026 ~$1.750 Mrd. Logarithmische Achse.</p>
+    </div>
+    <div class="dep-box">
+      <h4 class="font-head font-bold text-white mb-2">CAGR-Lesart (zwei Zeitfenster)</h4>
+      <p class="text-sm text-slate-300 leading-relaxed mb-2">
+        <strong>12-Jahres-Fenster (2012–2024):</strong> $2,4 → ~$350 Mrd. = CAGR <strong>~52% p.a.</strong> —
+        extrem für ein Kapitalgut-intensives Geschäft, aber stetig getragen von Falcon-Wiederverwendung und Starlink-Aufbau.
+      </p>
+      <p class="text-sm text-slate-300 leading-relaxed mb-2">
+        <strong>14-Jahres-Fenster (2012–2026-05, inkl. S-1):</strong> $2,4 → ~$1.750 Mrd. <span class="est-mark">EST</span> =
+        CAGR <strong>~58% p.a.</strong> — die letzten 17 Monate (2024-12 → 2026-05) heben den
+        Gesamtdurchschnitt deutlich, weil die Bewertung in diesem Fenster ×5 stieg.
+      </p>
+      <p class="text-xs text-slate-400 leading-relaxed">
+        Die Beschleunigung 2024→2025→2026 (×2,3 → ×2,2 in jeweils einem Jahr) fällt zeitlich mit der
+        Starlink-Subscriber-Verdopplung, dem xAI-Merger <span class="est-mark">EST</span> und der S-1-Vorbereitung zusammen — ein klassisches Anzeichen,
+        dass die letzten Bewertungsstufen stärker vom Narrativ als von der laufenden Cashflow-Realität
+        getragen werden (vgl. Devil's Advocate, S03).
+      </p>
+    </div>
+  </div>
+
+  <!-- D · Tender-Offer-Mechanismus -->
+  <h3 class="font-head font-bold text-tngb-lavender mb-3">D · Tender-Offer-Mechanismus</h3>
+  <div class="dep-box mb-10">
+    <div class="flex flex-wrap items-center gap-2 text-sm">
+      <div class="process-node" style="background:rgba(0,207,255,0.12);color:#00CFFF;border:1px solid rgba(0,207,255,0.3);">Mitarbeiter halten<br/>illiquide Aktien/RSUs</div>
+      <span class="arrow">→</span>
+      <div class="process-node" style="background:rgba(0,204,122,0.12);color:#00CC7A;border:1px solid rgba(0,204,122,0.3);">SpaceX legt<br/>Tender-Preis fest<br/>($185, Dez '24)</div>
+      <span class="arrow">→</span>
+      <div class="process-node" style="background:rgba(223,175,15,0.12);color:#DFAF0F;border:1px solid rgba(223,175,15,0.3);">Zugelassene Investoren<br/>+ Eigenrückkauf<br/>($500 Mio.) kaufen</div>
+      <span class="arrow">→</span>
+      <div class="process-node" style="background:rgba(153,51,255,0.12);color:#9933FF;border:1px solid rgba(153,51,255,0.3);">Mitarbeiter werden<br/>liquide — ohne IPO</div>
+      <span class="arrow">→</span>
+      <div class="process-node" style="background:rgba(230,57,154,0.12);color:#E6399A;border:1px solid rgba(230,57,154,0.3);">Neue impliz.<br/>Bewertung gesetzt</div>
+    </div>
+    <p class="text-xs text-slate-400 mt-3">Reine Sekundärtransaktion: kein Kapitalzufluss zum Unternehmen, keine SEC-Berichtspflicht, Kontrolle bleibt bei Musk. Halbjährliche Kadenz (Sommer/Winter).</p>
+  </div>
+
+  <!-- E · Abhängigkeitsanalyse -->
+  <h3 class="font-head font-bold text-tngb-magenta mb-3">E · Abhängigkeitsanalyse (Konzentrationsrisiko)</h3>
+  <div class="grid md:grid-cols-2 gap-5 mb-10">
+    <div class="dep-box">
+      <div class="relative" style="height:230px;"><canvas id="depChart"></canvas></div>
+    </div>
+    <div class="dep-box">
+      <h4 class="font-head font-bold text-white mb-2">Kumulierte US-Bundesverträge <span class="est-mark">EST</span></h4>
+      <ul class="text-sm text-slate-300 space-y-2">
+        <li>• <strong>~$22 Mrd.</strong> kumuliert; $11,8 Mrd. aktiv verbleibend (52 Verträge)</li>
+        <li>• NASA ~$15 Mrd. | DOD/Space Force ~$7 Mrd. | Starshield/NRO &gt;$1,8 Mrd.</li>
+        <li>• <strong>NASA HLS:</strong> Option A $2,89 Mrd. + Option B $1,15 Mrd. = ~$4,04 Mrd. obligiert; Potenzial ~$4,3–4,5 Mrd.; ~$2,6 Mrd. ausgezahlt (65%)</li>
+        <li class="text-tngb-magenta">⚠ Government-Anteil ~60% am Umsatz 2024 → hoher \(D_{Gov}\): Bewertung politisch budgetzyklus-sensitiv. Starlink-Wachstum senkt diesen Quotienten strukturell.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- E2 · IPO-Szenarien -->
+  <h3 class="font-head font-bold text-tngb-indigo mb-3">E2 · IPO-Bewertungsszenarien (Mai 2026, S-1-Basis) <span class="est-mark">EST</span></h3>
+  <div class="grid md:grid-cols-3 gap-5 mb-10">
+    <div class="dep-box border-t-2" style="border-top-color:#E6399A;">
+      <div class="text-tngb-magenta font-head font-bold mb-1">Bear · ~$1.200 Mrd.</div>
+      <p class="text-xs text-slate-300 mb-2">EV/Rev ~64x auf 2025E ($18,7 Mrd.)</p>
+      <ul class="text-xs text-slate-400 space-y-1">
+        <li>• Zinsnormalisierung komprimiert Tech-Multiples</li>
+        <li>• Starship-Verzögerungen drücken Optionswert</li>
+        <li>• ITAR-Disclosure-Friktion schreckt Investoren</li>
+      </ul>
+    </div>
+    <div class="dep-box border-t-2" style="border-top-color:#DFAF0F;">
+      <div class="text-tngb-gold font-head font-bold mb-1">Base · ~$1.750 Mrd.</div>
+      <p class="text-xs text-slate-300 mb-2">EV/Rev ~94x auf 2025E — Modul-Richtwert</p>
+      <ul class="text-xs text-slate-400 space-y-1">
+        <li>• Starlink ~9 Mio. Abos, weiter starkes Wachstum</li>
+        <li>• Launch-Monopol-Cashflow stabil</li>
+        <li>• Starship-Option teilweise eingepreist</li>
+      </ul>
+    </div>
+    <div class="dep-box border-t-2" style="border-top-color:#00CC7A;">
+      <div class="text-tngb-emerald font-head font-bold mb-1">Bull · ~$2.000+ Mrd.</div>
+      <p class="text-xs text-slate-300 mb-2">EV/Rev ~107x auf 2025E</p>
+      <ul class="text-xs text-slate-400 space-y-1">
+        <li>• Starlink &gt;10 Mio. Abos, D2D-Durchbruch</li>
+        <li>• Starship operationell + HLS-Meilensteine</li>
+        <li>• Niedrigzins-Umfeld stützt Growth-Multiples</li>
+      </ul>
+    </div>
+  </div>
+  <p class="text-xs text-slate-500 mb-10">
+    Methodischer Hinweis: Die Multiples wirken absurd hoch im Vergleich zu Aerospace-Defense-Peers (0,4–1,0x),
+    sind aber konsistent mit reinen Hyper-Growth-Satcom-Werten (Rocket Lab ~160x, AST SpaceMobile ~180x).
+    Die Bewertungsfrage reduziert sich darauf, ob man SpaceX als <em>Aerospace-Unternehmen</em> (dann massiv
+    überbewertet) oder als <em>Tech-/Satcom-Plattform mit Raumfahrt-Burggraben</em> (dann im Peer-Korridor) klassifiziert.
+  </p>
+
+  <!-- F · Globale Vergleichstabelle (sortierbar) -->
+  <h3 class="font-head font-bold text-tngb-cyan mb-1">F · Globale Vergleichstabelle <span class="est-mark">EST</span></h3>
+  <p class="text-xs text-tngb-muted mb-3">Spaltenkopf klicken zum Sortieren. <span style="color:#DFAF0F;">SpaceX in Gold</span> · <span style="color:#00CFFF;">Aerospace-Peers in Cyan</span> · <span style="color:#9933FF;">Tech-Vergleich in Lavender</span>. Stand Mai/Jun 2026.</p>
+  <div class="overflow-x-auto mb-2">
+  <table id="cmpTable">
+    <thead><tr>
+      <th class="sortable" data-type="str">Unternehmen</th>
+      <th class="sortable" data-type="str">Ticker</th>
+      <th class="sortable" data-type="str">Sektor</th>
+      <th class="sortable" data-type="num">Mktcap/EV ($Mrd.)</th>
+      <th class="sortable" data-type="num">Revenue ($Mrd.)</th>
+      <th class="sortable" data-type="num">EV/Revenue</th>
+      <th class="sortable" data-type="num">EV/EBITDA</th>
+      <th class="sortable" data-type="num">EBITDA-Marge</th>
+      <th class="sortable" data-type="str">Land</th>
+    </tr></thead>
+    <tbody id="cmpBody"></tbody>
+  </table>
+  </div>
+  <p class="text-xs text-slate-500 mb-8">Anmerkungen: SpaceX, Blue Origin und ULA sind privat — alle Werte geschätzt/abgeleitet. Rocket Lab EV/Revenue extrem hoch durch Wachstums-Premium (Kurs +750% in 12 Monaten). Boeing-Bewertung nach 737-MAX-Recovery-Zyklus.</p>
+
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="dep-box">
+      <h4 class="font-head font-bold text-white mb-2">EV/Revenue im Vergleich (log) <span class="est-mark">EST</span></h4>
+      <div class="relative" style="height:300px;"><canvas id="evrChart"></canvas></div>
+      <p class="text-xs text-tngb-muted mt-2">Zwei Cluster: Aerospace-Defense (0,4–1,0x) und Hyper-Growth-Satcom/Tech (80–180x). SpaceX liegt im zweiten Cluster — das ist der Kern der Klassifizierungsfrage.</p>
+    </div>
+    <div class="dep-box">
+      <h4 class="font-head font-bold text-white mb-2">Lesart der Vergleichstabelle</h4>
+      <p class="text-sm text-slate-300 leading-relaxed mb-2">
+        Die Tabelle verbindet drei nicht direkt vergleichbare Welten: <strong>klassische Aerospace-Defense-Konzerne</strong>
+        (Boeing, LMT, NOC, RTX, Airbus) handeln nahe dem Umsatz, weil sie reife, margenstabile, aber langsam wachsende
+        Cashflows liefern. <strong>Satcom-Betreiber</strong> (SES, Eutelsat, Iridium, Viasat) zeigen ein breites Spektrum
+        je nach Orbit-Typ und Wachstum. <strong>Hyper-Growth-Werte</strong> (Rocket Lab, AST SpaceMobile, Palantir) tragen
+        Multiples, die nur über mehrjähriges Umsatzwachstum verteidigbar sind.
+      </p>
+      <p class="text-sm text-slate-300 leading-relaxed">
+        SpaceX ist ein Hybrid: ein Aerospace-Burggraben (Launch) kombiniert mit einer Satcom-Wachstumsplattform (Starlink)
+        und einer Tech-Option (Starship). Genau diese Hybridität macht jeden Single-Multiple-Vergleich irreführend —
+        und begründet methodisch die Sum-of-the-Parts-Analyse aus S04.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S06 PROZESS-TIMELINE ===== -->
+<section id="s06" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S06</span>
+    <h2 class="section-title">Interaktive Prozess-Timeline</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">
+    Drei Zeithorizonte, drei Prozesse: der hypothetische <strong>IPO-Prozess</strong> (Tag-Ebene), die
+    operative <strong>Starlink-Expansion</strong> (Woche-Ebene) und die <strong>Government-Contract-Vergabe</strong>
+    (Monat-Ebene). Jeder Schritt erklärt sich auf dem global gewählten Wissensniveau.
+  </p>
+
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <div class="flex gap-2" id="tl-scope">
+      <button class="tab-btn active-tab" data-scope="tag">Tag · IPO-Prozess</button>
+      <button class="tab-btn" data-scope="woche">Woche · Starlink-Expansion</button>
+      <button class="tab-btn" data-scope="monat">Monat · Gov-Contract</button>
+    </div>
+    <div class="flex gap-2 ml-auto items-center">
+      <button id="tlPlay" class="level-btn active-level">▶ Play</button>
+      <button class="level-btn" data-speed="1">1×</button>
+      <button class="level-btn" data-speed="2">2×</button>
+      <button class="level-btn" data-speed="5">5×</button>
+    </div>
+  </div>
+
+  <div class="dep-box overflow-x-auto">
+    <div id="tlTrack" class="flex flex-wrap items-stretch gap-2"></div>
+    <div id="tlNarr" class="sim-out mt-4 text-sm text-slate-200"></div>
+  </div>
+  <p class="text-xs text-tngb-muted mt-2">Tastatur: <span class="font-mono text-tngb-cyan">+</span>/<span class="font-mono text-tngb-cyan">−</span> Tempo. Der hervorgehobene Schritt pulsiert (pulseGlow). Narrativ-Text passt sich dem global gewählten Wissensniveau an.</p>
+</section>
+
+<!-- ===== S07 LIVE-SIMULATION ===== -->
+<section id="s07" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S07</span>
+    <h2 class="section-title">Live-Simulationstool — 7-Achsen-Wirkungsradar</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">
+    Verschiebe die fünf Treiber (Starlink-Abonnenten, Launch-Preisindex, Zinsniveau, Government-Anteil,
+    Starship-Kommerzialisierung) und beobachte die Auswirkungen auf sieben gesellschaftliche Wirkungsachsen.
+    Die Presets bilden drei plausible Welten ab; alle Radar-Formeln sind unten transparent kommentiert.
+    Das Devil's-Advocate-Szenario zeigt, wie stark die Bewertung am Schlüsselrisiko „Musk“ hängt.
+  </p>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div class="dep-box space-y-5">
+      <div class="flex gap-2 flex-wrap mb-2">
+        <button class="level-btn active-level" data-preset="status">Status Quo 2024</button>
+        <button class="level-btn" data-preset="boom">Starlink-Boom 2028</button>
+        <button class="level-btn" data-preset="bear">Konservativ/Bear</button>
+      </div>
+      <div>
+        <div class="flex justify-between text-sm mb-1"><span class="text-slate-300">1 · Starlink Abonnenten (Mio.)</span><span class="font-mono text-tngb-cyan" id="lblSub">4</span></div>
+        <div class="slider-wrap"><input type="range" id="simSub" min="4" max="50" value="4" step="1"/></div>
+        <div class="text-xs text-tngb-muted mt-1" id="subArr"></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-sm mb-1"><span class="text-slate-300">2 · Launch-Preisindex (%)</span><span class="font-mono text-tngb-cyan" id="lblPreis">100</span></div>
+        <div class="slider-wrap"><input type="range" id="simPreis" min="50" max="200" value="100" step="5"/></div>
+        <div class="text-xs text-tngb-muted mt-1">100 = aktuell; höher = geringerer Wettbewerbsdruck</div>
+      </div>
+      <div>
+        <div class="flex justify-between text-sm mb-1"><span class="text-slate-300">3 · Zinsniveau (%)</span><span class="font-mono text-tngb-cyan" id="lblZins">5</span></div>
+        <div class="slider-wrap"><input type="range" id="simZins" min="0" max="10" value="5" step="0.5"/></div>
+        <div class="text-xs text-tngb-muted mt-1">Höhere Zinsen komprimieren DCF-Bewertung</div>
+      </div>
+      <div>
+        <div class="flex justify-between text-sm mb-1"><span class="text-slate-300">4 · Government-Revenue-Anteil (%)</span><span class="font-mono text-tngb-cyan" id="lblGovt">60</span></div>
+        <div class="slider-wrap"><input type="range" id="simGovt" min="20" max="80" value="60" step="5"/></div>
+        <div class="text-xs text-tngb-muted mt-1">Höher = stärkeres Konzentrations-/Diversifizierungsrisiko</div>
+      </div>
+      <div>
+        <div class="flex justify-between text-sm mb-1"><span class="text-slate-300">5 · Starship-Kommerzialisierung (%)</span><span class="font-mono text-tngb-cyan" id="lblShip">10</span></div>
+        <div class="slider-wrap"><input type="range" id="simShip" min="0" max="100" value="10" step="5"/></div>
+        <div class="text-xs text-tngb-muted mt-1">Realer Optionswert: 0 = OTM, 100 = voll kommerzialisiert</div>
+      </div>
+      <div class="caveat-box">
+        <p class="text-xs text-slate-300"><strong class="text-tngb-magenta">Devil's Advocate:</strong> <button id="muskBtn" class="underline text-tngb-magenta">Szenario „Musk verlässt SpaceX“ einrechnen</button> → alle Achsen −20 bis −35.</p>
+      </div>
+    </div>
+
+    <div class="dep-box">
+      <div class="relative" style="height:380px;"><canvas id="radarChart"></canvas></div>
+      <div class="text-xs text-tngb-muted mt-3 space-y-1">
+        <div class="font-mono text-tngb-cyan">Radar-Formeln (transparent):</div>
+        <div class="font-mono text-[0.65rem] leading-relaxed">Fachbereich = clamp(55 + sub·0,8 − zinsen·2)<br/>Gesellschaft = clamp(40 + sub·0,6 + ship·0,3)<br/>Wirtschaft = clamp(60 + sub·0,5 − govt·0,15)<br/>Wohlstand = clamp(50 + sub·0,4 − zinsen·3)<br/>Wissen = clamp(65 + ship·0,4 + sub·0,1)<br/>Gesundheit = clamp(70 − sub/5 − ship/10)<br/>Zukunftsfähigkeit = clamp(45 + ship·0,5 + sub·0,2 − zinsen·1,5)<br/>clamp = min(100, max(5, x))</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S08 VISUAL EXPLORATION ===== -->
+<section id="s08" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S08</span>
+    <h2 class="section-title">Visual Exploration — 4 Pflicht-Diagramme</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    Vier komplementäre Sichten: das <strong>Sankey</strong> zeigt, wohin das Geld fließt; die
+    <strong>Payoff-Matrix</strong> erklärt das strategische Spiel gegen den Incumbent Boeing; das
+    <strong>CLD</strong> macht die selbstverstärkenden und dämpfenden Rückkopplungen sichtbar; und das
+    <strong>Bow-Tie</strong> verknüpft Ursachen und Konsequenzen des zentralen Risikos — einer
+    Bewertungskorrektur oder eines gescheiterten IPO — über die dazwischenliegenden Barrieren.
+  </p>
+
+  <!-- D1 Sankey -->
+  <h3 class="font-head font-bold text-tngb-cyan mb-2">Diagramm 1 · Sankey — SpaceX Geldflüsse (Mio. $, 2024 vereinfacht auf 10.000)</h3>
+  <div class="dep-box mb-10">
+    <div id="sankeyChart" style="height:460px;"></div>
+    <p class="text-xs text-tngb-muted mt-2">Balancing-Check: Einnahmen 4.500+2.500+1.500+1.000+500 = 10.000. Intermediate balanced: Starlink-BU IN=4.500/OUT=4.500 ✓; Launch Services IN=5.000/OUT=5.000 ✓. Ausgaben + FCF/Reserve (500) = 10.000 ✓.</p>
+  </div>
+
+  <!-- D2 Payoff-Matrix -->
+  <h3 class="font-head font-bold text-tngb-gold mb-2">Diagramm 2 · Payoff-Matrix — SpaceX vs. Boeing (DOD/NASA-Ausschreibungen)</h3>
+  <div class="dep-box mb-10">
+    <p class="text-xs text-slate-400 mb-3">2×2-Normalform-Spiel, simultane Entscheidung. Payoffs (SpaceX, Boeing), Skala 1–4.</p>
+    <div class="overflow-x-auto">
+    <table style="table-layout:fixed;">
+      <thead><tr><th style="width:22%;"></th><th class="text-center">Boeing: Politisches Lobbying</th><th class="text-center">Boeing: Technischer Wettbewerb</th></tr></thead>
+      <tbody>
+        <tr>
+          <th>SpaceX: Disruption (Fixpreis, Wiederverwendung)</th>
+          <td><div class="matrix-cell">SpaceX gewinnt Marktanteile, Boeing kompensiert politisch<br/><span class="font-mono text-tngb-cyan">(3, 2)</span></div></td>
+          <td><div class="matrix-cell nash">★ NASH-GG · SpaceX dominiert technisch<br/><span class="font-mono text-tngb-emerald font-bold">(4, 2)</span></div></td>
+        </tr>
+        <tr>
+          <th>SpaceX: Incumbent-Verhalten (Cost-Plus)</th>
+          <td><div class="matrix-cell">Boeing-Heimspiel (historischer Status Quo)<br/><span class="font-mono text-tngb-magenta">(1, 4)</span></div></td>
+          <td><div class="matrix-cell">gemischtes Gleichgewicht<br/><span class="font-mono text-slate-300">(2, 3)</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="text-xs text-slate-400 mt-3"><strong>Interpretation:</strong> Nash-Gleichgewicht bei (Disruption, Technischer Wettbewerb). Nur bei <em>transparenten technischen</em> Ausschreibungen ist SpaceX optimal positioniert; politisch dominierte Beschaffung (Cost-Plus + Lobbying) begünstigt strukturell den Incumbent Boeing.</p>
+  </div>
+
+  <!-- D3 CLD -->
+  <h3 class="font-head font-bold text-tngb-emerald mb-2">Diagramm 3 · Kausalschleifendiagramm (CLD) — SpaceX Systemdynamik</h3>
+  <div class="dep-box mb-10">
+    <svg viewBox="0 0 880 420" class="w-full" style="max-height:440px;">
+      <defs>
+        <marker id="ah-cyan" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#00CFFF"/></marker>
+        <marker id="ah-em" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#00CC7A"/></marker>
+        <marker id="ah-mag" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#E6399A"/></marker>
+        <marker id="ah-or" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#FF6B00"/></marker>
+      </defs>
+      <!-- R+ Starlink loop -->
+      <text x="120" y="30" fill="#00CFFF" font-size="13" font-weight="700">R+ Starlink-Netzwerkschleife</text>
+      <g font-size="11" fill="#E2E8F0">
+        <rect x="40" y="50" width="120" height="40" rx="8" fill="rgba(0,207,255,0.1)" stroke="#00CFFF"/><text x="100" y="74" text-anchor="middle">Satellitenzahl ↑</text>
+        <rect x="230" y="50" width="140" height="40" rx="8" fill="rgba(0,207,255,0.1)" stroke="#00CFFF"/><text x="300" y="68" text-anchor="middle">Geschwindigkeit /</text><text x="300" y="82" text-anchor="middle">Coverage ↑</text>
+        <rect x="440" y="50" width="120" height="40" rx="8" fill="rgba(0,207,255,0.1)" stroke="#00CFFF"/><text x="500" y="74" text-anchor="middle">Mehr Abonnenten</text>
+        <rect x="630" y="50" width="120" height="40" rx="8" fill="rgba(0,207,255,0.1)" stroke="#00CFFF"/><text x="690" y="74" text-anchor="middle">Mehr Revenue</text>
+        <rect x="440" y="130" width="140" height="40" rx="8" fill="rgba(0,207,255,0.1)" stroke="#00CFFF"/><text x="510" y="154" text-anchor="middle">Mehr Startkapazität</text>
+      </g>
+      <line x1="160" y1="70" x2="228" y2="70" stroke="#00CFFF" stroke-width="2" marker-end="url(#ah-cyan)"/>
+      <line x1="370" y1="70" x2="438" y2="70" stroke="#00CFFF" stroke-width="2" marker-end="url(#ah-cyan)"/>
+      <line x1="560" y1="70" x2="628" y2="70" stroke="#00CFFF" stroke-width="2" marker-end="url(#ah-cyan)"/>
+      <path d="M690,90 Q690,150 580,150" fill="none" stroke="#00CFFF" stroke-width="2" marker-end="url(#ah-cyan)"/>
+      <path d="M440,150 Q260,150 100,92" fill="none" stroke="#00CFFF" stroke-width="2" marker-end="url(#ah-cyan)"/>
+      <!-- R+ learning loop -->
+      <text x="40" y="215" fill="#00CC7A" font-size="13" font-weight="700">R+ Lernkurven-Schleife</text>
+      <g font-size="11" fill="#E2E8F0">
+        <rect x="40" y="230" width="150" height="38" rx="8" fill="rgba(0,204,122,0.1)" stroke="#00CC7A"/><text x="115" y="253" text-anchor="middle">Wiederverwendung ↑</text>
+        <rect x="240" y="230" width="120" height="38" rx="8" fill="rgba(0,204,122,0.1)" stroke="#00CC7A"/><text x="300" y="253" text-anchor="middle">Startkosten ↓</text>
+        <rect x="410" y="230" width="110" height="38" rx="8" fill="rgba(0,204,122,0.1)" stroke="#00CC7A"/><text x="465" y="253" text-anchor="middle">Mehr Starts</text>
+        <rect x="570" y="230" width="120" height="38" rx="8" fill="rgba(0,204,122,0.1)" stroke="#00CC7A"/><text x="630" y="253" text-anchor="middle">Mehr Lerneffekt</text>
+      </g>
+      <line x1="190" y1="249" x2="238" y2="249" stroke="#00CC7A" stroke-width="2" marker-end="url(#ah-em)"/>
+      <line x1="360" y1="249" x2="408" y2="249" stroke="#00CC7A" stroke-width="2" marker-end="url(#ah-em)"/>
+      <line x1="520" y1="249" x2="568" y2="249" stroke="#00CC7A" stroke-width="2" marker-end="url(#ah-em)"/>
+      <path d="M630,268 Q630,300 115,300 Q115,280 115,270" fill="none" stroke="#00CC7A" stroke-width="2" marker-end="url(#ah-em)"/>
+      <!-- B- regulation -->
+      <text x="40" y="345" fill="#E6399A" font-size="13" font-weight="700">B− Regulierungs-Balancierung</text>
+      <g font-size="11" fill="#E2E8F0">
+        <rect x="40" y="360" width="130" height="38" rx="8" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="105" y="383" text-anchor="middle">Orbital Debris ↑</text>
+        <rect x="210" y="360" width="140" height="38" rx="8" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="280" y="383" text-anchor="middle">FCC/ITU Intervention</text>
+        <rect x="390" y="360" width="150" height="38" rx="8" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="465" y="383" text-anchor="middle">Genehm.-Verzögerung</text>
+        <rect x="580" y="360" width="120" height="38" rx="8" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="640" y="383" text-anchor="middle">Wachstumsbremse</text>
+      </g>
+      <line x1="170" y1="379" x2="208" y2="379" stroke="#E6399A" stroke-width="2" marker-end="url(#ah-mag)"/>
+      <line x1="350" y1="379" x2="388" y2="379" stroke="#E6399A" stroke-width="2" marker-end="url(#ah-mag)"/>
+      <line x1="540" y1="379" x2="578" y2="379" stroke="#E6399A" stroke-width="2" marker-end="url(#ah-mag)"/>
+      <!-- B- musk -->
+      <text x="730" y="345" fill="#FF6B00" font-size="12" font-weight="700">B− Musk-Überlastung</text>
+      <g font-size="10" fill="#E2E8F0">
+        <rect x="720" y="360" width="150" height="50" rx="8" fill="rgba(255,107,0,0.1)" stroke="#FF6B00"/><text x="795" y="380" text-anchor="middle">Erfolg ↑ → Tesla/X-</text><text x="795" y="396" text-anchor="middle">Ablenkung ↑ → Fokus ↓</text>
+      </g>
+    </svg>
+    <p class="text-xs text-tngb-muted mt-2">Zwei verstärkende Schleifen (R+ Netzwerk, R+ Lernkurve) treiben das exponentielle Wachstum; zwei balancierende Schleifen (B− Regulierung, B− Musk-Überlastung) wirken als Dämpfer.</p>
+  </div>
+
+  <!-- D4 Bow-Tie -->
+  <h3 class="font-head font-bold text-tngb-orange mb-2">Diagramm 4 · Bow-Tie — IPO-Bewertungskorrektur-Risiko</h3>
+  <div class="dep-box mb-2 overflow-x-auto">
+    <svg viewBox="0 0 980 440" class="w-full" style="min-width:760px;max-height:460px;">
+      <defs><marker id="bt-ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#64748B"/></marker></defs>
+      <!-- Causes -->
+      <g font-size="10.5" fill="#E2E8F0">
+        <rect x="10" y="20"  width="190" height="34" rx="7" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="105" y="41" text-anchor="middle">1 · Musk-Klumpenrisiko (Tesla/X)</text>
+        <rect x="10" y="100" width="190" height="34" rx="7" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="105" y="121" text-anchor="middle">2 · NASA-Budget-Cut (Kongress)</text>
+        <rect x="10" y="180" width="190" height="34" rx="7" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="105" y="201" text-anchor="middle">3 · ITAR-Verstoß / Cyberangriff</text>
+        <rect x="10" y="260" width="190" height="34" rx="7" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="105" y="281" text-anchor="middle">4 · Starship RUD ×N</text>
+        <rect x="10" y="340" width="190" height="34" rx="7" fill="rgba(230,57,154,0.1)" stroke="#E6399A"/><text x="105" y="361" text-anchor="middle">5 · Zinsnormalisierung</text>
+      </g>
+      <!-- Barriers (left) -->
+      <g font-size="9" fill="#94A3B8">
+        <line x1="200" y1="37"  x2="430" y2="200" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <line x1="200" y1="117" x2="430" y2="210" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <line x1="200" y1="197" x2="430" y2="215" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <line x1="200" y1="277" x2="430" y2="225" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <line x1="200" y1="357" x2="430" y2="235" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <rect x="250" y="120" width="120" height="22" rx="5" fill="rgba(0,204,122,0.08)" stroke="#00CC7A"/><text x="310" y="135" text-anchor="middle" fill="#00CC7A">Vertragsstreuung</text>
+        <rect x="250" y="260" width="120" height="22" rx="5" fill="rgba(0,204,122,0.08)" stroke="#00CC7A"/><text x="310" y="275" text-anchor="middle" fill="#00CC7A">Dual-Class-Aktien</text>
+      </g>
+      <!-- Central event -->
+      <polygon points="430,180 550,150 550,290 430,260" fill="rgba(255,107,0,0.18)" stroke="#FF6B00" stroke-width="2"/>
+      <text x="490" y="210" text-anchor="middle" fill="#FF6B00" font-size="12" font-weight="700">Bewertungs-</text>
+      <text x="490" y="228" text-anchor="middle" fill="#FF6B00" font-size="12" font-weight="700">korrektur /</text>
+      <text x="490" y="246" text-anchor="middle" fill="#FF6B00" font-size="12" font-weight="700">Failed IPO</text>
+      <!-- Barriers (right) -->
+      <g font-size="9" fill="#94A3B8">
+        <rect x="610" y="120" width="130" height="22" rx="5" fill="rgba(0,204,122,0.08)" stroke="#00CC7A"/><text x="675" y="135" text-anchor="middle" fill="#00CC7A">Starlink-FCF-Puffer</text>
+        <rect x="610" y="200" width="130" height="22" rx="5" fill="rgba(0,204,122,0.08)" stroke="#00CC7A"/><text x="675" y="215" text-anchor="middle" fill="#00CC7A">DOD-krit.-Infra-Status</text>
+        <rect x="610" y="280" width="130" height="22" rx="5" fill="rgba(0,204,122,0.08)" stroke="#00CC7A"/><text x="675" y="295" text-anchor="middle" fill="#00CC7A">Board-Governance</text>
+      </g>
+      <!-- Consequences -->
+      <g font-size="10.5" fill="#E2E8F0">
+        <line x1="550" y1="200" x2="780" y2="37"  stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <line x1="550" y1="210" x2="780" y2="117" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <line x1="550" y1="220" x2="780" y2="197" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <line x1="550" y1="230" x2="780" y2="277" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <line x1="550" y1="240" x2="780" y2="357" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#bt-ar)"/>
+        <rect x="780" y="20"  width="195" height="34" rx="7" fill="rgba(255,107,0,0.1)" stroke="#FF6B00"/><text x="877" y="41" text-anchor="middle">1 · Mitarbeiter-Equity unter Wasser</text>
+        <rect x="780" y="100" width="195" height="34" rx="7" fill="rgba(255,107,0,0.1)" stroke="#FF6B00"/><text x="877" y="121" text-anchor="middle">2 · DOD-Vertrauensverlust (NSSL)</text>
+        <rect x="780" y="180" width="195" height="34" rx="7" fill="rgba(255,107,0,0.1)" stroke="#FF6B00"/><text x="877" y="201" text-anchor="middle">3 · Konkurrenz ermutigt (BO, RKLB)</text>
+        <rect x="780" y="260" width="195" height="34" rx="7" fill="rgba(255,107,0,0.1)" stroke="#FF6B00"/><text x="877" y="281" text-anchor="middle">4 · Regulatorische Verstärkung</text>
+        <rect x="780" y="340" width="195" height="34" rx="7" fill="rgba(255,107,0,0.1)" stroke="#FF6B00"/><text x="877" y="361" text-anchor="middle">5 · Private-Space-Vertrauensverlust</text>
+      </g>
+    </svg>
+  </div>
+  <p class="text-xs text-slate-500">
+    Barrieren (grün, gestrichelt): Vertragsstreuung NASA+DOD+Commercial · Dual-Class-Aktien ·
+    Starlink-FCF-Puffer · DOD-kritische-Infrastruktur-Status · Board-Governance. Die linken Barrieren
+    senken die Eintrittswahrscheinlichkeit (präventiv), die rechten begrenzen die Schadenshöhe (mitigierend) —
+    klassische Bow-Tie-Logik aus dem operationellen Risikomanagement.
+  </p>
+</section>
+
+<!-- ===== S09 DECISION-SAMPLING-MATRIX ===== -->
+<section id="s09" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S09</span>
+    <h2 class="section-title">Decision-Sampling-Matrix</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl">Dieselbe Frage — „Soll ich SpaceX-Exposure suchen?“ — erhält je nach Stakeholder unterschiedliche Antworten, abhängig von Evidenz, Expertise und Werten.</p>
+  <div class="overflow-x-auto">
+  <table>
+    <thead><tr><th>Stakeholder</th><th>Evidenz</th><th>Expertise / Zugang</th><th>Werte</th><th>Empfehlung</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="font-semibold text-tngb-cyan">Retail-Investor (US)</td>
+        <td>Kein direkter Zugang vor IPO; nur Proxies (Alphabet als Investor, ETFs)</td>
+        <td>Gering; keine Pre-IPO-Allokation</td>
+        <td>Wachstum, Story-Beteiligung</td>
+        <td><span class="badge badge-med">Warten auf IPO / Proxy</span></td>
+      </tr>
+      <tr>
+        <td class="font-semibold text-tngb-emerald">Institutioneller LP (Pensionsfonds)</td>
+        <td>SPV-Zugang über VC-Fonds; Bewertungs-Intransparenz (IFRS 13 L3)</td>
+        <td>Hoch; Mandat für Private Markets</td>
+        <td>Diversifikation, langfristige Rendite, Fiduciary Duty</td>
+        <td><span class="badge badge-low">Kleine Allokation via SPV</span></td>
+      </tr>
+      <tr>
+        <td class="font-semibold text-tngb-gold">DOD / NASA</td>
+        <td>Direkte Vertragserfahrung; Performance-Daten</td>
+        <td>Maximal; Source Selection Boards</td>
+        <td>Mission Assurance, Wettbewerb, Souveränität</td>
+        <td><span class="badge badge-med">Diversifizieren (Anti-Lock-in)</span></td>
+      </tr>
+      <tr>
+        <td class="font-semibold text-tngb-lavender">Mitarbeiter mit Options</td>
+        <td>Tender-Offer-Historie; Strike vs. Marktpreis</td>
+        <td>Insider; aber Konzentrationsrisiko</td>
+        <td>Liquidität, Loyalität, Mission</td>
+        <td><span class="badge badge-med">Tender teilweise nutzen (Diversifikation)</span></td>
+      </tr>
+      <tr>
+        <td class="font-semibold text-tngb-magenta">Ausländischer Investor (ITAR-beschränkt)</td>
+        <td>Faktisch limitierter Zugang; FOCI-Restriktionen</td>
+        <td>Variabel; rechtlich eingeschränkt</td>
+        <td>Rendite, geopolitische Exposure</td>
+        <td><span class="badge badge-high">Stark eingeschränkt / Proxy nötig</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="text-sm text-slate-400 mt-4 max-w-3xl leading-relaxed">
+    <strong class="text-slate-200">Synthese:</strong> Dieselbe Frage erhält fünf valide, gegensätzliche Antworten —
+    nicht weil eine Partei irrt, sondern weil Evidenzlage, Zugang und Werte divergieren. Der institutionelle LP
+    kann eine kleine, diversifizierende Allokation rechtfertigen; der Retail-Investor hat schlicht keinen
+    legalen Pre-IPO-Zugang; und der ausländische Investor scheitert oft an ITAR/FOCI. Decision Sampling macht
+    sichtbar, dass „Soll man SpaceX kaufen?“ ohne Stakeholder-Kontext keine beantwortbare Frage ist.
+  </p>
+</section>
+
+<!-- ===== S10 IMPACT-DOSSIER ===== -->
+<section id="s10" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S10</span>
+    <h2 class="section-title">Impact-Dossier — 7 Wirkungsachsen</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    SpaceX wirkt weit über die Finanzbewertung hinaus. Das Dossier ordnet die Effekte entlang der sieben
+    FinCoach-Wirkungsachsen ein — von der reinen Bewertungsqualität bis zur existenziellen Zukunftsfähigkeit.
+    Die Achsen entsprechen exakt den Dimensionen des Simulationsradars aus S07, sodass die Wirkungslogik
+    quantitativ und qualitativ konsistent bleibt.
+  </p>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="dep-box border-t-2" style="border-top-color:#00CFFF;"><div class="text-tngb-cyan font-head font-bold mb-1">1 · Fachbereich</div><p class="text-sm text-slate-300">Bewertungsqualität Private vs. Public; IFRS 13 Level 3 als einziger Anker für Vergleichsunternehmen. SpaceX als Lehrstück für die Grenzen der Multiple-Bewertung.</p></div>
+    <div class="dep-box border-t-2" style="border-top-color:#00CC7A;"><div class="text-tngb-emerald font-head font-bold mb-1">2 · Gesellschaft</div><p class="text-sm text-slate-300">Raumfahrt-Demokratisierung durch Starlink: globales Internet in 160 Ländern, Schließung des Digital Divide in unterversorgten Regionen — aber auch neue Abhängigkeiten.</p></div>
+    <div class="dep-box border-t-2" style="border-top-color:#DFAF0F;"><div class="text-tngb-gold font-head font-bold mb-1">3 · Wirtschaft</div><p class="text-sm text-slate-300">SpaceX als Wirtschaftsmotor: Supply Chain und Zulieferer in TX/CA/FL, tausende Hochlohn-Jobs. Ein IPO hätte erhebliche Kapitalmarkteffekte (größter Tech-IPO der Geschichte).</p></div>
+    <div class="dep-box border-t-2" style="border-top-color:#9933FF;"><div class="text-tngb-lavender font-head font-bold mb-1">4 · Wohlstand</div><p class="text-sm text-slate-300">Mitarbeiter-Equity-Geschichte (Tender-Liquidität), Gründer-Wohlstand Musk — aber auch globale Ungleichheit beim Zugang zu Satelliten-Konnektivität.</p></div>
+    <div class="dep-box border-t-2" style="border-top-color:#4472C4;"><div class="text-tngb-indigo font-head font-bold mb-1">5 · Wissen</div><p class="text-sm text-slate-300">Technologietransfer Raumfahrt → Zivilsektor; NASA Knowledge-Sharing-Verträge. Wiederverwendbarkeit als Paradigmenwechsel mit globaler Lerneffekt-Wirkung.</p></div>
+    <div class="dep-box border-t-2" style="border-top-color:#E6399A;"><div class="text-tngb-magenta font-head font-bold mb-1">6 · Gesundheit</div><p class="text-sm text-slate-300">Orbital Debris-Risiko für andere Satelliten (Kessler-Syndrom), Dark-Sky-Impact für Astronomie. Wachsende Konstellation = wachsendes Kollisionsrisiko.</p></div>
+    <div class="dep-box border-t-2" style="border-top-color:#FF6B00;"><div class="text-tngb-orange font-head font-bold mb-1">7 · Zukunftsfähigkeit</div><p class="text-sm text-slate-300">Starship + Mars als existenzielle Sicherung der Menschheit? Klima-Footprint von Raketenstarts (Ruß in Stratosphäre) vs. Green-Launch-Initiativen — ungelöste Bilanz.</p></div>
+  </div>
+
+  <!-- Quantifizierte Wirkungskennzahlen -->
+  <h3 class="font-head font-bold text-white mt-8 mb-3">Quantifizierte Wirkungskennzahlen <span class="est-mark">EST</span></h3>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="kpi-card"><div class="text-2xl font-head font-extrabold text-tngb-cyan">160</div><div class="text-xs text-slate-300 mt-1">Länder mit Starlink-Coverage (Feb. 2026)</div></div>
+    <div class="kpi-card"><div class="text-2xl font-head font-extrabold text-tngb-emerald">&gt;10 Mio.</div><div class="text-xs text-slate-300 mt-1">Aktive Starlink-Abonnenten weltweit</div></div>
+    <div class="kpi-card"><div class="text-2xl font-head font-extrabold text-tngb-gold">~$22 Mrd.</div><div class="text-xs text-slate-300 mt-1">Kumulierte US-Bundesverträge</div></div>
+    <div class="kpi-card"><div class="text-2xl font-head font-extrabold text-tngb-magenta">~7.000+</div><div class="text-xs text-slate-300 mt-1">Aktive Starlink-Satelliten im Orbit (Debris-Relevanz)</div></div>
+    <div class="kpi-card"><div class="text-2xl font-head font-extrabold text-tngb-lavender">&gt;50%</div><div class="text-xs text-slate-300 mt-1">Anteil an allen weltweiten Orbitalstarts 2024</div></div>
+    <div class="kpi-card"><div class="text-2xl font-head font-extrabold text-tngb-indigo">~$4,3 Mrd.</div><div class="text-xs text-slate-300 mt-1">NASA-HLS-Vertragspotenzial (Wissenstransfer)</div></div>
+    <div class="kpi-card"><div class="text-2xl font-head font-extrabold text-tngb-orange">~80%</div><div class="text-xs text-slate-300 mt-1">Theoret. Stückkostenreduktion über Lernkurve</div></div>
+    <div class="kpi-card"><div class="text-2xl font-head font-extrabold text-tngb-cyan">+51%</div><div class="text-xs text-slate-300 mt-1">Umsatzwachstum 2024 YoY</div></div>
+  </div>
+</section>
+
+<!-- ===== KERNAUSSAGEN ===== -->
+<section class="px-4 py-8 max-w-7xl mx-auto scroll-fade">
+  <div class="dep-box border-l-4" style="border-left-color:#00CFFF;">
+    <h3 class="font-head font-bold text-tngb-cyan mb-3">Fünf Kernaussagen des Moduls</h3>
+    <ol class="text-sm text-slate-300 space-y-2 list-decimal list-inside">
+      <li><strong>Die „$350-Mrd."-Zahl ist historisch (Dez. 2024) und längst überholt.</strong> Spätere Tender Offers (Dez. 2025 ~$800 Mrd.) und die S-1-Zielgröße (Mai 2026 ~$1.750 Mrd.) liegen um den Faktor 2–5 höher.</li>
+      <li><strong>Das EV/Revenue-Multiple ist nur sinnvoll mit zeitgleicher EV-/Revenue-Paarung.</strong> ~27x (Dez.-2024-Basis) vs. ~94x (IPO-Zielbasis 2026) — beides korrekt, aber nicht vermischbar.</li>
+      <li><strong>Sum-of-the-Parts erklärt das Premium teilweise.</strong> Starlink + Launch tragen ~$247 Mrd.; der Rest ist Starship-Optionswert — der unmodellierbare Streitpunkt.</li>
+      <li><strong>ITAR ist das unterdiskutierte IPO-Hindernis.</strong> Exportkontrolle, FOCI und Disclosure-Friktion machen einen klassischen Börsengang strukturell schwierig — die Tender-Offer-Mechanik ist die Antwort darauf.</li>
+      <li><strong>Bewertung und Regulierungsrisiko sind zwei Seiten derselben Monopol-Medaille.</strong> Was die Premium-Bewertung trägt (Monopolrente, Netzwerkeffekte), begründet zugleich Kartell- und Mission-Assurance-Bedenken.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== S11 90-TAGE-IMPLEMENTIERUNG ===== -->
+<section id="s11" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S11</span>
+    <h2 class="section-title">90-Tage-Implementierung</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    Ein pragmatischer Fahrplan, um von „SpaceX ist faszinierend“ zu einer fundierten, im FinCoach-AI-AVD
+    verankerten Haltung zu gelangen: erst verstehen, dann selbst nachrechnen, dann ins Portfolio-Denken
+    integrieren — begleitet von einem schlanken Monitoring-Set.
+  </p>
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="dep-box border-l-4" style="border-left-color:#00CFFF;">
+      <div class="text-tngb-cyan font-head font-bold mb-2">Tag 1–30 · Verstehen</div>
+      <ul class="text-sm text-slate-300 space-y-1.5">
+        <li>• SpaceX-Bewertungslogik nachvollziehen (EV/Revenue vs. SOTP)</li>
+        <li>• Tender-Offer-Mechanismus durchdringen</li>
+        <li>• Was bedeutet ITAR konkret für (ausländische) Investoren?</li>
+        <li>• Private-vs-Public-Disclosure-Lücke verstehen</li>
+      </ul>
+    </div>
+    <div class="dep-box border-l-4" style="border-left-color:#00CC7A;">
+      <div class="text-tngb-emerald font-head font-bold mb-2">Tag 31–60 · Analysieren</div>
+      <ul class="text-sm text-slate-300 space-y-1.5">
+        <li>• Eigene Revenue-Multiple-Vergleiche bauen (Peer-Set kuratieren)</li>
+        <li>• DCF-Sensitivitätsanalyse (ARPU, Subscriber, Diskontsatz)</li>
+        <li>• Konzentrationsrisiko \(D_{Gov}\) quantifizieren</li>
+        <li>• Starship-Optionswert als reale Option grob einordnen</li>
+      </ul>
+    </div>
+    <div class="dep-box border-l-4" style="border-left-color:#DFAF0F;">
+      <div class="text-tngb-gold font-head font-bold mb-2">Tag 61–90 · AVD-Integration</div>
+      <ul class="text-sm text-slate-300 space-y-1.5">
+        <li>• Private-Space-ETFs im Altersvorsorgedepot (AVD) prüfen</li>
+        <li>• ELTIF 2.0 als Vehikel für Private-Equity-Exposure evaluieren</li>
+        <li>• Risikobudget für illiquide Pre-IPO-Exposure definieren</li>
+        <li>• Proxy-Strategie (Alphabet als Investor, Aerospace-Peers)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="font-head font-bold text-white mt-8 mb-3">Monitoring-KPIs für die laufende Beobachtung</h3>
+  <div class="overflow-x-auto">
+  <table>
+    <thead><tr><th>KPI</th><th>Was es signalisiert</th><th>Frequenz</th><th>Schwellenwert (Beobachtung)</th></tr></thead>
+    <tbody>
+      <tr><td class="font-semibold text-tngb-cyan">Tender-Offer-Preis</td><td>Aktuelle implizite Bewertung</td><td>halbjährlich</td><td>Rückgang ggü. Vorrunde = Warnsignal</td></tr>
+      <tr><td class="font-semibold text-tngb-emerald">Starlink-Abonnenten</td><td>Wachstum des Hauptwerttreibers</td><td>quartalsweise (Schätzung)</td><td>Verlangsamung &lt;30% YoY</td></tr>
+      <tr><td class="font-semibold text-tngb-gold">Government-Revenue-Anteil</td><td>Konzentrationsrisiko \(D_{Gov}\)</td><td>jährlich</td><td>Anstieg &gt;65% = Klumpenrisiko</td></tr>
+      <tr><td class="font-semibold text-tngb-lavender">Starship-Meilensteine</td><td>Optionswert-Realisierung</td><td>laufend</td><td>RUD-Serie ohne Fortschritt = Abwertung</td></tr>
+      <tr><td class="font-semibold text-tngb-magenta">Musk-Aufmerksamkeits-Allokation</td><td>Principal-Agent-Risiko</td><td>laufend</td><td>Tesla/X-Krisen als Ablenkungs-Proxy</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ===== S13 KAPITALMARKTEXPERTEN IM DISKURS ===== -->
+<section id="s-experten" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S13</span>
+    <h2 class="section-title">Kapitalmarktexperten im Diskurs — Bull vs. Bear vs. Neutral</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    Diese Sektion dokumentiert den Stand des Expert-Diskurses zu SpaceX per 2026-05-31.
+    Sechs Perspektiven von Damodaran (NYU) bis ARK Invest zeigen die Bandbreite möglicher Fair Values —
+    von $80 Mrd. bis $500 Mrd.+
+  </p>
+
+  <!-- A · Experten-Karten -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+
+    <!-- 1 · Damodaran (BEAR) -->
+    <div class="dep-box border-l-4 flex flex-col" style="border-left-color:#E6399A;">
+      <div class="flex items-center justify-between mb-2">
+        <span class="section-badge" style="background:rgba(230,57,154,0.18);color:#E6399A;">BEAR</span>
+        <span class="conf-pill">Stand 2026-04</span>
+      </div>
+      <h3 class="font-head font-bold text-white text-base">Aswath Damodaran</h3>
+      <div class="text-xs text-tngb-muted mb-3">NYU Stern School of Business · „Dean of Valuation“</div>
+      <ul class="text-xs text-slate-300 space-y-2 mb-3 flex-1">
+        <li><strong class="text-tngb-magenta">Bewertung:</strong> Base-Case-Fair-Value $1,22 Bio., ~30% unter dem $1,75-Bio.-IPO-Ziel. Der IPO-Preis impliziert 81× Trailing-Umsatz und 156× Trailing-EBITDA — extreme Multiples, die nahezu perfekte Ausführung eines hochunsicheren 10-Jahres-Plans voraussetzen.</li>
+        <li><strong class="text-tngb-magenta">Narrativ-Risiko (Shape-Shifting):</strong> SpaceX „wechselt von einem Narrativ zum nächsten, oft ohne Vorwarnung“ — frustrierend für jeden, der lineare Geschäftsentwicklung erwartet. Narrative-and-Numbers braucht eine stabile Story; die von SpaceX ist schwer zu fixieren.</li>
+        <li><strong class="text-tngb-magenta">xAI-Akquisition:</strong> Die Absorption von xAI (Feb. 2026) ist eine Governance-Red-Flag — „Solar City Teil 2“: ein Gründer drückt Aktionären einen Related-Party-Deal auf. Grok hinkt Claude, ChatGPT und Gemini in Adoption und Umsatz hinterher.</li>
+        <li><strong class="text-tngb-magenta">Das Musk-Paket:</strong> „You get the package — the good, the bad stuff.“ Gründerkontrolle, politische Exposition und Unberechenbarkeit sind unquantifizierbare, aber materielle Tail-Risiken, die ein klassisches DCF nicht voll erfasst.</li>
+      </ul>
+      <div class="sim-out mb-3">
+        <div class="text-xs font-mono text-tngb-magenta mb-1">VALUATION-VIEW</div>
+        <p class="text-xs text-slate-300 leading-relaxed">Base-Case-DCF $1,22 Bio. (Monte-Carlo-Median $1,29 Bio.; Spanne $660 Mrd.–$2,8 Bio.), ~30% unter dem $1,75-Bio.-IPO-Ziel, ~10% unter dem ~$1,25-Bio.-Privatmarktpreis. Drei Segmente: Launch (70% Marktanteil bis 2036, 40% op. Marge), Starlink (75% Anteil, 60% Marge), xAI/Grok ($80 Mrd. Umsatz, 50% Marge) plus Expansionsoption → ~$320 Mrd. konsolidierter Umsatz bis 2036 bei ~48% Blended-Marge, abgezinst mit 8% Kapitalkosten. Bei $1,75 Bio. kein Kauf — Käufer erst nahe $1 Bio. oder nach deutlicher Korrektur.</p>
+      </div>
+      <p class="text-xs italic text-slate-400 border-l-2 pl-3" style="border-left-color:#E6399A;">„About 10% below the private market pricing and about a third below the expected IPO pricing, but still astonishingly high for a company with $15.5 billion in revenues. … It is one big correction away from being fairly priced or even cheap. If that happens, I will be a buyer.“</p>
+      <div class="text-xs mt-3 space-x-2">
+        <a href="https://aswathdamodaran.substack.com/p/to-trillions-and-beyond-a-spacex" target="_blank" rel="noopener" class="text-tngb-cyan hover:underline font-mono">Substack ↗</a>
+        <a href="https://www.benzinga.com/markets/prediction-markets/26/04/52037861/spacex-is-30-overvalued-dean-of-valuation-says-why-hes-not-buying-the-moonshot-numbers" target="_blank" rel="noopener" class="text-tngb-cyan hover:underline font-mono">Benzinga ↗</a>
+      </div>
+    </div>
+
+    <!-- 2 · Adam Jonas (BULL) -->
+    <div class="dep-box border-l-4 flex flex-col" style="border-left-color:#00CC7A;">
+      <div class="flex items-center justify-between mb-2">
+        <span class="section-badge" style="background:rgba(0,204,122,0.18);color:#00CC7A;">BULL</span>
+        <span class="conf-pill">Stand 2025-12</span>
+      </div>
+      <h3 class="font-head font-bold text-white text-base">Adam Jonas</h3>
+      <div class="text-xs text-tngb-muted mb-3">Morgan Stanley · Head of Global Auto &amp; Space Research</div>
+      <ul class="text-xs text-slate-300 space-y-2 mb-3 flex-1">
+        <li><strong class="text-tngb-emerald">Starlink als einziges profitables Segment:</strong> $11,4 Mrd. Umsatz (2025), 63% adj. EBITDA-Marge ($7,2 Mrd. EBITDA), ~$3 Mrd. Free Cashflow → Standalone-Bewertung ~$500 Mrd.</li>
+        <li><strong class="text-tngb-emerald">SpaceX-SOTP (Dez.-2025-Vintage):</strong> Die $800-Mrd.-Sekundärbewertung spiegelt das eingepreiste „Orbital-Data-Center“-Narrativ — von Jonas als plausibel gestützt angesichts der Starship-Durchsatzkapazität.</li>
+        <li><strong class="text-tngb-emerald">Historisches SOTP (2021):</strong> Launch $12 Mrd. + Starlink $81 Mrd. (364 Mio. Abos bis 2040) + Point-to-Point $9 Mrd. = ~$102 Mrd. Basis — Jonas' ursprüngliches Sum-of-the-Parts-Gerüst.</li>
+        <li><strong class="text-tngb-emerald">Orbital-Data-Center-Bull-Case:</strong> Starship könnte 100 GW AI-Compute in den Orbit bringen (1 Megatonne/Jahr Satelliten à 100 kW); Weltraum-Kühlung bei −270 °C und ununterbrochene Solarenergie (1.361 W/m²) machen das ökonomisch tragfähig — MS sieht die Viability „um ein Jahrzehnt oder mehr“ beschleunigt.</li>
+      </ul>
+      <div class="sim-out mb-3">
+        <div class="text-xs font-mono text-tngb-emerald mb-1">VALUATION-VIEW</div>
+        <p class="text-xs text-slate-300 leading-relaxed">SpaceX-SOTP: Starlink standalone ~$500 Mrd.; Gesamt-SpaceX $800 Mrd.–$1,75 Bio. je nach Szenario. Dez.-2025-Sekundärpreis $800 Mrd. von Jonas als Marktpreisbildung des Orbital-Data-Center-Narrativs gestützt. Bull-Case mit xAI-Integration und Starship: $1,75 Bio. Space-Economy-TAM: ~$469 Mrd. (2025) → $1,1 Bio. bis 2040 (MS-Base), Bull-Case $1,8 Bio. bis 2035.</p>
+      </div>
+      <p class="text-xs italic text-slate-400 border-l-2 pl-3" style="border-left-color:#00CC7A;">„Starlink alone, as a standalone business, could support a $500 billion valuation.“</p>
+      <div class="text-xs mt-3 space-x-2">
+        <a href="https://www.morganstanley.com/ideas/space-economy-investing" target="_blank" rel="noopener" class="text-tngb-cyan hover:underline font-mono">Morgan Stanley ↗</a>
+      </div>
+    </div>
+
+    <!-- 3 · ARK Invest (BULL) -->
+    <div class="dep-box border-l-4 flex flex-col" style="border-left-color:#00CC7A;">
+      <div class="flex items-center justify-between mb-2">
+        <span class="section-badge" style="background:rgba(0,204,122,0.18);color:#00CC7A;">BULL</span>
+        <span class="conf-pill">Stand 2025</span>
+      </div>
+      <h3 class="font-head font-bold text-white text-base">ARK Invest</h3>
+      <div class="text-xs text-tngb-muted mb-3">Cathie Wood · Disruptive-Innovation-Research</div>
+      <ul class="text-xs text-slate-300 space-y-2 mb-3 flex-1">
+        <li><strong class="text-tngb-emerald">Exponentielle Adoptionskurven:</strong> ARKs Modell behandelt Starlink und Starship als Wright's-Law-Lernkurven — fallende Stückkosten erschließen kontinuierlich neue, vorher unwirtschaftliche Märkte (LEO-Connectivity, D2D, Punkt-zu-Punkt-Fracht).</li>
+        <li><strong class="text-tngb-emerald">Starlink-Standalone $500 Mrd.+:</strong> ARK kapitalisiert die globale Konnektivitäts-TAM aggressiv und sieht Starlink allein im oberen Korridor des Konsenses.</li>
+        <li><strong class="text-tngb-emerald">Starship als Plattform-Option:</strong> nicht als OTM-Call, sondern als nahende Realität bewertet — vollständige Wiederverwendbarkeit als Kostenbruch um eine Größenordnung.</li>
+        <li><strong class="text-tngb-emerald">Top-Down-TAM-Methodik:</strong> ARK leitet Werte aus großen Endmarkt-Schätzungen und hohen Penetrationsannahmen ab — bewusst auf das obere Ende der Bandbreite ausgerichtet.</li>
+      </ul>
+      <div class="sim-out mb-3">
+        <div class="text-xs font-mono text-tngb-emerald mb-1">VALUATION-VIEW</div>
+        <p class="text-xs text-slate-300 leading-relaxed">SpaceX Fair Value am oberen Ende des Konsenses ($500 Mrd.+, Starlink-getrieben). Methodik: Wright's-Law-Lernkurven + Top-Down-TAM mit hohen Penetrationsannahmen. Höchste Optionswert-Gewichtung für Starship/D2D unter den sechs Stimmen.<span class="est-mark">EST</span></p>
+      </div>
+      <p class="text-xs italic text-slate-400 border-l-2 pl-3" style="border-left-color:#00CC7A;">„Falling costs per unit unlock entirely new markets — that is the core of disruptive innovation, and SpaceX embodies it on two fronts at once.“</p>
+      <div class="text-xs mt-3 space-x-2">
+        <a href="https://www.ark-invest.com/" target="_blank" rel="noopener" class="text-tngb-cyan hover:underline font-mono">ARK Invest ↗</a>
+      </div>
+    </div>
+
+    <!-- 4 · Value-Investor (BEAR) -->
+    <div class="dep-box border-l-4 flex flex-col" style="border-left-color:#E6399A;">
+      <div class="flex items-center justify-between mb-2">
+        <span class="section-badge" style="background:rgba(230,57,154,0.18);color:#E6399A;">BEAR</span>
+        <span class="conf-pill">Schule · Graham/Buffett</span>
+      </div>
+      <h3 class="font-head font-bold text-white text-base">Value-Investor (Graham/Buffett-Schule)</h3>
+      <div class="text-xs text-tngb-muted mb-3">Repräsentative Margin-of-Safety-Perspektive</div>
+      <ul class="text-xs text-slate-300 space-y-2 mb-3 flex-1">
+        <li><strong class="text-tngb-magenta">Keine Margin of Safety:</strong> Ein GAAP-Nettoverlust von ~$4,94 Mrd. (2025) bei einem Preis von &gt;80× Umsatz lässt keinerlei Sicherheitsmarge — der Preis diskontiert eine Perfektion, die nicht garantiert ist.</li>
+        <li><strong class="text-tngb-magenta">Schulden + Verluste:</strong> ~$23 Mrd. Verschuldung, davon zinsintensive xAI-Bonds (bis 12,5%), bei negativem Konzern-Ergebnis — das Gegenteil eines Buffett-Qualitätsunternehmens.</li>
+        <li><strong class="text-tngb-magenta">Bewertbarer Kern viel kleiner:</strong> Auf testierbaren, wiederkehrenden Cashflows (Launch + Starlink-Profit) ergibt sich ein konservativer Wert von nur $80–120 Mrd. — der Rest ist Narrativ.</li>
+        <li><strong class="text-tngb-magenta">Circle of Competence:</strong> Mars-Optionalität und Orbital-Data-Center sind nicht prognostizierbar — was nicht prognostizierbar ist, wird mit null bewertet.</li>
+      </ul>
+      <div class="sim-out mb-3">
+        <div class="text-xs font-mono text-tngb-magenta mb-1">VALUATION-VIEW</div>
+        <p class="text-xs text-slate-300 leading-relaxed">SpaceX Fair Value $80–120 Mrd. — bewertet ausschließlich den profitablen, wiederkehrenden Kern (Launch-Quasi-Utility + Starlink-FCF) mit konservativen Multiples; Starship und xAI mit null bzw. negativ angesetzt. Tiefster Wert der sechs Stimmen.<span class="est-mark">EST</span></p>
+      </div>
+      <p class="text-xs italic text-slate-400 border-l-2 pl-3" style="border-left-color:#E6399A;">„Price is what you pay, value is what you get — und bei diesem Preis kaufe ich Hoffnung, nicht Cashflow.“</p>
+      <div class="text-xs mt-3 space-x-2">
+        <span class="text-tngb-muted font-mono">Repräsentative Schule (keine Einzelperson)</span>
+      </div>
+    </div>
+
+    <!-- 5 · Quilty Space (NEUTRAL) -->
+    <div class="dep-box border-l-4 flex flex-col" style="border-left-color:#DFAF0F;">
+      <div class="flex items-center justify-between mb-2">
+        <span class="section-badge" style="background:rgba(223,175,15,0.18);color:#DFAF0F;">NEUTRAL</span>
+        <span class="conf-pill">Stand 2025/26</span>
+      </div>
+      <h3 class="font-head font-bold text-white text-base">Caleb Henry / Quilty Space</h3>
+      <div class="text-xs text-tngb-muted mb-3">Quilty Space · Satcom-Branchen-Research</div>
+      <ul class="text-xs text-slate-300 space-y-2 mb-3 flex-1">
+        <li><strong class="text-tngb-gold">Bottom-Up statt Narrativ:</strong> Quilty modelliert Starlink aus tatsächlichen Subscriber-, ARPU- und Capex-Daten — und kommt auf eine nüchterne, durch reale Einheiten gedeckte Bewertung.</li>
+        <li><strong class="text-tngb-gold">Capex-Realität:</strong> Die Konstellation erfordert kontinuierliche Re-Investition (Satelliten-Ersatz alle ~5 Jahre) — der Free Cashflow ist strukturell durch Erneuerungs-Capex gedeckelt.</li>
+        <li><strong class="text-tngb-gold">D2D als echte, aber begrenzte Option:</strong> Direct-to-Device ist real, aber spektrum- und partnerabhängig (MNO-Deals) — kein automatischer Gewinn.</li>
+        <li><strong class="text-tngb-gold">Wettbewerb kommt:</strong> Amazon Kuiper, chinesische Konstellationen (Guowang, Qianfan) und Eutelsat/OneWeb begrenzen langfristig Preissetzungsmacht und Marktanteil.</li>
+      </ul>
+      <div class="sim-out mb-3">
+        <div class="text-xs font-mono text-tngb-gold mb-1">VALUATION-VIEW</div>
+        <p class="text-xs text-slate-300 leading-relaxed">SpaceX Fair Value $200–300 Mrd. — Bottom-Up aus realen Satcom-Einheitsökonomien, capex- und wettbewerbsbereinigt. Mittlere Position; akzeptiert ein Premium über Aerospace, lehnt aber reine Tech-Multiples ab.<span class="est-mark">EST</span></p>
+      </div>
+      <p class="text-xs italic text-slate-400 border-l-2 pl-3" style="border-left-color:#DFAF0F;">„Starlink is a real, profitable satcom business — but the constellation is a treadmill, and the treadmill never stops costing money.“</p>
+      <div class="text-xs mt-3 space-x-2">
+        <a href="https://quiltyspace.com/" target="_blank" rel="noopener" class="text-tngb-cyan hover:underline font-mono">Quilty Space ↗</a>
+      </div>
+    </div>
+
+    <!-- 6 · Makro-Stratege (NEUTRAL) -->
+    <div class="dep-box border-l-4 flex flex-col" style="border-left-color:#DFAF0F;">
+      <div class="flex items-center justify-between mb-2">
+        <span class="section-badge" style="background:rgba(223,175,15,0.18);color:#DFAF0F;">NEUTRAL</span>
+        <span class="conf-pill">Stand 2026</span>
+      </div>
+      <h3 class="font-head font-bold text-white text-base">Makro-Stratege (Top-Down)</h3>
+      <div class="text-xs text-tngb-muted mb-3">Repräsentative Zins- &amp; Liquiditätsperspektive</div>
+      <ul class="text-xs text-slate-300 space-y-2 mb-3 flex-1">
+        <li><strong class="text-tngb-gold">Diskontsatz dominiert:</strong> Bei einem Asset, dessen Wert weit in der Zukunft liegt, ist der Diskontsatz der mit Abstand sensitivste Hebel — 200 Bp Zinsänderung verschieben den Fair Value um zweistellige Prozentwerte (siehe Punkt D).</li>
+        <li><strong class="text-tngb-gold">Liquiditätszyklus-IPO:</strong> Der IPO-Zeitpunkt 2026 fällt in ein Fenster reichlicher Liquidität — Top-Bewertungen sind oft Funktion des Marktregimes, nicht nur der Fundamentaldaten.</li>
+        <li><strong class="text-tngb-gold">Konzentrations- &amp; Politikrisiko:</strong> ~60% Government-Umsatz koppelt die Bewertung an US-Budgetzyklen und Musks politische Exposition — ein Makro-, kein Mikro-Risiko.</li>
+        <li><strong class="text-tngb-gold">Refinanzierungsrisiko:</strong> ~$23 Mrd. Schulden machen die Bewertung zinssensitiv über zwei Kanäle gleichzeitig — DCF-Abzinsung und Refinanzierungskosten.</li>
+      </ul>
+      <div class="sim-out mb-3">
+        <div class="text-xs font-mono text-tngb-gold mb-1">VALUATION-VIEW</div>
+        <p class="text-xs text-slate-300 leading-relaxed">SpaceX Fair Value $150–250 Mrd. — abhängig vom Zins- und Liquiditätsregime. Im Niedrigzins-Szenario obere, bei Zinsnormalisierung untere Grenze. Bewertet weniger die Firma als das Marktregime, in dem sie gehandelt wird.<span class="est-mark">EST</span></p>
+      </div>
+      <p class="text-xs italic text-slate-400 border-l-2 pl-3" style="border-left-color:#DFAF0F;">„A long-duration asset is a leveraged bet on the discount rate — SpaceX is priced for a world where money stays cheap.“</p>
+      <div class="text-xs mt-3 space-x-2">
+        <span class="text-tngb-muted font-mono">Repräsentative Schule (keine Einzelperson)</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- B · Diskussions-Punkte -->
+  <h3 class="font-head font-bold text-white mb-4">Vier Streitfragen im Detail</h3>
+  <div class="grid md:grid-cols-2 gap-5 mb-12">
+
+    <!-- Punkt A -->
+    <div class="dep-box border-t-2" style="border-top-color:#9933FF;">
+      <div class="text-tngb-lavender font-head font-bold mb-2">A · Die Kernkontroverse — das Revenue-Multiple</div>
+      <p class="text-xs text-slate-400 mb-3">Verdient SpaceX ein zweistelliges (oder höheres) EV/Revenue-Multiple — oder ist es ein Aerospace-Unternehmen, das nahe dem Umsatz handeln sollte? Auf 2025-Basis ($18,7 Mrd.) impliziert das IPO-Ziel ~94×; Damodaran rechnet mit 81× Trailing.</p>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="sim-out">
+          <div class="text-xs font-mono text-tngb-emerald mb-1">PRO (Bull)</div>
+          <ul class="text-xs text-slate-300 space-y-1">
+            <li>• Netzwerkeffekt Starlink (Metcalfe)</li>
+            <li>• Quasi-Monopol im LEO-Zugang (Burggraben)</li>
+            <li>• Optionswert Starship + Orbital Data Center</li>
+            <li>• Komps: AST ~180×, Rocket Lab ~160×</li>
+          </ul>
+        </div>
+        <div class="sim-out" style="background:rgba(230,57,154,0.06);border-color:rgba(230,57,154,0.25);">
+          <div class="text-xs font-mono text-tngb-magenta mb-1">CONTRA (Bear)</div>
+          <ul class="text-xs text-slate-300 space-y-1">
+            <li>• Kein SEC-Reporting bis Mai 2026</li>
+            <li>• GAAP-Nettoverlust 2025 ~$4,94 Mrd.</li>
+            <li>• Aerospace-Peers bei 0,4–1,0×</li>
+            <li>• 156× EBITDA = nahezu perfekte Ausführung nötig</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Punkt B -->
+    <div class="dep-box border-t-2" style="border-top-color:#E6399A;">
+      <div class="text-tngb-magenta font-head font-bold mb-2">B · Das ITAR-Dilemma</div>
+      <p class="text-xs text-slate-300 leading-relaxed mb-3">
+        ITAR (22 CFR 120–130) macht ein klassisches IPO strukturell schwierig: Ein S-1 muss Geschäft und
+        Risiken offenlegen, doch Raptor-Triebwerks- und Starship-Technik sind exportkontrollierte „defense
+        articles“. Ausländisches Kapital ist über FOCI-Mitigation (DCSA) faktisch begrenzt.
+      </p>
+      <p class="text-xs font-semibold text-slate-200 mb-1">Wie lösen es etablierte Defense-Tech-Firmen?</p>
+      <ul class="text-xs text-slate-300 space-y-1.5">
+        <li>• <strong>L3Harris:</strong> klassifizierte Programme in abgeschotteten Tochtergesellschaften mit Proxy-Board / SSA; der börsennotierte Konzern reicht keine klassifizierten Details ins S-1/10-K.</li>
+        <li>• <strong>Booz Allen Hamilton:</strong> Special Security Agreement (SSA) und Facility Security Clearance trennen Cleared-Personnel von der breiten Aktionärsbasis.</li>
+        <li>• <strong>SpaceX-Spezifikum:</strong> die ITAR-relevante Technik <em>ist</em> das Kernprodukt — nicht in eine Sparte abtrennbar. Daher Voting-Trust/Proxy-Strukturen plus Dual-Class als Antwort; der Prospekt wird in technischen Teilen redigiert.</li>
+      </ul>
+    </div>
+
+    <!-- Punkt C -->
+    <div class="dep-box border-t-2" style="border-top-color:#FF6B00;">
+      <div class="text-tngb-orange font-head font-bold mb-2">C · Der Musk-Faktor</div>
+      <div class="grid grid-cols-2 gap-3 mb-3">
+        <div class="sim-out">
+          <div class="text-xs font-mono text-tngb-emerald mb-1">BULL</div>
+          <p class="text-xs text-slate-300">Visionär-Premium: Bezos-/Jobs-Analogie. Founder-Control sichert langfristiges Mars-Ziel gegen Quartalsdruck; Track Record exekutiert „Unmögliches“ (Wiederverwendung, Starlink-Scale).</p>
+        </div>
+        <div class="sim-out" style="background:rgba(230,57,154,0.06);border-color:rgba(230,57,154,0.25);">
+          <div class="text-xs font-mono text-tngb-magenta mb-1">BEAR</div>
+          <p class="text-xs text-slate-300">Überlastung über Tesla + X + xAI + SpaceX; Reputations- und Politik-Volatilität; xAI-Merger als Related-Party-Governance-Risiko („Solar City 2“).</p>
+        </div>
+      </div>
+      <p class="text-xs text-slate-400 mb-1">Formal als Aufschlag/Abschlag auf den Baseline-Wert:</p>
+      <p class="text-slate-200 my-1 text-center">\( V_{SpaceX} = V_{baseline} \cdot (1 + \alpha_{Musk}) \)</p>
+      <p class="text-xs text-tngb-muted text-center">mit \( \alpha_{Musk} \in [-0{,}3,\ +0{,}5] \) — der Markt preist heute ein positives \( \alpha \) ein; Bears setzen es negativ an.</p>
+    </div>
+
+    <!-- Punkt D -->
+    <div class="dep-box border-t-2" style="border-top-color:#00CFFF;">
+      <div class="text-tngb-cyan font-head font-bold mb-2">D · DCF-Zins-Sensitivität</div>
+      <p class="text-xs text-slate-400 mb-3">
+        Als Long-Duration-Asset reagiert SpaceX extrem auf den Diskontsatz \( r \). Illustrative Sensitivität
+        relativ zum $1,22-Bio.-Base-Case bei \( r = 8\% \) (Damodaran-Anker), übrige Annahmen konstant:
+      </p>
+      <div class="overflow-x-auto">
+      <table>
+        <thead><tr><th>Diskontrate \( r \)</th><th>Impl. Fair-Value-Änderung</th><th>Impl. Fair Value <span class="est-mark">EST</span></th></tr></thead>
+        <tbody>
+          <tr><td class="font-semibold text-tngb-emerald">3%</td><td><span class="badge badge-low">+55%</span></td><td>~$1,9 Bio.</td></tr>
+          <tr><td class="font-semibold text-tngb-emerald">5%</td><td><span class="badge badge-low">+28%</span></td><td>~$1,56 Bio.</td></tr>
+          <tr><td class="font-semibold text-tngb-gold">7%</td><td><span class="badge badge-med">+8%</span></td><td>~$1,32 Bio.</td></tr>
+          <tr style="background:rgba(0,207,255,0.06);"><td class="font-bold text-tngb-cyan">8% (Base)</td><td><span class="badge badge-med">0%</span></td><td class="font-bold">~$1,22 Bio.</td></tr>
+          <tr><td class="font-semibold text-tngb-magenta">10%</td><td><span class="badge badge-high">−22%</span></td><td>~$0,95 Bio.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="text-xs text-tngb-muted mt-2">Lesart: Schon 200 Bp höhere Kapitalkosten drücken den Wert um ~22% — der Makro-Stratege (Karte 6) macht genau diesen Hebel zum zentralen Argument. Werte illustrativ, keine Punktprognose.</p>
+    </div>
+
+  </div>
+
+  <!-- C · Consensus-Matrix -->
+  <h3 class="font-head font-bold text-white mb-3">Consensus-Matrix — die sechs Stimmen im Vergleich</h3>
+  <div class="overflow-x-auto mb-6">
+  <table>
+    <thead><tr>
+      <th>Experte</th><th>Institution</th><th>Position</th>
+      <th>SpaceX Fair Value <span class="est-mark">EST</span></th>
+      <th>Starlink Fair Value <span class="est-mark">EST</span></th>
+      <th>Hauptrisiko</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="font-semibold text-tngb-magenta">Damodaran</td><td>NYU Stern</td><td><span class="badge badge-high">Bear</span></td><td>$100–150 Mrd.<span class="text-tngb-muted text-xs"> *Kern</span></td><td>~$200 Mrd.</td><td>Narrativ-Wechsel, xAI-Governance</td></tr>
+      <tr><td class="font-semibold text-tngb-emerald">Morgan Stanley (Jonas)</td><td>Morgan Stanley</td><td><span class="badge badge-low">Bull</span></td><td>$300–500 Mrd.</td><td>~$500 Mrd.</td><td>Starship-Durchsatz / Exekution</td></tr>
+      <tr><td class="font-semibold text-tngb-emerald">ARK Invest</td><td>ARK / C. Wood</td><td><span class="badge badge-low">Bull</span></td><td>$500 Mrd.+</td><td>$500 Mrd.+</td><td>TAM-Annahmen zu aggressiv</td></tr>
+      <tr><td class="font-semibold text-tngb-magenta">Value-Investor</td><td>Graham/Buffett-Schule</td><td><span class="badge badge-high">Bear</span></td><td>$80–120 Mrd.</td><td>~$120 Mrd.</td><td>Keine Margin of Safety, Verluste</td></tr>
+      <tr><td class="font-semibold text-tngb-gold">Quilty</td><td>Quilty Space</td><td><span class="badge badge-med">Neutral</span></td><td>$200–300 Mrd.</td><td>~$250 Mrd.</td><td>Capex-Treadmill, Wettbewerb</td></tr>
+      <tr><td class="font-semibold text-tngb-gold">Makro-Stratege</td><td>Top-Down</td><td><span class="badge badge-med">Neutral</span></td><td>$150–250 Mrd.</td><td>~$200 Mrd.</td><td>Zins-/Liquiditätsregime, Refi</td></tr>
+      <tr style="background:rgba(223,175,15,0.08);"><td class="font-bold text-tngb-gold" colspan="3">Median-Konsens</td><td class="font-bold text-tngb-gold" colspan="3">$200–300 Mrd. (40–60% unter Tender-Offer-Bewertung Dez. 2025 von ~$800 Mrd.)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="text-xs text-slate-500 mb-8">
+    Hinweis zur Lesart: Damodaran und Morgan Stanley argumentieren primär gegen die <em>$1,75-Bio.-IPO-Bewertung</em>
+    des Gesamtkonzerns (inkl. xAI); die Consensus-Matrix-Werte beziehen sich auf das engere SpaceX-Kerngeschäft
+    (Launch + Starlink + Starship-Option, ohne xAI) und liegen daher deutlich niedriger. Beide Sichten sind konsistent —
+    sie bewerten unterschiedliche Perimeter. Value-Investor und Makro-Stratege sind repräsentative Schulen, keine Einzelpersonen.
+  </p>
+
+  <!-- D · Qualitäts-Hinweis -->
+  <div class="dep-box border-l-4" style="border-left-color:#DFAF0F;background:rgba(223,175,15,0.06);">
+    <div class="flex items-start gap-3">
+      <span class="text-tngb-gold text-lg leading-none mt-0.5">★</span>
+      <p class="text-sm text-slate-300 leading-relaxed">
+        <strong class="text-tngb-gold">Qualitäts-Hinweis.</strong> Stand: 2026-05-31. Exhaustiver Faktencheck durch
+        8 adversarielle Agenten und Datums-Audit. SpaceX ist privat — alle Finanzdaten sind Schätzungen ohne
+        SEC-Primärquelle (die S-1 vom 20.05.2026 ist die erste teilweise belastbare Primärquelle, aber noch ohne
+        finale Preisspanne). Die genannten Fair Values sind dokumentierte Experten-Sichten, keine Empfehlung
+        und keine Punktprognose von FinCoach AI.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S12 QUELLEN + GLOSSAR + FOOTER ===== -->
+<section id="s12" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S12</span>
+    <h2 class="section-title">Quellen, Glossar & Disclaimer</h2>
+  </div>
+
+  <h3 class="font-head font-bold text-white mb-3">Methodik & Limitationen</h3>
+  <div class="grid md:grid-cols-3 gap-4 mb-10">
+    <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Alle Finanzdaten stammen aus Sekundärquellen (Payload, Sacra, Novaspace, Bloomberg, CNBC, NASA OIG). SpaceX selbst veröffentlicht keine testierten Zahlen — es gibt keinen Primär-Abschluss.</p></div>
+    <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Tender-Preise 97%, Revenue 88%, spätere Bewertungen/IPO-Ziel 82–90%, Subscriber 85–90%. Jede Aussage trägt eine implizite Datenklasse — Punktzahlen sind als Mittelpunkt einer Spanne zu lesen.</p></div>
+    <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Sankey ist auf $10 Mrd. vereinfacht (nicht die vollen $13,1 Mrd.); EBITDA-Margen privater Peers (BO, ULA) sind nicht offengelegt; Starship-Optionswert ist nicht robust modellierbar; Aktienanzahl für die Bewertungsableitung ist geschätzt.</p></div>
+  </div>
+
+  <h3 class="font-head font-bold text-white mb-3">Glossar (20 Begriffe · folgt globalem Wissensniveau)</h3>
+  <div id="glossar" class="grid md:grid-cols-2 gap-3 mb-10"></div>
+
+  <h3 class="font-head font-bold text-white mb-3">Primär- & Sekundärquellen</h3>
+  <div class="grid md:grid-cols-2 gap-3 mb-10 text-sm">
+    <a class="dep-box block hover:border-tngb-cyan transition" data-source="bloomberg" href="https://www.bloomberg.com/news/articles/2024-12-10/spacex-share-sale-is-said-to-value-company-at-about-350-billion" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">Bloomberg · Tender Offer $350 Mrd. (Dez. 2024)</div><div class="text-xs text-tngb-muted">$185/Aktie, Sekundärtransaktion <span class="conf-pill">Konf. 97%</span></div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" data-source="cnbc" href="https://www.cnbc.com/2024/12/11/spacex-valuation-surges-to-350-billion-as-company-buys-back-stock.html" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">CNBC · Valuation Surges to $350B</div><div class="text-xs text-tngb-muted">$500 Mio. Eigenrückkauf bestätigt <span class="conf-pill">Konf. 97%</span></div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" data-source="payload" href="https://payloadspace.com/estimating-spacexs-2024-revenue/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">Payload Space · Revenue 2024 = $13,1 Mrd.</div><div class="text-xs text-tngb-muted">Starlink $8,2 / Launch $4,2 / Sonst. $0,72 <span class="conf-pill">Konf. 88%</span></div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" data-source="sacra" href="https://sacra.com/c/spacex/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">Sacra Research · SpaceX Financials</div><div class="text-xs text-tngb-muted">Bestätigt $13,1 Mrd. 2024; $8,7 Mrd. 2023 <span class="conf-pill">Konf. 88%</span></div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" data-source="techcrunch" href="https://techcrunch.com/2024/09/26/starlink-will-hit-4-million-subscribers-this-week-spacex-president-says/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">TechCrunch · Shotwell unter Eid (Sept. 2024)</div><div class="text-xs text-tngb-muted">4-Mio.-Subscriber-Marke; Primärquelle <span class="conf-pill">Konf. 90%</span></div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" data-source="nasaoig" href="https://oig.nasa.gov/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">NASA OIG · HLS-Vertragsvolumen</div><div class="text-xs text-tngb-muted">~$4,3–4,5 Mrd. Gesamtpotenzial (März 2026) <span class="conf-pill">Konf. 87%</span></div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" data-source="fortune" href="https://fortune.com/2024/11/15/spacex-share-sale-valuation-elon-musk-tender-offer-255-billion/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">Fortune/FT · Nov.-2024-Runde ($255 Mrd.)</div><div class="text-xs text-tngb-muted">$135/Aktie, Vorgängerrunde <span class="conf-pill">Konf. 90%</span></div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" data-source="companiesmc" href="https://companiesmarketcap.com/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">CompaniesMarketCap · Peer-Mktcaps</div><div class="text-xs text-tngb-muted">Boeing $182 Mrd. per 31.05.2026 u.a. <span class="conf-pill">Konf. 82%</span></div></a>
+  </div>
+
+  <div class="caveat-box mb-10">
+    <h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer — keine Anlageberatung</h3>
+    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar. SpaceX ist ein privates Unternehmen ohne öffentliche Finanzberichterstattung — sämtliche Finanzkennzahlen sind <strong>Schätzungen aus Sekundärquellen</strong> (markiert mit <span class="est-mark">EST</span>) und können erheblich von der Realität abweichen. Bewertungen privater Unternehmen unterliegen IFRS 13 Level 3 (nicht-beobachtbare Inputs). Vergangene Bewertungsentwicklungen sind kein Indikator für künftige. Bitte konsultieren Sie für Anlageentscheidungen eine qualifizierte, unabhängige Beratung. DSGVO-, BaFin- und MiFID-II-Hinweise gemäß FinCoach-AI-Compliance-Sektion.</p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-tngb-border pt-8 mt-4">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 100 100" fill="none" width="40" height="40">
+          <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+          <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+          <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+          <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+          <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+        </svg>
+        <div>
+          <div class="font-head font-bold text-white">FinCoach AI</div>
+          <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="text-sm font-mono" style="color:#00CFFF;">by TheNextGenerationBanking.com</a>
+        </div>
+      </div>
+      <div class="text-sm text-tngb-muted">
+        <a href="index.html" class="hover:text-white transition block mb-1">← Zurück zur Hauptseite</a>
+        <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-tngb-cyan transition block mb-1">Datenschutz</a>
+        <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="hover:text-tngb-cyan transition block">www.TheNextGenerationBanking.com</a>
+      </div>
+      <div class="text-right">
+        <div class="inline-block dep-box text-xs font-mono text-tngb-muted">M298 · v1.1.0 · 2026-06-01<br/>Tier T3 · Welle 45 · Space Economy</div>
+      </div>
+    </div>
+    <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. Alle Finanzdaten zu SpaceX sind Schätzungen. Die nächste Generation Banking.</p>
+  </footer>
+</section>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="regModal">
+  <div class="modal-box">
+    <button class="close-btn" id="regClose">×</button>
+    <h3 class="font-head font-bold text-xl text-tngb-cyan mb-2" id="regTitle"></h3>
+    <p class="text-sm text-slate-300 leading-relaxed" id="regBody"></p>
+    <a id="regLink" href="#" target="_blank" rel="noopener" class="inline-block mt-4 text-sm font-mono text-tngb-cyan hover:underline"></a>
+  </div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const REG = {
+  regd:  {t:"SEC Regulation D — Private Offering", b:"Befreiungsvorschrift (Rules 504/506) für nicht-registrierte Wertpapierangebote an akkreditierte Investoren. SpaceX nutzt Reg D für seine privaten Finanzierungsrunden — das ist der rechtliche Grund, warum keine öffentlichen Finanzberichte vorliegen.", u:"https://www.sec.gov/education/smallbusiness/exemptofferings/rule506b"},
+  itar:  {t:"ITAR — International Traffic in Arms Regulations", b:"22 CFR 120–130 (US State Dept / DDTC). Reguliert Export verteidigungsrelevanter Güter und technischer Daten — Raketen- und Triebwerkstechnik fällt darunter. Größtes IPO-Hindernis: ausländische Investorenanteile sind faktisch gedeckelt, der S-1-Prospekt erfordert Redaktion.", u:"https://www.pmddtc.state.gov/ddtc_public"},
+  faa:   {t:"FAA AST — Office of Commercial Space Transportation", b:"Lizenziert kommerzielle Raketenstarts und Wiedereintritte in den USA (14 CFR Part 450). Jeder Falcon-9- und Starship-Start benötigt eine FAA-AST-Lizenz; Verzögerungen hier sind operativer Engpass.", u:"https://www.faa.gov/space"},
+  far:   {t:"NASA FAR / DFARS", b:"Federal Acquisition Regulation und Defense FAR Supplement regeln staatliche Beschaffung. SpaceX setzt überwiegend Firm-Fixed-Price-Verträge ein (z.B. HLS Option A $2,89 Mrd.) statt Cost-Plus — verlagert Risiko, ermöglicht Margen-Upside.", u:"https://www.acquisition.gov/far"},
+  fcc:   {t:"FCC Part 25 — Satellite Communications", b:"47 CFR Part 25 lizenziert Satellitenfunk in den USA. Starlink benötigt FCC-Genehmigungen für jede Satellitenkohorte; Orbital-Debris-Auflagen und Spektrum-Koordination sind hier verankert.", u:"https://www.fcc.gov/space"},
+  ifrs:  {t:"IFRS 13 — Level 3 Fair Value", b:"Bewertung mit nicht-beobachtbaren Inputs (keine Marktpreise). Private Unternehmen wie SpaceX werden von Fonds nach IFRS 13 Level 3 bewertet — daher die hohe Schätz-Unsicherheit und Spannweite der genannten Bewertungen.", u:"https://www.ifrs.org/issued-standards/list-of-standards/ifrs-13-fair-value-measurement/"},
+  nssl:  {t:"DOD NSSL — National Security Space Launch", b:"US-Programm für sicherheitskritische Starts (Space Force). SpaceX und ULA teilen sich Phase-3-Aufträge. Hohe Abhängigkeit der DOD von SpaceX wirft Anti-Lock-in- und Mission-Assurance-Fragen auf.", u:"https://www.ssc.spaceforce.mil/"},
+  itu:   {t:"ITU — Radio Regulations", b:"Internationale Fernmeldeunion koordiniert global Orbital-Slots und Funkfrequenzen. Starlink konkurriert um knappe LEO-Slots; ITU-Filings und das First-Come-First-Served-Prinzip sind ein strategischer Engpass.", u:"https://www.itu.int/en/ITU-R/space/Pages/default.aspx"},
+};
+
+const CMP = [
+  {n:"SpaceX",        t:"privat*", s:"New Space / Satcom", cap:1750, rev:18.7, evr:93,  eve:null, mar:null, land:"USA", cls:"gold"},
+  {n:"Rocket Lab",    t:"RKLB",    s:"Small Launch / Satbau", cap:84,  rev:0.5, evr:160, eve:null, mar:-15,  land:"USA/NZ", cls:"cyan"},
+  {n:"Boeing",        t:"BA",      s:"Aerospace Defense", cap:182, rev:70,  evr:0.6, eve:11,   mar:6,    land:"USA", cls:"cyan"},
+  {n:"Airbus",        t:"AIR.PA",  s:"Aerospace Civil", cap:95,  rev:80,  evr:0.4, eve:5,    mar:9,    land:"EU", cls:"cyan"},
+  {n:"Lockheed Martin",t:"LMT",    s:"Defense", cap:105, rev:68,  evr:0.7, eve:6,    mar:11.5, land:"USA", cls:"cyan"},
+  {n:"Northrop Grumman",t:"NOC",   s:"Defense", cap:65,  rev:42,  evr:0.9, eve:7,    mar:12.5, land:"USA", cls:"cyan"},
+  {n:"Raytheon / RTX",t:"RTX",     s:"Defense / Avionics", cap:160, rev:80,  evr:1.0, eve:9,    mar:11,   land:"USA", cls:"cyan"},
+  {n:"Palantir",      t:"PLTR",    s:"Govtech / AI", cap:290, rev:3.6, evr:80,  eve:null, mar:30,   land:"USA", cls:"lavender"},
+  {n:"Viasat",        t:"VSAT",    s:"Satcom Legacy", cap:1.5, rev:4.4, evr:1.0, eve:null, mar:15,   land:"USA", cls:"cyan"},
+  {n:"SES",           t:"SESG",    s:"Satcom GEO", cap:2.5, rev:2.3, evr:1.5, eve:null, mar:40,   land:"LUX", cls:"cyan"},
+  {n:"Eutelsat",      t:"ETL.PA",  s:"Satcom / OneWeb", cap:0.8, rev:1.4, evr:2.5, eve:null, mar:35,   land:"FR", cls:"cyan"},
+  {n:"Iridium",       t:"IRDM",    s:"LEO Satcom", cap:3.8, rev:0.8, evr:4.8, eve:null, mar:45,   land:"USA", cls:"cyan"},
+  {n:"Planet Labs",   t:"PL",      s:"Earth Obs", cap:1.6, rev:0.25,evr:6.2, eve:null, mar:-10,  land:"USA", cls:"cyan"},
+  {n:"AST SpaceMobile",t:"ASTS",   s:"D2D Satcom", cap:9.0, rev:0.05,evr:180, eve:null, mar:-90,  land:"USA", cls:"cyan"},
+  {n:"Blue Origin",   t:"privat*", s:"New Space", cap:15,  rev:0.75,evr:null,eve:null, mar:-30,  land:"USA", cls:"cyan"},
+  {n:"ULA (JV)",      t:"privat*", s:"Launch Heritage", cap:6.5, rev:1.5, evr:4.0, eve:null, mar:null, land:"USA", cls:"cyan"},
+  {n:"Tesla",         t:"TSLA",    s:"Tech-Vergleich (Musk)", cap:1100,rev:98, evr:8.5, eve:45,   mar:12,   land:"USA", cls:"lavender"},
+  {n:"Amazon (Blue O.)",t:"AMZN",  s:"Tech-Vergleich (Kuiper)", cap:2400,rev:680,evr:3.5, eve:18,   mar:18,   land:"USA", cls:"lavender"},
+  {n:"Alphabet (SpaceX-Inv.)",t:"GOOGL",s:"Tech-Vergleich (Investor)", cap:2300,rev:360,evr:6.0, eve:14,   mar:32,   land:"USA", cls:"lavender"},
+];
+
+const GLOSSAR = [
+  ["ITAR","Tag","Regeln, die US-Waffen- und Raketentechnik vor Export schützen.","22 CFR 120–130: Exportkontrolle verteidigungsrelevanter Daten; deckelt ausländische Investoren.","FOCI-Mitigation, DDTC-Lizenzen, technische Daten als 'defense articles' — zentrales IPO-Disclosure-Problem."],
+  ["FAR/DFARS","Tag","Regelwerk, wie der US-Staat Aufträge vergibt.","Federal Acquisition Regulation + Defense Supplement; Vertragstypen, Preisgestaltung.","CAS-Compliance, Firm-Fixed-Price vs. Cost-Plus, Termination for Convenience-Klauseln."],
+  ["NSSL","Tag","Programm für sicherheitskritische US-Raketenstarts.","National Security Space Launch der Space Force; Phase-3-Aufträge zwischen SpaceX und ULA.","Mission Assurance, Assured Access to Space, Anti-Lock-in-Wettbewerbspolitik."],
+  ["HLS","Tag","Mond-Landefähre von SpaceX für die NASA.","Human Landing System; Artemis III/IV; Starship-Variante.","Firm-Fixed-Price Option A $2,89 Mrd. + Option B $1,15 Mrd.; ~$2,6 Mrd. ausgezahlt."],
+  ["RUD","Tag","'Rapid Unplanned Disassembly' — eine Rakete explodiert.","Euphemismus für katastrophalen Fehlschlag, v.a. bei Starship-Testflügen.","Iteratives Hardware-Rich-Testen: bewusste Inkaufnahme von RUDs zur Beschleunigung der Lernkurve."],
+  ["Reuse Rate","Tag","Wie oft eine Rakete wiederverwendet wird.","Wiederverwendungsquote der Falcon-9-Erststufe; senkt Stückkosten.","Treiber der Lernkurve C_n = C_1·n^(log2 LR); Booster mit 20+ Flügen erreicht."],
+  ["ARPU","Tag","Durchschnittlicher Umsatz pro Nutzer (Starlink).","Average Revenue Per User; Privat- vs. Enterprise- vs. Maritime-Mix.","Kern-Input der Starlink-DCF: V = Σ ARPU·N_t·(1-Churn)^t / (1+r)^t."],
+  ["Churn Rate","Tag","Anteil der Kunden, die kündigen.","Abwanderungsquote; reduziert die DCF-Basis von Starlink.","Sensitiv für SOTP; niedriger Churn rechtfertigt höhere Multiples auf wiederkehrende Umsätze."],
+  ["EV/Revenue","Tag","Unternehmenswert geteilt durch Umsatz.","Enterprise Value / Revenue_TTM; Bewertungs-Multiple.","Zeitgleiche Paarung zwingend; SpaceX ~27x (Dez '24) bis ~93x (IPO-Ziel '26)."],
+  ["Sum-of-the-Parts","Tag","Wert = Summe der einzelnen Geschäftsbereiche.","V_SpaceX = V_Starlink + V_Launch + V_Starship,opt.","Heterogene Comps je Segment; Starship als reale Option separat zu bewerten."],
+  ["Dual-Class Share","Tag","Zwei Aktienklassen mit unterschiedlichem Stimmrecht.","Class A vs. Class B (Super-Voting); sichert Gründer-Kontrolle.","Musk ~85,1% kombinierte Stimmrechte laut S-1; Mission-Lock-in vs. Agency-Risiko."],
+  ["Tender Offer","Tag","Rückkauf von Mitarbeiteraktien zum Festpreis.","Sekundärtransaktion ohne Kapitalzufluss; periodische Liquidität.","Dez '24: $185/Aktie, bis $1,25 Mrd.; setzt implizite Bewertung ohne SEC-Pflicht."],
+  ["Lock-up Period","Tag","Sperrfrist, in der Insider nach IPO nicht verkaufen dürfen.","Typisch 180 Tage nach Börsengang.","Verhindert Kursdruck durch Insider-Verkäufe; Ablauf ist oft Volatilitäts-Event."],
+  ["SPAC vs. Direct Listing","Tag","Zwei Alternativen zum klassischen IPO.","SPAC = Mantel-Übernahme; Direct Listing = Börsennotierung ohne neue Emission.","Für SpaceX unwahrscheinlich; Größe spricht für klassisches bookbuilt IPO."],
+  ["FCC Part 25","Tag","US-Regeln für Satellitenfunk.","47 CFR Part 25; lizenziert Starlink-Kohorten und Spektrum.","Orbital-Debris-Auflagen, Spektrum-Koordination mit GEO-Betreibern."],
+  ["ITU","Tag","UN-Organisation, die Orbital-Slots verteilt.","International Telecommunication Union; Radio Regulations.","First-Come-First-Served-Slots, knappe LEO-Frequenzen als strategischer Engpass."],
+  ["Kessler Syndrome","Tag","Kettenreaktion von Satellitenkollisionen.","Selbstverstärkende Trümmerwolke im Orbit (Donald Kessler, 1978).","Systemisches Risiko für die Starlink-Konstellation und alle LEO-Akteure."],
+  ["Orbital Debris","Tag","Weltraumschrott im Erdorbit.","Ausgediente Satelliten, Raketenstufen, Fragmente.","FCC/ITU-Deorbit-Auflagen; B--Schleife im CLD (Regulierungs-Balancierung)."],
+  ["Raptor Engine","Tag","Das Triebwerk von Starship.","Methan-Sauerstoff-Vollstrom-Stufenbrennverfahren (Full-Flow Staged Combustion).","Hohe Stückzahl-Fertigung; ITAR-klassifiziert — Kern des Disclosure-Problems beim IPO."],
+  ["Starship","Tag","SpaceXs vollständig wiederverwendbares Mega-Raketensystem.","Super Heavy Booster + Starship-Oberstufe; Ziel Mars + HLS.","Realer Optionswert (OTM-Call); 4 suborbitale Testflüge 2024; γ_Option in der Premium-Dekomposition."],
+];
+
+/* ============ LEVEL SYSTEM ============ */
+let LEVEL = 'einsteiger';
+const LVL_IDX = {einsteiger:0, fortgeschritten:1, experte:2};
+
+function setLevel(l){
+  LEVEL = l;
+  document.querySelectorAll('.level-btn[data-lvl]').forEach(b=>b.classList.toggle('active-level', b.dataset.lvl===l));
+  document.querySelectorAll('[data-s02]').forEach(b=>{});
+  // S02 tabs follow level
+  document.querySelectorAll('#s02-tabs .tab-btn').forEach(b=>b.classList.toggle('active-tab', b.dataset.s02===l));
+  document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active', c.dataset.s02c===l));
+  renderGlossar();
+  renderTimeline();
+}
+document.querySelectorAll('.level-btn[data-lvl]').forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.lvl)));
+
+/* S02 tabs */
+document.querySelectorAll('#s02-tabs .tab-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#s02-tabs .tab-btn').forEach(x=>x.classList.toggle('active-tab', x===b));
+  document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active', c.dataset.s02c===b.dataset.s02));
+}));
+
+/* ============ REG MODAL ============ */
+const regModal=document.getElementById('regModal');
+document.querySelectorAll('.reg-tag[data-reg]').forEach(b=>b.addEventListener('click',()=>{
+  const r=REG[b.dataset.reg];
+  document.getElementById('regTitle').textContent=r.t;
+  document.getElementById('regBody').textContent=r.b;
+  const lnk=document.getElementById('regLink'); lnk.href=r.u; lnk.textContent='→ Offizielle Quelle öffnen';
+  regModal.classList.add('open');
+}));
+document.getElementById('regClose').addEventListener('click',()=>regModal.classList.remove('open'));
+regModal.addEventListener('click',e=>{ if(e.target===regModal) regModal.classList.remove('open'); });
+
+/* ============ COMPARE TABLE (sortable) ============ */
+const clsColor={gold:'#DFAF0F',cyan:'#00CFFF',lavender:'#9933FF'};
+let sortState={col:3,dir:-1};
+function fmtNum(v,suffix=''){ return v===null?'<span class="text-tngb-muted">n/a</span>':(v+suffix); }
+function renderCmp(){
+  const body=document.getElementById('cmpBody');
+  const cols=['n','t','s','cap','rev','evr','eve','mar','land'];
+  const key=cols[sortState.col];
+  const rows=[...CMP].sort((a,b)=>{
+    let av=a[key], bv=b[key];
+    if(typeof av==='number'||typeof bv==='number'){ av=av===null?-Infinity:av; bv=bv===null?-Infinity:bv; return (av-bv)*sortState.dir; }
+    return String(av).localeCompare(String(bv))*sortState.dir;
+  });
+  body.innerHTML=rows.map(r=>{
+    const c=clsColor[r.cls];
+    const star=r.t.includes('privat')?'<span class="est-mark">EST</span>':'';
+    return `<tr style="background:${r.cls==='gold'?'rgba(223,175,15,0.07)':'transparent'};">
+      <td style="color:${c};font-weight:700;">${r.n}${star}</td>
+      <td class="font-mono text-xs">${r.t}</td>
+      <td class="text-xs text-slate-400">${r.s}</td>
+      <td class="font-mono">${r.cap>=100?r.cap.toLocaleString('de-DE'):r.cap}</td>
+      <td class="font-mono">${r.rev}</td>
+      <td class="font-mono">${fmtNum(r.evr,'x')}</td>
+      <td class="font-mono">${fmtNum(r.eve,'x')}</td>
+      <td class="font-mono">${fmtNum(r.mar,'%')}</td>
+      <td class="text-xs">${r.land}</td></tr>`;
+  }).join('');
+}
+document.querySelectorAll('#cmpTable th.sortable').forEach((th,i)=>th.addEventListener('click',()=>{
+  if(sortState.col===i) sortState.dir*=-1; else { sortState.col=i; sortState.dir=1; }
+  document.querySelectorAll('#cmpTable th').forEach(x=>x.classList.remove('sort-asc','sort-desc'));
+  th.classList.add(sortState.dir===1?'sort-asc':'sort-desc');
+  renderCmp();
+}));
+renderCmp();
+
+/* ============ GLOSSAR ============ */
+function renderGlossar(){
+  const idx=LVL_IDX[LEVEL];
+  document.getElementById('glossar').innerHTML=GLOSSAR.map(g=>{
+    const txt=g[2+idx];
+    const border = LEVEL==='einsteiger'?'#00CFFF':LEVEL==='fortgeschritten'?'#00CC7A':'#E6399A';
+    return `<div class="dep-box" style="border-left:3px solid ${border};">
+      <div class="font-head font-bold text-white text-sm">${g[0]} <span class="text-xs font-mono text-tngb-muted">[${g[1]}]</span></div>
+      <div class="text-xs text-slate-300 mt-1">${txt}</div></div>`;
+  }).join('');
+}
+renderGlossar();
+
+/* ============ CHARTS ============ */
+const gridColor='rgba(100,116,139,0.15)';
+Chart.defaults.color='#94A3B8'; Chart.defaults.font.family='Inter';
+
+// Valuation history (log scale)
+new Chart(document.getElementById('valHistChart'),{
+  type:'line',
+  data:{ labels:['2012','2015','2019','2021','2022','2023','Dez 24','Dez 25','IPO-Ziel 26'],
+    datasets:[{label:'Bewertung ($Mrd.)', data:[2.4,12,33,74,127,150,350,800,1750],
+      borderColor:'#DFAF0F', backgroundColor:'rgba(223,175,15,0.12)', fill:true, tension:0.3, pointRadius:4, pointBackgroundColor:'#DFAF0F'}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{y:{type:'logarithmic',grid:{color:gridColor},title:{display:true,text:'$ Mrd. (log)'}},x:{grid:{color:gridColor}}},
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y+' Mrd. (EST)'}}}}
+});
+
+// Dependency doughnut
+new Chart(document.getElementById('depChart'),{
+  type:'doughnut',
+  data:{ labels:['NASA','DOD/NRO','Commercial Launch','Starlink (kommerz.)','Intl & Other'],
+    datasets:[{data:[19,16,12,46,7], backgroundColor:['#DFAF0F','#FF6B00','#00CC7A','#00CFFF','#9933FF'], borderColor:'#0A0F1A', borderWidth:2}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:12,font:{size:10}}},title:{display:true,text:'Umsatzquellen 2024 (% · EST)'}}}
+});
+
+// Launch cadence
+new Chart(document.getElementById('launchChart'),{
+  type:'bar',
+  data:{ labels:['2018','2020','2021','2022','2023','2024'],
+    datasets:[{label:'Orbitalstarts', data:[21,26,31,61,96,134],
+      backgroundColor:['#1E293B','#334155','#475569','#00CC7A','#00CFFF','#DFAF0F'], borderRadius:4}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{y:{grid:{color:gridColor},title:{display:true,text:'Orbitalstarts/Jahr'}},x:{grid:{display:false}}},
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' Starts'}}}}
+});
+
+// Learning curve
+(function(){
+  const ns=[1,2,4,8,16,32,64,128,256,512,1024];
+  const curve=(lr)=>ns.map(n=>+(Math.pow(n,Math.log2(lr))).toFixed(3));
+  new Chart(document.getElementById('learnChart'),{
+    type:'line',
+    data:{ labels:ns,
+      datasets:[
+        {label:'LR=0,85', data:curve(0.85), borderColor:'#00CC7A', backgroundColor:'rgba(0,204,122,0.1)', fill:true, tension:0.25, pointRadius:2},
+        {label:'LR=0,90', data:curve(0.90), borderColor:'#9933FF', borderDash:[5,4], fill:false, tension:0.25, pointRadius:2}
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{x:{type:'logarithmic',grid:{color:gridColor},title:{display:true,text:'kumulierte Starts n (log)'}},y:{grid:{color:gridColor},title:{display:true,text:'C_n / C_1'},min:0,max:1}},
+      plugins:{legend:{labels:{font:{size:10},boxWidth:12}}}}
+  });
+})();
+
+// EV/Revenue comparison (log)
+new Chart(document.getElementById('evrChart'),{
+  type:'bar',
+  data:{ labels:['Airbus','Boeing','LMT','NOC','RTX','SES','ULA','Iridium','Tesla','GOOGL','PLTR','SpaceX','RKLB','ASTS'],
+    datasets:[{label:'EV/Revenue', data:[0.4,0.6,0.7,0.9,1.0,1.5,4.0,4.8,8.5,6.0,80,93,160,180],
+      backgroundColor:(c)=>{ const l=c.chart.data.labels[c.dataIndex]; return l==='SpaceX'?'#DFAF0F':['Tesla','GOOGL','PLTR'].includes(l)?'#9933FF':'#00CFFF'; }, borderRadius:3}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    scales:{x:{type:'logarithmic',grid:{color:gridColor},title:{display:true,text:'EV/Revenue (log)'}},y:{grid:{display:false},ticks:{font:{size:10}}}},
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'x (EST)'}}}}
+});
+
+// Sankey (ECharts)
+const sankey=echarts.init(document.getElementById('sankeyChart'),null,{renderer:'canvas'});
+const colMap={
+  'Starlink Subscriptions':'#00CFFF','NASA Verträge':'#DFAF0F','DOD/NRO Launches':'#FF6B00',
+  'Commercial Launch':'#00CC7A','Other Gov & Intl':'#9933FF','Starlink Business Unit':'#00CFFF',
+  'Launch Services':'#DFAF0F','Falcon-9 Produktion & Betrieb':'#64748B','Starlink-Satelliten-Produktion':'#00CFFF',
+  'Starship-Entwicklung & Tests':'#9933FF','Bodeninfrastruktur & Operationen':'#64748B',
+  'G&A, Engineering, Talent':'#E040A0','Free Cash Flow / Reserve':'#00CC7A'
+};
+sankey.setOption({
+  backgroundColor:'transparent',
+  tooltip:{trigger:'item',triggerOn:'mousemove',formatter:p=>p.dataType==='edge'?`${p.data.source} → ${p.data.target}: ${p.data.value} Mio. $`:`${p.name}`},
+  series:[{type:'sankey',left:10,right:170,top:10,bottom:10,
+    nodeWidth:16,nodeGap:11,
+    data:[
+      {name:'Starlink Subscriptions'},{name:'NASA Verträge'},{name:'DOD/NRO Launches'},
+      {name:'Commercial Launch'},{name:'Other Gov & Intl'},{name:'Starlink Business Unit'},
+      {name:'Launch Services'},{name:'Falcon-9 Produktion & Betrieb'},{name:'Starlink-Satelliten-Produktion'},
+      {name:'Starship-Entwicklung & Tests'},{name:'Bodeninfrastruktur & Operationen'},
+      {name:'G&A, Engineering, Talent'},{name:'Free Cash Flow / Reserve'}
+    ].map(n=>({name:n.name,itemStyle:{color:colMap[n.name]||'#64748B'}})),
+    links:[
+      {source:'Starlink Subscriptions',target:'Starlink Business Unit',value:4500},
+      {source:'NASA Verträge',target:'Launch Services',value:2500},
+      {source:'DOD/NRO Launches',target:'Launch Services',value:1500},
+      {source:'Commercial Launch',target:'Launch Services',value:1000},
+      {source:'Other Gov & Intl',target:'Launch Services',value:500},
+      {source:'Starlink Business Unit',target:'Starlink-Satelliten-Produktion',value:2500},
+      {source:'Starlink Business Unit',target:'Bodeninfrastruktur & Operationen',value:1500},
+      {source:'Starlink Business Unit',target:'G&A, Engineering, Talent',value:500},
+      {source:'Launch Services',target:'Falcon-9 Produktion & Betrieb',value:2000},
+      {source:'Launch Services',target:'Starship-Entwicklung & Tests',value:2000},
+      {source:'Launch Services',target:'G&A, Engineering, Talent',value:1000},
+      {source:'Starlink Business Unit',target:'Free Cash Flow / Reserve',value:0}
+    ].filter(l=>l.value>0),
+    lineStyle:{color:'gradient',opacity:0.45,curveness:0.5},
+    label:{color:'#CBD5E1',fontSize:10,fontFamily:'Inter'},
+    emphasis:{focus:'adjacency'}
+  }]
+});
+window.addEventListener('resize',()=>sankey.resize());
+
+/* ============ RADAR SIM ============ */
+const clamp=(x)=>Math.min(100,Math.max(5,x));
+let muskPenalty=0;
+const radarAxes=['Fachbereich','Gesellschaft','Wirtschaft','Wohlstand','Wissen','Gesundheit','Zukunftsfähigkeit'];
+function computeRadar(){
+  const sub=+simSub.value, preis=+simPreis.value, zins=+simZins.value, govt=+simGovt.value, ship=+simShip.value;
+  let v=[
+    clamp(55 + sub*0.8 - zins*2),
+    clamp(40 + sub*0.6 + ship*0.3),
+    clamp(60 + sub*0.5 - govt*0.15),
+    clamp(50 + sub*0.4 - zins*3),
+    clamp(65 + ship*0.4 + sub*0.1),
+    clamp(70 - sub/5 - ship/10),
+    clamp(45 + ship*0.5 + sub*0.2 - zins*1.5)
+  ];
+  if(muskPenalty){
+    // Devil's Advocate: Musk verlässt SpaceX → jede Achse -20 bis -35 (fest pro Achse)
+    const MUSK=[22,28,25,30,20,35,33];
+    v=v.map((x,i)=>clamp(x - MUSK[i]));
+  }
+  return v;
+}
+const simSub=document.getElementById('simSub'),simPreis=document.getElementById('simPreis'),
+  simZins=document.getElementById('simZins'),simGovt=document.getElementById('simGovt'),simShip=document.getElementById('simShip');
+const radarChart=new Chart(document.getElementById('radarChart'),{
+  type:'radar',
+  data:{labels:radarAxes,datasets:[{label:'Wirkungsprofil',data:computeRadar(),
+    borderColor:'#00CFFF',backgroundColor:'rgba(0,207,255,0.18)',pointBackgroundColor:'#00CFFF',borderWidth:2}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{r:{min:0,max:100,grid:{color:gridColor},angleLines:{color:gridColor},pointLabels:{font:{size:11}},ticks:{display:false}}},
+    plugins:{legend:{display:false}}}
+});
+function refreshRadar(){
+  lblSub.textContent=simSub.value; lblPreis.textContent=simPreis.value; lblZins.textContent=simZins.value;
+  lblGovt.textContent=simGovt.value; lblShip.textContent=simShip.value;
+  const arr=(+simSub.value*0.18).toFixed(1);
+  subArr.textContent=`${simSub.value} Mio. Abonnenten · ~$${arr} Mrd. ARR (bei ~$1.000 Mix-ARPU, EST)`;
+  radarChart.data.datasets[0].data=computeRadar();
+  radarChart.data.datasets[0].borderColor=muskPenalty?'#E6399A':'#00CFFF';
+  radarChart.data.datasets[0].backgroundColor=muskPenalty?'rgba(230,57,154,0.18)':'rgba(0,207,255,0.18)';
+  radarChart.update();
+}
+[simSub,simPreis,simZins,simGovt,simShip].forEach(s=>s.addEventListener('input',refreshRadar));
+const PRESETS={status:[4,100,5,60,10],boom:[25,85,4,40,40],bear:[5,110,7,75,5]};
+document.querySelectorAll('.level-btn[data-preset]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.level-btn[data-preset]').forEach(x=>x.classList.toggle('active-level',x===b));
+  const p=PRESETS[b.dataset.preset];
+  simSub.value=p[0];simPreis.value=p[1];simZins.value=p[2];simGovt.value=p[3];simShip.value=p[4];
+  refreshRadar();
+}));
+document.getElementById('muskBtn').addEventListener('click',()=>{ muskPenalty=!muskPenalty; refreshRadar();
+  document.getElementById('muskBtn').textContent=muskPenalty?'Szenario „Musk verlässt SpaceX“ AKTIV — zurücksetzen':'Szenario „Musk verlässt SpaceX“ einrechnen';
+});
+refreshRadar();
+
+/* ============ TIMELINE ============ */
+const TL={
+  tag:{name:'IPO-Prozess',steps:[
+    {t:'Board-Entscheidung + Bank-Mandat',e:'Der Vorstand beschließt den Börsengang und beauftragt Investmentbanken als Begleiter.',f:'Mandatierung der Lead-Underwriter (Bookrunner); Festlegung von Struktur und Zeitplan.',x:'Syndikatsbildung, Gross-Spread-Verhandlung, ITAR-Vorprüfung der offenzulegenden Daten.'},
+    {t:'S-1-Prospekt + ITAR-Redaktion',e:'Es wird ein detailliertes Dokument für die Börsenaufsicht erstellt — geheime Technik wird geschwärzt.',f:'S-1-Filing inkl. Risikofaktoren, MD&A; ITAR-pflichtige Technikdetails werden redigiert.',x:'Abstimmung mit DDTC/DCSA; Confidential-Treatment-Requests für klassifizierte technische Daten.'},
+    {t:'SEC-Review + DOD-Clearance',e:'Die Aufsicht prüft alles; das Verteidigungsministerium muss Sicherheitsaspekte freigeben.',f:'SEC-Kommentarrunden; parallel DOD-Clearance und ITAR-Compliance-Statement.',x:'FOCI-Mitigation-Verhandlung; National-Security-Agreement falls ausländische Beteiligung relevant.'},
+    {t:'Roadshow (ITAR-limitiert)',e:'Das Management wirbt bei Großinvestoren — ausländische sind aber beschränkt.',f:'Institutionelle Roadshow; ausländische Investoren durch ITAR/FOCI faktisch gedeckelt.',x:'Allokations-Steuerung zur Wahrung der US-Personen-Quote; Aufbau des Orderbuchs.'},
+    {t:'Pricing & Allokation',e:'Der Ausgabepreis wird festgelegt und Aktien zugeteilt — Musk behält die Kontrolle.',f:'Bookbuilding-Pricing; Dual-Class-Struktur sichert Musks Stimmrechtsmehrheit.',x:'Greenshoe-Option, Class-B-Super-Voting (~85% Stimmrechte), Preisfindung vs. Nachfrage.'},
+    {t:'Ersthandel + Lock-Up',e:'Die Aktie wird erstmals gehandelt; Mitarbeiter dürfen 180 Tage nicht verkaufen.',f:'First Trade; 180-Tage-Lock-Up für Insider und Mitarbeiter.',x:'Stabilisierungsmaßnahmen, Lock-Up-Ablauf als Volatilitäts-Event, Aftermarket-Support.'}
+  ]},
+  woche:{name:'Starlink-Expansion',steps:[
+    {t:'FCC-Lizenzantrag',e:'SpaceX beantragt die Erlaubnis, neue Satelliten zu betreiben.',f:'FCC-Part-25-Antrag für neue Satellitenkohorte inkl. Orbital-Debris-Plan.',x:'Spektrum-Koordination, Deorbit-Nachweis, ITU-Filing-Abgleich.'},
+    {t:'Startfenster-Koordination',e:'Ein Termin für den Raketenstart wird mit den Behörden abgestimmt.',f:'Falcon-9-Startfenster mit FAA, Range und Militär koordiniert.',x:'Range-Safety, Trajektorien-Konfliktprüfung, Wetterfenster-Optimierung.'},
+    {t:'Satellitenproduktion',e:'Die Satelliten werden gebaut und für den Start vorbereitet.',f:'Serienfertigung und Integration in Hawthorne/Boca Chica.',x:'Vertikale Integration, Stückkostendegression durch Volumen, Payload-Stacking.'},
+    {t:'Start & Orbit-Injection',e:'Die Rakete bringt die Satelliten in die richtige Umlaufbahn.',f:'Orbitaler Start, Stufentrennung, Booster-Landung, Orbit-Injection.',x:'Phasing zur Zielorbit-Ebene, Ionentriebwerk-Anhebung über Wochen.'},
+    {t:'Konstellation-Aktivierung',e:'Die neuen Satelliten gehen ans Netz; Kunden bekommen mehr Kapazität.',f:'Constellation-Aktivierung; Kapazitäts-Update für Kundenzellen.',x:'Inter-Satellite-Laser-Mesh-Integration, dynamisches Beam-Hopping, Kapazitätsallokation.'}
+  ]},
+  monat:{name:'Government-Contract-Vergabe',steps:[
+    {t:'RFP veröffentlicht',e:'NASA oder Militär schreiben einen Auftrag öffentlich aus.',f:'Request for Proposals von NASA/DOD/NRO mit Anforderungen und Bewertungskriterien.',x:'Sources-Sought, Draft-RFP-Industry-Days, Evaluation-Criteria-Gewichtung.'},
+    {t:'Angebotsvorbereitung',e:'SpaceX erstellt ein Angebot mit Technik, Preis und Nachweisen.',f:'Technisches + Preis-Angebot inkl. ITAR-Compliance-Nachweis.',x:'Past-Performance-Volume, Cost-Realism-Narrativ, Firm-Fixed-Price-Kalkulation.'},
+    {t:'Technische & Preisevaluierung',e:'Eine Kommission bewertet alle Angebote.',f:'Source Selection Board prüft Technik und Preis getrennt.',x:'Best-Value-Tradeoff vs. LPTA, technische Risiko-Ratings, Competitive Range.'},
+    {t:'Vertragsverhandlung',e:'Die Vertragsbedingungen werden ausgehandelt.',f:'FAR/DFARS-Verhandlung, CAS- und ITAR-Klauseln.',x:'Definitization, Cost Accounting Standards, Termination-Klauseln, Milestone-Payments.'},
+    {t:'Award & Protest-Frist',e:'Der Zuschlag wird erteilt; unterlegene Bieter können Einspruch erheben.',f:'Contract Award; GAO-Protest-Frist (typ. 10 Tage).',x:'Bid-Protest-Risiko, Automatic-Stay, Corrective-Action-Szenarien.'},
+    {t:'Work Authorization',e:'Die Arbeit beginnt; Meilensteine werden festgelegt.',f:'Work Authorization und Milestone-Definition.',x:'EVM-Baseline (Earned Value Management), IBR (Integrated Baseline Review).'}
+  ]}
+};
+let tlScope='tag', tlStep=0, tlSpeed=1, tlPlaying=true, tlTimer=null;
+function renderTimeline(){
+  const sc=TL[tlScope];
+  const track=document.getElementById('tlTrack');
+  track.innerHTML=sc.steps.map((s,i)=>`<div class="process-node ${i===tlStep?'pulse-glow':''}" data-step="${i}"
+    style="flex:1;min-width:120px;background:${i===tlStep?'rgba(0,207,255,0.18)':'var(--card)'};color:${i===tlStep?'#00CFFF':'#94A3B8'};border:1px solid ${i===tlStep?'#00CFFF':'var(--border)'};">
+    <div class="text-[0.6rem] font-mono opacity-70">${i+1}/${sc.steps.length}</div>${s.t}</div>`).join('<span class="arrow self-center">→</span>');
+  const idx=LVL_IDX[LEVEL];
+  const s=sc.steps[tlStep];
+  const txt = idx===0?s.e : idx===1?s.f : s.x;
+  document.getElementById('tlNarr').innerHTML=`<span class="font-mono text-tngb-cyan text-xs">${sc.name} · Schritt ${tlStep+1}: ${s.t}</span><br/><span class="text-slate-200">${txt}</span>`;
+  track.querySelectorAll('[data-step]').forEach(n=>n.addEventListener('click',()=>{ tlStep=+n.dataset.step; renderTimeline(); }));
+}
+function tlTick(){ tlStep=(tlStep+1)%TL[tlScope].steps.length; renderTimeline(); }
+function tlRestart(){ clearInterval(tlTimer); if(tlPlaying) tlTimer=setInterval(tlTick, 3000/tlSpeed); }
+document.querySelectorAll('#tl-scope .tab-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#tl-scope .tab-btn').forEach(x=>x.classList.toggle('active-tab',x===b));
+  tlScope=b.dataset.scope; tlStep=0; renderTimeline(); tlRestart();
+}));
+document.getElementById('tlPlay').addEventListener('click',()=>{
+  tlPlaying=!tlPlaying;
+  document.getElementById('tlPlay').textContent=tlPlaying?'▶ Play':'⏸ Pause';
+  document.getElementById('tlPlay').classList.toggle('active-level',tlPlaying);
+  tlRestart();
+});
+document.querySelectorAll('.level-btn[data-speed]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.level-btn[data-speed]').forEach(x=>x.classList.toggle('active-level',x===b));
+  tlSpeed=+b.dataset.speed; tlRestart();
+}));
+renderTimeline(); tlRestart();
+
+/* ============ KEYBOARD SHORTCUTS ============ */
+const SECTIONS=['s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s-experten','s12'];
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName)) return;
+  const cur=SECTIONS.findIndex(id=>{ const el=document.getElementById(id); const r=el.getBoundingClientRect(); return r.top>=-100 && r.top<window.innerHeight*0.5; });
+  if(e.key==='j'){ const n=Math.min(SECTIONS.length-1,(cur<0?0:cur)+1); document.getElementById(SECTIONS[n]).scrollIntoView({behavior:'smooth'}); }
+  if(e.key==='k'){ const n=Math.max(0,(cur<0?0:cur)-1); document.getElementById(SECTIONS[n]).scrollIntoView({behavior:'smooth'}); }
+  if(e.key==='+'||e.key==='='){ tlSpeed=Math.min(5,tlSpeed*2||1); tlSpeed=tlSpeed>5?5:tlSpeed; document.querySelectorAll('.level-btn[data-speed]').forEach(x=>x.classList.toggle('active-level',+x.dataset.speed===tlSpeed)); tlRestart(); }
+  if(e.key==='-'||e.key==='_'){ tlSpeed=Math.max(1,Math.floor(tlSpeed/2)); document.querySelectorAll('.level-btn[data-speed]').forEach(x=>x.classList.toggle('active-level',+x.dataset.speed===tlSpeed)); tlRestart(); }
+});
+
+/* ============ NAVDOCK + SCROLL-FADE ============ */
+const dockObs=new IntersectionObserver(es=>{
+  es.forEach(en=>{ if(en.isIntersecting){ const id=en.target.id;
+    document.querySelectorAll('#navdock a').forEach(a=>a.classList.toggle('active-dock',a.dataset.dock===id)); } });
+},{rootMargin:'-40% 0px -55% 0px'});
+SECTIONS.forEach(id=>{ const el=document.getElementById(id); if(el) dockObs.observe(el); });
+
+const fadeObs=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('visible'); }),{threshold:0.06});
+document.querySelectorAll('.scroll-fade').forEach(el=>fadeObs.observe(el));
+
+/* ============ KATEX ============ */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderMathInElement(document.body,{delimiters:[
+    {left:'\\[',right:'\\]',display:true},
+    {left:'\\(',right:'\\)',display:false}
+  ],throwOnError:false});
+});
+</script>
+<!-- =====================================================================
+     v2.0.0 · Live-DBOM-Audit-JavaScript
+     Liest beim Page-Load die externe DBOM (provenance/m298.dbom.json),
+     verifiziert dass jedes data-source-Attribut eine gültige Fact-ID
+     referenziert, zeigt Status im Live-Audit-Banner.
+     Liest separat den letzten daily-audit Score und zeigt Compliance-Pill.
+     ===================================================================== -->
+<script>
+(async function liveAudit() {
+  const banner = document.getElementById('live-audit-banner');
+  const status = document.getElementById('live-audit-status');
+  const meta   = document.getElementById('live-audit-meta');
+  const score  = document.getElementById('live-audit-score');
+  if (!banner || !status) return;
+
+  try {
+    // 1. DBOM laden
+    const dbomRes = await fetch('provenance/m298.dbom.json', { cache: 'no-cache' });
+    if (!dbomRes.ok) throw new Error('DBOM nicht erreichbar (HTTP ' + dbomRes.status + ')');
+    const dbom = await dbomRes.json();
+
+    // 2. Fact-IDs sammeln
+    const validFactIds = new Set((dbom.facts || []).map(f => f.id));
+    const factClassMap = Object.fromEntries((dbom.facts || []).map(f => [f.id, {
+      class: f.verdict, confidence: f.confidence, claim: f.claim,
+      source_id: f.source_id, status: f.status, caveat: f.caveat
+    }]));
+
+    // 3. data-source-Attribute im DOM prüfen
+    const referenced = document.querySelectorAll('[data-source^="FACT_"]');
+    let missingCount = 0;
+    const missingFacts = new Set();
+    referenced.forEach(el => {
+      const id = el.dataset.source;
+      if (!validFactIds.has(id)) {
+        missingCount++; missingFacts.add(id);
+        el.style.outline = '2px dashed #E6399A';
+        el.title = 'DBOM-MISSING: Fact-ID "' + id + '" nicht in DBOM!';
+      } else {
+        // Anreichern: Tooltip mit DBOM-Details
+        const info = factClassMap[id];
+        const existingTooltip = el.getAttribute('data-tooltip') || '';
+        const factDetail = '[' + info.class + ' · Konf. ' + info.confidence + '] ' + info.claim + (info.caveat ? ' · ' + info.caveat : '');
+        if (!existingTooltip) el.setAttribute('data-tooltip', factDetail);
+      }
+    });
+
+    // 4. Status-Update
+    const moduleVersion = dbom.module.version;
+    const stichtag = dbom.module.stichtag;
+    const totalFacts = (dbom.facts || []).length;
+    const confirmedFacts = (dbom.facts || []).filter(f => f.verdict === 'CONFIRMED').length;
+    const scenarioFacts = (dbom.facts || []).filter(f => f.verdict === 'SCENARIO_PROJECTION').length;
+
+    meta.innerHTML = 'Modul <code>v' + moduleVersion + '</code> · DBOM-Schema <code>' + dbom.$schema_id + '</code> · ' +
+                     totalFacts + ' Fakten (' + confirmedFacts + ' confirmed, ' + scenarioFacts + ' scenario) · ' +
+                     referenced.length + ' HTML-Referenzen geprüft';
+
+    if (missingCount === 0) {
+      banner.classList.remove('warn', 'err');
+      status.innerHTML = '✓ DBOM-Integrität OK · alle ' + referenced.length + ' data-source-Referenzen aufgelöst · Stichtag ' + stichtag;
+    } else {
+      banner.classList.add('err');
+      status.innerHTML = '✗ ' + missingCount + ' ungültige data-source-Referenz(en): <code>' +
+                          [...missingFacts].join(', ') + '</code>';
+    }
+
+    // 5. Compliance-Score (aus letztem daily-audit) — best effort
+    try {
+      const todayIso = new Date().toISOString().slice(0, 10);
+      const reportRes = await fetch('reports/compliance/' + todayIso + '.json', { cache: 'no-cache' });
+      if (reportRes.ok) {
+        const report = await reportRes.json();
+        const m298 = (report.modules || []).find(m => m.id === 'M298');
+        if (m298) {
+          const scoreClass = m298.score_pct >= 80 ? 'good' : m298.score_pct >= 60 ? 'warn' : 'crit';
+          score.innerHTML = '<span class="compliance-pill ' + scoreClass + '">M298 Score · ' + m298.score_pct + '%</span>';
+        }
+      }
+    } catch (e) { /* Score-Pill ist optional */ }
+  } catch (err) {
+    banner.classList.add('warn');
+    status.innerHTML = '⚠ DBOM-Live-Lookup nicht möglich: ' + err.message + ' (offline?)';
+  }
+})();
+</script>
+
+</body>
+</html>

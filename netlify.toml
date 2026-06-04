@@ -1,0 +1,48 @@
+# ════════════════════════════════════════════════════════════════
+#  Netlify-Konfiguration · FinCoach AI Rente-Analyse (Modul M303)
+#  Statische Site — kein Build-Step nötig (reines HTML/CSS/JS via CDN)
+# ════════════════════════════════════════════════════════════════
+
+[build]
+  # Das Site-Root ist dieser Ordner. Kein Build-Befehl, nur publizieren.
+  publish = "."
+  command = ""
+
+# Saubere URLs: /impressum statt /impressum.html
+[[redirects]]
+  from = "/impressum"
+  to = "/impressum.html"
+  status = 200
+[[redirects]]
+  from = "/datenschutz"
+  to = "/datenschutz.html"
+  status = 200
+[[redirects]]
+  from = "/analyse"
+  to = "/modul.html"
+  status = 200
+
+# 404 -> Startseite (SPA-artiges Fallback)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
+
+# ───────────── Sicherheits-Header (alle Seiten) ─────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # CSP erlaubt die genutzten CDNs (Tailwind, KaTeX/jsDelivr, Google Fonts, Chart.js).
+    # Bei Self-Hosting der Ressourcen kann diese Policy auf 'self' verschärft werden.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self'"
+
+# HTML nicht aggressiv cachen (Inhalte ändern sich), Assets dürfen länger leben
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

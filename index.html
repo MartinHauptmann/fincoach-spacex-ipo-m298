@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SpaceX — Der Weg zum Billionen-IPO · Analyse · FinCoach AI · TheNextGenerationBanking</title>
+<meta name="description" content="Kritische, faktengeprüfte Analyse von SpaceX auf dem Weg vom $350-Mrd.-Tender (2024) zum S-1-Filing (2026, ~$1.750 Mrd.): Finanzstruktur, Sum-of-the-Parts mit xAI, EV/Revenue, IPO-Szenarien, globaler Vergleich, ITAR-Hürden. SpaceX ist privat — alle Finanzzahlen sind Schätzungen. FinCoach AI by TheNextGenerationBanking. Keine Anlageberatung.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://fincoach-spacex-ipo-m298.netlify.app/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="SpaceX — Der Weg zum Billionen-IPO">
+<meta property="og:description" content="Vom $350-Mrd.-Tender zum S-1-Filing (~$1.750 Mrd.): Finanzstruktur, Sum-of-the-Parts, IPO-Szenarien, globaler Vergleich. SpaceX ist privat — alle Zahlen sind Schätzungen. FinCoach AI.">
+<meta property="og:site_name" content="FinCoach AI · TheNextGenerationBanking">
+<link rel="stylesheet" href="fonts.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', muted:'#64748B', border:'#1E293B' } },
+    fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
+  }}}
+</script>
+<style>
+  body{background:#0A0F1A;color:#E2E8F0;font-family:'Inter',sans-serif;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .card{background:#121A2E;border:1px solid #1E293B;border-radius:16px;}
+  a.brandlink{color:#00CFFF;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="sticky top-0 z-30 backdrop-blur-xl bg-tngb-bg/80 border-b border-tngb-border">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="flex items-center gap-3">
+      <svg viewBox="0 0 100 100" class="w-9 h-9" fill="none">
+        <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+        <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+        <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+        <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+        <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+      </svg>
+      <div><div class="font-display font-bold text-lg leading-none">FinCoach AI</div><div class="text-[10px] text-tngb-muted mono">by TheNextGenerationBanking.com</div></div>
+    </a>
+    <nav class="flex gap-5 text-sm">
+      <a href="modul.html" class="hover:text-tngb-cyan">Analyse</a>
+      <a href="impressum.html" class="hover:text-tngb-cyan">Impressum</a>
+      <a href="datenschutz.html" class="hover:text-tngb-cyan">Datenschutz</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-6 pt-16 pb-12">
+  <div class="text-xs text-tngb-muted mono mb-4">Datenstand: 2026-06-01 · Rechtsstand: 2026-06-04 · Modul M298</div>
+  <h1 class="text-4xl md:text-6xl font-display font-bold tracking-tight leading-tight">
+    SpaceX — der Weg zum<br><span class="text-tngb-cyan">Billionen-Dollar-IPO</span>
+  </h1>
+  <p class="mt-5 text-lg text-slate-300 max-w-3xl">
+    Eine kritische, faktengeprüfte Tiefenanalyse von SpaceX vom $350-Mrd.-Tender (Dez. 2024) bis zum
+    S-1-Filing (Mai 2026, ~$1.750 Mrd.): Finanzstruktur, Sum-of-the-Parts-Bewertung inkl. xAI-Integration,
+    EV/Revenue-Multiples, IPO-Szenarien, globaler Vergleich und die ITAR-Exportkontroll-Hürden.
+  </p>
+  <div class="flex flex-wrap gap-4 mt-8">
+    <a href="modul.html" class="bg-tngb-cyan text-tngb-bg font-bold px-6 py-3 rounded-lg hover:opacity-90">Zur vollständigen Analyse →</a>
+    <a href="#themen" class="border border-tngb-border px-6 py-3 rounded-lg hover:bg-tngb-card">Themenüberblick</a>
+  </div>
+</section>
+
+<!-- THEMEN -->
+<section id="themen" class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-5">
+  <div class="card p-6"><h3 class="text-tngb-cyan font-bold mb-2">Bewertung &amp; Finanzstruktur</h3><p class="text-sm text-slate-300">Vom Tender-Offer zur S-1-Bewertung: Sum-of-the-Parts (Starlink, Starship, Launch), xAI-Integration und EV/Revenue im Kontext.</p></div>
+  <div class="card p-6"><h3 class="text-tngb-emerald font-bold mb-2">IPO-Szenarien &amp; Vergleich</h3><p class="text-sm text-slate-300">Drei IPO-Pfade, globaler Vergleich mit den größten Börsengängen und Einordnung der Mega-Cap-Bewertungslogik.</p></div>
+  <div class="card p-6"><h3 class="text-tngb-lavender font-bold mb-2">Risiken &amp; ITAR</h3><p class="text-sm text-slate-300">Exportkontrolle (ITAR), Konzentrationsrisiken, Governance und warum private Finanzdaten nur Schätzungen sind.</p></div>
+</section>
+
+<!-- PRIVATFIRMEN-DISCLAIMER (M-DBOM-Pflicht) -->
+<section class="max-w-6xl mx-auto px-6 pt-2 pb-6">
+  <div class="card p-6 border-l-4 border-tngb-magenta">
+    <h2 class="text-xl font-bold text-tngb-magenta mb-3">Wichtiger Hinweis zu den Finanzzahlen</h2>
+    <p class="text-sm text-slate-300 leading-relaxed">
+      <strong>SpaceX (Space Exploration Technologies Corp.) ist ein privates, nicht börsennotiertes Unternehmen</strong>
+      und veröffentlicht keine geprüften Finanzdaten. <strong>Sämtliche in dieser Analyse genannten Umsatz-,
+      Bewertungs- und Margenzahlen sind Schätzungen</strong> aus Sekundärquellen, Sekundärtransaktionen
+      (Tender-Offers) und — soweit verfügbar — aus dem öffentlich eingereichten S-1-Entwurf. Sie sind
+      <strong>nicht SEC-final-verifiziert</strong>. Im Analyse-Modul ist jeder Datenpunkt nach dem
+      FinCoach-AI-Provenienzstandard (M-DBOM) klassifiziert: verifizierte Fakten sind von
+      <span class="mono">SCENARIO_PROJECTION</span>-Annahmen getrennt ausgewiesen.
+    </p>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="max-w-6xl mx-auto px-6 py-6">
+  <div class="card p-6 border-l-4 border-tngb-orange">
+    <h2 class="text-xl font-bold text-tngb-orange mb-3">Rechtlicher Hinweis</h2>
+    <p class="text-sm text-slate-300 leading-relaxed">
+      Die Inhalte dieser Website sind eine <strong>journalistisch-redaktionelle Aufbereitung</strong> öffentlich
+      verfügbarer Informationen zu SpaceX und zu Kapitalmarkt-Themen. Sie stellen <strong>keine</strong> Rechts-,
+      Steuer- oder Anlageberatung im Sinne des RDG / StBerG / WpIG / FinDAG dar und sind <strong>keine Empfehlung</strong>
+      zum Kauf, Verkauf oder Halten von Finanzprodukten, Wertpapieren oder Unternehmensanteilen. Kapitalanlagen
+      unterliegen Markt-, Kurs- und Totalverlustrisiken. Für verbindliche Auskünfte sind zugelassene Berufsträger:innen
+      (Rechtsanwält:innen, Steuerberater:innen, Honorar-Anlageberater:innen) zuständig.
+    </p>
+    <p class="text-sm text-tngb-muted mt-3">
+      Datenstand: <span class="mono text-tngb-cyan">2026-06-01</span> · Rechtsstand:
+      <span class="mono text-tngb-cyan">2026-06-04</span>. Spätere Entwicklungen (insb. ein tatsächliches
+      IPO, finale SEC-Filings, Bewertungsänderungen) sind nicht berücksichtigt. Quellen und Provenienz sind im
+      Analyse-Modul nachvollziehbar dokumentiert. „SpaceX", „Starlink" und „Starship" sind Marken der jeweiligen
+      Rechteinhaber; ihre Nennung erfolgt rein beschreibend.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-tngb-border mt-12">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap items-start justify-between gap-6">
+    <div>
+      <div class="font-display font-bold text-xl">FinCoach AI</div>
+      <div class="text-sm text-tngb-muted">powered by <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="brandlink mono">www.TheNextGenerationBanking.com</a></div>
+    </div>
+    <div class="text-xs text-tngb-muted max-w-xl">
+      <div class="flex gap-4 mb-2">
+        <a href="impressum.html" class="brandlink">Impressum</a>
+        <a href="datenschutz.html" class="brandlink">Datenschutz</a>
+        <a href="modul.html" class="brandlink">Analyse</a>
+      </div>
+      Keine Rechts-, Steuer- oder Anlageberatung. SpaceX ist privat — alle Finanzzahlen sind Schätzungen.
+      Datenstand 2026-06-01 · Rechtsstand 2026-06-04. © 2026 TheNextGenerationBanking. Alle Rechte vorbehalten.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
