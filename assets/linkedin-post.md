@@ -55,3 +55,41 @@ Faktengeprüfte Analyse mit transparenter Datenherkunft statt Hype. 👉 Link in
 _Keine Anlageberatung. Zahlen medien-/nutzerbasiert, Datenstand 2026-06-19._
 
 #SpaceX #IPO #NASDAQ #FinCoachAI #Bewertung #Finanzbildung
+
+---
+---
+
+# LinkedIn-Post 2 — Zuteilungs-Kaskade (M299)
+
+> Grafik: `assets/linkedin-zuteilung-m299.png` (1080×1350)
+> Ideal auch als **Karussell** zusammen mit `linkedin-spacex-ipo.png`.
+
+---
+
+🧩 **Beim ~$75-Mrd.-IPO von SpaceX stellt sich die Frage, die kaum jemand erklärt: Wer bekommt eigentlich die Aktien?**
+
+Die Antwort ist eine verschachtelte **Zuteilungs-Kaskade** — von der Welt bis zum einzelnen Broker. So sieht sie aus (Szenario-Werte):
+
+**① Tranchen** (Gesamtemission)
+Institutionell 57 % · Cornerstone 25 % · Retail 10 % · Mitarbeiter 8 %
+→ Bei SpaceX real ungewöhnlich: Retail bis ~30 %. Free Float nur ~5 %.
+
+**② Geografisch**
+Nordamerika 62 % · EMEA 24 % · Asien-Pazifik 11 % · Rest 3 %
+→ Deutschland landet bei ~5 %. Wichtig: ITAR — der nicht-US-Anteil (~38 %) ist exportkontroll-sensibel.
+
+**③ Konsortium**
+Global Coordinators 54 % · Bookrunners 28 % · Co-Manager 18 %
+→ Wer das Orderbuch füllt, verdient an Gebühr UND Zuteilung („Pot" & Designations).
+
+**④ Deutschland** (~5 % des Deals)
+Konsortialbank 40 % · Direktbanken/Neobroker 21 % · Genossenschaft 12 % · Sparkassen 12 % · Privatbanken 10 % · übrige 4 % · Sozial-/Ethikbanken ~1 %
+→ Über Trade Republic, Scalable, ING & Co. kommt der Privatanleger überhaupt erst an die Aktie. Ethik-/Sozialbanken schließen Dual-Use meist aus.
+
+Jede Ebene teilt den Anteil der darüber weiter auf — kleine Quoten-Entscheidungen entscheiden, ob ein Privatanleger in Deutschland am Ende eine Zuteilung sieht oder nicht.
+
+👉 Interaktiver Zuteilungs-Simulator + komplette Analyse: [Link in den Kommentaren]
+
+_Illustrative Szenario-Werte mit transparenter Datenherkunft (M-DBOM). Keine Anlageberatung. Datenstand 2026-06-19._
+
+#IPO #SpaceX #Kapitalmarkt #Zuteilung #Allokation #Banking #Neobroker #TradeRepublic #FinCoachAI #TheNextGenerationBanking #Finanzbildung #ITAR
