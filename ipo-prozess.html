@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Der Börsengang-Prozess am Beispiel SpaceX — Beteiligte, Pflichten, Banken · FinCoach AI</title>
+<meta name="description" content="Komplette Übersicht & Analyse des IPO-Prozesses am Beispiel SpaceX: alle Phasen vom Vorstandsbeschluss bis zum Aftermarket, sämtliche Beteiligte und ihre Zustimmungen/Konzepte, die Rolle von Investment-, Geschäfts-, Genossenschafts- und Sozial-/Ethikbanken, sowie alle Aufgaben und Pflichten vor und nach dem Börsengang. SpaceX ist privat — alle Finanzzahlen sind Schätzungen. Keine Anlageberatung.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://fincoach-spacex-ipo-m298.netlify.app/ipo-prozess.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Der Börsengang-Prozess am Beispiel SpaceX">
+<meta property="og:description" content="Alle Phasen, alle Beteiligten, alle Pflichten vor & nach dem IPO — inkl. der Rolle von Sozial-/Ethikbanken. FinCoach AI by TheNextGenerationBanking.">
+<meta property="og:site_name" content="FinCoach AI · TheNextGenerationBanking">
+<link rel="stylesheet" href="fonts.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', indigo:'#4472C4', coral:'#E040A0', muted:'#64748B', border:'#1E293B' } },
+  fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
+}}}
+</script>
+<style>
+  :root{ --bg:#0A0F1A; --card:#121A2E; --cyan:#00CFFF; --emerald:#00CC7A; --magenta:#E6399A; --orange:#FF6B00; --lavender:#9933FF; --gold:#DFAF0F; --indigo:#4472C4; --muted:#64748B; --border:#1E293B; }
+  *{box-sizing:border-box;}
+  html{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif;}
+  body{background:var(--bg);}
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;}
+  code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;}
+  a.brandlink{color:var(--cyan);}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#F1F5F9;margin-bottom:.35rem;}
+  .section-kicker{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+  .scroll-fade{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease;}
+  .scroll-fade.visible{opacity:1;transform:none;}
+  table{width:100%;border-collapse:collapse;}
+  th{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:.6rem .75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:bottom;}
+  td{padding:.65rem .75rem;font-size:.82rem;border-bottom:1px solid rgba(30,41,59,.6);vertical-align:top;}
+  tr:hover td{background:rgba(0,207,255,.04);}
+  .badge{display:inline-block;padding:1px 8px;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;}
+  .b-emi{background:rgba(0,207,255,.16);color:var(--cyan);border:1px solid rgba(0,207,255,.4);}
+  .b-bank{background:rgba(0,204,122,.16);color:var(--emerald);border:1px solid rgba(0,204,122,.4);}
+  .b-reg{background:rgba(230,57,154,.16);color:var(--magenta);border:1px solid rgba(230,57,154,.4);}
+  .b-gate{background:rgba(255,107,0,.16);color:var(--orange);border:1px solid rgba(255,107,0,.4);}
+  .b-adv{background:rgba(153,51,255,.16);color:var(--lavender);border:1px solid rgba(153,51,255,.4);}
+  .b-inv{background:rgba(223,175,15,.16);color:var(--gold);border:1px solid rgba(223,175,15,.4);}
+  .phase-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.78rem;}
+  .timeline{position:relative;}
+  .est-mark{color:var(--gold);font-size:.6rem;font-weight:700;vertical-align:super;cursor:help;}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:3px 11px;border-radius:9999px;font-size:.7rem;font-weight:600;border:1px solid var(--border);background:rgba(18,26,46,.6);color:#CBD5E1;}
+  details{border:1px solid var(--border);border-radius:12px;background:var(--card);margin-bottom:.6rem;overflow:hidden;}
+  details>summary{cursor:pointer;list-style:none;padding:.9rem 1.1rem;font-family:'Space Grotesk',sans-serif;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:.75rem;}
+  details>summary::-webkit-details-marker{display:none;}
+  details>summary::after{content:'+';color:var(--cyan);font-size:1.2rem;line-height:1;}
+  details[open]>summary::after{content:'–';}
+  details .body{padding:0 1.1rem 1.1rem;font-size:.85rem;color:#CBD5E1;line-height:1.6;}
+  #navdock{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:6px;}
+  #navdock a{width:30px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;font-family:'JetBrains Mono',monospace;background:rgba(18,26,46,.85);border:1px solid var(--border);color:var(--muted);text-decoration:none;transition:all .18s;}
+  #navdock a:hover,#navdock a.active-dock{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  @media (max-width:980px){#navdock{display:none;}}
+  .legend-dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
+  ul.tick{list-style:none;padding:0;margin:0;}
+  ul.tick li{position:relative;padding-left:1.25rem;margin-bottom:.4rem;font-size:.85rem;line-height:1.55;color:#CBD5E1;}
+  ul.tick li::before{content:'▸';position:absolute;left:0;color:var(--cyan);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="sticky top-0 z-30 backdrop-blur-xl bg-tngb-bg/80 border-b border-tngb-border">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <svg viewBox="0 0 100 100" class="w-9 h-9" fill="none">
+        <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+        <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+        <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+        <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+        <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+      </svg>
+      <div><div class="font-display font-bold text-lg leading-none">FinCoach AI</div><div class="text-[10px] text-tngb-muted mono">by TheNextGenerationBanking.com</div></div>
+    </a>
+    <nav class="flex gap-5 text-sm">
+      <a href="index.html" class="hover:text-tngb-cyan">Start</a>
+      <a href="modul.html" class="hover:text-tngb-cyan">Analyse</a>
+      <a href="ipo-prozess.html" class="text-tngb-cyan">IPO-Prozess</a>
+      <a href="m299.html" class="hover:text-tngb-cyan">Zuteilung</a>
+      <a href="impressum.html" class="hover:text-tngb-cyan">Impressum</a>
+    </nav>
+  </div>
+</header>
+
+<!-- NAVDOCK -->
+<nav id="navdock" aria-label="Sektions-Navigation">
+  <a href="#ueberblick" data-dock="ueberblick" title="Überblick">01</a>
+  <a href="#phasen" data-dock="phasen" title="Phasen">02</a>
+  <a href="#beteiligte" data-dock="beteiligte" title="Beteiligte">03</a>
+  <a href="#zustimmung" data-dock="zustimmung" title="Zustimmungs-Matrix">04</a>
+  <a href="#banken" data-dock="banken" title="Rolle der Banken">05</a>
+  <a href="#sozial" data-dock="sozial" title="Sozial-/Ethikbanken">06</a>
+  <a href="#nachher" data-dock="nachher" title="Nach dem IPO">07</a>
+  <a href="#pflichten" data-dock="pflichten" title="Pflichten-Matrix">08</a>
+  <a href="#spacex" data-dock="spacex" title="SpaceX-Spezifika">09</a>
+  <a href="#glossar" data-dock="glossar" title="Glossar">10</a>
+</nav>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-6 pt-14 pb-8">
+  <div class="text-xs text-tngb-muted mono mb-4">Datenstand: 2026-06-01 · Rechtsstand: 2026-06-04 · Ergänzungsmodul zu M298</div>
+  <h1 class="text-4xl md:text-5xl font-display font-bold tracking-tight leading-tight">
+    Der Börsengang-Prozess<br><span class="text-tngb-cyan">am Beispiel SpaceX</span>
+  </h1>
+  <p class="mt-5 text-lg text-slate-300 max-w-3xl">
+    Eine vollständige Übersicht und Analyse: Welche <strong>Prozesse</strong> für einen Börsengang (IPO) erledigt werden
+    müssen, <strong>welche Beteiligten</strong> mit Zustimmungen und Konzepten mitwirken, welche <strong>Rolle Banken</strong> —
+    von Investmentbanken bis zu Genossenschafts- und Sozial-/Ethikbanken — spielen, und welche <strong>Aufgaben und Pflichten</strong>
+    jeder Beteiligte <strong>vor und nach</strong> dem Börsengang trägt.
+  </p>
+  <div class="flex flex-wrap gap-2 mt-6">
+    <span class="pill"><span class="legend-dot" style="background:var(--cyan)"></span>Emittent</span>
+    <span class="pill"><span class="legend-dot" style="background:var(--emerald)"></span>Banken / Konsortium</span>
+    <span class="pill"><span class="legend-dot" style="background:var(--lavender)"></span>Berater (Recht / Prüfung)</span>
+    <span class="pill"><span class="legend-dot" style="background:var(--magenta)"></span>Regulierer</span>
+    <span class="pill"><span class="legend-dot" style="background:var(--orange)"></span>Gatekeeper (Börse / FINRA)</span>
+    <span class="pill"><span class="legend-dot" style="background:var(--gold)"></span>Investoren</span>
+  </div>
+</section>
+
+<!-- PRIVATFIRMEN-DISCLAIMER -->
+<section class="max-w-6xl mx-auto px-6 pb-4">
+  <div class="card p-5 border-l-4 border-tngb-magenta">
+    <p class="text-sm text-slate-300 leading-relaxed">
+      <strong class="text-tngb-magenta">Hinweis:</strong> SpaceX (Space Exploration Technologies Corp.) ist ein
+      <strong>privates, nicht börsennotiertes Unternehmen</strong>. Ein tatsächlicher Börsengang ist zum Rechtsstand
+      dieses Moduls <strong>nicht vollzogen</strong>. Diese Seite beschreibt den <strong>generischen IPO-Prozess</strong>
+      (primär nach US-Recht, da ein SpaceX-Listing an der NYSE/Nasdaq am wahrscheinlichsten wäre) und nutzt SpaceX als
+      durchgängiges Anschauungsbeispiel. SpaceX-spezifische Angaben mit
+      <span class="est-mark" title="Szenario / Schätzung – nicht SEC-verifiziert">⊘</span> sind Szenario-Annahmen,
+      keine verifizierten Fakten. Dies ist <strong>keine Rechts-, Steuer- oder Anlageberatung</strong>.
+    </p>
+  </div>
+</section>
+
+<!-- 01 · ÜBERBLICK -->
+<section id="ueberblick" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">01 · Das große Bild</div>
+  <h2 class="section-title">Was ist ein Börsengang — und was muss überhaupt „erledigt" werden?</h2>
+  <p class="text-slate-300 max-w-3xl mt-2 mb-6 text-sm leading-relaxed">
+    Ein Börsengang (Initial Public Offering, IPO) verwandelt ein privates Unternehmen in eine börsennotierte
+    Aktiengesellschaft, deren Anteile öffentlich gehandelt werden. Im Kern werden dabei drei Dinge gleichzeitig erreicht:
+    <strong>(1) Kapital wird beschafft</strong> (neue Aktien = „Primärkapital"), <strong>(2) Altaktionäre erhalten Liquidität</strong>
+    (Verkauf bestehender Aktien = „Sekundärkapital"), und <strong>(3) das Unternehmen wechselt in ein dauerhaftes
+    Regulierungs- und Publizitätsregime</strong>. Der Prozess ist daher keine einmalige Transaktion, sondern der Eintritt
+    in fortlaufende Pflichten. Grob teilt er sich in vier Blöcke:
+  </p>
+  <div class="grid md:grid-cols-4 gap-4">
+    <div class="card p-5"><div class="text-tngb-cyan font-bold mb-1 text-sm">A · Vorbereitung</div><p class="text-xs text-slate-400 leading-relaxed">Börsenreife herstellen: Governance, Rechnungslegung, Kontrollsystem, Equity Story. „Soll" und „Kann" klären.</p><div class="mono text-[10px] text-tngb-muted mt-2">12–24 Monate</div></div>
+    <div class="card p-5"><div class="text-tngb-emerald font-bold mb-1 text-sm">B · Strukturierung</div><p class="text-xs text-slate-400 leading-relaxed">Mandatierung, Due Diligence, Prospekt/S-1, regulatorische Prüfung, Listing-Antrag.</p><div class="mono text-[10px] text-tngb-muted mt-2">4–9 Monate</div></div>
+    <div class="card p-5"><div class="text-tngb-gold font-bold mb-1 text-sm">C · Vermarktung & Preis</div><p class="text-xs text-slate-400 leading-relaxed">Research, Roadshow, Bookbuilding, Pricing, Zuteilung, erster Handelstag.</p><div class="mono text-[10px] text-tngb-muted mt-2">2–6 Wochen</div></div>
+    <div class="card p-5"><div class="text-tngb-magenta font-bold mb-1 text-sm">D · Nach dem IPO</div><p class="text-xs text-slate-400 leading-relaxed">Stabilisierung, Lock-up, laufende Berichtspflichten, Investor Relations, Governance.</p><div class="mono text-[10px] text-tngb-muted mt-2">dauerhaft</div></div>
+  </div>
+</section>
+
+<!-- 02 · PHASEN -->
+<section id="phasen" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">02 · Prozess</div>
+  <h2 class="section-title">Die Phasen eines IPO — Schritt für Schritt</h2>
+  <p class="text-slate-300 max-w-3xl mt-2 mb-6 text-sm leading-relaxed">
+    Jede Phase hat ein klares Ergebnis („Deliverable") und ein „Tor", das ohne Zustimmung bestimmter Beteiligter
+    nicht passierbar ist. Klicken Sie auf eine Phase für Details, Beteiligte und das jeweilige Ergebnis.
+  </p>
+
+  <div class="space-y-2">
+
+    <details open>
+      <summary><span><span class="phase-num text-tngb-cyan">P0</span> &nbsp; Börsenreife / IPO-Readiness <span class="text-xs text-tngb-muted">— „Sind wir bereit?"</span></span></summary>
+      <div class="body">
+        <p class="mb-2">Lange vor dem eigentlichen Verfahren prüft das Unternehmen seine <strong>Börsenreife</strong>: belastbare Finanzhistorie
+        (i.&nbsp;d.&nbsp;R. 2–3 geprüfte Jahresabschlüsse nach US-GAAP/IFRS), ein internes Kontrollsystem (ICFR), eine kapitalmarktfähige
+        Governance (unabhängiges Board, Prüfungs-/Vergütungsausschuss), Skalierbarkeit der Equity Story.</p>
+        <ul class="tick">
+          <li><strong>Beteiligte:</strong> Vorstand/CFO, Gründer/Mehrheitsaktionär, Aufsichtsorgan, Wirtschaftsprüfer, IPO-Readiness-Berater.</li>
+          <li><strong>Ergebnis:</strong> „Go/No-Go"-Vorentscheidung, Gap-Analyse, Roadmap zur Schließung von Lücken.</li>
+          <li><strong>SpaceX-Bezug:</strong> Trennung der Segmente (Starlink, Launch, Starship), Umgang mit ITAR-Daten, Frage einer Carve-out-Struktur (z.&nbsp;B. nur Starlink an die Börse).<span class="est-mark" title="Szenario-Annahme">⊘</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span><span class="phase-num text-tngb-emerald">P1</span> &nbsp; Grundsatzbeschluss & Mandatierung der Banken <span class="text-xs text-tngb-muted">— „Beauty Contest"</span></span></summary>
+      <div class="body">
+        <p class="mb-2">Das Aufsichts-/Leitungsorgan fasst den <strong>formellen IPO-Beschluss</strong>. Investmentbanken präsentieren sich im
+        „Beauty Contest"; ausgewählt werden ein oder mehrere <strong>Global Coordinators / Lead-Bookrunner</strong> sowie weitere
+        Konsortialbanken. Es werden Engagement Letter, Honorar/Provision (Underwriting Fee, typ. 1–7&nbsp;%), Rollen und der
+        Greenshoe vereinbart.</p>
+        <ul class="tick">
+          <li><strong>Beteiligte:</strong> Board/Aktionäre (Beschluss & Vollmacht), Investmentbanken, Emittenten-Anwälte.</li>
+          <li><strong>Ergebnis:</strong> Mandatsvertrag, Konsortialstruktur, Zeitplan, vorläufige Bewertungsspanne.</li>
+          <li><strong>SpaceX-Bezug:</strong> Bei ~$1.750&nbsp;Mrd. Bewertung<span class="est-mark" title="Szenario-Annahme">⊘</span> wäre ein großes Banken-Syndikat (Goldman Sachs, Morgan Stanley, J.P.&nbsp;Morgan u.&nbsp;a.) realistisch.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span><span class="phase-num text-tngb-lavender">P2</span> &nbsp; Due Diligence <span class="text-xs text-tngb-muted">— Prüfung & Haftungsabsicherung</span></span></summary>
+      <div class="body">
+        <p class="mb-2">Umfassende rechtliche, finanzielle, steuerliche und kommerzielle Prüfung. Sie schützt vor Prospekthaftung:
+        Banken und Anwälte müssen die „due diligence defense" belegen können. Der Wirtschaftsprüfer liefert später den
+        <strong>Comfort Letter</strong>.</p>
+        <ul class="tick">
+          <li><strong>Beteiligte:</strong> Emittenten- & Konsortial-Anwälte, Wirtschaftsprüfer, Management (Q&amp;A, Datenraum), ggf. Branchengutachter.</li>
+          <li><strong>Ergebnis:</strong> Due-Diligence-Berichte, Disclosure-Schedules, Risikofaktoren-Katalog für den Prospekt.</li>
+          <li><strong>SpaceX-Bezug:</strong> Exportkontrolle (ITAR/EAR), Regierungsaufträge (NASA/DoD), Konzentrations- & Schlüsselpersonenrisiko (Musk).</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span><span class="phase-num text-tngb-lavender">P3</span> &nbsp; Prospekt / Registration Statement (S-1) <span class="text-xs text-tngb-muted">— das zentrale Dokument</span></span></summary>
+      <div class="body">
+        <p class="mb-2">Das Kerndokument: in den USA das <strong>Form S-1</strong> bei der SEC, in der EU der <strong>Wertpapierprospekt</strong>
+        nach EU-Prospektverordnung (gebilligt durch die nationale Aufsicht, z.&nbsp;B. BaFin). Es enthält Geschäftsmodell,
+        geprüfte Abschlüsse, Risikofaktoren (MD&amp;A), Mittelverwendung, Kapitalisierung und Governance. Große Emittenten
+        nutzen oft das vertrauliche <em>confidential filing</em> (JOBS Act) zur Vorabprüfung.</p>
+        <ul class="tick">
+          <li><strong>Beteiligte:</strong> Emittent (verantwortlich für Inhalt), Anwälte (Drafting), Wirtschaftsprüfer (Zahlen), Banken (Marktteile), Financial Printer.</li>
+          <li><strong>Ergebnis:</strong> eingereichtes S-1 / gebilligter Prospekt; Grundlage der Prospekthaftung.</li>
+          <li><strong>SpaceX-Bezug:</strong> S-1-Entwurf mit Bewertung ~$1.750&nbsp;Mrd.<span class="est-mark" title="Szenario-Annahme">⊘</span>; ITAR-Hinweise und Dual-Class-Struktur als zentrale Risikofaktoren.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span><span class="phase-num text-tngb-magenta">P4</span> &nbsp; Regulatorische Prüfung & Listing-Antrag <span class="text-xs text-tngb-muted">— die Tore</span></span></summary>
+      <div class="body">
+        <p class="mb-2">Die <strong>SEC</strong> (bzw. BaFin in der EU) prüft den Prospekt und gibt Kommentare; erst nach „Effectiveness"
+        darf verkauft werden. Parallel prüft die <strong>Börse</strong> (NYSE/Nasdaq) den Listing-Antrag, und in den USA prüft
+        <strong>FINRA</strong> die Angemessenheit der Banken-Vergütung. Ein eigenes Tor ist die staatliche Freigabe.</p>
+        <ul class="tick">
+          <li><strong>Beteiligte:</strong> SEC/BaFin (Billigung), Börse (Listing-Zulassung), FINRA (USA), bei sensiblen Branchen Regierungsstellen.</li>
+          <li><strong>Ergebnis:</strong> „Notice of effectiveness", Listing-Approval, FINRA-„No objection".</li>
+          <li><strong>SpaceX-Bezug:</strong> Zusätzliches Tor durch <strong>ITAR/DDTC (State Dept.)</strong><span class="est-mark" title="Szenario-Annahme">⊘</span> und ggf. CFIUS-Auflagen zu ausländischem Aktienbesitz.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span><span class="phase-num text-tngb-gold">P5</span> &nbsp; Vermarktung: Research, Roadshow & Bookbuilding <span class="text-xs text-tngb-muted">— die Nachfrage</span></span></summary>
+      <div class="body">
+        <p class="mb-2">Analysten der Konsortialbanken veröffentlichen (außerhalb der „quiet period") Research; das Management geht auf
+        <strong>Roadshow</strong> zu institutionellen Investoren. Im <strong>Bookbuilding</strong> sammeln die Banken Kauforders
+        innerhalb der Preisspanne und bauen das Orderbuch auf. Anker-Investoren (Cornerstones) können früh zeichnen.</p>
+        <ul class="tick">
+          <li><strong>Beteiligte:</strong> Management/IR, Bookrunner & Vertriebsbanken, institutionelle Investoren, ggf. Retail-Banken für Privatanleger.</li>
+          <li><strong>Ergebnis:</strong> gefülltes Orderbuch, Nachfrageindikation, Über-/Unterzeichnung.</li>
+          <li><strong>SpaceX-Bezug:</strong> Hohe Retail-Nachfrage erwartbar (Markenstärke); Verteilung über Privat-/Direktbanken als Distributionskanal.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span><span class="phase-num text-tngb-gold">P6</span> &nbsp; Pricing, Zuteilung & Erstnotiz <span class="text-xs text-tngb-muted">— der „Tag X"</span></span></summary>
+      <div class="body">
+        <p class="mb-2">Am Abend vor dem Listing legen Emittent und Bookrunner den <strong>endgültigen Ausgabepreis</strong> fest
+        (Pricing). Die Aktien werden zugeteilt (Allocation), der Underwriting Agreement wird unterzeichnet, und am nächsten
+        Tag beginnt der Handel. Der Erlös fließt beim Settlement (T+1/T+2).</p>
+        <ul class="tick">
+          <li><strong>Beteiligte:</strong> Emittent, Bookrunner, Investoren, Transfer Agent / Clearing (DTC), Börse (Designated Market Maker).</li>
+          <li><strong>Ergebnis:</strong> festgelegter Preis, Mittelzufluss, erster Börsenkurs.</li>
+          <li><strong>SpaceX-Bezug:</strong> Größenordnung würde den IPO unter die größten der Geschichte einordnen; Pricing-Disziplin entscheidet über „Pop" vs. „Money left on the table".</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span><span class="phase-num text-tngb-magenta">P7</span> &nbsp; Aftermarket: Stabilisierung & Lock-up <span class="text-xs text-tngb-muted">— die ersten Wochen</span></span></summary>
+      <div class="body">
+        <p class="mb-2">Nach der Erstnotiz darf der Stabilisierungsmanager über die <strong>Greenshoe-Option</strong> (Mehrzuteilung, meist
+        bis 15&nbsp;%) den Kurs in den ersten ~30 Tagen stützen. Altaktionäre und Management unterliegen einer
+        <strong>Lock-up-Frist</strong> (typ. 90–180 Tage), in der sie keine Aktien verkaufen dürfen.</p>
+        <ul class="tick">
+          <li><strong>Beteiligte:</strong> Stabilisierungsmanager (eine Bank), Altaktionäre/Insider (Lock-up), Investoren, Research-Analysten (nach quiet period).</li>
+          <li><strong>Ergebnis:</strong> stabilisierter Sekundärmarkt, geordnetes Auslaufen der Lock-ups.</li>
+          <li><strong>SpaceX-Bezug:</strong> Mitarbeiter mit großen Anteilspaketen → Lock-up-Auslauf als kursrelevantes Ereignis.</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- 03 · BETEILIGTE -->
+<section id="beteiligte" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">03 · Akteure</div>
+  <h2 class="section-title">Alle Beteiligten und ihr Beitrag zum Börsengang</h2>
+  <p class="text-slate-300 max-w-3xl mt-2 mb-6 text-sm leading-relaxed">
+    Ein IPO ist ein Zusammenspiel vieler Parteien. Jede bringt entweder eine <strong>Zustimmung/Genehmigung</strong> ein
+    (ohne die der Prozess stoppt) oder ein <strong>Konzept/Dokument</strong> (das den Prozess inhaltlich trägt) — viele
+    bringen beides. Die Tabelle ordnet jede Partei nach Rolle und Beitrag.
+  </p>
+  <div class="card overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Beteiligte:r</th><th>Rolle</th><th>Bringt ein (Zustimmung / Konzept)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Vorstand / CEO / CFO</strong></td><td><span class="badge b-emi">Emittent</span></td><td>Strategische Entscheidung, Equity Story, Verantwortung für Prospektinhalt, Roadshow-Auftritt. <em>Zustimmung & Konzept.</em></td></tr>
+        <tr><td><strong>Aufsichts-/Verwaltungsrat (Board)</strong></td><td><span class="badge b-emi">Emittent</span></td><td>Formeller IPO-Beschluss, Genehmigung von Prospekt, Preisspanne & Mandaten; Einrichtung der Board-Ausschüsse. <em>Zustimmung.</em></td></tr>
+        <tr><td><strong>Gründer / Mehrheitsaktionär</strong> (Musk)</td><td><span class="badge b-emi">Emittent</span></td><td>Zustimmung zur Verwässerung & Governance (Dual-Class), Schlüsselperson der Equity Story, Lock-up-Bindung. <em>Zustimmung.</em></td></tr>
+        <tr><td><strong>Bestehende Aktionäre</strong> (VCs, Fonds, Mitarbeiter)</td><td><span class="badge b-emi">Emittent</span></td><td>Zustimmung zur Transaktion (Gesellschaftervereinbarungen), ggf. Verkauf von Altanteilen, Lock-up. <em>Zustimmung.</em></td></tr>
+        <tr><td><strong>Global Coordinator / Lead-Bookrunner</strong></td><td><span class="badge b-bank">Bank</span></td><td>Gesamtsteuerung, Bewertung, Bookbuilding, Underwriting (Platzierungsgarantie), Pricing. <em>Konzept & Risikoübernahme.</em></td></tr>
+        <tr><td><strong>Konsortialbanken / Co-Manager</strong></td><td><span class="badge b-bank">Bank</span></td><td>Mit-Platzierung, Vertrieb an eigene Kundenbasis, Research-Coverage. <em>Konzept & Distribution.</em></td></tr>
+        <tr><td><strong>Stabilisierungsmanager</strong></td><td><span class="badge b-bank">Bank</span></td><td>Greenshoe & Kursstabilisierung in den ersten ~30 Tagen. <em>Konzept (Aftermarket).</em></td></tr>
+        <tr><td><strong>Emittenten-Anwälte</strong></td><td><span class="badge b-adv">Berater</span></td><td>Prospekt-Drafting, Gesellschaftsrechtsstruktur, Verträge, Legal Opinion. <em>Konzept.</em></td></tr>
+        <tr><td><strong>Konsortial-Anwälte</strong></td><td><span class="badge b-adv">Berater</span></td><td>Schutz der Banken, Underwriting Agreement, Negative Assurance Letter. <em>Konzept.</em></td></tr>
+        <tr><td><strong>Wirtschaftsprüfer (Auditor)</strong></td><td><span class="badge b-adv">Berater</span></td><td>Testat der Abschlüsse, Prüfung ICFR, <strong>Comfort Letter</strong> an die Banken. <em>Konzept & Bestätigung.</em></td></tr>
+        <tr><td><strong>SEC</strong> (bzw. BaFin/EU)</td><td><span class="badge b-reg">Regulierer</span></td><td>Prüfung & Kommentierung des Prospekts; Erklärung der „Effectiveness"/Billigung. <em>Genehmigung (Tor).</em></td></tr>
+        <tr><td><strong>Börse</strong> (NYSE / Nasdaq)</td><td><span class="badge b-gate">Gatekeeper</span></td><td>Prüfung der Zulassungskriterien, Listing-Genehmigung, Marktmodell (DMM). <em>Zulassung (Tor).</em></td></tr>
+        <tr><td><strong>FINRA</strong> (USA)</td><td><span class="badge b-gate">Gatekeeper</span></td><td>Prüfung der Angemessenheit der Underwriting-Vergütung. <em>„No objection" (Tor).</em></td></tr>
+        <tr><td><strong>Regierungsstellen</strong> (State Dept./DDTC, CFIUS, DoD)</td><td><span class="badge b-reg">Regulierer</span></td><td>Bei sicherheitssensiblen Branchen: Exportkontroll- & Eigentumsauflagen. <em>Genehmigung (Sondertor).</em></td></tr>
+        <tr><td><strong>Transfer Agent / Clearing (DTC)</strong></td><td><span class="badge b-gate">Infrastruktur</span></td><td>Aktienregister, Settlement, Verwahrung. <em>Konzept (Abwicklung).</em></td></tr>
+        <tr><td><strong>IR-/PR-Agentur, Financial Printer</strong></td><td><span class="badge b-adv">Berater</span></td><td>Kommunikation, Investor Relations, Erstellung/Druck der Dokumente. <em>Konzept.</em></td></tr>
+        <tr><td><strong>Institutionelle Investoren</strong></td><td><span class="badge b-inv">Investor</span></td><td>Zeichnung im Bookbuilding, Preisfindung, Anker-/Cornerstone-Orders. <em>Nachfrage.</em></td></tr>
+        <tr><td><strong>Privatanleger (Retail)</strong></td><td><span class="badge b-inv">Investor</span></td><td>Zeichnung über Retail-/Direktbanken; in DE oft über Genossenschafts-/Sparkassen-Schiene. <em>Nachfrage.</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 04 · ZUSTIMMUNGS-MATRIX -->
+<section id="zustimmung" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">04 · Genehmigungslogik</div>
+  <h2 class="section-title">Wer muss wann zustimmen? — die „Tore" des Prozesses</h2>
+  <p class="text-slate-300 max-w-3xl mt-2 mb-6 text-sm leading-relaxed">
+    Ein IPO scheitert nicht an Meinungen, sondern an fehlenden Freigaben. Diese Matrix zeigt die harten
+    Zustimmungs-Tore — jedes ist ein „Nein-möglich"-Punkt, an dem der Prozess ohne ein „Ja" anhält.
+  </p>
+  <div class="card overflow-x-auto">
+    <table>
+      <thead><tr><th>Tor</th><th>Wer entscheidet</th><th>Worüber</th><th>Konsequenz bei „Nein"</th></tr></thead>
+      <tbody>
+        <tr><td>IPO-Grundsatz</td><td>Board / Hauptversammlung</td><td>Ob & wie viel Kapital, Struktur, Mandate</td><td>Kein Verfahren.</td></tr>
+        <tr><td>Bewertung & Preisspanne</td><td>Board + Bookrunner</td><td>Indikative Spanne, finaler Preis</td><td>Verschiebung / Rückzug.</td></tr>
+        <tr><td>Comfort Letter</td><td>Wirtschaftsprüfer</td><td>Belastbarkeit der Zahlen</td><td>Banken unterzeichnen nicht.</td></tr>
+        <tr><td>Prospekt-Effectiveness</td><td>SEC (bzw. BaFin)</td><td>Vollständigkeit/Richtigkeit der Offenlegung</td><td>Kein Verkauf erlaubt.</td></tr>
+        <tr><td>Listing</td><td>Börse</td><td>Erfüllung der Zulassungskriterien</td><td>Keine Notierung.</td></tr>
+        <tr><td>Underwriting-Vergütung</td><td>FINRA (USA)</td><td>Angemessenheit der Bankenhonorare</td><td>Strukturanpassung nötig.</td></tr>
+        <tr><td>Exportkontrolle / Eigentum</td><td>State Dept./DDTC, CFIUS</td><td>ITAR-Konformität, ausländischer Anteilsbesitz<span class="est-mark" title="Szenario-Annahme SpaceX">⊘</span></td><td>Sonderstruktur (z.&nbsp;B. Stimmrechtsbeschränkung) oder Stopp.</td></tr>
+        <tr><td>Underwriting Agreement</td><td>Emittent + Banken</td><td>Endgültige Risikoübernahme am Pricing-Tag</td><td>Deal platzt am letzten Tag.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 05 · ROLLE DER BANKEN -->
+<section id="banken" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">05 · Banken</div>
+  <h2 class="section-title">Die Rolle der Banken — vom Konsortium bis zur Stabilisierung</h2>
+  <p class="text-slate-300 max-w-3xl mt-2 mb-6 text-sm leading-relaxed">
+    Banken sind im IPO weit mehr als Vermittler. Sie übernehmen das <strong>Platzierungsrisiko</strong>, bauen die
+    Nachfrage auf, bewerten, setzen den Preis und stützen den Kurs danach. Üblich ist ein gestuftes Syndikat.
+  </p>
+  <div class="grid md:grid-cols-2 gap-4 mb-6">
+    <div class="card p-5"><h3 class="text-tngb-emerald font-bold text-base mb-2">Konsortialstruktur (Syndikat)</h3>
+      <ul class="tick">
+        <li><strong>Global Coordinator / Lead-Bookrunner:</strong> steuert den gesamten Deal, hält das Orderbuch, setzt den Preis.</li>
+        <li><strong>Joint Bookrunner:</strong> teilen Verantwortung & Vertrieb für große Deals.</li>
+        <li><strong>Co-Manager / Senior Co-Lead:</strong> zusätzliche Distribution und Research.</li>
+        <li><strong>Selling Group:</strong> weitere Banken, die nur platzieren, kein Underwriting tragen.</li>
+      </ul>
+    </div>
+    <div class="card p-5"><h3 class="text-tngb-emerald font-bold text-base mb-2">Kernfunktionen der Banken</h3>
+      <ul class="tick">
+        <li><strong>Underwriting:</strong> beim „firm commitment" garantieren die Banken die Platzierung — sie übernehmen unverkaufte Aktien selbst.</li>
+        <li><strong>Bewertung & Pricing:</strong> Valuation-Modelle, Preisspanne, finaler Preis.</li>
+        <li><strong>Bookbuilding & Allocation:</strong> Nachfrage sammeln, Aktien zuteilen.</li>
+        <li><strong>Stabilisierung & Greenshoe:</strong> Kursstützung in den ersten ~30 Tagen.</li>
+        <li><strong>Research & Aftermarket:</strong> Analystencoverage, Liquidität nach dem Listing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card overflow-x-auto">
+    <table>
+      <thead><tr><th>Banktyp</th><th>Typische Rolle im IPO</th><th>Beitrag</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Investmentbanken</strong> (Goldman, Morgan Stanley, J.P. Morgan)</td><td>Lead-/Bookrunner, Underwriter</td><td>Risikoübernahme, Bewertung, Bookbuilding, Pricing, Stabilisierung.</td></tr>
+        <tr><td><strong>Universal-/Geschäftsbanken</strong> (Deutsche Bank, BNP, UBS)</td><td>Konsortialbank, Co-Manager</td><td>Distribution an institutionelle & vermögende Privatkunden, Research, ggf. Brückenfinanzierung.</td></tr>
+        <tr><td><strong>Privat-/Direktbanken & Broker</strong></td><td>Selling Group, Retail-Kanal</td><td>Zeichnung für Privatanleger, Depotführung, Sekundärhandel.</td></tr>
+        <tr><td><strong>Genossenschaftsbanken / Sparkassen</strong> (DE)</td><td>Vertriebspartner (Verbund)</td><td>Breiter Retail-Vertrieb über DZ Bank/Deka-Verbund; Zugang für Privatanleger in der Fläche.</td></tr>
+        <tr><td><strong>Sozial-/Ethik-/Nachhaltigkeitsbanken</strong></td><td>i.&nbsp;d.&nbsp;R. <em>kein</em> Konsortium; ESG-Filter</td><td>Entscheiden anhand von Ausschlusskriterien, ob sie das Papier überhaupt vermitteln/halten — siehe nächster Abschnitt.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 06 · SOZIALBANKEN -->
+<section id="sozial" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">06 · Sonderfrage</div>
+  <h2 class="section-title">Welche Rolle haben Sozial-/Ethikbanken?</h2>
+  <div class="card p-5 border-l-4 border-tngb-orange mb-6">
+    <p class="text-sm text-slate-300 leading-relaxed">
+      <strong>Begriffsklärung:</strong> „Sozialbanken" werden im Sprachgebrauch unterschiedlich verwendet. Gemeint sind hier
+      meist <strong>werteorientierte / ethisch-ökologische Banken</strong> (z.&nbsp;B. GLS Bank, Triodos, Umweltbank) sowie
+      teilweise der <strong>genossenschaftliche/öffentlich-rechtliche Sektor</strong> (Volksbanken, Sparkassen) mit sozialem
+      Auftrag. <strong>Wichtig:</strong> Solche Institute sind bei einem Mega-IPO wie SpaceX in aller Regel <strong>nicht</strong>
+      Teil des Underwriting-Konsortiums — dafür fehlen ihnen das Investmentbanking-Mandat, die Bilanzgröße für die
+      Risikoübernahme und meist das Mandatsinteresse.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="card p-5">
+      <h3 class="text-tngb-cyan font-bold text-base mb-2">Was Sozial-/Ethikbanken tatsächlich tun</h3>
+      <ul class="tick">
+        <li><strong>ESG-Gatekeeper für ihre Kunden:</strong> Sie prüfen über Positiv-/Ausschlusskriterien, ob ein Wertpapier ins Anlageuniversum passt — Rüstung/Dual-Use, fehlende Mitbestimmung, Umweltwirkung können zum Ausschluss führen.</li>
+        <li><strong>Distribution & Beratung:</strong> Sofern zulässig, vermitteln sie die Aktie an interessierte Privatkunden oder lehnen dies aus Überzeugung ab.</li>
+        <li><strong>Treuhand & Depot:</strong> Verwahrung für Kunden, die das Papier dennoch halten wollen.</li>
+        <li><strong>Stimmrechtsausübung & Engagement:</strong> Als Aktionär (z.&nbsp;B. über nachhaltige Fonds) Einflussnahme auf Governance/Nachhaltigkeit.</li>
+      </ul>
+    </div>
+    <div class="card p-5">
+      <h3 class="text-tngb-magenta font-bold text-base mb-2">SpaceX-spezifische Spannungsfelder</h3>
+      <ul class="tick">
+        <li><strong>Dual-Use / Rüstungsnähe:</strong> Launch-Dienste und Starlink für Militär/Behörden kollidieren oft mit Ausschlusskriterien ethischer Banken.</li>
+        <li><strong>Governance:</strong> Dual-Class-Aktien mit Gründerkontrolle widersprechen „one share, one vote"-Idealen.</li>
+        <li><strong>Transparenz:</strong> Als bislang private Firma fehlende ESG-Historie erschwert die Bewertung.</li>
+        <li><strong>Fazit:</strong> Viele Sozial-/Ethikbanken würden SpaceX <em>nicht</em> aktiv anbieten — ihre Rolle ist eher die kritische <strong>Negativauswahl</strong> als die Platzierung.<span class="est-mark" title="Einordnung/Szenario, keine Aussage über konkrete Institute">⊘</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · NACH DEM IPO -->
+<section id="nachher" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">07 · Danach</div>
+  <h2 class="section-title">Wie der Prozess nach dem Börsengang weitergeht</h2>
+  <p class="text-slate-300 max-w-3xl mt-2 mb-6 text-sm leading-relaxed">
+    Mit dem ersten Handelstag beginnt nicht das Ende, sondern ein dauerhaftes Pflichtenregime. Die wichtigsten
+    Nach-IPO-Bausteine:
+  </p>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="card p-5"><h3 class="text-tngb-emerald font-bold text-base mb-2">Stabilisierung & Greenshoe (Wochen 1–4)</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">Der Stabilisierungsmanager kann durch Rückkäufe und Ausübung der Mehrzuteilungsoption den Kurs stützen. Nach Ablauf wird abgerechnet.</p></div>
+    <div class="card p-5"><h3 class="text-tngb-gold font-bold text-base mb-2">Lock-up & quiet period</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">Insider dürfen 90–180 Tage nicht verkaufen; Analysten der Banken dürfen erst nach der quiet period (~25 Tage, USA) Research starten.</p></div>
+    <div class="card p-5"><h3 class="text-tngb-cyan font-bold text-base mb-2">Laufende Berichtspflichten</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">USA: 10-K (jährlich), 10-Q (quartalsweise), 8-K (ad hoc), Proxy Statement. EU: Jahres-/Halbjahresfinanzbericht & Ad-hoc-Publizität (MAR).</p></div>
+    <div class="card p-5"><h3 class="text-tngb-lavender font-bold text-base mb-2">Governance & Compliance</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">Sarbanes-Oxley (ICFR-Testat), unabhängige Board-Ausschüsse, Insiderhandels-Regeln, Reg FD (Gleichbehandlung bei Information).</p></div>
+    <div class="card p-5"><h3 class="text-tngb-magenta font-bold text-base mb-2">Investor Relations</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">Earnings Calls, Guidance, Hauptversammlung, kontinuierlicher Dialog mit Analysten & Investoren.</p></div>
+    <div class="card p-5"><h3 class="text-tngb-orange font-bold text-base mb-2">Markt & Folgetransaktionen</h3>
+      <p class="text-sm text-slate-400 leading-relaxed">Index-Aufnahme, Folgeplatzierungen (Follow-on/SPO), Mitarbeiteraktien-Programme, ggf. Aktienrückkäufe.</p></div>
+  </div>
+</section>
+
+<!-- 08 · PFLICHTEN-MATRIX -->
+<section id="pflichten" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">08 · Pflichten vorher / nachher</div>
+  <h2 class="section-title">Aufgaben & Pflichten jedes Beteiligten — vor und nach dem IPO</h2>
+  <p class="text-slate-300 max-w-3xl mt-2 mb-6 text-sm leading-relaxed">
+    Die zentrale Tabelle dieser Analyse: Was jede Partei <strong>vorher</strong> leisten muss, um den IPO zu ermöglichen,
+    und welche Pflichten <strong>danach</strong> dauerhaft bestehen.
+  </p>
+  <div class="card overflow-x-auto">
+    <table>
+      <thead><tr><th>Beteiligte:r</th><th>Vor dem IPO</th><th>Nach dem IPO</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge b-emi">Emittent</span><br><strong>Vorstand/CFO</strong></td>
+          <td>Equity Story, Börsenreife, Datenraum, Prospektverantwortung, Roadshow.</td>
+          <td>Berichtspflichten (10-K/Q/8-K), Earnings Calls, Guidance, SOX-Compliance, Krisenkommunikation.</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-emi">Emittent</span><br><strong>Board/Ausschüsse</strong></td>
+          <td>IPO-Beschluss, Genehmigung Prospekt/Preis, Einrichtung Prüfungs-/Vergütungsausschuss.</td>
+          <td>Überwachung, Abschlussbilligung, Vergütungsentscheidungen, Governance-Pflege.</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-emi">Emittent</span><br><strong>Gründer/Altaktionäre</strong></td>
+          <td>Zustimmung zu Verwässerung/Struktur, ggf. Anteilsverkauf, Lock-up-Zusage.</td>
+          <td>Lock-up einhalten, Insider-/Meldepflichten (Sec. 16, Rule 144 / Directors' Dealings).</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-bank">Bank</span><br><strong>Bookrunner/Konsortium</strong></td>
+          <td>Due Diligence, Bewertung, Underwriting, Bookbuilding, Pricing.</td>
+          <td>Stabilisierung/Greenshoe (~30 Tage), Research-Coverage, Market Making, Folgetransaktionen.</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-adv">Berater</span><br><strong>Wirtschaftsprüfer</strong></td>
+          <td>Testat der Abschlüsse, ICFR-Prüfung, Comfort Letter.</td>
+          <td>Laufende Jahres-/Quartalsprüfung, ICFR-Attestierung, ggf. Bring-down Comfort bei Folgeemissionen.</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-adv">Berater</span><br><strong>Anwälte</strong></td>
+          <td>Prospekt-Drafting, Strukturierung, Legal Opinions, Underwriting Agreement.</td>
+          <td>Laufende Disclosure-Beratung, Compliance, Folgeemissionen, Litigation-Abwehr.</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-reg">Regulierer</span><br><strong>SEC / BaFin</strong></td>
+          <td>Prüfung & Kommentierung des Prospekts, Erklärung Effectiveness/Billigung.</td>
+          <td>Überwachung der laufenden Publizität, Durchsetzung (Enforcement), Marktmissbrauchsaufsicht.</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-gate">Gatekeeper</span><br><strong>Börse</strong></td>
+          <td>Prüfung Zulassungskriterien, Listing-Genehmigung.</td>
+          <td>Überwachung der Listing-Pflichten (Corporate Governance, Streubesitz, Mindestkurs), Handelsorganisation.</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-bank">Bank</span><br><strong>Sozial-/Ethikbanken</strong></td>
+          <td>ESG-Prüfung, Entscheidung über Vermittlung/Ausschluss, Kundenberatung.</td>
+          <td>Engagement/Stimmrechtsausübung (falls investiert), laufendes ESG-Monitoring, ggf. Divestment.</td>
+        </tr>
+        <tr>
+          <td><span class="badge b-inv">Investor</span><br><strong>Institutionell/Retail</strong></td>
+          <td>Analyse, Zeichnung im Bookbuilding, Preisindikation.</td>
+          <td>Halten/Handeln, Meldepflichten bei Schwellen (13D/13G, 13F / Stimmrechtsmitteilungen), Stimmrechtsausübung.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 09 · SPACEX-SPEZIFIKA -->
+<section id="spacex" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">09 · Sonderfall SpaceX</div>
+  <h2 class="section-title">Was den SpaceX-IPO besonders macht</h2>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="card p-5"><h3 class="text-tngb-orange font-bold text-sm mb-2">ITAR / Exportkontrolle</h3><p class="text-xs text-slate-400 leading-relaxed">Raketentechnik unterliegt der US-Exportkontrolle (ITAR). Ausländischer Aktienbesitz, Board-Zugang und Offenlegung müssen mit DDTC/State Dept. abgestimmt sein — ein zusätzliches Tor, das ein Standard-IPO nicht hat.<span class="est-mark" title="Szenario-Annahme">⊘</span></p></div>
+    <div class="card p-5"><h3 class="text-tngb-lavender font-bold text-sm mb-2">Dual-Class & Kontrolle</h3><p class="text-xs text-slate-400 leading-relaxed">Eine Stimmrechts-Doppelstruktur sichert dem Gründer Kontrolle trotz Verwässerung — relevant für Governance-Ratings und ESG-orientierte Investoren.</p></div>
+    <div class="card p-5"><h3 class="text-tngb-magenta font-bold text-sm mb-2">Privater Status = Schätzungen</h3><p class="text-xs text-slate-400 leading-relaxed">Ohne geprüfte Pflichtveröffentlichungen sind Umsatz, Marge und Bewertung (~$1.750&nbsp;Mrd.<span class="est-mark" title="Szenario-Annahme">⊘</span>) Schätzungen aus Sekundärquellen — erst das S-1 schafft geprüfte Zahlen.</p></div>
+    <div class="card p-5"><h3 class="text-tngb-cyan font-bold text-sm mb-2">Carve-out-Option</h3><p class="text-xs text-slate-400 leading-relaxed">Statt der Gesamtfirma könnte nur ein Segment (z.&nbsp;B. Starlink) an die Börse — das verändert Prospekt, Bewertung und Beteiligtenkreis.<span class="est-mark" title="Szenario-Annahme">⊘</span></p></div>
+    <div class="card p-5"><h3 class="text-tngb-gold font-bold text-sm mb-2">Schlüsselperson Musk</h3><p class="text-xs text-slate-400 leading-relaxed">Hohe Personenabhängigkeit ist ein zentraler Risikofaktor im Prospekt und beeinflusst Bewertung und Lock-up-Gestaltung.</p></div>
+    <div class="card p-5"><h3 class="text-tngb-emerald font-bold text-sm mb-2">Retail-Andrang</h3><p class="text-xs text-slate-400 leading-relaxed">Markenstärke dürfte enorme Privatanleger-Nachfrage erzeugen — Zuteilungslogik, Distributionskanäle (auch Genossenschafts-/Direktbanken) und Stabilisierung werden besonders relevant.</p></div>
+  </div>
+</section>
+
+<!-- 10 · GLOSSAR -->
+<section id="glossar" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="section-kicker mb-1">10 · Glossar</div>
+  <h2 class="section-title">Begriffe in Kürze</h2>
+  <div class="card overflow-x-auto">
+    <table>
+      <thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td><strong>S-1 / Registration Statement</strong></td><td>US-Registrierungsdokument bei der SEC; Grundlage für den öffentlichen Verkauf.</td></tr>
+        <tr><td><strong>Prospekt</strong></td><td>EU-Pendant; durch nationale Aufsicht (z.&nbsp;B. BaFin) gebilligtes Verkaufsdokument.</td></tr>
+        <tr><td><strong>Underwriting</strong></td><td>Übernahme/Platzierungsgarantie durch die Banken; beim „firm commitment" tragen sie das Absatzrisiko.</td></tr>
+        <tr><td><strong>Bookbuilding</strong></td><td>Verfahren zur Nachfrage- und Preisermittlung über ein Orderbuch.</td></tr>
+        <tr><td><strong>Greenshoe</strong></td><td>Mehrzuteilungsoption (meist ≤15&nbsp;%) zur Stabilisierung in den ersten Handelstagen.</td></tr>
+        <tr><td><strong>Lock-up</strong></td><td>Haltefrist (typ. 90–180 Tage), in der Insider keine Aktien verkaufen dürfen.</td></tr>
+        <tr><td><strong>Comfort Letter</strong></td><td>Bestätigung des Wirtschaftsprüfers an die Banken zu den Finanzangaben.</td></tr>
+        <tr><td><strong>Quiet Period</strong></td><td>Zeitraum mit Kommunikationsbeschränkungen rund um die Emission.</td></tr>
+        <tr><td><strong>ICFR / SOX</strong></td><td>Internes Kontrollsystem über die Finanzberichterstattung (Sarbanes-Oxley Act).</td></tr>
+        <tr><td><strong>ITAR / DDTC</strong></td><td>US-Exportkontrolle für Verteidigungsgüter; relevant für SpaceX-Eigentümerstruktur.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="max-w-6xl mx-auto px-6 py-8">
+  <div class="card p-6 border-l-4 border-tngb-orange">
+    <h2 class="text-lg font-bold text-tngb-orange mb-3">Rechtlicher Hinweis</h2>
+    <p class="text-sm text-slate-300 leading-relaxed">
+      Diese Seite ist eine <strong>journalistisch-redaktionelle, allgemeinbildende</strong> Darstellung des IPO-Prozesses und
+      stellt <strong>keine</strong> Rechts-, Steuer- oder Anlageberatung (RDG / StBerG / WpIG / FinDAG) dar. Der beschriebene
+      Ablauf folgt primär dem US-Kapitalmarktrecht (SEC); EU-/deutsche Besonderheiten sind nur hinweisend genannt. SpaceX ist
+      privat — alle Finanzzahlen sind Schätzungen, ein Börsengang ist nicht vollzogen. Mit
+      <span class="est-mark" title="Szenario-Annahme">⊘</span> markierte SpaceX-Angaben sind Szenario-Annahmen.
+      „SpaceX", „Starlink", „Starship" sind Marken der Rechteinhaber; ihre Nennung erfolgt rein beschreibend.
+    </p>
+    <p class="text-sm text-tngb-muted mt-3">Datenstand <span class="mono text-tngb-cyan">2026-06-01</span> · Rechtsstand <span class="mono text-tngb-cyan">2026-06-04</span>.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-tngb-border mt-8">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap items-start justify-between gap-6">
+    <div>
+      <div class="font-display font-bold text-xl">FinCoach AI</div>
+      <div class="text-sm text-tngb-muted">powered by <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="brandlink mono">www.TheNextGenerationBanking.com</a></div>
+    </div>
+    <div class="text-xs text-tngb-muted max-w-xl">
+      <div class="flex gap-4 mb-2">
+        <a href="index.html" class="brandlink">Start</a>
+        <a href="modul.html" class="brandlink">Analyse</a>
+        <a href="impressum.html" class="brandlink">Impressum</a>
+        <a href="datenschutz.html" class="brandlink">Datenschutz</a>
+      </div>
+      Keine Rechts-, Steuer- oder Anlageberatung. SpaceX ist privat — alle Finanzzahlen sind Schätzungen.
+      Datenstand 2026-06-01 · Rechtsstand 2026-06-04. © 2026 TheNextGenerationBanking. Alle Rechte vorbehalten.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll-Reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.scroll-fade').forEach(el=>io.observe(el));
+
+  // NavDock active state
+  const dockSections = document.querySelectorAll('section[id]');
+  const dockObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id = e.target.id;
+        document.querySelectorAll('#navdock a').forEach(a=>a.classList.toggle('active-dock', a.dataset.dock===id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  dockSections.forEach(s=>dockObs.observe(s));
+</script>
+
+</body>
+</html>

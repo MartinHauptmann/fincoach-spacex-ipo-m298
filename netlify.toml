@@ -21,6 +21,18 @@
   from = "/analyse"
   to = "/modul.html"
   status = 200
+[[redirects]]
+  from = "/ipo-prozess"
+  to = "/ipo-prozess.html"
+  status = 200
+[[redirects]]
+  from = "/m299"
+  to = "/m299.html"
+  status = 200
+[[redirects]]
+  from = "/zuteilung"
+  to = "/m299.html"
+  status = 200
 
 # 404 -> Startseite (SPA-artiges Fallback)
 [[redirects]]
