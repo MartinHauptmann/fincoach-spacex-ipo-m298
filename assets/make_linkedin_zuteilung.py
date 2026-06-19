@@ -88,16 +88,16 @@ def stage(y, label, note, segs, note_col=MUTED):
     text(M, y + 34 + BH + 12, note, fr(17), note_col)
 
 stage(330, "① TRANCHEN  ·  Gesamtemission ~$75 Mrd.",
-      "Real bei SpaceX: Retail bis ~30 %  ·  Greenshoe +15 % separat  ·  Free Float ~5 %",
-      [(57, CYAN, "Institutionell"), (25, EMERALD, "Cornerstone"), (10, GOLD, "Retail"), (8, LAV, "Mitarb.")])
+      "Real bei SpaceX: Retail bis ~30 %  ·  Mitarbeiter bis ~5 %  ·  Greenshoe +15 % separat  ·  Free Float ~5 %",
+      [(70, CYAN, "Institutionell"), (15, EMERALD, "Anchor"), (10, GOLD, "Retail"), (5, LAV, "Mit.")])
 
-stage(500, "② GEOGRAFISCH  ·  Länder & Regionen",
-      "EMEA-Detail: UK 9 % · DE 5 % · CH 3 % · FR 2 %  ·  ITAR: nicht-US-Anteil ~38 % FOCI-sensibel",
-      [(62, CYAN, "Nordamerika"), (24, EMERALD, "EMEA"), (11, GOLD, "APAC"), (3, MUTED, "RoW")],
+stage(500, "② GEOGRAFISCH  ·  reportierte Ist-Verteilung 85 : 10 : 5",
+      "USA-Heimatmarkt dominiert (ITAR-Home-Bias) · DE ~5 % des Deals · Auslandsanteil ~15 % FOCI-sensibel",
+      [(85, CYAN, "USA (Core)"), (10, EMERALD, "Europa/UK"), (5, GOLD, "Asien/Rest")],
       note_col=MAGENTA)
 
 stage(670, "③ KONSORTIUM  ·  Banken-Syndikat",
-      "3 Global Coordinators · 4 Bookrunners · 6 Co-Manager  ·  Gross Spread ~2,5 %",
+      "3 Global Coordinators · 4 Bookrunners · 6 Co-Manager  ·  Gross Spread ~1 % (0,75–1,5 %)",
       [(54, CYAN, "Global Coordinators"), (28, EMERALD, "Bookrunners"), (18, GOLD, "Co-Manager")])
 
 # Stage 4 with legend
@@ -120,11 +120,12 @@ for i, (pct, col, lab) in enumerate(de):
     d.ellipse([cxl, ry + 4, cxl + 14, ry + 18], fill=col)
     text(cxl + 24, ry, f"{lab}", fr(17), WHITE)
     text(cxl + col_w - 30, ry, f"{pct}%", fm(17), col, anchor="ra")
+text(M, ly + 4 * 30 + 8, "Reportierte Fill-Rates (Repartierung): ING ~25 %  ·  Trade Republic ~12,9 % (gekürzt) — Report, nicht verifiziert", fr(15), GOLD)
 
 # ---- FOOTER ----
 fy = 1180
 d.line([(M, fy), (W - M, fy)], fill=BORDER, width=1)
-text(M, fy + 20, "Illustrative SzenarioWerte (M-DBOM: SCENARIO) · Datenstand 2026-06-19 · nicht unabhängig verifiziert.".replace("SzenarioWerte", "Szenario-Werte"), fr(17), MUTED)
+text(M, fy + 20, "Szenario-Werte (an reale Branchenspannen angelehnt) + reportierte Ist-Angaben · M-DBOM: SCENARIO · Stand 2026-06-19 · nicht verifiziert.", fr(16), MUTED)
 text(M, fy + 47, "Keine Anlage-, Steuer- oder Rechtsberatung.", fr(17), MUTED)
 text(W - M, fy + 56, "fincoach-spacex-ipo-m298", fm(18), GOLD, anchor="rm")
 

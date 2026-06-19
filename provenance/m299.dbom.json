@@ -4,24 +4,24 @@
   "module": {
     "id": "M299",
     "title": "Internationale IPO-Zuteilung — Quoten, Konsortium & Deutschland (am Beispiel SpaceX)",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "stichtag": "2026-06-19",
     "buildDate": "2026-06-19T00:00:00Z",
-    "predecessor_version": null,
+    "predecessor_version": "1.0.0",
     "related_modules": ["M298"],
     "external_dbom": "provenance/m299.dbom.json"
   },
   "fact_summary": {
-    "total": 10,
-    "confirmed_primary": 7,
-    "scenario_projection": 3,
+    "total": 12,
+    "confirmed_primary": 8,
+    "scenario_projection": 4,
     "by_class": {
       "REGULATORY_FRAMEWORK": 4,
-      "INDUSTRY_PRACTICE": 3,
-      "SCENARIO_PROJECTION": 3
+      "INDUSTRY_PRACTICE": 4,
+      "SCENARIO_PROJECTION": 4
     }
   },
-  "honest_disclosure": "Der SpaceX-IPO wurde am 12.06.2026 vollzogen (SPCX · NASDAQ, $135/Aktie, Emissionserlös ~$75 Mrd., bis ~$86 Mrd. mit Greenshoe); die Deal-Eckdaten sind nutzer-/medienvorgegeben und von FinCoach nicht unabhängig verifiziert. Die konkreten Zuteilungsquoten bleiben ILLUSTRATIVE SZENARIO-WERTE zur Veranschaulichung der Mechanik — reale Allokationsdaten sind nicht offengelegt. Allgemeine Mechanik-, Markt- und Regulierungsaussagen sind als gängige Praxis bzw. Rechtsrahmen klassifiziert; das LLM-Trainings-Wissen hat einen Cutoff vor 2026.",
+  "honest_disclosure": "Der SpaceX-IPO wurde am 12.06.2026 vollzogen (SPCX · NASDAQ, $135/Aktie, Emissionserlös ~$75 Mrd., bis ~$86 Mrd. mit Greenshoe); die Deal-Eckdaten sind nutzer-/medienvorgegeben und von FinCoach nicht unabhängig verifiziert. Die konkreten Zuteilungsquoten bleiben ILLUSTRATIVE SZENARIO-WERTE zur Veranschaulichung der Mechanik — reale Allokationsdaten sind nicht offengelegt. Allgemeine Mechanik-, Markt- und Regulierungsaussagen sind als gängige Praxis bzw. Rechtsrahmen klassifiziert; das LLM-Trainings-Wissen hat einen Cutoff vor 2026. v1.1.0: Die Szenario-Tranchen (Institutionell 70%, Anchor 15%, Retail 10%, Mitarbeiter 5%), der Gross Spread (~1%) und die deutschen Kanalquoten wurden an realistische Branchenspannen angelehnt; zusätzlich wurden reportierte Ist-Angaben aus einem Intelligence-Report (geografisch 85:10:5, Broker-Fill-Rates ING ~25% / Trade Republic ~12,9%, Retail ~30%) als nicht unabhängig verifizierte Medienangaben eingearbeitet.",
   "audit_trail_url": "provenance/m299.dbom.json#audit_trail",
   "facts": [
     { "id": "FACT_INST_RETAIL_SPLIT", "verdict": "CONFIRMED", "class": "INDUSTRY_PRACTICE", "confidence": 0.82, "status": "verified_practice",
@@ -49,11 +49,17 @@
       "claim": "SpaceX-IPO am 12.06.2026 (SPCX · NASDAQ) zu $135/Aktie, Emissionserlös ~$75 Mrd., mit Mehrzuteilung/Greenshoe bis ~$86 Mrd.; nur ~5% Free Float.",
       "source_id": "SRC_SCENARIO", "caveat": "Nutzer-/medienvorgegeben, von FinCoach nicht unabhängig verifiziert — daher weiter als SCENARIO_PROJECTION geführt." },
     { "id": "FACT_SPACEX_ALLOC_CASCADE_SCENARIO", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.4, "status": "scenario",
-      "claim": "Illustrative SpaceX-Zuteilungskaskade über Tranchen, Geografie, Konsortium und deutsche Vertriebskanäle (didaktisches Modell). Realer Kontext: ungewöhnlich hoher Retail-Fokus (bis zu ~30% der Aktien an Privatanleger) und sehr geringer Free Float (~5%).",
-      "source_id": "SRC_SCENARIO", "caveat": "Quoten-Verteilung sind didaktische Modellwerte, keine offengelegten realen Allokationen; Retail-~30% und Free-Float-~5% sind nutzer-/medienvorgegeben." },
+      "claim": "Illustrative SpaceX-Zuteilungskaskade: Tranchen (Institutionell 70%, Anchor 15%, Retail 10%, Mitarbeiter 5%), Geografie (reportiert 85:10:5 USA/Europa/Asien), Konsortium (3/4/6 Banken, Gross Spread ~1%, Split 20/20/60) und deutsche Vertriebskanäle. Realer Kontext: ungewöhnlich hoher Retail-Fokus (bis zu ~30%) und sehr geringer Free Float (~5%).",
+      "source_id": "SRC_SCENARIO", "caveat": "Tranchen-/Konsortial-/Geo-Quoten an realistische Branchenspannen angelehnt, bleiben didaktische Modellwerte; die geografische 85:10:5-Angabe, Retail-~30% und Free-Float-~5% sind nutzer-/medienvorgegeben (Intelligence-Report), nicht unabhängig verifiziert." },
     { "id": "FACT_DE_DISTRIBUTION_CHANNELS", "verdict": "CONFIRMED", "class": "INDUSTRY_PRACTICE", "confidence": 0.72, "status": "verified_practice",
       "claim": "Der deutsche Retail-Vertrieb läuft über Großbanken, den Genossenschaftsverbund (DZ Bank/Volksbanken), den Sparkassen-Verbund (DekaBank), Privatbanken sowie Direktbanken/Neobroker.",
-      "source_id": "SRC_DE_BANKING", "caveat": "Sozial-/Ethikbanken meist mit Ausschlusskriterien." }
+      "source_id": "SRC_DE_BANKING", "caveat": "Sozial-/Ethikbanken meist mit Ausschlusskriterien. Belegt nur die Existenz/Struktur der Kanäle, NICHT die konkreten Prozentwerte." },
+    { "id": "FACT_DE_CHANNEL_SPLIT_SCENARIO", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.35, "status": "scenario",
+      "claim": "Illustrative prozentuale Aufteilung der deutschen IPO-Tranche auf Vertriebskanäle (Konsortialbank ~40%, Direktbanken/Neobroker ~21%, Genossenschaft ~12%, Sparkassen ~12%, Privatbanken ~10%, übrige ~4%, Sozial-/Ethikbanken ~1%).",
+      "source_id": "SRC_SCENARIO", "caveat": "Frei gewählte didaktische Modellwerte — keine offengelegten realen Zuteilungen. Verlässlich ist nur die Existenz der Kanäle (FACT_DE_DISTRIBUTION_CHANNELS)." },
+    { "id": "FACT_REPORTED_ALLOCATION", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.4, "status": "scenario",
+      "claim": "Reportierte Ist-Zuteilung (Intelligence-Report): geografische Volumen-Verteilung ~85% USA / ~10% Europa-UK / ~5% Asien-Rest; Retail-Tranche ~30%; Broker-Fill-Rates ~25% (ING) bzw. ~12,9% (Trade Republic, wegen Überzeichnung gekürzt).",
+      "source_id": "SRC_INTEL_REPORT", "caveat": "Report-/medienvorgegeben (Perplexity Finance, Focus, Zeit, Euronews, Morningstar, SEC S-1); von FinCoach AI nicht unabhängig verifiziert." }
   ],
   "sources": [
     { "id": "SRC_NYSE_IPO_GUIDE", "label": "NYSE / Nasdaq IPO Guides — Allokationspraxis" },
@@ -64,6 +70,7 @@
     { "id": "SRC_HKEX_LISTING", "label": "HKEX Listing Rules — Clawback" },
     { "id": "SRC_DDTC_ITAR", "label": "US State Dept / DDTC — ITAR & FOCI" },
     { "id": "SRC_DE_BANKING", "label": "Deutsche Bankenlandschaft / Verbundstruktur" },
-    { "id": "SRC_SCENARIO", "label": "FinCoach AI Szenario-Annahme (didaktisch)" }
+    { "id": "SRC_SCENARIO", "label": "FinCoach AI Szenario-Annahme (didaktisch)" },
+    { "id": "SRC_INTEL_REPORT", "label": "Intelligence-Report (Perplexity Finance, Focus, Zeit, Euronews, Morningstar, SEC S-1) — nutzer-/medienvorgegeben" }
   ]
 }

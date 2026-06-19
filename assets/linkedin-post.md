@@ -68,23 +68,23 @@ _Keine Anlageberatung. Zahlen medien-/nutzerbasiert, Datenstand 2026-06-19._
 
 🧩 **Beim ~$75-Mrd.-IPO von SpaceX stellt sich die Frage, die kaum jemand erklärt: Wer bekommt eigentlich die Aktien?**
 
-Die Antwort ist eine verschachtelte **Zuteilungs-Kaskade** — von der Welt bis zum einzelnen Broker. So sieht sie aus (Szenario-Werte):
+Die Antwort ist eine verschachtelte **Zuteilungs-Kaskade** — von der Welt bis zum einzelnen Broker. So sieht sie aus (Szenario-Werte, an reale Branchenspannen angelehnt; reportierte Ist-Angaben gekennzeichnet):
 
 **① Tranchen** (Gesamtemission)
-Institutionell 57 % · Cornerstone 25 % · Retail 10 % · Mitarbeiter 8 %
+Institutionell 70 % · Anchor 15 % · Retail 10 % · Mitarbeiter 5 %
 → Bei SpaceX real ungewöhnlich: Retail bis ~30 %. Free Float nur ~5 %.
 
-**② Geografisch**
-Nordamerika 62 % · EMEA 24 % · Asien-Pazifik 11 % · Rest 3 %
-→ Deutschland landet bei ~5 %. Wichtig: ITAR — der nicht-US-Anteil (~38 %) ist exportkontroll-sensibel.
+**② Geografisch** _(reportierte Ist-Verteilung)_
+USA-Core 85 % · Europa/UK 10 % · Asien/Rest 5 % — das „85:10:5-Prinzip".
+→ Deutschland landet bei ~5 % des Deals. Der hohe US-Anteil passt zum ITAR-Home-Bias (Auslandsanteil nur ~15 %).
 
 **③ Konsortium**
-Global Coordinators 54 % · Bookrunners 28 % · Co-Manager 18 %
+Global Coordinators 54 % · Bookrunners 28 % · Co-Manager 18 % · Gross Spread ~1 %
 → Wer das Orderbuch füllt, verdient an Gebühr UND Zuteilung („Pot" & Designations).
 
-**④ Deutschland** (~5 % des Deals)
+**④ Deutschland** (~5 % des Deals · _frei gewählte Szenario-Quoten, keine realen SpaceX-Zahlen_)
 Konsortialbank 40 % · Direktbanken/Neobroker 21 % · Genossenschaft 12 % · Sparkassen 12 % · Privatbanken 10 % · übrige 4 % · Sozial-/Ethikbanken ~1 %
-→ Über Trade Republic, Scalable, ING & Co. kommt der Privatanleger überhaupt erst an die Aktie. Ethik-/Sozialbanken schließen Dual-Use meist aus.
+→ Reportiert: ING-Kunden bekamen ~25 % ihrer Order, Trade-Republic-Kunden wurden auf ~12,9 % gekürzt. Ethik-/Sozialbanken schließen Dual-Use meist aus.
 
 Jede Ebene teilt den Anteil der darüber weiter auf — kleine Quoten-Entscheidungen entscheiden, ob ein Privatanleger in Deutschland am Ende eine Zuteilung sieht oder nicht.
 

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FinCoach AI · SpaceX Update</title>
+<meta name="description" content="Post-IPO SpaceX Update (SPCX/NASDAQ): Kurs $185,00 (+37% seit Ausgabe $135), Marktkap. ~$2,42 Bio., Stand 18.06.2026. Fokus auf die Zuteilung — 85:10:5-Prinzip, Broker-Quoten (ING ~25%, Trade Republic ~12,9%) und Zuteilungs-Simulator. Alle Zahlen report-/medien-/nutzervorgegeben und von FinCoach AI nicht unabhängig verifiziert. Keine Anlageberatung. Stand 2026-06-19."/>
+<meta name="robots" content="index,follow"/>
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="FinCoach AI · SpaceX Update — Post-IPO-Stand mit Fokus auf die Zuteilung"/>
+<meta property="og:description" content="SPCX $185,00 (+37% seit $135), Marktkap. ~$2,42 Bio. Zuteilungs-Fokus: 85:10:5, ING ~25%, Trade Republic ~12,9% — report-/medienvorgegebene, nicht unabhängig verifizierte Angaben. FinCoach AI."/>
+<meta property="og:site_name" content="FinCoach AI · TheNextGenerationBanking"/>
+<link rel="stylesheet" href="fonts.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', indigo:'#4472C4', muted:'#64748B', border:'#1E293B' } },
+  fontFamily: { sans:['Inter','system-ui','sans-serif'], head:['Space Grotesk','sans-serif'], display:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
+}}}
+</script>
+<style>
+  :root{ --bg:#0A0F1A; --card:#121A2E; --cyan:#00CFFF; --emerald:#00CC7A; --magenta:#E6399A; --orange:#FF6B00; --lavender:#9933FF; --gold:#DFAF0F; --indigo:#4472C4; --muted:#64748B; --border:#1E293B; }
+  *{box-sizing:border-box;}
+  html{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif;}
+  body{background:var(--bg);}
+  h1,h2,h3,h4,h5,h6{font-family:'Space Grotesk',sans-serif;}
+  code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+  .card{background:#121A2E;border:1px solid #1E293B;border-radius:16px;}
+  a.brandlink{color:#00CFFF;}
+  .glass{background:rgba(18,26,46,0.7);backdrop-filter:blur(16px);border:1px solid rgba(0,207,255,0.12);}
+  .scroll-fade{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+  .scroll-fade.visible{opacity:1;transform:none;}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#F1F5F9;margin-bottom:.35rem;}
+  .section-badge{font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:4px;}
+  .kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.35rem;position:relative;}
+  .dep-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+  .caveat-box{background:rgba(230,57,154,0.07);border:1px solid rgba(230,57,154,0.35);border-radius:12px;padding:1rem 1.25rem;}
+  .est-mark{color:var(--gold);font-size:.62rem;font-weight:700;vertical-align:super;cursor:help;}
+  .report-badge{display:inline-block;padding:1px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.04em;background:rgba(223,175,15,0.16);color:#DFAF0F;border:1px solid rgba(223,175,15,0.4);white-space:nowrap;vertical-align:middle;}
+  table{width:100%;border-collapse:collapse;}
+  th{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:.6rem .75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:bottom;}
+  td{padding:.6rem .75rem;font-size:.82rem;border-bottom:1px solid rgba(30,41,59,.6);vertical-align:top;}
+  tr:hover td{background:rgba(0,207,255,.04);}
+  .badge{display:inline-block;padding:1px 8px;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;}
+  .b-bank{background:rgba(0,204,122,.16);color:var(--emerald);border:1px solid rgba(0,204,122,.4);}
+  .b-legal{background:rgba(230,57,154,.16);color:var(--magenta);border:1px solid rgba(230,57,154,.4);}
+  .b-audit{background:rgba(223,175,15,.16);color:var(--gold);border:1px solid rgba(223,175,15,.4);}
+  .b-broker{background:rgba(0,207,255,.16);color:var(--cyan);border:1px solid rgba(0,207,255,.4);}
+  ul.tick{list-style:none;padding:0;margin:0;}
+  ul.tick li{position:relative;padding-left:1.25rem;margin-bottom:.4rem;font-size:.85rem;line-height:1.55;color:#CBD5E1;}
+  ul.tick li::before{content:'\25B8';position:absolute;left:0;color:var(--cyan);}
+  .ticker-wrap{overflow:hidden;background:var(--card);border-bottom:1px solid var(--border);}
+  .ticker{display:inline-block;white-space:nowrap;animation:ticker 36s linear infinite;}
+  @keyframes ticker{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+  .sim-btn{border:1px solid var(--border);cursor:pointer;padding:.45rem 1rem;border-radius:8px;font-size:.8rem;font-weight:600;background:var(--card);color:var(--muted);transition:all .2s;}
+  .sim-btn.active-sim{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  .chart-box{position:relative;width:100%;height:300px;}
+</style>
+</head>
+<body class="min-h-screen" style="background:#0A0F1A;">
+
+<!-- ===== LIVE-TICKER ===== -->
+<div class="ticker-wrap sticky top-0 z-40">
+  <div class="ticker text-xs font-mono tracking-wide py-2 text-slate-300">
+    <span style="color:#00CFFF;font-weight:700;">SPCX</span> $185,00 <span style="color:#E6399A;">(&minus;3,56%)</span> &middot; Marktkap. $2,42 Bio. &middot; Tagestief $172,11 &middot; Tageshoch $190,00 &middot; Free Float 5% &middot; Volumen 254,82 Mio. &middot; <span class="report-badge">REPORT/EST</span> alle Werte report-/medienvorgegeben, nicht unabh. verifiziert &middot; Stand 2026-06-19 &middot;
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="sticky top-[33px] z-30 backdrop-blur-xl bg-tngb-bg/80 border-b border-tngb-border">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <svg viewBox="0 0 100 100" class="w-9 h-9" fill="none">
+        <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+        <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+        <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+        <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+        <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+      </svg>
+      <div><div class="font-display font-bold text-lg leading-none">FinCoach AI</div><div class="text-[10px] text-tngb-muted mono">by TheNextGenerationBanking.com</div></div>
+    </a>
+    <nav class="flex gap-5 text-sm flex-wrap">
+      <a href="index.html" class="hover:text-tngb-cyan">Start</a>
+      <a href="modul.html" class="hover:text-tngb-cyan">Analyse</a>
+      <a href="ipo-prozess.html" class="hover:text-tngb-cyan">IPO-Prozess</a>
+      <a href="m299.html" class="hover:text-tngb-cyan">Zuteilung</a>
+      <a href="impressum.html" class="hover:text-tngb-cyan">Impressum</a>
+      <a href="datenschutz.html" class="hover:text-tngb-cyan">Datenschutz</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== S01 HERO ===== -->
+<section id="s01" class="max-w-6xl mx-auto px-6 pt-12 pb-10 scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">SPACEX UPDATE</span>
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Post-IPO &middot; SPCX / NASDAQ</span>
+    <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">Stand 18.06.2026 &middot; Datenstand 2026-06-19</span>
+  </div>
+  <h1 class="text-4xl md:text-6xl font-display font-bold tracking-tight leading-tight">
+    SpaceX Update —<br><span class="text-tngb-cyan">Post-IPO-Stand &amp; Zuteilung</span>
+  </h1>
+  <p class="mt-5 text-lg text-slate-300 max-w-3xl">
+    SpaceX notiert unter <span class="mono">SPCX</span> an der NASDAQ. Schlusskurs <strong>$185,00</strong>
+    (<strong>+37%</strong> seit Ausgabepreis $135), Marktkapitalisierung <strong>~$2,42 Bio.</strong>,
+    bisheriges Hoch $225,64 (Stand 18.06.2026). Dieses Update fasst den aktuellen Stand zusammen — mit
+    klarem Fokus auf die <strong class="text-tngb-gold">Zuteilung</strong>: das 85:10:5-Prinzip der Wall Street,
+    Broker-Quoten und einen Zuteilungs-Simulator.
+  </p>
+
+  <!-- KPI-Reihe -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+    <div class="kpi-card">
+      <div class="text-3xl font-head font-extrabold" style="color:#00CFFF;">$185,00</div>
+      <div class="text-sm font-semibold text-slate-300 mt-1">Schlusskurs (18.06.)</div>
+      <div class="text-xs text-tngb-muted mt-1">Ausgabepreis $135 <span class="report-badge">REPORT</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">+37%</div>
+      <div class="text-sm font-semibold text-slate-300 mt-1">seit Ausgabe</div>
+      <div class="text-xs text-tngb-muted mt-1">$135 &rarr; $185 <span class="report-badge">REPORT</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$2,42 Bio.</div>
+      <div class="text-sm font-semibold text-slate-300 mt-1">Marktkapitalisierung</div>
+      <div class="text-xs text-tngb-muted mt-1">Peak ~$2,75 Bio. <span class="report-badge">REPORT</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="text-3xl font-head font-extrabold" style="color:#E6399A;">5%</div>
+      <div class="text-sm font-semibold text-slate-300 mt-1">Free Float</div>
+      <div class="text-xs text-tngb-muted mt-1">Hoch $225,64 <span class="report-badge">REPORT</span></div>
+    </div>
+  </div>
+
+  <!-- DATEN-TRANSPARENZ-BOX -->
+  <div class="caveat-box mt-8 max-w-4xl">
+    <div class="flex items-start gap-3">
+      <span class="text-tngb-magenta text-lg leading-none mt-0.5">&#9888;</span>
+      <div class="text-sm text-slate-300 leading-relaxed">
+        <strong class="text-tngb-magenta">Daten-Transparenz (FinCoach-Standard):</strong>
+        Alle Kurs-, Bewertungs- und Zuteilungszahlen auf dieser Seite sind
+        <strong>report-/medien-/nutzervorgegeben</strong> (Quellen laut Intelligence-Report:
+        Perplexity Finance, Morningstar, Focus, Zeit, Euronews, SEC S-1 Prospectus) und von
+        <strong>FinCoach AI nicht unabhängig verifiziert</strong>. Insbesondere die Zuteilungsquoten
+        (85:10:5, ING ~25%, Trade Republic ~12,9%) sind als nicht unabhängig verifizierte Report-Angaben
+        bzw. Veranschaulichungen zu verstehen und mit <span class="report-badge">REPORT/EST</span> markiert.
+        Stand 2026-06-19. <strong>Keine Anlage-, Steuer- oder Rechtsberatung.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S02 MARKT-PERFORMANCE ===== -->
+<section id="s02" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">01 &middot; MARKT-PERFORMANCE</span>
+    <h2 class="section-title">Kurshistorie: die erste Handelswoche</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">
+    Kursbewegung vom IPO-Tag (12.06.) bis zum aktuellen Stand. Der starke &bdquo;Pop&ldquo; am ersten Tag
+    wurde durch hohe Retail-Nachfrage getrieben. <span class="report-badge">REPORT</span> Werte report-/medienvorgegeben.
+  </p>
+  <div class="grid lg:grid-cols-3 gap-6 items-stretch">
+    <div class="card p-6 lg:col-span-2">
+      <div class="chart-box"><canvas id="priceChart"></canvas></div>
+    </div>
+    <div class="space-y-4">
+      <div class="kpi-card">
+        <div class="text-xs font-bold text-tngb-muted uppercase">Ausgabepreis</div>
+        <div class="text-3xl font-head font-extrabold text-white">$135,00</div>
+        <div class="text-xs text-tngb-muted">12. Juni 2026</div>
+      </div>
+      <div class="kpi-card" style="border-color:#DFAF0F;">
+        <div class="text-xs font-bold text-tngb-muted uppercase">Bisheriges Hoch</div>
+        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">$225,64</div>
+        <div class="text-xs text-tngb-muted">Volatilität durch 5% Free Float</div>
+      </div>
+      <div class="kpi-card" style="border-color:#00CFFF;">
+        <div class="text-xs font-bold text-tngb-muted uppercase">Marktkapitalisierung</div>
+        <div class="text-2xl font-head font-extrabold" style="color:#00CFFF;">$2,42 Bio.</div>
+        <div class="text-[10px] text-tngb-muted mt-1 uppercase">Überholte zeitweise Amazon (Zeit-Bericht)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S03 IPO-PROZESS ===== -->
+<section id="s03" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">02 &middot; IPO-PROZESS</span>
+    <h2 class="section-title">Chronologie eines historischen Listings</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    Vom vertraulichen S-1-Filing bis zur Glocke an der NASDAQ. Der Prozess wurde durch
+    <strong>ITAR-Bestimmungen</strong> (Exportkontrolle) und die <strong>xAI-Integration</strong> verlangsamt.
+  </p>
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="dep-box border-l-4" style="border-left-color:#9933FF;">
+      <div class="flex items-center gap-2 mb-2"><span class="badge b-legal">Phase 1</span><h3 class="font-head font-bold text-tngb-lavender">Pre-IPO</h3></div>
+      <p class="text-sm text-slate-300 leading-relaxed">Morningstar beziffert den Fair Value auf <strong>$780 Mrd.</strong>, während der Markt bereits <strong>$1,75 Bio.</strong> antizipiert. <span class="report-badge">REPORT</span></p>
+    </div>
+    <div class="dep-box border-l-4" style="border-left-color:#00CFFF;">
+      <div class="flex items-center gap-2 mb-2"><span class="badge b-broker">Phase 2</span><h3 class="font-head font-bold text-tngb-cyan">12.06. Handelsstart</h3></div>
+      <p class="text-sm text-slate-300 leading-relaxed">Erstkurs <strong>$150 (+11%)</strong>, ausgeprägter <strong>Retail-Fokus</strong> (30%-Tranche), das Handelsvolumen explodiert. <span class="report-badge">REPORT</span></p>
+    </div>
+    <div class="dep-box border-l-4" style="border-left-color:#00CC7A;">
+      <div class="flex items-center gap-2 mb-2"><span class="badge b-bank">Phase 3</span><h3 class="font-head font-bold text-tngb-emerald">Post-IPO</h3></div>
+      <p class="text-sm text-slate-300 leading-relaxed">Kurs <strong>$185</strong>, Marktkap. <strong>&gt;$2,4 Bio.</strong>; überholt zeitweise Amazon (Peak ~$2,75 Bio.). <span class="report-badge">REPORT</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S04 AKTEURE & ROLLEN ===== -->
+<section id="s04" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(230,57,154,0.15);color:#E6399A;">03 &middot; AKTEURE &amp; ROLLEN</span>
+    <h2 class="section-title">Das institutionelle Gefüge</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">
+    Jede Rolle hat direkten Einfluss auf die Zuteilungschancen der Anleger.
+  </p>
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="dep-box border-t-4" style="border-top-color:#00CC7A;">
+      <h4 class="font-head font-bold text-white mb-1">Lead-Banken</h4>
+      <p class="text-xs text-tngb-muted italic mb-3">Goldman Sachs &amp; Morgan Stanley</p>
+      <p class="text-sm text-slate-300">Steuern das Orderbuch und entscheiden über die strategische Zuteilung an Staatsfonds.</p>
+    </div>
+    <div class="dep-box border-t-4" style="border-top-color:#E6399A;">
+      <h4 class="font-head font-bold text-white mb-1">Legal Advisors</h4>
+      <p class="text-xs text-tngb-muted italic mb-3">Skadden</p>
+      <p class="text-sm text-slate-300">Sichern Aktionärsrechte (kritisch laut Euronews) und managen die xAI-Fusion.</p>
+    </div>
+    <div class="dep-box border-t-4" style="border-top-color:#DFAF0F;">
+      <h4 class="font-head font-bold text-white mb-1">Notare / Audit</h4>
+      <p class="text-xs text-tngb-muted italic mb-3">Wirtschaftsprüfer</p>
+      <p class="text-sm text-slate-300">Testat der Bilanzen — wichtig für die Bewertung der Starlink-Cashflows.</p>
+    </div>
+    <div class="dep-box border-t-4" style="border-top-color:#00CFFF;">
+      <h4 class="font-head font-bold text-white mb-1">Retail-Broker</h4>
+      <p class="text-xs text-tngb-muted italic mb-3">Trade Republic / ING</p>
+      <p class="text-sm text-slate-300">Schnittstelle zum Privatanleger; die Quote hängt von der Konsortial-Anbindung ab.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S05 STRATEGIE & RISIKO ===== -->
+<section id="s05" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00;">04 &middot; STRATEGIE &amp; RISIKO</span>
+    <h2 class="section-title">Bewertungslücke &amp; Risiko-Check</h2>
+  </div>
+  <div class="grid lg:grid-cols-2 gap-6 items-stretch">
+    <div class="card p-6">
+      <h3 class="font-head font-bold text-white mb-1">Bewertungslücke: Realität vs. Hype</h3>
+      <p class="text-xs text-tngb-muted mb-4">Fundamentale Analyse (Morningstar) vs. Marktwert (in Bio. $). <span class="report-badge">REPORT</span></p>
+      <div class="chart-box"><canvas id="valuationChart"></canvas></div>
+    </div>
+    <div class="card p-6 border-l-4" style="border-left-color:#E6399A;">
+      <h3 class="font-head font-bold text-tngb-magenta mb-5">Risiko-Check: &bdquo;Liquiditäts-Falle&ldquo;</h3>
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 dep-box">
+          <div class="font-head font-extrabold text-3xl" style="color:#E6399A;">5%</div>
+          <div>
+            <h4 class="font-bold uppercase text-xs text-slate-300">Free Float</h4>
+            <p class="text-xs text-tngb-muted">Laut Zeit-Bericht sind nur 5% der Aktien frei handelbar — geringe Verkäufe lösen massive Kursschwankungen aus.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 dep-box">
+          <div class="font-head font-extrabold text-3xl" style="color:#DFAF0F;">&#9888;</div>
+          <div>
+            <h4 class="font-bold uppercase text-xs text-slate-300">Aktionärsrechte</h4>
+            <p class="text-xs text-tngb-muted">Euronews kritisiert schwache Kontrollrechte für Minderheitsaktionäre durch die Dual-Class-Struktur.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 dep-box">
+          <div class="font-head font-extrabold text-3xl" style="color:#FF6B00;">2,75</div>
+          <div>
+            <h4 class="font-bold uppercase text-xs text-slate-300">Peak-Bewertung ($ Bio.)</h4>
+            <p class="text-xs text-tngb-muted">Das Allzeithoch nach dem IPO übertraf Amazon deutlich; die Nachhaltigkeit wird bezweifelt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S06 ZUTEILUNGS-LOGIK (KERN) ===== -->
+<section id="s06" class="max-w-6xl mx-auto px-6 py-12 scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">05 &middot; KERN</span>
+    <h2 class="section-title">Die Zuteilungs-Logik</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    Warum die Region über die Quote entscheidet — das <strong>85:10:5-Prinzip der Wall Street</strong> —
+    und wie sich Broker-Quoten je nach Konsortial-Anbindung unterscheiden.
+    <span class="report-badge">REPORT/EST</span> Alle Quoten sind nicht unabhängig verifizierte Report-Angaben bzw. Veranschaulichungen.
+  </p>
+
+  <div class="grid lg:grid-cols-2 gap-6 items-stretch">
+    <!-- Donut -->
+    <div class="card p-6">
+      <h3 class="font-head font-bold text-white mb-1">Geografische Volumen-Verteilung <span class="report-badge">REPORT/EST</span></h3>
+      <p class="text-xs text-tngb-muted mb-4">85:10:5-Prinzip — USA Core / Europa-UK / Asien-Rest.</p>
+      <div class="chart-box"><canvas id="allocDonut"></canvas></div>
+    </div>
+    <!-- Broker-Quoten -->
+    <div class="card p-6">
+      <h3 class="font-head font-bold text-white mb-3">Broker-Quoten <span class="report-badge">REPORT/EST</span></h3>
+      <div class="overflow-x-auto">
+        <table>
+          <thead><tr><th>Kanal</th><th>Quote</th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ING</strong> (konsortial-angebunden)</td><td class="mono text-tngb-emerald">~25%</td><td>höhere Quote durch Konsortial-Anbindung.</td></tr>
+            <tr><td><strong>Trade Republic</strong> (Neobroker)</td><td class="mono text-tngb-gold">~12,9%</td><td>wegen hoher Nachfrage gekürzt (EU-Retail-Quote).</td></tr>
+            <tr><td>Retail-Tranche gesamt</td><td class="mono text-tngb-cyan">~30%</td><td>ungewöhnlich hoher Retail-Fokus.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="tick mt-4">
+        <li>Anleger bei konsortial-angebundenen Instituten wie ING erhielten höhere Quoten (~25%).</li>
+        <li>Neobroker-Kunden (Trade Republic) wurden auf ~12,9% gekürzt.</li>
+        <li>Die Quote hängt direkt von der Konsortial-Anbindung des Brokers ab.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Zuteilungs-Simulator -->
+  <div class="card p-6 mt-6 border-l-4" style="border-left-color:#DFAF0F;">
+    <div class="flex flex-wrap items-center gap-3 mb-2">
+      <h3 class="font-head font-bold text-tngb-gold">Zuteilungs-Simulator</h3>
+      <span class="report-badge">SCENARIO</span>
+    </div>
+    <p class="text-xs text-tngb-muted mb-4 max-w-2xl">
+      Reine Veranschaulichung: Bestellwert eingeben, Szenario wählen — erwartete Zuteilung wird geschätzt.
+      Keine reale Allokation, keine Anlageberatung.
+    </p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-tngb-muted uppercase mb-2" for="allocInput">Bestellwert (&euro;)</label>
+          <input type="number" id="allocInput" min="0" step="100" placeholder="z. B. 1000" class="w-full p-3 rounded-xl bg-tngb-bg border border-tngb-border text-sm text-slate-200 outline-none focus:border-tngb-cyan"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-tngb-muted uppercase mb-2">Szenario</label>
+          <div class="flex gap-2 flex-wrap">
+            <button type="button" class="sim-btn active-sim" data-quote="0.25" data-name="ING">ING ~25%</button>
+            <button type="button" class="sim-btn" data-quote="0.129" data-name="Trade Republic">Trade Republic ~12,9%</button>
+          </div>
+        </div>
+      </div>
+      <div class="dep-box flex flex-col justify-center" style="border-color:rgba(0,207,255,0.25);background:rgba(0,207,255,0.05);">
+        <div id="allocRes" class="text-sm text-slate-300">
+          <span class="text-tngb-muted">Bestellwert eingeben und Szenario wählen.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DISCLAIMER / PROVENIENZ ===== -->
+<section class="max-w-6xl mx-auto px-6 py-8 scroll-fade">
+  <div class="card p-6 border-l-4 border-tngb-orange">
+    <h2 class="text-xl font-bold text-tngb-orange mb-3">Rechtlicher Hinweis &amp; Provenienz</h2>
+    <p class="text-sm text-slate-300 leading-relaxed">
+      Diese Seite ist eine <strong>journalistisch-redaktionelle Aufbereitung</strong> eines Intelligence-Reports
+      zu SpaceX (Post-IPO). Sämtliche Kurs-, Bewertungs- und Zuteilungszahlen sind
+      <strong>report-/medien-/nutzervorgegeben</strong> (Quellen laut Report: Perplexity Finance Data, Morningstar,
+      Focus, Zeit, Euronews, SEC S-1 Prospectus) und <strong>von FinCoach AI nicht unabhängig verifiziert</strong>.
+      Die Inhalte stellen <strong>keine</strong> Anlage-, Steuer- oder Rechtsberatung dar und sind keine Empfehlung
+      zum Kauf, Verkauf oder Halten von Finanzprodukten. Kapitalanlagen unterliegen Markt-, Kurs- und
+      Totalverlustrisiken (insb. bei geringem Free Float wie ~5% bei SpaceX).
+    </p>
+    <p class="text-sm text-tngb-muted mt-3">
+      Datenstand: <span class="mono text-tngb-cyan">2026-06-19</span> &middot; Rechtsstand:
+      <span class="mono text-tngb-cyan">2026-06-19</span>. &bdquo;SpaceX&ldquo;, &bdquo;Starlink&ldquo; und
+      &bdquo;xAI&ldquo; sind Marken der jeweiligen Rechteinhaber; ihre Nennung erfolgt rein beschreibend.
+    </p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="border-t border-tngb-border mt-12">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap items-start justify-between gap-6">
+    <div>
+      <div class="font-display font-bold text-xl">FinCoach AI</div>
+      <div class="text-sm text-tngb-muted">powered by <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="brandlink mono">www.TheNextGenerationBanking.com</a></div>
+    </div>
+    <div class="text-xs text-tngb-muted max-w-xl">
+      <div class="flex gap-4 mb-2 flex-wrap">
+        <a href="index.html" class="brandlink">Start</a>
+        <a href="modul.html" class="brandlink">Analyse</a>
+        <a href="ipo-prozess.html" class="brandlink">IPO-Prozess</a>
+        <a href="m299.html" class="brandlink">Zuteilung</a>
+        <a href="impressum.html" class="brandlink">Impressum</a>
+        <a href="datenschutz.html" class="brandlink">Datenschutz</a>
+      </div>
+      Keine Rechts-, Steuer- oder Anlageberatung. Alle Kurs-/Bewertungs-/Zuteilungszahlen sind report-/medien-/nutzervorgegeben (Perplexity Finance, Morningstar, Focus, Zeit, Euronews, SEC S-1) und von FinCoach AI nicht unabhängig verifiziert.
+      Datenstand 2026-06-19 &middot; Rechtsstand 2026-06-19. &copy; 2026 TheNextGenerationBanking. Alle Rechte vorbehalten.
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var C = { cyan:'#00CFFF', emerald:'#00CC7A', gold:'#DFAF0F', lavender:'#9933FF', orange:'#FF6B00', magenta:'#E6399A', muted:'#64748B' };
+
+  function baseOpts(legend){
+    return {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:legend, position:'bottom', labels:{ color:'#94A3B8', font:{ size:11 }, boxWidth:12 } } },
+      scales:{}
+    };
+  }
+  function mk(id, cfg){ var el=document.getElementById(id); if(el && window.Chart){ return new Chart(el, cfg); } }
+
+  // Price chart
+  mk('priceChart', {
+    type:'line',
+    data:{
+      labels:['12.06 (IPO)','13.06','14.06','15.06','16.06','17.06','18.06'],
+      datasets:[{
+        label:'Schlusskurs ($)',
+        data:[150.00,168.50,174.20,191.82,195.40,191.00,185.00],
+        borderColor:C.cyan,
+        backgroundColor:'rgba(0,207,255,0.10)',
+        fill:true, tension:0.3, pointRadius:4, pointBackgroundColor:C.cyan
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{
+        y:{ beginAtZero:false, ticks:{ color:'#94A3B8' }, grid:{ color:'rgba(100,116,139,0.15)' } },
+        x:{ ticks:{ color:'#94A3B8' }, grid:{ display:false } }
+      }
+    }
+  });
+
+  // Valuation gap
+  mk('valuationChart', {
+    type:'bar',
+    data:{
+      labels:['Morningstar Fair Value','Pre-IPO-Schätzung','Ist-Zustand 18.06.','Amazon-Vergleich'],
+      datasets:[{ label:'Bewertung in Bio. $', data:[0.78,1.75,2.42,2.20], backgroundColor:[C.muted,'#94A3B8',C.cyan,C.gold] }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{
+        y:{ beginAtZero:true, ticks:{ color:'#94A3B8' }, grid:{ color:'rgba(100,116,139,0.15)' } },
+        x:{ ticks:{ color:'#94A3B8', font:{ size:10 } }, grid:{ display:false } }
+      }
+    }
+  });
+
+  // Donut allocation
+  mk('allocDonut', {
+    type:'doughnut',
+    data:{
+      labels:['USA Core 85%','Europa/UK 10%','Asien/Rest 5%'],
+      datasets:[{ data:[85,10,5], backgroundColor:[C.cyan,C.emerald,C.gold], borderColor:'#0A0F1A', borderWidth:2 }]
+    },
+    options:baseOpts(true)
+  });
+
+  // Simulator
+  var quote = 0.25;
+  var quoteName = 'ING';
+  var input = document.getElementById('allocInput');
+  var res = document.getElementById('allocRes');
+  var btns = document.querySelectorAll('.sim-btn');
+
+  function fmtEuro(n){
+    return n.toLocaleString('de-DE', { minimumFractionDigits:2, maximumFractionDigits:2 }) + ' €';
+  }
+  function calc(){
+    if(!res) return;
+    var raw = input ? parseFloat(input.value) : NaN;
+    if(isNaN(raw) || raw <= 0){
+      res.innerHTML = '<span class="text-tngb-muted">Bestellwert eingeben und Szenario wählen.</span>';
+      return;
+    }
+    var alloc = raw * quote;
+    res.innerHTML =
+      '<div class="text-xs text-tngb-muted uppercase font-bold mb-1">Erwartete Zuteilung &middot; Szenario ' + quoteName + '</div>' +
+      '<div class="text-2xl font-head font-extrabold text-tngb-cyan">' + fmtEuro(alloc) + '</div>' +
+      '<div class="text-xs text-tngb-muted mt-1">Basis: ' + (quote*100).toLocaleString('de-DE') + '% von ' + fmtEuro(raw) + ' Bestellwert</div>' +
+      '<div class="text-xs text-tngb-gold mt-2"><span class="report-badge">SCENARIO</span> Reine Veranschaulichung, nicht unabh. verifiziert. Keine Anlageberatung.</div>';
+  }
+  for(var i=0;i<btns.length;i++){
+    btns[i].addEventListener('click', function(){
+      for(var j=0;j<btns.length;j++){ btns[j].classList.remove('active-sim'); }
+      this.classList.add('active-sim');
+      quote = parseFloat(this.getAttribute('data-quote'));
+      quoteName = this.getAttribute('data-name');
+      calc();
+    });
+  }
+  if(input){ input.addEventListener('input', calc); }
+
+  // Scroll-fade
+  var fadeObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('visible'); } });
+  }, { threshold:0.06 });
+  document.querySelectorAll('.scroll-fade').forEach(function(el){ fadeObs.observe(el); });
+})();
+</script>
+
+</body>
+</html>
