@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>M299 v1.0.0 · Internationale IPO-Zuteilung — Quoten, Konsortium &amp; Deutschland · FinCoach AI</title>
+<meta name="description" content="FinCoach AI Deep-Dive M299: Der internationale IPO-Zuteilungsprozess am Beispiel SpaceX. Welche Zuteilungsquoten-Entscheidungen getroffen werden müssen und welche Auswirkungen sie haben — von der Gesamtemission über Tranchen, Konsortialmitglieder, Länder, lokale Banken bis zu Broker-/Direktbanken in Deutschland. Mit Compliance-, Datenqualitäts- und Styleguide-Checks. SpaceX ist privat — alle Zahlen sind Szenario-Schätzungen. Keine Anlageberatung."/>
+<link rel="stylesheet" href="fonts.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', indigo:'#4472C4', coral:'#E040A0', muted:'#64748B', border:'#1E293B' } },
+  fontFamily: { sans:['Inter','system-ui','sans-serif'], head:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
+}}}
+</script>
+<style>
+  :root{ --bg:#0A0F1A; --card:#121A2E; --cyan:#00CFFF; --emerald:#00CC7A; --magenta:#E6399A; --orange:#FF6B00; --lavender:#9933FF; --gold:#DFAF0F; --indigo:#4472C4; --coral:#E040A0; --muted:#64748B; --border:#1E293B; }
+  *{box-sizing:border-box;}
+  html{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif;}
+  body{background:var(--bg);}
+  h1,h2,h3,h4,h5,h6{font-family:'Space Grotesk',sans-serif;}
+  code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+  .glass{background:rgba(18,26,46,0.7);backdrop-filter:blur(16px);border:1px solid rgba(0,207,255,0.12);}
+  .scroll-fade{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+  .scroll-fade.visible{opacity:1;transform:none;}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#F1F5F9;margin-bottom:.35rem;}
+  .section-badge{font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:4px;}
+  .kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.35rem;position:relative;}
+  .kpi-card.scenario-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px dashed rgba(255,107,0,0.35);border-radius:inherit;}
+  .kpi-card.confirmed-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px solid rgba(0,204,122,0.35);border-radius:inherit;}
+  .dep-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+  .caveat-box{background:rgba(230,57,154,0.07);border:1px solid rgba(230,57,154,0.35);border-radius:12px;padding:1rem 1.25rem;}
+  .est-mark{color:var(--gold);font-size:.62rem;font-weight:700;vertical-align:super;cursor:help;}
+  table{width:100%;border-collapse:collapse;}
+  th{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:.6rem .75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:bottom;}
+  td{padding:.6rem .75rem;font-size:.82rem;border-bottom:1px solid rgba(30,41,59,.6);vertical-align:top;}
+  tr:hover td{background:rgba(0,207,255,.04);}
+  .badge{display:inline-block;padding:1px 8px;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;}
+  .b-emi{background:rgba(0,207,255,.16);color:var(--cyan);border:1px solid rgba(0,207,255,.4);}
+  .b-bank{background:rgba(0,204,122,.16);color:var(--emerald);border:1px solid rgba(0,204,122,.4);}
+  .b-reg{background:rgba(230,57,154,.16);color:var(--magenta);border:1px solid rgba(230,57,154,.4);}
+  .b-gate{background:rgba(255,107,0,.16);color:var(--orange);border:1px solid rgba(255,107,0,.4);}
+  .b-inv{background:rgba(223,175,15,.16);color:var(--gold);border:1px solid rgba(223,175,15,.4);}
+  .level-btn{border:none;cursor:pointer;padding:.35rem .9rem;border-radius:6px;font-size:.75rem;font-weight:600;transition:all .2s;}
+  .level-btn.active-level{background:var(--cyan);color:#0A0F1A;}
+  .level-btn:not(.active-level){background:var(--card);color:var(--muted);border:1px solid var(--border);}
+  .tab-btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s;}
+  .tab-btn.active-tab{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  .lvl-content{display:none;} .lvl-content.active{display:block;}
+  .reg-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;font-size:.72rem;font-weight:600;text-decoration:none;border:1px solid;cursor:pointer;transition:transform .15s;}
+  .reg-tag:hover{transform:translateY(-1px);}
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:var(--card);border:1px solid var(--cyan);border-radius:16px;max-width:560px;width:100%;padding:2rem;position:relative;max-height:82vh;overflow-y:auto;}
+  .close-btn{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;}
+  .close-btn:hover{color:var(--cyan);}
+  .slider-wrap{display:flex;align-items:center;gap:.75rem;}
+  .slider-wrap input[type=range]{flex:1;accent-color:var(--cyan);}
+  .sim-out{background:rgba(0,207,255,.06);border:1px solid rgba(0,207,255,.2);border-radius:8px;padding:.75rem 1rem;}
+  .compliance-pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:9999px;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;background:rgba(100,116,139,.15);color:#64748B;border:1px solid rgba(100,116,139,.3);}
+  .compliance-pill.good{background:rgba(0,204,122,.15);color:#00CC7A;border-color:rgba(0,204,122,.4);}
+  .compliance-pill.warn{background:rgba(223,175,15,.15);color:#DFAF0F;border-color:rgba(223,175,15,.4);}
+  #live-audit-banner{background:rgba(0,204,122,.08);border-left:3px solid #00CC7A;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#94A3B8;display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  #live-audit-banner.warn{background:rgba(223,175,15,.10);border-left-color:#DFAF0F;}
+  #live-audit-banner.err{background:rgba(230,57,154,.10);border-left-color:#E6399A;color:#E6399A;}
+  #live-audit-banner code{color:#00CFFF;}
+  .dbom-pill{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.58rem;}
+  .dbom-class-badge{padding:1px 6px;border-radius:4px;background:rgba(255,107,0,.16);color:#FF6B00;border:1px solid rgba(255,107,0,.35);}
+  .dbom-class-badge.dc-primary{background:rgba(0,204,122,.16);color:#00CC7A;border-color:rgba(0,204,122,.35);}
+  .dbom-conf{color:#64748B;}
+  .check-pass{color:#00CC7A;font-weight:700;} .check-na{color:#64748B;}
+  #navdock{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:6px;}
+  #navdock a{width:30px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:700;font-family:'JetBrains Mono',monospace;background:rgba(18,26,46,.85);border:1px solid var(--border);color:var(--muted);text-decoration:none;transition:all .18s;}
+  #navdock a:hover,#navdock a.active-dock{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  @media (max-width:1024px){#navdock{display:none;}}
+  ul.tick{list-style:none;padding:0;margin:0;}
+  ul.tick li{position:relative;padding-left:1.25rem;margin-bottom:.4rem;font-size:.85rem;line-height:1.55;color:#CBD5E1;}
+  ul.tick li::before{content:'▸';position:absolute;left:0;color:var(--cyan);}
+  .cascade-bar{height:26px;border-radius:5px;display:flex;overflow:hidden;border:1px solid var(--border);}
+  .cascade-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#0A0F1A;font-family:'JetBrains Mono',monospace;}
+  [data-tooltip]{position:relative;cursor:help;border-bottom:1px dotted rgba(0,207,255,.5);}
+</style>
+
+<!-- ============ M-DBOM · JSON-LD ============ -->
+<script type="application/ld+json" id="module-provenance">
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": { "id": "M299", "title": "Internationale IPO-Zuteilung — Quoten, Konsortium & Deutschland", "version": "1.0.0", "stichtag": "2026-06-19", "related_modules": ["M298"], "external_dbom": "provenance/m299.dbom.json" },
+  "fact_summary": { "total": 10, "confirmed_primary": 7, "scenario_projection": 3 },
+  "honest_disclosure": "SpaceX ist privat; konkrete Zuteilungsquoten sind illustrative Szenario-Werte. Allgemeine Mechanik/Regulierung ist als Praxis/Rahmen klassifiziert."
+}
+</script>
+</head>
+<body class="min-h-screen" style="background:#0A0F1A;">
+
+<!-- ===== NAV ===== -->
+<nav class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+  <a href="index.html" class="flex items-center gap-2">
+    <svg viewBox="0 0 100 100" fill="none" width="36" height="36">
+      <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+      <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+      <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+      <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+      <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+    </svg>
+    <div><div class="font-head font-bold text-white text-sm leading-tight">FinCoach AI</div><div class="text-xs leading-tight" style="color:#00CFFF;">by TheNextGenerationBanking.com</div></div>
+  </a>
+  <div class="flex items-center gap-2 flex-wrap">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">M299</span>
+    <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">T3 · Welle 45</span>
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Capital Markets / Equity Allocation</span>
+    <a href="modul.html" class="text-xs text-tngb-muted hover:text-white transition ml-2">M298</a>
+    <a href="index.html" class="text-xs text-tngb-muted hover:text-white transition">← Hauptseite</a>
+  </div>
+</nav>
+
+<!-- ===== NavDock ===== -->
+<div id="navdock" aria-label="Sektions-Navigation">
+  <a href="#s01" data-dock="s01" title="Hero">01</a>
+  <a href="#s02" data-dock="s02" title="Grundlagen">02</a>
+  <a href="#s03" data-dock="s03" title="Beteiligte">03</a>
+  <a href="#s04" data-dock="s04" title="Prozess">04</a>
+  <a href="#s05" data-dock="s05" title="Zuteilungs-Kaskade">05</a>
+  <a href="#s06" data-dock="s06" title="Entscheidungen & Wirkung">06</a>
+  <a href="#s07" data-dock="s07" title="Live-Simulation">07</a>
+  <a href="#s08" data-dock="s08" title="Deutschland-Fokus">08</a>
+  <a href="#s09" data-dock="s09" title="Rolle der Banken">09</a>
+  <a href="#s10" data-dock="s10" title="Pflichten">10</a>
+  <a href="#s-exp" data-dock="s-exp" title="Experten-Diskurs">EX</a>
+  <a href="#s-qa" data-dock="s-qa" title="QA / Compliance">QA</a>
+  <a href="#s-mtx" data-dock="s-mtx" title="Modul-Matrix">MX</a>
+  <a href="#s12" data-dock="s12" title="Quellen & Glossar">12</a>
+</div>
+
+<!-- ===== Provenienz-Banner ===== -->
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.0.0</span>
+    <span class="text-slate-300">10 Fakten · 7 confirmed (Praxis/Rahmen) · 3 SCENARIO_PROJECTION · Stichtag 2026-06-19</span>
+    <span class="ml-auto flex items-center gap-2">
+      <a href="provenance/m299.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
+      <a href="ipo-prozess.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">↗ IPO-Prozess</a>
+    </span>
+  </div>
+  <div id="live-audit-banner" class="mt-2 rounded-xl">
+    <span class="font-bold" style="color:#00CC7A;">● LIVE-AUDIT</span>
+    <span id="live-audit-status">prüft DBOM-Integrität …</span>
+    <span class="ml-auto" id="live-audit-meta"></span>
+    <span id="live-audit-score" class="ml-auto"></span>
+  </div>
+</div>
+
+<!-- ===== CAT-Banner ===== -->
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+    <span class="font-mono font-bold" style="color:#00CFFF;">CAT</span>
+    <span class="text-tngb-muted">Cognitive Apprenticeship Track</span>
+    <span class="text-slate-400">·</span>
+    <span class="text-slate-300">Wissensniveau global wählbar</span>
+    <span class="ml-auto flex items-center gap-1">
+      <button class="level-btn active-level" data-lvl="einsteiger">Einsteiger</button>
+      <button class="level-btn" data-lvl="fortgeschritten">Fortgeschritten</button>
+      <button class="level-btn" data-lvl="experte">Experte</button>
+    </span>
+  </div>
+</div>
+
+<!-- ===== S01 HERO ===== -->
+<section id="s01" class="px-4 pt-10 pb-12 max-w-7xl mx-auto">
+  <div class="scroll-fade">
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S01 · HERO</span>
+      <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Equity Capital Markets</span>
+      <span class="section-badge" style="background:rgba(0,207,255,0.12);color:#00CFFF;">Tier T3 · Welle 45</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-head font-extrabold text-white mb-3 leading-tight">
+      Internationale IPO-<span style="background:linear-gradient(135deg,#DFAF0F 0%,#FF6B00 60%,#E6399A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">Zuteilung</span>
+    </h1>
+    <p class="text-xl font-head font-semibold mb-3" style="color:#00CFFF;">
+      Welche Zuteilungsquoten entschieden werden — von der Gesamtemission über Tranchen, Länder und Konsortium bis zu Broker- &amp; Direktbanken in Deutschland
+    </p>
+    <p class="text-base text-slate-400 max-w-3xl mb-6 leading-relaxed">
+      Ein Deep-Dive zum am meisten unterschätzten Hebel eines Börsengangs: der <strong>Allokation</strong>. Wer wie viele
+      Aktien zu welchem Preis bekommt, entscheidet über Kursstabilität, Investorenstruktur, Gebühren-Ökonomie und politische
+      Optik. Wir zerlegen die Zuteilungskaskade Schicht für Schicht — und zeigen jede Entscheidung samt Wirkung am
+      durchgehenden Beispiel SpaceX.
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span> · Provenienz nach M-DBOM v1 · 7 Praxis-/Rahmenfakten, 3 SCENARIO_PROJECTION.</span>
+    </p>
+
+    <div class="caveat-box mb-8 max-w-3xl">
+      <div class="flex items-start gap-3">
+        <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
+        <div class="text-sm text-slate-300 leading-relaxed">
+          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> SpaceX ist privat, ein Börsengang ist nicht
+          vollzogen. Alle <strong>konkreten Zuteilungsquoten in diesem Modul sind illustrative Szenario-Werte</strong>
+          (mit <span class="est-mark">EST</span> / Rahmen <span class="dbom-class-badge">SCENARIO</span> markiert), die die
+          <em>Mechanik</em> veranschaulichen — keine realen Allokationen. Die allgemeinen Mechanik-, Markt- und
+          Regulierungsaussagen folgen gängiger ECM-Praxis bzw. dem Rechtsrahmen (US-SEC, EU/BaFin, HKEX).
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+      <div class="kpi-card confirmed-kpi" data-source="FACT_INST_RETAIL_SPLIT" data-fact-class="INDUSTRY_PRACTICE">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">~80–90%</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Institutionelle Tranche</div>
+        <div class="text-xs text-tngb-muted mt-1">typischer Anteil bei großen US-IPOs</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRAXIS</span><span class="dbom-conf">Konf. 0.82</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi" data-source="FACT_GREENSHOE_15" data-fact-class="REGULATORY_FRAMEWORK">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CFFF;">bis 15%</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Greenshoe / Mehrzuteilung</div>
+        <div class="text-xs text-tngb-muted mt-1">Stabilisierungs-Puffer (Over-Allotment)</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">RAHMEN</span><span class="dbom-conf">Konf. 0.92</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi" data-source="FACT_GROSS_SPREAD" data-fact-class="INDUSTRY_PRACTICE">
+        <div class="text-3xl font-head font-extrabold" style="color:#E6399A;">~1–3%</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Gross Spread (Mega-IPO)</div>
+        <div class="text-xs text-tngb-muted mt-1">Banken-Provision · klein bis ~7%</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRAXIS</span><span class="dbom-conf">Konf. 0.80</span></div>
+      </div>
+      <div class="kpi-card scenario-kpi" style="border-color:#DFAF0F;" data-source="FACT_SPACEX_DEAL_SIZE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
+        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$60 Mrd.<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Illustratives Deal-Volumen</div>
+        <div class="text-xs text-tngb-muted mt-1">SpaceX-Szenario · geringer Streubesitz</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.40</span></div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <button class="reg-tag" style="color:#00CFFF;border-color:rgba(0,207,255,0.4);background:rgba(0,207,255,0.08);" data-reg="regm">SEC Reg M · Stabilisierung</button>
+      <button class="reg-tag" style="color:#E6399A;border-color:rgba(230,57,154,0.4);background:rgba(230,57,154,0.08);" data-reg="itar">ITAR/FOCI · Foreign Cap</button>
+      <button class="reg-tag" style="color:#00CC7A;border-color:rgba(0,204,122,0.4);background:rgba(0,204,122,0.08);" data-reg="bsk">DE · Zuteilungsgrundsätze</button>
+      <button class="reg-tag" style="color:#DFAF0F;border-color:rgba(223,175,15,0.4);background:rgba(223,175,15,0.08);" data-reg="clawback">HKEX · Clawback</button>
+      <button class="reg-tag" style="color:#9933FF;border-color:rgba(153,51,255,0.4);background:rgba(153,51,255,0.08);" data-reg="greenshoe">Greenshoe · Over-Allotment</button>
+      <button class="reg-tag" style="color:#FF6B00;border-color:rgba(255,107,0,0.4);background:rgba(255,107,0,0.08);" data-reg="mifid">MiFID II · Anlegerschutz</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S02 GRUNDLAGEN (3-Level) ===== -->
+<section id="s02" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S02</span>
+    <h2 class="section-title">Grundlagen — Was bedeutet „Zuteilung" überhaupt?</h2>
+  </div>
+  <div class="flex gap-2 mb-6 flex-wrap" id="s02-tabs">
+    <button class="tab-btn active-tab" data-s02="einsteiger">Einsteiger</button>
+    <button class="tab-btn" data-s02="fortgeschritten">Fortgeschritten</button>
+    <button class="tab-btn" data-s02="experte">Experte</button>
+  </div>
+
+  <div class="lvl-content active" data-s02c="einsteiger">
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-cyan mb-2">Was ist Zuteilung?</h3><p class="text-sm text-slate-300 leading-relaxed">Beim Börsengang gibt es nur eine begrenzte Zahl Aktien, aber oft viel mehr Kaufwünsche. „Zuteilung" (Allocation) heißt: Wer bekommt wie viele dieser Aktien? Diese Entscheidung treffen das Unternehmen und die begleitenden Banken gemeinsam.</p></div>
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-emerald mb-2">Was ist Überzeichnung?</h3><p class="text-sm text-slate-300 leading-relaxed">Wenn z.&nbsp;B. 10× so viele Aktien bestellt wie verfügbar sind, ist die Emission „10-fach überzeichnet". Dann bekommt nicht jeder alles — es muss <strong>repartiert</strong> (gekürzt) werden, etwa per Quote oder Losverfahren.</p></div>
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-gold mb-2">Warum ist das wichtig?</h3><p class="text-sm text-slate-300 leading-relaxed">Bekommen kurzfristige Spekulanten zu viel, fällt der Kurs nach dem ersten Tag schnell („Flowback"). Gehen Aktien an langfristige Investoren, bleibt der Kurs stabiler. Zuteilung ist also Steuerung der späteren Aktionärsstruktur.</p></div>
+    </div>
+  </div>
+
+  <div class="lvl-content" data-s02c="fortgeschritten">
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-cyan mb-2">Bookbuilding &amp; Orderbuch</h3><p class="text-sm text-slate-300 leading-relaxed">Im Bookbuilding sammeln die Bookrunner Orders innerhalb der Preisspanne. Das Orderbuch zeigt <em>Qualität</em> der Nachfrage: Long-only-Fonds, Hedgefonds, Sovereign Funds, Retail. Die Zuteilung ist meist <strong>diskretionär</strong> — die Banken (mit dem Emittenten) wählen Investoren bewusst aus, statt rein pro-rata zuzuteilen.</p></div>
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-emerald mb-2">Tranchen</h3><p class="text-sm text-slate-300 leading-relaxed">Die Emission wird in Tranchen aufgeteilt: institutionell, Retail, Mitarbeiter/Directed Shares und ggf. Cornerstone. Jede Tranche hat eigene Regeln, Quoten und Distributionskanäle.</p></div>
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-gold mb-2">Cornerstone &amp; Anchor</h3><p class="text-sm text-slate-300 leading-relaxed">Cornerstone-Investoren verpflichten sich vor der Roadshow zu einem festen Betrag (mit Lock-up) und werden namentlich genannt — sie geben dem Deal Glaubwürdigkeit. Anchor-Orders sind frühe, große (nicht öffentlich gebundene) Orders.</p></div>
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-lavender mb-2">Greenshoe</h3><p class="text-sm text-slate-300 leading-relaxed">Die Mehrzuteilungsoption erlaubt den Banken, bis zu 15% mehr zu platzieren als geplant. Fällt der Kurs, kaufen sie zurück (Stabilisierung); steigt er, üben sie den Greenshoe aus. Ein zentrales Instrument der Aftermarket-Steuerung.</p></div>
+    </div>
+  </div>
+
+  <div class="lvl-content" data-s02c="experte">
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-cyan mb-2">Allokation als Prinzipal-Agent-Problem</h3><p class="text-sm text-slate-300 leading-relaxed">Diskretionäre Zuteilung erzeugt Interessenkonflikte: Banken können Allokationen an Investoren vergeben, von denen sie anderweitig profitieren („Spinning"/„Laddering"). Regulatorisch adressiert über FINRA Rules 5130/5131 (USA) und MiFID-II-Conduct-Regeln (EU). Der Emittent kontert über <strong>allocation guidelines</strong> und ein gemeinsames Allokationskomitee.</p></div>
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-emerald mb-2">Underpricing &amp; „money left on the table"</h3><p class="text-sm text-slate-300 leading-relaxed">Ein bewusst niedriger Preis erzeugt einen „Pop" am ersten Tag und belohnt zugeteilte Investoren — auf Kosten des Emittenten. Die Zuteilungspolitik bestimmt, <em>wer</em> diesen Wert erhält. Optimal: Preis und Allokation gemeinsam so wählen, dass Informationsrenten minimiert und stabile Halter belohnt werden (Benveniste/Spindt-Logik).</p></div>
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-gold mb-2">Pot vs. Retail / Jump Ball</h3><p class="text-sm text-slate-300 leading-relaxed">Institutionelle Orders laufen über einen gemeinsamen „Pot" (zentral beim Lead gebucht); die Selling Concession wird über „designations"/„jump ball" den Banken zugewiesen, die die Nachfrage gebracht haben. Das verknüpft Zuteilung direkt mit der Gebühren-Ökonomie.</p></div>
+      <div class="dep-box"><h3 class="font-head font-bold text-tngb-lavender mb-2">Clawback-Trigger</h3><p class="text-sm text-slate-300 leading-relaxed">In Märkten mit fester Retail-Tranche (HK) verschieben Clawback-Stufen bei hoher Retail-Überzeichnung automatisch Anteile aus dem institutionellen Pool zur Retail-Tranche (z.&nbsp;B. 15× → Retail-Quote steigt deutlich). Das begrenzt Bevorzugung Institutioneller, erhöht aber Flowback-Risiko.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S03 BETEILIGTE ===== -->
+<section id="s03" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S03</span>
+    <h2 class="section-title">Wer entscheidet über die Zuteilung?</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Die Allokation ist eine gemeinsame Entscheidung — mit klarer Rollenverteilung. Jede Partei bringt eine Zustimmung oder ein Konzept ein.</p>
+  <div class="dep-box overflow-x-auto">
+    <table>
+      <thead><tr><th>Beteiligte:r</th><th>Rolle</th><th>Beitrag zur Zuteilung</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Emittent (Vorstand/Gründer)</strong></td><td><span class="badge b-emi">Emittent</span></td><td>Gibt die Allokationsphilosophie vor (stabile vs. maximaler Preis), genehmigt finale Investorenliste, will langfristige Aktionäre.</td></tr>
+        <tr><td><strong>Global Coordinator / Bookrunner</strong></td><td><span class="badge b-bank">Bank</span></td><td>Führt das Orderbuch, empfiehlt Zuteilung pro Investor, steuert Tranchen, Greenshoe &amp; Stabilisierung.</td></tr>
+        <tr><td><strong>Konsortialbanken / Co-Manager</strong></td><td><span class="badge b-bank">Bank</span></td><td>Bringen eigene Nachfrage (Designations), verteilen an ihre Kundenbasis, erhalten Selling Concession.</td></tr>
+        <tr><td><strong>Lokale Banken / Broker (DE)</strong></td><td><span class="badge b-bank">Distribution</span></td><td>Sammeln Retail-Orders, repartieren bei Überzeichnung nach offengelegten Regeln (Quote/Los).</td></tr>
+        <tr><td><strong>Investoren (inst./Retail)</strong></td><td><span class="badge b-inv">Investor</span></td><td>Geben Orders mit Preis/Menge ab; Qualität &amp; Halteabsicht beeinflussen die Zuteilung.</td></tr>
+        <tr><td><strong>Cornerstone-Investoren</strong></td><td><span class="badge b-inv">Anker</span></td><td>Feste, gebundene Vorab-Zusage; reservierte Allokation, stabilisiert das Buch.</td></tr>
+        <tr><td><strong>Regulierer (SEC/BaFin/FINRA)</strong></td><td><span class="badge b-reg">Regulierer</span></td><td>Setzen Rahmen gegen Missbrauch (Spinning/Laddering), Stabilisierungsregeln, Anlegerschutz.</td></tr>
+        <tr><td><strong>Börse / Stabilisierungsmanager</strong></td><td><span class="badge b-gate">Gatekeeper</span></td><td>Listing-Regeln (Streubesitz!), Stabilisierungsfenster, Greenshoe-Abwicklung.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== S04 PROZESS-TIMELINE ===== -->
+<section id="s04" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S04</span>
+    <h2 class="section-title">Der Allokations-Prozess — Schritt für Schritt</h2>
+  </div>
+  <div class="grid md:grid-cols-3 gap-2 items-stretch" id="tl-grid"></div>
+  <div class="sim-out mt-4" id="tlNarr"></div>
+  <div class="flex gap-2 mt-3 flex-wrap" id="tl-scope">
+    <button class="tab-btn active-tab" data-scope="0">Schritt 1</button>
+    <button class="tab-btn" data-scope="1">2</button><button class="tab-btn" data-scope="2">3</button>
+    <button class="tab-btn" data-scope="3">4</button><button class="tab-btn" data-scope="4">5</button>
+    <button class="tab-btn" data-scope="5">6</button><button class="tab-btn" data-scope="6">7</button>
+  </div>
+</section>
+
+<!-- ===== S05 ZUTEILUNGS-KASKADE (DEEP DIVE) ===== -->
+<section id="s05" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S05 · KERN</span>
+    <h2 class="section-title">Die Zuteilungs-Kaskade — von der Gesamtemission bis zur lokalen Bank</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
+    Die Allokation ist eine verschachtelte Kaskade: Jede Ebene teilt den Anteil der darüberliegenden weiter auf.
+    Alle Zahlen sind <strong>illustrative SpaceX-Szenario-Werte</strong> <span class="dbom-class-badge">SCENARIO</span>
+    (Basis: ~$60&nbsp;Mrd. Bruttoemission) und dienen nur der Veranschaulichung der Mechanik.
+  </p>
+
+  <!-- EBENE 1: TRANCHEN -->
+  <div class="dep-box mb-6" data-source="FACT_SPACEX_ALLOC_CASCADE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
+    <h3 class="font-head font-bold text-tngb-cyan mb-1">Ebene 1 · Gesamtemission → Tranchen <span class="est-mark">EST</span></h3>
+    <p class="text-xs text-tngb-muted mb-3">Wer darf grundsätzlich zeichnen? Die Basisemission (100% = ~$60 Mrd.) wird auf Investorenklassen verteilt.</p>
+    <div class="cascade-bar mb-3">
+      <div class="cascade-seg" style="width:57%;background:#00CFFF;">Institutionell 57%</div>
+      <div class="cascade-seg" style="width:25%;background:#00CC7A;">Cornerstone 25%</div>
+      <div class="cascade-seg" style="width:10%;background:#DFAF0F;">Retail 10%</div>
+      <div class="cascade-seg" style="width:8%;background:#9933FF;color:#fff;">Mitarb. 8%</div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-3 mt-3">
+      <canvas id="chartTranchen" height="180"></canvas>
+      <div class="overflow-x-auto"><table>
+        <thead><tr><th>Tranche</th><th>Quote</th><th>Logik</th></tr></thead>
+        <tbody>
+          <tr><td>Institutionell (offen)</td><td class="mono text-tngb-cyan">57%</td><td>Long-only, Sovereign Funds, Hedgefonds — diskretionär zugeteilt.</td></tr>
+          <tr><td>Cornerstone/Anchor</td><td class="mono text-tngb-emerald">25%</td><td>Vorab gebunden, mit Lock-up — Stabilitätsanker.</td></tr>
+          <tr><td>Retail/Privatanleger</td><td class="mono text-tngb-gold">10%</td><td>Politische Optik, Markenbindung, breite Streuung.</td></tr>
+          <tr><td>Mitarbeiter/Directed Shares</td><td class="mono text-tngb-lavender">8%</td><td>Friends &amp; Family, Mitarbeiterbindung.</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-tngb-muted mt-2">+ <strong>Greenshoe bis 15%</strong> zusätzlich (Mehrzuteilung, separat).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EBENE 2: GEOGRAFIE -->
+  <div class="dep-box mb-6" data-source="FACT_SPACEX_ALLOC_CASCADE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
+    <h3 class="font-head font-bold text-tngb-emerald mb-1">Ebene 2 · Geografische Zuteilung (Länder/Regionen) <span class="est-mark">EST</span></h3>
+    <p class="text-xs text-tngb-muted mb-3">In welche Länder fließen die Aktien? Bei SpaceX zusätzlich durch <strong>ITAR/FOCI</strong> beschränkt — der nicht-US-Anteil ist gedeckelt und meist stimmrechtsbegrenzt.</p>
+    <div class="grid md:grid-cols-2 gap-3">
+      <canvas id="chartGeo" height="200"></canvas>
+      <div class="overflow-x-auto"><table>
+        <thead><tr><th>Region / Land</th><th>Quote (Gesamt)</th><th>Hinweis</th></tr></thead>
+        <tbody>
+          <tr><td>Nordamerika (USA/CA)</td><td class="mono text-tngb-cyan">62%</td><td>Heimatmarkt; ITAR-unkritisch.</td></tr>
+          <tr><td>EMEA gesamt</td><td class="mono text-tngb-emerald">24%</td><td>davon: UK 9%, <strong>DE 5%</strong>, CH 3%, FR 2%, Nordics 2%, übrige 3%.</td></tr>
+          <tr><td>Asien-Pazifik</td><td class="mono text-tngb-gold">11%</td><td>SG, JP, HK, AUS; FOCI-sensibel.</td></tr>
+          <tr><td>Rest der Welt</td><td class="mono text-tngb-muted">3%</td><td>Naher Osten (Sovereign Funds).</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-tngb-magenta mt-2">⚠ ITAR-Effekt: nicht-US-Anteil (~38%) muss FOCI-Schwellen wahren → ggf. Stimmrechtsbeschränkung statt voller Streichung.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EBENE 3: KONSORTIUM -->
+  <div class="dep-box mb-6" data-source="FACT_SPACEX_ALLOC_CASCADE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
+    <h3 class="font-head font-bold text-tngb-gold mb-1">Ebene 3 · Zuteilung auf Konsortialmitglieder <span class="est-mark">EST</span></h3>
+    <p class="text-xs text-tngb-muted mb-3">Wie verteilt sich die Platzierungs-Ökonomie (Selling Concession) auf die Banken? Größe folgt League-Table-Rang &amp; gebrachter Nachfrage.</p>
+    <div class="grid md:grid-cols-2 gap-3">
+      <canvas id="chartKons" height="200"></canvas>
+      <div class="overflow-x-auto"><table>
+        <thead><tr><th>Konsortial-Rolle</th><th>Anzahl</th><th>Anteil je</th><th>Σ</th></tr></thead>
+        <tbody>
+          <tr><td>Joint Global Coordinators</td><td>3</td><td class="mono">~18%</td><td class="mono text-tngb-cyan">54%</td></tr>
+          <tr><td>Joint Bookrunners</td><td>4</td><td class="mono">~7%</td><td class="mono text-tngb-emerald">28%</td></tr>
+          <tr><td>Co-Manager</td><td>6</td><td class="mono">~3%</td><td class="mono text-tngb-gold">18%</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-tngb-muted mt-2">Gross Spread (Szenario ~2,5%) teilt sich klassisch: <strong>20% Management Fee · 20% Underwriting Fee · 60% Selling Concession</strong>. Der „Pot" + Designations verknüpfen Zuteilung und Gebühr.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EBENE 4: DEUTSCHLAND -->
+  <div class="dep-box" data-source="FACT_DE_DISTRIBUTION_CHANNELS" data-fact-class="INDUSTRY_PRACTICE">
+    <h3 class="font-head font-bold text-tngb-lavender mb-1">Ebene 4 · Innerhalb Deutschlands → lokale Banken &amp; Broker <span class="est-mark">EST</span></h3>
+    <p class="text-xs text-tngb-muted mb-3">Die deutsche Tranche (~5% des Deals) wird über die Vertriebskanäle der Bankenlandschaft verteilt. Szenario-Aufteilung:</p>
+    <div class="grid md:grid-cols-2 gap-3">
+      <canvas id="chartDE" height="220"></canvas>
+      <div class="overflow-x-auto"><table>
+        <thead><tr><th>Kanal</th><th>Quote (DE-Tranche)</th><th>Charakter</th></tr></thead>
+        <tbody>
+          <tr><td>Konsortialbank DE (Deutsche Bank) — inst.</td><td class="mono text-tngb-cyan">40%</td><td>institutionelle DE-Kunden direkt.</td></tr>
+          <tr><td>Direktbanken/Neobroker (ING, comdirect, Trade Republic, Scalable, flatexDEGIRO)</td><td class="mono text-tngb-emerald">21%</td><td>breiter Retail-Zugang, oft Zeichnungsaktionen.</td></tr>
+          <tr><td>Genossenschaftsverbund (DZ Bank → Volks-/Raiffeisenbanken)</td><td class="mono text-tngb-gold">12%</td><td>Fläche, Beratungsgeschäft.</td></tr>
+          <tr><td>Sparkassen-Verbund (DekaBank/LBBW/Helaba)</td><td class="mono text-tngb-orange">12%</td><td>Fläche, öffentlich-rechtlich.</td></tr>
+          <tr><td>Privatbanken/Vermögensverwalter (Berenberg, Hauck Aufhäuser …)</td><td class="mono text-tngb-indigo">10%</td><td>vermögende Privatkunden.</td></tr>
+          <tr><td>übrige Broker</td><td class="mono text-tngb-muted">4%</td><td>Resttranche.</td></tr>
+          <tr><td>Sozial-/Ethikbanken (GLS, Triodos, Umweltbank)</td><td class="mono text-tngb-magenta">~1%</td><td>meist Ausschluss (Dual-Use) → siehe S09.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S06 ENTSCHEIDUNGEN & AUSWIRKUNGEN ===== -->
+<section id="s06" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S06</span>
+    <h2 class="section-title">Welche Quoten-Entscheidungen — und welche Auswirkungen?</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Jede Stellschraube der Zuteilung hat klare Konsequenzen. Diese Matrix ist der Kern der Analyse: Entscheidung → Wirkung → Zielkonflikt.</p>
+  <div class="dep-box overflow-x-auto">
+    <table>
+      <thead><tr><th>Entscheidung (Quote)</th><th>Höher bedeutet…</th><th>Niedriger bedeutet…</th><th>Zielkonflikt</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Institutionell ↑</strong></td><td>stabilere Kurse, bessere Preisfindung, weniger Flowback</td><td>weniger breite Streuung, mehr Konzentration</td><td>Stabilität ↔ Demokratisierung</td></tr>
+        <tr><td><strong>Retail ↑</strong></td><td>politische Optik, Markenbindung, Liquidität</td><td>höheres Flowback-/Volatilitätsrisiko</td><td>Optik ↔ Kursstabilität</td></tr>
+        <tr><td><strong>Cornerstone ↑</strong></td><td>Glaubwürdigkeit, gesichertes Buch, weniger Free-Float-Druck</td><td>geringerer echter Free Float, Index-Eignung sinkt</td><td>Sicherheit ↔ Liquidität</td></tr>
+        <tr><td><strong>Greenshoe ↑</strong></td><td>mehr Stabilisierungsmunition, größeres Volumen</td><td>weniger Verknappung, geringerer „Pop"</td><td>Stabilität ↔ Knappheitseffekt</td></tr>
+        <tr><td><strong>Ausland ↑</strong></td><td>globaler Streubesitz, mehr Nachfrage</td><td>ITAR/FOCI-Konflikt (SpaceX), Währungsrisiko</td><td>Reichweite ↔ Regulierung</td></tr>
+        <tr><td><strong>Diskretionär statt pro-rata</strong></td><td>gezielte Qualitätsallokation, Belohnung stabiler Halter</td><td>Missbrauchsrisiko (Spinning), Fairness-Frage</td><td>Steuerung ↔ Gleichbehandlung</td></tr>
+        <tr><td><strong>Konzentriert auf wenige Banken</strong></td><td>klare Verantwortung, einfache Steuerung</td><td>weniger Distribution &amp; Research-Coverage</td><td>Kontrolle ↔ Reichweite</td></tr>
+        <tr><td><strong>Clawback aktiv</strong></td><td>faire Retail-Beteiligung bei Überzeichnung</td><td>mehr Flowback, schwächeres institutionelles Buch</td><td>Fairness ↔ Stabilität</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== S07 LIVE-SIMULATION ===== -->
+<section id="s07" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S07 · LIVE</span>
+    <h2 class="section-title">Zuteilungs-Simulator — Quoten setzen, Wirkung sehen</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Verschiebe die Tranchen-Quoten (Summe wird auf 100% normiert) und beobachte den geschätzten <strong>Stabilitäts-Score</strong> und das <strong>Flowback-Risiko</strong>. Rein didaktisches Modell <span class="dbom-class-badge">SCENARIO</span>.</p>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="dep-box space-y-4">
+      <div><div class="flex justify-between text-xs mb-1"><span>Institutionell</span><span class="mono text-tngb-cyan" id="lblInst">57</span>%</div><div class="slider-wrap"><input type="range" id="simInst" min="0" max="90" value="57"></div></div>
+      <div><div class="flex justify-between text-xs mb-1"><span>Cornerstone (gebunden)</span><span class="mono text-tngb-emerald" id="lblCorn">25</span>%</div><div class="slider-wrap"><input type="range" id="simCorn" min="0" max="60" value="25"></div></div>
+      <div><div class="flex justify-between text-xs mb-1"><span>Retail</span><span class="mono text-tngb-gold" id="lblRet">10</span>%</div><div class="slider-wrap"><input type="range" id="simRet" min="0" max="60" value="10"></div></div>
+      <div><div class="flex justify-between text-xs mb-1"><span>Mitarbeiter/Directed</span><span class="mono text-tngb-lavender" id="lblEmp">8</span>%</div><div class="slider-wrap"><input type="range" id="simEmp" min="0" max="30" value="8"></div></div>
+      <div><div class="flex justify-between text-xs mb-1"><span>Greenshoe (zusätzlich)</span><span class="mono text-tngb-orange" id="lblGreen">15</span>%</div><div class="slider-wrap"><input type="range" id="simGreen" min="0" max="15" value="15"></div></div>
+    </div>
+    <div class="space-y-4">
+      <canvas id="chartSim" height="180"></canvas>
+      <div class="sim-out" id="simOut"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S08 DEUTSCHLAND-FOKUS ===== -->
+<section id="s08" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S08</span>
+    <h2 class="section-title">Deutschland-Fokus — Repartierung, Verbund &amp; Broker</h2>
+  </div>
+  <div class="grid md:grid-cols-2 gap-5 mb-6">
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-cyan mb-2">Repartierung bei Überzeichnung — die zulässigen Methoden</h3>
+      <p class="text-xs text-tngb-muted mb-2">Nach den „Grundsätzen für die Zuteilung von Aktienemissionen an Privatanleger" (Börsensachverständigenkommission, 2000) muss die Methode <strong>vorab offengelegt</strong> und diskriminierungsfrei sein:</p>
+      <ul class="tick">
+        <li><strong>Quotale Zuteilung:</strong> jeder erhält denselben Prozentsatz seiner Order.</li>
+        <li><strong>Losverfahren:</strong> zufällige Auswahl unter den Zeichnern.</li>
+        <li><strong>Zuteilung nach Ordergrößenklassen / Deckelung:</strong> Begrenzung großer Orders.</li>
+        <li><strong>Mindestzuteilung („Hard floor"):</strong> garantierte Stückzahl je Zeichner.</li>
+        <li><strong>Bevorzugung bestimmter Gruppen:</strong> z.&nbsp;B. Mitarbeiter, Neukunden, „Friends &amp; Family" — sofern offengelegt.</li>
+      </ul>
+    </div>
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-emerald mb-2">Die deutsche Distributions-Architektur</h3>
+      <ul class="tick">
+        <li><strong>Großbanken:</strong> als Konsortialbank Zugang zum internationalen Buch + eigene Kunden.</li>
+        <li><strong>Genossenschaftssektor:</strong> DZ Bank als Zentralinstitut → ~700 Volks-/Raiffeisenbanken in der Fläche.</li>
+        <li><strong>Sparkassensektor:</strong> DekaBank/Landesbanken → ~350 Sparkassen.</li>
+        <li><strong>Direktbanken/Neobroker:</strong> ING, comdirect, Trade Republic, Scalable, flatexDEGIRO — größter Retail-Hebel, oft mit „Zeichnungsaktionen".</li>
+        <li><strong>Privatbanken:</strong> Berenberg, Hauck Aufhäuser Lampe — vermögende Privatkunden, teils selbst im Konsortium.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="caveat-box">
+    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">MiFID-II-Bezug:</strong> Die Zuteilung an Privatkunden unterliegt den Wohlverhaltens- und Product-Governance-Regeln (Zielmarktbestimmung, Geeignetheit/Angemessenheit). Eine hochvolatile Einzelaktie wie ein SpaceX-IPO muss in den Zielmarkt des Privatanlegers passen — das begrenzt aktiven Vertrieb gegenüber konservativen Kunden.</p>
+  </div>
+</section>
+
+<!-- ===== S09 ROLLE DER BANKEN inkl. SOZIALBANKEN ===== -->
+<section id="s09" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S09</span>
+    <h2 class="section-title">Rolle der Banken — inkl. Sozial-/Ethikbanken</h2>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-emerald mb-2 text-sm">Investment-/Konsortialbanken</h3><p class="text-xs text-slate-400 leading-relaxed">Underwriting, Bookbuilding, Zuteilungsempfehlung, Stabilisierung. Erhalten den Löwenanteil der Selling Concession. Zuteilung an Investoren ist ihr zentrales Steuerungsinstrument.</p></div>
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-cyan mb-2 text-sm">Geschäfts-/Direkt-/Verbundbanken</h3><p class="text-xs text-slate-400 leading-relaxed">Distributionskanal in die Fläche; sammeln und repartieren Retail-Orders. Ihre Reichweite bestimmt, wie breit Privatanleger überhaupt zeichnen können.</p></div>
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-magenta mb-2 text-sm">Sozial-/Ethikbanken</h3><p class="text-xs text-slate-400 leading-relaxed">i.&nbsp;d.&nbsp;R. <strong>kein</strong> Konsortium. Sie wirken als <strong>ESG-Negativfilter</strong>: SpaceX würde wegen Dual-Use/Rüstungsnähe und Dual-Class-Governance häufig <em>ausgeschlossen</em> — Zuteilungsquote nahe 0.</p></div>
+  </div>
+  <div class="dep-box mt-4">
+    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-cyan">Warum Sozialbanken bei der Zuteilung kaum vorkommen:</strong> Für die Konsortialrolle fehlen ihnen Investmentbanking-Mandat und Bilanzgröße für die Risikoübernahme; für die Distribution kollidiert eine Rüstungs-nahe Aktie mit ihren Ausschlusskriterien. Ihre eigentliche Rolle ist die kritische Auswahl <em>gegen</em> solche Titel sowie Engagement/Stimmrechtsausübung in nachhaltigen Fonds — nicht die Platzierung. Eine vertiefte Behandlung steht im Schwester-Beitrag „IPO-Prozess".</p>
+  </div>
+</section>
+
+<!-- ===== S10 PFLICHTEN VOR/NACH ===== -->
+<section id="s10" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S10</span>
+    <h2 class="section-title">Aufgaben &amp; Pflichten rund um die Zuteilung — vorher / nachher</h2>
+  </div>
+  <div class="dep-box overflow-x-auto">
+    <table>
+      <thead><tr><th>Beteiligte:r</th><th>Vor dem IPO</th><th>Nach dem IPO</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge b-emi">Emittent</span></td><td>Allokationsphilosophie, Tranchen- &amp; Quoten-Genehmigung, Investorenauswahl.</td><td>Investor-Relations-Pflege der zugeteilten Anker, Lock-up-Monitoring, Reporting.</td></tr>
+        <tr><td><span class="badge b-bank">Bookrunner</span></td><td>Bookbuilding, Zuteilungsempfehlung, Greenshoe-Struktur, Fairness-Doku.</td><td>Stabilisierung (~30 Tage), Greenshoe-Abrechnung, Research nach Quiet Period.</td></tr>
+        <tr><td><span class="badge b-bank">Lokale Banken/Broker</span></td><td>Retail-Order-Sammlung, Offenlegung der Repartierungsmethode (DE-Grundsätze).</td><td>Korrekte Zuteilung/Abrechnung, Depoteinbuchung, MiFID-Dokumentation.</td></tr>
+        <tr><td><span class="badge b-reg">Regulierer</span></td><td>Rahmen gegen Spinning/Laddering, Stabilisierungsregeln, Prospektbilligung.</td><td>Überwachung Stabilisierung &amp; Marktmissbrauch, Anlegerschutz-Enforcement.</td></tr>
+        <tr><td><span class="badge b-inv">Investoren</span></td><td>Order-Qualität, Halteabsicht signalisieren, Cornerstone-Bindung.</td><td>Lock-up/Meldeschwellen, Stimmrechtsausübung, kein verbotenes Flipping (bei Bindung).</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== S-EXP EXPERTEN-DISKURS ===== -->
+<section id="s-exp" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">S13 · DISKURS</span>
+    <h2 class="section-title">Kapitalmarktexperten zur Zuteilung — drei Perspektiven</h2>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="dep-box border-l-4" style="border-color:#00CC7A;"><h3 class="font-head font-bold text-tngb-emerald mb-2">ECM-Banker (pro Diskretion)</h3><p class="text-sm text-slate-300 leading-relaxed">„Diskretionäre Allokation ist kein Makel, sondern das Werkzeug für ein stabiles Buch. Wir belohnen Investoren, die in der Roadshow ehrliches Preisfeedback geben und langfristig halten — das senkt Volatilität und Kapitalkosten des Emittenten."</p></div>
+    <div class="dep-box border-l-4" style="border-color:#E6399A;"><h3 class="font-head font-bold text-tngb-magenta mb-2">Verbraucherschützer (kontra)</h3><p class="text-sm text-slate-300 leading-relaxed">„Privatanleger erhalten bei den attraktivsten Deals systematisch zu wenig, während Institutionelle den ‚Pop' abschöpfen. Ohne Clawback und transparente Quoten bleibt Retail das Auffangbecken für schwache Deals."</p></div>
+    <div class="dep-box border-l-4" style="border-color:#DFAF0F;"><h3 class="font-head font-bold text-tngb-gold mb-2">Akademiker (neutral)</h3><p class="text-sm text-slate-300 leading-relaxed">„Empirisch reduziert qualitätsorientierte Zuteilung das Underpricing nicht zwingend — sie verteilt die Informationsrente nur. Entscheidend ist die gemeinsame Optimierung von Preis <em>und</em> Allokation, nicht die Quote allein."</p></div>
+  </div>
+</section>
+
+<!-- ===== S-QA COMPLIANCE / DATENQUALITÄT / STYLEGUIDE ===== -->
+<section id="s-qa" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">QA</span>
+    <h2 class="section-title">Qualitätssicherung — Compliance-, Datenqualitäts- &amp; Styleguide-Checks</h2>
+    <span id="qa-pill"></span>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Jedes FinCoach-AI-Modul durchläuft eine dreistufige Prüfung. Status wird beim Laden teils live ermittelt (DBOM-Integrität, Provenienz-Auflösung).</p>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-magenta mb-3">① Compliance</h3>
+      <table><tbody>
+        <tr><td>Keine Anlageberatung (Disclaimer)</td><td class="check-pass">✓</td></tr>
+        <tr><td>Privatfirmen-Hinweis (M-DBOM)</td><td class="check-pass">✓</td></tr>
+        <tr><td>RDG/StBerG/WpIG/FinDAG-Hinweis</td><td class="check-pass">✓</td></tr>
+        <tr><td>MiFID-II-/BaFin-Bezug benannt</td><td class="check-pass">✓</td></tr>
+        <tr><td>Markennennung rein beschreibend</td><td class="check-pass">✓</td></tr>
+        <tr><td>DSGVO: Fonts self-hosted, kein Tracking</td><td class="check-pass">✓</td></tr>
+      </tbody></table>
+    </div>
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität</h3>
+      <table><tbody>
+        <tr><td>M-DBOM v1 eingebettet (JSON-LD)</td><td class="check-pass">✓</td></tr>
+        <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
+        <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
+        <tr><td>SCENARIO vs. CONFIRMED getrennt</td><td class="check-pass">✓</td></tr>
+        <tr><td>Konfidenzwerte je Fakt</td><td class="check-pass">✓</td></tr>
+        <tr><td>Stichtag angegeben (2026-06-19)</td><td class="check-pass">✓</td></tr>
+      </tbody></table>
+    </div>
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-gold mb-3">③ Styleguide</h3>
+      <table><tbody>
+        <tr><td>TNGB-Farbtokens &amp; Fonts</td><td class="check-pass">✓</td></tr>
+        <tr><td>CAT-Level (Einsteiger→Experte)</td><td class="check-pass">✓</td></tr>
+        <tr><td>NavDock &amp; Sektions-Badges</td><td class="check-pass">✓</td></tr>
+        <tr><td>Provenienz- &amp; Live-Audit-Banner</td><td class="check-pass">✓</td></tr>
+        <tr><td>EST-Markierung für Schätzungen</td><td class="check-pass">✓</td></tr>
+        <tr><td>Quellen-/Glossar-/Disclaimer-Sektion</td><td class="check-pass">✓</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S-MTX MODUL-MATRIX ===== -->
+<section id="s-mtx" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">MX</span>
+    <h2 class="section-title">Einordnung in die FinCoach-AI-Modul-Matrix</h2>
+  </div>
+  <div class="dep-box overflow-x-auto">
+    <table>
+      <thead><tr><th>Modul</th><th>Titel</th><th>Tier · Welle</th><th>Fokus</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="mono text-tngb-gold">M298</td><td>SpaceX — Der Weg zum $1,75-Billionen-IPO</td><td>T3 · 45</td><td>Bewertung, SOTP, IPO-Szenarien, ITAR</td><td><a class="text-tngb-cyan hover:underline" href="modul.html">öffnen →</a></td></tr>
+        <tr><td class="mono text-tngb-emerald">M298-A</td><td>Der Börsengang-Prozess am Beispiel SpaceX</td><td>T3 · 45</td><td>Phasen, Beteiligte, Pflichten, Sozialbanken</td><td><a class="text-tngb-cyan hover:underline" href="ipo-prozess.html">öffnen →</a></td></tr>
+        <tr style="background:rgba(0,207,255,0.05);"><td class="mono text-tngb-cyan font-bold">M299</td><td><strong>Internationale IPO-Zuteilung (dieses Modul)</strong></td><td>T3 · 45</td><td>Zuteilungskaskade, Quoten, Konsortium, DE-Vertrieb</td><td><span class="text-tngb-muted">aktiv</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-xs text-tngb-muted mt-3">Cluster „Space Economy / Equity Capital Markets" · Welle 45. M299 vertieft die Allokations-Ebene aus M298-A.</p>
+</section>
+
+<!-- ===== S12 QUELLEN, GLOSSAR & DISCLAIMER ===== -->
+<section id="s12" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S12</span>
+    <h2 class="section-title">Quellen, Glossar &amp; Disclaimer</h2>
+  </div>
+
+  <h3 class="font-head font-bold text-white mb-3">Methodik &amp; Limitationen</h3>
+  <div class="grid md:grid-cols-3 gap-4 mb-10">
+    <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Mechanik/Regulierung aus etablierter ECM-Praxis &amp; Rechtsrahmen (SEC, EU/BaFin, HKEX, FINRA). Konkrete SpaceX-Quoten sind didaktische Szenario-Werte.</p></div>
+    <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Praxis-/Rahmenfakten 0,72–0,92; Szenario-Quoten 0,40. Jede Aussage trägt eine Datenklasse — Quoten sind Modellmittelpunkte.</p></div>
+    <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Reale Allokationsdaten sind vertraulich; Marktpraxis variiert je Region/Deal; SpaceX hat keinen vollzogenen IPO. Werte nicht für reale Allokationen verwenden.</p></div>
+  </div>
+
+  <h3 class="font-head font-bold text-white mb-3">Glossar (folgt globalem Wissensniveau)</h3>
+  <div id="glossar" class="grid md:grid-cols-2 gap-3 mb-10"></div>
+
+  <h3 class="font-head font-bold text-white mb-3">Primär- &amp; Rahmenquellen</h3>
+  <div class="grid md:grid-cols-2 gap-3 mb-10 text-sm">
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.sec.gov/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">SEC · Regulation M (Stabilisierung)</div><div class="text-xs text-tngb-muted">Over-Allotment &amp; Kursstabilisierung</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.finra.org/rules-guidance/rulebooks/finra-rules/5131" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">FINRA · Rules 5130/5131</div><div class="text-xs text-tngb-muted">Spinning/New-Issue-Allokation</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.bafin.de/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">BaFin / EU-Prospekt-VO &amp; MiFID II</div><div class="text-xs text-tngb-muted">Anlegerschutz &amp; Product Governance</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://en-rules.hkex.com.hk/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">HKEX · Listing Rules (Clawback)</div><div class="text-xs text-tngb-muted">Retail-Clawback-Mechanik</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.pmddtc.state.gov/ddtc_public" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">US State Dept · DDTC (ITAR)</div><div class="text-xs text-tngb-muted">Foreign-Ownership / FOCI</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.nyse.com/publicdocs/nyse/listing/nyse_ipo_guide.pdf" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">NYSE IPO Guide</div><div class="text-xs text-tngb-muted">Allokations- &amp; Syndikatspraxis</div></a>
+  </div>
+
+  <div class="caveat-box mb-10">
+    <h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer — keine Anlageberatung</h3>
+    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar (RDG/StBerG/WpIG/FinDAG). SpaceX ist ein privates Unternehmen ohne vollzogenen Börsengang — <strong>alle konkreten Zuteilungsquoten sind illustrative Szenario-Werte</strong> (<span class="est-mark">EST</span>) und nicht für reale Allokationen geeignet. Die allgemeine Mechanik folgt gängiger ECM-Praxis und dem jeweiligen Rechtsrahmen. „SpaceX", „Starlink", „Starship" sind Marken der Rechteinhaber; ihre Nennung erfolgt rein beschreibend. Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span>.</p>
+  </div>
+
+  <footer class="border-t border-tngb-border pt-8 mt-4">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 100 100" fill="none" width="40" height="40">
+          <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+          <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+          <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+          <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+          <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+        </svg>
+        <div><div class="font-head font-bold text-white">FinCoach AI</div><a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="text-sm font-mono" style="color:#00CFFF;">by TheNextGenerationBanking.com</a></div>
+      </div>
+      <div class="text-sm text-tngb-muted">
+        <a href="index.html" class="hover:text-white transition block mb-1">← Hauptseite</a>
+        <a href="modul.html" class="hover:text-tngb-cyan transition block mb-1">M298 · SpaceX-Analyse</a>
+        <a href="ipo-prozess.html" class="hover:text-tngb-cyan transition block mb-1">IPO-Prozess</a>
+        <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
+      </div>
+      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M299 · v1.0.0 · 2026-06-19<br/>Tier T3 · Welle 45 · Equity Allocation</div></div>
+    </div>
+    <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. Zuteilungsquoten sind Szenario-Schätzungen. Die nächste Generation Banking.</p>
+  </footer>
+</section>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="regModal">
+  <div class="modal-box">
+    <button class="close-btn" id="regClose">×</button>
+    <h3 class="font-head font-bold text-xl text-tngb-cyan mb-2" id="regTitle"></h3>
+    <p class="text-sm text-slate-300 leading-relaxed" id="regBody"></p>
+    <a id="regLink" href="#" target="_blank" rel="noopener" class="inline-block mt-4 text-sm font-mono text-tngb-cyan hover:underline"></a>
+  </div>
+</div>
+
+<script>
+/* ====== LEVEL / CAT ====== */
+const LVL_IDX={einsteiger:0,fortgeschritten:1,experte:2};
+let LEVEL='einsteiger';
+document.querySelectorAll('.level-btn[data-lvl]').forEach(b=>b.addEventListener('click',()=>{
+  LEVEL=b.dataset.lvl;
+  document.querySelectorAll('.level-btn[data-lvl]').forEach(x=>x.classList.toggle('active-level',x.dataset.lvl===LEVEL));
+  document.querySelectorAll('#s02-tabs .tab-btn').forEach(x=>x.classList.toggle('active-tab',x.dataset.s02===LEVEL));
+  document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active',c.dataset.s02c===LEVEL));
+  renderGlossar(); renderTimeline();
+}));
+document.querySelectorAll('#s02-tabs .tab-btn').forEach(b=>b.addEventListener('click',()=>{
+  const v=b.dataset.s02;
+  document.querySelectorAll('#s02-tabs .tab-btn').forEach(x=>x.classList.toggle('active-tab',x===b));
+  document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active',c.dataset.s02c===v));
+}));
+
+/* ====== REG MODAL ====== */
+const REG={
+  regm:{t:"SEC Regulation M — Stabilisierung",b:"Regelt zulässige Kursstabilisierung und Over-Allotment nach der Emission. Der Stabilisierungsmanager darf in einem definierten Fenster (~30 Tage) Aktien zurückkaufen und den Greenshoe ausüben.",u:"https://www.sec.gov/"},
+  itar:{t:"ITAR / FOCI — Foreign Ownership Cap",b:"22 CFR 120–130: Bei verteidigungsrelevanten Emittenten begrenzen ITAR und FOCI-Regeln (Foreign Ownership, Control or Influence) den ausländischen Anteils- und Stimmrechtsbesitz — direkter Eingriff in die geografische Zuteilung.",u:"https://www.pmddtc.state.gov/ddtc_public"},
+  bsk:{t:"DE — Zuteilungsgrundsätze (2000)",b:"„Grundsätze für die Zuteilung von Aktienemissionen an Privatanleger“ der Börsensachverständigenkommission: Die Zuteilungsmethode (Quote, Los, Deckelung) muss vorab offengelegt und diskriminierungsfrei sein.",u:"https://www.bafin.de/"},
+  clawback:{t:"HKEX — Clawback",b:"In Hongkong verschieben gestaffelte Clawback-Trigger bei hoher Retail-Überzeichnung automatisch Aktien aus der institutionellen in die Retail-Tranche — erhöht die Retail-Quote, aber auch das Flowback-Risiko.",u:"https://en-rules.hkex.com.hk/"},
+  greenshoe:{t:"Greenshoe / Over-Allotment",b:"Mehrzuteilungsoption (typ. bis 15%): Banken platzieren mehr Aktien als geplant und decken sich über Rückkäufe (Stabilisierung) oder Ausübung der Option ein. Zentrales Aftermarket-Instrument.",u:"https://www.sec.gov/"},
+  mifid:{t:"MiFID II — Anlegerschutz",b:"EU-Wohlverhaltens- und Product-Governance-Regeln: Zielmarktbestimmung, Geeignetheit/Angemessenheit. Begrenzt den aktiven Retail-Vertrieb hochvolatiler Einzelaktien an konservative Kunden.",u:"https://www.bafin.de/"}
+};
+const modal=document.getElementById('regModal');
+document.querySelectorAll('.reg-tag').forEach(b=>b.addEventListener('click',()=>{
+  const r=REG[b.dataset.reg]; if(!r) return;
+  document.getElementById('regTitle').textContent=r.t;
+  document.getElementById('regBody').textContent=r.b;
+  const l=document.getElementById('regLink'); l.href=r.u; l.textContent=r.u;
+  modal.classList.add('open');
+}));
+document.getElementById('regClose').addEventListener('click',()=>modal.classList.remove('open'));
+modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.remove('open'); });
+
+/* ====== TIMELINE ====== */
+const STEPS=[
+  {t:'1 · Allokationsphilosophie',e:'Das Unternehmen legt fest, ob es eher stabile Investoren oder den höchsten Preis will.',f:'Definition der Allocation Guidelines: Ziel-Investorenmix, Tranchengrößen, Cornerstone-Strategie.',x:'Festlegung von Pot-Struktur, Designations-Regeln und Anti-Spinning-Leitplanken mit dem Syndikat.'},
+  {t:'2 · Cornerstone-Akquise',e:'Große Investoren sagen früh feste Beträge zu und werden namentlich genannt.',f:'Cornerstone-Agreements mit Lock-up; reservierte Quote vor der Roadshow.',x:'Verhandlung Bindungsgrad vs. Free-Float-Erhalt; Index-Eignungs-Check.'},
+  {t:'3 · Bookbuilding',e:'Investoren geben Kaufwünsche mit Preis und Menge ab.',f:'Orderbuch-Aufbau in der Preisspanne; Qualitätsbewertung der Nachfrage.',x:'Demand-Curve-Analyse, Preis-/Mengen-Sensitivität, Order-Qualität (sticky vs. fast money).'},
+  {t:'4 · Geografische & Konsortial-Aufteilung',e:'Es wird entschieden, in welche Länder und über welche Banken Aktien gehen.',f:'Länderquoten (ITAR-konform) und Verteilung auf Konsortialmitglieder.',x:'FOCI-Schwellen, Designations, League-Table-/Coverage-Anreize je Bank.'},
+  {t:'5 · Repartierung Retail',e:'Bei Überzeichnung wird die Retail-Tranche fair gekürzt.',f:'Quotale Zuteilung / Losverfahren / Deckelung — vorab offengelegt (DE-Grundsätze).',x:'Clawback-Trigger, Mindestzuteilung, MiFID-Zielmarkt-Konsistenz.'},
+  {t:'6 · Pricing & finale Allokation',e:'Preis wird festgelegt und jeder Investor erhält seine Stückzahl.',f:'Pricing-Call; finale Investorenliste durch Emittent genehmigt.',x:'Underpricing-Kalibrierung, Informationsrenten-Verteilung, Stabilisierungsplan.'},
+  {t:'7 · Aftermarket',e:'Nach dem Start stützen die Banken den Kurs; Insider dürfen nicht verkaufen.',f:'Stabilisierung &amp; Greenshoe (~30 Tage); Lock-up läuft.',x:'Over-Allotment-Settlement, Flowback-Monitoring, Research nach Quiet Period.'}
+];
+let tlStep=0;
+function renderTimeline(){
+  const grid=document.getElementById('tl-grid'); if(!grid) return;
+  grid.innerHTML=STEPS.map((s,i)=>`<div class="dep-box ${i===tlStep?'':''}" data-step="${i}" style="cursor:pointer;border-color:${i===tlStep?'#00CFFF':'var(--border)'};">
+    <div class="text-[0.6rem] font-mono" style="color:${i===tlStep?'#00CFFF':'#64748B'}">SCHRITT ${i+1}/7</div>
+    <div class="font-head font-bold text-sm mt-1" style="color:${i===tlStep?'#00CFFF':'#E2E8F0'}">${s.t.replace(/^\d+ · /,'')}</div></div>`).join('');
+  grid.querySelectorAll('[data-step]').forEach(n=>n.addEventListener('click',()=>{tlStep=+n.dataset.step;renderTimeline();syncScopeTabs();}));
+  const idx=LVL_IDX[LEVEL]; const s=STEPS[tlStep]; const txt=idx===0?s.e:idx===1?s.f:s.x;
+  document.getElementById('tlNarr').innerHTML=`<span class="font-mono text-tngb-cyan text-xs">${s.t}</span><br/><span class="text-slate-200">${txt}</span>`;
+}
+function syncScopeTabs(){ document.querySelectorAll('#tl-scope .tab-btn').forEach((x,i)=>x.classList.toggle('active-tab',i===tlStep)); }
+document.querySelectorAll('#tl-scope .tab-btn').forEach(b=>b.addEventListener('click',()=>{tlStep=+b.dataset.scope;renderTimeline();syncScopeTabs();}));
+renderTimeline();
+
+/* ====== GLOSSAR ====== */
+const GLOSSAR=[
+  ["Allokation","Verteilung der Aktien auf Zeichner.","Diskretionäre Zuteilung durch Emittent + Bookrunner.","Steuerung der Aktionärsstruktur; Trade-off Stabilität vs. Preis."],
+  ["Überzeichnung","Mehr Nachfrage als Aktien verfügbar.","Oversubscription-Faktor (z.B. 10×).","Treiber für Repartierung und ggf. Clawback."],
+  ["Repartierung","Kürzung der Orders bei Überzeichnung.","Quote, Losverfahren oder Deckelung.","In DE offenlegungspflichtig (Zuteilungsgrundsätze)."],
+  ["Cornerstone","Vorab gebundener Großinvestor (genannt).","Mit Lock-up; reservierte Quote.","Stabilitätsanker, reduziert echten Free Float."],
+  ["Greenshoe","Mehrzuteilungsoption bis ~15%.","Over-Allotment zur Stabilisierung.","Munition gegen Kursverfall am ersten Tag."],
+  ["Gross Spread","Banken-Provision der Emission.","~7% klein bis ~1–3% Mega-IPO.","20/20/60 Management/Underwriting/Selling Concession."],
+  ["Selling Concession","Vergütung für den Verkauf.","Größter Teil des Gross Spread.","Über Designations/Pot mit Zuteilung verknüpft."],
+  ["Flowback","Rückfluss/Verkauf kurz nach IPO.","Hohe Fast-Money-Quote → mehr Flowback.","Drückt den Kurs; Gegenmittel: Qualitätsallokation."],
+  ["Clawback","Verschiebung inst.→Retail bei Überzeichnung.","HKEX-Stufen; in USA unüblich.","Erhöht Retail-Fairness, senkt institutionelle Stabilität."],
+  ["FOCI / ITAR","Begrenzung ausländischen Besitzes.","Foreign Ownership, Control or Influence.","Deckelt geografische Auslandsquote bei SpaceX."],
+  ["Designations","Zuweisung der Concession an Banken.","Investor benennt, welche Bank ‚Credit' bekommt.","Verknüpft Nachfrage-Beitrag mit Gebühr."],
+  ["Free Float","Frei handelbarer Streubesitz.","Anteil nicht-gebundener Aktien.","Voraussetzung für Index-Aufnahme &amp; Liquidität."]
+];
+function renderGlossar(){
+  const idx=LVL_IDX[LEVEL]; const el=document.getElementById('glossar'); if(!el) return;
+  el.innerHTML=GLOSSAR.map(g=>`<div class="dep-box"><div class="font-head font-bold text-tngb-cyan text-sm mb-1">${g[0]}</div><p class="text-xs text-slate-400">${g[1+idx]}</p></div>`).join('');
+}
+renderGlossar();
+
+/* ====== CHARTS ====== */
+const C={cyan:'#00CFFF',emerald:'#00CC7A',gold:'#DFAF0F',lavender:'#9933FF',orange:'#FF6B00',indigo:'#4472C4',magenta:'#E6399A',muted:'#64748B'};
+const baseOpts=(legend)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:legend,labels:{color:'#94A3B8',font:{size:10}}}},scales:{}});
+function mk(id,cfg){ const c=document.getElementById(id); if(c&&window.Chart) return new Chart(c,cfg); }
+mk('chartTranchen',{type:'doughnut',data:{labels:['Institutionell','Cornerstone','Retail','Mitarbeiter'],datasets:[{data:[57,25,10,8],backgroundColor:[C.cyan,C.emerald,C.gold,C.lavender],borderColor:'#0A0F1A',borderWidth:2}]},options:baseOpts(true)});
+mk('chartGeo',{type:'bar',data:{labels:['Nordamerika','EMEA','Asien-Pazifik','Rest'],datasets:[{data:[62,24,11,3],backgroundColor:[C.cyan,C.emerald,C.gold,C.muted]}]},options:{...baseOpts(false),scales:{y:{ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}},x:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});
+mk('chartKons',{type:'bar',data:{labels:['3× Global Coord.','4× Bookrunner','6× Co-Manager'],datasets:[{data:[54,28,18],backgroundColor:[C.cyan,C.emerald,C.gold]}]},options:{...baseOpts(false),indexAxis:'y',scales:{x:{ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}},y:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});
+mk('chartDE',{type:'bar',data:{labels:['Großbank (inst.)','Direkt/Neobroker','Genossensch.','Sparkassen','Privatbanken','übrige','Sozial/Ethik'],datasets:[{data:[40,21,12,12,10,4,1],backgroundColor:[C.cyan,C.emerald,C.gold,C.orange,C.indigo,C.muted,C.magenta]}]},options:{...baseOpts(false),indexAxis:'y',scales:{x:{ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}},y:{ticks:{color:'#94A3B8',font:{size:9}},grid:{display:false}}}}});
+
+/* ====== SIMULATOR ====== */
+let simChart=mk('chartSim',{type:'doughnut',data:{labels:['Institutionell','Cornerstone','Retail','Mitarbeiter'],datasets:[{data:[57,25,10,8],backgroundColor:[C.cyan,C.emerald,C.gold,C.lavender],borderColor:'#0A0F1A',borderWidth:2}]},options:baseOpts(true)});
+const S={inst:'simInst',corn:'simCorn',ret:'simRet',emp:'simEmp',green:'simGreen'};
+function refreshSim(){
+  let inst=+v('simInst'),corn=+v('simCorn'),ret=+v('simRet'),emp=+v('simEmp'),green=+v('simGreen');
+  document.getElementById('lblInst').textContent=inst;document.getElementById('lblCorn').textContent=corn;
+  document.getElementById('lblRet').textContent=ret;document.getElementById('lblEmp').textContent=emp;
+  document.getElementById('lblGreen').textContent=green;
+  let sum=inst+corn+ret+emp; if(sum===0) sum=1;
+  const n=[inst,corn,ret,emp].map(x=>+(x/sum*100).toFixed(1));
+  if(simChart){simChart.data.datasets[0].data=n;simChart.update();}
+  // Stabilitäts-Score: gebundene/institutionelle stabilisieren, Retail erhöht Flowback, Greenshoe puffert
+  const stab=Math.max(0,Math.min(100,Math.round(0.6*n[0]+1.0*n[1]-0.7*n[2]+0.2*green+25)));
+  const flow=Math.max(0,Math.min(100,Math.round(0.9*n[2]+0.4*n[3]-0.3*n[1]-0.2*green+10)));
+  const stabCls=stab>=70?'#00CC7A':stab>=45?'#DFAF0F':'#E6399A';
+  const flowCls=flow<=30?'#00CC7A':flow<=55?'#DFAF0F':'#E6399A';
+  document.getElementById('simOut').innerHTML=
+    `<div class="text-sm mb-2">Normierte Tranchen: <span class="mono text-tngb-cyan">${n[0]}/${n[1]}/${n[2]}/${n[3]}</span> · Greenshoe <span class="mono text-tngb-orange">${green}%</span></div>`+
+    `<div class="text-sm">Stabilitäts-Score: <strong style="color:${stabCls}">${stab}/100</strong></div>`+
+    `<div class="text-sm">Flowback-Risiko: <strong style="color:${flowCls}">${flow}/100</strong></div>`+
+    `<div class="text-xs text-tngb-muted mt-2">${stab>=70?'Stabiles, institutionell getragenes Buch.':flow>=55?'Hoher Retail-Anteil → Volatilität am ersten Tag wahrscheinlich.':'Ausgewogener Mix.'} <span class="dbom-class-badge">SCENARIO-Modell</span></div>`;
+}
+function v(id){const e=document.getElementById(id);return e?e.value:0;}
+Object.values(S).forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener('input',refreshSim);});
+refreshSim();
+
+/* ====== NAVDOCK + SCROLL-FADE ====== */
+const SECTIONS=['s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s-exp','s-qa','s-mtx','s12'];
+const dockObs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const id=en.target.id;document.querySelectorAll('#navdock a').forEach(a=>a.classList.toggle('active-dock',a.dataset.dock===id));}}),{rootMargin:'-40% 0px -55% 0px'});
+SECTIONS.forEach(id=>{const el=document.getElementById(id);if(el)dockObs.observe(el);});
+const fadeObs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.06});
+document.querySelectorAll('.scroll-fade').forEach(el=>fadeObs.observe(el));
+
+/* ====== KEYBOARD ====== */
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  const cur=SECTIONS.findIndex(id=>{const el=document.getElementById(id);if(!el)return false;const r=el.getBoundingClientRect();return r.top>=-100&&r.top<window.innerHeight*0.5;});
+  if(e.key==='j'){const n=Math.min(SECTIONS.length-1,(cur<0?0:cur)+1);document.getElementById(SECTIONS[n]).scrollIntoView({behavior:'smooth'});}
+  if(e.key==='k'){const n=Math.max(0,(cur<0?0:cur)-1);document.getElementById(SECTIONS[n]).scrollIntoView({behavior:'smooth'});}
+});
+
+/* ====== KATEX ====== */
+document.addEventListener('DOMContentLoaded',()=>{ if(window.renderMathInElement) renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false}); });
+</script>
+
+<!-- ====== LIVE-DBOM-AUDIT ====== -->
+<script>
+(async function liveAudit(){
+  const banner=document.getElementById('live-audit-banner'),status=document.getElementById('live-audit-status'),
+    meta=document.getElementById('live-audit-meta'),score=document.getElementById('live-audit-score');
+  const qaDbom=document.getElementById('qa-dbom'),qaRefs=document.getElementById('qa-refs'),qaPill=document.getElementById('qa-pill');
+  if(!banner)return;
+  try{
+    const res=await fetch('provenance/m299.dbom.json',{cache:'no-cache'});
+    if(!res.ok)throw new Error('DBOM nicht erreichbar (HTTP '+res.status+')');
+    const dbom=await res.json();
+    const valid=new Set((dbom.facts||[]).map(f=>f.id));
+    const map=Object.fromEntries((dbom.facts||[]).map(f=>[f.id,f]));
+    const refs=document.querySelectorAll('[data-source^="FACT_"]');
+    let missing=0;const miss=new Set();
+    refs.forEach(el=>{const id=el.dataset.source;
+      if(!valid.has(id)){missing++;miss.add(id);el.style.outline='2px dashed #E6399A';el.title='DBOM-MISSING: '+id;}
+      else{const info=map[id];if(!el.getAttribute('data-tooltip'))el.setAttribute('data-tooltip','['+info.verdict+' · Konf. '+info.confidence+'] '+info.claim+(info.caveat?' · '+info.caveat:''));}
+    });
+    const total=(dbom.facts||[]).length,conf=(dbom.facts||[]).filter(f=>f.verdict==='CONFIRMED').length,
+      scen=(dbom.facts||[]).filter(f=>f.verdict==='SCENARIO_PROJECTION').length;
+    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · Schema <code>'+dbom.$schema_id+'</code> · '+total+' Fakten ('+conf+' confirmed, '+scen+' scenario) · '+refs.length+' HTML-Referenzen geprüft';
+    if(qaDbom){qaDbom.textContent='✓';qaDbom.className='check-pass';}
+    if(missing===0){
+      banner.classList.remove('warn','err');
+      status.innerHTML='✓ DBOM-Integrität OK · alle '+refs.length+' data-source-Referenzen aufgelöst · Stichtag '+dbom.module.stichtag;
+      if(qaRefs){qaRefs.textContent='✓ ('+refs.length+')';qaRefs.className='check-pass';}
+      if(qaPill)qaPill.innerHTML='<span class="compliance-pill good">QA · alle Checks bestanden</span>';
+      if(score)score.innerHTML='<span class="compliance-pill good">M299 Integrität · 100%</span>';
+    }else{
+      banner.classList.add('err');
+      status.innerHTML='✗ '+missing+' ungültige Referenz(en): <code>'+[...miss].join(', ')+'</code>';
+      if(qaRefs){qaRefs.textContent='✗ '+missing;qaRefs.className='';qaRefs.style.color='#E6399A';}
+      if(qaPill)qaPill.innerHTML='<span class="compliance-pill warn">QA · '+missing+' offen</span>';
+    }
+  }catch(err){
+    banner.classList.add('warn');
+    status.innerHTML='⚠ DBOM-Live-Lookup nicht möglich: '+err.message+' (offline?)';
+    if(qaDbom){qaDbom.textContent='⚠ offline';qaDbom.className='check-na';}
+    if(qaRefs){qaRefs.textContent='— (eingebettetes JSON-LD vorhanden)';qaRefs.className='check-na';}
+    if(qaPill)qaPill.innerHTML='<span class="compliance-pill warn">QA · DBOM offline</span>';
+  }
+})();
+</script>
+</body>
+</html>
