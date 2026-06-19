@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>M299 v1.0.0 · Internationale IPO-Zuteilung — Quoten, Konsortium &amp; Deutschland · FinCoach AI</title>
-<meta name="description" content="FinCoach AI Deep-Dive M299: Der internationale IPO-Zuteilungsprozess am Beispiel SpaceX. Welche Zuteilungsquoten-Entscheidungen getroffen werden müssen und welche Auswirkungen sie haben — von der Gesamtemission über Tranchen, Konsortialmitglieder, Länder, lokale Banken bis zu Broker-/Direktbanken in Deutschland. Mit Compliance-, Datenqualitäts- und Styleguide-Checks. SpaceX ist privat — alle Zahlen sind Szenario-Schätzungen. Keine Anlageberatung."/>
+<meta name="description" content="FinCoach AI Deep-Dive M299: Der internationale IPO-Zuteilungsprozess am Beispiel SpaceX. Welche Zuteilungsquoten-Entscheidungen getroffen werden müssen und welche Auswirkungen sie haben — von der Gesamtemission über Tranchen, Konsortialmitglieder, Länder, lokale Banken bis zu Broker-/Direktbanken in Deutschland. Mit Compliance-, Datenqualitäts- und Styleguide-Checks. SpaceX-IPO am 12.06.2026 vollzogen (Eckdaten nutzer-/medienvorgegeben); die konkreten Zuteilungsquoten bleiben Szenario-Schätzungen. Keine Anlageberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -92,7 +92,7 @@ tailwind.config = { theme: { extend: {
   "$schema_id": "fincoach.m-dbom.v1",
   "module": { "id": "M299", "title": "Internationale IPO-Zuteilung — Quoten, Konsortium & Deutschland", "version": "1.0.0", "stichtag": "2026-06-19", "related_modules": ["M298"], "external_dbom": "provenance/m299.dbom.json" },
   "fact_summary": { "total": 10, "confirmed_primary": 7, "scenario_projection": 3 },
-  "honest_disclosure": "SpaceX ist privat; konkrete Zuteilungsquoten sind illustrative Szenario-Werte. Allgemeine Mechanik/Regulierung ist als Praxis/Rahmen klassifiziert."
+  "honest_disclosure": "SpaceX-IPO am 12.06.2026 vollzogen; Deal-Eckdaten nutzer-/medienvorgegeben und nicht unabhängig verifiziert. Konkrete Zuteilungsquoten bleiben illustrative Szenario-Werte. Allgemeine Mechanik/Regulierung ist als Praxis/Rahmen klassifiziert."
 }
 </script>
 </head>
@@ -188,18 +188,20 @@ tailwind.config = { theme: { extend: {
       Ein Deep-Dive zum am meisten unterschätzten Hebel eines Börsengangs: der <strong>Allokation</strong>. Wer wie viele
       Aktien zu welchem Preis bekommt, entscheidet über Kursstabilität, Investorenstruktur, Gebühren-Ökonomie und politische
       Optik. Wir zerlegen die Zuteilungskaskade Schicht für Schicht — und zeigen jede Entscheidung samt Wirkung am
-      durchgehenden Beispiel SpaceX.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span> · Provenienz nach M-DBOM v1 · 7 Praxis-/Rahmenfakten, 3 SCENARIO_PROJECTION.</span>
+      durchgehenden Beispiel SpaceX, das am 12.06.2026 an die NASDAQ ging.
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span> · IPO vollzogen 12.06.2026 (Eckdaten medien-/nutzervorgegeben) · Provenienz nach M-DBOM v1 · 7 Praxis-/Rahmenfakten, 3 SCENARIO_PROJECTION.</span>
     </p>
 
     <div class="caveat-box mb-8 max-w-3xl">
       <div class="flex items-start gap-3">
         <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
         <div class="text-sm text-slate-300 leading-relaxed">
-          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> SpaceX ist privat, ein Börsengang ist nicht
-          vollzogen. Alle <strong>konkreten Zuteilungsquoten in diesem Modul sind illustrative Szenario-Werte</strong>
-          (mit <span class="est-mark">EST</span> / Rahmen <span class="dbom-class-badge">SCENARIO</span> markiert), die die
-          <em>Mechanik</em> veranschaulichen — keine realen Allokationen. Die allgemeinen Mechanik-, Markt- und
+          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> Der SpaceX-IPO wurde am <strong>12.06.2026</strong>
+          vollzogen (SPCX · NASDAQ, $135/Aktie, Emissionserlös ~$75 Mrd., bis ~$86 Mrd. mit Greenshoe). Diese Deal-Eckdaten
+          sind <strong>nutzer-/medienvorgegeben und von FinCoach nicht unabhängig verifiziert</strong>
+          (Rahmen <span class="dbom-class-badge">SCENARIO</span>). Die <strong>konkreten Zuteilungsquoten in diesem Modul bleiben
+          illustrative Szenario-Werte</strong> (mit <span class="est-mark">EST</span> markiert), die die
+          <em>Mechanik</em> veranschaulichen — keine offengelegten realen Allokationen. Die allgemeinen Mechanik-, Markt- und
           Regulierungsaussagen folgen gängiger ECM-Praxis bzw. dem Rechtsrahmen (US-SEC, EU/BaFin, HKEX).
         </div>
       </div>
@@ -226,10 +228,10 @@ tailwind.config = { theme: { extend: {
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRAXIS</span><span class="dbom-conf">Konf. 0.80</span></div>
       </div>
       <div class="kpi-card scenario-kpi" style="border-color:#DFAF0F;" data-source="FACT_SPACEX_DEAL_SIZE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
-        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$60 Mrd.<span class="est-mark">EST</span></div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">Illustratives Deal-Volumen</div>
-        <div class="text-xs text-tngb-muted mt-1">SpaceX-Szenario · geringer Streubesitz</div>
-        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.40</span></div>
+        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$75 Mrd.<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Emissionserlös (bis ~$86 Mrd. mit Greenshoe)</div>
+        <div class="text-xs text-tngb-muted mt-1">SpaceX-IPO 12.06.2026 · $135/Aktie · ~5% Free Float</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.55</span></div>
       </div>
     </div>
 
@@ -331,14 +333,15 @@ tailwind.config = { theme: { extend: {
   </div>
   <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
     Die Allokation ist eine verschachtelte Kaskade: Jede Ebene teilt den Anteil der darüberliegenden weiter auf.
-    Alle Zahlen sind <strong>illustrative SpaceX-Szenario-Werte</strong> <span class="dbom-class-badge">SCENARIO</span>
-    (Basis: ~$60&nbsp;Mrd. Bruttoemission) und dienen nur der Veranschaulichung der Mechanik.
+    Die Quoten sind weiterhin <strong>illustrative SpaceX-Szenario-Werte</strong> <span class="dbom-class-badge">SCENARIO</span>
+    (didaktisches Modell) und dienen nur der Veranschaulichung der Mechanik. Die Deal-Basis ist real: Emissionserlös ~$75&nbsp;Mrd.
+    (bis ~$86&nbsp;Mrd. mit Greenshoe), IPO 12.06.2026, $135/Aktie — nutzer-/medienvorgegeben.
   </p>
 
   <!-- EBENE 1: TRANCHEN -->
   <div class="dep-box mb-6" data-source="FACT_SPACEX_ALLOC_CASCADE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
     <h3 class="font-head font-bold text-tngb-cyan mb-1">Ebene 1 · Gesamtemission → Tranchen <span class="est-mark">EST</span></h3>
-    <p class="text-xs text-tngb-muted mb-3">Wer darf grundsätzlich zeichnen? Die Basisemission (100% = ~$60 Mrd.) wird auf Investorenklassen verteilt.</p>
+    <p class="text-xs text-tngb-muted mb-3">Wer darf grundsätzlich zeichnen? Die Basisemission (100% = realer Erlös ~$75 Mrd.) wird auf Investorenklassen verteilt. Die Quoten unten sind ein generischer Modell-Default; <strong class="text-tngb-gold">real teilte SpaceX bis zu ~30% an Retail zu</strong> (ungewöhnlich hoch).</p>
     <div class="cascade-bar mb-3">
       <div class="cascade-seg" style="width:57%;background:#00CFFF;">Institutionell 57%</div>
       <div class="cascade-seg" style="width:25%;background:#00CC7A;">Cornerstone 25%</div>
@@ -352,11 +355,12 @@ tailwind.config = { theme: { extend: {
         <tbody>
           <tr><td>Institutionell (offen)</td><td class="mono text-tngb-cyan">57%</td><td>Long-only, Sovereign Funds, Hedgefonds — diskretionär zugeteilt.</td></tr>
           <tr><td>Cornerstone/Anchor</td><td class="mono text-tngb-emerald">25%</td><td>Vorab gebunden, mit Lock-up — Stabilitätsanker.</td></tr>
-          <tr><td>Retail/Privatanleger</td><td class="mono text-tngb-gold">10%</td><td>Politische Optik, Markenbindung, breite Streuung.</td></tr>
+          <tr><td>Retail/Privatanleger</td><td class="mono text-tngb-gold">10%<span class="est-mark" title="generischer Default; real bei SpaceX bis ~30%">*</span></td><td>Politische Optik, Markenbindung, breite Streuung. <strong class="text-tngb-gold">Real bei SpaceX: bis ~30%</strong> (ungewöhnlich hoher Retail-Fokus) — der 10%-Wert ist nur der generische Modell-Default.</td></tr>
           <tr><td>Mitarbeiter/Directed Shares</td><td class="mono text-tngb-lavender">8%</td><td>Friends &amp; Family, Mitarbeiterbindung.</td></tr>
         </tbody>
       </table>
       <p class="text-xs text-tngb-muted mt-2">+ <strong>Greenshoe bis 15%</strong> zusätzlich (Mehrzuteilung, separat).</p>
+      <p class="text-xs text-tngb-magenta mt-2">⚠ Realer SpaceX-Free-Float: nur <strong>~5%</strong> der Aktien frei handelbar → extrem geringe frei handelbare Quote, entsprechend hohe Volatilität im Aftermarket.</p>
       </div>
     </div>
   </div>
@@ -499,7 +503,7 @@ tailwind.config = { theme: { extend: {
     </div>
   </div>
   <div class="caveat-box">
-    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">MiFID-II-Bezug:</strong> Die Zuteilung an Privatkunden unterliegt den Wohlverhaltens- und Product-Governance-Regeln (Zielmarktbestimmung, Geeignetheit/Angemessenheit). Eine hochvolatile Einzelaktie wie ein SpaceX-IPO muss in den Zielmarkt des Privatanlegers passen — das begrenzt aktiven Vertrieb gegenüber konservativen Kunden.</p>
+    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">MiFID-II-Bezug:</strong> Die Zuteilung an Privatkunden unterliegt den Wohlverhaltens- und Product-Governance-Regeln (Zielmarktbestimmung, Geeignetheit/Angemessenheit). Eine hochvolatile Einzelaktie wie der SpaceX-IPO muss in den Zielmarkt des Privatanlegers passen — das begrenzt aktiven Vertrieb gegenüber konservativen Kunden. Verschärfend: Der reale SpaceX-Free-Float liegt bei nur <strong>~5%</strong>, die Retail-Quote war mit bis zu ~30% ungewöhnlich hoch — beides treibt die Volatilität und macht die Zielmarkt-/Geeignetheitsprüfung besonders relevant.</p>
   </div>
 </section>
 
@@ -627,7 +631,7 @@ tailwind.config = { theme: { extend: {
   <div class="grid md:grid-cols-3 gap-4 mb-10">
     <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Mechanik/Regulierung aus etablierter ECM-Praxis &amp; Rechtsrahmen (SEC, EU/BaFin, HKEX, FINRA). Konkrete SpaceX-Quoten sind didaktische Szenario-Werte.</p></div>
     <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Praxis-/Rahmenfakten 0,72–0,92; Szenario-Quoten 0,40. Jede Aussage trägt eine Datenklasse — Quoten sind Modellmittelpunkte.</p></div>
-    <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Reale Allokationsdaten sind vertraulich; Marktpraxis variiert je Region/Deal; SpaceX hat keinen vollzogenen IPO. Werte nicht für reale Allokationen verwenden.</p></div>
+    <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Reale Allokationsdaten sind vertraulich; Marktpraxis variiert je Region/Deal; der SpaceX-IPO ist zwar vollzogen (12.06.2026), die konkreten Zuteilungsquoten sind aber nicht offengelegt. Werte nicht für reale Allokationen verwenden.</p></div>
   </div>
 
   <h3 class="font-head font-bold text-white mb-3">Glossar (folgt globalem Wissensniveau)</h3>
@@ -645,7 +649,7 @@ tailwind.config = { theme: { extend: {
 
   <div class="caveat-box mb-10">
     <h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer — keine Anlageberatung</h3>
-    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar (RDG/StBerG/WpIG/FinDAG). SpaceX ist ein privates Unternehmen ohne vollzogenen Börsengang — <strong>alle konkreten Zuteilungsquoten sind illustrative Szenario-Werte</strong> (<span class="est-mark">EST</span>) und nicht für reale Allokationen geeignet. Die allgemeine Mechanik folgt gängiger ECM-Praxis und dem jeweiligen Rechtsrahmen. „SpaceX", „Starlink", „Starship" sind Marken der Rechteinhaber; ihre Nennung erfolgt rein beschreibend. Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span>.</p>
+    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar (RDG/StBerG/WpIG/FinDAG). Der SpaceX-IPO wurde am 12.06.2026 vollzogen; die Deal-Eckdaten sind nutzer-/medienvorgegeben und nicht unabhängig verifiziert — <strong>die konkreten Zuteilungsquoten bleiben illustrative Szenario-Werte</strong> (<span class="est-mark">EST</span>) und nicht für reale Allokationen geeignet. Die allgemeine Mechanik folgt gängiger ECM-Praxis und dem jeweiligen Rechtsrahmen. „SpaceX", „Starlink", „Starship" sind Marken der Rechteinhaber; ihre Nennung erfolgt rein beschreibend. Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span>.</p>
   </div>
 
   <footer class="border-t border-tngb-border pt-8 mt-4">

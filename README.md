@@ -12,6 +12,8 @@ SpaceX-IPO-Analyse mit globalem Vergleich.
 |---|---|
 | `index.html` | Landing-Page mit Disclaimer, Privatfirmen-Hinweis, Themenüberblick, Brand |
 | `modul.html` | Vollständiges Analyse-Modul (M298) inkl. Charts/Simulatoren — Schriften via `fonts.css` self-hosted |
+| `ipo-prozess.html` | Übersicht des IPO-Prozesses: Phasen, Beteiligte/Zustimmungen, Rolle der Banken, Pflichten vor & nach dem Börsengang |
+| `m299.html` | Deep-Dive IPO-Zuteilung (M299): Quoten-Kaskade, Simulator, M-DBOM-Provenienz, Compliance-/Datenqualitäts-Checks |
 | `impressum.html` | Impressum nach § 5 DDG / § 18 MStV (ausgefüllt) |
 | `datenschutz.html` | DSGVO-Datenschutzerklärung (ausgefüllt) |
 | `fonts.css` + `fonts/` | Self-gehostete Schriften (Inter, Space Grotesk, JetBrains Mono) — keine Google-CDN-Abrufe |
@@ -23,8 +25,10 @@ SpaceX-IPO-Analyse mit globalem Vergleich.
 
 ## 2 · Rechtliche Eckpunkte (bereits umgesetzt)
 
-- **Privatfirmen-Disclaimer (M-DBOM-Pflicht):** SpaceX ist privat — alle Finanzzahlen sind als Schätzungen
-  gekennzeichnet (Landing + Modul). Verifizierte Fakten sind von `SCENARIO_PROJECTION`-Annahmen getrennt.
+- **Privatfirmen-/Bewertungs-Disclaimer (M-DBOM-Pflicht):** SpaceX ist seit 12.06.2026 börsennotiert
+  (Ticker `SPCX`, NASDAQ). Die genannten Bewertungs-/Finanzzahlen sind dennoch weiterhin medien- bzw.
+  nutzerbasierte Schätzungen und nicht unabhängig von FinCoach AI verifiziert (Landing + Modul, Stand
+  2026-06-19). Verifizierte Fakten sind von `SCENARIO_PROJECTION`-Annahmen getrennt.
 - **Fachlicher Disclaimer:** Keine Rechts-, Steuer- oder Anlageberatung (RDG/StBerG/WpIG/FinDAG); Hinweis auf
   Markt-/Totalverlustrisiko.
 - **Marken-Hinweis:** „SpaceX", „Starlink", „Starship" rein beschreibend genannt.
@@ -75,4 +79,5 @@ git add modul.html && git commit -m "Modul M298 aktualisiert" && git push
 ---
 
 © 2026 TheNextGenerationBanking · FinCoach AI · Keine Rechts-, Steuer- oder Anlageberatung ·
-SpaceX ist privat — alle Finanzzahlen sind Schätzungen · Datenstand 2026-06-01 · Rechtsstand 2026-06-04
+SpaceX ist seit 12.06.2026 börsennotiert (SPCX/NASDAQ) — Bewertungs-/Finanzzahlen sind dennoch
+medien-/nutzerbasiert und nicht unabhängig verifiziert (Schätzungen) · Datenstand 2026-06-19 · Rechtsstand 2026-06-19
