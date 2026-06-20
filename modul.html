@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M298 v2.0.0 · SpaceX — Der Weg zum $1,75-Billionen-IPO · FinCoach AI</title>
-<meta name="description" content="FinCoach AI Tiefenmodul M298: SpaceX vom $350-Mrd.-Tender (Dez. 2024) zum S-1-Filing (Mai 2026, ~$1.750 Mrd.). Finanzstruktur, Sum-of-the-Parts mit xAI-Integration, EV/Revenue ~113x, IPO-Szenarien, globaler Vergleich, ITAR-Hürden. Provenienz nach M-DBOM v1 — 4 verifizierte, 4 als SCENARIO_PROJECTION markierte Fakten. Stichtag 2026-06-01."/>
+<title>M298 v2.2.0 · SpaceX — Der Weg zum $1,75-Billionen-IPO (jetzt börsennotiert · SPCX) · FinCoach AI</title>
+<meta name="description" content="FinCoach AI Tiefenmodul M298: SpaceX vom $350-Mrd.-Tender (Dez. 2024) über das S-1-Filing (Mai 2026, ~$1.750 Mrd.) zum Börsengang (12.06.2026, $135/Aktie, SPCX/NASDAQ) — aktuell ~$2,42 Bln. Marktkap. Finanzstruktur, Sum-of-the-Parts mit xAI-Integration, EV/Revenue ~129x EST, globaler Vergleich, ITAR-Hürden, Free Float ~5%. Provenienz nach M-DBOM v1 — Bewertungs-/Finanzzahlen medien-/nutzerbasiert, nicht unabhängig verifiziert. Stichtag 2026-06-19."/>
 <link rel="stylesheet" href="fonts.css"/><!-- Self-hosted Fonts (DSGVO: keine Google-CDN-Abrufe) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -198,12 +198,12 @@ tailwind.config = {
   "module": {
     "id": "M298",
     "title": "SpaceX — Der Weg zum $1,75-Billionen-IPO",
-    "version": "2.0.0",
-    "predecessor_version": "1.1.0",
+    "version": "2.2.0",
+    "predecessor_version": "2.1.0",
     "predecessor_archive": "archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html",
     "comparison_report": "reports/compliance/m298-v1-vs-v2-comparison.html",
-    "stichtag": "2026-06-01",
-    "buildDate": "2026-06-01T15:50:00Z",
+    "stichtag": "2026-06-19",
+    "buildDate": "2026-06-19T12:00:00Z",
     "external_dbom": "provenance/m298.dbom.json",
     "visual_provenance": "provenance/m298-provenance.html"
   },
@@ -217,7 +217,13 @@ tailwind.config = {
       "SCENARIO_PROJECTION": 4
     }
   },
-  "honest_disclosure": "Das LLM-Trainings-Wissen hat einen Cutoff vor 2026. Behauptete 2025/2026er-Ereignisse (S-1-Filing Mai 2026, xAI-Merger Feb 2026, Tender Jul/Dez 2025) wurden vom User vorgegeben und sind als SCENARIO_PROJECTION markiert — unabhängige Web-Verifikation ausstehend.",
+  "honest_disclosure": "SpaceX ist seit dem Going-Live am 12.06.2026 boersennotiert (Ticker SPCX, NASDAQ; Ausgabepreis $135,00/Aktie). Das LLM-Trainings-Wissen hat einen Cutoff vor 2026; die hier genannten Bewertungs-/Finanzzahlen (S-1-Ziel ~$1.750 Mrd., IPO-Preis $135, Erstkurs ~$150, aktuelle Marktkap. ~$2,42 Bln. per 2026-06-19, Free Float ~5%, Retail-Quote bis 30%) wurden medien-/nutzervorgegeben und sind von FinCoach AI nicht unabhaengig SEC-verifiziert — sie bleiben als SCENARIO_PROJECTION/USER_PROVIDED markiert. Keine Anlageberatung. v2.2.0 (Post-IPO-Update): aktueller Kurs $185 (+37% seit $135), Peak-Bewertung ~$2,75 Bln. sowie die reportierte Zuteilung (geografisch 85:10:5, Broker-Fill-Rates ING ~25% / Trade Republic ~12,9%, Retail ~30%) wurden aus einem Intelligence-Report integriert - medien-/nutzervorgegeben, nicht unabhaengig verifiziert; Detail im Single-Pager spacex-update.html.",
+  "changelog": [
+    { "version": "2.2.0", "date": "2026-06-19", "type": "update", "summary": "Post-IPO-Update: Marktdynamik (Kurs $185, +37%, Peak ~$2,75 Bln.) und reportierte Zuteilung (85:10:5, ING ~25% / Trade Republic ~12,9%, Retail ~30%) aus Intelligence-Report integriert (nicht unabhaengig verifiziert); Verweis auf spacex-update.html." },
+    { "version": "2.1.0", "date": "2026-06-19", "type": "major", "summary": "Going-Live: IPO am 12.06.2026 ($135/Aktie, SPCX/NASDAQ), Marktkap. ~$2,42 Bln., Free Float ~5%; Umstellung IFRS-13-Level-3 auf beobachtbaren Marktpreis." },
+    { "version": "2.0.0", "date": "2026-05-20", "type": "major", "summary": "S-1-Filing und Pre-IPO-Neubewertung (~$1.750 Mrd.), SOTP inkl. xAI, globaler Vergleich, ITAR-Huerden." },
+    { "version": "1.1.0", "date": "2024-12", "type": "base", "summary": "Erstfassung: $350-Mrd.-Tender-Offer, Bewertungshistorie, Starlink-Oekonomie (archiviert)." }
+  ],
   "audit_trail_url": "provenance/m298.dbom.json#audit_trail"
 }
 </script>
@@ -251,6 +257,7 @@ tailwind.config = {
     <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">T3 · Welle 45</span>
     <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Private Markets / Space Economy</span>
     <a href="m299.html" class="text-xs text-tngb-muted hover:text-white transition ml-2">M299 · Zuteilung</a>
+    <a href="spacex-update.html" class="text-xs text-tngb-muted hover:text-white transition ml-2">SpaceX Update</a>
     <a href="index.html" class="text-xs text-tngb-muted hover:text-white transition">← Hauptseite</a>
   </div>
 </nav>
@@ -258,6 +265,7 @@ tailwind.config = {
 <!-- ===== NavDock ===== -->
 <div id="navdock" aria-label="Sektions-Navigation">
   <a href="#s01" title="S01 · Hero" data-dock="s01">01</a>
+  <a href="#s-updates" title="Update-Historie" data-dock="s-updates">↻</a>
   <a href="#s02" title="S02 · Background" data-dock="s02">02</a>
   <a href="#s03" title="S03 · Interdisziplinäre Landkarte" data-dock="s03">03</a>
   <a href="#s04" title="S04 · Wissenschaftlicher Unterbau" data-dock="s04">04</a>
@@ -275,12 +283,13 @@ tailwind.config = {
 <!-- ===== M-DBOM Provenienz-Banner (sichtbar, klickbar) ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
-    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v2.0.0</span>
-    <span class="text-slate-300">8 Fakten · 4 confirmed · 4 SCENARIO_PROJECTION · 5 Quellen verifiziert · Stichtag 2026-06-01</span>
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v2.2.0</span>
+    <span class="text-slate-300">8 Fakten · 4 confirmed · 4 SCENARIO_PROJECTION · SPCX seit 12.06.2026 börsennotiert · Bewertungszahlen nicht unabhängig verifiziert · Stichtag 2026-06-19</span>
     <span class="ml-auto flex items-center gap-2">
       <a href="provenance/m298-provenance.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,204,122,0.15);color:#00CC7A;border:1px solid rgba(0,204,122,0.4);">📊 Provenienz-Graph</a>
       <a href="provenance/m298.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
       <a href="archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(100,116,139,0.15);color:#94A3B8;border:1px solid rgba(100,116,139,0.3);">⟲ v1.1.0</a>
+      <a href="#s-updates" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">📜 Update-Historie</a>
       <a href="reports/compliance/m298-v1-vs-v2-comparison.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">⇆ Vergleich</a>
     </span>
   </div>
@@ -321,90 +330,100 @@ tailwind.config = {
       SpaceX — Der Weg zum <span style="background:linear-gradient(135deg,#DFAF0F 0%,#FF6B00 60%,#E6399A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">$1,75-Billionen-IPO</span>
     </h1>
     <p class="text-xl font-head font-semibold mb-3" style="color:#00CFFF;">
-      Vom $350-Mrd.-Tender (2024-12) zum S-1-Filing (2026-05) · Finanzstruktur, Sum-of-the-Parts, globaler Unternehmensvergleich
+      Going-Live vollzogen — seit 12.06.2026 an der NASDAQ notiert (Ticker SPCX) · vom $350-Mrd.-Tender (2024-12) über das S-1-Filing (2026-05) zum Börsengang zu $135 · jetzt ~$2,42 Bln. Marktkap.
     </p>
     <p class="text-base text-slate-400 max-w-3xl mb-6 leading-relaxed">
-      Eine akribische Studie zum wertvollsten privaten Raumfahrtunternehmen der Welt — von der
-      5-fachen Bewertungseskalation in 17 Monaten über die Tender-Offer-Mechanik, die Starlink-Ökonomie
-      und die Sum-of-the-Parts-Analyse bis zu den ITAR-Hürden des Nasdaq-IPO (Ticker SPCX, erw. Pricing 2026-06-12).
+      Eine akribische Studie zum wertvollsten Raumfahrtunternehmen der Welt — von der
+      Bewertungseskalation über die Tender-Offer-Mechanik, die Starlink-Ökonomie
+      und die Sum-of-the-Parts-Analyse bis zu den ITAR-Hürden. Der Börsengang ist <strong class="text-tngb-cyan">vollzogen</strong>:
+      IPO am 12.06.2026 zum Ausgabepreis $135,00/Aktie (Ticker SPCX, NASDAQ); Erstkurs ~$150 (≈+11%),
+      Intraday-Hoch ~$174. Aktuell (Stand 2026-06-19) Kurs $185,00 und eine Marktkapitalisierung von ~$2,42 Bln.
       <span class="block mt-2 text-xs text-tngb-muted">
-        Stichtag: <span class="font-mono text-tngb-cyan">2026-06-01</span> ·
+        Stichtag: <span class="font-mono text-tngb-cyan">2026-06-19</span> ·
         Provenienz nach <a href="provenance/m298-provenance.html" class="text-tngb-emerald hover:underline">M-DBOM v1</a> ·
-        4 verifizierte, 4 als SCENARIO_PROJECTION markierte Fakten.
+        SpaceX ist börsennotiert, doch die genannten Bewertungs-/Finanzzahlen sind medien-/nutzerbasiert und von FinCoach AI nicht unabhängig verifiziert.
       </span>
     </p>
 
     <!-- Daten-Transparenz-Box (verbindlich, einheitliches Pattern für alle FinCoach-Module) -->
-    <div class="caveat-box mb-8 max-w-3xl" id="datentransparenz-hero" data-stichtag="2026-06-01">
+    <div class="caveat-box mb-8 max-w-3xl" id="datentransparenz-hero" data-stichtag="2026-06-19">
       <div class="flex items-start gap-3">
         <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
         <div class="text-sm text-slate-300 leading-relaxed">
-          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> SpaceX ist ein privates, nicht
-          SEC-meldepflichtiges Unternehmen und veröffentlicht <em>keine</em> testierten Finanzdaten.
-          Alle Finanzkennzahlen in diesem Modul sind Schätzungen aus Sekundärquellen
-          (Payload Space, Sacra, Novaspace, Bloomberg, CNBC) und mit <span class="est-mark">EST</span> markiert.
+          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> SpaceX ist seit dem Börsengang
+          (12.06.2026, Ticker SPCX, NASDAQ) <em>börsennotiert</em> — es existiert nun ein öffentlicher Marktpreis.
+          Die in diesem Modul genannten Bewertungs- und Finanzkennzahlen sind jedoch weiterhin
+          medien-/nutzerbasiert (Payload Space, Sacra, Novaspace, Bloomberg, CNBC) und von FinCoach AI
+          <strong>nicht final SEC-verifiziert</strong> — sie bleiben mit <span class="est-mark">EST</span> markiert.
           Die „$350 Mrd."-Bewertung bezieht sich auf das Tender-Offer Dez. 2024; spätere Runden
-          (Juli 2025 ~$400 Mrd., Dez. 2025 ~$800 Mrd.) und die <strong>S-1-IPO-Zielgröße Mai 2026
-          (~$1.750 Mrd.)</strong> sind im Modul gesondert ausgewiesen. <strong class="text-tngb-cyan">Datenstand: 2026-06-01.</strong>
+          (Juli 2025 ~$400 Mrd., Dez. 2025 ~$800 Mrd.), die <strong>S-1-IPO-Zielgröße Mai 2026
+          (~$1.750 Mrd.)</strong> und die aktuelle Marktkapitalisierung (~$2,42 Bln.) sind gesondert ausgewiesen.
+          <strong class="text-tngb-cyan">Datenstand: 2026-06-19.</strong>
 
           <!-- Bewertungs-Timeline-Pill-Reihe (visuell prominenter) -->
           <div class="mt-3 flex flex-wrap gap-2 items-center text-xs font-mono">
             <span class="text-tngb-muted">Bewertungs-Eskalation:</span>
             <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="Tender Offer · $185/Aktie · 1,89 Mrd. Aktien · Quelle: Bloomberg 10.12.2024" data-pubdate="2024-12-10">2024-12 · $350 Mrd.</span>
             <span class="arrow">→</span>
-            <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="Sekundärrunde · $212/Aktie · Quelle: Bloomberg 23.07.2025" data-pubdate="2025-07-23">2025-07 · $400 Mrd.</span>
-            <span class="arrow">→</span>
             <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="Tender Offer · $421/Aktie · Quelle: WSJ 15.12.2025" data-pubdate="2025-12-15">2025-12 · $800 Mrd.</span>
             <span class="arrow">→</span>
-            <span class="px-2 py-0.5 rounded font-bold" style="background:rgba(223,175,15,0.18);border:1px solid #DFAF0F;color:#DFAF0F;" data-tooltip="S-1-Filing 20.05.2026 · Nasdaq SPCX · erw. Pricing 12.06.2026 · Quelle: SEC EDGAR" data-pubdate="2026-05-20">2026-05 · S-1: ~$1.750 Mrd.</span>
+            <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="S-1-Filing 20.05.2026 · Nasdaq SPCX · Quelle: SEC EDGAR" data-pubdate="2026-05-20">2026-05 · S-1: ~$1.750 Mrd.</span>
+            <span class="arrow">→</span>
+            <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="IPO 12.06.2026 · Ausgabepreis $135,00/Aktie · Erstkurs ~$150 (≈+11%) · Emissionserlös ~$75 Mrd. (mit Greenshoe bis ~$86 Mrd.) · Quelle: NASDAQ/Medien" data-pubdate="2026-06-12">2026-06-12 · IPO $135 (Erstkurs ~$150)</span>
+            <span class="arrow">→</span>
+            <span class="px-2 py-0.5 rounded bg-tngb-card border border-tngb-border" data-tooltip="Erster Handelstag · Intraday-Hoch ~$174 → Marktkap. ~$2,3 Bln. · Quelle: NASDAQ/Medien" data-pubdate="2026-06-12">erster Tag · intraday ~$2,3 Bln.</span>
+            <span class="arrow">→</span>
+            <span class="px-2 py-0.5 rounded font-bold" style="background:rgba(223,175,15,0.18);border:1px solid #DFAF0F;color:#DFAF0F;" data-tooltip="Schlusskurs $185,00 (−3,56%) · Marktkap. ~$2,42 Bln. · medien-/nutzerbasiert, nicht unabhängig verifiziert" data-pubdate="2026-06-19">2026-06-19 · ~$2,42 Bln. (Kurs $185)</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- KPIs (Stand: 2026-06-01 · S-1-Filing-Basis primär, historische Tender-Bewertungen sekundär)
-         v2.0.0: jede KPI mit data-source-Attribut → Live-DBOM-Lookup via JS -->
+    <!-- KPIs (Stand: 2026-06-19 · Going-Live vollzogen · Marktpreis existiert, Bewertungszahlen aber medien-/nutzerbasiert)
+         v2.1.0: jede KPI mit data-source-Attribut → Live-DBOM-Lookup via JS -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10" id="hero-kpi-grid">
       <div class="kpi-card scenario-kpi" style="border-color:#DFAF0F;"
            data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED"
            data-fact-class="SCENARIO_PROJECTION"
            data-confidence="0.50"
-           data-pubdate="2026-05-20">
-        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$1.750 Mrd.<span class="est-mark">EST</span></div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">S-1-IPO-Ziel · Mai 2026</div>
-        <div class="text-xs text-tngb-muted mt-1">SEC EDGAR S-1 eingereicht 2026-05-20 · Ticker SPCX</div>
+           data-pubdate="2026-06-19"
+           data-tooltip="Schlusskurs $185,00 (−3,56% / −$6,82) · nachbörslich $181,69 · Marktkap. $2.419.035.106.770 · medien-/nutzerbasiert, nicht unabhängig SEC-verifiziert.">
+        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$2,42 Bln.<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Marktkap. · Stand 2026-06-19</div>
+        <div class="text-xs text-tngb-muted mt-1">Kurs $185,00 · zeitweise ~$2,75 Bln. (überholte Amazon) · Ticker SPCX</div>
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.50</span></div>
       </div>
       <div class="kpi-card scenario-kpi"
            data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED"
            data-fact-class="SCENARIO_PROJECTION"
            data-confidence="0.55"
-           data-pubdate="2026-04-30">
-        <div class="text-3xl font-head font-extrabold" style="color:#00CFFF;">~$15,5 Mrd.<span class="est-mark">EST</span></div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">Run-Rate-Umsatz Q1 2026</div>
-        <div class="text-xs text-tngb-muted mt-1">Starlink ~$11,5 Mrd. ARR · Launch ~$4 Mrd. · Sacra 2026-04-30</div>
+           data-pubdate="2026-06-12">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CFFF;">$135<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">IPO-Preis · Erstkurs ~$150</div>
+        <div class="text-xs text-tngb-muted mt-1">IPO 12.06.2026 · ≈+11% · Intraday-Hoch ~$174 · Erlös ~$75 Mrd. (Greenshoe bis ~$86 Mrd.)</div>
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.55</span></div>
       </div>
       <div class="kpi-card scenario-kpi"
            data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED"
            data-fact-class="DERIVED"
            data-confidence="0.50"
-           data-pubdate="2026-06-01"
-           data-tooltip="Abgeleitet: $1.750 Mrd. / $15,5 Mrd. = 112,9x → ~113x. Inkonsistenz zu S04 (~93x/94x) entsteht aus anderer Revenue-Basis (2025E vs Q1-2026-Run-Rate) — siehe Multiples-Konsistenz-Tabelle in S04.">
-        <div class="text-3xl font-head font-extrabold" style="color:#E6399A;">~113x<span class="est-mark">EST</span></div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">EV/Revenue · S-1-Ziel</div>
-        <div class="text-xs text-tngb-muted mt-1">$1.750/$15,5 — vs. Boeing ~0,6x, Tesla ~7x</div>
+           data-pubdate="2026-06-19"
+           data-tooltip="Abgeleitet: Marktkap ~$2,42 Bln. / Umsatz 2025 ~$18,7 Mrd. ≈ 129x. Inkonsistenz zu S04 (~93x/94x auf S-1-Zielbasis) entsteht aus anderer Bewertungs-/Revenue-Basis — siehe Multiples-Konsistenz-Tabelle in S04.">
+        <div class="text-3xl font-head font-extrabold" style="color:#E6399A;">~129x<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">EV/Revenue · Marktpreis-Basis</div>
+        <div class="text-xs text-tngb-muted mt-1">$2.420/$18,7 — vs. Boeing ~0,6x, Tesla ~7x</div>
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-derived">DERIVED</span><span class="dbom-conf">Konf. 0.50</span></div>
       </div>
-      <div class="kpi-card confirmed-kpi"
-           data-source="FACT_NASA_HLS_CONTRACT"
-           data-fact-class="PRIMARY_OFFICIAL"
-           data-confidence="0.95"
-           data-pubdate="2026-05-15">
-        <div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">~170</div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">Starts H1 2026 (annualisiert)</div>
-        <div class="text-xs text-tngb-muted mt-1">2024: 138 · 2025: 152 · &gt;55% aller weltweiten Starts · Payload 2026-05-15</div>
-        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRIMARY</span><span class="dbom-conf">Konf. 0.95</span></div>
+      <div class="kpi-card scenario-kpi"
+           data-source="FACT_SPACEX_VAL_S1_2026_PROJECTED"
+           data-fact-class="SCENARIO_PROJECTION"
+           data-confidence="0.50"
+           data-pubdate="2026-06-12"
+           data-tooltip="Nur ~5% der Aktien sind frei handelbar → hohe Liquiditäts-/Volatilitätsanfälligkeit. Retail-Fokus: bis zu 30% der angebotenen Aktien an Privatanleger (ungewöhnlich hoch).">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">~5%<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Free Float · frei handelbar</div>
+        <div class="text-xs text-tngb-muted mt-1">Retail-Quote bis 30% · hohe Volatilitätsanfälligkeit</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.50</span></div>
       </div>
     </div>
 
@@ -420,6 +439,22 @@ tailwind.config = {
       <button class="reg-tag" style="color:#E040A0;border-color:rgba(224,64,160,0.4);background:rgba(224,64,160,0.08);" data-reg="itu">ITU · Radio Regulations</button>
     </div>
   </div>
+</section>
+
+<!-- ===== S-UPDATES · UPDATE-HISTORIE (versioniert, datengetrieben) ===== -->
+<section id="s-updates" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-3">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">UPDATE-HISTORIE</span>
+    <span class="section-badge" style="background:rgba(0,204,122,0.12);color:#00CC7A;">Semantic Versioning · M-DBOM</span>
+    <span class="section-badge" id="updates-current-badge" style="background:rgba(223,175,15,0.12);color:#DFAF0F;">aktuell v2.2.0</span>
+  </div>
+  <h2 class="section-title">Update-Historie — versionierte Aktualisierungen im Zeitablauf</h2>
+  <p class="text-base text-slate-400 max-w-3xl mb-8 leading-relaxed">
+    Dieses Modul wird versioniert fortgeschrieben. Jede Aktualisierung erscheint als datierter Eintrag — neueste zuerst.
+    Die Historie ist zusätzlich maschinenlesbar im <a href="provenance/m298.dbom.json" class="text-tngb-emerald hover:underline">M-DBOM</a>
+    (Feld <span class="font-mono text-tngb-cyan">changelog</span>) hinterlegt und wächst mit jedem künftigen Update automatisch mit.
+  </p>
+  <div id="updates-timeline"></div>
 </section>
 
 <!-- ===== S02 BACKGROUND (3-Level-Tabs) ===== -->
@@ -989,7 +1024,7 @@ tailwind.config = {
     <tbody id="cmpBody"></tbody>
   </table>
   </div>
-  <p class="text-xs text-slate-500 mb-8">Anmerkungen: SpaceX, Blue Origin und ULA sind privat — alle Werte geschätzt/abgeleitet. Rocket Lab EV/Revenue extrem hoch durch Wachstums-Premium (Kurs +750% in 12 Monaten). Boeing-Bewertung nach 737-MAX-Recovery-Zyklus.</p>
+  <p class="text-xs text-slate-500 mb-8">Anmerkungen: SpaceX ist seit 12.06.2026 börsennotiert (SPCX/NASDAQ, Marktkap. ~$2.419 Mrd. per 2026-06-19), die Finanzkennzahlen sind aber medien-/nutzerbasiert und nicht unabhängig verifiziert (EST); Blue Origin und ULA sind privat — alle Werte geschätzt/abgeleitet. Rocket Lab EV/Revenue extrem hoch durch Wachstums-Premium (Kurs +750% in 12 Monaten). Boeing-Bewertung nach 737-MAX-Recovery-Zyklus.</p>
 
   <div class="grid md:grid-cols-2 gap-5">
     <div class="dep-box">
@@ -1437,10 +1472,28 @@ tailwind.config = {
     <h2 class="section-title">Kapitalmarktexperten im Diskurs — Bull vs. Bear vs. Neutral</h2>
   </div>
   <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
-    Diese Sektion dokumentiert den Stand des Expert-Diskurses zu SpaceX per 2026-05-31.
+    Diese Sektion dokumentiert den Stand des Expert-Diskurses zu SpaceX per 2026-06-19.
     Sechs Perspektiven von Damodaran (NYU) bis ARK Invest zeigen die Bandbreite möglicher Fair Values —
     von $80 Mrd. bis $500 Mrd.+
   </p>
+
+  <!-- A0 · Kritischer Bewertungs-Gegenpunkt nach Going-Live (v2.1.0) -->
+  <div class="caveat-box mb-10 max-w-4xl">
+    <div class="flex items-start gap-3">
+      <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
+      <div class="text-sm text-slate-300 leading-relaxed">
+        <strong class="text-tngb-magenta">Überbewertungs-Debatte nach Going-Live (Stand 2026-06-19).</strong>
+        Mit dem Börsengang am 12.06.2026 entstand erstmals ein öffentlicher Marktpreis — doch die Bewertungsfrage
+        bleibt offen. Dem aktuellen Marktpreis von <strong class="text-tngb-cyan">~$2,42 Bln.</strong> steht ein
+        <strong class="text-tngb-gold">Morningstar Fair Value von ~$780 Mrd.</strong> gegenüber:
+        der Markt zahlt also rund das <strong>Dreifache</strong> der unabhängig modellierten Fair Value — eine deutliche Überbewertungs-Debatte.
+        Hinzu kommen zwei strukturelle Risiken: Der <strong>Free Float liegt bei nur ~5%</strong> der Aktien (frei handelbar) →
+        hohe Liquiditäts- und Volatilitätsanfälligkeit; die <strong>Retail-Quote</strong> betrug beim IPO bis zu <strong>30%</strong>
+        der angebotenen Aktien (ungewöhnlich hoch) → die Kursbildung ist überdurchschnittlich von Privatanleger-Sentiment getrieben.
+        Sämtliche genannten Zahlen sind medien-/nutzerbasiert <span class="est-mark">EST</span> und von FinCoach AI nicht unabhängig verifiziert. <strong>Keine Anlageberatung.</strong>
+      </div>
+    </div>
+  </div>
 
   <!-- A · Experten-Karten -->
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
@@ -1713,11 +1766,11 @@ tailwind.config = {
     <div class="flex items-start gap-3">
       <span class="text-tngb-gold text-lg leading-none mt-0.5">★</span>
       <p class="text-sm text-slate-300 leading-relaxed">
-        <strong class="text-tngb-gold">Qualitäts-Hinweis.</strong> Stand: 2026-05-31. Exhaustiver Faktencheck durch
-        8 adversarielle Agenten und Datums-Audit. SpaceX ist privat — alle Finanzdaten sind Schätzungen ohne
-        SEC-Primärquelle (die S-1 vom 20.05.2026 ist die erste teilweise belastbare Primärquelle, aber noch ohne
-        finale Preisspanne). Die genannten Fair Values sind dokumentierte Experten-Sichten, keine Empfehlung
-        und keine Punktprognose von FinCoach AI.
+        <strong class="text-tngb-gold">Qualitäts-Hinweis.</strong> Stand: 2026-06-19. Exhaustiver Faktencheck durch
+        8 adversarielle Agenten und Datums-Audit. SpaceX ist seit 12.06.2026 börsennotiert (SPCX/NASDAQ) — es existiert
+        nun ein Marktpreis, doch die hier genannten Bewertungs-/Finanzzahlen sind medien-/nutzerbasiert und von FinCoach AI
+        nicht unabhängig SEC-verifiziert. Die genannten Fair Values (inkl. Morningstar ~$780 Mrd. vs. Marktpreis ~$2,42 Bln.)
+        sind dokumentierte Experten-Sichten, keine Empfehlung und keine Punktprognose von FinCoach AI.
       </p>
     </div>
   </div>
@@ -1732,7 +1785,7 @@ tailwind.config = {
 
   <h3 class="font-head font-bold text-white mb-3">Methodik & Limitationen</h3>
   <div class="grid md:grid-cols-3 gap-4 mb-10">
-    <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Alle Finanzdaten stammen aus Sekundärquellen (Payload, Sacra, Novaspace, Bloomberg, CNBC, NASA OIG). SpaceX selbst veröffentlicht keine testierten Zahlen — es gibt keinen Primär-Abschluss.</p></div>
+    <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">SpaceX ist seit 12.06.2026 börsennotiert (SPCX/NASDAQ). Die hier genannten Finanz-/Bewertungsdaten stammen jedoch aus Medien-/Sekundärquellen (Payload, Sacra, Novaspace, Bloomberg, CNBC, NASA OIG) und sind von FinCoach AI nicht unabhängig SEC-verifiziert (Stand 2026-06-19).</p></div>
     <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Tender-Preise 97%, Revenue 88%, spätere Bewertungen/IPO-Ziel 82–90%, Subscriber 85–90%. Jede Aussage trägt eine implizite Datenklasse — Punktzahlen sind als Mittelpunkt einer Spanne zu lesen.</p></div>
     <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Sankey ist auf $10 Mrd. vereinfacht (nicht die vollen $13,1 Mrd.); EBITDA-Margen privater Peers (BO, ULA) sind nicht offengelegt; Starship-Optionswert ist nicht robust modellierbar; Aktienanzahl für die Bewertungsableitung ist geschätzt.</p></div>
   </div>
@@ -1754,7 +1807,7 @@ tailwind.config = {
 
   <div class="caveat-box mb-10">
     <h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer — keine Anlageberatung</h3>
-    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar. SpaceX ist ein privates Unternehmen ohne öffentliche Finanzberichterstattung — sämtliche Finanzkennzahlen sind <strong>Schätzungen aus Sekundärquellen</strong> (markiert mit <span class="est-mark">EST</span>) und können erheblich von der Realität abweichen. Bewertungen privater Unternehmen unterliegen IFRS 13 Level 3 (nicht-beobachtbare Inputs). Vergangene Bewertungsentwicklungen sind kein Indikator für künftige. Bitte konsultieren Sie für Anlageentscheidungen eine qualifizierte, unabhängige Beratung. DSGVO-, BaFin- und MiFID-II-Hinweise gemäß FinCoach-AI-Compliance-Sektion.</p>
+    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar. SpaceX ist seit dem Börsengang (12.06.2026, Ticker SPCX/NASDAQ) börsennotiert; die hier genannten Bewertungs-/Finanzzahlen sind jedoch <strong>medien-/nutzerbasiert und von FinCoach AI nicht unabhängig verifiziert</strong> (Stand 2026-06-19, markiert mit <span class="est-mark">EST</span>) und können erheblich von der Realität abweichen. Seit dem Going-Live existiert zwar ein beobachtbarer Marktpreis (zuvor IFRS 13 Level 3, nicht-beobachtbare Inputs), doch die zugrunde liegenden Finanzkennzahlen bleiben unverifiziert. Vergangene Bewertungs- und Kursentwicklungen sind kein Indikator für künftige. Bitte konsultieren Sie für Anlageentscheidungen eine qualifizierte, unabhängige Beratung. DSGVO-, BaFin- und MiFID-II-Hinweise gemäß FinCoach-AI-Compliance-Sektion.</p>
   </div>
 
   <!-- Footer -->
@@ -1780,7 +1833,7 @@ tailwind.config = {
         <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="hover:text-tngb-cyan transition block">www.TheNextGenerationBanking.com</a>
       </div>
       <div class="text-right">
-        <div class="inline-block dep-box text-xs font-mono text-tngb-muted">M298 · v1.1.0 · 2026-06-01<br/>Tier T3 · Welle 45 · Space Economy</div>
+        <div class="inline-block dep-box text-xs font-mono text-tngb-muted">M298 · v2.2.0 · 2026-06-19<br/>Tier T3 · Welle 45 · Space Economy</div>
       </div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. Alle Finanzdaten zu SpaceX sind Schätzungen. Die nächste Generation Banking.</p>
@@ -1811,7 +1864,7 @@ const REG = {
 };
 
 const CMP = [
-  {n:"SpaceX",        t:"privat*", s:"New Space / Satcom", cap:1750, rev:18.7, evr:93,  eve:null, mar:null, land:"USA", cls:"gold"},
+  {n:"SpaceX",        t:"SPCX (privat-Schätz.)*", s:"New Space / Satcom", cap:2419, rev:18.7, evr:129, eve:null, mar:null, land:"USA", cls:"gold"},
   {n:"Rocket Lab",    t:"RKLB",    s:"Small Launch / Satbau", cap:84,  rev:0.5, evr:160, eve:null, mar:-15,  land:"USA/NZ", cls:"cyan"},
   {n:"Boeing",        t:"BA",      s:"Aerospace Defense", cap:182, rev:70,  evr:0.6, eve:11,   mar:6,    land:"USA", cls:"cyan"},
   {n:"Airbus",        t:"AIR.PA",  s:"Aerospace Civil", cap:95,  rev:80,  evr:0.4, eve:5,    mar:9,    land:"EU", cls:"cyan"},
@@ -1937,6 +1990,59 @@ function renderGlossar(){
   }).join('');
 }
 renderGlossar();
+
+/* ============ UPDATE-HISTORIE (versioniert, datengetrieben — neue Updates einfach oben anfügen) ============ */
+const MODULE_UPDATES=[
+  {version:'2.2.0',date:'2026-06-19',type:'Update',color:'#00CFFF',
+   title:'Post-IPO-Update — Marktdynamik & Zuteilung integriert',
+   summary:'Integration eines Post-IPO-Intelligence-Reports: aktuelle Marktdaten und die reportierte Zuteilungs-Logik.',
+   changes:['Kurs $185,00 (+37 % seit Ausgabe $135), bisheriges Hoch $225,64','Peak-Bewertung ~$2,75 Bln. (überholt zeitweise Amazon)','Zuteilung geografisch 85:10:5 (USA / Europa-UK / Asien-Rest), Retail-Tranche ~30 %','Broker-Fill-Rates: ING ~25 % · Trade Republic ~12,9 % (wegen Überzeichnung gekürzt)'],
+   link:{href:'spacex-update.html',label:'→ Vollständiger SpaceX-Update-Single-Pager'},
+   prov:'Report-/medienvorgegeben (Perplexity, Focus, Zeit, Euronews, Morningstar, SEC S-1) — von FinCoach AI nicht unabhängig verifiziert.'},
+  {version:'2.1.0',date:'2026-06-19',type:'Major',color:'#00CC7A',
+   title:'Going-Live — SpaceX ist börsennotiert',
+   summary:'IPO vollzogen: SPCX an der NASDAQ.',
+   changes:['Börsengang 12.06.2026, Ausgabepreis $135,00/Aktie (Ticker SPCX)','Erstkurs ~$150 (≈ +11 %), Intraday-Hoch ~$174','Aktuelle Marktkap. ~$2,42 Bln. · Free Float ~5 %','Umstellung von IFRS-13-Level-3 (nicht beobachtbar) auf beobachtbaren Marktpreis'],
+   prov:'Eckdaten medien-/nutzervorgegeben, nicht unabhängig SEC-verifiziert.'},
+  {version:'2.0.0',date:'2026-05-20',type:'Major',color:'#DFAF0F',
+   title:'S-1-Filing & Pre-IPO-Neubewertung',
+   summary:'S-1-Registrierung; Bewertungsziel ~$1.750 Mrd.',
+   changes:['S-1-Filing (Mai 2026), Bewertungsziel ~$1.750 Mrd.','Sum-of-the-Parts inkl. xAI-Integration, EV/Revenue ~129x EST','Globaler Vergleich & ITAR-Hürden ergänzt'],
+   prov:'Bewertungszahlen Szenario-/medienbasiert.'},
+  {version:'1.1.0',date:'2024-12',type:'Basis',color:'#9933FF',
+   title:'Erstfassung — Tender-Offer & Bewertungseskalation',
+   summary:'Ausgangsmodul rund um den $350-Mrd.-Tender-Offer (Dez. 2024).',
+   changes:['$350-Mrd.-Tender-Offer-Mechanik','Bewertungshistorie 2002–2024','Starlink-Ökonomie-Grundlagen'],
+   archive:{href:'archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html',label:'⟲ archivierte Fassung'}}
+];
+function renderUpdates(){
+  const el=document.getElementById('updates-timeline'); if(!el) return;
+  const last=MODULE_UPDATES.length-1;
+  el.innerHTML=MODULE_UPDATES.map((u,i)=>{
+    const chg=(u.changes||[]).map(c=>`<li>${c}</li>`).join('');
+    const link=u.link?`<a href="${u.link.href}" class="inline-block mt-2 text-sm font-semibold" style="color:${u.color};">${u.link.label}</a>`:'';
+    const arch=u.archive?`<a href="${u.archive.href}" class="inline-block mt-2 ml-1 text-xs text-tngb-muted hover:text-white">${u.archive.label}</a>`:'';
+    const prov=u.prov?`<div class="text-xs text-tngb-muted mt-2"><span class="est-mark">EST</span> ${u.prov}</div>`:'';
+    const lineCol=i<last?'rgba(100,116,139,0.25)':'transparent';
+    return `<div style="position:relative;padding-left:1.6rem;padding-bottom:1.25rem;margin-left:7px;border-left:2px solid ${lineCol};">
+      <span style="position:absolute;left:-8px;top:3px;width:14px;height:14px;border-radius:50%;background:${u.color};box-shadow:0 0 0 3px #0A0F1A,0 0 10px ${u.color};"></span>
+      <div class="dep-box" style="border-left:3px solid ${u.color};">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+          <span class="font-mono font-bold" style="color:${u.color};">v${u.version}</span>
+          <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">${u.type}</span>
+          <span class="text-xs font-mono text-tngb-muted">${u.date}</span>
+        </div>
+        <div class="font-head font-bold text-white">${u.title}</div>
+        <div class="text-sm text-slate-300 mt-1">${u.summary}</div>
+        <ul class="text-sm text-slate-300 mt-2" style="list-style:disc;margin-left:1.1rem;">${chg}</ul>
+        ${link}${arch}${prov}
+      </div>
+    </div>`;
+  }).join('');
+  const badge=document.getElementById('updates-current-badge');
+  if(badge) badge.textContent='aktuell v'+MODULE_UPDATES[0].version;
+}
+renderUpdates();
 
 /* ============ CHARTS ============ */
 const gridColor='rgba(100,116,139,0.15)';

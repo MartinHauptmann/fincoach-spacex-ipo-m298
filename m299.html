@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M299 v1.0.0 · Internationale IPO-Zuteilung — Quoten, Konsortium &amp; Deutschland · FinCoach AI</title>
-<meta name="description" content="FinCoach AI Deep-Dive M299: Der internationale IPO-Zuteilungsprozess am Beispiel SpaceX. Welche Zuteilungsquoten-Entscheidungen getroffen werden müssen und welche Auswirkungen sie haben — von der Gesamtemission über Tranchen, Konsortialmitglieder, Länder, lokale Banken bis zu Broker-/Direktbanken in Deutschland. Mit Compliance-, Datenqualitäts- und Styleguide-Checks. SpaceX ist privat — alle Zahlen sind Szenario-Schätzungen. Keine Anlageberatung."/>
+<title>M299 v1.1.0 · Internationale IPO-Zuteilung — Quoten, Konsortium &amp; Deutschland · FinCoach AI</title>
+<meta name="description" content="FinCoach AI Deep-Dive M299: Der internationale IPO-Zuteilungsprozess am Beispiel SpaceX. Welche Zuteilungsquoten-Entscheidungen getroffen werden müssen und welche Auswirkungen sie haben — von der Gesamtemission über Tranchen, Konsortialmitglieder, Länder, lokale Banken bis zu Broker-/Direktbanken in Deutschland. Mit Compliance-, Datenqualitäts- und Styleguide-Checks. SpaceX-IPO am 12.06.2026 vollzogen (Eckdaten nutzer-/medienvorgegeben); die konkreten Zuteilungsquoten bleiben Szenario-Schätzungen. Keine Anlageberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -90,9 +90,9 @@ tailwind.config = { theme: { extend: {
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M299", "title": "Internationale IPO-Zuteilung — Quoten, Konsortium & Deutschland", "version": "1.0.0", "stichtag": "2026-06-19", "related_modules": ["M298"], "external_dbom": "provenance/m299.dbom.json" },
+  "module": { "id": "M299", "title": "Internationale IPO-Zuteilung — Quoten, Konsortium & Deutschland", "version": "1.1.0", "stichtag": "2026-06-19", "related_modules": ["M298"], "external_dbom": "provenance/m299.dbom.json", "predecessor_version": "1.0.0" },
   "fact_summary": { "total": 10, "confirmed_primary": 7, "scenario_projection": 3 },
-  "honest_disclosure": "SpaceX ist privat; konkrete Zuteilungsquoten sind illustrative Szenario-Werte. Allgemeine Mechanik/Regulierung ist als Praxis/Rahmen klassifiziert."
+  "honest_disclosure": "SpaceX-IPO am 12.06.2026 vollzogen; Deal-Eckdaten nutzer-/medienvorgegeben und nicht unabhängig verifiziert. Konkrete Zuteilungsquoten bleiben illustrative Szenario-Werte. Allgemeine Mechanik/Regulierung ist als Praxis/Rahmen klassifiziert."
 }
 </script>
 </head>
@@ -140,7 +140,7 @@ tailwind.config = { theme: { extend: {
 <!-- ===== Provenienz-Banner ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
-    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.0.0</span>
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.1.0</span>
     <span class="text-slate-300">10 Fakten · 7 confirmed (Praxis/Rahmen) · 3 SCENARIO_PROJECTION · Stichtag 2026-06-19</span>
     <span class="ml-auto flex items-center gap-2">
       <a href="provenance/m299.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -188,18 +188,20 @@ tailwind.config = { theme: { extend: {
       Ein Deep-Dive zum am meisten unterschätzten Hebel eines Börsengangs: der <strong>Allokation</strong>. Wer wie viele
       Aktien zu welchem Preis bekommt, entscheidet über Kursstabilität, Investorenstruktur, Gebühren-Ökonomie und politische
       Optik. Wir zerlegen die Zuteilungskaskade Schicht für Schicht — und zeigen jede Entscheidung samt Wirkung am
-      durchgehenden Beispiel SpaceX.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span> · Provenienz nach M-DBOM v1 · 7 Praxis-/Rahmenfakten, 3 SCENARIO_PROJECTION.</span>
+      durchgehenden Beispiel SpaceX, das am 12.06.2026 an die NASDAQ ging.
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span> · IPO vollzogen 12.06.2026 (Eckdaten medien-/nutzervorgegeben) · Provenienz nach M-DBOM v1 · 7 Praxis-/Rahmenfakten, 3 SCENARIO_PROJECTION.</span>
     </p>
 
     <div class="caveat-box mb-8 max-w-3xl">
       <div class="flex items-start gap-3">
         <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
         <div class="text-sm text-slate-300 leading-relaxed">
-          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> SpaceX ist privat, ein Börsengang ist nicht
-          vollzogen. Alle <strong>konkreten Zuteilungsquoten in diesem Modul sind illustrative Szenario-Werte</strong>
-          (mit <span class="est-mark">EST</span> / Rahmen <span class="dbom-class-badge">SCENARIO</span> markiert), die die
-          <em>Mechanik</em> veranschaulichen — keine realen Allokationen. Die allgemeinen Mechanik-, Markt- und
+          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> Der SpaceX-IPO wurde am <strong>12.06.2026</strong>
+          vollzogen (SPCX · NASDAQ, $135/Aktie, Emissionserlös ~$75 Mrd., bis ~$86 Mrd. mit Greenshoe). Diese Deal-Eckdaten
+          sind <strong>nutzer-/medienvorgegeben und von FinCoach nicht unabhängig verifiziert</strong>
+          (Rahmen <span class="dbom-class-badge">SCENARIO</span>). Die <strong>konkreten Zuteilungsquoten in diesem Modul bleiben
+          illustrative Szenario-Werte</strong> (mit <span class="est-mark">EST</span> markiert), die die
+          <em>Mechanik</em> veranschaulichen — keine offengelegten realen Allokationen. Die allgemeinen Mechanik-, Markt- und
           Regulierungsaussagen folgen gängiger ECM-Praxis bzw. dem Rechtsrahmen (US-SEC, EU/BaFin, HKEX).
         </div>
       </div>
@@ -226,10 +228,10 @@ tailwind.config = { theme: { extend: {
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRAXIS</span><span class="dbom-conf">Konf. 0.80</span></div>
       </div>
       <div class="kpi-card scenario-kpi" style="border-color:#DFAF0F;" data-source="FACT_SPACEX_DEAL_SIZE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
-        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$60 Mrd.<span class="est-mark">EST</span></div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">Illustratives Deal-Volumen</div>
-        <div class="text-xs text-tngb-muted mt-1">SpaceX-Szenario · geringer Streubesitz</div>
-        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.40</span></div>
+        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">~$75 Mrd.<span class="est-mark">EST</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Emissionserlös (bis ~$86 Mrd. mit Greenshoe)</div>
+        <div class="text-xs text-tngb-muted mt-1">SpaceX-IPO 12.06.2026 · $135/Aktie · ~5% Free Float</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span><span class="dbom-conf">Konf. 0.55</span></div>
       </div>
     </div>
 
@@ -331,32 +333,35 @@ tailwind.config = { theme: { extend: {
   </div>
   <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">
     Die Allokation ist eine verschachtelte Kaskade: Jede Ebene teilt den Anteil der darüberliegenden weiter auf.
-    Alle Zahlen sind <strong>illustrative SpaceX-Szenario-Werte</strong> <span class="dbom-class-badge">SCENARIO</span>
-    (Basis: ~$60&nbsp;Mrd. Bruttoemission) und dienen nur der Veranschaulichung der Mechanik.
+    Die Quoten sind weiterhin <strong>illustrative SpaceX-Szenario-Werte</strong> <span class="dbom-class-badge">SCENARIO</span>
+    (didaktisches Modell) und dienen nur der Veranschaulichung der Mechanik. Die Deal-Basis ist real: Emissionserlös ~$75&nbsp;Mrd.
+    (bis ~$86&nbsp;Mrd. mit Greenshoe), IPO 12.06.2026, $135/Aktie — nutzer-/medienvorgegeben. Zusätzlich eingearbeitet sind
+    <strong class="text-tngb-gold">reportierte Ist-Angaben</strong> aus einem Intelligence-Report (geografische 85:10:5-Verteilung, Broker-Fill-Rates ING ~25% / Trade Republic ~12,9%) — ebenfalls medien-/nutzervorgegeben und nicht unabhängig verifiziert.
   </p>
 
   <!-- EBENE 1: TRANCHEN -->
   <div class="dep-box mb-6" data-source="FACT_SPACEX_ALLOC_CASCADE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
     <h3 class="font-head font-bold text-tngb-cyan mb-1">Ebene 1 · Gesamtemission → Tranchen <span class="est-mark">EST</span></h3>
-    <p class="text-xs text-tngb-muted mb-3">Wer darf grundsätzlich zeichnen? Die Basisemission (100% = ~$60 Mrd.) wird auf Investorenklassen verteilt.</p>
+    <p class="text-xs text-tngb-muted mb-3">Wer darf grundsätzlich zeichnen? 100% = die <strong>platzierte Emission</strong> (~$75 Mrd.) — davon real nur ~5% dauerhaft frei handelbar (Free Float). Die Quoten unten sind ein generischer Modell-Default; laut Nutzer-/Medienangaben (Intelligence-Report) lag der <strong class="text-tngb-gold">Retail-Anteil bei bis zu ~30%</strong> (ungewöhnlich hoch, nicht unabhängig verifiziert).</p>
     <div class="cascade-bar mb-3">
-      <div class="cascade-seg" style="width:57%;background:#00CFFF;">Institutionell 57%</div>
-      <div class="cascade-seg" style="width:25%;background:#00CC7A;">Cornerstone 25%</div>
+      <div class="cascade-seg" style="width:70%;background:#00CFFF;">Institutionell 70%</div>
+      <div class="cascade-seg" style="width:15%;background:#00CC7A;">Anchor 15%</div>
       <div class="cascade-seg" style="width:10%;background:#DFAF0F;">Retail 10%</div>
-      <div class="cascade-seg" style="width:8%;background:#9933FF;color:#fff;">Mitarb. 8%</div>
+      <div class="cascade-seg" style="width:5%;background:#9933FF;color:#fff;">Mit. 5%</div>
     </div>
     <div class="grid md:grid-cols-2 gap-3 mt-3">
       <canvas id="chartTranchen" height="180"></canvas>
       <div class="overflow-x-auto"><table>
         <thead><tr><th>Tranche</th><th>Quote</th><th>Logik</th></tr></thead>
         <tbody>
-          <tr><td>Institutionell (offen)</td><td class="mono text-tngb-cyan">57%</td><td>Long-only, Sovereign Funds, Hedgefonds — diskretionär zugeteilt.</td></tr>
-          <tr><td>Cornerstone/Anchor</td><td class="mono text-tngb-emerald">25%</td><td>Vorab gebunden, mit Lock-up — Stabilitätsanker.</td></tr>
-          <tr><td>Retail/Privatanleger</td><td class="mono text-tngb-gold">10%</td><td>Politische Optik, Markenbindung, breite Streuung.</td></tr>
-          <tr><td>Mitarbeiter/Directed Shares</td><td class="mono text-tngb-lavender">8%</td><td>Friends &amp; Family, Mitarbeiterbindung.</td></tr>
+          <tr><td>Institutionell (offen)<span class="est-mark" title="illustrativer Modellwert">*</span></td><td class="mono text-tngb-cyan">70%</td><td>Long-only, Sovereign Funds, Hedgefonds — diskretionär zugeteilt.</td></tr>
+          <tr><td>Anchor (gebunden)<span class="est-mark" title="illustrativer Modellwert">*</span></td><td class="mono text-tngb-emerald">15%</td><td>Vorab zugesagte Großinvestoren mit Lock-up — US-Pendant zur asiatischen „Cornerstone"-Tranche (informell, meist ohne formalen Prospekt-Lock-up).</td></tr>
+          <tr><td>Retail/Privatanleger</td><td class="mono text-tngb-gold">10%<span class="est-mark" title="generischer Default; real bei SpaceX bis ~30%">*</span></td><td>Politische Optik, Markenbindung, breite Streuung. <strong class="text-tngb-gold">Real bei SpaceX: bis ~30%</strong> (laut Nutzer-/Medienangaben) — der 10%-Wert ist nur der generische Modell-Default.</td></tr>
+          <tr><td>Mitarbeiter/Directed Shares<span class="est-mark" title="illustrativer Modellwert; real bei SpaceX bis ~5%">*</span></td><td class="mono text-tngb-lavender">5%</td><td>Friends &amp; Family, Mitarbeiterbindung — real bei SpaceX bis ~5%.</td></tr>
         </tbody>
       </table>
       <p class="text-xs text-tngb-muted mt-2">+ <strong>Greenshoe bis 15%</strong> zusätzlich (Mehrzuteilung, separat).</p>
+      <p class="text-xs text-tngb-magenta mt-2">⚠ Realer SpaceX-Free-Float: nur <strong>~5%</strong> der Aktien frei handelbar → extrem geringe frei handelbare Quote, entsprechend hohe Volatilität im Aftermarket.</p>
       </div>
     </div>
   </div>
@@ -364,19 +369,18 @@ tailwind.config = { theme: { extend: {
   <!-- EBENE 2: GEOGRAFIE -->
   <div class="dep-box mb-6" data-source="FACT_SPACEX_ALLOC_CASCADE_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
     <h3 class="font-head font-bold text-tngb-emerald mb-1">Ebene 2 · Geografische Zuteilung (Länder/Regionen) <span class="est-mark">EST</span></h3>
-    <p class="text-xs text-tngb-muted mb-3">In welche Länder fließen die Aktien? Bei SpaceX zusätzlich durch <strong>ITAR/FOCI</strong> beschränkt — der nicht-US-Anteil ist gedeckelt und meist stimmrechtsbegrenzt.</p>
+    <p class="text-xs text-tngb-muted mb-3">In welche Länder fließen die Aktien? Bei SpaceX zusätzlich durch <strong>ITAR/FOCI</strong> beschränkt — der Anteil außerhalb der USA ist gedeckelt und meist stimmrechtsbegrenzt. <strong class="text-tngb-gold">Reportierte Ist-Verteilung: 85 : 10 : 5</strong> (USA 85% · Europa/UK 10% · Asien/Rest 5% — Intelligence-Report, nicht unabhängig verifiziert).</p>
     <div class="grid md:grid-cols-2 gap-3">
       <canvas id="chartGeo" height="200"></canvas>
       <div class="overflow-x-auto"><table>
         <thead><tr><th>Region / Land</th><th>Quote (Gesamt)</th><th>Hinweis</th></tr></thead>
         <tbody>
-          <tr><td>Nordamerika (USA/CA)</td><td class="mono text-tngb-cyan">62%</td><td>Heimatmarkt; ITAR-unkritisch.</td></tr>
-          <tr><td>EMEA gesamt</td><td class="mono text-tngb-emerald">24%</td><td>davon: UK 9%, <strong>DE 5%</strong>, CH 3%, FR 2%, Nordics 2%, übrige 3%.</td></tr>
-          <tr><td>Asien-Pazifik</td><td class="mono text-tngb-gold">11%</td><td>SG, JP, HK, AUS; FOCI-sensibel.</td></tr>
-          <tr><td>Rest der Welt</td><td class="mono text-tngb-muted">3%</td><td>Naher Osten (Sovereign Funds).</td></tr>
+          <tr><td>USA (Core)<span class="est-mark" title="Intelligence-Report, nicht verifiziert">*</span></td><td class="mono text-tngb-cyan">85%</td><td>Heimatmarkt; ITAR-unkritisch. Hoher Home-Bias durch Exportkontrolle.</td></tr>
+          <tr><td>Europa / UK<span class="est-mark" title="Intelligence-Report, nicht verifiziert">*</span></td><td class="mono text-tngb-emerald">10%</td><td>illustrativ darunter: UK, <strong>DE (~halbe EU-Tranche ≈ ~5% des Deals)</strong>, CH, FR.</td></tr>
+          <tr><td>Asien / Rest<span class="est-mark" title="Intelligence-Report, nicht verifiziert">*</span></td><td class="mono text-tngb-gold">5%</td><td>SG/JP/HK/AUS + Naher Osten (Sovereign Funds); FOCI-sensibel.</td></tr>
         </tbody>
       </table>
-      <p class="text-xs text-tngb-magenta mt-2">⚠ ITAR-Effekt: nicht-US-Anteil (~38%) muss FOCI-Schwellen wahren → ggf. Stimmrechtsbeschränkung statt voller Streichung.</p>
+      <p class="text-xs text-tngb-magenta mt-2">⚠ ITAR-Effekt: der Anteil außerhalb der USA (~15% lt. Report) muss FOCI-Schwellen wahren → ggf. Stimmrechtsbeschränkung statt voller Streichung. Der hohe US-Heimatanteil (85%) ist mit dem ITAR-Home-Bias konsistent.</p>
       </div>
     </div>
   </div>
@@ -395,30 +399,33 @@ tailwind.config = { theme: { extend: {
           <tr><td>Co-Manager</td><td>6</td><td class="mono">~3%</td><td class="mono text-tngb-gold">18%</td></tr>
         </tbody>
       </table>
-      <p class="text-xs text-tngb-muted mt-2">Gross Spread (Szenario ~2,5%) teilt sich klassisch: <strong>20% Management Fee · 20% Underwriting Fee · 60% Selling Concession</strong>. Der „Pot" + Designations verknüpfen Zuteilung und Gebühr.</p>
+      <p class="text-xs text-tngb-muted mt-2">Gross Spread (Szenario ~1%, Spanne 0,75–1,5% für Mega-IPOs dieser Größe — degressiv mit der Dealgröße) teilt sich klassisch: <strong>20% Management Fee · 20% Underwriting Fee · 60% Selling Concession</strong>. Der „Pot" + Designations verknüpfen Zuteilung und Gebühr.</p>
       </div>
     </div>
   </div>
 
   <!-- EBENE 4: DEUTSCHLAND -->
-  <div class="dep-box" data-source="FACT_DE_DISTRIBUTION_CHANNELS" data-fact-class="INDUSTRY_PRACTICE">
+  <div class="dep-box" data-source="FACT_DE_CHANNEL_SPLIT_SCENARIO" data-fact-class="SCENARIO_PROJECTION">
     <h3 class="font-head font-bold text-tngb-lavender mb-1">Ebene 4 · Innerhalb Deutschlands → lokale Banken &amp; Broker <span class="est-mark">EST</span></h3>
-    <p class="text-xs text-tngb-muted mb-3">Die deutsche Tranche (~5% des Deals) wird über die Vertriebskanäle der Bankenlandschaft verteilt. Szenario-Aufteilung:</p>
+    <p class="text-xs text-tngb-muted mb-3">Die deutsche Tranche (~5% des Deals, Teil der ~10% Europa-Quote) wird über die Vertriebskanäle der Bankenlandschaft verteilt. <strong class="text-tngb-magenta">Die bankgenauen Prozentwerte unten sind frei gewählte didaktische Annahmen — keine realen Zuteilungen</strong>; verlässlich ist nur die Existenz/Struktur der Kanäle.</p>
     <div class="grid md:grid-cols-2 gap-3">
       <canvas id="chartDE" height="220"></canvas>
       <div class="overflow-x-auto"><table>
         <thead><tr><th>Kanal</th><th>Quote (DE-Tranche)</th><th>Charakter</th></tr></thead>
         <tbody>
-          <tr><td>Konsortialbank DE (Deutsche Bank) — inst.</td><td class="mono text-tngb-cyan">40%</td><td>institutionelle DE-Kunden direkt.</td></tr>
-          <tr><td>Direktbanken/Neobroker (ING, comdirect, Trade Republic, Scalable, flatexDEGIRO)</td><td class="mono text-tngb-emerald">21%</td><td>breiter Retail-Zugang, oft Zeichnungsaktionen.</td></tr>
-          <tr><td>Genossenschaftsverbund (DZ Bank → Volks-/Raiffeisenbanken)</td><td class="mono text-tngb-gold">12%</td><td>Fläche, Beratungsgeschäft.</td></tr>
-          <tr><td>Sparkassen-Verbund (DekaBank/LBBW/Helaba)</td><td class="mono text-tngb-orange">12%</td><td>Fläche, öffentlich-rechtlich.</td></tr>
-          <tr><td>Privatbanken/Vermögensverwalter (Berenberg, Hauck Aufhäuser …)</td><td class="mono text-tngb-indigo">10%</td><td>vermögende Privatkunden.</td></tr>
-          <tr><td>übrige Broker</td><td class="mono text-tngb-muted">4%</td><td>Resttranche.</td></tr>
-          <tr><td>Sozial-/Ethikbanken (GLS, Triodos, Umweltbank)</td><td class="mono text-tngb-magenta">~1%</td><td>meist Ausschluss (Dual-Use) → siehe S09.</td></tr>
+          <tr><td>Konsortialbank DE (Deutsche Bank) — inst.</td><td class="mono text-tngb-cyan">40%<span class="est-mark" title="frei gewählte Modellannahme">*</span></td><td>institutionelle DE-Kunden direkt.</td></tr>
+          <tr><td>Direktbanken/Neobroker (ING, comdirect, Trade Republic, Scalable, flatexDEGIRO)</td><td class="mono text-tngb-emerald">21%<span class="est-mark" title="frei gewählte Modellannahme">*</span></td><td>breiter Retail-Zugang, oft Zeichnungsaktionen.</td></tr>
+          <tr><td>Genossenschaftsverbund (DZ Bank → Volks-/Raiffeisenbanken)</td><td class="mono text-tngb-gold">12%<span class="est-mark" title="frei gewählte Modellannahme">*</span></td><td>Fläche, Beratungsgeschäft.</td></tr>
+          <tr><td>Sparkassen-Verbund (DekaBank/LBBW/Helaba)</td><td class="mono text-tngb-orange">12%<span class="est-mark" title="frei gewählte Modellannahme">*</span></td><td>Fläche, öffentlich-rechtlich.</td></tr>
+          <tr><td>Privatbanken/Vermögensverwalter (Berenberg, Hauck Aufhäuser Lampe …)</td><td class="mono text-tngb-indigo">10%<span class="est-mark" title="frei gewählte Modellannahme">*</span></td><td>vermögende Privatkunden.</td></tr>
+          <tr><td>übrige Broker</td><td class="mono text-tngb-muted">4%<span class="est-mark" title="frei gewählte Modellannahme">*</span></td><td>Resttranche.</td></tr>
+          <tr><td>Sozial-/Ethikbanken (GLS, Triodos, Umweltbank)</td><td class="mono text-tngb-magenta">~1%<span class="est-mark" title="frei gewählte Modellannahme">*</span></td><td>meist Ausschluss (Dual-Use) → siehe S09.</td></tr>
         </tbody>
       </table>
       </div>
+    </div>
+    <div class="caveat-box mt-4" data-source="FACT_REPORTED_ALLOCATION" data-fact-class="SCENARIO_PROJECTION">
+      <p class="text-xs text-slate-300 leading-relaxed"><strong class="text-tngb-gold">Reportierte Ist-Zuteilungsquoten (Repartierung):</strong> Laut Intelligence-Report erhielten Kunden konsortial-angebundener Institute wie <strong>ING</strong> Zuteilungen von <strong>~25%</strong> ihrer Order, während Neobroker-Kunden (<strong>Trade Republic</strong>) wegen der starken Überzeichnung auf <strong>~12,9%</strong> gekürzt wurden <span class="est-mark" title="Intelligence-Report, nicht verifiziert">REP</span>. Diese Fill-Rates (Order → tatsächliche Zuteilung) sind etwas anderes als die Tranchen-Verteilung oben — und sind nutzer-/medienvorgegeben, von FinCoach AI nicht unabhängig verifiziert.</p>
     </div>
   </div>
 </section>
@@ -456,10 +463,10 @@ tailwind.config = { theme: { extend: {
   <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Verschiebe die Tranchen-Quoten (Summe wird auf 100% normiert) und beobachte den geschätzten <strong>Stabilitäts-Score</strong> und das <strong>Flowback-Risiko</strong>. Rein didaktisches Modell <span class="dbom-class-badge">SCENARIO</span>.</p>
   <div class="grid md:grid-cols-2 gap-6">
     <div class="dep-box space-y-4">
-      <div><div class="flex justify-between text-xs mb-1"><span>Institutionell</span><span class="mono text-tngb-cyan" id="lblInst">57</span>%</div><div class="slider-wrap"><input type="range" id="simInst" min="0" max="90" value="57"></div></div>
-      <div><div class="flex justify-between text-xs mb-1"><span>Cornerstone (gebunden)</span><span class="mono text-tngb-emerald" id="lblCorn">25</span>%</div><div class="slider-wrap"><input type="range" id="simCorn" min="0" max="60" value="25"></div></div>
+      <div><div class="flex justify-between text-xs mb-1"><span>Institutionell</span><span class="mono text-tngb-cyan" id="lblInst">70</span>%</div><div class="slider-wrap"><input type="range" id="simInst" min="0" max="90" value="70"></div></div>
+      <div><div class="flex justify-between text-xs mb-1"><span>Anchor (gebunden)</span><span class="mono text-tngb-emerald" id="lblCorn">15</span>%</div><div class="slider-wrap"><input type="range" id="simCorn" min="0" max="60" value="15"></div></div>
       <div><div class="flex justify-between text-xs mb-1"><span>Retail</span><span class="mono text-tngb-gold" id="lblRet">10</span>%</div><div class="slider-wrap"><input type="range" id="simRet" min="0" max="60" value="10"></div></div>
-      <div><div class="flex justify-between text-xs mb-1"><span>Mitarbeiter/Directed</span><span class="mono text-tngb-lavender" id="lblEmp">8</span>%</div><div class="slider-wrap"><input type="range" id="simEmp" min="0" max="30" value="8"></div></div>
+      <div><div class="flex justify-between text-xs mb-1"><span>Mitarbeiter/Directed</span><span class="mono text-tngb-lavender" id="lblEmp">5</span>%</div><div class="slider-wrap"><input type="range" id="simEmp" min="0" max="30" value="5"></div></div>
       <div><div class="flex justify-between text-xs mb-1"><span>Greenshoe (zusätzlich)</span><span class="mono text-tngb-orange" id="lblGreen">15</span>%</div><div class="slider-wrap"><input type="range" id="simGreen" min="0" max="15" value="15"></div></div>
     </div>
     <div class="space-y-4">
@@ -499,7 +506,7 @@ tailwind.config = { theme: { extend: {
     </div>
   </div>
   <div class="caveat-box">
-    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">MiFID-II-Bezug:</strong> Die Zuteilung an Privatkunden unterliegt den Wohlverhaltens- und Product-Governance-Regeln (Zielmarktbestimmung, Geeignetheit/Angemessenheit). Eine hochvolatile Einzelaktie wie ein SpaceX-IPO muss in den Zielmarkt des Privatanlegers passen — das begrenzt aktiven Vertrieb gegenüber konservativen Kunden.</p>
+    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">MiFID-II-Bezug:</strong> Die Zuteilung an Privatkunden unterliegt den Wohlverhaltens- und Product-Governance-Regeln (Zielmarktbestimmung, Geeignetheit/Angemessenheit). Eine hochvolatile Einzelaktie wie der SpaceX-IPO muss in den Zielmarkt des Privatanlegers passen — das begrenzt aktiven Vertrieb gegenüber konservativen Kunden. Verschärfend: Der reale SpaceX-Free-Float liegt bei nur <strong>~5%</strong>, die Retail-Quote lag laut Nutzer-/Medienangaben bei bis zu ~30% — beides treibt die Volatilität und macht die Zielmarkt-/Geeignetheitsprüfung besonders relevant.</p>
   </div>
 </section>
 
@@ -627,7 +634,7 @@ tailwind.config = { theme: { extend: {
   <div class="grid md:grid-cols-3 gap-4 mb-10">
     <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Mechanik/Regulierung aus etablierter ECM-Praxis &amp; Rechtsrahmen (SEC, EU/BaFin, HKEX, FINRA). Konkrete SpaceX-Quoten sind didaktische Szenario-Werte.</p></div>
     <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Praxis-/Rahmenfakten 0,72–0,92; Szenario-Quoten 0,40. Jede Aussage trägt eine Datenklasse — Quoten sind Modellmittelpunkte.</p></div>
-    <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Reale Allokationsdaten sind vertraulich; Marktpraxis variiert je Region/Deal; SpaceX hat keinen vollzogenen IPO. Werte nicht für reale Allokationen verwenden.</p></div>
+    <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Reale Allokationsdaten sind vertraulich; Marktpraxis variiert je Region/Deal; der SpaceX-IPO ist zwar vollzogen (12.06.2026), die konkreten Zuteilungsquoten sind aber nicht offengelegt. Werte nicht für reale Allokationen verwenden.</p></div>
   </div>
 
   <h3 class="font-head font-bold text-white mb-3">Glossar (folgt globalem Wissensniveau)</h3>
@@ -645,7 +652,7 @@ tailwind.config = { theme: { extend: {
 
   <div class="caveat-box mb-10">
     <h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer — keine Anlageberatung</h3>
-    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar (RDG/StBerG/WpIG/FinDAG). SpaceX ist ein privates Unternehmen ohne vollzogenen Börsengang — <strong>alle konkreten Zuteilungsquoten sind illustrative Szenario-Werte</strong> (<span class="est-mark">EST</span>) und nicht für reale Allokationen geeignet. Die allgemeine Mechanik folgt gängiger ECM-Praxis und dem jeweiligen Rechtsrahmen. „SpaceX", „Starlink", „Starship" sind Marken der Rechteinhaber; ihre Nennung erfolgt rein beschreibend. Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span>.</p>
+    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar (RDG/StBerG/WpIG/FinDAG). Der SpaceX-IPO wurde am 12.06.2026 vollzogen; die Deal-Eckdaten sind nutzer-/medienvorgegeben und nicht unabhängig verifiziert — <strong>die konkreten Zuteilungsquoten bleiben illustrative Szenario-Werte</strong> (<span class="est-mark">EST</span>) und nicht für reale Allokationen geeignet. Die allgemeine Mechanik folgt gängiger ECM-Praxis und dem jeweiligen Rechtsrahmen. „SpaceX", „Starlink", „Starship" sind Marken der Rechteinhaber; ihre Nennung erfolgt rein beschreibend. Stichtag <span class="font-mono text-tngb-cyan">2026-06-19</span>.</p>
   </div>
 
   <footer class="border-t border-tngb-border pt-8 mt-4">
@@ -667,7 +674,7 @@ tailwind.config = { theme: { extend: {
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M299 · v1.0.0 · 2026-06-19<br/>Tier T3 · Welle 45 · Equity Allocation</div></div>
+      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M299 · v1.1.0 · 2026-06-19<br/>Tier T3 · Welle 45 · Equity Allocation</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. Zuteilungsquoten sind Szenario-Schätzungen. Die nächste Generation Banking.</p>
   </footer>
@@ -769,13 +776,13 @@ renderGlossar();
 const C={cyan:'#00CFFF',emerald:'#00CC7A',gold:'#DFAF0F',lavender:'#9933FF',orange:'#FF6B00',indigo:'#4472C4',magenta:'#E6399A',muted:'#64748B'};
 const baseOpts=(legend)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:legend,labels:{color:'#94A3B8',font:{size:10}}}},scales:{}});
 function mk(id,cfg){ const c=document.getElementById(id); if(c&&window.Chart) return new Chart(c,cfg); }
-mk('chartTranchen',{type:'doughnut',data:{labels:['Institutionell','Cornerstone','Retail','Mitarbeiter'],datasets:[{data:[57,25,10,8],backgroundColor:[C.cyan,C.emerald,C.gold,C.lavender],borderColor:'#0A0F1A',borderWidth:2}]},options:baseOpts(true)});
-mk('chartGeo',{type:'bar',data:{labels:['Nordamerika','EMEA','Asien-Pazifik','Rest'],datasets:[{data:[62,24,11,3],backgroundColor:[C.cyan,C.emerald,C.gold,C.muted]}]},options:{...baseOpts(false),scales:{y:{ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}},x:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});
+mk('chartTranchen',{type:'doughnut',data:{labels:['Institutionell','Anchor','Retail','Mitarbeiter'],datasets:[{data:[70,15,10,5],backgroundColor:[C.cyan,C.emerald,C.gold,C.lavender],borderColor:'#0A0F1A',borderWidth:2}]},options:baseOpts(true)});
+mk('chartGeo',{type:'bar',data:{labels:['USA (Core)','Europa/UK','Asien/Rest'],datasets:[{data:[85,10,5],backgroundColor:[C.cyan,C.emerald,C.gold]}]},options:{...baseOpts(false),scales:{y:{ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}},x:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});
 mk('chartKons',{type:'bar',data:{labels:['3× Global Coord.','4× Bookrunner','6× Co-Manager'],datasets:[{data:[54,28,18],backgroundColor:[C.cyan,C.emerald,C.gold]}]},options:{...baseOpts(false),indexAxis:'y',scales:{x:{ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}},y:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});
 mk('chartDE',{type:'bar',data:{labels:['Großbank (inst.)','Direkt/Neobroker','Genossensch.','Sparkassen','Privatbanken','übrige','Sozial/Ethik'],datasets:[{data:[40,21,12,12,10,4,1],backgroundColor:[C.cyan,C.emerald,C.gold,C.orange,C.indigo,C.muted,C.magenta]}]},options:{...baseOpts(false),indexAxis:'y',scales:{x:{ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}},y:{ticks:{color:'#94A3B8',font:{size:9}},grid:{display:false}}}}});
 
 /* ====== SIMULATOR ====== */
-let simChart=mk('chartSim',{type:'doughnut',data:{labels:['Institutionell','Cornerstone','Retail','Mitarbeiter'],datasets:[{data:[57,25,10,8],backgroundColor:[C.cyan,C.emerald,C.gold,C.lavender],borderColor:'#0A0F1A',borderWidth:2}]},options:baseOpts(true)});
+let simChart=mk('chartSim',{type:'doughnut',data:{labels:['Institutionell','Anchor','Retail','Mitarbeiter'],datasets:[{data:[70,15,10,5],backgroundColor:[C.cyan,C.emerald,C.gold,C.lavender],borderColor:'#0A0F1A',borderWidth:2}]},options:baseOpts(true)});
 const S={inst:'simInst',corn:'simCorn',ret:'simRet',emp:'simEmp',green:'simGreen'};
 function refreshSim(){
   let inst=+v('simInst'),corn=+v('simCorn'),ret=+v('simRet'),emp=+v('simEmp'),green=+v('simGreen');
