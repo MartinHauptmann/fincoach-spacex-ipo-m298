@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M298 v2.1.0 · SpaceX — Der Weg zum $1,75-Billionen-IPO (jetzt börsennotiert · SPCX) · FinCoach AI</title>
+<title>M298 v2.2.0 · SpaceX — Der Weg zum $1,75-Billionen-IPO (jetzt börsennotiert · SPCX) · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Tiefenmodul M298: SpaceX vom $350-Mrd.-Tender (Dez. 2024) über das S-1-Filing (Mai 2026, ~$1.750 Mrd.) zum Börsengang (12.06.2026, $135/Aktie, SPCX/NASDAQ) — aktuell ~$2,42 Bln. Marktkap. Finanzstruktur, Sum-of-the-Parts mit xAI-Integration, EV/Revenue ~129x EST, globaler Vergleich, ITAR-Hürden, Free Float ~5%. Provenienz nach M-DBOM v1 — Bewertungs-/Finanzzahlen medien-/nutzerbasiert, nicht unabhängig verifiziert. Stichtag 2026-06-19."/>
 <link rel="stylesheet" href="fonts.css"/><!-- Self-hosted Fonts (DSGVO: keine Google-CDN-Abrufe) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
@@ -198,8 +198,8 @@ tailwind.config = {
   "module": {
     "id": "M298",
     "title": "SpaceX — Der Weg zum $1,75-Billionen-IPO",
-    "version": "2.1.0",
-    "predecessor_version": "2.0.0",
+    "version": "2.2.0",
+    "predecessor_version": "2.1.0",
     "predecessor_archive": "archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html",
     "comparison_report": "reports/compliance/m298-v1-vs-v2-comparison.html",
     "stichtag": "2026-06-19",
@@ -217,7 +217,13 @@ tailwind.config = {
       "SCENARIO_PROJECTION": 4
     }
   },
-  "honest_disclosure": "SpaceX ist seit dem Going-Live am 12.06.2026 boersennotiert (Ticker SPCX, NASDAQ; Ausgabepreis $135,00/Aktie). Das LLM-Trainings-Wissen hat einen Cutoff vor 2026; die hier genannten Bewertungs-/Finanzzahlen (S-1-Ziel ~$1.750 Mrd., IPO-Preis $135, Erstkurs ~$150, aktuelle Marktkap. ~$2,42 Bln. per 2026-06-19, Free Float ~5%, Retail-Quote bis 30%) wurden medien-/nutzervorgegeben und sind von FinCoach AI nicht unabhaengig SEC-verifiziert — sie bleiben als SCENARIO_PROJECTION/USER_PROVIDED markiert. Keine Anlageberatung.",
+  "honest_disclosure": "SpaceX ist seit dem Going-Live am 12.06.2026 boersennotiert (Ticker SPCX, NASDAQ; Ausgabepreis $135,00/Aktie). Das LLM-Trainings-Wissen hat einen Cutoff vor 2026; die hier genannten Bewertungs-/Finanzzahlen (S-1-Ziel ~$1.750 Mrd., IPO-Preis $135, Erstkurs ~$150, aktuelle Marktkap. ~$2,42 Bln. per 2026-06-19, Free Float ~5%, Retail-Quote bis 30%) wurden medien-/nutzervorgegeben und sind von FinCoach AI nicht unabhaengig SEC-verifiziert — sie bleiben als SCENARIO_PROJECTION/USER_PROVIDED markiert. Keine Anlageberatung. v2.2.0 (Post-IPO-Update): aktueller Kurs $185 (+37% seit $135), Peak-Bewertung ~$2,75 Bln. sowie die reportierte Zuteilung (geografisch 85:10:5, Broker-Fill-Rates ING ~25% / Trade Republic ~12,9%, Retail ~30%) wurden aus einem Intelligence-Report integriert - medien-/nutzervorgegeben, nicht unabhaengig verifiziert; Detail im Single-Pager spacex-update.html.",
+  "changelog": [
+    { "version": "2.2.0", "date": "2026-06-19", "type": "update", "summary": "Post-IPO-Update: Marktdynamik (Kurs $185, +37%, Peak ~$2,75 Bln.) und reportierte Zuteilung (85:10:5, ING ~25% / Trade Republic ~12,9%, Retail ~30%) aus Intelligence-Report integriert (nicht unabhaengig verifiziert); Verweis auf spacex-update.html." },
+    { "version": "2.1.0", "date": "2026-06-19", "type": "major", "summary": "Going-Live: IPO am 12.06.2026 ($135/Aktie, SPCX/NASDAQ), Marktkap. ~$2,42 Bln., Free Float ~5%; Umstellung IFRS-13-Level-3 auf beobachtbaren Marktpreis." },
+    { "version": "2.0.0", "date": "2026-05-20", "type": "major", "summary": "S-1-Filing und Pre-IPO-Neubewertung (~$1.750 Mrd.), SOTP inkl. xAI, globaler Vergleich, ITAR-Huerden." },
+    { "version": "1.1.0", "date": "2024-12", "type": "base", "summary": "Erstfassung: $350-Mrd.-Tender-Offer, Bewertungshistorie, Starlink-Oekonomie (archiviert)." }
+  ],
   "audit_trail_url": "provenance/m298.dbom.json#audit_trail"
 }
 </script>
@@ -259,6 +265,7 @@ tailwind.config = {
 <!-- ===== NavDock ===== -->
 <div id="navdock" aria-label="Sektions-Navigation">
   <a href="#s01" title="S01 · Hero" data-dock="s01">01</a>
+  <a href="#s-updates" title="Update-Historie" data-dock="s-updates">↻</a>
   <a href="#s02" title="S02 · Background" data-dock="s02">02</a>
   <a href="#s03" title="S03 · Interdisziplinäre Landkarte" data-dock="s03">03</a>
   <a href="#s04" title="S04 · Wissenschaftlicher Unterbau" data-dock="s04">04</a>
@@ -276,12 +283,13 @@ tailwind.config = {
 <!-- ===== M-DBOM Provenienz-Banner (sichtbar, klickbar) ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
-    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v2.1.0</span>
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v2.2.0</span>
     <span class="text-slate-300">8 Fakten · 4 confirmed · 4 SCENARIO_PROJECTION · SPCX seit 12.06.2026 börsennotiert · Bewertungszahlen nicht unabhängig verifiziert · Stichtag 2026-06-19</span>
     <span class="ml-auto flex items-center gap-2">
       <a href="provenance/m298-provenance.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,204,122,0.15);color:#00CC7A;border:1px solid rgba(0,204,122,0.4);">📊 Provenienz-Graph</a>
       <a href="provenance/m298.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
       <a href="archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(100,116,139,0.15);color:#94A3B8;border:1px solid rgba(100,116,139,0.3);">⟲ v1.1.0</a>
+      <a href="#s-updates" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">📜 Update-Historie</a>
       <a href="reports/compliance/m298-v1-vs-v2-comparison.html" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">⇆ Vergleich</a>
     </span>
   </div>
@@ -431,6 +439,22 @@ tailwind.config = {
       <button class="reg-tag" style="color:#E040A0;border-color:rgba(224,64,160,0.4);background:rgba(224,64,160,0.08);" data-reg="itu">ITU · Radio Regulations</button>
     </div>
   </div>
+</section>
+
+<!-- ===== S-UPDATES · UPDATE-HISTORIE (versioniert, datengetrieben) ===== -->
+<section id="s-updates" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-3">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">UPDATE-HISTORIE</span>
+    <span class="section-badge" style="background:rgba(0,204,122,0.12);color:#00CC7A;">Semantic Versioning · M-DBOM</span>
+    <span class="section-badge" id="updates-current-badge" style="background:rgba(223,175,15,0.12);color:#DFAF0F;">aktuell v2.2.0</span>
+  </div>
+  <h2 class="section-title">Update-Historie — versionierte Aktualisierungen im Zeitablauf</h2>
+  <p class="text-base text-slate-400 max-w-3xl mb-8 leading-relaxed">
+    Dieses Modul wird versioniert fortgeschrieben. Jede Aktualisierung erscheint als datierter Eintrag — neueste zuerst.
+    Die Historie ist zusätzlich maschinenlesbar im <a href="provenance/m298.dbom.json" class="text-tngb-emerald hover:underline">M-DBOM</a>
+    (Feld <span class="font-mono text-tngb-cyan">changelog</span>) hinterlegt und wächst mit jedem künftigen Update automatisch mit.
+  </p>
+  <div id="updates-timeline"></div>
 </section>
 
 <!-- ===== S02 BACKGROUND (3-Level-Tabs) ===== -->
@@ -1809,7 +1833,7 @@ tailwind.config = {
         <a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="hover:text-tngb-cyan transition block">www.TheNextGenerationBanking.com</a>
       </div>
       <div class="text-right">
-        <div class="inline-block dep-box text-xs font-mono text-tngb-muted">M298 · v2.1.0 · 2026-06-19<br/>Tier T3 · Welle 45 · Space Economy</div>
+        <div class="inline-block dep-box text-xs font-mono text-tngb-muted">M298 · v2.2.0 · 2026-06-19<br/>Tier T3 · Welle 45 · Space Economy</div>
       </div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. Alle Finanzdaten zu SpaceX sind Schätzungen. Die nächste Generation Banking.</p>
@@ -1966,6 +1990,59 @@ function renderGlossar(){
   }).join('');
 }
 renderGlossar();
+
+/* ============ UPDATE-HISTORIE (versioniert, datengetrieben — neue Updates einfach oben anfügen) ============ */
+const MODULE_UPDATES=[
+  {version:'2.2.0',date:'2026-06-19',type:'Update',color:'#00CFFF',
+   title:'Post-IPO-Update — Marktdynamik & Zuteilung integriert',
+   summary:'Integration eines Post-IPO-Intelligence-Reports: aktuelle Marktdaten und die reportierte Zuteilungs-Logik.',
+   changes:['Kurs $185,00 (+37 % seit Ausgabe $135), bisheriges Hoch $225,64','Peak-Bewertung ~$2,75 Bln. (überholt zeitweise Amazon)','Zuteilung geografisch 85:10:5 (USA / Europa-UK / Asien-Rest), Retail-Tranche ~30 %','Broker-Fill-Rates: ING ~25 % · Trade Republic ~12,9 % (wegen Überzeichnung gekürzt)'],
+   link:{href:'spacex-update.html',label:'→ Vollständiger SpaceX-Update-Single-Pager'},
+   prov:'Report-/medienvorgegeben (Perplexity, Focus, Zeit, Euronews, Morningstar, SEC S-1) — von FinCoach AI nicht unabhängig verifiziert.'},
+  {version:'2.1.0',date:'2026-06-19',type:'Major',color:'#00CC7A',
+   title:'Going-Live — SpaceX ist börsennotiert',
+   summary:'IPO vollzogen: SPCX an der NASDAQ.',
+   changes:['Börsengang 12.06.2026, Ausgabepreis $135,00/Aktie (Ticker SPCX)','Erstkurs ~$150 (≈ +11 %), Intraday-Hoch ~$174','Aktuelle Marktkap. ~$2,42 Bln. · Free Float ~5 %','Umstellung von IFRS-13-Level-3 (nicht beobachtbar) auf beobachtbaren Marktpreis'],
+   prov:'Eckdaten medien-/nutzervorgegeben, nicht unabhängig SEC-verifiziert.'},
+  {version:'2.0.0',date:'2026-05-20',type:'Major',color:'#DFAF0F',
+   title:'S-1-Filing & Pre-IPO-Neubewertung',
+   summary:'S-1-Registrierung; Bewertungsziel ~$1.750 Mrd.',
+   changes:['S-1-Filing (Mai 2026), Bewertungsziel ~$1.750 Mrd.','Sum-of-the-Parts inkl. xAI-Integration, EV/Revenue ~129x EST','Globaler Vergleich & ITAR-Hürden ergänzt'],
+   prov:'Bewertungszahlen Szenario-/medienbasiert.'},
+  {version:'1.1.0',date:'2024-12',type:'Basis',color:'#9933FF',
+   title:'Erstfassung — Tender-Offer & Bewertungseskalation',
+   summary:'Ausgangsmodul rund um den $350-Mrd.-Tender-Offer (Dez. 2024).',
+   changes:['$350-Mrd.-Tender-Offer-Mechanik','Bewertungshistorie 2002–2024','Starlink-Ökonomie-Grundlagen'],
+   archive:{href:'archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html',label:'⟲ archivierte Fassung'}}
+];
+function renderUpdates(){
+  const el=document.getElementById('updates-timeline'); if(!el) return;
+  const last=MODULE_UPDATES.length-1;
+  el.innerHTML=MODULE_UPDATES.map((u,i)=>{
+    const chg=(u.changes||[]).map(c=>`<li>${c}</li>`).join('');
+    const link=u.link?`<a href="${u.link.href}" class="inline-block mt-2 text-sm font-semibold" style="color:${u.color};">${u.link.label}</a>`:'';
+    const arch=u.archive?`<a href="${u.archive.href}" class="inline-block mt-2 ml-1 text-xs text-tngb-muted hover:text-white">${u.archive.label}</a>`:'';
+    const prov=u.prov?`<div class="text-xs text-tngb-muted mt-2"><span class="est-mark">EST</span> ${u.prov}</div>`:'';
+    const lineCol=i<last?'rgba(100,116,139,0.25)':'transparent';
+    return `<div style="position:relative;padding-left:1.6rem;padding-bottom:1.25rem;margin-left:7px;border-left:2px solid ${lineCol};">
+      <span style="position:absolute;left:-8px;top:3px;width:14px;height:14px;border-radius:50%;background:${u.color};box-shadow:0 0 0 3px #0A0F1A,0 0 10px ${u.color};"></span>
+      <div class="dep-box" style="border-left:3px solid ${u.color};">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+          <span class="font-mono font-bold" style="color:${u.color};">v${u.version}</span>
+          <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">${u.type}</span>
+          <span class="text-xs font-mono text-tngb-muted">${u.date}</span>
+        </div>
+        <div class="font-head font-bold text-white">${u.title}</div>
+        <div class="text-sm text-slate-300 mt-1">${u.summary}</div>
+        <ul class="text-sm text-slate-300 mt-2" style="list-style:disc;margin-left:1.1rem;">${chg}</ul>
+        ${link}${arch}${prov}
+      </div>
+    </div>`;
+  }).join('');
+  const badge=document.getElementById('updates-current-badge');
+  if(badge) badge.textContent='aktuell v'+MODULE_UPDATES[0].version;
+}
+renderUpdates();
 
 /* ============ CHARTS ============ */
 const gridColor='rgba(100,116,139,0.15)';
