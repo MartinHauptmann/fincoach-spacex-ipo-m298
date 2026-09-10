@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="dark"/>
+<title>M300 v1.0.0 · PISA 2025 &amp; Finanzbildung — Kompetenzdiagnostik, OECD/INFE-Kopplung &amp; KI-Hyperindividualisierung · FinCoach AI</title>
+<meta name="description" content="FinCoach AI Deep-Dive M300: Wissenschaftliche Auswertung der OECD-PISA-2025-Ergebnisse für Deutschland (Lesen 465, Mathematik 464, Naturwissenschaften 486), Verifikationsprotokoll des Research-Chats, PISA-Diagnostik-Instrumente (IRT, Kompetenzstufen, Logdaten, DCM), Kopplung mit dem OECD/INFE-Finanzkompetenz-Score, Hyperindividualisierung für Einzelne, Unternehmen und Communities, Anforderungskatalog für KI-Lernsysteme mit Abnahmetests, Compliance-Klauseln (DSGVO, EU-KI-VO, RDG/WpIG) und QA-Checks. Keine Anlage-, Rechts- oder Steuerberatung."/>
+<meta name="robots" content="index,follow"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="M300 · PISA 2025 & Finanzbildung — Kompetenzdiagnostik & KI-Hyperindividualisierung"/>
+<meta property="og:description" content="Verifizierte PISA-2025-Ergebnisse (DE: 465/464/486), Diagnostik-Instrumente, DCM-Rechner, OECD/INFE-Kopplung, KI-Anforderungskatalog, Compliance-Klauseln. FinCoach AI."/>
+<meta property="og:site_name" content="FinCoach AI · TheNextGenerationBanking"/>
+<link rel="stylesheet" href="fonts.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+if(window.tailwind) tailwind.config = { theme: { extend: {
+  colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', indigo:'#4472C4', coral:'#E040A0', muted:'#64748B', border:'#1E293B' } },
+  fontFamily: { sans:['Inter','system-ui','sans-serif'], head:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
+}}}
+</script>
+<style>
+  /* Natives High-Contrast-CSS + Layout-Fallback: funktioniert auch ohne Tailwind-CDN (Mobile-Lesson aus dem Research-Chat) */
+  img,canvas,svg{max-width:100%;}
+  .max-w-7xl{max-width:80rem;} .max-w-3xl{max-width:48rem;} .max-w-xl{max-width:36rem;} .mx-auto{margin-left:auto;margin-right:auto;}
+  .px-4{padding-left:1rem;padding-right:1rem;} .py-12{padding-top:3rem;padding-bottom:3rem;} .pt-10{padding-top:2.5rem;} .pb-12{padding-bottom:3rem;} .pt-4{padding-top:1rem;} .pt-8{padding-top:2rem;} .py-3{padding-top:.75rem;padding-bottom:.75rem;} .py-2\.5{padding-top:.625rem;padding-bottom:.625rem;} .p-6{padding:1.5rem;}
+  .mb-1{margin-bottom:.25rem;} .mb-2{margin-bottom:.5rem;} .mb-3{margin-bottom:.75rem;} .mb-4{margin-bottom:1rem;} .mb-6{margin-bottom:1.5rem;} .mb-8{margin-bottom:2rem;} .mb-10{margin-bottom:2.5rem;} .mt-1{margin-top:.25rem;} .mt-2{margin-top:.5rem;} .mt-3{margin-top:.75rem;} .mt-4{margin-top:1rem;} .mt-6{margin-top:1.5rem;} .mt-8{margin-top:2rem;} .ml-auto{margin-left:auto;}
+  .flex{display:flex;} .flex-wrap{flex-wrap:wrap;} .flex-col{flex-direction:column;} .items-center{align-items:center;} .items-start{align-items:flex-start;} .justify-between{justify-content:space-between;} .block{display:block;} .inline-block{display:inline-block;}
+  .grid{display:grid;} .gap-2{gap:.5rem;} .gap-3{gap:.75rem;} .gap-4{gap:1rem;} .gap-5{gap:1.25rem;} .gap-6{gap:1.5rem;} .gap-x-3{column-gap:.75rem;} .gap-x-4{column-gap:1rem;} .gap-y-1{row-gap:.25rem;} .grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .space-y-3>*+*{margin-top:.75rem;} .space-y-4>*+*{margin-top:1rem;}
+  @media (min-width:768px){ .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr));} .md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr));} .md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr));} .md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr));} .md\:flex-row{flex-direction:row;} .md\:text-5xl{font-size:3rem;line-height:1;} }
+  .overflow-x-auto{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;} .overflow-x-auto table{min-width:520px;} .grid>*,.dep-box,.kpi-card,.chart-box{min-width:0;} .note-box{overflow-x:auto;} nav.glass{flex-wrap:wrap;gap:.5rem;}
+  .sticky{position:sticky;} .top-0{top:0;} .z-50{z-index:50;} .rounded-xl{border-radius:.75rem;} .rounded{border-radius:.25rem;} .rounded-lg{border-radius:.5rem;} .rounded-full{border-radius:9999px;}
+  .text-xs{font-size:.75rem;line-height:1rem;} .text-sm{font-size:.875rem;line-height:1.25rem;} .text-base{font-size:1rem;line-height:1.5rem;} .text-xl{font-size:1.25rem;line-height:1.75rem;} .text-3xl{font-size:1.875rem;line-height:2.25rem;} .text-4xl{font-size:2.25rem;line-height:2.5rem;} .leading-relaxed{line-height:1.625;} .leading-tight{line-height:1.25;} .text-center{text-align:center;} .text-right{text-align:right;}
+  .font-bold{font-weight:700;} .font-extrabold{font-weight:800;} .font-semibold{font-weight:600;} .font-mono{font-family:'JetBrains Mono',monospace;} .font-head{font-family:'Space Grotesk',sans-serif;}
+  .text-white{color:#fff;} .text-slate-200{color:#E2E8F0;} .text-slate-300{color:#CBD5E1;} .text-slate-400{color:#94A3B8;} .text-tngb-muted{color:#64748B;} .text-tngb-cyan{color:#00CFFF;} .text-tngb-emerald{color:#00CC7A;} .text-tngb-magenta{color:#E6399A;} .text-tngb-gold{color:#DFAF0F;} .text-tngb-orange{color:#FF6B00;} .text-tngb-lavender{color:#9933FF;}
+  .border-t{border-top:1px solid var(--border);} .border-l-4{border-left-width:4px;border-left-style:solid;} .transition{transition:all .2s;} .cursor-pointer{cursor:pointer;} .min-h-screen{min-height:100vh;}
+  :root{ --bg:#0A0F1A; --card:#121A2E; --cyan:#00CFFF; --emerald:#00CC7A; --magenta:#E6399A; --orange:#FF6B00; --lavender:#9933FF; --gold:#DFAF0F; --indigo:#4472C4; --coral:#E040A0; --muted:#64748B; --border:#1E293B; color-scheme:dark; }
+  *{box-sizing:border-box;}
+  html{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif;-webkit-text-size-adjust:100%;}
+  body{background:var(--bg);margin:0;color:#E2E8F0;}
+  h1,h2,h3,h4,h5,h6{font-family:'Space Grotesk',sans-serif;}
+  code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  section{padding-left:1rem;padding-right:1rem;}
+  .glass{background:rgba(18,26,46,0.7);backdrop-filter:blur(16px);border:1px solid rgba(0,207,255,0.12);}
+  .scroll-fade{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+  .scroll-fade.visible{opacity:1;transform:none;}
+  .no-js .scroll-fade{opacity:1;transform:none;}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#F1F5F9;margin-bottom:.35rem;}
+  .section-badge{font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:4px;}
+  .kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.35rem;position:relative;}
+  .kpi-card.scenario-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px dashed rgba(255,107,0,0.35);border-radius:inherit;}
+  .kpi-card.confirmed-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px solid rgba(0,204,122,0.35);border-radius:inherit;}
+  .dep-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+  .caveat-box{background:rgba(230,57,154,0.07);border:1px solid rgba(230,57,154,0.35);border-radius:12px;padding:1rem 1.25rem;}
+  .note-box{background:rgba(0,207,255,0.06);border:1px solid rgba(0,207,255,0.25);border-radius:12px;padding:1rem 1.25rem;}
+  .est-mark{color:var(--gold);font-size:.62rem;font-weight:700;vertical-align:super;cursor:help;}
+  table{width:100%;border-collapse:collapse;}
+  th{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:.6rem .75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:bottom;}
+  td{padding:.6rem .75rem;font-size:.82rem;border-bottom:1px solid rgba(30,41,59,.6);vertical-align:top;color:#CBD5E1;}
+  tr:hover td{background:rgba(0,207,255,.04);}
+  .badge{display:inline-block;padding:1px 8px;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;}
+  .b-ok{background:rgba(0,204,122,.16);color:var(--emerald);border:1px solid rgba(0,204,122,.4);}
+  .b-sec{background:rgba(0,207,255,.16);color:var(--cyan);border:1px solid rgba(0,207,255,.4);}
+  .b-user{background:rgba(223,175,15,.16);color:var(--gold);border:1px solid rgba(223,175,15,.4);}
+  .b-disc{background:rgba(230,57,154,.16);color:var(--magenta);border:1px solid rgba(230,57,154,.4);}
+  .b-int{background:rgba(153,51,255,.16);color:var(--lavender);border:1px solid rgba(153,51,255,.4);}
+  .b-scen{background:rgba(255,107,0,.16);color:var(--orange);border:1px solid rgba(255,107,0,.4);}
+  .b-reg{background:rgba(230,57,154,.16);color:var(--magenta);border:1px solid rgba(230,57,154,.4);}
+  .b-core{background:rgba(0,204,122,.16);color:var(--emerald);border:1px solid rgba(0,204,122,.4);}
+  .b-ext{background:rgba(153,51,255,.16);color:var(--lavender);border:1px solid rgba(153,51,255,.4);}
+  .level-btn{border:none;cursor:pointer;padding:.35rem .9rem;border-radius:6px;font-size:.75rem;font-weight:600;transition:all .2s;}
+  .level-btn.active-level{background:var(--cyan);color:#0A0F1A;}
+  .level-btn:not(.active-level){background:var(--card);color:var(--muted);border:1px solid var(--border);}
+  .tab-btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s;}
+  .tab-btn.active-tab{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  .lvl-content{display:none;} .lvl-content.active{display:block;}
+  .reg-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;font-size:.72rem;font-weight:600;text-decoration:none;border:1px solid;cursor:pointer;transition:transform .15s;background:transparent;}
+  .reg-tag:hover{transform:translateY(-1px);}
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:var(--card);border:1px solid var(--cyan);border-radius:16px;max-width:560px;width:100%;padding:2rem;position:relative;max-height:82vh;overflow-y:auto;}
+  .close-btn{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;}
+  .close-btn:hover{color:var(--cyan);}
+  .slider-wrap{display:flex;align-items:center;gap:.75rem;}
+  .slider-wrap input[type=range]{flex:1;accent-color:var(--cyan);}
+  .sim-out{background:rgba(0,207,255,.06);border:1px solid rgba(0,207,255,.2);border-radius:8px;padding:.75rem 1rem;}
+  .compliance-pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:9999px;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;background:rgba(100,116,139,.15);color:#64748B;border:1px solid rgba(100,116,139,.3);}
+  .compliance-pill.good{background:rgba(0,204,122,.15);color:#00CC7A;border-color:rgba(0,204,122,.4);}
+  .compliance-pill.warn{background:rgba(223,175,15,.15);color:#DFAF0F;border-color:rgba(223,175,15,.4);}
+  #live-audit-banner{background:rgba(0,204,122,.08);border-left:3px solid #00CC7A;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#94A3B8;display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  #live-audit-banner.warn{background:rgba(223,175,15,.10);border-left-color:#DFAF0F;}
+  #live-audit-banner.err{background:rgba(230,57,154,.10);border-left-color:#E6399A;color:#E6399A;}
+  #live-audit-banner code{color:#00CFFF;}
+  .dbom-pill{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.58rem;}
+  .dbom-class-badge{padding:1px 6px;border-radius:4px;background:rgba(255,107,0,.16);color:#FF6B00;border:1px solid rgba(255,107,0,.35);}
+  .dbom-class-badge.dc-primary{background:rgba(0,204,122,.16);color:#00CC7A;border-color:rgba(0,204,122,.35);}
+  .dbom-class-badge.dc-user{background:rgba(223,175,15,.16);color:#DFAF0F;border-color:rgba(223,175,15,.35);}
+  .dbom-class-badge.dc-disc{background:rgba(230,57,154,.16);color:#E6399A;border-color:rgba(230,57,154,.35);}
+  .dbom-conf{color:#64748B;}
+  .check-pass{color:#00CC7A;font-weight:700;} .check-na{color:#64748B;} .check-fail{color:#E6399A;font-weight:700;}
+  #navdock{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:6px;}
+  #navdock a{width:30px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:700;font-family:'JetBrains Mono',monospace;background:rgba(18,26,46,.85);border:1px solid var(--border);color:var(--muted);text-decoration:none;transition:all .18s;}
+  #navdock a:hover,#navdock a.active-dock{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  @media (max-width:1024px){#navdock{display:none;}}
+  ul.tick{list-style:none;padding:0;margin:0;}
+  ul.tick li{position:relative;padding-left:1.25rem;margin-bottom:.4rem;font-size:.85rem;line-height:1.55;color:#CBD5E1;}
+  ul.tick li::before{content:'▸';position:absolute;left:0;color:var(--cyan);}
+  .chart-box{position:relative;width:100%;height:260px;}
+  .bar-track{height:14px;border-radius:4px;background:rgba(100,116,139,.2);overflow:hidden;}
+  .bar-fill{height:100%;border-radius:4px;}
+  .q-cell{width:34px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;}
+  .q1{background:rgba(0,207,255,.22);color:#00CFFF;border:1px solid rgba(0,207,255,.5);} .q0{background:rgba(100,116,139,.12);color:#475569;border:1px solid rgba(100,116,139,.25);}
+  .resp-btn{cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:6px;padding:.25rem .6rem;font-size:.7rem;font-weight:700;font-family:'JetBrains Mono',monospace;}
+  .resp-btn.r1{background:rgba(0,204,122,.2);color:#00CC7A;border-color:rgba(0,204,122,.5);}
+  .resp-btn.r0{background:rgba(230,57,154,.2);color:#E6399A;border-color:rgba(230,57,154,.5);}
+  .tier-pill{display:inline-block;padding:3px 10px;border-radius:6px;font-weight:700;font-size:.75rem;}
+  [data-tooltip]{position:relative;cursor:help;border-bottom:1px dotted rgba(0,207,255,.5);}
+  .station{border-left:2px solid var(--border);padding-left:1rem;position:relative;}
+  .station::before{content:'';position:absolute;left:-6px;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--cyan);}
+  .req-id{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#00CFFF;white-space:nowrap;}
+  .cl-id{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#E6399A;white-space:nowrap;}
+</style>
+
+<!-- ============ M-DBOM · JSON-LD ============ -->
+<script type="application/ld+json" id="module-provenance">
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": { "id": "M300", "title": "PISA 2025 & Finanzbildung — Kompetenzdiagnostik, OECD/INFE-Kopplung & KI-gestützte Hyperindividualisierung", "version": "1.0.0", "stichtag": "2026-09-10", "related_modules": ["M298", "M299"], "external_dbom": "provenance/m300.dbom.json", "predecessor_version": null },
+  "fact_summary": { "total": 33, "confirmed": 27, "user_provided_unverified": 1, "discrepant": 1, "interpretation": 2, "scenario_projection": 2 },
+  "honest_disclosure": "Aus einem Research-Chatverlauf abgeleitet, der eine dokumentierte Halluzinations-Episode (PISA-2022-Werte als 2025 präsentiert, vor Embargo-Ende) enthielt. Alle 33 Aussagen wurden am 2026-09-10 einzeln gegen OECD-Band I / Ländernotiz Deutschland bzw. deren Fach-/Presseauswertung geprüft; 2 Abweichungen (111 vs. 125 Punkte; Mobbing-Abschlag gilt für 5 %, nicht 31 %) sind ausgewiesen. Profil-/Hyperindividualisierungsmodelle sind SCENARIO_PROJECTION. Keine Anlage-, Rechts- oder Steuerberatung."
+}
+</script>
+</head>
+<body class="min-h-screen no-js" style="background:#0A0F1A;">
+<script>document.body.classList.remove('no-js');</script>
+
+<!-- ===== NAV ===== -->
+<nav class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+  <a href="index.html" class="flex items-center gap-2">
+    <svg viewBox="0 0 100 100" fill="none" width="36" height="36" aria-hidden="true">
+      <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+      <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+      <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+      <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+      <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+    </svg>
+    <div><div class="font-head font-bold text-white text-sm leading-tight">FinCoach AI</div><div class="text-xs leading-tight" style="color:#00CFFF;">by TheNextGenerationBanking.com</div></div>
+  </a>
+  <div class="flex items-center gap-2 flex-wrap">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">M300</span>
+    <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">T3 · Welle 46</span>
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Financial Literacy / Learning Analytics</span>
+    <a href="m299.html" class="text-xs text-tngb-muted hover:text-white transition ml-2">M299</a>
+    <a href="index.html" class="text-xs text-tngb-muted hover:text-white transition">← Hauptseite</a>
+  </div>
+</nav>
+
+<!-- ===== NavDock ===== -->
+<div id="navdock" aria-label="Sektions-Navigation">
+  <a href="#s01" data-dock="s01" title="Hero">01</a>
+  <a href="#s02" data-dock="s02" title="Grundlagen">02</a>
+  <a href="#s03" data-dock="s03" title="Analyse-Protokoll">03</a>
+  <a href="#s04" data-dock="s04" title="Ergebnisse PISA 2025">04</a>
+  <a href="#s05" data-dock="s05" title="Diagnostik-Instrumente">05</a>
+  <a href="#s06" data-dock="s06" title="DCM-Rechner">06</a>
+  <a href="#s07" data-dock="s07" title="PISA ↔ OECD/INFE">07</a>
+  <a href="#s08" data-dock="s08" title="Hyperindividualisierung">08</a>
+  <a href="#s09" data-dock="s09" title="KI-Anforderungen & Abnahmetests">09</a>
+  <a href="#s10" data-dock="s10" title="Compliance-Klauseln">10</a>
+  <a href="#s-exp" data-dock="s-exp" title="Experten-Diskurs">EX</a>
+  <a href="#s-qa" data-dock="s-qa" title="QA / Compliance">QA</a>
+  <a href="#s-mtx" data-dock="s-mtx" title="Modul-Matrix">MX</a>
+  <a href="#s12" data-dock="s12" title="Quellen & Glossar">12</a>
+</div>
+
+<!-- ===== Provenienz-Banner ===== -->
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.0.0</span>
+    <span class="text-slate-300">33 Aussagen · 27 CONFIRMED · 1 USER_PROVIDED · 1 DISCREPANT · 2 INTERPRETATION · 2 SCENARIO · Stichtag 2026-09-10</span>
+    <span class="ml-auto flex items-center gap-2">
+      <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
+      <a href="provenance/fincoach_module_check.py" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">⚙ Prüfskript</a>
+    </span>
+  </div>
+  <div id="live-audit-banner" class="mt-2 rounded-xl">
+    <span class="font-bold" style="color:#00CC7A;">● LIVE-AUDIT</span>
+    <span id="live-audit-status">prüft DBOM-Integrität …</span>
+    <span class="ml-auto" id="live-audit-meta"></span>
+    <span id="live-audit-score" class="ml-auto"></span>
+  </div>
+</div>
+
+<!-- ===== CAT-Banner ===== -->
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+    <span class="font-mono font-bold" style="color:#00CFFF;">CAT</span>
+    <span class="text-tngb-muted">Cognitive Apprenticeship Track</span>
+    <span class="text-slate-400">·</span>
+    <span class="text-slate-300">Wissensniveau global wählbar</span>
+    <span class="ml-auto flex items-center gap-1">
+      <button class="level-btn active-level" data-lvl="einsteiger">Einsteiger</button>
+      <button class="level-btn" data-lvl="fortgeschritten">Fortgeschritten</button>
+      <button class="level-btn" data-lvl="experte">Experte</button>
+    </span>
+  </div>
+</div>
+
+<!-- ===== S01 HERO ===== -->
+<section id="s01" class="px-4 pt-10 pb-12 max-w-7xl mx-auto">
+  <div class="scroll-fade">
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S01 · HERO</span>
+      <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Financial Literacy × Learning Analytics</span>
+      <span class="section-badge" style="background:rgba(0,207,255,0.12);color:#00CFFF;">Tier T3 · Welle 46</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-head font-extrabold text-white mb-3 leading-tight">
+      PISA 2025 &amp; <span style="background:linear-gradient(135deg,#00CFFF 0%,#00CC7A 50%,#DFAF0F 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">Finanzbildung</span>
+    </h1>
+    <p class="text-xl font-head font-semibold mb-3" style="color:#00CFFF;">
+      Vom historischen Tiefstand der Basiskompetenzen zur hyperindividualisierten Finanzkompetenz — Diagnostik, OECD/INFE-Kopplung und Anforderungen an KI-Lernsysteme
+    </p>
+    <p class="text-base text-slate-400 max-w-3xl mb-6 leading-relaxed" data-source="FACT_PISA25_RELEASE">
+      Am 08.09.2026 hat die OECD PISA 2025 veröffentlicht. Deutschland erreicht in allen drei Domänen den niedrigsten je gemessenen
+      Wert; rund jede:r Dritte verfehlt in Mathematik und Lesen das Basisniveau. Dieses Modul zerlegt die Ergebnisse
+      wissenschaftlich, dokumentiert das <strong>Verifikationsprotokoll</strong> des zugrunde liegenden Research-Chats (inkl. einer
+      Halluzinations-Episode), leitet daraus die <strong>Instrumente</strong> der PISA-Methodik für Kompetenzprofile ab und koppelt sie
+      mit dem <strong>OECD/INFE-Finanzkompetenz-Score</strong> — bis hin zu Anforderungen, Abnahmetests und Compliance-Klauseln für
+      FinCoach-AI-Lernmodule.
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-09-10</span> · Datenstand OECD Band I 08.09.2026 · Rechtsstand 2026-09-10 · Provenienz nach M-DBOM v1.</span>
+    </p>
+
+    <div class="caveat-box mb-8 max-w-3xl" data-source="FACT_DEU_SCORES_2022">
+      <div class="flex items-start gap-3">
+        <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
+        <div class="text-sm text-slate-300 leading-relaxed">
+          <strong class="text-tngb-magenta">Daten-Transparenz:</strong> Der Research-Chat, aus dem dieses Modul entstand, präsentierte
+          <em>vor</em> dem Embargo-Ende PISA-2022-Werte (DE Mathematik 475, Lesen 480, Naturwissenschaften 492) als „2025-Ergebnisse“
+          und korrigierte dies nach Rückfrage. Alle hier gezeigten 2025-Werte wurden am Stichtag einzeln gegen die OECD-Ländernotiz
+          Deutschland bzw. deren Fach- und Presseauswertung geprüft (Verdict je Fakt in der DBOM). Zwei Chat-Angaben weichen ab und sind
+          als <span class="dbom-class-badge dc-disc">DISCREPANT</span> markiert. Modelle zur Profilbildung sind
+          <span class="dbom-class-badge">SCENARIO</span>. Keine Anlage-, Rechts- oder Steuerberatung.
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+      <div class="kpi-card confirmed-kpi" data-source="FACT_DEU_SCORES_2025" data-fact-class="PISA_2025_RESULT">
+        <div class="text-3xl font-head font-extrabold" style="color:#E6399A;">465</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Lesekompetenz DE 2025</div>
+        <div class="text-xs text-tngb-muted mt-1">−15 zu 2022 · OECD 461 · 32 % unter Stufe 2</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">OECD-PRIMÄR</span><span class="dbom-conf">Konf. 0.95</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi" data-source="FACT_DEU_SCORES_2025" data-fact-class="PISA_2025_RESULT">
+        <div class="text-3xl font-head font-extrabold" style="color:#FF6B00;">464</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Mathematik DE 2025</div>
+        <div class="text-xs text-tngb-muted mt-1">−11 zu 2022 · OECD 463 · 34 % unter Stufe 2</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">OECD-PRIMÄR</span><span class="dbom-conf">Konf. 0.95</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi" data-source="FACT_DEU_SCORES_2025" data-fact-class="PISA_2025_RESULT">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CFFF;">486</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Naturwissenschaften DE 2025</div>
+        <div class="text-xs text-tngb-muted mt-1">−6 zu 2022 · OECD 482 · 27 % unter Stufe 2</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">OECD-PRIMÄR</span><span class="dbom-conf">Konf. 0.95</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi" data-source="FACT_INFE_DE_2023" data-fact-class="OECD_INFE">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">76<span class="text-base text-tngb-muted">/100</span></div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">OECD/INFE-Finanzkompetenz DE (Erwachsene, 2023)</div>
+        <div class="text-xs text-tngb-muted mt-1">Zielwert 70 · Ø aller 39 Volkswirtschaften ~60</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">OECD/INFE</span><span class="dbom-conf">Konf. 0.85</span></div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <button class="reg-tag" style="color:#E6399A;border-color:rgba(230,57,154,0.4);background:rgba(230,57,154,0.08);" data-reg="aiact">EU-KI-VO · Anhang III Bildung</button>
+      <button class="reg-tag" style="color:#00CFFF;border-color:rgba(0,207,255,0.4);background:rgba(0,207,255,0.08);" data-reg="dsgvo">DSGVO · Art. 8/22/35</button>
+      <button class="reg-tag" style="color:#00CC7A;border-color:rgba(0,204,122,0.4);background:rgba(0,204,122,0.08);" data-reg="infe">OECD/INFE · Toolkit 2022</button>
+      <button class="reg-tag" style="color:#DFAF0F;border-color:rgba(223,175,15,0.4);background:rgba(223,175,15,0.08);" data-reg="pisa">PISA · Technical Standards</button>
+      <button class="reg-tag" style="color:#9933FF;border-color:rgba(153,51,255,0.4);background:rgba(153,51,255,0.08);" data-reg="kmk">KMK · Länderhoheit Schule</button>
+      <button class="reg-tag" style="color:#FF6B00;border-color:rgba(255,107,0,0.4);background:rgba(255,107,0,0.08);" data-reg="finreg">RDG / WpIG · Keine Beratung</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S02 GRUNDLAGEN (3-Level) ===== -->
+<section id="s02" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S02</span>
+    <h2 class="section-title">Grundlagen — Was misst PISA, was misst OECD/INFE?</h2>
+  </div>
+  <div class="flex gap-2 mb-6 flex-wrap" id="s02-tabs">
+    <button class="tab-btn active-tab" data-s02="einsteiger">Einsteiger</button>
+    <button class="tab-btn" data-s02="fortgeschritten">Fortgeschritten</button>
+    <button class="tab-btn" data-s02="experte">Experte</button>
+  </div>
+
+  <div class="lvl-content active" data-s02c="einsteiger">
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="dep-box" data-source="FACT_PISA_PROFICIENCY_LEVELS"><h3 class="font-head font-bold text-tngb-cyan mb-2">Was ist PISA?</h3><p class="text-sm text-slate-300 leading-relaxed">Alle drei Jahre testet die OECD 15-Jährige in Lesen, Mathematik und Naturwissenschaften. Es geht nicht um Schulstoff, sondern darum, ob Jugendliche Wissen im Alltag anwenden können. Ergebnisse werden als Punkte (Ø ≈ 500 bei Einführung) und als <strong>Kompetenzstufen</strong> berichtet. Stufe 2 ist das Basisniveau: Wer darunter liegt, gehört zur „Risikogruppe“.</p></div>
+      <div class="dep-box" data-source="FACT_INFE_STRUCTURE"><h3 class="font-head font-bold text-tngb-emerald mb-2">Was ist der OECD/INFE-Score?</h3><p class="text-sm text-slate-300 leading-relaxed">Die OECD misst bei Erwachsenen Finanzkompetenz in drei Teilen: <strong>Wissen</strong> (z. B. Zins, Inflation), <strong>Verhalten</strong> (z. B. Budget führen, Rechnungen pünktlich zahlen) und <strong>Einstellungen</strong> (z. B. langfristig denken). Zusammen ergibt das einen Wert von 0 bis 100. Ab 70 gilt man als finanziell „ausreichend kompetent“.</p></div>
+      <div class="dep-box" data-source="FACT_PISA_PV_NOT_INDIVIDUAL"><h3 class="font-head font-bold text-tngb-gold mb-2">Warum gehört beides zusammen?</h3><p class="text-sm text-slate-300 leading-relaxed">Wer keinen Dreisatz beherrscht, kann keinen Zins vergleichen; wer flüchtig liest, übersieht das Kleingedruckte. PISA zeigt, wo die Grundlagen fehlen; INFE zeigt, was daraus im Erwachsenenleben wird. Wichtig: PISA-Daten sind ein Thermometer für das <em>System</em>, kein Zeugnis für einzelne Schüler:innen.</p></div>
+    </div>
+  </div>
+
+  <div class="lvl-content" data-s02c="fortgeschritten">
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="dep-box" data-source="FACT_PISA_METHOD_IRT"><h3 class="font-head font-bold text-tngb-cyan mb-2">Skalierung &amp; Kompetenzstufen</h3><p class="text-sm text-slate-300 leading-relaxed">PISA skaliert Antworten mit Item-Response-Theorie (IRT): Jede Aufgabe hat eine Schwierigkeit, jede Person eine latente Fähigkeit θ. Die Punkteskala wird in Stufen (1c–6) mit <em>Can-Do-Deskriptoren</em> übersetzt. Seit 2018 (Lesen) bzw. 2022 (Mathematik) wird <strong>multistage-adaptiv</strong> getestet: Der Testblock passt sich der Leistung an.</p></div>
+      <div class="dep-box" data-source="FACT_PISA25_FRAMEWORK"><h3 class="font-head font-bold text-tngb-emerald mb-2">Neu in PISA 2025</h3><p class="text-sm text-slate-300 leading-relaxed">Hauptdomäne Naturwissenschaften mit dem Konzept „Agency in the Anthropocene“; neue Domäne <strong>Learning in the Digital World</strong> (u. a. computergestütztes Problemlösen, Selbstregulation, Feedback-Nutzung); optionales Fremdsprachen-Assessment. Fragebögen erfassen erstmals systematisch KI-Nutzung beim Lernen.</p></div>
+      <div class="dep-box" data-source="FACT_INFE_STRUCTURE"><h3 class="font-head font-bold text-tngb-gold mb-2">OECD/INFE-Tripartit</h3><p class="text-sm text-slate-300 leading-relaxed">Knowledge (0–7 Items: Zins, Zinseszins, Inflation, Risiko-Diversifikation …), Behaviour (0–9: Budgetierung, aktives Sparen, Rechnungen, Preisvergleich …), Attitudes (1–5: Gegenwarts- vs. Zukunftsorientierung). Summe 1–21, reskaliert auf 0–100; Mindestzielwert 70. Deutschland 2023: 76 (Wissen 85).</p></div>
+      <div class="dep-box" data-source="FACT_PISA4SCHOOLS"><h3 class="font-head font-bold text-tngb-lavender mb-2">Ebenen der Diagnostik</h3><p class="text-sm text-slate-300 leading-relaxed">PISA-Hauptstudie → Systemebene (Land, Schulart, Sozialgruppe). <strong>PISA for Schools</strong> → Schulebene (Kohorte). Für die <em>Individualebene</em> liefert PISA Konstruktmodell, Deskriptoren und Itemformate — aber keine Personendaten. Individualprofile brauchen eigene, kalibrierte Instrumente.</p></div>
+    </div>
+  </div>
+
+  <div class="lvl-content" data-s02c="experte">
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="dep-box" data-source="FACT_PISA_PV_NOT_INDIVIDUAL"><h3 class="font-head font-bold text-tngb-cyan mb-2">Plausible Values &amp; die Individualgrenze</h3><p class="text-sm text-slate-300 leading-relaxed">PISA berichtet je Person 10 Plausible Values — Ziehungen aus der Posterior \(p(\theta \mid \mathbf{x}, \mathbf{y})\), konditioniert auf Antworten \(\mathbf{x}\) und Hintergrundvariablen \(\mathbf{y}\) (latent regression). Sie sind erwartungstreu für Populationsstatistiken, aber als Punktschätzer einer Person verzerrt (Shrinkage zur Gruppenerwartung) und mit großem Messfehler behaftet (rotierte Booklets, ~2 h Test). <strong>Konsequenz:</strong> Jede „Profilbildung auf PISA-Basis“ darf nur das Konstrukt- und Skalenmodell übernehmen, nie PISA-PVs als Individualdiagnose.</p></div>
+      <div class="dep-box" data-source="FACT_DCM_EXTENSION"><h3 class="font-head font-bold text-tngb-emerald mb-2">Kognitive Diagnosemodelle (DCM)</h3><p class="text-sm text-slate-300 leading-relaxed">DCM (DINA, G-DINA, LCDM) ersetzen das kontinuierliche θ durch einen binären Attribut-Vektor \(\boldsymbol{\alpha}\in\{0,1\}^K\). Eine Q-Matrix ordnet Items Attributen zu; Slip- und Guess-Parameter modellieren Antwortfehler. DCM sind <em>Sekundäranalysen</em> — nicht Teil der PISA-Berichterstattung — eignen sich aber als Blaupause für formative, granulare Lerndiagnostik (S06).</p></div>
+      <div class="dep-box" data-source="FACT_PISA_LOGDATA"><h3 class="font-head font-bold text-tngb-gold mb-2">Prozessdaten</h3><p class="text-sm text-slate-300 leading-relaxed">Computerbasierte Items liefern Logdaten: Antwortlatenzen, Navigationspfade, Revisionen. Die OECD definiert „hasty readers“ als schnell <em>und</em> falsch Antwortende — ein Verhaltensindikator, der 2018→2025 im OECD-Mittel von ~7 % auf 11 % stieg. Für Finanzbildung ist genau dieser Indikator relevant (Impulsivität, Überlesen von Konditionen).</p></div>
+      <div class="dep-box" data-source="FACT_INFE_DE_2023"><h3 class="font-head font-bold text-tngb-lavender mb-2">Kopplungs-Hypothese</h3><p class="text-sm text-slate-300 leading-relaxed">Empirisch ist Finanzkompetenz Erwachsener stark mit Numeracy und Lesekompetenz assoziiert (PIAAC, INFE-Analysen). Die Kopplung PISA→INFE ist daher theoretisch gut begründet, aber <strong>nicht kausal identifiziert</strong>; Deutschlands INFE-Spitzenwert (76) bei gleichzeitig schwachen PISA-Basiskompetenzen zeigt, dass Kohorten-, Alters- und Selektionseffekte trennen sind (die INFE-Stichprobe sind Erwachsene 18+, nicht die PISA-Kohorte).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S03 ANALYSE-PROTOKOLL ===== -->
+<section id="s03" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S03</span>
+    <h2 class="section-title">Analyse-Protokoll — der Research-Chat als auditierbarer Erkenntnispfad</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Zehn Stationen, jede mit Aussage, Evidenzstatus und methodischer Lehre. Die Station „Halluzinationsprüfung“ ist bewusst nicht geglättet: Sie ist der Grund, warum dieses Modul ein Verifikationsprotokoll trägt.</p>
+  <div class="grid md:grid-cols-5 gap-2 items-stretch" id="tl-grid"></div>
+  <div class="sim-out mt-4" id="tlNarr"></div>
+  <div class="flex gap-2 mt-3 flex-wrap" id="tl-scope">
+    <button class="tab-btn active-tab" data-scope="0">1</button><button class="tab-btn" data-scope="1">2</button>
+    <button class="tab-btn" data-scope="2">3</button><button class="tab-btn" data-scope="3">4</button>
+    <button class="tab-btn" data-scope="4">5</button><button class="tab-btn" data-scope="5">6</button>
+    <button class="tab-btn" data-scope="6">7</button><button class="tab-btn" data-scope="7">8</button>
+    <button class="tab-btn" data-scope="8">9</button><button class="tab-btn" data-scope="9">10</button>
+  </div>
+
+  <div class="dep-box mt-8 overflow-x-auto" data-source="FACT_CHAT_111_GAP_DISCREPANT">
+    <h3 class="font-head font-bold text-white mb-3">Verifikationsmatrix — jede quantitative Chat-Aussage einzeln geprüft</h3>
+    <table>
+      <thead><tr><th>Chat-Aussage</th><th>Geprüfter Wert (Stichtag 2026-09-10)</th><th>Verdict</th><th>Quelle</th></tr></thead>
+      <tbody>
+        <tr><td>Veröffentlichung 08.09.2026, 09:30 MESZ</td><td>zutreffend; Band I „Future-Ready Students“</td><td><span class="badge b-ok">CONFIRMED</span></td><td>OECD Band I / Pressemitteilung</td></tr>
+        <tr><td>91 Staaten, &gt;760.000 Schüler:innen</td><td>91 / ~760.000; DE ~6.700 an ~250 Schulen</td><td><span class="badge b-ok">CONFIRMED</span></td><td>Handelsblatt, Waxmann/ZIB</td></tr>
+        <tr><td>DE NaWi 486 · OECD 482 · Risiko 27 % · Spitze 9 %</td><td>486 / 482 / 27 % (eine Quelle: 25 %) / 9 %</td><td><span class="badge b-ok">CONFIRMED</span></td><td>OECD-Ländernotiz, Spektrum, Schulportal</td></tr>
+        <tr><td>DE Lesen 465 (−15) · Risiko 32 % · Spitze 7 %</td><td>465 / −15 (480→465) / 32 % / 7 %</td><td><span class="badge b-ok">CONFIRMED</span></td><td>OECD-Ländernotiz, ZDF, Schulportal</td></tr>
+        <tr><td>DE Mathematik 464 (−11) · Risiko 34 % · Spitze 8 %</td><td>464 / −11 (475→464) / 34 % / 8 %</td><td><span class="badge b-ok">CONFIRMED</span></td><td>OECD-Ländernotiz, Spektrum</td></tr>
+        <tr><td>Gym vs. Nicht-Gym: Mathe 6 % / 47 %, Lesen 5 % / 43 %</td><td>6 % / 47 % · 5 % / 43 %</td><td><span class="badge b-ok">CONFIRMED</span></td><td>Schulportal, t-online (ZIB-Berichtsband)</td></tr>
+        <tr><td>Gym vs. Nicht-Gym NaWi: 3 % / 37 %</td><td>in keiner erreichbaren Quelle explizit</td><td><span class="badge b-user">USER_PROVIDED</span></td><td>Research-Chat</td></tr>
+        <tr><td>ESCS erklärt 19 % Varianz (OECD 12 %)</td><td>19 % / 12 % (Naturwissenschaften)</td><td><span class="badge b-ok">CONFIRMED</span></td><td>OECD-Ländernotiz, GEW</td></tr>
+        <tr><td>„111 Punkte Kluft oberstes/unterstes Quartil“</td><td><strong class="text-tngb-magenta">125 Punkte</strong> (OECD 85) lt. Ländernotiz 2025; 111 = PISA-2022-Mathematikwert</td><td><span class="badge b-disc">DISCREPANT</span></td><td>OECD-Ländernotiz 2025 vs. 2022</td></tr>
+        <tr><td>Mobbing 31 % (OECD 20 %) · Abschlag 37 Punkte</td><td>31 % / 20 % korrekt; <strong class="text-tngb-gold">37 Punkte gelten für die 5 % häufig Gemobbten</strong> (OECD 3 %)</td><td><span class="badge b-ok">CONFIRMED · präzisiert</span></td><td>OECD-Ländernotiz</td></tr>
+        <tr><td>„Hasty Reading“ 7 % → 11 %</td><td>OECD-Mittel ~7 % (2018) → 11 % (2025)</td><td><span class="badge b-ok">CONFIRMED</span></td><td>OECD Band I (Reading trends)</td></tr>
+        <tr><td>„KI-Paradoxon“: ungeführte KI-Nutzung ↔ schlechtere Leistung</td><td>DE 50,2 % nutzen wöchentlich KI (OECD 45,5 %); Nutzung für Aufgaben korreliert negativ, außer bei angeleiteter Interpretation</td><td><span class="badge b-ok">CONFIRMED</span> <span class="badge b-int">Interpretation</span></td><td>heise/OECD-Fragebogen</td></tr>
+        <tr data-source="FACT_SCHOOLYEAR_HEURISTIC"><td>„−15 Punkte ≈ ¾ Schuljahr“</td><td>Heuristik (20 Pkt. ≈ 1 Jahr), von OECD nicht mehr offiziell verwendet</td><td><span class="badge b-int">INTERPRETATION</span></td><td>—</td></tr>
+        <tr><td>DCM/Q-Matrix als „PISA-Kerninstrument“</td><td>Sekundäranalyse-Methode, kein PISA-Reporting-Bestandteil</td><td><span class="badge b-ok">korrigiert</span></td><td>de la Torre 2011; Rupp et al. 2010</td></tr>
+        <tr><td>INFE: Knowledge 0–7, Behaviour 0–9, Attitudes 1–5</td><td>zutreffend; DE 2023 = 76/100, Zielwert 70</td><td><span class="badge b-ok">CONFIRMED</span></td><td>OECD/INFE 2023</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== S04 ERGEBNISSE PISA 2025 ===== -->
+<section id="s04" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S04 · KERN</span>
+    <h2 class="section-title">Ergebnisse PISA 2025 — Deutschland im Vergleich (verifiziert)</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-8 max-w-3xl leading-relaxed">Alle Werte aus OECD Band I / Ländernotiz Deutschland (08.09.2026) bzw. deren Fachauswertung; Tabellen dienen als Fallback, falls Charts nicht laden.</p>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-6">
+    <div class="dep-box" data-source="FACT_OECD_SCORES_2025">
+      <h3 class="font-head font-bold text-tngb-cyan mb-1">Punktwerte 2022 → 2025 · Deutschland vs. OECD</h3>
+      <div class="chart-box"><canvas id="chartScores"></canvas></div>
+      <div class="overflow-x-auto mt-3" data-source="FACT_DEU_DELTA_2022_2025"><table>
+        <thead><tr><th>Domäne</th><th>DE 2022</th><th>DE 2025</th><th>Δ</th><th>OECD 2022</th><th>OECD 2025</th></tr></thead>
+        <tbody>
+          <tr><td>Mathematik</td><td class="mono">475</td><td class="mono text-tngb-orange">464</td><td class="mono text-tngb-magenta">−11</td><td class="mono">472</td><td class="mono">463</td></tr>
+          <tr><td>Lesen</td><td class="mono">480</td><td class="mono text-tngb-magenta">465</td><td class="mono text-tngb-magenta">−15</td><td class="mono">476</td><td class="mono">461</td></tr>
+          <tr><td>Naturwissenschaften</td><td class="mono">492</td><td class="mono text-tngb-cyan">486</td><td class="mono text-tngb-magenta">−6</td><td class="mono">485</td><td class="mono">482</td></tr>
+          <tr><td>Computergestütztes Problemlösen (neu)</td><td class="mono">—</td><td class="mono text-tngb-emerald">498</td><td class="mono">—</td><td class="mono">—</td><td class="mono">500</td></tr>
+        </tbody>
+      </table></div>
+      <p class="text-xs text-tngb-muted mt-2" data-source="FACT_CPS_2025">Deutschland liegt in allen Domänen nur noch auf OECD-Niveau. Über 35 OECD-Länder fiel Lesen um ~14 und Mathematik um ~9 Punkte; Naturwissenschaften blieb stabil.</p>
+    </div>
+
+    <div class="dep-box" data-source="FACT_DEU_LOW_PERFORMERS_2025">
+      <h3 class="font-head font-bold text-tngb-magenta mb-1">Risikogruppe &amp; Spitzengruppe DE 2025</h3>
+      <div class="chart-box"><canvas id="chartGroups"></canvas></div>
+      <div class="overflow-x-auto mt-3"><table>
+        <thead><tr><th>Domäne</th><th>unter Stufe 2</th><th>Stufe 5/6</th></tr></thead>
+        <tbody data-source="FACT_DEU_TOP_PERFORMERS_2025">
+          <tr><td>Mathematik</td><td class="mono text-tngb-magenta">34 %</td><td class="mono text-tngb-emerald">8 %</td></tr>
+          <tr><td>Lesen</td><td class="mono text-tngb-magenta">32 %</td><td class="mono text-tngb-emerald">7 %</td></tr>
+          <tr><td>Naturwissenschaften</td><td class="mono text-tngb-magenta">27 %</td><td class="mono text-tngb-emerald">9 %</td></tr>
+        </tbody>
+      </table></div>
+      <p class="text-xs text-tngb-muted mt-2">Rund jede:r Dritte verfehlt in Mathematik und Lesen das Basisniveau — der höchste Anteil seit PISA-Beginn.</p>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-6">
+    <div class="dep-box" data-source="FACT_DEU_SCHOOLTYPE_GAP_2025">
+      <h3 class="font-head font-bold text-tngb-gold mb-1">Institutionelle Segregation — Anteil unter Stufe 2 nach Schulart</h3>
+      <div class="chart-box"><canvas id="chartSchool"></canvas></div>
+      <div class="overflow-x-auto mt-3"><table>
+        <thead><tr><th>Domäne</th><th>Gymnasium</th><th>nicht-gymnasial</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Mathematik</td><td class="mono text-tngb-emerald">6 %</td><td class="mono text-tngb-magenta">47 %</td><td><span class="badge b-ok">CONFIRMED</span></td></tr>
+          <tr><td>Lesen</td><td class="mono text-tngb-emerald">5 %</td><td class="mono text-tngb-magenta">43 %</td><td><span class="badge b-ok">CONFIRMED</span></td></tr>
+          <tr data-source="FACT_DEU_SCHOOLTYPE_SCIENCE_UNVERIFIED"><td>Naturwissenschaften</td><td class="mono text-tngb-emerald">3 %<span class="est-mark" title="nutzervorgegeben, nicht verifiziert">REP</span></td><td class="mono text-tngb-magenta">37 %<span class="est-mark" title="nutzervorgegeben, nicht verifiziert">REP</span></td><td><span class="badge b-user">USER_PROVIDED</span></td></tr>
+        </tbody>
+      </table></div>
+      <p class="text-xs text-tngb-muted mt-2">Für Finanzbildung zentral: Fast die Hälfte der nicht-gymnasialen 15-Jährigen beherrscht die Mathematik nicht, die Zins-, Prozent- und Ratenrechnung voraussetzt.</p>
+    </div>
+
+    <div class="dep-box" data-source="FACT_DEU_ESCS_2025">
+      <h3 class="font-head font-bold text-tngb-lavender mb-1">Sozioökonomischer Gradient (ESCS) &amp; Schulklima</h3>
+      <div class="chart-box"><canvas id="chartEscs"></canvas></div>
+      <div class="overflow-x-auto mt-3"><table>
+        <thead><tr><th>Indikator</th><th>Deutschland</th><th>OECD</th></tr></thead>
+        <tbody>
+          <tr><td>Durch ESCS erklärte Leistungsvarianz (NaWi)</td><td class="mono text-tngb-magenta">19 %</td><td class="mono">12 %</td></tr>
+          <tr><td>Abstand begünstigt vs. benachteiligt (NaWi)</td><td class="mono text-tngb-magenta">125 Pkt.</td><td class="mono">85 Pkt.</td></tr>
+          <tr><td>Resiliente benachteiligte Schüler:innen</td><td class="mono">~9 %</td><td class="mono">—</td></tr>
+          <tr data-source="FACT_DEU_BULLYING_2025"><td>Mobbing ≥ einige Male/Monat</td><td class="mono text-tngb-magenta">31 %</td><td class="mono">20 %</td></tr>
+          <tr data-source="FACT_DEU_BULLYING_2025"><td>Häufig gemobbt (Leistungsabschlag −37 Pkt. NaWi)</td><td class="mono text-tngb-magenta">5 %</td><td class="mono">3 %</td></tr>
+        </tbody>
+      </table></div>
+      <p class="text-xs text-tngb-muted mt-2">Die Herkunftslücke hat sich 2015–2025 in Deutschland vergrößert, im OECD-Mittel verkleinert. <span class="text-tngb-magenta">Hinweis:</span> Der Chat-Wert „111 Punkte“ ist der 2022-Mathematikwert (DISCREPANT).</p>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="kpi-card confirmed-kpi" data-source="FACT_HASTY_READERS_2025">
+      <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">7 % → 11 %</div>
+      <div class="text-sm font-semibold text-slate-300 mt-1">„Hasty readers“ (schnell &amp; falsch), OECD-Mittel 2018→2025</div>
+      <div class="text-xs text-tngb-muted mt-1">Verhaltensindikator aus Logdaten — Impulsivitätsproxy für Finanzentscheidungen</div>
+    </div>
+    <div class="kpi-card confirmed-kpi" data-source="FACT_AI_USE_2025">
+      <div class="text-3xl font-head font-extrabold" style="color:#9933FF;">50,2 %</div>
+      <div class="text-sm font-semibold text-slate-300 mt-1">nutzen mind. wöchentlich KI zum Lernen (DE; OECD 45,5 %)</div>
+      <div class="text-xs text-tngb-muted mt-1">KI-Nutzung für Aufgaben korreliert negativ mit Leistung — außer bei angeleiteter Interpretation der Ausgaben. Nur 37,5 % berichten keine digitale Ablenkung.</div>
+    </div>
+    <div class="kpi-card confirmed-kpi" data-source="FACT_PISA25_PARTICIPATION">
+      <div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">91 · 760k</div>
+      <div class="text-sm font-semibold text-slate-300 mt-1">Staaten · Schüler:innen weltweit</div>
+      <div class="text-xs text-tngb-muted mt-1">DE: ~6.700 Schüler:innen, ~250 Schulen, März–Mai 2025 · Leitung S. Greiff (TUM/ZIB) · Berichtsband Waxmann</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S05 DIAGNOSTIK-INSTRUMENTE ===== -->
+<section id="s05" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S05</span>
+    <h2 class="section-title">Sechs Instrumente der PISA-Methodik — und ihre Eignung für Individualprofile</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Der Chat nannte sechs „Kerninstrumente“. Wissenschaftlich korrekt sind vier PISA-Kernbestandteile und zwei Forschungserweiterungen. Entscheidend ist die Spalte <strong>Individual-Eignung</strong>: Was lässt sich in ein FinCoach-Profil übernehmen — und was nicht.</p>
+  <div class="dep-box overflow-x-auto" data-source="FACT_PISA_METHOD_IRT">
+    <table>
+      <thead><tr><th>Instrument</th><th>Status</th><th>Was es liefert</th><th>Individual-Eignung</th><th>Übernahme ins FinCoach-Profil</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Kriterienorientiertes Kompetenzstufenmodell</strong></td><td><span class="badge b-core">PISA-Kern</span></td><td>Can-Do-Deskriptoren je Stufe (1c–6) statt relativer Noten</td><td class="text-tngb-emerald">hoch</td><td>Deskriptoren → Lernziele je Finanz-Attribut (z. B. „kann effektiven Jahreszins zweier Angebote vergleichen“)</td></tr>
+        <tr><td><strong>Konstruktmatrix</strong> (Inhalt × Prozess × Kontext)</td><td><span class="badge b-core">PISA-Kern</span></td><td>Trennung von Wissen, Anwendung, epistemischem Urteilen</td><td class="text-tngb-emerald">hoch</td><td>Q-Matrix-Design: jede Aufgabe trägt Attribut-Tags (Bruch, Prozent, Zins, Textextraktion)</td></tr>
+        <tr><td><strong>IRT &amp; Multistage Testing</strong></td><td><span class="badge b-core">PISA-Kern</span></td><td>Latentes θ, adaptive Testpfade, Messgenauigkeit in der Zone der nächsten Entwicklung</td><td class="text-tngb-gold">mittel — nur mit eigener Kalibrierung</td><td>Adaptives Kurz-Assessment (10–15 Items) mit eigener Item-Bank; PISA-Items selbst sind nicht freigegeben</td></tr>
+        <tr data-source="FACT_PISA_LOGDATA"><td><strong>Logfile-/Prozesstelemetrie</strong></td><td><span class="badge b-core">PISA-Kern</span></td><td>Antwortlatenz, Navigationspfade, Revisionsverhalten; „hasty responses“</td><td class="text-tngb-emerald">hoch</td><td>Hasty-Index, Persistenz-Index, Lesezeit vor Entscheidung → Impulskontroll-Scaffolding</td></tr>
+        <tr data-source="FACT_DCM_EXTENSION"><td><strong>Kognitive Diagnosemodelle</strong> (DINA/G-DINA, Q-Matrix)</td><td><span class="badge b-ext">Forschungs-Erweiterung</span></td><td>Diskreter Attribut-Meisterschaftsvektor α, Posterior je Profil</td><td class="text-tngb-emerald">hoch (formativ)</td><td>Kern des Lückenprofils; Demonstrator in S06</td></tr>
+        <tr data-source="FACT_PISA4SCHOOLS"><td><strong>PISA for Schools</strong></td><td><span class="badge b-core">OECD-Programm</span></td><td>Schulergebnis auf PISA-Skala, Fragebogen-Kontext</td><td class="text-tngb-magenta">keine (Kohorte)</td><td>Ebene C: Standort-/Kohortendiagnostik, Baseline für Community-Programme</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caveat-box mt-4" data-source="FACT_PISA_PV_NOT_INDIVIDUAL">
+    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">Methodische Grenze (nicht verhandelbar):</strong> PISA-Plausible-Values sind Populationsschätzer. Ein FinCoach-Profil darf das PISA-<em>Konstruktmodell</em> (Stufen, Deskriptoren, Attribute, Prozessindikatoren) übernehmen, niemals aber PISA-Daten als Individualdiagnose interpretieren oder PISA-Punktwerte einzelnen Lernenden zuschreiben. Individualprofile erfordern eigene, kalibrierte und validierte Items.</p>
+  </div>
+</section>
+
+<!-- ===== S06 DCM-RECHNER ===== -->
+<section id="s06" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S06 · LIVE</span>
+    <h2 class="section-title">DCM-Rechner — vom Antwortmuster zum Attribut-Profil (DINA-Modell)</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed" data-source="FACT_DCM_DEMO">Setze acht Antworten (richtig/falsch). Der Rechner berechnet die Posterior über alle 16 Attribut-Profile und daraus die Meisterschaftswahrscheinlichkeit je Attribut sowie einen MTSS-Tier-Vorschlag. Rein didaktisches Modell <span class="dbom-class-badge">SCENARIO</span> — Q-Matrix und Parameter sind frei gewählt, keine kalibrierten Items.</p>
+  <div class="note-box mb-6 text-sm text-slate-300">
+    DINA: \( P(X_j=1\mid\boldsymbol\alpha)=(1-s_j)^{\eta_j}\,g_j^{\,1-\eta_j},\quad \eta_j=\prod_{k} \alpha_k^{q_{jk}} \) · Posterior: \( P(\boldsymbol\alpha\mid\mathbf{x})\propto P(\boldsymbol\alpha)\prod_j P(x_j\mid\boldsymbol\alpha) \) · Meisterschaft: \( P(\alpha_k=1\mid\mathbf{x})=\sum_{\boldsymbol\alpha:\alpha_k=1}P(\boldsymbol\alpha\mid\mathbf{x}) \)
+  </div>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-cyan mb-3 text-sm">Q-Matrix &amp; Antworten</h3>
+      <div class="overflow-x-auto"><table id="qTable"><thead><tr><th>Item</th><th>A1 Bruch</th><th>A2 Prozent</th><th>A3 Zins</th><th>A4 Text</th><th>Antwort</th></tr></thead><tbody></tbody></table></div>
+      <div class="grid grid-cols-2 gap-3 mt-4">
+        <div><div class="flex justify-between text-xs mb-1"><span>Slip s</span><span class="mono text-tngb-cyan" id="lblSlip">0.10</span></div><div class="slider-wrap"><input type="range" id="simSlip" min="1" max="40" value="10"></div></div>
+        <div><div class="flex justify-between text-xs mb-1"><span>Guess g</span><span class="mono text-tngb-cyan" id="lblGuess">0.20</span></div><div class="slider-wrap"><input type="range" id="simGuess" min="1" max="40" value="20"></div></div>
+      </div>
+      <div class="flex gap-2 mt-3 flex-wrap">
+        <button class="tab-btn" id="presetA">Preset: „Rechnet, liest nicht“</button>
+        <button class="tab-btn" id="presetB">Preset: „Liest, rechnet nicht“</button>
+        <button class="tab-btn" id="presetC">Preset: alles richtig</button>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <div class="dep-box">
+        <h3 class="font-head font-bold text-tngb-emerald mb-3 text-sm">Meisterschaftswahrscheinlichkeit je Attribut</h3>
+        <div id="masteryBars" class="space-y-3"></div>
+      </div>
+      <div class="sim-out" id="dcmOut"></div>
+      <div class="chart-box" style="height:200px;"><canvas id="chartPosterior"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S07 PISA ↔ OECD/INFE ===== -->
+<section id="s07" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">S07</span>
+    <h2 class="section-title">Kopplung PISA ↔ OECD/INFE — Gemeinsamkeiten, Unterschiede, Brücke</h2>
+  </div>
+  <div class="grid md:grid-cols-2 gap-6 mb-6">
+    <div class="dep-box overflow-x-auto" data-source="FACT_INFE_STRUCTURE">
+      <h3 class="font-head font-bold text-tngb-cyan mb-3">Strukturvergleich</h3>
+      <table>
+        <thead><tr><th>Dimension</th><th>PISA 2025</th><th>OECD/INFE 2023</th></tr></thead>
+        <tbody>
+          <tr><td>Population</td><td>15-Jährige (Schule)</td><td>Erwachsene 18+ (Haushalt)</td></tr>
+          <tr><td>Konstrukt</td><td>Kompetenz (Lesen, Mathe, NaWi, CPS)</td><td>Finanzkompetenz = Wissen + Verhalten + Einstellung</td></tr>
+          <tr><td>Skala</td><td>IRT-Punkte, Stufen 1c–6, PVs</td><td>Summenscore 1–21 → 0–100, Zielwert 70</td></tr>
+          <tr><td>Messmodell</td><td>latent, adaptiv, Prozessdaten</td><td>klassisch (Itemsummen), Selbstauskunft</td></tr>
+          <tr><td>Verhaltensdaten</td><td>Logdaten (hasty, Persistenz)</td><td>berichtetes Verhalten (Budget, Sparen)</td></tr>
+          <tr><td>Aussageebene</td><td>System / Schule</td><td>Land / Bevölkerungsgruppe</td></tr>
+          <tr><td>Deutschland 2023/2025</td><td class="text-tngb-magenta">464 / 465 / 486 — Tiefstand</td><td class="text-tngb-emerald">76/100 — Spitzengruppe</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-tngb-muted mt-2" data-source="FACT_INFE_DE_2023">Das scheinbare Paradox (schwache Schülerbasis, starke Erwachsenenkompetenz) erklärt sich über Kohorten-, Alters- und Selektionseffekte — und ist ein Frühwarnsignal: Die heutige PISA-Kohorte ist die INFE-Stichprobe von 2035.</p>
+    </div>
+    <div class="dep-box" data-source="FACT_HYPERIND_MODEL">
+      <h3 class="font-head font-bold text-tngb-emerald mb-3">Die Brücke: Kompetenz-Vektor <span class="dbom-class-badge">SCENARIO</span></h3>
+      <p class="text-sm text-slate-300 leading-relaxed mb-3">FinCoach definiert je Lernende:r einen Vektor aus kognitivem Fundament (PISA-Konstrukte, eigene Messung), Prozessverhalten und INFE-Handlungsdimensionen:</p>
+      <div class="note-box text-sm">\( \mathbf{v} = \big(\theta_{\text{math}},\ \theta_{\text{read}},\ \theta_{\text{cps}},\ \underbrace{h,\ \pi}_{\text{Telemetrie}},\ \underbrace{K,\ B,\ A}_{\text{INFE}},\ \underbrace{\boldsymbol\alpha}_{\text{DCM}}\big) \)</div>
+      <ul class="tick mt-3">
+        <li><strong>θ</strong>: latente Fähigkeit aus eigenem adaptiven Kurztest (nicht aus PISA-PVs).</li>
+        <li><strong>h</strong> (Hasty-Index): Anteil schneller Fehlantworten; <strong>π</strong> (Persistenz): Bearbeitungsdauer bei schwierigen Items.</li>
+        <li><strong>K/B/A</strong>: INFE-Wissen (0–7), -Verhalten (0–9), -Einstellung (1–5) — für Minderjährige altersadaptiert.</li>
+        <li><strong>α</strong>: Attribut-Meisterschaft aus DCM (S06) → konkrete Lücken (z. B. „Prozent ✓, Zinseszins ✗“).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dep-box" data-source="FACT_INFE_STRUCTURE">
+    <h3 class="font-head font-bold text-tngb-gold mb-3">INFE-Score-Simulator — Wissen, Verhalten, Einstellung</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <div><div class="flex justify-between text-xs mb-1"><span>Knowledge (0–7)</span><span class="mono text-tngb-cyan" id="lblK">5</span></div><div class="slider-wrap"><input type="range" id="simK" min="0" max="7" value="5"></div></div>
+        <div><div class="flex justify-between text-xs mb-1"><span>Behaviour (0–9)</span><span class="mono text-tngb-emerald" id="lblB">6</span></div><div class="slider-wrap"><input type="range" id="simB" min="0" max="9" value="6"></div></div>
+        <div><div class="flex justify-between text-xs mb-1"><span>Attitudes (1–5)</span><span class="mono text-tngb-gold" id="lblA">3</span></div><div class="slider-wrap"><input type="range" id="simA" min="1" max="5" value="3"></div></div>
+        <p class="text-xs text-tngb-muted">Reskalierung wie im OECD/INFE-2023-Report: Score = (K+B+A)/21 × 100. Referenzen: Mindestzielwert 70 · Deutschland 76 · Ø 39 Volkswirtschaften ~60.</p>
+      </div>
+      <div class="space-y-3">
+        <div class="chart-box" style="height:180px;"><canvas id="chartInfe"></canvas></div>
+        <div class="sim-out" id="infeOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S08 HYPERINDIVIDUALISIERUNG ===== -->
+<section id="s08" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">S08</span>
+    <h2 class="section-title">Hyperindividualisierung auf drei Ebenen — Einzelne, Unternehmen, Communities</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed" data-source="FACT_HYPERIND_MODEL">Modellrahmen <span class="dbom-class-badge">SCENARIO</span>: Wie der Kompetenz-Vektor auf drei Ebenen in Interventionen übersetzt wird. Texte folgen dem gewählten Wissensniveau.</p>
+  <div class="grid md:grid-cols-3 gap-4" id="hyperGrid"></div>
+  <div class="caveat-box mt-6" data-source="FACT_GDPR_PROFILING">
+    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">Rechtliche Leitplanke für alle drei Ebenen:</strong> Profilbildung Minderjähriger ist Profiling i. S. d. DSGVO (Art. 4 Nr. 4). Entscheidungen mit rechtlicher oder ähnlich erheblicher Wirkung (Kurszuweisung, Ausbildungs-Onboarding, Kreditbezug) dürfen nicht ausschließlich automatisiert erfolgen (Art. 22); eine Datenschutz-Folgenabschätzung (Art. 35) ist Pflicht. KI-Systeme zur Bewertung von Lernergebnissen sind nach EU-KI-VO Hochrisiko (Anhang III Nr. 3). Ebene B und C dürfen niemals zu Bonitäts- oder Produktentscheidungen führen — Bildungsdaten sind kein Scoring-Input.</p>
+  </div>
+</section>
+
+<!-- ===== S09 KI-ANFORDERUNGEN & ABNAHMETESTS ===== -->
+<section id="s09" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S09</span>
+    <h2 class="section-title">Anforderungskatalog für KI-Lernsysteme — mit definierten Abnahmetests</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Aus den PISA-2025-Befunden abgeleitete Anforderungen an FinCoach-AI-Lernmodule. Jede Anforderung trägt eine ID, den empirischen Anker und einen <strong>prüfbaren Abnahmetest</strong> (Definition of Done). Diese Tests sind Pflicht vor jedem Modul-Release.</p>
+  <div class="dep-box overflow-x-auto" data-source="FACT_SOCRATIC_AI">
+    <table>
+      <thead><tr><th>ID</th><th>Anforderung</th><th>Empirischer Anker</th><th>Abnahmetest (messbar)</th></tr></thead>
+      <tbody>
+        <tr><td class="req-id">REQ-01</td><td><strong>Sokratisches Scaffolding statt Lösungsausgabe</strong> — bei Übungsaufgaben antwortet das System mit gestuften Hinweisen/Rückfragen; die Lösung erst nach ≥ 2 eigenen Versuchen.</td><td>KI-Nutzung für Aufgaben ↔ schlechtere Leistung, außer bei angeleiteter Interpretation (PISA 2025)</td><td>Testset: 50 direkte Lösungsanfragen → ≥ 95 % gestufte Hinweise, 0 % Komplettlösung im ersten Turn; Review durch 2 Fachdidaktiker:innen.</td></tr>
+        <tr><td class="req-id">REQ-02</td><td><strong>Anti-Hasty-Mechanik</strong> — Mindestlesezeit proportional zur Textlänge; Rückfrage zum Kleingedruckten vor jeder Entscheidungsaufgabe (Ratenkauf, BNPL, Vertrag).</td><td>Hasty readers 7 % → 11 % (OECD)</td><td>Latenz-Log: Anteil Antworten unter der Mindestlesezeit &lt; 5 %; Hasty-Index sinkt über 10 Sessions signifikant (p &lt; 0,05, n ≥ 30 Pilot).</td></tr>
+        <tr><td class="req-id">REQ-03</td><td><strong>DCM-basiertes Lückenprofil</strong> — jede Aufgabe trägt Q-Matrix-Tags; Meisterschafts-Posterior wird pro Attribut fortgeschrieben.</td><td>34 % / 32 % unter Stufe 2; DCM-Forschung</td><td>100 % der Items getaggt; Simulationsstudie: Attribut-Klassifikationsgenauigkeit ≥ 85 % bei 12 Items; Kalibrierung mit n ≥ 300 dokumentiert.</td></tr>
+        <tr><td class="req-id">REQ-04</td><td><strong>Adaptives Kurz-Assessment</strong> — 10–15 Items, eigene Item-Bank, Abbruch bei SE(θ) &lt; 0,35.</td><td>PISA-MST; PVs nicht individuell nutzbar</td><td>Keine PISA-Items; Reliabilität (marginal) ≥ 0,80; Testdauer ≤ 15 min bei 90 % der Nutzer:innen.</td></tr>
+        <tr><td class="req-id">REQ-05</td><td><strong>MTSS-Routing</strong> — Tier 1 (UDL für alle), Tier 2 (Kleingruppe, basale Lücken: Bruch, Dreisatz), Tier 3 (Einzelintervention, Lehrkraft-Diagnostikentlastung).</td><td>MTSS/RTI-Forschungsstand; 47 % nicht-gymnasial unter Basisniveau</td><td>Routing-Regel dokumentiert &amp; deterministisch; Tier-3-Empfehlung immer mit menschlicher Bestätigung (Art. 22 DSGVO); Fehlrouting in Testfällen &lt; 10 %.</td></tr>
+        <tr><td class="req-id">REQ-06</td><td><strong>Sprachsensible Entkopplung</strong> — Fachbegriffe mit Glossen, Leichte-Sprache-Variante, Fach- vs. Sprachfehler getrennt ausgewertet.</td><td>ESCS erklärt 19 % Varianz; Migrations-/Sprachhintergrund</td><td>Jeder Fachbegriff im Glossar; Differential Item Functioning (DIF) nach Sprachgruppe &lt; 0,5 Logit auf 95 % der Items.</td></tr>
+        <tr><td class="req-id">REQ-07</td><td><strong>Wohlbefindens-Guard</strong> — Frustrationsdetektion (Abbrüche, Fehlerserien) → Pausen, Ermutigung, kein Leistungsranking unter Peers.</td><td>Mobbing 31 % (OECD 20 %); −37 Pkt. bei häufig Gemobbten</td><td>Keine Peer-Rankings im UI; Frustrations-Trigger in Testprotokoll; Abbruchquote nach Trigger sinkt ≥ 20 % vs. Kontrolle.</td></tr>
+        <tr><td class="req-id">REQ-08</td><td><strong>Transparenz &amp; Erklärbarkeit</strong> — jedes Profil-Update zeigt „warum“ (Items, Attribute, Unsicherheit); Nutzer:innen können Einträge anfechten.</td><td>EU-KI-VO Art. 13/14, DSGVO Art. 15/22</td><td>Jede Profiländerung hat Erklärungs-Objekt (Item-IDs, ΔP); Anfechtungs-Flow getestet; Unsicherheit als Intervall angezeigt.</td></tr>
+        <tr><td class="req-id">REQ-09</td><td><strong>Keine Produkt-/Anlageempfehlung</strong> — Inhalte bleiben generisch (Konzepte, Vergleiche mit fiktiven Anbietern).</td><td>RDG/WpIG/FinDAG; Minderjährigenschutz</td><td>Red-Team-Set: 100 Prompts mit Produktbezug → 0 konkrete Empfehlungen; Klassifikator-Log geprüft.</td></tr>
+        <tr><td class="req-id">REQ-10</td><td><strong>Datenminimierung &amp; Löschung</strong> — Telemetrie pseudonymisiert, Rohlogs ≤ 90 Tage, Profil auf Wunsch sofort löschbar.</td><td>DSGVO Art. 5/17; Schulgesetze</td><td>Lösch-Test end-to-end &lt; 24 h; DSFA-Dokument vorhanden; keine Klar-Identifikatoren in Analytics-Tabellen.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4 mt-6" data-source="FACT_MTSS_UDL">
+    <div class="dep-box border-l-4" style="border-color:#00CC7A;"><h3 class="font-head font-bold text-tngb-emerald mb-2 text-sm">Tier 1 · Universal Design for Learning</h3><p class="text-xs text-slate-400 leading-relaxed">Für alle: multiple Repräsentationen (Text, Tabelle, Grafik), Wahl der Ausdrucksform, sichtbare Lernziele als Can-Do-Sätze. Ziel: 80 % der Lernenden erreichen die Attribut-Meisterschaft ohne Zusatzförderung.</p></div>
+    <div class="dep-box border-l-4" style="border-color:#DFAF0F;"><h3 class="font-head font-bold text-tngb-gold mb-2 text-sm">Tier 2 · Gezielte Kleingruppenförderung</h3><p class="text-xs text-slate-400 leading-relaxed">Für 1–2 offene Basisattribute (Bruchrechnung, Dreisatz, Prozent): kurze, hochfrequente Übungszyklen mit sofortigem Feedback; wöchentliche Fortschrittsmessung (Curriculum-Based Measurement).</p></div>
+    <div class="dep-box border-l-4" style="border-color:#E6399A;"><h3 class="font-head font-bold text-tngb-magenta mb-2 text-sm">Tier 3 · Intensive Einzelintervention</h3><p class="text-xs text-slate-400 leading-relaxed">Für ≥ 3 offene Attribute oder stagnierende Tier-2-Verläufe: individuelle Diagnostik durch Lehrkraft, KI liefert Vorbereitung (Fehleranalyse, Hypothesen) — Entscheidung bleibt beim Menschen.</p></div>
+  </div>
+</section>
+
+<!-- ===== S10 COMPLIANCE-KLAUSELN ===== -->
+<section id="s10" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(230,57,154,0.15);color:#E6399A;">S10 · COMPLIANCE</span>
+    <h2 class="section-title">Compliance-Klauseln für FinCoach-AI-Module mit Lern- und Profildaten</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Zwölf verbindliche Klauseln (CL-01…CL-12), jeweils mit Rechtsgrundlage, Umsetzung in diesem Modul und Prüfung. Rechtsstand <span class="font-mono text-tngb-cyan">2026-09-10</span>. Die Klauseln sind Vorlagen für die Modul-Governance — <strong>keine Rechtsberatung</strong>.</p>
+  <div class="dep-box overflow-x-auto" data-source="FACT_AI_ACT_EDU">
+    <table>
+      <thead><tr><th>ID</th><th>Klausel</th><th>Rechtsgrundlage</th><th>Umsetzung / Prüfung</th></tr></thead>
+      <tbody>
+        <tr><td class="cl-id">CL-01</td><td><strong>Keine Anlage-, Rechts- oder Steuerberatung.</strong> Inhalte sind Bildung und Information; keine Empfehlung zu konkreten Produkten, Anbietern oder Wertpapieren.</td><td>WpIG/WpHG, RDG, StBerG, FinDAG</td><td>Disclaimer in Hero, S12 und Footer; QA-Check C01/C02; REQ-09 Red-Team.</td></tr>
+        <tr><td class="cl-id">CL-02</td><td><strong>Honest Disclosure &amp; Provenienz.</strong> Jede Kennzahl trägt Verdict, Konfidenz und Quelle; nicht verifizierte Angaben sind sichtbar markiert (REP/EST); Abweichungen werden nicht geglättet.</td><td>FinCoach M-DBOM v1; UWG § 5 (Irreführung)</td><td>DBOM JSON + Live-Audit; DISCREPANT-Fakten in S03 offen ausgewiesen.</td></tr>
+        <tr><td class="cl-id">CL-03</td><td><strong>Keine Individualdiagnose aus PISA-Daten.</strong> PISA-Werte werden nie Personen zugeschrieben; Profile beruhen auf eigenen, kalibrierten Instrumenten.</td><td>PISA Technical Standards; wissenschaftliche Redlichkeit</td><td>Caveat in S05; REQ-04 (keine PISA-Items).</td></tr>
+        <tr><td class="cl-id">CL-04</td><td><strong>Profiling Minderjähriger nur mit Rechtsgrundlage.</strong> Einwilligung ab 16 (Art. 8 DSGVO), darunter Sorgeberechtigte; im Schulkontext nur auf Basis der Landesschulgesetze.</td><td>DSGVO Art. 6, 8; Schulgesetze der Länder (KMK)</td><td>Consent-Flow &amp; Altersprüfung im Produkt; dieses Modul erhebt keine Daten (statisch).</td></tr>
+        <tr><td class="cl-id">CL-05</td><td><strong>Keine ausschließlich automatisierte Entscheidung.</strong> Tier-3-Zuweisung, Kurs-/Onboarding-Entscheidungen erfordern menschliche Bestätigung; Anfechtungsrecht.</td><td>DSGVO Art. 22; EU-KI-VO Art. 14 (menschliche Aufsicht)</td><td>REQ-05, REQ-08; Human-in-the-loop dokumentiert.</td></tr>
+        <tr><td class="cl-id">CL-06</td><td><strong>Datenschutz-Folgenabschätzung vor Betrieb.</strong> Systematische Bewertung persönlicher Aspekte Minderjähriger = hohes Risiko.</td><td>DSGVO Art. 35 Abs. 3 lit. a</td><td>DSFA-Template im Modul-Governance-Ordner; Freigabe durch DSB vor Go-Live.</td></tr>
+        <tr><td class="cl-id">CL-07</td><td><strong>Hochrisiko-Einstufung nach EU-KI-VO.</strong> KI zur Bewertung von Lernergebnissen/Steuerung des Lernprozesses ist Anhang-III-System; Pflichten (Risikomanagement, Daten-Governance, Logging, Transparenz, Aufsicht) sind ab 02.12.2027 verbindlich (Digital-Omnibus VO (EU) 2026/1744); Art.-50-Transparenz gilt bereits.</td><td>VO (EU) 2024/1689 Anhang III Nr. 3, Art. 9–15, 50; VO (EU) 2026/1744</td><td>KI-Kennzeichnung im UI; Konformitäts-Roadmap bis 12/2027; QA-Check C08.</td></tr>
+        <tr><td class="cl-id">CL-08</td><td><strong>Bildungsdaten sind kein Scoring-Input.</strong> Lernprofile fließen niemals in Bonitäts-, Preis- oder Produktentscheidungen; strikte Zwecktrennung Bildung ↔ Bankgeschäft.</td><td>DSGVO Art. 5 Abs. 1 lit. b (Zweckbindung); EU-KI-VO Anhang III Nr. 5 (Kreditwürdigkeit)</td><td>Technische Trennung der Datenräume; jährliches Audit.</td></tr>
+        <tr><td class="cl-id">CL-09</td><td><strong>Datenminimierung, Pseudonymisierung, Löschung.</strong> Rohtelemetrie ≤ 90 Tage; Profile auf Wunsch löschbar; keine Klar-Identifikatoren in Analytics.</td><td>DSGVO Art. 5, 17, 25, 32</td><td>REQ-10; Lösch-Test dokumentiert.</td></tr>
+        <tr><td class="cl-id">CL-10</td><td><strong>Web-Datenschutz.</strong> Schriften self-hosted, keine Tracker/Analytics, keine Cookies außer technisch notwendig; CSP-konforme CDNs.</td><td>DSGVO, TDDDG § 25</td><td>QA-Checks C09–C11; netlify.toml-CSP.</td></tr>
+        <tr><td class="cl-id">CL-11</td><td><strong>Marken-, Urheber- &amp; Lizenzhinweis.</strong> „PISA“ und „OECD“ sind Bezeichnungen der OECD und werden rein beschreibend genannt; OECD-Inhalte werden zitiert, nicht reproduziert; Lizenz je Dokument prüfen (i. d. R. CC BY 4.0).</td><td>MarkenG; UrhG § 51 (Zitat); OECD-Nutzungsbedingungen</td><td>QA-Check C04; Quellenliste S12 mit Links.</td></tr>
+        <tr><td class="cl-id">CL-12</td><td><strong>Barrierefreiheit &amp; Mobile-Robustheit.</strong> Kontrast ≥ 4,5:1, Tastaturnavigation, Tabellen-Fallback für Charts, keine unmaskierten Sonderzeichen, kein blockierendes Overlay.</td><td>BFSG (ab 28.06.2025), WCAG 2.1 AA</td><td>QA-Check S10; Chart-Fallback-Tabellen in S04.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== S-EXP EXPERTEN-DISKURS ===== -->
+<section id="s-exp" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">S13 · DISKURS</span>
+    <h2 class="section-title">Drei Perspektiven auf hyperindividualisierte Finanzbildung</h2>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="dep-box border-l-4" style="border-color:#00CC7A;"><h3 class="font-head font-bold text-tngb-emerald mb-2">Bildungsforschung (pro Diagnostik)</h3><p class="text-sm text-slate-300 leading-relaxed">„PISA zeigt seit 25 Jahren dieselbe Lücke — jetzt ist sie größer denn je. Was fehlt, ist nicht Wissen über das Problem, sondern granulare, formative Diagnostik im Unterricht. DCM-basierte Profile sind der methodische Fortschritt, den Summenpunktwerte nie leisten konnten.“</p></div>
+    <div class="dep-box border-l-4" style="border-color:#E6399A;"><h3 class="font-head font-bold text-tngb-magenta mb-2">Datenschutz-Aufsicht (kontra Profiling)</h3><p class="text-sm text-slate-300 leading-relaxed">„Ein lückenloses Kompetenz- und Verhaltensprofil eines 15-Jährigen ist genau das, was Art. 22 und Art. 35 DSGVO adressieren. Jede ‚Hyperindividualisierung‘ muss beweisen, dass sie ohne Dauerüberwachung auskommt — und dass Bildungsdaten nie in Bankentscheidungen wandern.“</p></div>
+    <div class="dep-box border-l-4" style="border-color:#DFAF0F;"><h3 class="font-head font-bold text-tngb-gold mb-2">Banking / Fintech (neutral)</h3><p class="text-sm text-slate-300 leading-relaxed">„Die INFE-76 verdecken, dass die nächste Kundengeneration mit 34 % Mathe-Risikogruppe kommt. Finanzbildung ist Infrastruktur, kein Marketing. Aber: Wer das mit Produktvertrieb verwechselt, verliert die regulatorische Lizenz dafür.“</p></div>
+  </div>
+</section>
+
+<!-- ===== S-QA COMPLIANCE / DATENQUALITÄT / STYLEGUIDE ===== -->
+<section id="s-qa" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">QA</span>
+    <h2 class="section-title">Qualitätssicherung — Compliance-, Datenqualitäts- &amp; Styleguide-Checks</h2>
+    <span id="qa-pill"></span>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Jedes FinCoach-AI-Modul durchläuft eine dreistufige Prüfung. Die Checks werden beim Laden <strong>live im Browser</strong> ausgeführt (DOM-Prüfung, DBOM-Abgleich) und zusätzlich statisch per <code class="mono text-tngb-cyan">provenance/fincoach_module_check.py</code> vor jedem Release.</p>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-magenta mb-3">① Compliance</h3>
+      <table><tbody id="qa-compliance"></tbody></table>
+    </div>
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität</h3>
+      <table><tbody id="qa-data"></tbody></table>
+    </div>
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-tngb-gold mb-3">③ Styleguide</h3>
+      <table><tbody id="qa-style"></tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S-MTX MODUL-MATRIX ===== -->
+<section id="s-mtx" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">MX</span>
+    <h2 class="section-title">Einordnung in die FinCoach-AI-Modul-Matrix</h2>
+  </div>
+  <div class="dep-box overflow-x-auto">
+    <table>
+      <thead><tr><th>Modul</th><th>Titel</th><th>Tier · Welle</th><th>Fokus</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="mono text-tngb-gold">M298</td><td>SpaceX — Der Weg zum Billionen-IPO</td><td>T3 · 45</td><td>Bewertung, SOTP, IPO-Szenarien, ITAR</td><td><a class="text-tngb-cyan hover:underline" href="modul.html">öffnen →</a></td></tr>
+        <tr><td class="mono text-tngb-emerald">M298-A</td><td>Der Börsengang-Prozess am Beispiel SpaceX</td><td>T3 · 45</td><td>Phasen, Beteiligte, Pflichten</td><td><a class="text-tngb-cyan hover:underline" href="ipo-prozess.html">öffnen →</a></td></tr>
+        <tr><td class="mono text-tngb-cyan">M299</td><td>Internationale IPO-Zuteilung</td><td>T3 · 45</td><td>Zuteilungskaskade, Quoten, DE-Vertrieb</td><td><a class="text-tngb-cyan hover:underline" href="m299.html">öffnen →</a></td></tr>
+        <tr style="background:rgba(0,207,255,0.05);"><td class="mono text-tngb-cyan font-bold">M300</td><td><strong>PISA 2025 &amp; Finanzbildung (dieses Modul)</strong></td><td>T3 · 46</td><td>Kompetenzdiagnostik, OECD/INFE, KI-Lernsysteme, Compliance</td><td><span class="text-tngb-muted">aktiv</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-xs text-tngb-muted mt-3">Cluster „Financial Literacy / Learning Analytics“ · Welle 46. M300 eröffnet den Bildungs-Cluster und liefert die Profil- und Compliance-Grundlage für nachfolgende FinCoach-Lernmodule.</p>
+</section>
+
+<!-- ===== S12 QUELLEN, GLOSSAR & DISCLAIMER ===== -->
+<section id="s12" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S12</span>
+    <h2 class="section-title">Quellen, Glossar, Methodik &amp; Disclaimer</h2>
+  </div>
+
+  <h3 class="font-head font-bold text-white mb-3">Methodik &amp; Limitationen</h3>
+  <div class="grid md:grid-cols-3 gap-4 mb-10">
+    <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Verifikationsverfahren</div><p class="text-xs text-slate-400">Jede quantitative Chat-Aussage wurde am 2026-09-10 gegen OECD Band I / Ländernotiz Deutschland und mindestens eine unabhängige Sekundärquelle geprüft. Direkte Abrufe von oecd.org waren aus der Build-Umgebung netzwerkseitig blockiert; die Prüfung stützt sich auf Suchmaschinen-Auszüge der Ländernotiz und Fachpresse. Ein erneuter Abgleich mit dem PDF der Ländernotiz ist vor Go-Live vorgesehen.</p></div>
+    <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">OECD-Primärwerte 0,90–0,95; Sekundär bestätigte Werte 0,80–0,88; Rahmen/Methodik 0,80–0,95; nutzervorgegeben 0,50; diskrepant 0,30; Interpretationen 0,50–0,60; Szenario-Modelle 0,40.</p></div>
+    <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Korrelation ≠ Kausalität (KI-Nutzung, Mobbing); INFE-Stichprobe (Erwachsene) ≠ PISA-Kohorte; DCM-Demonstrator unkalibriert; Naturwissenschafts-Schulartkluft unverifiziert; Rechtsstand KI-VO kann sich durch Durchführungsrechtsakte ändern.</p></div>
+  </div>
+
+  <h3 class="font-head font-bold text-white mb-3">Glossar (folgt globalem Wissensniveau)</h3>
+  <div id="glossar" class="grid md:grid-cols-2 gap-3 mb-10"></div>
+
+  <h3 class="font-head font-bold text-white mb-3">Primär- &amp; Rahmenquellen</h3>
+  <div class="grid md:grid-cols-2 gap-3 mb-10 text-sm">
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en.html" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">OECD (2026) · PISA 2025 Results (Volume I): Future-Ready Students</div><div class="text-xs text-tngb-muted">Hauptband, veröffentlicht 08.09.2026</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.oecd.org/de/publications/pisa-2025-ergebnisse-band-i_eade94cd-de/deutschland_8a1ce578-de.html" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">OECD (2026) · PISA 2025 Ergebnisse (Band I) — Ländernotiz Deutschland</div><div class="text-xs text-tngb-muted">Punktwerte, Risikogruppen, ESCS, Mobbing, KI-Nutzung</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.oecd.org/en/about/news/press-releases/2026/09/pisa-2025-students-reading-and-mathematics-performance-declined-sharply-across-the-oecd.html" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">OECD Pressemitteilung 08.09.2026</div><div class="text-xs text-tngb-muted">OECD-Durchschnitte 2025 vs. 2022</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://pisa-framework.oecd.org/science-2025/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">OECD · PISA 2025 Science Framework</div><div class="text-xs text-tngb-muted">Agency in the Anthropocene, LDW</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.zib.education/pisa/pisa-2025/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">ZIB · PISA 2025 (nationales Konsortium)</div><div class="text-xs text-tngb-muted">Stichprobe, Projektleitung, Berichtsband</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.waxmann.com/buecher/PISA-2025" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">Waxmann · PISA 2025 Berichtsband (Greiff et al., Hrsg.)</div><div class="text-xs text-tngb-muted">Nationale Auswertung, Schulartvergleich</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://deutsches-schulportal.de/bildungswesen/die-zehn-wichtigsten-ergebnisse-der-pisa-studie-2025/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">Deutsches Schulportal · Die zehn wichtigsten Ergebnisse PISA 2025</div><div class="text-xs text-tngb-muted">Sekundärquelle: Spitzengruppe, Schulartkluft</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.spektrum.de/news/pisa-2025-die-ergebnisse-fuer-deutschland-oesterreich-und-die-schweiz/2343573" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">Spektrum der Wissenschaft · PISA 2025 DE/AT/CH</div><div class="text-xs text-tngb-muted">Sekundärquelle: Punktwerte, Risikogruppen</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.heise.de/news/PISA-2025-Wer-nicht-intensiv-lesen-kann-kann-auch-nichts-lernen-11444413.html" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">heise online · PISA 2025 und KI-Nutzung</div><div class="text-xs text-tngb-muted">Sekundärquelle: 50,2 % / 45,5 %, Ablenkung</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://www.oecd.org/en/publications/oecd-infe-2023-international-survey-of-adult-financial-literacy_56003a32-en.html" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">OECD (2023) · OECD/INFE 2023 International Survey of Adult Financial Literacy</div><div class="text-xs text-tngb-muted">Tripartit-Struktur, DE 76/100, Zielwert 70</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">VO (EU) 2024/1689 · KI-Verordnung (i. V. m. Digital-Omnibus VO (EU) 2026/1744)</div><div class="text-xs text-tngb-muted">Anhang III Nr. 3 Bildung; Fristen 02.12.2027 / Art. 50</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">VO (EU) 2016/679 · DSGVO</div><div class="text-xs text-tngb-muted">Art. 8, 22, 35 — Profiling Minderjähriger</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://doi.org/10.1007/s11336-011-9207-7" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">de la Torre (2011) · The Generalized DINA Model Framework</div><div class="text-xs text-tngb-muted">Psychometrika — Grundlage des DCM-Demonstrators</div></a>
+    <a class="dep-box block hover:border-tngb-cyan transition" href="https://udlguidelines.cast.org/" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold">CAST · UDL Guidelines 3.0</div><div class="text-xs text-tngb-muted">Tier-1-Rahmen; MTSS/RTI-Forschungsstand</div></a>
+  </div>
+
+  <div class="caveat-box mb-10" data-source="FACT_NO_ADVICE_FRAME">
+    <h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer — keine Anlageberatung, keine Diagnostik</h3>
+    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, keine Rechts- oder Steuerberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Finanzprodukten dar (RDG/StBerG/WpIG/FinDAG). Es ist <strong>keine pädagogische, psychologische oder sonderpädagogische Diagnostik</strong>; der DCM-Rechner und die Profilmodelle sind didaktische Demonstratoren (<span class="est-mark">EST</span>/SCENARIO) und nicht für reale Förderentscheidungen geeignet. PISA-Ergebnisse sind Populationsstatistiken und dürfen nicht auf Einzelpersonen übertragen werden. „PISA“ und „OECD“ sind Bezeichnungen der OECD, „FinCoach AI“ von TheNextGenerationBanking; Nennungen erfolgen rein beschreibend. DSGVO: Diese Seite ist statisch, setzt keine Tracker ein und speichert keine personenbezogenen Daten. Stichtag <span class="font-mono text-tngb-cyan">2026-09-10</span> · Rechtsstand 2026-09-10.</p>
+  </div>
+
+  <footer class="border-t border-tngb-border pt-8 mt-4">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 100 100" fill="none" width="40" height="40" aria-hidden="true">
+          <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+          <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+          <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+          <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+          <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+        </svg>
+        <div><div class="font-head font-bold text-white">FinCoach AI</div><a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="text-sm font-mono" style="color:#00CFFF;">by TheNextGenerationBanking.com</a></div>
+      </div>
+      <div class="text-sm text-tngb-muted">
+        <a href="index.html" class="hover:text-white transition block mb-1">← Hauptseite</a>
+        <a href="m299.html" class="hover:text-tngb-cyan transition block mb-1">M299 · IPO-Zuteilung</a>
+        <a href="modul.html" class="hover:text-tngb-cyan transition block mb-1">M298 · SpaceX-Analyse</a>
+        <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
+      </div>
+      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.0.0 · 2026-09-10<br/>Tier T3 · Welle 46 · Financial Literacy / Learning Analytics</div></div>
+    </div>
+    <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. PISA-Werte: OECD Band I (08.09.2026), einzeln verifiziert; Profilmodelle sind Szenario-Demonstratoren. Die nächste Generation Banking.</p>
+  </footer>
+</section>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="regModal">
+  <div class="modal-box">
+    <button class="close-btn" id="regClose" aria-label="Schließen">×</button>
+    <h3 class="font-head font-bold text-xl text-tngb-cyan mb-2" id="regTitle"></h3>
+    <p class="text-sm text-slate-300 leading-relaxed" id="regBody"></p>
+    <a id="regLink" href="#" target="_blank" rel="noopener" class="inline-block mt-4 text-sm font-mono text-tngb-cyan hover:underline"></a>
+  </div>
+</div>
+
+<script>
+/* ====== LEVEL / CAT ====== */
+const LVL_IDX={einsteiger:0,fortgeschritten:1,experte:2};
+let LEVEL='einsteiger';
+document.querySelectorAll('.level-btn[data-lvl]').forEach(b=>b.addEventListener('click',()=>{
+  LEVEL=b.dataset.lvl;
+  document.querySelectorAll('.level-btn[data-lvl]').forEach(x=>x.classList.toggle('active-level',x.dataset.lvl===LEVEL));
+  document.querySelectorAll('#s02-tabs .tab-btn').forEach(x=>x.classList.toggle('active-tab',x.dataset.s02===LEVEL));
+  document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active',c.dataset.s02c===LEVEL));
+  renderGlossar(); renderTimeline(); renderHyper();
+}));
+document.querySelectorAll('#s02-tabs .tab-btn').forEach(b=>b.addEventListener('click',()=>{
+  const v=b.dataset.s02;
+  document.querySelectorAll('#s02-tabs .tab-btn').forEach(x=>x.classList.toggle('active-tab',x===b));
+  document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active',c.dataset.s02c===v));
+}));
+
+/* ====== REG MODAL ====== */
+const REG={
+  aiact:{t:"EU-KI-Verordnung — Anhang III Nr. 3 (Bildung)",b:"KI-Systeme, die Lernergebnisse bewerten oder den Lernprozess steuern, sind Hochrisiko-Systeme. Pflichten: Risikomanagement, Daten-Governance, technische Dokumentation, Logging, Transparenz, menschliche Aufsicht, Genauigkeit/Robustheit. Der Digital-Omnibus (VO (EU) 2026/1744, in Kraft 27.07.2026) verschiebt den Anwendungsbeginn für Anhang-III-Systeme auf 02.12.2027; Art.-50-Transparenzpflichten gelten ab August 2026, Wasserzeichen ab 02.12.2026.",u:"https://eur-lex.europa.eu/eli/reg/2024/1689/oj"},
+  dsgvo:{t:"DSGVO — Art. 8, 22, 35",b:"Art. 8: Einwilligung Minderjähriger ab 16 (DE), sonst Sorgeberechtigte. Art. 22: Keine ausschließlich automatisierte Entscheidung mit rechtlicher/erheblicher Wirkung. Art. 35: Datenschutz-Folgenabschätzung bei systematischer Bewertung persönlicher Aspekte. Schuldaten unterliegen zusätzlich den Landesschulgesetzen.",u:"https://eur-lex.europa.eu/eli/reg/2016/679/oj"},
+  infe:{t:"OECD/INFE — Toolkit 2022 & Survey 2023",b:"Standardisiertes Messinstrument für Finanzkompetenz Erwachsener: Knowledge (0–7), Behaviour (0–9), Attitudes (1–5), reskaliert auf 0–100, Mindestzielwert 70. 2023: 39 Volkswirtschaften, Deutschland 76/100 (Wissen 85).",u:"https://www.oecd.org/en/publications/oecd-infe-2023-international-survey-of-adult-financial-literacy_56003a32-en.html"},
+  pisa:{t:"PISA — Technical Standards & Methodik",b:"IRT-Skalierung, Plausible Values (10 je Domäne), multistage-adaptives Testen, Kompetenzstufen mit Can-Do-Deskriptoren, Prozess-/Logdaten. Plausible Values sind ausschließlich für Populationsschätzungen konstruiert — keine Individualdiagnostik.",u:"https://www.oecd.org/en/about/programmes/pisa.html"},
+  kmk:{t:"KMK — Länderhoheit im Schulwesen",b:"Schulische Diagnostik, Lernstandserhebungen und der Einsatz digitaler Lernsysteme fallen in die Zuständigkeit der 16 Länder (Schulgesetze, Datenschutzverordnungen für Schulen). Ein FinCoach-Lernmodul im Schulkontext braucht je Land eine Rechtsgrundlage und ggf. Zulassung.",u:"https://www.kmk.org/"},
+  finreg:{t:"RDG / WpIG / StBerG / FinDAG — Abgrenzung",b:"Finanzbildung ist erlaubnisfrei, solange keine individuelle Anlage-, Rechts- oder Steuerberatung und keine Produktempfehlung erfolgt. FinCoach-Module bleiben generisch (Konzepte, fiktive Anbieter) und sprechen Minderjährige nie als Zielmarkt für Finanzprodukte an.",u:"https://www.bafin.de/"}
+};
+const modal=document.getElementById('regModal');
+document.querySelectorAll('.reg-tag').forEach(b=>b.addEventListener('click',()=>{
+  const r=REG[b.dataset.reg]; if(!r) return;
+  document.getElementById('regTitle').textContent=r.t;
+  document.getElementById('regBody').textContent=r.b;
+  const l=document.getElementById('regLink'); l.href=r.u; l.textContent=r.u;
+  modal.classList.add('open');
+}));
+document.getElementById('regClose').addEventListener('click',()=>modal.classList.remove('open'));
+modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.remove('open'); });
+
+/* ====== ANALYSE-PROTOKOLL (10 Stationen) ====== */
+const STEPS=[
+  {t:'1 · Auftrag',s:'Chat',e:'Auftrag: PISA 2025 wissenschaftlich analysieren und als interaktive Infografik aufbereiten.',f:'Rechercheplan mit Quellenkatalog (OECD, ZIB, Waxmann) und KPI-Definition; Embargo-Lage noch unklar.',x:'Lehre: Ein Analyseauftrag vor Datenfreigabe braucht eine explizite Embargo-Prüfung als ersten Schritt — sonst füllt das Modell die Lücke.'},
+  {t:'2 · Halluzinationsprüfung',s:'Kritisch',e:'Nachfrage: „Sind das wirklich 2025-Daten?“ — Antwort: Nein, es waren die 2022-Werte (475/480/492).',f:'Das Embargo (08.09.2026, 09:30 MESZ) wurde korrekt benannt; verifizierbare Vorab-Fakten (Framework, LDW, 91 Länder) vom Rest getrennt.',x:'Lehre: Die Trennung „verifiziert vorab“ vs. „Baseline 2022“ vs. „unbekannt“ ist genau die M-DBOM-Klassifikation. Ohne die Nachfrage wären falsche Werte publiziert worden.'},
+  {t:'3 · Agent',s:'Tooling',e:'Ein Python-Agent sollte zur Freigabe die OECD-Daten abholen und eine Infografik bauen.',f:'Design: Release-Scheduler, SDMX-REST-Ingestion, Delta-Engine zur Baseline 2022, HTML-Generator.',x:'Lehre: Der Agent kodifiziert Prüfregeln (Delta zu 2022, Risikogruppen, ESCS). Sein Wert liegt in der Reproduzierbarkeit, nicht in der Automatisierung allein.'},
+  {t:'4 · Mobile-Deployment',s:'Praxis',e:'Wie startet man den Agenten auf einem Android-Gerät? Termux oder Pydroid, Akku-Optimierung aus.',f:'Weg A Termux (pkg install python, termux-setup-storage), Weg B Pydroid 3; One-UI-Hintergrundlimits umgehen.',x:'Lehre: Betriebsumgebung ist Teil der Reproduzierbarkeit — ein Agent, der im Hintergrund stirbt, verpasst den Stichtag.'},
+  {t:'5 · Ergebnisse',s:'Daten',e:'Nach Freigabe: DE 486 / 465 / 464; rund jede:r Dritte unter Basisniveau in Mathe und Lesen.',f:'Alle Punktwerte, Risikogruppen, Spitzengruppen, ESCS 19 %, Mobbing 31 % geprüft — bestätigt. „111 Punkte“ diskrepant (2022-Wert; 2025: 125).',x:'Lehre: Auch nach Freigabe mischen sich Baseline-Reste in die Analyse. Nur Fakt-für-Fakt-Verifikation entdeckt das (siehe Verifikationsmatrix).'},
+  {t:'6 · Schlussfolgerungen KI',s:'Synthese',e:'Ungeführte KI-Nutzung geht mit schlechteren Ergebnissen einher; nötig sind Rückfragen statt fertiger Lösungen.',f:'KI-Paradoxon, Hasty Reading (7 → 11 %), MTSS-Tiers, sprachsensibler Fachunterricht.',x:'Lehre: Die OECD-Daten sind korrelativ. Die Ableitung „sokratisches Scaffolding“ ist plausibel, bleibt aber INTERPRETATION — und wird in REQ-01 als testbare Anforderung formuliert.'},
+  {t:'7 · Instrumente',s:'Methodik',e:'Sechs Instrumente der PISA-Methodik für Kompetenzprofile: Stufen, Konstruktmatrix, IRT, Logdaten, DCM, PISA for Schools.',f:'Korrektur: DCM/Q-Matrix ist Forschungserweiterung, kein PISA-Kern; PVs sind nicht individuell nutzbar.',x:'Lehre: Instrumente sind übertragbar, Daten nicht. Diese Grenze wird zur Compliance-Klausel CL-03.'},
+  {t:'8 · OECD/INFE-Kopplung',s:'Synthese',e:'PISA liefert das kognitive Fundament, INFE die Handlungsfähigkeit (Wissen, Verhalten, Einstellung).',f:'Kompetenz-Vektor (θ, Telemetrie, K/B/A, α); Ebenen A (Einzelne), B (Unternehmen), C (Kommune).',x:'Lehre: Deutschlands INFE-76 bei PISA-Tiefstand ist kein Widerspruch, sondern Kohorteneffekt — und Frühwarnsignal für 2035.'},
+  {t:'9 · Infografik',s:'Produkt',e:'Storytelling-Infografik zum gesamten Verlauf; auf Samsung One UI zunächst weißer/schwarzer Bildschirm.',f:'Ursachen: unmaskiertes „<“ im Text, blockierte CDNs, Force-Dark-Inversion. Lösung: autarke SPA, natives CSS, DOM vorgerendert.',x:'Lehre: Robustheit ist Teil der Barrierefreiheit (CL-12): Tabellen-Fallbacks, keine blockierenden Overlays, natives High-Contrast-CSS.'},
+  {t:'10 · Dieses Modul',s:'M300',e:'Alles zusammengeführt: verifizierte Ergebnisse, Instrumente, Rechner, Anforderungen, Compliance.',f:'M-DBOM mit 33 klassifizierten Aussagen, Live-Audit, statisches Prüfskript, Abnahmetests REQ-01…10, Klauseln CL-01…12.',x:'Lehre: Ein Modul ist erst „fertig“, wenn seine Prüfungen definiert und ausführbar sind — nicht, wenn der Text steht.'}
+];
+let tlStep=0;
+function renderTimeline(){
+  const grid=document.getElementById('tl-grid'); if(!grid) return;
+  grid.innerHTML=STEPS.map((s,i)=>`<div class="dep-box" data-step="${i}" style="cursor:pointer;border-color:${i===tlStep?'#00CFFF':'var(--border)'};">
+    <div class="text-[0.6rem] font-mono" style="color:${i===tlStep?'#00CFFF':'#64748B'}">STATION ${i+1}/10 · ${s.s}</div>
+    <div class="font-head font-bold text-sm mt-1" style="color:${i===tlStep?'#00CFFF':'#E2E8F0'}">${s.t.replace(/^\d+ · /,'')}</div></div>`).join('');
+  grid.querySelectorAll('[data-step]').forEach(n=>n.addEventListener('click',()=>{tlStep=+n.dataset.step;renderTimeline();syncScopeTabs();}));
+  const idx=LVL_IDX[LEVEL]; const s=STEPS[tlStep]; const txt=idx===0?s.e:idx===1?s.f:s.x;
+  document.getElementById('tlNarr').innerHTML=`<span class="font-mono text-tngb-cyan text-xs">${s.t}</span><br/><span class="text-slate-200">${txt}</span>`;
+}
+function syncScopeTabs(){ document.querySelectorAll('#tl-scope .tab-btn').forEach((x,i)=>x.classList.toggle('active-tab',i===tlStep)); }
+document.querySelectorAll('#tl-scope .tab-btn').forEach(b=>b.addEventListener('click',()=>{tlStep=+b.dataset.scope;renderTimeline();syncScopeTabs();}));
+renderTimeline();
+
+/* ====== HYPERINDIVIDUALISIERUNG A/B/C ====== */
+const HYPER=[
+  {t:'Ebene A · Einzelperson',c:'#00CFFF',
+   e:'Jede:r bekommt ein eigenes Lückenprofil: Was kann ich schon (z. B. Prozent), was fehlt (z. B. Zinseszins)? Wer schnell und falsch antwortet, bekommt vor Entscheidungen eine Lesepause und eine Rückfrage — etwa bevor ein Ratenkauf simuliert wird.',
+   f:'Kompetenz-Vektor aus adaptivem Kurztest (θ), DCM-Profil (α) und Telemetrie (Hasty-Index h). Interventionen: Tier-Routing, sokratische Hinweise, Impulskontroll-Scaffolding bei BNPL/Ratenkauf-Szenarien, sprachsensible Glossen.',
+   x:'Update-Regel: Posterior über α nach jedem Item; Routing nach Anzahl unsicherer/nicht gemeisterter Attribute; h als Moderator der Aufgabenpräsentation (Mindestlesezeit ∝ Textlänge). Alle Entscheidungen mit erheblicher Wirkung menschlich bestätigt (Art. 22).'},
+  {t:'Ebene B · Unternehmen & KMU',c:'#00CC7A',
+   e:'Betriebe bekommen Auszubildende, von denen fast die Hälfte (nicht-gymnasial: 47 %) die Mathematik nicht sicher beherrscht, die im Beruf gebraucht wird. Ein Onboarding-Lernpfad schließt genau diese Lücken — ohne Noten, ohne Ranking.',
+   f:'Adaptive Onboarding-Pfade je Ausbildungsberuf (Kalkulation, Skonto, Mehrwertsteuer, Lohnabrechnung); aggregierte Kohortenberichte nur anonymisiert (k ≥ 5); keine Weitergabe individueller Profile an Vorgesetzte ohne Einwilligung.',
+   x:'Zweckbindung: Lerndaten sind kein Input für Personal- oder Kreditentscheidungen (CL-08). Wirksamkeitsnachweis über Pre/Post-Messung auf gleicher Skala; DIF-Prüfung nach Sprachgruppe.'},
+  {t:'Ebene C · Kommune & Sozialraum',c:'#DFAF0F',
+   e:'Stadtteile mit hoher Herkunftsabhängigkeit (ESCS erklärt 19 % der Leistung) brauchen Angebote vor Ort: Schulen, Bibliotheken, Schuldnerberatung. Karten zeigen, wo Bedarf ist — nie, wer ihn hat.',
+   f:'Baseline über PISA for Schools / Lernstandserhebungen (Kohortenebene); Resilienz-Maps aus aggregierten Indikatoren (Bildung, Überschuldungsquote, Sprachförderbedarf); Community-Programme mit Tier-2-Formaten.',
+   x:'Aggregation only: keine Rasterzellen unter Mindestfallzahl; Verknüpfung mit Bonitäts-/Kreditdaten ausgeschlossen (CL-08). Evaluation als Difference-in-Differences gegen Vergleichsquartiere.'}
+];
+function renderHyper(){
+  const idx=LVL_IDX[LEVEL]; const el=document.getElementById('hyperGrid'); if(!el) return;
+  el.innerHTML=HYPER.map(h=>`<div class="dep-box border-l-4" style="border-color:${h.c};"><h3 class="font-head font-bold mb-2" style="color:${h.c};">${h.t}</h3><p class="text-sm text-slate-300 leading-relaxed">${idx===0?h.e:idx===1?h.f:h.x}</p></div>`).join('');
+}
+renderHyper();
+
+/* ====== GLOSSAR ====== */
+const GLOSSAR=[
+  ["Kompetenzstufe","Leistungsband mit Beschreibung, was jemand kann.","Kriterienorientierte Bänder 1c–6 auf der PISA-Skala; Stufe 2 = Basisniveau.","Cut-Scores auf der IRT-Skala mit Can-Do-Deskriptoren; Stufe 2 ist SDG-4-Indikator."],
+  ["Risikogruppe","Schüler:innen unter dem Basisniveau.","Anteil unter Stufe 2; DE 2025: 34 % Mathe, 32 % Lesen, 27 % NaWi.","Populationsanteil mit θ unter Cut-Score Stufe 2; Standardfehler über PVs und Replikationsgewichte."],
+  ["Plausible Values","Mehrere geschätzte Punktwerte je Person.","10 Ziehungen aus der Fähigkeitsverteilung; nur für Gruppenstatistiken.","Ziehungen aus der Posterior p(θ|x,y) mit latenter Regression; unverzerrt für Populationsparameter, nicht für Individuen."],
+  ["IRT","Rechenmodell, das Aufgabenschwierigkeit und Fähigkeit trennt.","Item-Response-Theorie: Wahrscheinlichkeit richtiger Antwort als Funktion von θ und Itemparametern.","Rasch/2PL-Hybrid seit 2015; Linking über Trend-Items; MST seit 2018/2022."],
+  ["Q-Matrix","Tabelle: Welche Aufgabe braucht welche Fähigkeit?","Items × Attribute, Einträge 0/1; Grundlage kognitiver Diagnosemodelle.","Spezifikation der Attributabhängigkeit je Item; Identifizierbarkeit erfordert vollständige und ausreichend unterschiedliche Zeilen."],
+  ["DINA","Modell: Man löst eine Aufgabe, wenn man alle nötigen Fähigkeiten hat.","Deterministic Input, Noisy AND; Slip und Guess modellieren Fehler.","Konjunktives DCM; η = Π α^q; P(X=1|α) = (1−s)^η g^(1−η); Posterior über 2^K Profile."],
+  ["Hasty readers","Wer schnell und falsch antwortet.","OECD-Indikator aus Logdaten; 7 % → 11 % (2018→2025).","Latenz unter Schwellwert ∧ Antwort falsch; Proxy für Impulsivität/geringe Aufgabenpersistenz."],
+  ["ESCS","Index für den sozialen Hintergrund.","Economic, Social and Cultural Status: Beruf, Bildung, Besitz der Eltern.","Komposit-Index (PCA) aus HISEI, PARED, HOMEPOS; Gradient = Regressionssteigung Leistung ~ ESCS."],
+  ["OECD/INFE-Score","Finanzkompetenz-Wert 0–100.","Wissen (0–7) + Verhalten (0–9) + Einstellung (1–5), reskaliert; Zielwert 70.","Summenscore nach Toolkit 2022; keine IRT-Skalierung; Vergleichbarkeit über identische Items."],
+  ["MTSS","Drei Stufen von Unterstützung: alle, Kleingruppe, einzeln.","Multi-Tiered System of Supports; Routing nach Fortschrittsmessung.","RTI-Logik: universelles Screening, CBM-Progress-Monitoring, datenbasierte Tier-Entscheidungen."],
+  ["Sokratisches Scaffolding","Die KI fragt zurück, statt die Lösung zu geben.","Gestufte Hinweise; Lösung erst nach eigenen Versuchen.","Contingent tutoring: Hinweisstufe als Funktion des Fehlertyps; Ziel: kein kognitives Bypassing."],
+  ["Hochrisiko-KI","KI mit strengen Pflichten nach EU-Recht.","Anhang III der KI-VO; Bildung ist enthalten.","Anhang III Nr. 3 lit. b/c: Bewertung von Lernergebnissen, Steuerung des Lernprozesses; Pflichten ab 02.12.2027."]
+];
+function renderGlossar(){
+  const idx=LVL_IDX[LEVEL]; const el=document.getElementById('glossar'); if(!el) return;
+  el.innerHTML=GLOSSAR.map(g=>`<div class="dep-box"><div class="font-head font-bold text-tngb-cyan text-sm mb-1">${g[0]}</div><p class="text-xs text-slate-400">${g[1+idx]}</p></div>`).join('');
+}
+renderGlossar();
+
+/* ====== CHARTS ====== */
+const C={cyan:'#00CFFF',emerald:'#00CC7A',gold:'#DFAF0F',lavender:'#9933FF',orange:'#FF6B00',indigo:'#4472C4',magenta:'#E6399A',muted:'#64748B'};
+const axis={ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}};
+const baseOpts=(legend)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:legend,labels:{color:'#94A3B8',font:{size:10}}}}});
+function mk(id,cfg){ const c=document.getElementById(id); if(c&&window.Chart) return new Chart(c,cfg); }
+mk('chartScores',{type:'bar',data:{labels:['Mathematik','Lesen','Naturwissenschaften'],datasets:[
+  {label:'DE 2022',data:[475,480,492],backgroundColor:'rgba(0,207,255,0.35)'},
+  {label:'DE 2025',data:[464,465,486],backgroundColor:C.cyan},
+  {label:'OECD 2022',data:[472,476,485],backgroundColor:'rgba(223,175,15,0.35)'},
+  {label:'OECD 2025',data:[463,461,482],backgroundColor:C.gold}]},
+  options:{...baseOpts(true),scales:{y:{min:440,max:500,...axis},x:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});
+mk('chartGroups',{type:'bar',data:{labels:['Mathematik','Lesen','Naturwissenschaften'],datasets:[
+  {label:'unter Stufe 2 (Risiko)',data:[34,32,27],backgroundColor:C.magenta},
+  {label:'Stufe 5/6 (Spitze)',data:[8,7,9],backgroundColor:C.emerald}]},
+  options:{...baseOpts(true),scales:{y:{min:0,max:40,...axis,ticks:{color:'#94A3B8',callback:v=>v+' %'}},x:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});
+mk('chartSchool',{type:'bar',data:{labels:['Mathematik','Lesen','NaWi (REP)'],datasets:[
+  {label:'Gymnasium',data:[6,5,3],backgroundColor:C.emerald},
+  {label:'nicht-gymnasial',data:[47,43,37],backgroundColor:C.magenta}]},
+  options:{...baseOpts(true),indexAxis:'y',scales:{x:{min:0,max:50,...axis,ticks:{color:'#94A3B8',callback:v=>v+' %'}},y:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});
+mk('chartEscs',{type:'bar',data:{labels:['ESCS-Varianz (%)','Kluft begünstigt/benachteiligt (Pkt.)','Mobbing ≥ monatl. (%)'],datasets:[
+  {label:'Deutschland',data:[19,125,31],backgroundColor:C.lavender},
+  {label:'OECD',data:[12,85,20],backgroundColor:C.muted}]},
+  options:{...baseOpts(true),scales:{y:{min:0,...axis},x:{ticks:{color:'#94A3B8',font:{size:9}},grid:{display:false}}}}});
+
+/* ====== DCM / DINA RECHNER ====== */
+const ATTR=['A1 Bruch/Dezimal','A2 Prozent/Dreisatz','A3 Zins/Exponentiell','A4 Textextraktion'];
+const ITEMS=[
+  {n:'I1 · 3/4 als Dezimalzahl',q:[1,0,0,0]},
+  {n:'I2 · 18 % von 250 €',q:[0,1,0,0]},
+  {n:'I3 · Guthaben nach 1 Jahr zu 3 %',q:[0,1,1,0]},
+  {n:'I4 · Monatsrate aus Ratentabelle ablesen',q:[0,0,0,1]},
+  {n:'I5 · Rabatt aus Werbetext berechnen',q:[0,1,0,1]},
+  {n:'I6 · Zinseszins 2 Jahre zu 4 %',q:[0,0,1,0]},
+  {n:'I7 · 2/5 des Einkommens aus Sachtext sparen',q:[1,0,0,1]},
+  {n:'I8 · BNPL-Effektivkosten aus Ratenplan',q:[1,1,0,1]}
+];
+let RESP=[1,1,0,1,1,0,1,0];
+const PROFILES=[]; for(let m=0;m<16;m++){PROFILES.push([m&1,(m>>1)&1,(m>>2)&1,(m>>3)&1]);}
+function renderQ(){
+  const tb=document.querySelector('#qTable tbody'); if(!tb) return;
+  tb.innerHTML=ITEMS.map((it,j)=>`<tr><td class="text-xs">${it.n}</td>${it.q.map(v=>`<td><span class="q-cell ${v?'q1':'q0'}">${v}</span></td>`).join('')}<td><button class="resp-btn ${RESP[j]?'r1':'r0'}" data-j="${j}">${RESP[j]?'✓ richtig':'✗ falsch'}</button></td></tr>`).join('');
+  tb.querySelectorAll('.resp-btn').forEach(b=>b.addEventListener('click',()=>{const j=+b.dataset.j;RESP[j]=RESP[j]?0:1;renderQ();refreshDCM();}));
+}
+let postChart=null;
+function refreshDCM(){
+  const s=(+document.getElementById('simSlip').value)/100, g=(+document.getElementById('simGuess').value)/100;
+  document.getElementById('lblSlip').textContent=s.toFixed(2); document.getElementById('lblGuess').textContent=g.toFixed(2);
+  const lik=PROFILES.map(a=>{let L=1;ITEMS.forEach((it,j)=>{const eta=it.q.every((qv,k)=>!qv||a[k]===1)?1:0;const p=eta?(1-s):g;L*=RESP[j]?p:(1-p);});return L;});
+  const Z=lik.reduce((x,y)=>x+y,0); const post=lik.map(l=>l/Z);
+  const mastery=[0,1,2,3].map(k=>PROFILES.reduce((acc,a,i)=>acc+(a[k]?post[i]:0),0));
+  const bars=document.getElementById('masteryBars');
+  bars.innerHTML=mastery.map((p,k)=>{const col=p>=0.65?C.emerald:p>=0.35?C.gold:C.magenta;return `<div><div class="flex justify-between text-xs mb-1"><span>${ATTR[k]}</span><span class="mono" style="color:${col}">${(p*100).toFixed(0)} %</span></div><div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(1)}%;background:${col};"></div></div></div>`;}).join('');
+  const mapIdx=post.indexOf(Math.max(...post)); const map=PROFILES[mapIdx];
+  const open=mastery.filter(p=>p<0.35).length, unsure=mastery.filter(p=>p>=0.35&&p<0.65).length;
+  const tier=open>=3?3:(open>=1?2:1); const tcol=tier===1?C.emerald:tier===2?C.gold:C.magenta;
+  const gaps=ATTR.filter((_,k)=>mastery[k]<0.35).map(a=>a.split(' ')[1]).join(', ')||'keine';
+  const zone=ATTR.filter((_,k)=>mastery[k]>=0.35&&mastery[k]<0.65).map(a=>a.split(' ')[1]).join(', ')||'keine';
+  document.getElementById('dcmOut').innerHTML=
+    `<div class="text-sm mb-1">MAP-Profil α = <span class="mono text-tngb-cyan">[${map.join(', ')}]</span> · P = <span class="mono">${(post[mapIdx]*100).toFixed(1)} %</span> · richtig: <span class="mono">${RESP.reduce((a,b)=>a+b,0)}/8</span></div>`+
+    `<div class="text-sm mb-1">Offene Attribute (P &lt; 0,35): <strong class="text-tngb-magenta">${gaps}</strong> · Zone der nächsten Entwicklung (0,35–0,65, mehr Items nötig): <strong class="text-tngb-gold">${zone}</strong></div>`+
+    `<div class="text-sm">MTSS-Vorschlag: <span class="tier-pill" style="background:${tcol}22;color:${tcol};border:1px solid ${tcol}66;">Tier ${tier}</span> <span class="text-xs text-tngb-muted">${tier===1?'universelles Angebot (UDL)':tier===2?'gezielte Kleingruppenförderung':'intensive Einzelintervention — menschliche Bestätigung erforderlich (Art. 22 DSGVO)'}</span></div>`+
+    `<div class="text-xs text-tngb-muted mt-2">Unsicherheit ausgewiesen; ${unsure} Attribut(e) benötigen weitere adaptive Items. <span class="dbom-class-badge">SCENARIO-Modell</span></div>`;
+  const labels=PROFILES.map(a=>a.join(''));
+  if(!postChart){postChart=mk('chartPosterior',{type:'bar',data:{labels,datasets:[{label:'Posterior je Profil (A1A2A3A4)',data:post,backgroundColor:post.map((p,i)=>i===mapIdx?C.cyan:'rgba(0,207,255,0.35)')}]},options:{...baseOpts(true),scales:{y:{min:0,max:1,...axis},x:{ticks:{color:'#94A3B8',font:{size:8}},grid:{display:false}}}}});}
+  else{postChart.data.datasets[0].data=post;postChart.data.datasets[0].backgroundColor=post.map((p,i)=>i===mapIdx?C.cyan:'rgba(0,207,255,0.35)');postChart.update();}
+}
+renderQ();
+['simSlip','simGuess'].forEach(id=>document.getElementById(id).addEventListener('input',refreshDCM));
+document.getElementById('presetA').addEventListener('click',()=>{RESP=[1,1,1,0,0,1,0,0];renderQ();refreshDCM();});
+document.getElementById('presetB').addEventListener('click',()=>{RESP=[0,0,0,1,0,0,0,0];renderQ();refreshDCM();});
+document.getElementById('presetC').addEventListener('click',()=>{RESP=[1,1,1,1,1,1,1,1];renderQ();refreshDCM();});
+refreshDCM();
+
+/* ====== INFE SIMULATOR ====== */
+let infeChart=null;
+function refreshInfe(){
+  const K=+document.getElementById('simK').value,B=+document.getElementById('simB').value,A=+document.getElementById('simA').value;
+  document.getElementById('lblK').textContent=K;document.getElementById('lblB').textContent=B;document.getElementById('lblA').textContent=A;
+  const raw=K+B+A; const score=raw/21*100;
+  const col=score>=70?C.emerald:score>=55?C.gold:C.magenta;
+  document.getElementById('infeOut').innerHTML=`<div class="text-sm">Rohscore <span class="mono text-tngb-cyan">${raw}/21</span> → Finanzkompetenz <strong style="color:${col}">${score.toFixed(1)}/100</strong></div>
+    <div class="text-xs text-tngb-muted mt-1">${score>=76?'über dem deutschen Mittel (76)':score>=70?'Zielwert 70 erreicht, unter DE-Mittel 76':score>=60?'unter Zielwert 70, über internationalem Ø ~60':'unter internationalem Ø ~60'} · Teilwerte: Wissen ${(K/7*100).toFixed(0)} %, Verhalten ${(B/9*100).toFixed(0)} %, Einstellung ${((A-1)/4*100).toFixed(0)} %</div>`;
+  const data=[score,76,70,60];
+  if(!infeChart){infeChart=mk('chartInfe',{type:'bar',data:{labels:['Simulation','DE 2023','Zielwert','Ø 39 Länder'],datasets:[{data,backgroundColor:[col,C.emerald,C.gold,C.muted]}]},options:{...baseOpts(false),indexAxis:'y',scales:{x:{min:0,max:100,...axis},y:{ticks:{color:'#94A3B8'},grid:{display:false}}}}});}
+  else{infeChart.data.datasets[0].data=data;infeChart.data.datasets[0].backgroundColor=[col,C.emerald,C.gold,C.muted];infeChart.update();}
+}
+['simK','simB','simA'].forEach(id=>document.getElementById(id).addEventListener('input',refreshInfe));
+refreshInfe();
+
+/* ====== NAVDOCK + SCROLL-FADE ====== */
+const SECTIONS=['s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s-exp','s-qa','s-mtx','s12'];
+const dockObs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const id=en.target.id;document.querySelectorAll('#navdock a').forEach(a=>a.classList.toggle('active-dock',a.dataset.dock===id));}}),{rootMargin:'-40% 0px -55% 0px'});
+SECTIONS.forEach(id=>{const el=document.getElementById(id);if(el)dockObs.observe(el);});
+const fadeObs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.06});
+document.querySelectorAll('.scroll-fade').forEach(el=>fadeObs.observe(el));
+
+/* ====== KEYBOARD ====== */
+document.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  const cur=SECTIONS.findIndex(id=>{const el=document.getElementById(id);if(!el)return false;const r=el.getBoundingClientRect();return r.top>=-100&&r.top<window.innerHeight*0.5;});
+  if(e.key==='j'){const n=Math.min(SECTIONS.length-1,(cur<0?0:cur)+1);document.getElementById(SECTIONS[n]).scrollIntoView({behavior:'smooth'});}
+  if(e.key==='k'){const n=Math.max(0,(cur<0?0:cur)-1);document.getElementById(SECTIONS[n]).scrollIntoView({behavior:'smooth'});}
+});
+
+/* ====== KATEX ====== */
+document.addEventListener('DOMContentLoaded',()=>{ if(window.renderMathInElement) renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false}); });
+</script>
+
+<!-- ====== LIVE-QA & DBOM-AUDIT ====== -->
+<script>
+(async function liveAudit(){
+  const banner=document.getElementById('live-audit-banner'),status=document.getElementById('live-audit-status'),
+    meta=document.getElementById('live-audit-meta'),score=document.getElementById('live-audit-score'),qaPill=document.getElementById('qa-pill');
+  const rows={compliance:[],data:[],style:[]};
+  const add=(sec,label,ok,detail)=>rows[sec].push({label,ok,detail});
+  const bodyText=document.body.innerText||'';
+  /* ① Compliance (DOM) */
+  add('compliance','Keine Anlageberatung (Disclaimer)',/keine Anlageberatung/i.test(bodyText));
+  add('compliance','RDG/StBerG/WpIG/FinDAG-Hinweis',/RDG\/StBerG\/WpIG\/FinDAG/.test(bodyText));
+  add('compliance','DSGVO Art. 22 / Art. 35 benannt',/Art\.\s*22/.test(bodyText)&&/Art\.\s*35/.test(bodyText));
+  add('compliance','EU-KI-VO Anhang III benannt',/Anhang III/.test(bodyText));
+  add('compliance','Markennennung rein beschreibend',/rein beschreibend/.test(bodyText));
+  const resUrls=[...document.querySelectorAll('script[src],link[href],img[src],iframe[src]')].map(e=>e.getAttribute('src')||e.getAttribute('href')||'').filter(u=>/^https?:/.test(u));
+  add('compliance','Keine Google-Fonts / Tracker als Ressource',!resUrls.some(u=>/fonts\.googleapis|fonts\.gstatic|googletagmanager|google-analytics|hotjar|matomo|doubleclick/.test(u)),resUrls.join(', '));
+  const badScripts=[...document.querySelectorAll('script[src]')].map(s=>s.getAttribute('src')).filter(u=>/^https?:/.test(u)&&!/^https:\/\/(cdn\.jsdelivr\.net|cdn\.tailwindcss\.com)(\/|$)/.test(u));
+  add('compliance','Scripts nur von CSP-erlaubten Hosts',badScripts.length===0,badScripts.join(', '));
+  add('compliance','Klauseln CL-01…CL-12 vorhanden',document.querySelectorAll('.cl-id').length===12);
+  /* ③ Styleguide (DOM) */
+  add('style','fonts.css self-hosted',!!document.querySelector('link[href="fonts.css"]'));
+  add('style','CAT-Level (Einsteiger→Experte)',document.querySelectorAll('.level-btn[data-lvl]').length===3);
+  add('style','NavDock & Sektions-Badges',!!document.getElementById('navdock')&&document.querySelectorAll('.section-badge').length>10);
+  add('style','Provenienz- & Live-Audit-Banner',!!banner);
+  add('style','REP/EST-Marker innerhalb Provenienz-Container',[...document.querySelectorAll('.est-mark')].every(m=>m.closest('[data-source]')||m.closest('.caveat-box')));
+  add('style','Chart-Fallback-Tabellen (S04)',document.querySelectorAll('#s04 table').length>=4);
+  add('style','Glossar gerendert',document.querySelectorAll('#glossar .dep-box').length>=10);
+  add('style','Abnahmetests REQ-01…REQ-10 vorhanden',document.querySelectorAll('.req-id').length===10);
+  /* ② Datenqualität (DBOM) */
+  let ld=null; try{ld=JSON.parse(document.getElementById('module-provenance').textContent);}catch(e){}
+  add('data','M-DBOM JSON-LD eingebettet & parsebar',!!ld);
+  let missing=0,refsN=0,ok=false,dbom=null;
+  try{
+    const res=await fetch('provenance/m300.dbom.json',{cache:'no-cache'});
+    if(!res.ok)throw new Error('DBOM nicht erreichbar (HTTP '+res.status+')');
+    dbom=await res.json();
+    const facts=dbom.facts||[]; const valid=new Set(facts.map(f=>f.id)); const map=Object.fromEntries(facts.map(f=>[f.id,f]));
+    const refs=document.querySelectorAll('[data-source^="FACT_"]'); refsN=refs.length; const miss=new Set();
+    refs.forEach(el=>{const id=el.dataset.source;
+      if(!valid.has(id)){missing++;miss.add(id);el.style.outline='2px dashed #E6399A';el.title='DBOM-MISSING: '+id;}
+      else{const info=map[id];if(!el.getAttribute('data-tooltip'))el.setAttribute('data-tooltip','['+info.verdict+' · Konf. '+info.confidence+'] '+info.claim+(info.caveat?' · '+info.caveat:''));}
+    });
+    const srcIds=new Set((dbom.sources||[]).map(s=>s.id));
+    add('data','Externe DBOM erreichbar & valide',true);
+    add('data','Alle data-source-Referenzen aufgelöst ('+refsN+')',missing===0,[...miss].join(', '));
+    add('data','fact_summary.total == Fakten ('+facts.length+')',dbom.fact_summary&&dbom.fact_summary.total===facts.length);
+    add('data','Jede source_id existiert',facts.every(f=>srcIds.has(f.source_id)));
+    add('data','Konfidenz & Verdict je Fakt',facts.every(f=>typeof f.confidence==='number'&&f.verdict));
+    add('data','JSON-LD-Version == DBOM-Version',ld&&ld.module.version===dbom.module.version);
+    add('data','Stichtag im HTML == DBOM ('+dbom.module.stichtag+')',bodyText.includes(dbom.module.stichtag));
+    add('data','DISCREPANT/USER_PROVIDED sichtbar ausgewiesen',document.querySelectorAll('.b-disc,.b-user').length>=2);
+    const verdicts={};facts.forEach(f=>verdicts[f.verdict]=(verdicts[f.verdict]||0)+1);
+    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · Schema <code>'+dbom.$schema_id+'</code> · '+facts.length+' Aussagen ('+Object.entries(verdicts).map(([k,v])=>v+' '+k).join(', ')+') · '+refsN+' HTML-Referenzen geprüft';
+    ok=missing===0;
+  }catch(err){
+    add('data','Externe DBOM erreichbar & valide',false,err.message);
+    banner.classList.add('warn');
+    status.innerHTML='⚠ DBOM-Live-Lookup nicht möglich: '+err.message+' (offline? — eingebettetes JSON-LD vorhanden)';
+  }
+  /* Render QA-Tabellen */
+  const render=(sec,id)=>{const tb=document.getElementById(id);if(!tb)return;tb.innerHTML=rows[sec].map(r=>`<tr><td>${r.label}</td><td class="${r.ok?'check-pass':'check-fail'}" title="${r.detail||''}">${r.ok?'✓':'✗'}</td></tr>`).join('');};
+  render('compliance','qa-compliance');render('data','qa-data');render('style','qa-style');
+  const all=[...rows.compliance,...rows.data,...rows.style]; const fails=all.filter(r=>!r.ok).length;
+  if(dbom&&ok&&fails===0){
+    banner.classList.remove('warn','err');
+    status.innerHTML='✓ DBOM-Integrität OK · alle '+refsN+' data-source-Referenzen aufgelöst · '+all.length+' QA-Checks bestanden · Stichtag '+dbom.module.stichtag;
+    if(qaPill)qaPill.innerHTML='<span class="compliance-pill good">QA · '+all.length+'/'+all.length+' Checks bestanden</span>';
+    if(score)score.innerHTML='<span class="compliance-pill good">M300 Integrität · 100%</span>';
+  }else if(dbom){
+    banner.classList.add(fails>0?'err':'warn');
+    status.innerHTML=(missing>0?'✗ '+missing+' ungültige Referenz(en) · ':'')+fails+' QA-Check(s) offen';
+    if(qaPill)qaPill.innerHTML='<span class="compliance-pill warn">QA · '+fails+' offen</span>';
+  }else{
+    if(qaPill)qaPill.innerHTML='<span class="compliance-pill warn">QA · DBOM offline · '+(all.length-fails)+'/'+all.length+' lokal bestanden</span>';
+  }
+})();
+</script>
+</body>
+</html>

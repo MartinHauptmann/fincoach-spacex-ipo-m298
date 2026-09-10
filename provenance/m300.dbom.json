@@ -1,0 +1,519 @@
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": {
+    "id": "M300",
+    "title": "PISA 2025 & Finanzbildung — Kompetenzdiagnostik, OECD/INFE-Kopplung & KI-gestützte Hyperindividualisierung",
+    "version": "1.0.0",
+    "stichtag": "2026-09-10",
+    "buildDate": "2026-09-10T00:00:00Z",
+    "predecessor_version": null,
+    "related_modules": [
+      "M298",
+      "M299"
+    ],
+    "external_dbom": "provenance/m300.dbom.json",
+    "cluster": "Financial Literacy / Learning Analytics",
+    "tier": "T3",
+    "welle": 46
+  },
+  "fact_summary": {
+    "total": 33,
+    "confirmed": 27,
+    "user_provided_unverified": 1,
+    "discrepant": 1,
+    "interpretation": 2,
+    "scenario_projection": 2,
+    "by_verdict": {
+      "CONFIRMED": 27,
+      "USER_PROVIDED": 1,
+      "DISCREPANT": 1,
+      "INTERPRETATION": 2,
+      "SCENARIO_PROJECTION": 2
+    },
+    "by_class": {
+      "PISA_2025_RESULT": 13,
+      "PISA_METHODOLOGY": 7,
+      "PISA_2022_BASELINE": 1,
+      "USER_PROVIDED": 1,
+      "DISCREPANT": 1,
+      "OECD_INFE": 2,
+      "REGULATORY_FRAMEWORK": 3,
+      "PEDAGOGICAL_FRAMEWORK": 1,
+      "INTERPRETATION": 2,
+      "SCENARIO_PROJECTION": 2
+    }
+  },
+  "honest_disclosure": "Dieses Modul wurde aus einem Research-Chatverlauf (PISA-2025-Gesamtanalyse, KI-Potentiale, Methodik, OECD/INFE-Kopplung) abgeleitet. Der Chatverlauf enthielt eine dokumentierte Halluzinations-Episode: Vor dem 08.09.2026 wurden PISA-2022-Werte als 2025-Ergebnisse präsentiert und nach Nachfrage korrigiert. Am Stichtag 2026-09-10 lagen die OECD-Ergebnisse (Band I, Ländernotiz Deutschland) vor; jede der 33 klassifizierten Aussagen wurde einzeln gegen OECD-Primärquellen bzw. deren Presse-/Fachauswertung geprüft. Direkte Abrufe von oecd.org waren aus der Build-Umgebung netzwerkseitig blockiert (Egress-Proxy), die Verifikation erfolgte über Suchmaschinen-Auszüge der OECD-Ländernotiz und mehrere unabhängige Sekundärquellen (Spektrum, Deutsches Schulportal, ZDF, Handelsblatt, Tagesspiegel, GEW). Zwei Chat-Angaben weichen ab: (1) die '111-Punkte-Kluft' entspricht dem PISA-2022-Mathematikwert, die Ländernotiz 2025 nennt 125 Punkte (Naturwissenschaften, OECD 85); (2) der Leistungsabschlag von 37 Punkten gilt für die 5 % häufig gemobbten Schüler:innen, nicht für die 31 %, die mindestens einige Male pro Monat betroffen sind. Alle Modell-, Profil- und Hyperindividualisierungs-Konstrukte (DCM-Rechner, Kompetenz-Vektor, Ebenen A/B/C) sind didaktische SCENARIO_PROJECTION und keine PISA-Ergebnisse. Keine Rechts-, Steuer- oder Anlageberatung; keine Bildungs- oder Förderdiagnostik im rechtlichen Sinn.",
+  "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
+  "verification_protocol": {
+    "method": "Jede quantitative Chat-Aussage → Suche nach OECD-Ländernotiz-Auszug + ≥1 unabhängige Sekundärquelle → Verdict",
+    "primary_targets": [
+      "https://www.oecd.org/de/publications/pisa-2025-ergebnisse-band-i_eade94cd-de/deutschland_8a1ce578-de.html",
+      "https://www.oecd.org/content/dam/oecd/de/publications/reports/2026/09/pisa-2025-results-volume-i-country-notes_88d1164e/germany_20677961/8a1ce578-de.pdf",
+      "https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en.html"
+    ],
+    "network_limitation": "oecd.org, zib.education, spektrum.de, deutsches-schulportal.de per Egress-Proxy blockiert (HTTP 403 CONNECT); Inhalte über Suchmaschinen-Snippets verifiziert.",
+    "date": "2026-09-10"
+  },
+  "facts": [
+    {
+      "id": "FACT_PISA25_RELEASE",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "Die OECD hat PISA 2025 Band I ('Future-Ready Students') am 08.09.2026 um 09:30 MESZ veröffentlicht: Ergebnisse für Naturwissenschaften, Mathematik, Lesen und computergestütztes Problemlösen; Fremdsprachen-Assessment (Englisch) und selbstreguliertes Lernen folgen 2027.",
+      "source_id": "SRC_OECD_PISA25_VOL1",
+      "caveat": "Chat-Prognose des Termins (08.09.2026, 09:30) traf zu."
+    },
+    {
+      "id": "FACT_PISA25_PARTICIPATION",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.88,
+      "status": "verified_secondary",
+      "claim": "91 Staaten/Volkswirtschaften, rund 760.000 Schüler:innen; in Deutschland ~6.700 Schüler:innen an ~250 Schulen (März–Mai 2025); nationale Projektleitung Prof. Samuel Greiff (TUM/ZIB); nationaler Berichtsband bei Waxmann (236 S.).",
+      "source_id": "SRC_ZIB_WAXMANN",
+      "caveat": "Stichprobenzahlen aus Presse (Handelsblatt/ms-aktuell) und Waxmann-Verlagsseite."
+    },
+    {
+      "id": "FACT_PISA25_FRAMEWORK",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.92,
+      "status": "verified_framework",
+      "claim": "PISA 2025: Hauptdomäne Naturwissenschaften mit erweiterter Rahmenkonzeption ('Agency in the Anthropocene'); neue Domäne 'Learning in the Digital World' (LDW: digitale Werkzeuge, selbstreguliertes Lernen, Feedback-Nutzung); optionales Foreign Language Assessment.",
+      "source_id": "SRC_OECD_PISA25_FRAMEWORK",
+      "caveat": "Vorab publiziertes Framework, im Chat korrekt als verifiziert klassifiziert."
+    },
+    {
+      "id": "FACT_DEU_SCORES_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "Deutschland PISA 2025: Naturwissenschaften 486, Lesen 465, Mathematik 464 Punkte — in allen drei Domänen der niedrigste je gemessene Wert.",
+      "source_id": "SRC_OECD_LAENDERNOTIZ_DE",
+      "caveat": "Übereinstimmend in OECD-Ländernotiz, Spektrum, Schulportal, ZDF."
+    },
+    {
+      "id": "FACT_OECD_SCORES_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.9,
+      "status": "verified_primary",
+      "claim": "OECD-Durchschnitt 2025: Naturwissenschaften 482, Lesen 461, Mathematik 463. Über 35 OECD-Länder fiel Lesen um ~14 und Mathematik um ~9 Punkte; Naturwissenschaften stabil.",
+      "source_id": "SRC_OECD_PRESS_2026",
+      "caveat": "Durchschnitte beziehen sich auf 35 OECD-Länder mit Trenddaten."
+    },
+    {
+      "id": "FACT_DEU_SCORES_2022",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2022_BASELINE",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "Baseline PISA 2022 Deutschland: Mathematik 475, Lesen 480, Naturwissenschaften 492 (OECD: 472 / 476 / 485).",
+      "source_id": "SRC_OECD_PISA22_VOL1",
+      "caveat": "Diese Werte wurden im Chat vor dem Embargo-Ende fälschlich als 2025-Ergebnisse präsentiert und nach Nachfrage korrigiert."
+    },
+    {
+      "id": "FACT_DEU_DELTA_2022_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.9,
+      "status": "derived_verified",
+      "claim": "Veränderung Deutschland 2022→2025: Lesen −15, Mathematik −11, Naturwissenschaften −6 Punkte.",
+      "source_id": "SRC_OECD_LAENDERNOTIZ_DE",
+      "caveat": "Arithmetisch aus FACT_DEU_SCORES_2022/2025; Lesen −15 und Mathematik −11 im Chat korrekt."
+    },
+    {
+      "id": "FACT_DEU_LOW_PERFORMERS_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.9,
+      "status": "verified_primary",
+      "claim": "Risikogruppe (unter Kompetenzstufe 2) Deutschland 2025: Mathematik 34 %, Lesen 32 %, Naturwissenschaften 27 %.",
+      "source_id": "SRC_OECD_LAENDERNOTIZ_DE",
+      "caveat": "Eine Sekundärquelle nennt für Naturwissenschaften 25 %; die Mehrheit der Quellen und '73 % erreichen mind. Stufe 2' stützen 27 %."
+    },
+    {
+      "id": "FACT_DEU_TOP_PERFORMERS_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.85,
+      "status": "verified_secondary",
+      "claim": "Spitzengruppe (Stufe 5/6) Deutschland 2025: Naturwissenschaften 9 %, Mathematik 8 %, Lesen 7 %.",
+      "source_id": "SRC_SCHULPORTAL_TOP10",
+      "caveat": "Bestätigt über Schulportal/Spektrum-Auswertung der Ländernotiz."
+    },
+    {
+      "id": "FACT_DEU_SCHOOLTYPE_GAP_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.85,
+      "status": "verified_secondary",
+      "claim": "Institutionelle Segregation 2025 (Anteil unter Stufe 2): Mathematik 6 % (Gymnasium) vs. 47 % (nicht-gymnasial); Lesen 5 % vs. 43 %.",
+      "source_id": "SRC_SCHULPORTAL_TOP10",
+      "caveat": "Werte aus nationalem Berichtsband (ZIB), via Schulportal/t-online."
+    },
+    {
+      "id": "FACT_DEU_SCHOOLTYPE_SCIENCE_UNVERIFIED",
+      "verdict": "USER_PROVIDED",
+      "class": "USER_PROVIDED",
+      "confidence": 0.5,
+      "status": "unverified",
+      "claim": "Chat-Angabe: Naturwissenschafts-Risiko 3 % (Gymnasium) vs. 37 % (nicht-gymnasial).",
+      "source_id": "SRC_RESEARCH_CHAT",
+      "caveat": "Plausibel (Muster wie Mathematik/Lesen), aber in keiner erreichbaren Quelle explizit bestätigt — bleibt nutzervorgegeben."
+    },
+    {
+      "id": "FACT_DEU_ESCS_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.9,
+      "status": "verified_primary",
+      "claim": "Sozioökonomischer Status erklärt in Deutschland 19 % der Varianz der naturwissenschaftlichen Leistung (OECD: 12 %). Leistungsabstand begünstigt vs. benachteiligt: 125 Punkte (OECD: 85). ~9 % der benachteiligten Schüler:innen sind resilient (oberstes Leistungsquartil). Die Lücke hat sich 2015–2025 vergrößert, im OECD-Mittel verkleinert.",
+      "source_id": "SRC_OECD_LAENDERNOTIZ_DE",
+      "caveat": "Bezugsdomäne Naturwissenschaften (Hauptdomäne 2025)."
+    },
+    {
+      "id": "FACT_CHAT_111_GAP_DISCREPANT",
+      "verdict": "DISCREPANT",
+      "class": "DISCREPANT",
+      "confidence": 0.3,
+      "status": "discrepant",
+      "claim": "Chat-Angabe: '111 Punkte Kluft zwischen oberstem und unterstem Quartil' als PISA-2025-Ergebnis.",
+      "source_id": "SRC_RESEARCH_CHAT",
+      "caveat": "111 Punkte ist der PISA-2022-Wert für Mathematik (DEU 111 vs. OECD 93). Die Ländernotiz 2025 nennt 125 Punkte (Naturwissenschaften). Im Modul wird 125 verwendet; 111 nur als Baseline-Referenz."
+    },
+    {
+      "id": "FACT_DEU_BULLYING_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.85,
+      "status": "verified_primary",
+      "claim": "31 % der Schüler:innen in Deutschland berichten Mobbing mindestens einige Male pro Monat (OECD: 20 %); 5 % sind häufig betroffen (OECD: 3 %) und erzielen im Mittel 37 Punkte weniger in Naturwissenschaften.",
+      "source_id": "SRC_OECD_LAENDERNOTIZ_DE",
+      "caveat": "Chat verknüpfte den 37-Punkte-Abschlag mit den 31 %; korrekt bezieht er sich auf die 5 % häufig Gemobbten."
+    },
+    {
+      "id": "FACT_HASTY_READERS_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.85,
+      "status": "verified_primary",
+      "claim": "Anteil 'flüchtiger Leser:innen' (schnelle, falsche Antworten) stieg im OECD-Mittel von ~7 % (2018) auf 11 % (2025); Zunahme hastiger Antworten auch im übrigen Lesetest.",
+      "source_id": "SRC_OECD_PISA25_VOL1",
+      "caveat": "OECD-Durchschnitt; deutscher Einzelwert nicht verifiziert."
+    },
+    {
+      "id": "FACT_AI_USE_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.8,
+      "status": "verified_secondary",
+      "claim": "50,2 % der Schüler:innen in Deutschland nutzen mindestens wöchentlich KI zur Lernunterstützung (OECD: 45,5 %). KI-Nutzung für schulische Aufgaben korreliert mit schlechteren Ergebnissen; höhere Leistungen zeigen sich bei Nicht-Nutzung bzw. nur, wenn Unterricht explizit die Interpretation von KI-Ausgaben vermittelt. Nur 37,5 % (DE) berichten keine digitale Ablenkung.",
+      "source_id": "SRC_HEISE_PISA25",
+      "caveat": "Korrelation, keine Kausalität; Selbstauskunft im Schülerfragebogen."
+    },
+    {
+      "id": "FACT_CPS_2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.85,
+      "status": "verified_primary",
+      "claim": "Computergestütztes Problemlösen (LDW-Komponente) 2025: Deutschland 498 Punkte (OECD: 500); 53 % schneiden besser ab als aufgrund der NaWi-Leistung erwartet (OECD: 56,3 %).",
+      "source_id": "SRC_OECD_COUNTRY_NOTE_EN",
+      "caveat": "Neue Domäne, keine Trendaussage möglich."
+    },
+    {
+      "id": "FACT_PISA_METHOD_IRT",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.92,
+      "status": "verified_framework",
+      "claim": "PISA skaliert mit Item-Response-Theorie (Rasch/2PL-Hybrid seit 2015), berichtet Plausible Values (10 je Domäne) und nutzt seit 2018 (Lesen) bzw. 2022 (Mathematik) Multistage Adaptive Testing.",
+      "source_id": "SRC_OECD_TECH_REPORT",
+      "caveat": "Technical Report je Zyklus."
+    },
+    {
+      "id": "FACT_PISA_PV_NOT_INDIVIDUAL",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.95,
+      "status": "verified_framework",
+      "claim": "Plausible Values sind Ziehungen aus der Posterior-Verteilung und für Populations-/Gruppenschätzungen konstruiert — sie sind ausdrücklich NICHT als Individualdiagnostik einzelner Schüler:innen geeignet.",
+      "source_id": "SRC_OECD_TECH_REPORT",
+      "caveat": "Zentrale Grenze für jede 'Profilbildung auf PISA-Basis': Das Konstruktmodell ist übertragbar, die PISA-Daten selbst nicht."
+    },
+    {
+      "id": "FACT_PISA_PROFICIENCY_LEVELS",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.95,
+      "status": "verified_framework",
+      "claim": "Kriterienorientierte Kompetenzstufen (1c–6) mit Can-Do-Deskriptoren; Stufe 2 gilt als Basisniveau für gesellschaftliche Teilhabe (UN-SDG-4-Indikator).",
+      "source_id": "SRC_OECD_PISA25_VOL1",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_PISA_LOGDATA",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.85,
+      "status": "verified_framework",
+      "claim": "PISA erhebt Prozess-/Logdaten (Antwortzeiten, Navigation); daraus werden u. a. 'hasty responses' (schnell & falsch) und Persistenz-Indikatoren abgeleitet.",
+      "source_id": "SRC_OECD_PISA25_VOL1",
+      "caveat": "Logdaten nur für computerbasierte Items."
+    },
+    {
+      "id": "FACT_DCM_EXTENSION",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.8,
+      "status": "verified_framework",
+      "claim": "Kognitive Diagnosemodelle (DCM, z. B. DINA mit Q-Matrix) sind Sekundäranalyse-Methoden der psychometrischen Forschung, KEIN Bestandteil der offiziellen PISA-Berichterstattung.",
+      "source_id": "SRC_DCM_LITERATURE",
+      "caveat": "Im Chat als 'Kerninstrument' bezeichnet — hier korrigiert zu 'Forschungserweiterung'."
+    },
+    {
+      "id": "FACT_PISA4SCHOOLS",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.85,
+      "status": "verified_framework",
+      "claim": "'PISA for Schools' (PISA-based Test for Schools) liefert schulbezogene Ergebnisse auf der PISA-Skala für Einzelschulen — Diagnostik auf Kohorten-, nicht Individualebene.",
+      "source_id": "SRC_OECD_PISA4SCHOOLS",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_INFE_STRUCTURE",
+      "verdict": "CONFIRMED",
+      "class": "OECD_INFE",
+      "confidence": 0.9,
+      "status": "verified_framework",
+      "claim": "OECD/INFE-Finanzkompetenz (Toolkit 2022): Knowledge 0–7, Behaviour 0–9, Attitudes 1–5; Summe 1–21, im 2023-Report auf 0–100 reskaliert; Mindestzielwert 70.",
+      "source_id": "SRC_OECD_INFE_2023",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_INFE_DE_2023",
+      "verdict": "CONFIRMED",
+      "class": "OECD_INFE",
+      "confidence": 0.85,
+      "status": "verified_secondary",
+      "claim": "OECD/INFE 2023 (39 Volkswirtschaften, 20 OECD): Deutschland Gesamtscore 76/100 (Spitzengruppe); Finanzwissen DE 85, Hongkong 91, Estland 78; Durchschnitt Finanzwissen 63 (OECD 67); Gesamtdurchschnitt ~60.",
+      "source_id": "SRC_OECD_INFE_2023",
+      "caveat": "Gesamtdurchschnitt 60 aus Report-Zusammenfassung (Konf. 0.7); übrige Werte mehrfach bestätigt."
+    },
+    {
+      "id": "FACT_AI_ACT_EDU",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.9,
+      "status": "verified_framework",
+      "claim": "EU-KI-Verordnung: KI-Systeme zur Bewertung von Lernergebnissen bzw. zur Steuerung des Lernprozesses sind Hochrisiko (Anhang III Nr. 3). Der Digital-Omnibus (VO (EU) 2026/1744, in Kraft seit 27.07.2026) verschiebt den Anwendungsbeginn für Anhang-III-Systeme vom 02.08.2026 auf 02.12.2027; Art.-50-Transparenzpflichten bleiben ab August 2026, Wasserzeichen-Pflicht ab 02.12.2026.",
+      "source_id": "SRC_EU_AI_ACT_OMNIBUS",
+      "caveat": "Rechtsstand 2026-09-10; Sekundärquellen (Gibson Dunn, DLA Piper, CSA)."
+    },
+    {
+      "id": "FACT_GDPR_PROFILING",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.92,
+      "status": "verified_framework",
+      "claim": "DSGVO: Profiling Minderjähriger unterliegt Art. 8 (Einwilligungsalter 16 in DE), Art. 22 (automatisierte Einzelentscheidung), Art. 35 (DSFA bei systematischer Bewertung); Bildungsdaten fallen unter Schulgesetze der Länder (KMK-Hoheit).",
+      "source_id": "SRC_DSGVO",
+      "caveat": "Keine Rechtsberatung."
+    },
+    {
+      "id": "FACT_NO_ADVICE_FRAME",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.9,
+      "status": "verified_framework",
+      "claim": "Finanzbildungsinhalte sind von Anlage-, Rechts- und Steuerberatung (WpIG/WpHG, RDG, StBerG, FinDAG) abzugrenzen; keine Produktempfehlung, keine Zielmarktansprache Minderjähriger.",
+      "source_id": "SRC_DE_FINREG",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_MTSS_UDL",
+      "verdict": "CONFIRMED",
+      "class": "PEDAGOGICAL_FRAMEWORK",
+      "confidence": 0.85,
+      "status": "verified_framework",
+      "claim": "Multi-Tiered System of Supports (MTSS/RTI: Tier 1 universell, Tier 2 Kleingruppe, Tier 3 Einzelintervention) und Universal Design for Learning (CAST-Leitlinien) sind etablierte, evidenzbasierte Förderarchitekturen.",
+      "source_id": "SRC_MTSS_CAST",
+      "caveat": "Wirksamkeit kontextabhängig; keine PISA-Empfehlung, sondern Forschungsstand."
+    },
+    {
+      "id": "FACT_SOCRATIC_AI",
+      "verdict": "INTERPRETATION",
+      "class": "INTERPRETATION",
+      "confidence": 0.6,
+      "status": "interpretation",
+      "claim": "'KI-Paradoxon' und 'kognitives Bypassing': Die PISA-Korrelation (KI-Nutzung für Aufgaben ↔ schlechtere Leistung, außer bei angeleiteter Interpretation) wird als Beleg für sokratisches Scaffolding (Rückfragen statt Lösungen) interpretiert.",
+      "source_id": "SRC_RESEARCH_CHAT",
+      "caveat": "Interpretation des FinCoach-Research-Chats; die OECD-Daten sind korrelativ."
+    },
+    {
+      "id": "FACT_SCHOOLYEAR_HEURISTIC",
+      "verdict": "INTERPRETATION",
+      "class": "INTERPRETATION",
+      "confidence": 0.5,
+      "status": "interpretation",
+      "claim": "Heuristik '~20 PISA-Punkte ≈ ein Schuljahr' → −15 Punkte Lesen ≈ ¾ Schuljahr.",
+      "source_id": "SRC_RESEARCH_CHAT",
+      "caveat": "Grobe, umstrittene Faustregel; OECD verwendet sie seit 2018 nicht mehr offiziell."
+    },
+    {
+      "id": "FACT_HYPERIND_MODEL",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": 0.4,
+      "status": "scenario",
+      "claim": "Hyperindividualisierungs-Modell mit Kompetenz-Vektor (θ_math, θ_read, θ_cps, Telemetrie, INFE-K/B/A) auf drei Ebenen (A Einzelperson, B Unternehmen/KMU, C Kommune/Sozialraum) inkl. 'Ausbildungsreife-Lücke' (47 % nicht-gymnasial unter Basisniveau Mathematik).",
+      "source_id": "SRC_SCENARIO",
+      "caveat": "Didaktisches FinCoach-Modell; keine validierte Intervention. Die 47 % sind ein Schularten-Anteil, kein Ausbildungsreife-Maß."
+    },
+    {
+      "id": "FACT_DCM_DEMO",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": 0.4,
+      "status": "scenario",
+      "claim": "DINA-Demonstrator: 4 Attribute × 8 Items, Q-Matrix und Parameter (slip 0,10 / guess 0,20) frei gewählt zur Veranschaulichung der Posterior-Berechnung.",
+      "source_id": "SRC_SCENARIO",
+      "caveat": "Keine kalibrierten Items; nicht für reale Diagnostik verwenden."
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC_OECD_PISA25_VOL1",
+      "label": "OECD (2026): PISA 2025 Results (Volume I) — Future-Ready Students",
+      "url": "https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en.html"
+    },
+    {
+      "id": "SRC_OECD_LAENDERNOTIZ_DE",
+      "label": "OECD (2026): PISA 2025 Ergebnisse (Band I) — Ländernotiz Deutschland",
+      "url": "https://www.oecd.org/de/publications/pisa-2025-ergebnisse-band-i_eade94cd-de/deutschland_8a1ce578-de.html"
+    },
+    {
+      "id": "SRC_OECD_COUNTRY_NOTE_EN",
+      "label": "OECD (2026): PISA 2025 Results (Volume I) — Country Note Germany (EN)",
+      "url": "https://www.oecd.org/en/publications/pisa-2025-results-volume-i-country-notes_2d4ff9ea-en/germany_44abd042-en.html"
+    },
+    {
+      "id": "SRC_OECD_PRESS_2026",
+      "label": "OECD Pressemitteilung 08.09.2026: Reading and mathematics performance declined sharply across the OECD",
+      "url": "https://www.oecd.org/en/about/news/press-releases/2026/09/pisa-2025-students-reading-and-mathematics-performance-declined-sharply-across-the-oecd.html"
+    },
+    {
+      "id": "SRC_OECD_PISA25_FRAMEWORK",
+      "label": "OECD: PISA 2025 Science Framework / Learning in the Digital World",
+      "url": "https://pisa-framework.oecd.org/science-2025/"
+    },
+    {
+      "id": "SRC_OECD_PISA22_VOL1",
+      "label": "OECD (2023): PISA 2022 Results (Volume I) — Country Note Germany",
+      "url": "https://www.oecd.org/en/publications/pisa-2022-results-volume-i_53f23881-en.html"
+    },
+    {
+      "id": "SRC_OECD_TECH_REPORT",
+      "label": "OECD: PISA Technical Report (Scaling, Plausible Values, MST)",
+      "url": "https://www.oecd.org/en/about/programmes/pisa/pisa-data.html"
+    },
+    {
+      "id": "SRC_OECD_PISA4SCHOOLS",
+      "label": "OECD: PISA for Schools (PISA-based Test for Schools)",
+      "url": "https://www.oecd.org/en/about/programmes/pisa/pisa-for-schools.html"
+    },
+    {
+      "id": "SRC_ZIB_WAXMANN",
+      "label": "ZIB (zib.education/pisa/pisa-2025) · Waxmann: PISA 2025 Berichtsband (Greiff et al.)",
+      "url": "https://www.waxmann.com/buecher/PISA-2025"
+    },
+    {
+      "id": "SRC_SCHULPORTAL_TOP10",
+      "label": "Deutsches Schulportal (2026): Die zehn wichtigsten Ergebnisse der PISA-Studie 2025",
+      "url": "https://deutsches-schulportal.de/bildungswesen/die-zehn-wichtigsten-ergebnisse-der-pisa-studie-2025/"
+    },
+    {
+      "id": "SRC_SPEKTRUM_PISA25",
+      "label": "Spektrum der Wissenschaft (2026): PISA 2025 — Ergebnisse für Deutschland, Österreich und die Schweiz",
+      "url": "https://www.spektrum.de/news/pisa-2025-die-ergebnisse-fuer-deutschland-oesterreich-und-die-schweiz/2343573"
+    },
+    {
+      "id": "SRC_HEISE_PISA25",
+      "label": "heise online (2026): PISA 2025 — Wer nicht (intensiv) lesen kann, kann auch nichts lernen",
+      "url": "https://www.heise.de/news/PISA-2025-Wer-nicht-intensiv-lesen-kann-kann-auch-nichts-lernen-11444413.html"
+    },
+    {
+      "id": "SRC_OECD_INFE_2023",
+      "label": "OECD (2023): OECD/INFE 2023 International Survey of Adult Financial Literacy",
+      "url": "https://www.oecd.org/en/publications/oecd-infe-2023-international-survey-of-adult-financial-literacy_56003a32-en.html"
+    },
+    {
+      "id": "SRC_EU_AI_ACT_OMNIBUS",
+      "label": "VO (EU) 2024/1689 (KI-VO) i. V. m. VO (EU) 2026/1744 (Digital-Omnibus) — Anhang III Nr. 3 Bildung",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+    },
+    {
+      "id": "SRC_DSGVO",
+      "label": "VO (EU) 2016/679 (DSGVO) Art. 8, 9, 22, 35 · Schulgesetze der Länder",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "id": "SRC_DE_FINREG",
+      "label": "WpIG / WpHG / RDG / StBerG / FinDAG — Abgrenzung Bildung vs. Beratung",
+      "url": "https://www.bafin.de/"
+    },
+    {
+      "id": "SRC_MTSS_CAST",
+      "label": "CAST UDL Guidelines 3.0 · RTI/MTSS-Forschungsstand (Fuchs & Fuchs)",
+      "url": "https://udlguidelines.cast.org/"
+    },
+    {
+      "id": "SRC_DCM_LITERATURE",
+      "label": "de la Torre (2011): The Generalized DINA Model Framework, Psychometrika · Rupp/Templin/Henson (2010): Diagnostic Measurement",
+      "url": "https://doi.org/10.1007/s11336-011-9207-7"
+    },
+    {
+      "id": "SRC_RESEARCH_CHAT",
+      "label": "FinCoach-Research-Chatverlauf 'PISA 2025 Gesamtanalyse, KI-Potentiale & Methodik' (nutzervorgegeben)",
+      "url": ""
+    },
+    {
+      "id": "SRC_SCENARIO",
+      "label": "FinCoach AI Szenario-/Modellannahme (didaktisch)",
+      "url": ""
+    }
+  ],
+  "audit_trail": [
+    {
+      "date": "2026-09-10",
+      "event": "Chat-Analyse: 10 Stationen extrahiert, 38 quantitative Aussagen isoliert."
+    },
+    {
+      "date": "2026-09-10",
+      "event": "Verifikation: 27 Aussagen bestätigt (13 PISA-2025-Ergebnisse primär/sekundär, 1 Baseline 2022, 7 Methodik, 2 OECD/INFE, 3 Regulierung, 1 Pädagogik), 1 nutzervorgegeben offen (NaWi-Schulartkluft 3 %/37 %), 1 diskrepant (111 vs. 125), 2 Interpretation, 2 Szenario; Präzisierung Mobbing (5 % ↔ 37 Punkte)."
+    },
+    {
+      "date": "2026-09-10",
+      "event": "Netzwerk: oecd.org u. a. per Egress-Proxy blockiert; Verifikation über Such-Snippets + Sekundärquellen dokumentiert."
+    },
+    {
+      "date": "2026-09-10",
+      "event": "v1.0.0 gebaut; statische Prüfung via provenance/fincoach_module_check.py."
+    }
+  ],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-09-10",
+      "type": "base",
+      "summary": "Erstfassung: PISA-2025-Ergebnisse (verifiziert), Diagnostik-Instrumente, DCM-Demonstrator, OECD/INFE-Kopplung, Hyperindividualisierung A/B/C, KI-Anforderungskatalog mit Abnahmetests, Compliance-Klauseln CL-01…CL-12, QA-Checks."
+    }
+  ]
+}

@@ -14,6 +14,9 @@ SpaceX-IPO-Analyse mit globalem Vergleich.
 | `modul.html` | Vollständiges Analyse-Modul (M298) inkl. Charts/Simulatoren — Schriften via `fonts.css` self-hosted |
 | `ipo-prozess.html` | Übersicht des IPO-Prozesses: Phasen, Beteiligte/Zustimmungen, Rolle der Banken, Pflichten vor & nach dem Börsengang |
 | `m299.html` | Deep-Dive IPO-Zuteilung (M299): Quoten-Kaskade, Simulator, M-DBOM-Provenienz, Compliance-/Datenqualitäts-Checks |
+| `m300.html` | Deep-Dive PISA 2025 & Finanzbildung (M300): verifizierte OECD-Ergebnisse, Verifikationsprotokoll, Diagnostik-Instrumente, DCM-Rechner, OECD/INFE-Kopplung, KI-Anforderungskatalog mit Abnahmetests, Compliance-Klauseln CL-01…CL-12, Live-QA |
+| `provenance/*.dbom.json` | M-DBOM-Provenienz je Modul (Fakten, Verdicts, Konfidenzen, Quellen, Audit-Trail) |
+| `provenance/fincoach_module_check.py` | Statische Modul-Prüfung (Compliance / Datenqualität / Styleguide) — `python3 provenance/fincoach_module_check.py m300.html` |
 | `impressum.html` | Impressum nach § 5 DDG / § 18 MStV (ausgefüllt) |
 | `datenschutz.html` | DSGVO-Datenschutzerklärung (ausgefüllt) |
 | `fonts.css` + `fonts/` | Self-gehostete Schriften (Inter, Space Grotesk, JetBrains Mono) — keine Google-CDN-Abrufe |
@@ -39,6 +42,27 @@ SpaceX-IPO-Analyse mit globalem Vergleich.
 
 > Vor Go-Live empfohlen: AVV/DPA mit Netlify bestätigen; bei eigener Domain die Domain in
 > `sitemap.xml`, `robots.txt`, `index.html` (canonical/OG) eintragen. Die Vorlagen sind **keine Rechtsberatung**.
+
+---
+
+## 2b · Definierte Prüfungen für FinCoach-AI-Module
+
+Jedes Modul muss vor dem Release die dreistufige Prüfung bestehen (identisch als Live-Check im Browser
+und als statischer Check per Skript):
+
+```bash
+python3 provenance/fincoach_module_check.py m299.html m300.html   # Exit 0 = alle Pflichtprüfungen bestanden
+```
+
+| Stufe | Prüfungen (Auszug) |
+|---|---|
+| ① Compliance | Disclaimer „keine Anlageberatung“, RDG/StBerG/WpIG/FinDAG, DSGVO, Markennennung, Stichtag, Honest Disclosure, Impressum/Datenschutz, CSP-konforme CDNs, keine Tracker |
+| ② Datenqualität | JSON-LD-Provenienz, externe DBOM valide, eindeutige Fakt-IDs, `fact_summary` konsistent, alle `data-source`-Referenzen auflösbar, Quelle/Konfidenz/Verdict je Fakt, Stichtag & Version konsistent |
+| ③ Styleguide | fonts.css, CAT-Level, NavDock, Live-Audit-Banner, QA-Sektion, Glossar, Modul-Matrix, TNGB-Farbtoken, EST/REP-Marker, keine unmaskierten `<` im Fließtext |
+
+M300 enthält zusätzlich den Anforderungskatalog REQ-01…REQ-10 (Abnahmetests für KI-Lernsysteme) und
+die Compliance-Klauseln CL-01…CL-12 (DSGVO Art. 8/22/35, EU-KI-VO Anhang III inkl. Digital-Omnibus-Fristen,
+Zweckbindung Bildung ↔ Bankgeschäft, BFSG/WCAG).
 
 ---
 

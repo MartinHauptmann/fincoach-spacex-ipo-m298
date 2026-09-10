@@ -33,6 +33,14 @@
   from = "/zuteilung"
   to = "/m299.html"
   status = 200
+[[redirects]]
+  from = "/m300"
+  to = "/m300.html"
+  status = 200
+[[redirects]]
+  from = "/pisa"
+  to = "/m300.html"
+  status = 200
 
 # 404 -> Startseite (SPA-artiges Fallback)
 [[redirects]]
