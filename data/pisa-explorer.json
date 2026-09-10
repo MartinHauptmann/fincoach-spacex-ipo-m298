@@ -1,0 +1,401 @@
+{
+ "meta": {
+  "module": "M301",
+  "version": "1.0.0",
+  "stichtag": "2026-09-10",
+  "license": "OECD-Daten: CC BY 4.0 (Quellen je Wert); Aufbereitung FinCoach AI",
+  "link_error_default": 3.0,
+  "link_error_status": "EST",
+  "note": "Mittelwerte, Anteile und P90–P10 aus publizierten OECD-Tabellen/Ländernotizen. Standardfehler (SE) und Linking Error sind typische Größenordnungen (EST) und müssen aus Annex B1 ersetzt werden, bevor Signifikanzaussagen als belastbar gelten."
+ },
+ "domains": {
+  "math": "Mathematik",
+  "read": "Lesen",
+  "sci": "Naturwissenschaften",
+  "cps": "Computergestütztes Problemlösen"
+ },
+ "trend_available": {
+  "math": [
+   2003,
+   2025
+  ],
+  "read": [
+   2018,
+   2025
+  ],
+  "sci": [
+   2006,
+   2025
+  ],
+  "cps": [
+   2025,
+   2025
+  ]
+ },
+ "entities": [
+  {
+   "code": "DEU",
+   "name": "Deutschland",
+   "color": "#3987e5",
+   "cycles": {
+    "2025": {
+     "mean": {
+      "math": 464,
+      "read": 465,
+      "sci": 486,
+      "cps": 498
+     },
+     "se": {
+      "math": 3.1,
+      "read": 3.1,
+      "sci": 3.1,
+      "cps": 3.1
+     },
+     "se_status": "EST",
+     "low": {
+      "math": 34,
+      "read": 32,
+      "sci": 27
+     },
+     "top": {
+      "math": 8,
+      "read": 7,
+      "sci": 9
+     },
+     "pct_sci": {},
+     "gap_sci": 289,
+     "source": "SRC_OECD_LAENDERNOTIZ_DE"
+    },
+    "2022": {
+     "mean": {
+      "math": 475,
+      "read": 480,
+      "sci": 492,
+      "cps": null
+     },
+     "se": {
+      "math": 3.2,
+      "read": 3.2,
+      "sci": 3.2,
+      "cps": 3.2
+     },
+     "se_status": "EST",
+     "low": {
+      "math": 30,
+      "read": 33,
+      "sci": 23
+     },
+     "top": {
+      "math": 9,
+      "read": 8,
+      "sci": 10
+     },
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_PISA22_VOL1"
+    }
+   }
+  },
+  {
+   "code": "FIN",
+   "name": "Finnland",
+   "color": "#d95926",
+   "cycles": {
+    "2025": {
+     "mean": {
+      "math": 469,
+      "read": 474,
+      "sci": 504,
+      "cps": null
+     },
+     "se": {
+      "math": 2.4,
+      "read": 2.4,
+      "sci": 2.4,
+      "cps": 2.4
+     },
+     "se_status": "EST",
+     "low": {},
+     "top": {},
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_GPS_FIN"
+    },
+    "2022": {
+     "mean": {
+      "math": 484,
+      "read": 490,
+      "sci": 511,
+      "cps": null
+     },
+     "se": {
+      "math": 2.3,
+      "read": 2.3,
+      "sci": 2.3,
+      "cps": 2.3
+     },
+     "se_status": "EST",
+     "low": {},
+     "top": {},
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_PISA22_VOL1"
+    }
+   }
+  },
+  {
+   "code": "JPN",
+   "name": "Japan",
+   "color": "#199e70",
+   "cycles": {
+    "2025": {
+     "mean": {
+      "math": 525,
+      "read": 503,
+      "sci": 538,
+      "cps": null
+     },
+     "se": {
+      "math": 3.0,
+      "read": 3.0,
+      "sci": 3.0,
+      "cps": 3.0
+     },
+     "se_status": "EST",
+     "low": {},
+     "top": {},
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_GPS_JPN"
+    },
+    "2022": {
+     "mean": {
+      "math": 536,
+      "read": 516,
+      "sci": 547,
+      "cps": null
+     },
+     "se": {
+      "math": 3.2,
+      "read": 3.2,
+      "sci": 3.2,
+      "cps": 3.2
+     },
+     "se_status": "EST",
+     "low": {},
+     "top": {},
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_PISA22_VOL1"
+    }
+   }
+  },
+  {
+   "code": "SGP",
+   "name": "Singapur",
+   "color": "#c98500",
+   "cycles": {
+    "2025": {
+     "mean": {
+      "math": 563,
+      "read": 535,
+      "sci": 560,
+      "cps": null
+     },
+     "se": {
+      "math": 1.5,
+      "read": 1.5,
+      "sci": 1.5,
+      "cps": 1.5
+     },
+     "se_status": "EST",
+     "low": {
+      "sci": 9.9
+     },
+     "top": {
+      "math": 37,
+      "sci": 26.1
+     },
+     "pct_sci": {},
+     "gap_sci": 276,
+     "source": "SRC_OECD_GPS_SGP"
+    },
+    "2022": {
+     "mean": {
+      "math": 575,
+      "read": 543,
+      "sci": 561,
+      "cps": null
+     },
+     "se": {
+      "math": 1.5,
+      "read": 1.5,
+      "sci": 1.5,
+      "cps": 1.5
+     },
+     "se_status": "EST",
+     "low": {},
+     "top": {},
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_PISA22_VOL1"
+    }
+   }
+  },
+  {
+   "code": "ITA",
+   "name": "Italien",
+   "color": "#d55181",
+   "cycles": {
+    "2025": {
+     "mean": {
+      "math": 468,
+      "read": 474,
+      "sci": 483,
+      "cps": null
+     },
+     "se": {
+      "math": 2.9,
+      "read": 2.9,
+      "sci": 2.9,
+      "cps": 2.9
+     },
+     "se_status": "EST",
+     "low": {
+      "read": 24
+     },
+     "top": {
+      "math": 7
+     },
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_GPS_ITA"
+    },
+    "2022": {
+     "mean": {
+      "math": 471,
+      "read": 482,
+      "sci": 477,
+      "cps": null
+     },
+     "se": {
+      "math": 3.1,
+      "read": 3.1,
+      "sci": 3.1,
+      "cps": 3.1
+     },
+     "se_status": "EST",
+     "low": {},
+     "top": {},
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_PISA22_VOL1"
+    }
+   }
+  },
+  {
+   "code": "FRA",
+   "name": "Frankreich",
+   "color": "#9085e9",
+   "cycles": {
+    "2025": {
+     "mean": {
+      "math": 458,
+      "read": 456,
+      "sci": 483,
+      "cps": null
+     },
+     "se": {
+      "math": 2.6,
+      "read": 2.6,
+      "sci": 2.6,
+      "cps": 2.6
+     },
+     "se_status": "EST",
+     "low": {
+      "sci": 25.8
+     },
+     "top": {
+      "sci": 6.7
+     },
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_GPS_FRA"
+    },
+    "2022": {
+     "mean": {
+      "math": 474,
+      "read": 474,
+      "sci": 487,
+      "cps": null
+     },
+     "se": {
+      "math": 2.8,
+      "read": 2.8,
+      "sci": 2.8,
+      "cps": 2.8
+     },
+     "se_status": "EST",
+     "low": {},
+     "top": {},
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_PISA22_VOL1"
+    }
+   }
+  },
+  {
+   "code": "OECD",
+   "name": "OECD-Durchschnitt",
+   "color": "#94A3B8",
+   "cycles": {
+    "2025": {
+     "mean": {
+      "math": 463,
+      "read": 461,
+      "sci": 482,
+      "cps": 500
+     },
+     "se": {
+      "math": 0.5,
+      "read": 0.5,
+      "sci": 0.5,
+      "cps": 0.5
+     },
+     "se_status": "EST",
+     "low": {
+      "read": 31,
+      "sci": 25.7
+     },
+     "top": {
+      "math": 8,
+      "sci": 7.2
+     },
+     "pct_sci": {},
+     "gap_sci": 258,
+     "source": "SRC_OECD_PRESS_2026"
+    },
+    "2022": {
+     "mean": {
+      "math": 472,
+      "read": 476,
+      "sci": 485,
+      "cps": null
+     },
+     "se": {
+      "math": 0.5,
+      "read": 0.5,
+      "sci": 0.5,
+      "cps": 0.5
+     },
+     "se_status": "EST",
+     "low": {},
+     "top": {},
+     "pct_sci": {},
+     "gap_sci": null,
+     "source": "SRC_OECD_PISA22_VOL1"
+    }
+   }
+  }
+ ]
+}

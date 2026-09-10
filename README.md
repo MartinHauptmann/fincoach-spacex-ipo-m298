@@ -15,6 +15,7 @@ SpaceX-IPO-Analyse mit globalem Vergleich.
 | `ipo-prozess.html` | Übersicht des IPO-Prozesses: Phasen, Beteiligte/Zustimmungen, Rolle der Banken, Pflichten vor & nach dem Börsengang |
 | `m299.html` | Deep-Dive IPO-Zuteilung (M299): Quoten-Kaskade, Simulator, M-DBOM-Provenienz, Compliance-/Datenqualitäts-Checks |
 | `m300.html` | Deep-Dive PISA 2025 & Finanzbildung (M300): verifizierte OECD-Ergebnisse, Verifikationsprotokoll, Diagnostik-Instrumente, DCM-Rechner, OECD/INFE-Kopplung, KI-Anforderungskatalog mit Abnahmetests, Compliance-Klauseln CL-01…CL-12, Live-QA |
+| `m301.html` | PISA Explorer (M301): 3D-Ländervergleich mit Zeittrajektorien, SE/KI/Signifikanz inkl. Linking Error, Explainability-Glossar, Diagnostik-Hypothesen; Daten in `data/pisa-explorer.json`, Statistik-Engine `assets/pisa-stats.js` (Tests: `node assets/pisa-stats.test.js`) |
 | `provenance/*.dbom.json` | M-DBOM-Provenienz je Modul (Fakten, Verdicts, Konfidenzen, Quellen, Audit-Trail) |
 | `provenance/fincoach_module_check.py` | Statische Modul-Prüfung (Compliance / Datenqualität / Styleguide) — `python3 provenance/fincoach_module_check.py m300.html` |
 | `impressum.html` | Impressum nach § 5 DDG / § 18 MStV (ausgefüllt) |
@@ -51,7 +52,8 @@ Jedes Modul muss vor dem Release die dreistufige Prüfung bestehen (identisch al
 und als statischer Check per Skript):
 
 ```bash
-python3 provenance/fincoach_module_check.py m299.html m300.html   # Exit 0 = alle Pflichtprüfungen bestanden
+python3 provenance/fincoach_module_check.py m299.html m300.html m301.html   # Exit 0 = alle Pflichtprüfungen bestanden
+node assets/pisa-stats.test.js                                              # Statistik-Engine (M301)
 ```
 
 | Stufe | Prüfungen (Auszug) |

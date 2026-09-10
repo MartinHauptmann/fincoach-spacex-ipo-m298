@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="dark"/>
+<title>M301 v1.0.0 · PISA Explorer — 3D-Ländervergleich mit korrekter PISA-Statistik · FinCoach AI</title>
+<meta name="description" content="FinCoach AI PISA Explorer (M301): Länder als Punkte im 3D-Raum aus frei wählbaren PISA-2025-Kennzahlen (Mittelwerte, Risikogruppen, Spitzengruppen, P90–P10), Zeittrajektorien 2022→2025, Standardfehler, 95-%-Konfidenzintervalle, Signifikanz mit Linking Error, Explainability-Glossar und Diagnostik-Hypothesen-Panel. Keine Anlage-, Rechts- oder Steuerberatung."/>
+<meta name="robots" content="index,follow"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="M301 · PISA Explorer — evidenzbasierter Ländervergleich"/>
+<meta property="og:description" content="3D-Explorer über PISA-2025-Kennzahlen mit SE, Konfidenzintervallen, Linking Error und Explainability-Layer. FinCoach AI."/>
+<meta property="og:site_name" content="FinCoach AI · TheNextGenerationBanking"/>
+<link rel="stylesheet" href="fonts.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+if(window.tailwind) tailwind.config = { theme: { extend: {
+  colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', muted:'#64748B', border:'#1E293B' } },
+  fontFamily: { sans:['Inter','system-ui','sans-serif'], head:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
+}}}
+</script>
+<style>
+  :root{ --bg:#0A0F1A; --card:#121A2E; --cyan:#00CFFF; --emerald:#00CC7A; --magenta:#E6399A; --orange:#FF6B00; --lavender:#9933FF; --gold:#DFAF0F; --muted:#64748B; --border:#1E293B; --ink:#E2E8F0; --ink2:#94A3B8; color-scheme:dark; }
+  *{box-sizing:border-box;}
+  html{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-text-size-adjust:100%;}
+  body{background:var(--bg);margin:0;color:var(--ink);}
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;text-wrap:balance;}
+  code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+  .tnum{font-variant-numeric:tabular-nums;}
+  /* Layout-Fallback ohne Tailwind-CDN */
+  img,canvas,svg{max-width:100%;}
+  .max-w-7xl{max-width:80rem;} .max-w-3xl{max-width:48rem;} .mx-auto{margin-left:auto;margin-right:auto;}
+  .px-4{padding-left:1rem;padding-right:1rem;} .py-12{padding-top:3rem;padding-bottom:3rem;} .pt-10{padding-top:2.5rem;} .pb-12{padding-bottom:3rem;} .pt-4{padding-top:1rem;} .pt-8{padding-top:2rem;} .py-3{padding-top:.75rem;padding-bottom:.75rem;} .py-2\.5{padding-top:.625rem;padding-bottom:.625rem;}
+  .mb-1{margin-bottom:.25rem;} .mb-2{margin-bottom:.5rem;} .mb-3{margin-bottom:.75rem;} .mb-4{margin-bottom:1rem;} .mb-6{margin-bottom:1.5rem;} .mb-8{margin-bottom:2rem;} .mb-10{margin-bottom:2.5rem;} .mt-1{margin-top:.25rem;} .mt-2{margin-top:.5rem;} .mt-3{margin-top:.75rem;} .mt-4{margin-top:1rem;} .mt-6{margin-top:1.5rem;} .ml-auto{margin-left:auto;}
+  .flex{display:flex;} .flex-wrap{flex-wrap:wrap;} .flex-col{flex-direction:column;} .items-center{align-items:center;} .items-start{align-items:flex-start;} .justify-between{justify-content:space-between;} .block{display:block;} .inline-block{display:inline-block;}
+  .grid{display:grid;} .gap-2{gap:.5rem;} .gap-3{gap:.75rem;} .gap-4{gap:1rem;} .gap-5{gap:1.25rem;} .gap-6{gap:1.5rem;} .gap-x-3{column-gap:.75rem;} .gap-x-4{column-gap:1rem;} .gap-y-1{row-gap:.25rem;} .grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .space-y-3>*+*{margin-top:.75rem;} .space-y-4>*+*{margin-top:1rem;}
+  @media (min-width:768px){ .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr));} .md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr));} .md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr));} .md\:flex-row{flex-direction:row;} .md\:text-5xl{font-size:3rem;line-height:1;} .md\:col-span-2{grid-column:span 2 / span 2;} }
+  .overflow-x-auto{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;} .overflow-x-auto table{min-width:520px;} .grid>*,.dep-box,.kpi-card{min-width:0;} nav.glass{flex-wrap:wrap;gap:.5rem;}
+  .sticky{position:sticky;} .top-0{top:0;} .z-50{z-index:50;} .rounded-xl{border-radius:.75rem;} .rounded{border-radius:.25rem;} .rounded-lg{border-radius:.5rem;}
+  .text-xs{font-size:.75rem;line-height:1rem;} .text-sm{font-size:.875rem;line-height:1.25rem;} .text-base{font-size:1rem;line-height:1.5rem;} .text-xl{font-size:1.25rem;line-height:1.75rem;} .text-3xl{font-size:1.875rem;line-height:2.25rem;} .text-4xl{font-size:2.25rem;line-height:2.5rem;} .leading-relaxed{line-height:1.625;} .leading-tight{line-height:1.25;} .text-center{text-align:center;} .text-right{text-align:right;}
+  .font-bold{font-weight:700;} .font-extrabold{font-weight:800;} .font-semibold{font-weight:600;} .font-mono{font-family:'JetBrains Mono',monospace;} .font-head{font-family:'Space Grotesk',sans-serif;}
+  .text-white{color:#fff;} .text-slate-200{color:#E2E8F0;} .text-slate-300{color:#CBD5E1;} .text-slate-400{color:#94A3B8;} .text-tngb-muted{color:#64748B;} .text-tngb-cyan{color:#00CFFF;} .text-tngb-emerald{color:#00CC7A;} .text-tngb-magenta{color:#E6399A;} .text-tngb-gold{color:#DFAF0F;} .text-tngb-orange{color:#FF6B00;} .text-tngb-lavender{color:#9933FF;}
+  .border-t{border-top:1px solid var(--border);} .border-l-4{border-left-width:4px;border-left-style:solid;} .transition{transition:all .2s;} .min-h-screen{min-height:100vh;}
+  /* Komponenten */
+  .glass{background:rgba(18,26,46,0.7);backdrop-filter:blur(16px);border:1px solid rgba(0,207,255,0.12);}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#F1F5F9;margin-bottom:.35rem;}
+  .section-badge{font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:4px;}
+  .kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.35rem;position:relative;}
+  .kpi-card.confirmed-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px solid rgba(0,204,122,0.35);border-radius:inherit;}
+  .kpi-card.scenario-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px dashed rgba(255,107,0,0.35);border-radius:inherit;}
+  .dep-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+  .caveat-box{background:rgba(230,57,154,0.07);border:1px solid rgba(230,57,154,0.35);border-radius:12px;padding:1rem 1.25rem;}
+  .note-box{background:rgba(0,207,255,0.06);border:1px solid rgba(0,207,255,0.25);border-radius:12px;padding:1rem 1.25rem;overflow-x:auto;}
+  .est-mark{color:var(--gold);font-size:.62rem;font-weight:700;vertical-align:super;cursor:help;}
+  table{width:100%;border-collapse:collapse;}
+  th{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:.55rem .7rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:bottom;}
+  td{padding:.55rem .7rem;font-size:.82rem;border-bottom:1px solid rgba(30,41,59,.6);vertical-align:top;color:#CBD5E1;}
+  tr:hover td{background:rgba(0,207,255,.04);}
+  .badge{display:inline-block;padding:1px 8px;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;}
+  .b-above{background:rgba(0,204,122,.16);color:var(--emerald);border:1px solid rgba(0,204,122,.4);}
+  .b-equal{background:rgba(148,163,184,.16);color:#CBD5E1;border:1px solid rgba(148,163,184,.4);}
+  .b-below{background:rgba(230,57,154,.16);color:var(--magenta);border:1px solid rgba(230,57,154,.4);}
+  .b-est{background:rgba(223,175,15,.16);color:var(--gold);border:1px solid rgba(223,175,15,.4);}
+  .b-ok{background:rgba(0,204,122,.16);color:var(--emerald);border:1px solid rgba(0,204,122,.4);}
+  .level-btn{border:none;cursor:pointer;padding:.35rem .9rem;border-radius:6px;font-size:.75rem;font-weight:600;transition:all .2s;}
+  .level-btn.active-level{background:var(--cyan);color:#0A0F1A;}
+  .level-btn:not(.active-level){background:var(--card);color:var(--muted);border:1px solid var(--border);}
+  .tab-btn{padding:.45rem 1rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s;}
+  .tab-btn.active-tab{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  select,input[type=range]{font:inherit;}
+  select{background:#0F1729;color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:.4rem .6rem;font-size:.8rem;width:100%;}
+  select:focus,button:focus-visible,input:focus-visible,.chip:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+  label.ctl{display:block;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;}
+  .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;border-radius:9999px;border:1px solid var(--border);background:var(--card);color:#CBD5E1;font-size:.75rem;font-weight:600;cursor:pointer;user-select:none;}
+  .chip .sw{width:10px;height:10px;border-radius:50%;display:inline-block;}
+  .chip.off{opacity:.45;}
+  .chip.ref .sw{border:2px dashed #94A3B8;background:transparent;}
+  .viz-wrap{position:relative;background:#0D1526;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .viz-wrap canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab;}
+  .viz-3d{height:480px;} .viz-2d{height:240px;}
+  .tooltip{position:absolute;pointer-events:none;background:rgba(10,15,26,.96);border:1px solid rgba(0,207,255,.35);border-radius:8px;padding:.5rem .7rem;font-size:.72rem;color:var(--ink);max-width:260px;display:none;z-index:5;line-height:1.45;}
+  .viz-hint{position:absolute;left:10px;bottom:8px;font-size:.62rem;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+  .viz-2d .viz-hint{bottom:auto;top:6px;left:48px;right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;}
+  .stat{background:#0F1729;border:1px solid var(--border);border-radius:8px;padding:.6rem .75rem;}
+  .stat .l{font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);cursor:help;border-bottom:1px dotted rgba(0,207,255,.5);display:inline-block;}
+  .stat .v{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--ink);margin-top:.15rem;}
+  .stat .s{font-size:.66rem;color:var(--ink2);}
+  [data-gloss]{cursor:help;border-bottom:1px dotted rgba(0,207,255,.5);}
+  .pop{position:fixed;z-index:1000;max-width:360px;background:var(--card);border:1px solid var(--cyan);border-radius:12px;padding:1rem 1.15rem;font-size:.8rem;line-height:1.5;color:#CBD5E1;box-shadow:0 12px 40px rgba(0,0,0,.5);display:none;}
+  .pop h4{color:var(--cyan);font-size:.9rem;margin:0 0 .35rem;}
+  .pop .f{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink);background:#0F1729;border-radius:6px;padding:.4rem .5rem;margin:.4rem 0;overflow-x:auto;}
+  .pop .pit{color:var(--magenta);font-size:.72rem;margin-top:.4rem;}
+  .pop .src{color:var(--muted);font-size:.66rem;margin-top:.4rem;}
+  .pop .x{position:absolute;top:.4rem;right:.6rem;background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;}
+  .compliance-pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:9999px;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;background:rgba(100,116,139,.15);color:#64748B;border:1px solid rgba(100,116,139,.3);}
+  .compliance-pill.good{background:rgba(0,204,122,.15);color:#00CC7A;border-color:rgba(0,204,122,.4);}
+  .compliance-pill.warn{background:rgba(223,175,15,.15);color:#DFAF0F;border-color:rgba(223,175,15,.4);}
+  #live-audit-banner{background:rgba(0,204,122,.08);border-left:3px solid #00CC7A;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#94A3B8;display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  #live-audit-banner.warn{background:rgba(223,175,15,.10);border-left-color:#DFAF0F;}
+  #live-audit-banner.err{background:rgba(230,57,154,.10);border-left-color:#E6399A;color:#E6399A;}
+  #live-audit-banner code{color:#00CFFF;}
+  .dbom-pill{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.58rem;}
+  .dbom-class-badge{padding:1px 6px;border-radius:4px;background:rgba(255,107,0,.16);color:#FF6B00;border:1px solid rgba(255,107,0,.35);}
+  .dbom-class-badge.dc-primary{background:rgba(0,204,122,.16);color:#00CC7A;border-color:rgba(0,204,122,.35);}
+  .check-pass{color:#00CC7A;font-weight:700;} .check-na{color:#64748B;} .check-fail{color:#E6399A;font-weight:700;}
+  #navdock{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:6px;}
+  #navdock a{width:30px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:700;font-family:'JetBrains Mono',monospace;background:rgba(18,26,46,.85);border:1px solid var(--border);color:var(--muted);text-decoration:none;transition:all .18s;}
+  #navdock a:hover,#navdock a.active-dock{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  @media (max-width:1024px){#navdock{display:none;}}
+  ul.tick{list-style:none;padding:0;margin:0;}
+  ul.tick li{position:relative;padding-left:1.25rem;margin-bottom:.4rem;font-size:.85rem;line-height:1.55;color:#CBD5E1;}
+  ul.tick li::before{content:'▸';position:absolute;left:0;color:var(--cyan);}
+  .hyp{border-left:3px solid var(--gold);padding:.5rem .8rem;background:rgba(223,175,15,.06);border-radius:0 8px 8px 0;font-size:.82rem;color:#CBD5E1;}
+  .hyp b{color:var(--gold);}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+</style>
+
+<script type="application/ld+json" id="module-provenance">
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": { "id": "M301", "title": "PISA Explorer — 3D-Ländervergleich mit korrekter PISA-Statistik, Explainability-Glossar und Diagnostik-Brücke", "version": "1.0.0", "stichtag": "2026-09-10", "related_modules": ["M300"], "external_dbom": "provenance/m301.dbom.json", "predecessor_version": null },
+  "fact_summary": { "total": 16, "confirmed": 12, "scenario_projection": 3, "interpretation": 1 },
+  "honest_disclosure": "Mittelwerte, Anteile und P90–P10 aus publizierten OECD-Tabellen (verifiziert 2026-09-10). Standardfehler und Linking Error sind typische Größenordnungen (EST) und per Datenpaket zu ersetzen; bis dahin sind Signifikanzaussagen methodische Demonstration. Systemvergleiche erlauben keine Aussagen über Einzelpersonen. Keine Anlage-, Rechts- oder Steuerberatung."
+}
+</script>
+</head>
+<body class="min-h-screen" style="background:#0A0F1A;">
+
+<nav class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+  <a href="index.html" class="flex items-center gap-2">
+    <svg viewBox="0 0 100 100" fill="none" width="36" height="36" aria-hidden="true">
+      <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+      <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+      <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+      <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+      <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+    </svg>
+    <div><div class="font-head font-bold text-white text-sm leading-tight">FinCoach AI</div><div class="text-xs leading-tight" style="color:#00CFFF;">by TheNextGenerationBanking.com</div></div>
+  </a>
+  <div class="flex items-center gap-2 flex-wrap">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">M301</span>
+    <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">T3 · Welle 46</span>
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">PISA Explorer · Werkzeug</span>
+    <a href="m300.html" class="text-xs text-tngb-muted hover:text-white transition">M300</a>
+    <a href="index.html" class="text-xs text-tngb-muted hover:text-white transition">← Hauptseite</a>
+  </div>
+</nav>
+
+<div id="navdock" aria-label="Sektions-Navigation">
+  <a href="#s01" data-dock="s01" title="Hero">01</a>
+  <a href="#s02" data-dock="s02" title="Explorer">02</a>
+  <a href="#s03" data-dock="s03" title="Statistik-Panel">03</a>
+  <a href="#s04" data-dock="s04" title="Trend & Linking Error">04</a>
+  <a href="#s05" data-dock="s05" title="Diagnostik-Brücke">05</a>
+  <a href="#s06" data-dock="s06" title="Methodik">06</a>
+  <a href="#s-qa" data-dock="s-qa" title="QA">QA</a>
+  <a href="#s-mtx" data-dock="s-mtx" title="Modul-Matrix">MX</a>
+  <a href="#s12" data-dock="s12" title="Quellen & Glossar">12</a>
+</div>
+
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.0.0</span>
+    <span class="text-slate-300">16 Aussagen · 12 CONFIRMED · 3 SCENARIO (SE/LE geschätzt) · 1 INTERPRETATION · Stichtag 2026-09-10</span>
+    <span class="ml-auto flex items-center gap-2">
+      <a href="provenance/m301.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM</a>
+      <a href="data/pisa-explorer.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,204,122,0.15);color:#00CC7A;border:1px solid rgba(0,204,122,0.4);">{ } Daten</a>
+      <a href="assets/pisa-stats.js" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">ƒ Statistik-Engine</a>
+    </span>
+  </div>
+  <div id="live-audit-banner" class="mt-2 rounded-xl">
+    <span class="font-bold" style="color:#00CC7A;">● LIVE-AUDIT</span>
+    <span id="live-audit-status">prüft DBOM, Datenpaket und Statistik-Engine …</span>
+    <span class="ml-auto" id="live-audit-meta"></span>
+    <span class="ml-auto" id="live-audit-score"></span>
+  </div>
+</div>
+
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+    <span class="font-mono font-bold" style="color:#00CFFF;">CAT</span>
+    <span class="text-tngb-muted">Cognitive Apprenticeship Track</span>
+    <span class="text-slate-400">·</span>
+    <span class="text-slate-300">Erklärtiefe des Glossars</span>
+    <span class="ml-auto flex items-center gap-1">
+      <button class="level-btn active-level" data-lvl="einsteiger">Einsteiger</button>
+      <button class="level-btn" data-lvl="fortgeschritten">Fortgeschritten</button>
+      <button class="level-btn" data-lvl="experte">Experte</button>
+    </span>
+  </div>
+</div>
+
+<!-- S01 -->
+<section id="s01" class="px-4 pt-10 pb-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S01 · HERO</span>
+    <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Learning Analytics · Werkzeug</span>
+  </div>
+  <h1 class="text-4xl md:text-5xl font-head font-extrabold text-white mb-3 leading-tight">PISA <span style="background:linear-gradient(135deg,#00CFFF,#00CC7A 60%,#DFAF0F);-webkit-background-clip:text;background-clip:text;color:transparent;">Explorer</span></h1>
+  <p class="text-xl font-head font-semibold mb-3" style="color:#00CFFF;">Länder als Punkte im Raum, Unsicherheit als Pflichtangabe</p>
+  <p class="text-base text-slate-400 max-w-3xl mb-6 leading-relaxed" data-source="FACT_X_3D_DESIGN">
+    Drei frei belegbare Achsen aus PISA-2025-Kennzahlen, Zeittrajektorien 2022→2025, und zu jedem Punkt Standardfehler, 95-%-Konfidenzintervall,
+    Differenz zum OECD-Mittel und Signifikanz. Der 3D-Raum dient der Exploration; gelesen wird in den gekoppelten 2D-Projektionen und der Tabelle.
+    Jeder statistische Begriff ist anklickbar und erklärt sich auf drei Niveaus.
+    <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-09-10</span> · Datenstand OECD Band I 08.09.2026 · Werkzeug-Modul zu M300.</span>
+  </p>
+  <div class="caveat-box mb-8 max-w-3xl" data-source="FACT_X_SE_EST">
+    <div class="flex items-start gap-3"><span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
+      <div class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">Daten-Transparenz:</strong> Mittelwerte, Anteile und P90–P10 sind publizierte OECD-Werte (verifiziert). Die <strong>Standardfehler und der Linking Error sind typische Größenordnungen</strong> <span class="est-mark">EST</span>, weil Annex B1 aus der Build-Umgebung nicht abrufbar war. Sie sind im Datenpaket austauschbar; bis dahin zeigen Signifikanzangaben die Methode, nicht belastbare Inferenz. Keine Anlage-, Rechts- oder Steuerberatung.</div></div>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="kpi-card confirmed-kpi" data-source="FACT_X_DEU_GAP"><div class="text-3xl font-head font-extrabold tnum" style="color:#E6399A;">289</div><div class="text-sm font-semibold text-slate-300 mt-1"><span data-gloss="gap">P90–P10</span> Naturwissenschaften DE</div><div class="text-xs text-tngb-muted mt-1">OECD 258 · Rang 4 von 90 bei der Streuung</div><div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">OECD-GPS</span></div></div>
+    <div class="kpi-card confirmed-kpi" data-source="FACT_X_SGP_2025"><div class="text-3xl font-head font-extrabold tnum" style="color:#DFAF0F;">276</div><div class="text-sm font-semibold text-slate-300 mt-1">P90–P10 Naturwissenschaften Singapur</div><div class="text-xs text-tngb-muted mt-1">bei Mittelwert 560: hoch <em>und</em> breit</div><div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">OECD-GPS</span></div></div>
+    <div class="kpi-card confirmed-kpi" data-source="FACT_X_DEU_2025"><div class="text-3xl font-head font-extrabold tnum" style="color:#00CFFF;">486 <span class="text-base text-tngb-muted">± 3,1<span class="est-mark">EST</span></span></div><div class="text-sm font-semibold text-slate-300 mt-1">NaWi DE 2025, <span data-gloss="se">Mittelwert ± SE</span></div><div class="text-xs text-tngb-muted mt-1">95-%-KI ≈ 480–492 · OECD 482</div><div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">OECD</span><span class="dbom-class-badge">SE EST</span></div></div>
+    <div class="kpi-card scenario-kpi" data-source="FACT_X_LE_EST"><div class="text-3xl font-head font-extrabold tnum" style="color:#FF6B00;">LE 3,0<span class="est-mark">EST</span></div><div class="text-sm font-semibold text-slate-300 mt-1"><span data-gloss="le">Linking Error</span> 2022→2025</div><div class="text-xs text-tngb-muted mt-1">im Trend-Panel einstellbar (0–8)</div><div class="dbom-pill mt-1.5"><span class="dbom-class-badge">SCENARIO</span></div></div>
+  </div>
+</section>
+
+<!-- S02 EXPLORER -->
+<section id="s02" class="px-4 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S02 · EXPLORER</span><h2 class="section-title">3D-Explorer — Achsen, Länder, Zyklen</h2></div>
+  <div class="grid md:grid-cols-4 gap-4 mb-4">
+    <div><label class="ctl" for="axX">X-Achse</label><select id="axX"></select></div>
+    <div><label class="ctl" for="axY">Y-Achse</label><select id="axY"></select></div>
+    <div><label class="ctl" for="axZ">Z-Achse</label><select id="axZ"></select></div>
+    <div><label class="ctl">Anzeige</label>
+      <div class="flex gap-2 flex-wrap"><button class="tab-btn active-tab" id="btnTraj" type="button">Trajektorie 2022→2025</button><button class="tab-btn" id="btnCI" type="button">KI-Balken</button></div></div>
+  </div>
+  <div class="flex gap-2 flex-wrap mb-4" id="entityChips" aria-label="Länder ein-/ausblenden"></div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="md:col-span-2 viz-wrap viz-3d"><canvas id="c3d" aria-label="3D-Scatter der gewählten Kennzahlen"></canvas><div class="tooltip" id="tip3d"></div><div class="viz-hint">ziehen = drehen · antippen = Land wählen · ● 2025 ○ 2022</div></div>
+    <div class="space-y-4">
+      <div class="viz-wrap viz-2d"><canvas id="c2dxy" aria-label="2D-Projektion X gegen Y"></canvas><div class="tooltip" id="tipxy"></div><div class="viz-hint" id="hintxy"></div></div>
+      <div class="viz-wrap viz-2d"><canvas id="c2dxz" aria-label="2D-Projektion X gegen Z"></canvas><div class="tooltip" id="tipxz"></div><div class="viz-hint" id="hintxz"></div></div>
+    </div>
+  </div>
+  <div class="dep-box overflow-x-auto mt-4" data-source="FACT_X_BASELINE_2022"><table id="dataTable"><thead></thead><tbody></tbody></table>
+    <p class="text-xs text-tngb-muted mt-2">Datenquellen je Land: <span data-source="FACT_X_DEU_2025">DE Ländernotiz</span> · <span data-source="FACT_X_FIN_2025">FI Education GPS/OKM</span> · <span data-source="FACT_X_JPN_2025">JP Education GPS</span> · <span data-source="FACT_X_SGP_2025">SG Education GPS</span> · <span data-source="FACT_X_ITA_2025">IT Country Note</span> · <span data-source="FACT_X_FRA_2025">FR Note pays/DEPP</span> · <span data-source="FACT_X_OECD_2025">OECD Band I</span>.</p>
+    <p class="text-xs text-tngb-muted mt-2">Tabelle = Lesefassung des Charts (barrierefrei). ± = Standardfehler; <span class="badge b-est">EST</span> markiert geschätzte SE. „—“ = nicht publiziert / kein Trend.</p></div>
+</section>
+
+<!-- S03 STATISTIK-PANEL -->
+<section id="s03" class="px-4 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S03 · STATISTIK</span><h2 class="section-title">Land A ↔ Land B ↔ OECD — mit Unsicherheit</h2></div>
+  <div class="grid md:grid-cols-3 gap-4 mb-4">
+    <div><label class="ctl" for="selA">Land A</label><select id="selA"></select></div>
+    <div><label class="ctl" for="selB">Land B</label><select id="selB"></select></div>
+    <div><label class="ctl" for="selDom">Domäne</label><select id="selDom"></select></div>
+  </div>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="dep-box" data-source="FACT_X_SE_METHOD"><h3 class="font-head font-bold text-tngb-cyan mb-2 text-sm" id="hA"></h3><div class="stat-grid" id="statsA"></div></div>
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-gold mb-2 text-sm" id="hB"></h3><div class="stat-grid" id="statsB"></div></div>
+  </div>
+  <div class="dep-box mt-4 overflow-x-auto" data-source="FACT_X_OECD_2025"><h3 class="font-head font-bold text-white mb-2 text-sm">Differenzen (95-%-Niveau)</h3><table id="diffTable"><thead><tr><th>Vergleich</th><th>Differenz</th><th><span data-gloss="se">SE(Δ)</span></th><th>95-%-KI</th><th>z</th><th>p</th><th><span data-gloss="sig">Urteil</span></th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<!-- S04 TREND -->
+<section id="s04" class="px-4 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00;">S04 · TREND</span><h2 class="section-title">Veränderung 2022→2025 — der Linking Error entscheidet mit</h2></div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="dep-box" data-source="FACT_X_LINK_ERROR">
+      <div class="flex justify-between text-xs mb-1"><span><span data-gloss="le">Linking Error</span> (Punkte)</span><span class="mono text-tngb-orange" id="lblLE">3.0</span></div>
+      <input type="range" id="simLE" min="0" max="8" step="0.5" value="3" style="width:100%;accent-color:#FF6B00;">
+      <p class="text-xs text-tngb-muted mt-2">SE(Δ) = √(SE₂₀₂₅² + SE₂₀₂₂² + LE²). Publizierten LE je Domäne aus dem Technical Report eintragen; die Voreinstellung ist eine Größenordnung <span class="est-mark">EST</span>.</p>
+      <p class="text-xs text-tngb-muted mt-2" data-source="FACT_X_TREND_SCOPE">Trend verfügbar: Mathematik ab 2003, NaWi ab 2006, Lesen ab 2018, CPS kein Trend. 2022 = Pandemie-Zyklus.</p>
+    </div>
+    <div class="md:col-span-2 dep-box overflow-x-auto"><table id="trendTable"><thead><tr><th>Land</th><th>2022</th><th>2025</th><th>Δ</th><th>SE(Δ)</th><th>95-%-KI</th><th>Urteil</th></tr></thead><tbody></tbody></table>
+      <p class="text-xs text-tngb-muted mt-2" id="trendNote"></p></div>
+  </div>
+</section>
+
+<!-- S05 DIAGNOSTIK-BRÜCKE -->
+<section id="s05" class="px-4 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">S05 · BRÜCKE</span><h2 class="section-title">Was bedeutet dieser Unterschied für individuelles Lernen?</h2></div>
+  <div class="caveat-box mb-4" data-source="FACT_X_ECOLOGICAL"><p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">Ökologischer Fehlschluss, ausgeschlossen:</strong> Alles auf dieser Seite beschreibt Systeme (Länder, Kohorten). Kein Wert lässt sich auf eine einzelne Schülerin oder einen Schüler übertragen. Das Panel erzeugt deshalb <em>Hypothesen für die eigene Diagnostik</em> (M300, S05–S09), keine Empfehlungen.</p></div>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-gold mb-3 text-sm" id="hypTitle"></h3><div class="space-y-3" id="hypList"></div></div>
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-cyan mb-3 text-sm">Übersetzung in die Lernarchitektur (M300)</h3>
+      <ul class="tick">
+        <li><strong>Systemebene → Diagnostik:</strong> Streuung (P90–P10) und Risikoanteil legen die Mischung aus Tier-1-Breite und Tier-2-Tiefe nahe; sie ersetzen keine Messung.</li>
+        <li><strong>Diagnostik → Individualebene:</strong> Eigenes adaptives Kurz-Assessment und DCM-Profil (M300 S06); PISA liefert nur Konstruktmodell und Deskriptoren.</li>
+        <li><strong>Individualebene → KI-Tutor:</strong> Sokratisches Scaffolding, Anti-Hasty-Mechanik, Erklärbarkeit (REQ-01, 02, 08).</li>
+        <li><strong>Wirksamkeitsebene:</strong> Prä-Post auf derselben Skala, Kontrollgruppe, Effektstärke; erst dann zurück in die Modellverbesserung.</li>
+        <li><strong>Governance (querliegend):</strong> Klauseln CL-03 bis CL-09; Lernprofile sind nie Scoring-Input.</li>
+      </ul></div>
+  </div>
+</section>
+
+<!-- S06 METHODIK -->
+<section id="s06" class="px-4 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">S06 · METHODIK</span><h2 class="section-title">Wie der Explorer rechnet</h2></div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="dep-box" data-source="FACT_X_SE_METHOD"><h3 class="font-head font-bold text-tngb-cyan mb-2 text-sm">Unsicherheit je Wert</h3><div class="note-box mono text-xs">KI₉₅ = x̄ ± 1,96 · SE</div><p class="text-xs text-slate-400 mt-2">SE nach OECD: Stichprobenvarianz (80 BRR-Replikate, Fay 0,5) + Imputationsvarianz (10 Plausible Values, Rubin). Der Explorer rechnet nicht mit Rohdaten, sondern liest publizierte SE.</p></div>
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-gold mb-2 text-sm">Differenz zweier Länder</h3><div class="note-box mono text-xs">SE(Δ) = √(SE_A² + SE_B²)<br>z = Δ / SE(Δ) · signifikant: |z| ≥ 1,96</div><p class="text-xs text-slate-400 mt-2">Nur für unabhängige Stichproben. Gegen das OECD-Mittel ist das Land Teil des Mittels; dann gilt der publizierte SE der Differenz (hier: Näherung, als „approx“ markiert).</p></div>
+    <div class="dep-box" data-source="FACT_X_LINK_ERROR"><h3 class="font-head font-bold text-tngb-orange mb-2 text-sm">Veränderung über Zyklen</h3><div class="note-box mono text-xs">SE(Δ_t) = √(SE_t² + SE_{t−1}² + LE²)</div><p class="text-xs text-slate-400 mt-2">Der Linking Error quantifiziert die Unsicherheit der Skalenverknüpfung zwischen Zyklen. Ohne ihn werden Trends zu oft als signifikant ausgewiesen.</p></div>
+  </div>
+  <div class="dep-box mt-4"><h3 class="font-head font-bold text-white mb-2 text-sm">Selbsttest der Statistik-Engine (läuft beim Laden)</h3><div id="selftest" class="text-xs mono text-slate-300"></div><p class="text-xs text-tngb-muted mt-2">Vollständige Tests: <code class="mono text-tngb-cyan">node assets/pisa-stats.test.js</code> (10 Tests).</p></div>
+</section>
+
+<!-- S-QA -->
+<section id="s-qa" class="px-4 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">QA</span><h2 class="section-title">Qualitätssicherung — Compliance, Datenqualität, Styleguide</h2><span id="qa-pill"></span></div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-magenta mb-3">① Compliance</h3><table><tbody id="qa-compliance"></tbody></table></div>
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität</h3><table><tbody id="qa-data"></tbody></table></div>
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-gold mb-3">③ Styleguide</h3><table><tbody id="qa-style"></tbody></table></div>
+  </div>
+</section>
+
+<!-- S-MTX -->
+<section id="s-mtx" class="px-4 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">MX</span><h2 class="section-title">Einordnung in die FinCoach-AI-Modul-Matrix</h2></div>
+  <div class="dep-box overflow-x-auto"><table><thead><tr><th>Modul</th><th>Titel</th><th>Tier · Welle</th><th>Fokus</th><th></th></tr></thead><tbody>
+    <tr><td class="mono text-tngb-gold">M298</td><td>SpaceX — Der Weg zum Billionen-IPO</td><td>T3 · 45</td><td>Bewertung, IPO-Szenarien</td><td><a class="text-tngb-cyan" href="modul.html">öffnen →</a></td></tr>
+    <tr><td class="mono text-tngb-cyan">M299</td><td>Internationale IPO-Zuteilung</td><td>T3 · 45</td><td>Zuteilungskaskade</td><td><a class="text-tngb-cyan" href="m299.html">öffnen →</a></td></tr>
+    <tr><td class="mono text-tngb-emerald">M300</td><td>PISA 2025 &amp; Finanzbildung</td><td>T3 · 46</td><td>Diagnostik, OECD/INFE, KI-Anforderungen, Compliance</td><td><a class="text-tngb-cyan" href="m300.html">öffnen →</a></td></tr>
+    <tr style="background:rgba(0,207,255,0.05);"><td class="mono text-tngb-cyan font-bold">M301</td><td><strong>PISA Explorer (dieses Modul)</strong></td><td>T3 · 46</td><td>3D-Vergleich, Statistik-Engine, Explainability</td><td><span class="text-tngb-muted">aktiv</span></td></tr>
+  </tbody></table></div>
+</section>
+
+<!-- S12 -->
+<section id="s12" class="px-4 py-12 max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S12</span><h2 class="section-title">Glossar, Quellen &amp; Disclaimer</h2></div>
+  <h3 class="font-head font-bold text-white mb-3">Explainability-Glossar (anklickbar im gesamten Werkzeug, folgt CAT-Niveau)</h3>
+  <div id="glossar" class="grid md:grid-cols-2 gap-3 mb-10"></div>
+  <h3 class="font-head font-bold text-white mb-3">Quellen</h3>
+  <div class="grid md:grid-cols-2 gap-3 mb-10 text-sm" id="srcList"></div>
+  <div class="caveat-box mb-10"><h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer</h3><p class="text-sm text-slate-300 leading-relaxed">Dieses Werkzeug dient Bildungs- und Analysezwecken und ist <strong>keine Anlageberatung, keine Rechts- oder Steuerberatung</strong> (RDG/StBerG/WpIG/FinDAG) und <strong>keine pädagogische Diagnostik</strong>. PISA-Kennzahlen sind Populationsstatistiken; sie sind nicht auf Einzelpersonen übertragbar. Standardfehler und Linking Error sind, wo mit <span class="est-mark">EST</span> markiert, geschätzt. „PISA“ und „OECD“ sind Bezeichnungen der OECD; Nennungen erfolgen rein beschreibend; OECD-Daten unter CC BY 4.0, Quellen je Wert ausgewiesen. DSGVO: statische Seite, keine Tracker, keine personenbezogenen Daten. Stichtag <span class="font-mono text-tngb-cyan">2026-09-10</span>.</p></div>
+  <footer class="border-t pt-8 mt-4">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+      <div><div class="font-head font-bold text-white">FinCoach AI</div><a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="text-sm font-mono" style="color:#00CFFF;">by TheNextGenerationBanking.com</a></div>
+      <div class="text-sm text-tngb-muted"><a href="index.html" class="block mb-1">← Hauptseite</a><a href="m300.html" class="block mb-1">M300 · PISA 2025 &amp; Finanzbildung</a><a href="impressum.html" class="block mb-1">Impressum</a><a href="datenschutz.html" class="block">Datenschutz</a></div>
+      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M301 · v1.0.0 · 2026-09-10<br/>Tier T3 · Welle 46 · Learning Analytics</div></div>
+    </div>
+    <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. Die nächste Generation Banking.</p>
+  </footer>
+</section>
+
+<div class="pop" id="pop" role="dialog" aria-live="polite"><button class="x" id="popX" aria-label="Schließen">×</button><h4 id="popT"></h4><div id="popB"></div></div>
+
+<script type="application/json" id="data-inline">{"meta": {"module": "M301", "version": "1.0.0", "stichtag": "2026-09-10", "license": "OECD-Daten: CC BY 4.0 (Quellen je Wert); Aufbereitung FinCoach AI", "link_error_default": 3.0, "link_error_status": "EST", "note": "Mittelwerte, Anteile und P90–P10 aus publizierten OECD-Tabellen/Ländernotizen. Standardfehler (SE) und Linking Error sind typische Größenordnungen (EST) und müssen aus Annex B1 ersetzt werden, bevor Signifikanzaussagen als belastbar gelten."}, "domains": {"math": "Mathematik", "read": "Lesen", "sci": "Naturwissenschaften", "cps": "Computergestütztes Problemlösen"}, "trend_available": {"math": [2003, 2025], "read": [2018, 2025], "sci": [2006, 2025], "cps": [2025, 2025]}, "entities": [{"code": "DEU", "name": "Deutschland", "color": "#3987e5", "cycles": {"2025": {"mean": {"math": 464, "read": 465, "sci": 486, "cps": 498}, "se": {"math": 3.1, "read": 3.1, "sci": 3.1, "cps": 3.1}, "se_status": "EST", "low": {"math": 34, "read": 32, "sci": 27}, "top": {"math": 8, "read": 7, "sci": 9}, "pct_sci": {}, "gap_sci": 289, "source": "SRC_OECD_LAENDERNOTIZ_DE"}, "2022": {"mean": {"math": 475, "read": 480, "sci": 492, "cps": null}, "se": {"math": 3.2, "read": 3.2, "sci": 3.2, "cps": 3.2}, "se_status": "EST", "low": {"math": 30, "read": 33, "sci": 23}, "top": {"math": 9, "read": 8, "sci": 10}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_PISA22_VOL1"}}}, {"code": "FIN", "name": "Finnland", "color": "#d95926", "cycles": {"2025": {"mean": {"math": 469, "read": 474, "sci": 504, "cps": null}, "se": {"math": 2.4, "read": 2.4, "sci": 2.4, "cps": 2.4}, "se_status": "EST", "low": {}, "top": {}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_GPS_FIN"}, "2022": {"mean": {"math": 484, "read": 490, "sci": 511, "cps": null}, "se": {"math": 2.3, "read": 2.3, "sci": 2.3, "cps": 2.3}, "se_status": "EST", "low": {}, "top": {}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_PISA22_VOL1"}}}, {"code": "JPN", "name": "Japan", "color": "#199e70", "cycles": {"2025": {"mean": {"math": 525, "read": 503, "sci": 538, "cps": null}, "se": {"math": 3.0, "read": 3.0, "sci": 3.0, "cps": 3.0}, "se_status": "EST", "low": {}, "top": {}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_GPS_JPN"}, "2022": {"mean": {"math": 536, "read": 516, "sci": 547, "cps": null}, "se": {"math": 3.2, "read": 3.2, "sci": 3.2, "cps": 3.2}, "se_status": "EST", "low": {}, "top": {}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_PISA22_VOL1"}}}, {"code": "SGP", "name": "Singapur", "color": "#c98500", "cycles": {"2025": {"mean": {"math": 563, "read": 535, "sci": 560, "cps": null}, "se": {"math": 1.5, "read": 1.5, "sci": 1.5, "cps": 1.5}, "se_status": "EST", "low": {"sci": 9.9}, "top": {"math": 37, "sci": 26.1}, "pct_sci": {}, "gap_sci": 276, "source": "SRC_OECD_GPS_SGP"}, "2022": {"mean": {"math": 575, "read": 543, "sci": 561, "cps": null}, "se": {"math": 1.5, "read": 1.5, "sci": 1.5, "cps": 1.5}, "se_status": "EST", "low": {}, "top": {}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_PISA22_VOL1"}}}, {"code": "ITA", "name": "Italien", "color": "#d55181", "cycles": {"2025": {"mean": {"math": 468, "read": 474, "sci": 483, "cps": null}, "se": {"math": 2.9, "read": 2.9, "sci": 2.9, "cps": 2.9}, "se_status": "EST", "low": {"read": 24}, "top": {"math": 7}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_GPS_ITA"}, "2022": {"mean": {"math": 471, "read": 482, "sci": 477, "cps": null}, "se": {"math": 3.1, "read": 3.1, "sci": 3.1, "cps": 3.1}, "se_status": "EST", "low": {}, "top": {}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_PISA22_VOL1"}}}, {"code": "FRA", "name": "Frankreich", "color": "#9085e9", "cycles": {"2025": {"mean": {"math": 458, "read": 456, "sci": 483, "cps": null}, "se": {"math": 2.6, "read": 2.6, "sci": 2.6, "cps": 2.6}, "se_status": "EST", "low": {"sci": 25.8}, "top": {"sci": 6.7}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_GPS_FRA"}, "2022": {"mean": {"math": 474, "read": 474, "sci": 487, "cps": null}, "se": {"math": 2.8, "read": 2.8, "sci": 2.8, "cps": 2.8}, "se_status": "EST", "low": {}, "top": {}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_PISA22_VOL1"}}}, {"code": "OECD", "name": "OECD-Durchschnitt", "color": "#94A3B8", "cycles": {"2025": {"mean": {"math": 463, "read": 461, "sci": 482, "cps": 500}, "se": {"math": 0.5, "read": 0.5, "sci": 0.5, "cps": 0.5}, "se_status": "EST", "low": {"read": 31, "sci": 25.7}, "top": {"math": 8, "sci": 7.2}, "pct_sci": {}, "gap_sci": 258, "source": "SRC_OECD_PRESS_2026"}, "2022": {"mean": {"math": 472, "read": 476, "sci": 485, "cps": null}, "se": {"math": 0.5, "read": 0.5, "sci": 0.5, "cps": 0.5}, "se_status": "EST", "low": {}, "top": {}, "pct_sci": {}, "gap_sci": null, "source": "SRC_OECD_PISA22_VOL1"}}}]}</script>
+<script src="assets/pisa-stats.js"></script>
+<script>
+/* ===== DATEN ===== */
+const DATA=JSON.parse(document.getElementById('data-inline').textContent);
+const ENT=DATA.entities; const BY=Object.fromEntries(ENT.map(e=>[e.code,e]));
+const CYCLES=['2022','2025'];
+const METRICS=[
+ {id:'mean_math',l:'Mathematik · Mittelwert',u:'Pkt.',g:'mean',d:'math'},
+ {id:'mean_read',l:'Lesen · Mittelwert',u:'Pkt.',g:'mean',d:'read'},
+ {id:'mean_sci',l:'Naturwissenschaften · Mittelwert',u:'Pkt.',g:'mean',d:'sci'},
+ {id:'mean_cps',l:'Computergestütztes Problemlösen · Mittelwert',u:'Pkt.',g:'mean',d:'cps'},
+ {id:'low_math',l:'Mathematik · unter Stufe 2',u:'%',g:'low',d:'math'},
+ {id:'low_read',l:'Lesen · unter Stufe 2',u:'%',g:'low',d:'read'},
+ {id:'low_sci',l:'NaWi · unter Stufe 2',u:'%',g:'low',d:'sci'},
+ {id:'top_math',l:'Mathematik · Stufe 5/6',u:'%',g:'top',d:'math'},
+ {id:'top_read',l:'Lesen · Stufe 5/6',u:'%',g:'top',d:'read'},
+ {id:'top_sci',l:'NaWi · Stufe 5/6',u:'%',g:'top',d:'sci'},
+ {id:'gap_sci',l:'NaWi · P90−P10 (Streuung)',u:'Pkt.',g:'gap',d:'sci'}
+];
+const M=Object.fromEntries(METRICS.map(m=>[m.id,m]));
+function val(e,cy,mid){const m=M[mid],c=e.cycles[cy];if(!c)return null;let v=null;
+  if(m.g==='mean')v=c.mean[m.d];else if(m.g==='low')v=c.low[m.d];else if(m.g==='top')v=c.top[m.d];else if(m.g==='gap')v=c.gap_sci;
+  return (typeof v==='number')?v:null;}
+function se(e,cy,mid){const m=M[mid],c=e.cycles[cy];if(!c||m.g!=='mean')return null;return c.se[m.d];}
+const ST=window.PisaStats;
+
+/* ===== CAT ===== */
+const LVL_IDX={einsteiger:0,fortgeschritten:1,experte:2};let LEVEL='einsteiger';
+document.querySelectorAll('.level-btn[data-lvl]').forEach(b=>b.addEventListener('click',()=>{LEVEL=b.dataset.lvl;document.querySelectorAll('.level-btn[data-lvl]').forEach(x=>x.classList.toggle('active-level',x.dataset.lvl===LEVEL));renderGlossar();}));
+
+/* ===== GLOSSAR / EXPLAINABILITY ===== */
+const GLOSS={
+ mean:{t:'Mittelwert (x̄)',e:['Der Durchschnitt aller Schüler:innen eines Landes auf der PISA-Skala.','Gewichteter Mittelwert der Plausible Values; Skala mit ursprünglich Ø 500 / SD 100 (OECD, Ersterhebung der Domäne).','x̄ = (1/10) Σ_pv Σ_i w_i θ_i^(pv) / Σ w_i; Varianz aus BRR + Rubin.'],f:'x̄ ± SE',pit:'Ein Mittelwert sagt nichts über die Streuung: 486 kann eine enge oder eine sehr breite Verteilung sein.',src:'OECD Technical Report'},
+ se:{t:'Standardfehler (SE)',e:['Wie genau der Mittelwert gemessen ist. Kleiner SE = genauer.','Streuung des Schätzers über hypothetische Wiederholungen der Stichprobe; enthält Stichproben- und Messfehler.','SE² = Var_BRR (80 Replikate, Fay 0,5) + (1+1/10)·Var_zwischen-PV.'],f:'KI₉₅ = x̄ ± 1,96·SE',pit:'Zwei Länder mit 5 Punkten Abstand können statistisch ununterscheidbar sein, wenn beide SE ≈ 3 sind.',src:'OECD Technical Report'},
+ ci:{t:'95-%-Konfidenzintervall',e:['Der Bereich, in dem der wahre Wert mit hoher Sicherheit liegt.','Intervall x̄ ± 1,96·SE; überlappende Intervalle bedeuten nicht automatisch „kein Unterschied“.','Korrekt ist der Test der Differenz mit SE(Δ), nicht der Überlappungsvergleich zweier KI.'],f:'[x̄ − 1,96·SE ; x̄ + 1,96·SE]',pit:'Überlappende KI sind kein Beweis für Gleichheit.',src:'OECD Band I, Reader’s Guide'},
+ p90:{t:'P90 – 90. Perzentil',e:['Der Wert, unter dem 90 % der Schüler:innen liegen. Nur 10 % liegen darüber.','Punkt der Leistungsverteilung, kein Kompetenzstufen-Cut.','Quantil der PV-Verteilung, gewichtet; SE per BRR.'],f:'P90 ≠ „Top Performer“ (Stufe 5/6 ≥ 633 Pkt. NaWi)',pit:'P90 beschreibt den oberen Bereich, nicht die Spitzengruppe nach Kompetenzstufen.',src:'OECD Band I'},
+ p10:{t:'P10 – 10. Perzentil',e:['Der Wert, unter dem die schwächsten 10 % liegen.','Unterer Punkt der Verteilung; nicht identisch mit „unter Stufe 2“.','Quantil der PV-Verteilung, gewichtet.'],f:'',pit:'P10 ist keine Risikogruppe; die Risikogruppe ist der Anteil unter Stufe 2.',src:'OECD Band I'},
+ gap:{t:'Interdezilbereich P90−P10',e:['Abstand zwischen den besten 10 % und den schwächsten 10 %. Groß = große Leistungsunterschiede.','Spannweite der Verteilung; sagt nichts über Ursachen (Schulstruktur, Herkunft, Sprache).','SE der Differenz aus derselben Stichprobe: OECD publiziert ihn direkt; √(SE₉₀²+SE₁₀²) wäre falsch (Kovarianz).'],f:'Gap = P90 − P10',pit:'Ein großer Gap ist kein Beleg für Ungerechtigkeit an sich; Ursachen brauchen ESCS-Analysen.',src:'OECD Education GPS'},
+ low:{t:'Unter Stufe 2 (Risikogruppe)',e:['Anteil, der die Basisaufgaben nicht sicher löst.','Kriterienorientierter Cut-Score (z. B. NaWi 409,5 Pkt.); UN-SDG-4-Indikator.','Anteil der PV unter Cut, gewichtet; SE via BRR.'],f:'',pit:'Nicht mit P10 verwechseln.',src:'OECD Band I'},
+ top:{t:'Stufe 5/6 (Spitzengruppe)',e:['Anteil mit den anspruchsvollsten Kompetenzen.','Cut-Score Stufe 5 (NaWi 633,3 Pkt.).','Anteil der PV über Cut.'],f:'',pit:'Nicht mit P90 verwechseln.',src:'OECD Band I'},
+ pv:{t:'Plausible Values',e:['PISA schätzt für jede Person mehrere mögliche Punktwerte, um Unsicherheit ehrlich abzubilden.','10 Ziehungen aus der Posterior der latenten Kompetenz; für Gruppen richtig, für Einzelne nicht.','θ^(pv) ~ p(θ | x, y); Populationsschätzer über PV-Mittel + Rubin-Varianz. Individualdiagnose ausgeschlossen.'],f:'',pit:'PV sind keine Testergebnisse einzelner Schüler:innen.',src:'OECD Technical Report'},
+ le:{t:'Linking Error',e:['Zusätzliche Unsicherheit, wenn man zwei PISA-Runden vergleicht.','Fehler der Skalenverknüpfung zwischen Zyklen; wird zum SE der Veränderung addiert.','Seit 2015 vor allem länderspezifisches DIF der Trend-Items; SE(Δ) = √(SE_t²+SE_{t−1}²+LE²).'],f:'SE(Δ) = √(SE_t² + SE_{t−1}² + LE²)',pit:'Ohne LE erscheinen Trends zu oft signifikant.',src:'Robitzsch & Lüdtke 2023'},
+ sig:{t:'Statistische Signifikanz',e:['„Signifikant“ heißt: Der Unterschied ist größer, als Zufall der Stichprobe erklären würde.','Test |Δ|/SE(Δ) ≥ 1,96 (95 %). Die OECD berichtet dreistufig: über / gleich / unter OECD-Mittel.','Zweiseitiger z-Test; bei 90 Ländern Mehrfachvergleiche ohne Korrektur, daher konservativ lesen.'],f:'z = Δ / SE(Δ)',pit:'Signifikant ≠ bedeutsam: 3 Punkte können signifikant und praktisch irrelevant sein.',src:'OECD Band I, Reader’s Guide'},
+ eco:{t:'Ökologischer Fehlschluss',e:['Was für ein Land gilt, gilt nicht automatisch für eine Person.','Schluss von Aggregatdaten auf Individuen ist logisch unzulässig.','Robinson (1950); Individualaussagen erfordern Individualdaten.'],f:'',pit:'Das Diagnostik-Panel erzeugt Hypothesen, keine Zuschreibungen.',src:'Robinson 1950'}
+};
+function renderGlossar(){const i=LVL_IDX[LEVEL];const el=document.getElementById('glossar');el.innerHTML=Object.entries(GLOSS).map(([k,g])=>`<div class="dep-box"><div class="font-head font-bold text-tngb-cyan text-sm mb-1">${g.t}</div><p class="text-xs text-slate-400">${g.e[i]}</p>${g.f?`<div class="mono text-xs text-slate-300 mt-1">${g.f}</div>`:''}<div class="text-xs mt-1" style="color:#E6399A">Fallstrick: ${g.pit}</div></div>`).join('');}
+renderGlossar();
+const pop=document.getElementById('pop');
+function showPop(key,x,y){const g=GLOSS[key];if(!g)return;const i=LVL_IDX[LEVEL];document.getElementById('popT').textContent=g.t;
+  document.getElementById('popB').innerHTML=`<div>${g.e[i]}</div>${g.f?`<div class="f">${g.f}</div>`:''}<div class="pit">Fallstrick: ${g.pit}</div><div class="src">Quelle: ${g.src}</div>`;
+  pop.style.display='block';const w=Math.min(360,window.innerWidth-24);pop.style.left=Math.max(12,Math.min(x,window.innerWidth-w-12))+'px';pop.style.top=Math.min(y+12,window.innerHeight-pop.offsetHeight-12)+'px';}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-gloss]');if(t){e.preventDefault();showPop(t.dataset.gloss,e.clientX,e.clientY);return;}if(!e.target.closest('#pop'))pop.style.display='none';});
+document.getElementById('popX').addEventListener('click',()=>pop.style.display='none');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')pop.style.display='none';});
+
+/* ===== CONTROLS ===== */
+const STATE={x:'mean_math',y:'mean_read',z:'mean_sci',traj:true,ci:false,on:Object.fromEntries(ENT.map(e=>[e.code,true])),sel:'DEU',hover:null,yaw:-0.6,pitch:0.45};
+['axX','axY','axZ'].forEach((id,i)=>{const s=document.getElementById(id);s.innerHTML=METRICS.map(m=>`<option value="${m.id}">${m.l}</option>`).join('');s.value=[STATE.x,STATE.y,STATE.z][i];s.addEventListener('change',()=>{STATE[['x','y','z'][i]]=s.value;drawAll();});});
+document.getElementById('btnTraj').addEventListener('click',e=>{STATE.traj=!STATE.traj;e.target.classList.toggle('active-tab',STATE.traj);drawAll();});
+document.getElementById('btnCI').addEventListener('click',e=>{STATE.ci=!STATE.ci;e.target.classList.toggle('active-tab',STATE.ci);drawAll();});
+const chips=document.getElementById('entityChips');
+chips.innerHTML=ENT.map(e=>`<button type="button" class="chip ${e.code==='OECD'?'ref':''}" data-code="${e.code}"><span class="sw" style="background:${e.color}"></span>${e.name}</button>`).join('');
+chips.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{const k=c.dataset.code;STATE.on[k]=!STATE.on[k];c.classList.toggle('off',!STATE.on[k]);drawAll();}));
+
+/* ===== POINTS ===== */
+function points(){const out=[];ENT.forEach(e=>{if(!STATE.on[e.code])return;CYCLES.forEach(cy=>{const x=val(e,cy,STATE.x),y=val(e,cy,STATE.y),z=val(e,cy,STATE.z);if(x==null||y==null||z==null)return;out.push({e,cy,x,y,z,sx:se(e,cy,STATE.x),sy:se(e,cy,STATE.y),sz:se(e,cy,STATE.z)});});});return out;}
+function range(vals){let lo=Math.min(...vals),hi=Math.max(...vals);if(lo===hi){lo-=1;hi+=1;}const pad=(hi-lo)*0.12;return [lo-pad,hi+pad];}
+function fmt(v,u){return (u==='%'?v.toFixed(v%1?1:0)+' %':Math.round(v)+' Pkt.');}
+function tipHTML(p){const mx=M[STATE.x],my=M[STATE.y],mz=M[STATE.z];const line=(m,v,s)=>`${m.l}: <b class="tnum">${fmt(v,m.u)}</b>${s!=null?` ± ${s.toFixed(1)}${p.e.cycles[p.cy].se_status==='EST'?'<span style="color:#DFAF0F"> EST</span>':''}`:''}`;
+  return `<div style="color:${p.e.color};font-weight:700">${p.e.name} · ${p.cy}</div>${line(mx,p.x,p.sx)}<br>${line(my,p.y,p.sy)}<br>${line(mz,p.z,p.sz)}<div style="color:#64748B;margin-top:.25rem">antippen → Statistik-Panel</div>`;}
+
+/* ===== 3D RENDERER ===== */
+const c3=document.getElementById('c3d'),tip3=document.getElementById('tip3d');
+function setup(canvas){const r=canvas.parentElement.getBoundingClientRect();const dpr=window.devicePixelRatio||1;canvas.width=r.width*dpr;canvas.height=r.height*dpr;const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return {ctx,W:r.width,H:r.height};}
+function project3(nx,ny,nz,W,H){const cy=Math.cos(STATE.yaw),sy=Math.sin(STATE.yaw),cp=Math.cos(STATE.pitch),sp=Math.sin(STATE.pitch);
+  let x=nx*cy-nz*sy,z=nx*sy+nz*cy;let y=ny*cp-z*sp;z=ny*sp+z*cp;const f=1/(2.6+z);const s=Math.min(W,H)*0.95;return {X:W/2+x*f*s,Y:H/2-y*f*s,depth:z};}
+let PROJ3=[];
+function draw3(){const {ctx,W,H}=setup(c3);ctx.clearRect(0,0,W,H);const P=points();PROJ3=[];
+  if(!P.length){ctx.fillStyle='#64748B';ctx.font='12px JetBrains Mono';ctx.fillText('Keine Punkte: für diese Achsenkombination fehlen publizierte Werte.',16,24);return;}
+  const rx=range(P.map(p=>p.x)),ry=range(P.map(p=>p.y)),rz=range(P.map(p=>p.z));
+  const N=(v,r)=>((v-r[0])/(r[1]-r[0]))*2-1;
+  const pr=(x,y,z)=>project3(N(x,rx),N(y,ry),N(z,rz),W,H);
+  // Boden-Gitter (y = min)
+  ctx.lineWidth=1;ctx.strokeStyle='rgba(100,116,139,.18)';
+  for(let i=0;i<=4;i++){const t=-1+i*0.5;let a=project3(t,-1,-1,W,H),b=project3(t,-1,1,W,H);ctx.beginPath();ctx.moveTo(a.X,a.Y);ctx.lineTo(b.X,b.Y);ctx.stroke();a=project3(-1,-1,t,W,H);b=project3(1,-1,t,W,H);ctx.beginPath();ctx.moveTo(a.X,a.Y);ctx.lineTo(b.X,b.Y);ctx.stroke();}
+  // Achsen
+  const axes=[{a:[-1,-1,-1],b:[1,-1,-1],l:M[STATE.x].l,r:rx,u:M[STATE.x].u,c:'#00CFFF'},{a:[-1,-1,-1],b:[-1,1,-1],l:M[STATE.y].l,r:ry,u:M[STATE.y].u,c:'#00CC7A'},{a:[-1,-1,-1],b:[-1,-1,1],l:M[STATE.z].l,r:rz,u:M[STATE.z].u,c:'#DFAF0F'}];
+  ctx.font='10px JetBrains Mono';
+  axes.forEach(ax=>{const A=project3(...ax.a,W,H),B=project3(...ax.b,W,H);ctx.strokeStyle=ax.c;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(A.X,A.Y);ctx.lineTo(B.X,B.Y);ctx.stroke();
+    ctx.fillStyle=ax.c;const mid={X:(A.X+B.X)/2,Y:(A.Y+B.Y)/2};ctx.fillText(`${ax.l} (${fmt(ax.r[0],ax.u)} – ${fmt(ax.r[1],ax.u)})`,mid.X+6,mid.Y-6);ctx.fillStyle='#94A3B8';ctx.fillText(fmt(ax.r[1],ax.u),B.X+4,B.Y-4);});
+  // Trajektorien
+  if(STATE.traj){ENT.forEach(e=>{const a=P.find(p=>p.e===e&&p.cy==='2022'),b=P.find(p=>p.e===e&&p.cy==='2025');if(!a||!b)return;const A=pr(a.x,a.y,a.z),B=pr(b.x,b.y,b.z);ctx.strokeStyle=e.color;ctx.lineWidth=2;ctx.setLineDash(e.code==='OECD'?[4,4]:[]);ctx.beginPath();ctx.moveTo(A.X,A.Y);ctx.lineTo(B.X,B.Y);ctx.stroke();ctx.setLineDash([]);
+    const ang=Math.atan2(B.Y-A.Y,B.X-A.X);ctx.fillStyle=e.color;ctx.beginPath();ctx.moveTo(B.X,B.Y);ctx.lineTo(B.X-9*Math.cos(ang-0.4),B.Y-9*Math.sin(ang-0.4));ctx.lineTo(B.X-9*Math.cos(ang+0.4),B.Y-9*Math.sin(ang+0.4));ctx.closePath();ctx.fill();});}
+  // Punkte, nach Tiefe sortiert
+  const items=P.map(p=>({p,q:pr(p.x,p.y,p.z)})).sort((a,b)=>b.q.depth-a.q.depth);
+  items.forEach(({p,q})=>{const r=p.cy==='2025'?7:5;const hov=STATE.hover===p;const sel=STATE.sel===p.e.code;
+    if(STATE.ci&&p.sx!=null){const a=pr(p.x-1.96*p.sx,p.y,p.z),b=pr(p.x+1.96*p.sx,p.y,p.z);ctx.strokeStyle=p.e.color;ctx.lineWidth=1;ctx.globalAlpha=.7;ctx.beginPath();ctx.moveTo(a.X,a.Y);ctx.lineTo(b.X,b.Y);ctx.stroke();ctx.globalAlpha=1;}
+    ctx.beginPath();ctx.arc(q.X,q.Y,r+(hov||sel?2:0),0,Math.PI*2);ctx.fillStyle=p.cy==='2025'?p.e.color:'#0D1526';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=p.cy==='2025'?'#0D1526':p.e.color;ctx.stroke();
+    if(p.cy==='2025'){ctx.fillStyle='#E2E8F0';ctx.font='700 10px Inter';ctx.fillText(p.e.code,q.X+r+4,q.Y+4);}
+    PROJ3.push({p,X:q.X,Y:q.Y});});
+}
+function nearest(list,x,y,rad){let best=null,bd=rad*rad;list.forEach(o=>{const d=(o.X-x)**2+(o.Y-y)**2;if(d<bd){bd=d;best=o;}});return best;}
+let drag=null;
+c3.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,yaw:STATE.yaw,pitch:STATE.pitch,moved:false};c3.setPointerCapture(e.pointerId);});
+c3.addEventListener('pointermove',e=>{const r=c3.getBoundingClientRect();if(drag){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.abs(dx)+Math.abs(dy)>3)drag.moved=true;STATE.yaw=drag.yaw+dx*0.008;STATE.pitch=Math.max(-1.2,Math.min(1.2,drag.pitch+dy*0.008));draw3();return;}
+  const n=nearest(PROJ3,e.clientX-r.left,e.clientY-r.top,14);STATE.hover=n?n.p:null;if(n){tip3.innerHTML=tipHTML(n.p);tip3.style.display='block';tip3.style.left=Math.min(n.X+14,r.width-270)+'px';tip3.style.top=Math.max(4,n.Y-10)+'px';}else tip3.style.display='none';draw3();});
+c3.addEventListener('pointerup',e=>{if(drag&&!drag.moved){const r=c3.getBoundingClientRect();const n=nearest(PROJ3,e.clientX-r.left,e.clientY-r.top,16);if(n){STATE.sel=n.p.e.code;document.getElementById('selA').value=n.p.e.code;renderStats();drawAll();document.getElementById('s03').scrollIntoView({behavior:'smooth',block:'start'});}}drag=null;});
+c3.addEventListener('pointerleave',()=>{tip3.style.display='none';STATE.hover=null;draw3();});
+
+/* ===== 2D RENDERER ===== */
+function draw2(canvasId,tipId,hintId,kx,ky){const canvas=document.getElementById(canvasId),tip=document.getElementById(tipId);const {ctx,W,H}=setup(canvas);ctx.clearRect(0,0,W,H);
+  const P=points();const mx=M[STATE[kx]],my=M[STATE[ky]];document.getElementById(hintId).textContent=`${mx.l} × ${my.l}`;if(!P.length)return;
+  const pad={l:44,r:14,t:22,b:30};const rx=range(P.map(p=>p[kx])),ry=range(P.map(p=>p[ky]));
+  const X=v=>pad.l+(v-rx[0])/(rx[1]-rx[0])*(W-pad.l-pad.r),Y=v=>H-pad.b-(v-ry[0])/(ry[1]-ry[0])*(H-pad.t-pad.b);
+  ctx.strokeStyle='rgba(100,116,139,.18)';ctx.lineWidth=1;ctx.font='9px JetBrains Mono';ctx.fillStyle='#94A3B8';
+  for(let i=0;i<=4;i++){const vx=rx[0]+(rx[1]-rx[0])*i/4,vy=ry[0]+(ry[1]-ry[0])*i/4;ctx.beginPath();ctx.moveTo(X(vx),pad.t);ctx.lineTo(X(vx),H-pad.b);ctx.stroke();ctx.beginPath();ctx.moveTo(pad.l,Y(vy));ctx.lineTo(W-pad.r,Y(vy));ctx.stroke();ctx.fillText(Math.round(vx),X(vx)-8,H-pad.b+12);ctx.fillText(Math.round(vy),4,Y(vy)+3);}
+  const list=[];
+  if(STATE.traj){ENT.forEach(e=>{const a=P.find(p=>p.e===e&&p.cy==='2022'),b=P.find(p=>p.e===e&&p.cy==='2025');if(!a||!b)return;ctx.strokeStyle=e.color;ctx.lineWidth=1.5;ctx.setLineDash(e.code==='OECD'?[4,4]:[]);ctx.beginPath();ctx.moveTo(X(a[kx]),Y(a[ky]));ctx.lineTo(X(b[kx]),Y(b[ky]));ctx.stroke();ctx.setLineDash([]);});}
+  P.forEach(p=>{const x=X(p[kx]),y=Y(p[ky]);const r=p.cy==='2025'?5:3.5;
+    if(STATE.ci){const sx=p['s'+kx],sy=p['s'+ky];ctx.strokeStyle=p.e.color;ctx.globalAlpha=.6;ctx.lineWidth=1;if(sx!=null){ctx.beginPath();ctx.moveTo(X(p[kx]-1.96*sx),y);ctx.lineTo(X(p[kx]+1.96*sx),y);ctx.stroke();}if(sy!=null){ctx.beginPath();ctx.moveTo(x,Y(p[ky]-1.96*sy));ctx.lineTo(x,Y(p[ky]+1.96*sy));ctx.stroke();}ctx.globalAlpha=1;}
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=p.cy==='2025'?p.e.color:'#0D1526';ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle=p.cy==='2025'?'#0D1526':p.e.color;ctx.stroke();
+    if(p.cy==='2025'){ctx.fillStyle='#CBD5E1';ctx.font='700 9px Inter';ctx.fillText(p.e.code,x+7,y+3);}list.push({p,X:x,Y:y});});
+  canvas.onpointermove=e=>{const r=canvas.getBoundingClientRect();const n=nearest(list,e.clientX-r.left,e.clientY-r.top,12);if(n){tip.innerHTML=tipHTML(n.p);tip.style.display='block';tip.style.left=Math.min(n.X+12,r.width-270)+'px';tip.style.top=Math.max(4,n.Y-10)+'px';}else tip.style.display='none';};
+  canvas.onpointerleave=()=>tip.style.display='none';
+  canvas.onclick=e=>{const r=canvas.getBoundingClientRect();const n=nearest(list,e.clientX-r.left,e.clientY-r.top,14);if(n){STATE.sel=n.p.e.code;document.getElementById('selA').value=n.p.e.code;renderStats();drawAll();}};
+}
+
+/* ===== TABELLE ===== */
+function renderTable(){const t=document.getElementById('dataTable');const cols=[STATE.x,STATE.y,STATE.z];
+  t.querySelector('thead').innerHTML='<tr><th>Land</th><th>Zyklus</th>'+cols.map(c=>`<th>${M[c].l}</th>`).join('')+'<th>Quelle</th></tr>';
+  t.querySelector('tbody').innerHTML=ENT.filter(e=>STATE.on[e.code]).flatMap(e=>CYCLES.map(cy=>{const c=e.cycles[cy];return `<tr><td><span class="sw" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${e.color};margin-right:6px"></span>${e.name}</td><td class="mono">${cy}</td>`+cols.map(k=>{const v=val(e,cy,k),s=se(e,cy,k);return `<td class="mono tnum">${v==null?'—':fmt(v,M[k].u)+(s!=null?` <span class="text-tngb-muted">± ${s.toFixed(1)}</span>${c.se_status==='EST'?' <span class="badge b-est">EST</span>':''}`:'')}</td>`;}).join('')+`<td class="text-xs text-tngb-muted">${c.source.replace('SRC_','')}</td></tr>`;})).join('');}
+
+/* ===== STATISTIK-PANEL ===== */
+const selA=document.getElementById('selA'),selB=document.getElementById('selB'),selDom=document.getElementById('selDom');
+selA.innerHTML=selB.innerHTML=ENT.map(e=>`<option value="${e.code}">${e.name}</option>`).join('');selA.value='DEU';selB.value='FIN';
+selDom.innerHTML=Object.entries(DATA.domains).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');selDom.value='sci';
+[selA,selB,selDom].forEach(s=>s.addEventListener('change',()=>{STATE.sel=selA.value;renderStats();drawAll();}));
+function statCard(l,v,s,key){return `<div class="stat"><span class="l" data-gloss="${key}">${l}</span><div class="v tnum">${v}</div><div class="s">${s||''}</div></div>`;}
+function statsFor(e,dom){const c=e.cycles['2025'];const m=c.mean[dom],s=c.se[dom];const est=c.se_status==='EST';const out=[];
+  if(m==null){return '<div class="text-xs text-tngb-muted">Kein publizierter Wert für diese Domäne.</div>';}
+  const ci=ST.ci95(m,s);
+  out.push(statCard('Mittelwert',`${m}`,`± ${s.toFixed(1)} SE${est?' <span class="badge b-est">EST</span>':''}`,'mean'));
+  out.push(statCard('95-%-KI',`${ci.lo.toFixed(1)} – ${ci.hi.toFixed(1)}`,'x̄ ± 1,96·SE','ci'));
+  out.push(statCard('unter Stufe 2',c.low[dom]!=null?c.low[dom]+' %':'—','Risikogruppe','low'));
+  out.push(statCard('Stufe 5/6',c.top[dom]!=null?c.top[dom]+' %':'—','Spitzengruppe','top'));
+  if(dom==='sci')out.push(statCard('P90 − P10',c.gap_sci!=null?c.gap_sci+' Pkt.':'—','Interdezilbereich','gap'));
+  const p22=e.cycles['2022']&&e.cycles['2022'].mean[dom];out.push(statCard('2022',p22!=null?`${p22}`:'—',p22!=null?`Δ ${(m-p22)>0?'+':''}${(m-p22)} (siehe S04)`:'kein Trend','le'));
+  return out.join('');}
+function verdictBadge(d){const k=ST.classify(d);return `<span class="badge b-${k}">${k==='above'?'signifikant höher':k==='below'?'signifikant niedriger':'kein signifikanter Unterschied'}</span>`;}
+function diffRow(label,d,note){return `<tr><td>${label}${note?`<div class="text-xs text-tngb-muted">${note}</div>`:''}</td><td class="mono tnum">${d.diff>0?'+':''}${d.diff.toFixed(1)}</td><td class="mono tnum">${d.se.toFixed(2)}</td><td class="mono tnum">${d.ci.lo.toFixed(1)} … ${d.ci.hi.toFixed(1)}</td><td class="mono tnum">${d.z.toFixed(2)}</td><td class="mono tnum">${d.p<0.001?'<0,001':d.p.toFixed(3)}</td><td>${verdictBadge(d)}</td></tr>`;}
+function renderStats(){const A=BY[selA.value],B=BY[selB.value],O=BY.OECD,dom=selDom.value;const dn=DATA.domains[dom];
+  document.getElementById('hA').innerHTML=`<span style="color:${A.color}">●</span> ${A.name} · ${dn} 2025`;document.getElementById('hB').innerHTML=`<span style="color:${B.color}">●</span> ${B.name} · ${dn} 2025`;
+  document.getElementById('statsA').innerHTML=statsFor(A,dom);document.getElementById('statsB').innerHTML=statsFor(B,dom);
+  const rows=[];const a=A.cycles['2025'],b=B.cycles['2025'],o=O.cycles['2025'];
+  if(a.mean[dom]!=null&&b.mean[dom]!=null&&A!==B)rows.push(diffRow(`${A.name} − ${B.name}`,ST.diffIndependent(a.mean[dom],a.se[dom],b.mean[dom],b.se[dom]),'unabhängige Stichproben: SE(Δ)=√(SE_A²+SE_B²)'));
+  if(a.mean[dom]!=null&&A!==O){const d=ST.diffVsReference(a.mean[dom],a.se[dom],o.mean[dom],o.se[dom]);rows.push(diffRow(`${A.name} − OECD-Mittel`,d,d.approx?'Näherung (approx): publizierter SE der Differenz fehlt':''));}
+  if(b.mean[dom]!=null&&B!==O&&B!==A){const d=ST.diffVsReference(b.mean[dom],b.se[dom],o.mean[dom],o.se[dom]);rows.push(diffRow(`${B.name} − OECD-Mittel`,d,d.approx?'Näherung (approx)':''));}
+  document.querySelector('#diffTable tbody').innerHTML=rows.join('')||'<tr><td colspan="7" class="text-tngb-muted">Keine vergleichbaren Werte.</td></tr>';
+  renderTrend();renderHyp();}
+
+/* ===== TREND ===== */
+const simLE=document.getElementById('simLE');simLE.addEventListener('input',()=>{document.getElementById('lblLE').textContent=(+simLE.value).toFixed(1);renderTrend();});
+function renderTrend(){const dom=selDom.value,LE=+simLE.value;const tb=document.querySelector('#trendTable tbody');
+  if(dom==='cps'){tb.innerHTML='<tr><td colspan="7" class="text-tngb-muted">Computergestütztes Problemlösen ist 2025 neu — kein Trend möglich.</td></tr>';document.getElementById('trendNote').textContent='';return;}
+  tb.innerHTML=ENT.filter(e=>STATE.on[e.code]).map(e=>{const a=e.cycles['2022'],b=e.cycles['2025'];if(!a||a.mean[dom]==null||b.mean[dom]==null)return '';const t=ST.trend(b.mean[dom],b.se[dom],a.mean[dom],a.se[dom],LE);
+    return `<tr><td><span style="color:${e.color}">●</span> ${e.name}</td><td class="mono tnum">${a.mean[dom]}</td><td class="mono tnum">${b.mean[dom]}</td><td class="mono tnum">${t.diff>0?'+':''}${t.diff}</td><td class="mono tnum">${t.se.toFixed(2)}</td><td class="mono tnum">${t.ci.lo.toFixed(1)} … ${t.ci.hi.toFixed(1)}</td><td>${t.significant?`<span class="badge b-${t.diff<0?'below':'above'}">${t.diff<0?'signifikanter Rückgang':'signifikanter Anstieg'}</span>`:'<span class="badge b-equal">nicht signifikant</span>'}</td></tr>`;}).join('');
+  document.getElementById('trendNote').innerHTML=`Domäne ${DATA.domains[dom]} · LE = ${LE.toFixed(1)} <span class="badge b-est">EST</span> · SE je Wert geschätzt. Beobachten Sie, wie Urteile bei größerem LE kippen: Das ist der Grund, warum die OECD den Linking Error mitführt.`;}
+
+/* ===== HYPOTHESEN ===== */
+function renderHyp(){const A=BY[selA.value],O=BY.OECD,dom=selDom.value;const a=A.cycles['2025'],o=O.cycles['2025'];const H=[];const dn=DATA.domains[dom];
+  document.getElementById('hypTitle').textContent=`Hypothesen für die Diagnostik · ${A.name} · ${dn}`;
+  if(A===O){document.getElementById('hypList').innerHTML='<div class="text-xs text-tngb-muted">OECD-Mittel gewählt: Referenz, keine Hypothesen.</div>';return;}
+  if(a.mean[dom]!=null){const d=ST.diffVsReference(a.mean[dom],a.se[dom],o.mean[dom],o.se[dom]);const k=ST.classify(d);
+    H.push(`<div class="hyp"><b>H1 · Niveau.</b> ${A.name} liegt in ${dn} ${k==='above'?'signifikant über':k==='below'?'signifikant unter':'auf Höhe'} dem OECD-Mittel (Δ ${d.diff>0?'+':''}${d.diff.toFixed(0)}, SE ${d.se.toFixed(1)}${d.approx?', approx':''}). Für die eigene Kohorte ist das kein Befund, sondern eine Erwartung: Erst das adaptive Kurz-Assessment (M300 REQ-04) zeigt, ob sie zutrifft.</div>`);}
+  if(dom==='sci'&&a.gap_sci!=null){const wide=a.gap_sci>o.gap_sci;H.push(`<div class="hyp"><b>H2 · Streuung.</b> P90−P10 = ${a.gap_sci} (OECD ${o.gap_sci}): ${wide?'überdurchschnittlich heterogen. Hypothese: Lerngruppen brauchen mehr Tier-2-Differenzierung und DCM-Profile statt Einheitsaufgaben (M300 S06, REQ-03/05).':'eher homogen. Hypothese: Tier-1-Breitenangebote tragen weiter; Tier-2-Bedarf punktuell prüfen.'}</div>`);}
+  if(a.low[dom]!=null){const lo=a.low[dom],ol=o.low[dom];H.push(`<div class="hyp"><b>H3 · Basiskompetenz.</b> ${lo} % unter Stufe 2${ol!=null?` (OECD ${ol} %)`:''}. Hypothese: ${lo>=30?'Ein Drittel der Kohorte scheitert an Basisaufgaben; Finanzbildung muss Bruch-, Prozent- und Dreisatzlücken zuerst schließen (Tier 2), bevor Zins- oder Ratenkauf-Szenarien sinnvoll sind.':'Basislücken sind die Minderheit; sprachsensible Glossen und Anti-Hasty-Mechanik (REQ-02/06) haben Vorrang vor Grundrechenförderung.'}</div>`);}
+  if(a.top[dom]!=null){H.push(`<div class="hyp"><b>H4 · Spitze.</b> ${a.top[dom]} % auf Stufe 5/6. Hypothese: ${a.top[dom]<10?'Enrichment-Pfade (Zinseszins, Risiko-Diversifikation, Modellierung) sind unterversorgt; adaptive Items nach oben öffnen.':'Starke Spitze; Enrichment-Pfade tragen, Fokus auf Breite.'}</div>`);}
+  const p22=A.cycles['2022']&&A.cycles['2022'].mean[dom];if(p22!=null&&a.mean[dom]!=null){const t=ST.trend(a.mean[dom],a.se[dom],p22,A.cycles['2022'].se[dom],+simLE.value);H.push(`<div class="hyp"><b>H5 · Dynamik.</b> Δ 2022→2025 = ${t.diff>0?'+':''}${t.diff} (${t.significant?'signifikant':'nicht signifikant'} bei LE ${(+simLE.value).toFixed(1)}). Hypothese: ${t.diff<-8?'Kohorten-Verlust; Prä-Post-Messung im eigenen System muss auf derselben Skala erfolgen, sonst wird System-Drift als Interventionseffekt fehlgedeutet (Wirksamkeitsebene).':'Kein klarer Drift; Wirksamkeitsmessung ohne Trendkorrektur möglich.'}</div>`);}
+  H.push(`<div class="text-xs text-tngb-muted mt-2"><span data-gloss="eco">Ökologischer Fehlschluss</span>: Diese Hypothesen gelten für Systeme und Kohorten, nie für eine einzelne Person.</div>`);
+  document.getElementById('hypList').innerHTML=H.join('');}
+
+/* ===== DRAW ALL ===== */
+function drawAll(){draw3();draw2('c2dxy','tipxy','hintxy','x','y');draw2('c2dxz','tipxz','hintxz','x','z');renderTable();}
+window.addEventListener('resize',drawAll);
+drawAll();renderStats();
+
+/* ===== QUELLEN ===== */
+fetch('provenance/m301.dbom.json').then(r=>r.json()).then(d=>{document.getElementById('srcList').innerHTML=d.sources.filter(s=>s.url).map(s=>`<a class="dep-box block" href="${s.url}" target="_blank" rel="noopener"><div class="text-tngb-cyan font-semibold text-sm">${s.label}</div><div class="text-xs text-tngb-muted mono">${s.id}</div></a>`).join('');}).catch(()=>{document.getElementById('srcList').innerHTML='<div class="text-xs text-tngb-muted">Quellenliste in provenance/m301.dbom.json (offline nicht ladbar).</div>';});
+
+/* ===== NAVDOCK ===== */
+const SECTIONS=['s01','s02','s03','s04','s05','s06','s-qa','s-mtx','s12'];
+const dockObs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){document.querySelectorAll('#navdock a').forEach(a=>a.classList.toggle('active-dock',a.dataset.dock===en.target.id));}}),{rootMargin:'-40% 0px -55% 0px'});
+SECTIONS.forEach(id=>{const el=document.getElementById(id);if(el)dockObs.observe(el);});
+</script>
+
+<script>
+/* ===== LIVE-QA & DBOM-AUDIT ===== */
+(async function liveAudit(){
+  const banner=document.getElementById('live-audit-banner'),status=document.getElementById('live-audit-status'),meta=document.getElementById('live-audit-meta'),score=document.getElementById('live-audit-score'),qaPill=document.getElementById('qa-pill');
+  const rows={compliance:[],data:[],style:[]};const add=(s,l,ok,d)=>rows[s].push({label:l,ok,detail:d});const T=document.body.innerText||'';
+  add('compliance','Keine Anlageberatung (Disclaimer)',/keine Anlageberatung/i.test(T));
+  add('compliance','RDG/StBerG/WpIG/FinDAG-Hinweis',/RDG\/StBerG\/WpIG\/FinDAG/.test(T));
+  add('compliance','DSGVO-Hinweis',/DSGVO/.test(T));
+  add('compliance','Markennennung rein beschreibend & CC-BY-Lizenzhinweis',/rein beschreibend/.test(T)&&/CC BY 4\.0/.test(T));
+  add('compliance','Ökologischer Fehlschluss ausgeschlossen (CL-03)',/Ökologischer Fehlschluss/.test(T));
+  const res=[...document.querySelectorAll('script[src],link[href],img[src]')].map(e=>e.getAttribute('src')||e.getAttribute('href')||'').filter(u=>/^https?:/.test(u));
+  add('compliance','Keine Google-Fonts / Tracker als Ressource',!res.some(u=>/fonts\.googleapis|gstatic|googletagmanager|google-analytics|hotjar|matomo/.test(u)));
+  add('compliance','Scripts nur von CSP-erlaubten Hosts',[...document.querySelectorAll('script[src]')].every(s=>!/^https?:/.test(s.getAttribute('src'))||/^https:\/\/(cdn\.jsdelivr\.net|cdn\.tailwindcss\.com)(\/|$)/.test(s.getAttribute('src'))));
+  add('style','fonts.css self-hosted',!!document.querySelector('link[href="fonts.css"]'));
+  add('style','CAT-Level (3)',document.querySelectorAll('.level-btn[data-lvl]').length===3);
+  add('style','NavDock & Sektions-Badges',!!document.getElementById('navdock')&&document.querySelectorAll('.section-badge').length>8);
+  add('style','Tabellen-Fallback für alle Charts',document.querySelectorAll('#dataTable tbody tr').length>0);
+  add('style','Legende + Direktlabels (Identität nie nur Farbe)',document.querySelectorAll('#entityChips .chip').length===7);
+  add('style','Glossar gerendert',document.querySelectorAll('#glossar .dep-box').length>=10);
+  add('style','EST-Marker innerhalb Provenienz-Container',[...document.querySelectorAll('.est-mark')].every(m=>m.closest('[data-source]')||m.closest('.caveat-box')||m.closest('.dep-box')));
+  // Statistik-Selbsttest
+  const S=window.PisaStats;let st=[];try{st.push(['ci95 ±1,96·SE',Math.abs(S.ci95(486,3.1).half-6.0759)<1e-3]);st.push(['SE(Δ) unabhängig',Math.abs(S.diffIndependent(486,3.1,504,2.4).se-Math.sqrt(3.1**2+2.4**2))<1e-9]);st.push(['LE erhöht SE(Δ)',S.trend(465,3.1,480,3.2,3).se>S.trend(465,3.1,480,3.2,0).se]);st.push(['classify above/equal/below',S.classify(S.diffIndependent(560,1.5,482,.5))==='above'&&S.classify(S.diffIndependent(456,2.6,461,.5))==='equal']);st.push(['Φ(1,96)≈0,975',Math.abs(S._phi(1.959964)-0.975)<1e-4]);}catch(e){st.push(['Engine geladen',false]);}
+  document.getElementById('selftest').innerHTML=st.map(([l,ok])=>`<div>${ok?'<span class="check-pass">✓</span>':'<span class="check-fail">✗</span>'} ${l}</div>`).join('');
+  add('data','Statistik-Engine Selbsttests ('+st.length+')',st.every(x=>x[1]));
+  let ld=null;try{ld=JSON.parse(document.getElementById('module-provenance').textContent);}catch(e){}add('data','M-DBOM JSON-LD eingebettet',!!ld);
+  let dbom=null,dataOk=null;
+  try{const r=await fetch('provenance/m301.dbom.json',{cache:'no-cache'});if(!r.ok)throw new Error('HTTP '+r.status);dbom=await r.json();
+    const ids=new Set(dbom.facts.map(f=>f.id));const refs=[...document.querySelectorAll('[data-source^="FACT_"]')];const miss=refs.filter(el=>!ids.has(el.dataset.source));miss.forEach(el=>el.style.outline='2px dashed #E6399A');
+    add('data','Externe DBOM erreichbar & valide',true);add('data',`data-source-Referenzen aufgelöst (${refs.length})`,miss.length===0);add('data','fact_summary.total == Fakten',dbom.fact_summary.total===dbom.facts.length);add('data','JSON-LD-Version == DBOM-Version',ld&&ld.module.version===dbom.module.version);add('data','Stichtag im HTML',T.includes(dbom.module.stichtag));
+    const src=new Set(dbom.sources.map(s=>s.id));add('data','Jede source_id existiert',dbom.facts.every(f=>src.has(f.source_id)));
+    meta.innerHTML=`Modul <code>v${dbom.module.version}</code> · ${dbom.facts.length} Aussagen · ${refs.length} Referenzen`;
+  }catch(e){add('data','Externe DBOM erreichbar',false,e.message);}
+  try{const r=await fetch('data/pisa-explorer.json',{cache:'no-cache'});if(!r.ok)throw new Error('HTTP '+r.status);const ext=await r.json();dataOk=JSON.stringify(ext)===JSON.stringify(DATA);add('data','Datenpaket == eingebettete Daten',dataOk);}catch(e){add('data','Datenpaket erreichbar',false,e.message);}
+  const estN=DATA.entities.filter(e=>e.cycles['2025'].se_status==='EST').length;add('data',`SE-Status sichtbar (${estN} Entitäten EST)`,document.querySelectorAll('.badge.b-est').length>0);
+  add('data','Jeder Datenpunkt mit Quelle',DATA.entities.every(e=>Object.values(e.cycles).every(c=>c.source)));
+  const render=(s,id)=>{document.getElementById(id).innerHTML=rows[s].map(r=>`<tr><td>${r.label}</td><td class="${r.ok?'check-pass':'check-fail'}" title="${r.detail||''}">${r.ok?'✓':'✗'}</td></tr>`).join('');};
+  render('compliance','qa-compliance');render('data','qa-data');render('style','qa-style');
+  const all=[...rows.compliance,...rows.data,...rows.style],fails=all.filter(r=>!r.ok).length;
+  if(fails===0&&dbom){banner.classList.remove('warn','err');status.innerHTML=`✓ DBOM OK · Datenpaket konsistent · Engine-Selbsttest bestanden · ${all.length} QA-Checks · Stichtag ${dbom.module.stichtag}`;qaPill.innerHTML=`<span class="compliance-pill good">QA · ${all.length}/${all.length}</span>`;score.innerHTML='<span class="compliance-pill good">M301 Integrität · 100%</span>';}
+  else{banner.classList.add(dbom?'err':'warn');status.innerHTML=(dbom?'✗ ':'⚠ offline · ')+fails+' Check(s) offen';qaPill.innerHTML=`<span class="compliance-pill warn">QA · ${fails} offen</span>`;}
+})();
+</script>
+</body>
+</html>
