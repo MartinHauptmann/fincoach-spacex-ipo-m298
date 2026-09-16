@@ -4,10 +4,10 @@
   "module": {
     "id": "M302",
     "title": "PISA 2025 Deep Dive — Studie, Methodenwandel 2012–2025, Weltkarte, Ländervergleich, Datenregister",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "stichtag": "2026-09-16",
     "buildDate": "2026-09-16T00:00:00Z",
-    "predecessor_version": null,
+    "predecessor_version": "1.0.0",
     "related_modules": [
       "M300",
       "M301"
@@ -25,20 +25,19 @@
   },
   "fact_summary": {
     "total": 25,
-    "confirmed": 18,
-    "derived": 2,
-    "recalled_unverified": 3,
+    "confirmed": 19,
+    "derived": 4,
+    "recalled_unverified": 0,
     "scenario_projection": 1,
     "interpretation": 1,
     "by_verdict": {
-      "CONFIRMED": 18,
-      "DERIVED": 2,
-      "RECALLED_UNVERIFIED": 3,
+      "CONFIRMED": 19,
+      "DERIVED": 4,
       "SCENARIO_PROJECTION": 1,
       "INTERPRETATION": 1
     }
   },
-  "honest_disclosure": "M302 ist der reine Studien-Deep-Dive zu PISA 2025. Alle 2025-Werte der 91 Systeme (Mittelwerte, 95-%-KI, Rangspannen, Perzentile und Kompetenzstufen in Naturwissenschaften, Veränderung 2022→2025 mit Signifikanzflag, Zehnjahrestrend) stammen aus dem offiziellen OECD-StatLink zu Band I Kapitel 2 (stat.link/xgs41b, Workbook v1 vom 08.09.2026). Da oecd.org aus der Build-Umgebung netzwerkseitig blockiert war, wurde die Datei aus dem öffentlichen GitHub-Repository TeancumTian/pisa-2025-analysis (MIT; OECD-Daten unter OECD Terms) bezogen und stichprobenartig gegen die per Suchauszug verifizierten Ländernotiz-Werte (DE 486/465/464, OECD 482/461/463, SGP, FRA) geprüft. 2022-Werte sind aus 2025-Wert und offizieller Veränderung berechnet (DERIVED). 2012/2015 liegen für Mathematik der OECD-Länder aus einem OECD.Stat-Spiegel vor (kirenz/datasets); alle übrigen 2012/2015-Werte, sämtliche 2018-Werte und der OECD-Durchschnitt 2018 stammen aus Modellgedächtnis (RECALLED_UNVERIFIED), sind in Karte, Tabellen und Register sichtbar markiert und vor belastbarer Nutzung durch OECD-Tabellen zu ersetzen. Eine Kalibrierung des Gedächtnisses gegen den OECD.Stat-Spiegel ergab 44 von 44 Werten exakt (nur Mathematik 2015), ersetzt aber keine Primärprüfung. Kartengeometrie: Natural Earth (gemeinfrei) über johan/world.geo.json. Keine Anlage-, Rechts- oder Steuerberatung.",
+  "honest_disclosure": "M302 ist der reine Studien-Deep-Dive zu PISA 2025. Alle 2025-Werte der 91 Systeme (Mittelwerte, 95-%-KI, Rangspannen, Perzentile und Kompetenzstufen in Naturwissenschaften, Veränderung 2022→2025 mit Signifikanzflag, Zehnjahrestrend) stammen aus dem offiziellen OECD-StatLink zu Band I Kapitel 2 (stat.link/xgs41b, Workbook v1 vom 08.09.2026). Da oecd.org aus der Build-Umgebung netzwerkseitig blockiert war, wurde die Datei aus dem öffentlichen GitHub-Repository TeancumTian/pisa-2025-analysis (MIT; OECD-Daten unter OECD Terms) bezogen und stichprobenartig gegen die per Suchauszug verifizierten Ländernotiz-Werte (DE 486/465/464, OECD 482/461/463, SGP, FRA) geprüft. 2022-Werte sind aus 2025-Wert und offizieller Veränderung berechnet (DERIVED). 2012/2015 liegen für Mathematik der OECD-Länder aus einem OECD.Stat-Spiegel vor (kirenz/datasets); alle übrigen Werte 2012–2018 wurden in v1.1.0 aus den offiziellen OECD-Mikrodaten (Public Use Files) gewichtet berechnet (COMPUTED_MICRODATA) und gegen OECD.Stat sowie die offiziellen 2022-Werte validiert (mittlere Abweichung unter 1 Punkt). Kein Wert stammt aus Modellgedächtnis. Die publizierten OECD-Tabellen bleiben die Referenz und sollten bei Verfügbarkeit eingespielt werden. Kartengeometrie: Natural Earth (gemeinfrei) über johan/world.geo.json. Keine Anlage-, Rechts- oder Steuerberatung.",
   "audit_trail_url": "provenance/m302.dbom.json#audit_trail",
   "facts": [
     {
@@ -172,36 +171,6 @@
       "caveat": "Sekundärspiegel; Werte stimmen mit bekannten OECD-Tabellen überein (DE 2012: 514, 2015: 506)."
     },
     {
-      "id": "FACT_M302_RECALLED",
-      "verdict": "RECALLED_UNVERIFIED",
-      "class": "RECALLED",
-      "confidence": 0.65,
-      "status": "unverified",
-      "claim": "PISA-2018-Mittelwerte (Lesen/Mathematik/NaWi) für 78 Systeme aus Modellgedächtnis (PISA 2018 Vol. I Table I.1).",
-      "source_id": "SRC_MODEL_MEMORY",
-      "caveat": "Kalibrierung nur indirekt möglich; vor Nutzung durch OECD-Tabellen ersetzen. In Karte schraffiert."
-    },
-    {
-      "id": "FACT_M302_RECALLED_1215",
-      "verdict": "RECALLED_UNVERIFIED",
-      "class": "RECALLED",
-      "confidence": 0.6,
-      "status": "unverified",
-      "claim": "Lese- und NaWi-Mittelwerte 2012/2015 aller Systeme sowie Mathematik 2012/2015 der Nicht-OECD-Systeme aus Modellgedächtnis.",
-      "source_id": "SRC_MODEL_MEMORY",
-      "caveat": "Kalibrierung Mathematik 2015: 44/44 exakt gegen OECD.Stat-Spiegel."
-    },
-    {
-      "id": "FACT_M302_RECALLED_OECDAVG",
-      "verdict": "RECALLED_UNVERIFIED",
-      "class": "RECALLED",
-      "confidence": 0.7,
-      "status": "unverified",
-      "claim": "OECD-Durchschnitt 2018: Lesen 487, Mathematik 489, NaWi 489 (Modellgedächtnis); 2012/2015 aus OECD.Stat-Spiegel (Mathematik) bzw. Gedächtnis (Lesen/NaWi).",
-      "source_id": "SRC_MODEL_MEMORY",
-      "caveat": "Mitgliederbasis wechselt je Zyklus."
-    },
-    {
       "id": "FACT_M302_CYCLES",
       "verdict": "CONFIRMED",
       "class": "PISA_METHODOLOGY",
@@ -267,9 +236,9 @@
       "class": "QA",
       "confidence": 0.9,
       "status": "verified_internal",
-      "claim": "Kalibrierung: 44 Gedächtniswerte (Mathematik 2015) gegen OECD.Stat-Spiegel: 44 exakt, mittlere Abweichung 0,0 Punkte.",
+      "claim": "Frühere Gedächtniswerte (v1.0.0) wichen von den Mikrodaten-Mitteln im Mittel um 0,59 Punkte ab (n = 385, max. 3,6); sie sind in v1.1.0 vollständig ersetzt.",
       "source_id": "SRC_KIRENZ_OECDSTAT",
-      "caveat": "Nur Mathematik; kein Beleg für Lesen/NaWi oder 2018."
+      "caveat": "Historischer QA-Befund; keine Gedächtniswerte mehr im Datenpaket."
     },
     {
       "id": "FACT_M302_ENVSCI",
@@ -290,6 +259,36 @@
       "claim": "Systemvergleiche der Karte und Tabellen sind Aggregatbefunde; ihre Übertragung auf Individuen wäre ein ökologischer Fehlschluss (Klausel CL-03).",
       "source_id": "SRC_SCENARIO",
       "caveat": ""
+    },
+    {
+      "id": "FACT_M302_MICRODATA",
+      "verdict": "DERIVED",
+      "class": "DERIVED",
+      "confidence": 0.85,
+      "status": "derived",
+      "claim": "Ländermittel 2012, 2015, 2018 (Lesen/Mathematik/NaWi) für 65/73/80 Systeme sowie 2022 für Systeme ohne offiziellen Trendwert aus den OECD-Public-Use-Files berechnet: gewichtetes Mittel (W_FSTUWT) eines Plausible Value je Domäne (Aufbereitung kevinwang09/learningtower, Stichproben 480.174 / 519.334 / 612.004 / 613.744 Schüler:innen).",
+      "source_id": "SRC_LEARNINGTOWER",
+      "caveat": "Ein PV statt zehn und ohne Imputationsvarianz; Abweichung zur publizierten Tabelle typ. < 2 Punkte. Ersetzt die früheren RECALLED-Werte vollständig."
+    },
+    {
+      "id": "FACT_M302_OECDAVG_COMPUTED",
+      "verdict": "DERIVED",
+      "class": "DERIVED",
+      "confidence": 0.8,
+      "status": "derived",
+      "claim": "OECD-Mittel 2012/2015/2018 (Lesen/NaWi, 2018 auch Mathematik) als ungewichtetes Mittel der jeweiligen Mitgliederbasis (34/35/37) aus den Mikrodaten-Ländermitteln; Mathematik 2012/2015 aus OECD.Stat.",
+      "source_id": "SRC_LEARNINGTOWER",
+      "caveat": "Mitgliederbasis je Zyklus im Datenpaket dokumentiert."
+    },
+    {
+      "id": "FACT_M302_VALIDATION",
+      "verdict": "CONFIRMED",
+      "class": "QA",
+      "confidence": 0.9,
+      "status": "verified_internal",
+      "claim": "Validierung der Mikrodaten-Mittel: gegen OECD.Stat (Mathematik 2012/2015) n = 82, mittlere absolute Abweichung 0.55 Punkte, max. 2.4; gegen offizielle trendfähige 2022-Werte n = 222, 215 innerhalb von 2 Punkten, 3 Ausreißer > 4 Punkte durch abweichende Trendpopulation.",
+      "source_id": "SRC_KIRENZ_OECDSTAT",
+      "caveat": "Ausreißer im Datenpaket gelistet (validation_microdata.outliers_2022)."
     }
   ],
   "sources": [
@@ -334,11 +333,6 @@
       "url": "https://github.com/johan/world.geo.json"
     },
     {
-      "id": "SRC_MODEL_MEMORY",
-      "label": "Modellgedächtnis (Claude) — PISA 2012/2015/2018 Vol. I Tabellen; nicht abgerufen, nicht verifiziert",
-      "url": ""
-    },
-    {
       "id": "SRC_DE_FINREG",
       "label": "WpIG / WpHG / RDG / StBerG / FinDAG; DSGVO; VO (EU) 2024/1689 i. V. m. 2026/1744",
       "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
@@ -347,6 +341,11 @@
       "id": "SRC_SCENARIO",
       "label": "FinCoach AI Modell-/Darstellungsannahme",
       "url": ""
+    },
+    {
+      "id": "SRC_LEARNINGTOWER",
+      "label": "OECD PISA Public Use Files 2012/2015/2018/2022, aufbereitet in kevinwang09/learningtower (GitHub, student_full_data/*.rds; Kurationscode learningtower_masonry)",
+      "url": "https://github.com/kevinwang09/learningtower"
     }
   ],
   "audit_trail": [
@@ -365,9 +364,19 @@
     {
       "date": "2026-09-16",
       "event": "Datenregister mit 2.970 Zeilen (data/pisa-data-register.csv) erzeugt."
+    },
+    {
+      "date": "2026-09-16",
+      "event": "v1.1.0: 405 RECALLED-Zellen durch Mikrodaten-Mittel ersetzt (582 Zellen COMPUTED_MICRODATA); Validierung n=82 (OECD.Stat) und n=222 (2022) dokumentiert."
     }
   ],
   "changelog": [
+    {
+      "version": "1.1.0",
+      "date": "2026-09-16",
+      "type": "update",
+      "summary": "RECALLED-Werte vollständig durch aus OECD-Mikrodaten berechnete Ländermittel ersetzt; Validierung und Ausreißerliste im Datenpaket; Karte, Register und Disclaimer aktualisiert."
+    },
     {
       "version": "1.0.0",
       "date": "2026-09-16",

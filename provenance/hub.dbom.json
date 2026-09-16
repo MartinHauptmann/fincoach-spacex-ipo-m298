@@ -66,7 +66,7 @@
       "class": "STRUCTURE",
       "confidence": 0.95,
       "status": "verified_internal",
-      "claim": "M302 v1.0.0: Weltkarte 2012–2025, Ländervergleich 91 Systeme, Datenregister 2.970 Zeilen.",
+      "claim": "M302 v1.1.0: Weltkarte 2012–2025 (2012–2018 aus OECD-Mikrodaten berechnet), Ländervergleich 91 Systeme, Datenregister 3.149 Zeilen.",
       "source_id": "SRC_MODULES",
       "caveat": ""
     },
@@ -96,7 +96,7 @@
       "class": "QA",
       "confidence": 0.9,
       "status": "verified_internal",
-      "claim": "Offene Punkte: RECALLED-Historie, SE 2022/LE, Lesen/Mathe-Anteile nur DE/OECD, NaWi-Schulartkluft nutzervorgegeben, keine Mikrodaten.",
+      "claim": "Offene Punkte: 2012–2018 aus OECD-Mikrodaten berechnet statt aus publizierten Tabellen, SE 2022/LE Näherungen, Lesen/Mathe-Anteile nur DE/OECD, NaWi-Schulartkluft nutzervorgegeben, keine Mikrodaten-Analysen jenseits der Mittelwerte.",
       "source_id": "SRC_CHECK",
       "caveat": ""
     }

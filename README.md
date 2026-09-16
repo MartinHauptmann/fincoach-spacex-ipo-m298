@@ -78,7 +78,7 @@ Zweckbindung Bildung ↔ Bankgeschäft, BFSG/WCAG).
 | DERIVED_OFFICIAL / DERIVED_CI | aus offiziellen Werten berechnet (2022 = 2025 − Δ; SE = KI-Breite/3,92) | 2022-Mittel, 2025-SE |
 | OFFICIAL_COUNTRYNOTE | OECD-Ländernotiz, per Suchauszug verifiziert | DE-Detail (M300) |
 | SECONDARY_OECDSTAT | OECD.Stat-Spiegel 2003–2015 (kirenz/datasets) | Mathematik 2012/2015, 44 Systeme |
-| RECALLED_UNVERIFIED | Modellgedächtnis, nicht geprüft — **vor Nutzung ersetzen** | 2018 alle, 2012/2015 Lesen/NaWi |
+| COMPUTED_MICRODATA | aus OECD-Public-Use-Files gewichtet berechnet (ein Plausible Value; Abweichung zur Tabelle typ. < 2 Pkt.) | 2012/2015/2018 alle Domänen, 2022 ohne Trendwert |
 | EST / SCENARIO | Schätzung bzw. Modellannahme | SE 2022, Linking Error, DCM-Demo |
 
 ---
