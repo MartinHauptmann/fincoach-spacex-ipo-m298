@@ -4,10 +4,10 @@
   "module": {
     "id": "M302",
     "title": "PISA 2025 Deep Dive — Studie, Methodenwandel 2012–2025, Weltkarte, Ländervergleich, Datenregister",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "stichtag": "2026-09-16",
     "buildDate": "2026-09-16T00:00:00Z",
-    "predecessor_version": "1.0.0",
+    "predecessor_version": "1.1.0",
     "related_modules": [
       "M300",
       "M301"
@@ -17,23 +17,24 @@
       "data/pisa-2025-official.json",
       "data/pisa-history.json",
       "data/world-paths.json",
-      "data/pisa-data-register.csv"
+      "data/pisa-data-register.csv",
+      "data/pisa-percentiles.json"
     ],
     "cluster": "Financial Literacy / Learning Analytics",
     "tier": "T3",
     "welle": 46
   },
   "fact_summary": {
-    "total": 25,
+    "total": 27,
     "confirmed": 19,
-    "derived": 4,
+    "derived": 5,
     "recalled_unverified": 0,
-    "scenario_projection": 1,
+    "scenario_projection": 2,
     "interpretation": 1,
     "by_verdict": {
       "CONFIRMED": 19,
-      "DERIVED": 4,
-      "SCENARIO_PROJECTION": 1,
+      "DERIVED": 5,
+      "SCENARIO_PROJECTION": 2,
       "INTERPRETATION": 1
     }
   },
@@ -289,6 +290,26 @@
       "claim": "Validierung der Mikrodaten-Mittel: gegen OECD.Stat (Mathematik 2012/2015) n = 82, mittlere absolute Abweichung 0.55 Punkte, max. 2.4; gegen offizielle trendfähige 2022-Werte n = 222, 215 innerhalb von 2 Punkten, 3 Ausreißer > 4 Punkte durch abweichende Trendpopulation.",
       "source_id": "SRC_KIRENZ_OECDSTAT",
       "caveat": "Ausreißer im Datenpaket gelistet (validation_microdata.outliers_2022)."
+    },
+    {
+      "id": "FACT_M302_PCT_MICRODATA",
+      "verdict": "DERIVED",
+      "class": "DERIVED",
+      "confidence": 0.85,
+      "status": "derived",
+      "claim": "Perzentile P10/P25/P50/P75/P90 und Mittelwert je System, Zyklus (2012/2015/2018/2022) und Domäne (Lesen/Mathematik/NaWi) als gewichtete Quantile eines Plausible Value aus den OECD-Public-Use-Files; OECD-Mittel je Zyklus als Mittel der Mitglieder-Perzentile.",
+      "source_id": "SRC_LEARNINGTOWER",
+      "caveat": "Ein PV: Quantile leicht breiter/schmaler als der 10-PV-Wert möglich; 2025 NaWi bleibt offiziell (Figure I.2.1). Für Lesen/Mathematik/CPS 2025 publiziert Kap. 2 keine Perzentile."
+    },
+    {
+      "id": "FACT_M302_HERO",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": 0.6,
+      "status": "scenario",
+      "claim": "Hero-Grafik: gestapelter Punktstreifen der 91 NaWi-Mittelwerte 2025 (5-Punkte-Klassen) mit 95-%-KI, OECD-Referenz 482, Hervorhebung Deutschland und Stichprobenvorbehalte; Klick übergibt an S07.",
+      "source_id": "SRC_SCENARIO",
+      "caveat": "Darstellungsentscheidung; Werte offiziell (StatLink)."
     }
   ],
   "sources": [
@@ -368,9 +389,19 @@
     {
       "date": "2026-09-16",
       "event": "v1.1.0: 405 RECALLED-Zellen durch Mikrodaten-Mittel ersetzt (582 Zellen COMPUTED_MICRODATA); Validierung n=82 (OECD.Stat) und n=222 (2022) dokumentiert."
+    },
+    {
+      "date": "2026-09-16",
+      "event": "v1.2.0: Perzentile aus Mikrodaten (61/65/75/78 Systeme × 3 Domänen) berechnet; Register 7319 Zeilen."
     }
   ],
   "changelog": [
+    {
+      "version": "1.2.0",
+      "date": "2026-09-16",
+      "type": "update",
+      "summary": "S07 vollständig interaktiv: alle Systeme, alle Domänen, Zyklen 2012–2025, Sortierung, Filter, Werteanzeige, Markierungen, Tabellenfassung; Perzentil-Paket data/pisa-percentiles.json; Hero-Grafik (Punktstreifen 91 Systeme) im Kopf."
+    },
     {
       "version": "1.1.0",
       "date": "2026-09-16",
