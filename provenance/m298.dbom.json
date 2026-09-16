@@ -1,0 +1,65 @@
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": {
+    "id": "M298",
+    "title": "SpaceX — Der Weg zum $1,75-Billionen-IPO",
+    "version": "2.3.0",
+    "predecessor_version": "2.2.0",
+    "predecessor_archive": "archive/v1/modul-m298-spacex-ipo-globaler-vergleich.v1.1.0.html",
+    "comparison_report": "reports/compliance/m298-v1-vs-v2-comparison.html",
+    "stichtag": "2026-09-16",
+    "buildDate": "2026-09-16T00:00:00Z",
+    "external_dbom": "provenance/m298.dbom.json",
+    "visual_provenance": "provenance/m298-provenance.html"
+  },
+  "fact_summary": {
+    "total": 8,
+    "confirmed_primary": 1,
+    "scenario_projection": 7,
+    "by_class": {
+      "CONFIRMED": 1,
+      "SCENARIO_PROJECTION": 7
+    }
+  },
+  "honest_disclosure": "SpaceX ist seit dem Going-Live am 12.06.2026 boersennotiert (Ticker SPCX, NASDAQ; Ausgabepreis $135,00/Aktie). Das LLM-Trainings-Wissen hat einen Cutoff vor 2026; alle Bewertungs-/Finanz-/Kursdaten sind nutzer-/medien-/report-vorgegeben und von FinCoach AI NICHT unabhaengig SEC-verifiziert. v2.3.0 integriert einen institutionellen Equity-Research-Report Q3 2026 (Sep 2026): Rating Halten/Neutral, Kurs $148,50, Kursziel 12M $162, FY2025-Umsatz $18,7 Mrd. (+33%) bei GAAP-Nettoverlust -$4,94 Mrd., Segmente Starlink/Launch/SpaceXAI, SOTP-Fair-Value $150-165/Aktie, Lock-up-Expiry (~911 Mio. Aktien), Musk ~85% Stimmrechte/~42% Kapital. HINWEIS ZUR DISKREPANZ: Die zuvor (v2.2.0) aus einem Medien-/Intelligence-Report uebernommenen Momentum-Zahlen (Kurs $185, Marktkap. ~$2,42 Bln., Peak ~$2,75 Bln., 'ueberholt Amazon') werden durch die konservativere, fundamentale Q3-Institutionalanalyse nicht gestuetzt (SOTP-Segmentsumme ~$300-335 Mrd.) und gelten als ueberholt/strittig. Zudem ist der Report selbst intern inkonsistent (per-Aktie-Fair-Value vs. Segment-EV-Summe implizieren stark abweichende Aktienzahlen) und bleibt als SCENARIO_PROJECTION markiert. Keine Anlage-, Steuer- oder Rechtsberatung.",
+  "changelog": [
+    { "version": "2.3.0", "date": "2026-09-16", "type": "update", "summary": "Q3-2026-Research integriert: Rating Halten/Neutral, Kurs $148,50 (Konsolidierung nach ATH >$220), Kursziel 12M $162; FY2025-Zahlen (Umsatz $18,7 Mrd. +33%, Nettoverlust -$4,94 Mrd.), Segmentanalyse (Starlink/Launch/SpaceXAI), SOTP-Fair-Value $150-165/Aktie, Governance/Lock-up. Fruehere Momentum-Zahlen ($185 / ~$2,42 Bln. / Peak ~$2,75 Bln.) als ueberholt/strittig gekennzeichnet. Externe M-DBOM mit facts-Array erstmals angelegt (Live-Audit aufgeloest)." },
+    { "version": "2.2.0", "date": "2026-06-19", "type": "update", "summary": "Post-IPO-Update: Marktdynamik und reportierte Zuteilung (85:10:5, ING ~25% / Trade Republic ~12,9%, Retail ~30%) aus Intelligence-Report integriert (nicht unabhaengig verifiziert); Verweis auf spacex-update.html." },
+    { "version": "2.1.0", "date": "2026-06-19", "type": "major", "summary": "Going-Live: IPO am 12.06.2026 ($135/Aktie, SPCX/NASDAQ), Marktkap. ~$2,42 Bln., Free Float ~5%; Umstellung IFRS-13-Level-3 auf beobachtbaren Marktpreis." },
+    { "version": "2.0.0", "date": "2026-05-20", "type": "major", "summary": "S-1-Filing und Pre-IPO-Neubewertung (~$1.750 Mrd.), SOTP inkl. xAI, globaler Vergleich, ITAR-Huerden." },
+    { "version": "1.1.0", "date": "2024-12", "type": "base", "summary": "Erstfassung: $350-Mrd.-Tender-Offer, Bewertungshistorie, Starlink-Oekonomie (archiviert)." }
+  ],
+  "audit_trail_url": "provenance/m298.dbom.json#audit_trail",
+  "facts": [
+    { "id": "FACT_SPACEX_TENDER_DEC_2024", "verdict": "CONFIRMED", "class": "PRIMARY_INSTITUTIONAL", "confidence": 0.9, "status": "verified_secondary",
+      "claim": "Ein Tender-Offer im Dezember 2024 bewertete SpaceX mit rund $350 Mrd. ($185/Aktie, Sekundaertransaktion mit ~$500 Mio. Eigenrueckkauf).",
+      "source_id": "SRC_BLOOMBERG_CNBC", "caveat": "Sekundaerquellen (Bloomberg/CNBC), gut belegt; keine SEC-Primaerdaten." },
+    { "id": "FACT_SPACEX_VAL_S1_2026_PROJECTED", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.5, "status": "scenario",
+      "claim": "S-1-IPO-Zielbewertung (Mai 2026) ~$1.750 Mrd.; IPO 12.06.2026 zu $135/Aktie (SPCX/NASDAQ); Post-IPO-Kursverlauf und daraus abgeleitete Marktkapitalisierung/Multiples.",
+      "source_id": "SRC_SCENARIO", "caveat": "Nutzer-/medienvorgegeben, nicht primaerquellig verifiziert; Post-IPO-Momentum-Zahlen (v2.2.0) durch Q3-Analyse ueberholt/strittig." },
+    { "id": "FACT_XAI_MERGER_FEB_2026", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.45, "status": "scenario",
+      "claim": "Konsolidierung/Integration von xAI (Grok, Colossus) als Sparte SpaceXAI im Februar 2026.",
+      "source_id": "SRC_SCENARIO", "caveat": "Nicht durch LLM-Wissen bestaetigt; nutzer-/reportvorgegeben." },
+    { "id": "FACT_SPCX_Q3_2026_ASSESSMENT", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.5, "status": "scenario",
+      "claim": "Institutioneller Equity-Research-Report Q3 2026 (Sep 2026): Kurs $148,50, Rating Halten/Neutral, Kursziel 12M $162; IPO-Volumen $86 Mrd.; Erstkurs $160,95, Allzeithoch >$220, danach Konsolidierung ~$148.",
+      "source_id": "SRC_RESEARCH_Q3_2026", "caveat": "Report-/nutzervorgegeben, nicht unabhaengig verifiziert; Rating/Kursziel sind Analystenmeinung. Erstkurs $160,95 weicht von der frueheren Angabe (~$150) ab." },
+    { "id": "FACT_SPCX_FY2025_FINANCIALS", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.5, "status": "scenario",
+      "claim": "FY2025: Gesamtumsatz $18,7 Mrd. (+33% YoY), GAAP-Nettoverlust -$4,94 Mrd. (primaer getrieben durch Aufbau der KI-Rechenzentren).",
+      "source_id": "SRC_RESEARCH_Q3_2026", "caveat": "Report-/nutzervorgegeben, nicht SEC-verifiziert." },
+    { "id": "FACT_SPCX_SEGMENTS_FY2025", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.5, "status": "scenario",
+      "claim": "Segmente FY2025: Starlink $11,4 Mrd. (61%, Op. +$4,4 Mrd., 10,3 Mio. Nutzer); Launch Services $4,1 Mrd. (22%, >85% US-Orbitalstarts); SpaceXAI $3,2 Mrd. (17%, Op. -$6,4 Mrd., Colossus 1 mit >200.000 NVIDIA-GPUs, NVIDIA ~$21 Mrd. via Aktientausch beteiligt).",
+      "source_id": "SRC_RESEARCH_Q3_2026", "caveat": "Report-/nutzervorgegeben, nicht SEC-verifiziert; zirkulaere NVIDIA-Finanzierung erhoeht Kapitalstruktur-Komplexitaet." },
+    { "id": "FACT_SPCX_SOTP_Q3_2026", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.5, "status": "scenario",
+      "claim": "SOTP-Bewertung (FY2026e): Starlink $165-180 Mrd. (22x EV/EBITDA auf ~$7,5 Mrd.), Launch ~$55 Mrd. (10x EV/Sales auf ~$5,5 Mrd.), SpaceXAI $80-100 Mrd.; impliziter fundamentaler Fair Value $150-165/Aktie; Marktpreis $148,50 reflektiert dies nahezu vollstaendig.",
+      "source_id": "SRC_RESEARCH_Q3_2026", "caveat": "Report-/nutzervorgegeben; intern inkonsistent (Segment-EV-Summe ~$300-335 Mrd. vs. per-Aktie-Fair-Value implizieren stark abweichende Aktienzahlen) — nicht verifiziert." },
+    { "id": "FACT_SPCX_GOVERNANCE_LOCKUP", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.55, "status": "scenario",
+      "claim": "Governance/Lock-up: Sperrfrist fuer ~911 Mio. Altaktien endet im Spaetsommer/Herbst 2026 (erwarteter Verkaufsdruck); Elon Musk kontrolliert ~85% der Stimmrechte bei ~42% Kapitalanteil (Class-B); 'Vera Rubin'-GPU-Cluster-Capex verschiebt den Konzern-Break-even.",
+      "source_id": "SRC_RESEARCH_Q3_2026", "caveat": "Report-/nutzervorgegeben, nicht unabhaengig verifiziert." }
+  ],
+  "sources": [
+    { "id": "SRC_RESEARCH_Q3_2026", "label": "Institutioneller Equity-Research-Report Q3 2026 (SPCX, Sep 2026) — nutzervorgegeben, nicht unabhaengig verifiziert" },
+    { "id": "SRC_BLOOMBERG_CNBC", "label": "Bloomberg / CNBC — Tender-Offer Dez. 2024 (~$350 Mrd.)" },
+    { "id": "SRC_SCENARIO", "label": "FinCoach AI Szenario-/nutzervorgegebene Annahme (didaktisch)" }
+  ]
+}
