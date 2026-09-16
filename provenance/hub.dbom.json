@@ -1,0 +1,130 @@
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": {
+    "id": "HUB",
+    "title": "PISA-Hub — Verknüpfungsargumentation der FinCoach-AI-PISA-Module",
+    "version": "1.0.0",
+    "stichtag": "2026-09-16",
+    "buildDate": "2026-09-16T00:00:00Z",
+    "predecessor_version": null,
+    "related_modules": [
+      "M300",
+      "M301",
+      "M302"
+    ],
+    "external_dbom": "provenance/hub.dbom.json",
+    "cluster": "Financial Literacy / Learning Analytics",
+    "tier": "T3",
+    "welle": 46
+  },
+  "fact_summary": {
+    "total": 7,
+    "confirmed": 6,
+    "interpretation": 1,
+    "by_verdict": {
+      "CONFIRMED": 6,
+      "INTERPRETATION": 1
+    }
+  },
+  "honest_disclosure": "Der Hub enthält keine eigenen PISA-Zahlen; jede Aussage verweist auf das Modul und die DBOM, in der sie belegt ist. Die Argumentationskette ist eine Ordnung der Belege, keine zusätzliche Evidenz. Keine Anlage-, Rechts- oder Steuerberatung.",
+  "audit_trail_url": "provenance/hub.dbom.json#audit_trail",
+  "facts": [
+    {
+      "id": "FACT_HUB_SCOPE",
+      "verdict": "CONFIRMED",
+      "class": "STRUCTURE",
+      "confidence": 0.95,
+      "status": "verified_internal",
+      "claim": "Drei Module bilden die PISA-Linie: M302 (Studie/Daten), M301 (Statistik/Explorer), M300 (Diagnostik/Finanzbildung/KI-Anforderungen).",
+      "source_id": "SRC_MODULES",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_HUB_M300",
+      "verdict": "CONFIRMED",
+      "class": "STRUCTURE",
+      "confidence": 0.95,
+      "status": "verified_internal",
+      "claim": "M300 v1.0.0: 33 klassifizierte Aussagen, DCM-Rechner, INFE-Simulator, REQ-01…10, CL-01…12.",
+      "source_id": "SRC_MODULES",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_HUB_M301",
+      "verdict": "CONFIRMED",
+      "class": "STRUCTURE",
+      "confidence": 0.95,
+      "status": "verified_internal",
+      "claim": "M301 v1.1.0: 91 Systeme + OECD aus StatLink, Statistik-Engine mit 10 Unit-Tests, Explainability-Glossar.",
+      "source_id": "SRC_MODULES",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_HUB_M302",
+      "verdict": "CONFIRMED",
+      "class": "STRUCTURE",
+      "confidence": 0.95,
+      "status": "verified_internal",
+      "claim": "M302 v1.0.0: Weltkarte 2012–2025, Ländervergleich 91 Systeme, Datenregister 2.970 Zeilen.",
+      "source_id": "SRC_MODULES",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_HUB_CRITERIA",
+      "verdict": "CONFIRMED",
+      "class": "QA",
+      "confidence": 0.9,
+      "status": "verified_internal",
+      "claim": "Kriterienkatalog (18 Kriterien) aus der Modulvorlage M298/M299; Status aus statischen Prüfläufen und Sichtprüfung 2026-09-16.",
+      "source_id": "SRC_CHECK",
+      "caveat": "Sichtprüfung durch den Autor; kein externes Audit."
+    },
+    {
+      "id": "FACT_HUB_CHAIN",
+      "verdict": "INTERPRETATION",
+      "class": "INTERPRETATION",
+      "confidence": 0.7,
+      "status": "interpretation",
+      "claim": "Die zwölfschrittige Argumentationskette und 35 Kanten sind eine redaktionelle Ordnung der Belege; sie fügen keine Evidenz hinzu.",
+      "source_id": "SRC_MODULES",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_HUB_OPEN",
+      "verdict": "CONFIRMED",
+      "class": "QA",
+      "confidence": 0.9,
+      "status": "verified_internal",
+      "claim": "Offene Punkte: RECALLED-Historie, SE 2022/LE, Lesen/Mathe-Anteile nur DE/OECD, NaWi-Schulartkluft nutzervorgegeben, keine Mikrodaten.",
+      "source_id": "SRC_CHECK",
+      "caveat": ""
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC_MODULES",
+      "label": "provenance/m300.dbom.json · m301.dbom.json · m302.dbom.json",
+      "url": ""
+    },
+    {
+      "id": "SRC_CHECK",
+      "label": "provenance/fincoach_module_check.py (statische Prüfung), Headless-Render 2026-09-16",
+      "url": ""
+    }
+  ],
+  "audit_trail": [
+    {
+      "date": "2026-09-16",
+      "event": "Hub v1.0.0 mit 25 Knoten, 35 Kanten, 12 Kettenschritten, Kriterienmatrix."
+    }
+  ],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-09-16",
+      "type": "base",
+      "summary": "Erstfassung der Verknüpfungs-App."
+    }
+  ]
+}

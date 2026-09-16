@@ -1,0 +1,378 @@
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": {
+    "id": "M302",
+    "title": "PISA 2025 Deep Dive — Studie, Methodenwandel 2012–2025, Weltkarte, Ländervergleich, Datenregister",
+    "version": "1.0.0",
+    "stichtag": "2026-09-16",
+    "buildDate": "2026-09-16T00:00:00Z",
+    "predecessor_version": null,
+    "related_modules": [
+      "M300",
+      "M301"
+    ],
+    "external_dbom": "provenance/m302.dbom.json",
+    "data_packages": [
+      "data/pisa-2025-official.json",
+      "data/pisa-history.json",
+      "data/world-paths.json",
+      "data/pisa-data-register.csv"
+    ],
+    "cluster": "Financial Literacy / Learning Analytics",
+    "tier": "T3",
+    "welle": 46
+  },
+  "fact_summary": {
+    "total": 25,
+    "confirmed": 18,
+    "derived": 2,
+    "recalled_unverified": 3,
+    "scenario_projection": 1,
+    "interpretation": 1,
+    "by_verdict": {
+      "CONFIRMED": 18,
+      "DERIVED": 2,
+      "RECALLED_UNVERIFIED": 3,
+      "SCENARIO_PROJECTION": 1,
+      "INTERPRETATION": 1
+    }
+  },
+  "honest_disclosure": "M302 ist der reine Studien-Deep-Dive zu PISA 2025. Alle 2025-Werte der 91 Systeme (Mittelwerte, 95-%-KI, Rangspannen, Perzentile und Kompetenzstufen in Naturwissenschaften, Veränderung 2022→2025 mit Signifikanzflag, Zehnjahrestrend) stammen aus dem offiziellen OECD-StatLink zu Band I Kapitel 2 (stat.link/xgs41b, Workbook v1 vom 08.09.2026). Da oecd.org aus der Build-Umgebung netzwerkseitig blockiert war, wurde die Datei aus dem öffentlichen GitHub-Repository TeancumTian/pisa-2025-analysis (MIT; OECD-Daten unter OECD Terms) bezogen und stichprobenartig gegen die per Suchauszug verifizierten Ländernotiz-Werte (DE 486/465/464, OECD 482/461/463, SGP, FRA) geprüft. 2022-Werte sind aus 2025-Wert und offizieller Veränderung berechnet (DERIVED). 2012/2015 liegen für Mathematik der OECD-Länder aus einem OECD.Stat-Spiegel vor (kirenz/datasets); alle übrigen 2012/2015-Werte, sämtliche 2018-Werte und der OECD-Durchschnitt 2018 stammen aus Modellgedächtnis (RECALLED_UNVERIFIED), sind in Karte, Tabellen und Register sichtbar markiert und vor belastbarer Nutzung durch OECD-Tabellen zu ersetzen. Eine Kalibrierung des Gedächtnisses gegen den OECD.Stat-Spiegel ergab 44 von 44 Werten exakt (nur Mathematik 2015), ersetzt aber keine Primärprüfung. Kartengeometrie: Natural Earth (gemeinfrei) über johan/world.geo.json. Keine Anlage-, Rechts- oder Steuerberatung.",
+  "audit_trail_url": "provenance/m302.dbom.json#audit_trail",
+  "facts": [
+    {
+      "id": "FACT_M302_RELEASE",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "PISA 2025 Band I 'Future-Ready Students' wurde am 08.09.2026 veröffentlicht; Kapitel-2-Daten als StatLink (stat.link/xgs41b) frei verfügbar; Mikrodaten nach Registrierung; LDW-Vollbericht 2027, Fremdsprachen 2027.",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_M302_PARTICIPATION",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.92,
+      "status": "verified_primary",
+      "claim": "91 Systeme, > 760.000 Schüler:innen, ~33 Mio. repräsentierte 15-Jährige; Erstteilnehmer Armenien, Duschanbe, Ecuador, Kenia, Region Kurdistan, Ruanda, Sambia; Stichprobenvorbehalt (*) für Albanien, Kanada, Niederlande, Neuseeland, Norwegen, USA.",
+      "source_id": "SRC_OECD_PISA25_VOL1",
+      "caveat": "Liste der *-Systeme aus StatLink-Tabellen (Namen mit *)."
+    },
+    {
+      "id": "FACT_M302_DESIGN",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.9,
+      "status": "verified_framework",
+      "claim": "Hauptdomäne Naturwissenschaften mit neuem Rahmen; Nebendomänen Lesen/Mathematik; LDW mit CPS-Skala (OECD 500); Umweltwissenschafts-Subskala (OECD 480); optionales Fremdsprachen-Assessment; KI-Nutzung im Fragebogen.",
+      "source_id": "SRC_OECD_PISA25_VOL1",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_M302_METHOD",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.92,
+      "status": "verified_framework",
+      "claim": "IRT-Skalierung, 10 Plausible Values, 80 BRR-Replikationsgewichte (Fay 0,5); Kompetenzstufen 1c–6; Ländervergleiche als Dreiteilung und Rangspannen; Veränderungen 2022→2025 über OECD average-35 (ohne Costa Rica, Luxemburg, Spanien); Langfristtrend über OECD-23.",
+      "source_id": "SRC_OECD_TECH_REPORT",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_M302_OECD2025",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "OECD-Mittel 2025: Naturwissenschaften 482, Lesen 461, Mathematik 463, CPS 500; Lesen/Mathematik niedrigste je gemessene OECD-Mittel; Veränderung OECD-35: NaWi −2,8 (n. s.), Lesen −14,3, Mathematik −9,4.",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": "Table I.2.6."
+    },
+    {
+      "id": "FACT_M302_TOP",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "Höchste NaWi-Mittel 2025: B-S-J-Z (China) 597, Singapur 560, Macau 541, Chinesisch-Taipeh 540, Japan 538, Estland 527, Korea 526; CPS: Macau 572, Singapur 563, B-S-J-Z 560, Japan 557.",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": "Table I.2.1 / I.2.4."
+    },
+    {
+      "id": "FACT_M302_DEU",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "Deutschland 2025: NaWi 485,5 (KI 479–492, Rang 15–34 von 91, 11–28 OECD), Lesen 465,3, Mathematik 463,8, CPS 497,5; P10 342 / P50 485 / P90 630, P90−P10 288,5; unter Stufe 2 26,8 %, Stufe 5/6 9,4 %; Δ 2022→2025 NaWi −6,9 (n. s.), Lesen −14,5 (sig.), Mathematik −11,0 (sig.); Zehnjahrestrend −24 / −44 / −45 (sig.).",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": "Rundung erklärt 486/465/464 der Ländernotiz."
+    },
+    {
+      "id": "FACT_M302_DEU_NOTE",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.9,
+      "status": "verified_secondary",
+      "claim": "Ländernotiz-Werte für Deutschland (Risikogruppen 34/32/27 %, Schulartkluft, ESCS 19 %/125 Punkte, Mobbing 31 %/5 %/−37, KI-Nutzung 50,2 %) wie in M300 verifiziert.",
+      "source_id": "SRC_OECD_LAENDERNOTIZ_DE",
+      "caveat": "Verifikationsprotokoll in provenance/m300.dbom.json."
+    },
+    {
+      "id": "FACT_M302_PCT",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "Perzentile P10/P25/P50/P75/P90 in Naturwissenschaften für alle 91 Systeme und das OECD-Mittel (351/411/484/552/610) aus Figure I.2.1; P90−P10 OECD 258,4.",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_M302_RANKS",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.95,
+      "status": "verified_primary",
+      "claim": "Die OECD berichtet Rangspannen (obere/untere Position, alle Systeme und nur OECD) und 95-%-KI je Mittelwert; Tables I.2.o3–o6.",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_M302_SE_FROM_CI",
+      "verdict": "DERIVED",
+      "class": "DERIVED",
+      "confidence": 0.9,
+      "status": "derived",
+      "claim": "Standardfehler 2025 = (KI-Obergrenze − KI-Untergrenze) / (2 · 1,96) aus den publizierten, auf ganze Punkte gerundeten KI; Rundungsfehler ≤ 0,3 Punkte.",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": "Nicht der publizierte SE des Annex B1; Abweichung durch KI-Rundung."
+    },
+    {
+      "id": "FACT_M302_DERIVED_2022",
+      "verdict": "DERIVED",
+      "class": "DERIVED",
+      "confidence": 0.9,
+      "status": "derived",
+      "claim": "2022-Mittelwerte = 2025-Mittelwert − offizielle Veränderung 2022→2025 (Table I.2.6) für 74 Systeme mit Trendbasis.",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": "Entspricht dem trendfähigen 2022-Wert der OECD, nicht zwingend dem 2022-Headline-Wert (Rundung, Ausschlüsse)."
+    },
+    {
+      "id": "FACT_M302_HIST_SEC",
+      "verdict": "CONFIRMED",
+      "class": "PISA_HISTORY",
+      "confidence": 0.9,
+      "status": "verified_secondary",
+      "claim": "Mathematik-Mittelwerte 2012 und 2015 für 44 Systeme (OECD-Länder plus HKG, MAC, SGP, TWN, RUS, BRA, PER, COL, IDN) aus einem OECD.Stat-Extrakt (kirenz/datasets).",
+      "source_id": "SRC_KIRENZ_OECDSTAT",
+      "caveat": "Sekundärspiegel; Werte stimmen mit bekannten OECD-Tabellen überein (DE 2012: 514, 2015: 506)."
+    },
+    {
+      "id": "FACT_M302_RECALLED",
+      "verdict": "RECALLED_UNVERIFIED",
+      "class": "RECALLED",
+      "confidence": 0.65,
+      "status": "unverified",
+      "claim": "PISA-2018-Mittelwerte (Lesen/Mathematik/NaWi) für 78 Systeme aus Modellgedächtnis (PISA 2018 Vol. I Table I.1).",
+      "source_id": "SRC_MODEL_MEMORY",
+      "caveat": "Kalibrierung nur indirekt möglich; vor Nutzung durch OECD-Tabellen ersetzen. In Karte schraffiert."
+    },
+    {
+      "id": "FACT_M302_RECALLED_1215",
+      "verdict": "RECALLED_UNVERIFIED",
+      "class": "RECALLED",
+      "confidence": 0.6,
+      "status": "unverified",
+      "claim": "Lese- und NaWi-Mittelwerte 2012/2015 aller Systeme sowie Mathematik 2012/2015 der Nicht-OECD-Systeme aus Modellgedächtnis.",
+      "source_id": "SRC_MODEL_MEMORY",
+      "caveat": "Kalibrierung Mathematik 2015: 44/44 exakt gegen OECD.Stat-Spiegel."
+    },
+    {
+      "id": "FACT_M302_RECALLED_OECDAVG",
+      "verdict": "RECALLED_UNVERIFIED",
+      "class": "RECALLED",
+      "confidence": 0.7,
+      "status": "unverified",
+      "claim": "OECD-Durchschnitt 2018: Lesen 487, Mathematik 489, NaWi 489 (Modellgedächtnis); 2012/2015 aus OECD.Stat-Spiegel (Mathematik) bzw. Gedächtnis (Lesen/NaWi).",
+      "source_id": "SRC_MODEL_MEMORY",
+      "caveat": "Mitgliederbasis wechselt je Zyklus."
+    },
+    {
+      "id": "FACT_M302_CYCLES",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.85,
+      "status": "verified_framework",
+      "claim": "Methodenwandel: 2012 letzter papierbasierter Zyklus (Mathematik, 65 Systeme); 2015 computerbasiert mit neuem IRT-Modell (NaWi, 72); 2018 MST im Lesen und neuer Leserahmen (79); 2022 pandemiebedingt verschoben, neuer Mathematik-Rahmen, MST Mathematik (81); 2025 neuer NaWi-Rahmen, LDW/CPS, KI-Fragen, 91 Systeme.",
+      "source_id": "SRC_OECD_TECH_REPORT",
+      "caveat": "Teilnehmerzahlen je Zyklus nach OECD-Zählung (Länder und Volkswirtschaften)."
+    },
+    {
+      "id": "FACT_M302_TRENDSCOPE",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.88,
+      "status": "verified_framework",
+      "claim": "Trendvergleichbarkeit: Mathematik ab 2003, NaWi ab 2006, Lesen im aktuellen Format ab 2018, CPS ohne Trend; Linking Error erforderlich; Modus- und Rahmenbrüche 2015 und 2018.",
+      "source_id": "SRC_OECD_PISA25_VOL1",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_M302_OECDAVG",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.85,
+      "status": "verified_framework",
+      "claim": "OECD-Mitgliederbasis des Durchschnitts: 34 (2012), 35 (2015), 37 (2018), 38 (2022, 2025); Veränderungen 2022→2025 über OECD average-35, Langfristtrends über OECD-23.",
+      "source_id": "SRC_OECD_STATLINK_2025",
+      "caveat": "Table I.2.6 / Figure I.2.6."
+    },
+    {
+      "id": "FACT_M302_LINK",
+      "verdict": "CONFIRMED",
+      "class": "PISA_METHODOLOGY",
+      "confidence": 0.9,
+      "status": "verified_framework",
+      "claim": "Linking Error als Zusatzvarianz bei Zyklusvergleichen; seit 2015 v. a. länderspezifisches DIF; Signifikanz nur auf 95-%-Niveau inkl. LE.",
+      "source_id": "SRC_LINKING_ERROR",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_M302_MAP",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": 0.6,
+      "status": "scenario",
+      "claim": "Kartendarstellung: Plattkarte (Natural Earth 1:110m), Klassenbreiten 30 Punkte, Marker für flächenlose Systeme; B-S-J-Z färbt ganz China; Schraffur RECALLED, Punkte DERIVED.",
+      "source_id": "SRC_WORLD_GEOJSON",
+      "caveat": "Darstellungsentscheidung, keine OECD-Aussage; Länderzuordnung Ukraine/Region Kurdistan/Duschanbe nur als Marker."
+    },
+    {
+      "id": "FACT_M302_COMPLIANCE",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.9,
+      "status": "verified_framework",
+      "claim": "Klauseln CL-01…CL-12 geprüft: CL-04 bis CL-07 nicht einschlägig (keine Personendaten, keine Entscheidungen, kein KI-System); übrige erfüllt; Lizenzen OECD Terms/CC BY 4.0, Natural Earth gemeinfrei, MIT für Repository-Skripte.",
+      "source_id": "SRC_DE_FINREG",
+      "caveat": "Keine Rechtsberatung."
+    },
+    {
+      "id": "FACT_M302_CALIBRATION",
+      "verdict": "CONFIRMED",
+      "class": "QA",
+      "confidence": 0.9,
+      "status": "verified_internal",
+      "claim": "Kalibrierung: 44 Gedächtniswerte (Mathematik 2015) gegen OECD.Stat-Spiegel: 44 exakt, mittlere Abweichung 0,0 Punkte.",
+      "source_id": "SRC_KIRENZ_OECDSTAT",
+      "caveat": "Nur Mathematik; kein Beleg für Lesen/NaWi oder 2018."
+    },
+    {
+      "id": "FACT_M302_ENVSCI",
+      "verdict": "CONFIRMED",
+      "class": "PISA_2025_RESULT",
+      "confidence": 0.85,
+      "status": "verified_secondary",
+      "claim": "Umweltwissenschafts-Subskala OECD 480; Nicht-OECD-Mittel NaWi etwa 436–437; OECD-Spreizung NaWi 124 Punkte, über alle 91 Systeme 280 (Rwanda 317).",
+      "source_id": "SRC_TEANCUM_BRIEFING",
+      "caveat": "Aus Briefing zum StatLink (14.09.2026)."
+    },
+    {
+      "id": "FACT_M302_ECOLOGICAL",
+      "verdict": "INTERPRETATION",
+      "class": "INTERPRETATION",
+      "confidence": 0.7,
+      "status": "interpretation",
+      "claim": "Systemvergleiche der Karte und Tabellen sind Aggregatbefunde; ihre Übertragung auf Individuen wäre ein ökologischer Fehlschluss (Klausel CL-03).",
+      "source_id": "SRC_SCENARIO",
+      "caveat": ""
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC_OECD_STATLINK_2025",
+      "label": "OECD (2026): PISA 2025 Results (Volume I), Chapter 2 StatLink — Tables I.2.1–I.2.o10, Figures I.2.1–I.2.o3 (Workbook v1, 08.09.2026)",
+      "url": "https://stat.link/xgs41b"
+    },
+    {
+      "id": "SRC_OECD_PISA25_VOL1",
+      "label": "OECD (2026): PISA 2025 Results (Volume I) — Future-Ready Students",
+      "url": "https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en.html"
+    },
+    {
+      "id": "SRC_OECD_LAENDERNOTIZ_DE",
+      "label": "OECD (2026): PISA 2025 Ergebnisse (Band I) — Ländernotiz Deutschland",
+      "url": "https://www.oecd.org/de/publications/pisa-2025-ergebnisse-band-i_eade94cd-de/deutschland_8a1ce578-de.html"
+    },
+    {
+      "id": "SRC_OECD_TECH_REPORT",
+      "label": "OECD: PISA Technical Reports / PISA 2025 Technical Standards / Integrated Design",
+      "url": "https://www.oecd.org/content/dam/oecd/en/about/programmes/edu/pisa/publications/technical-standards/PISA_2025_Technical_Standards.pdf"
+    },
+    {
+      "id": "SRC_LINKING_ERROR",
+      "label": "Robitzsch & Lüdtke (2023): An Examination of the Linking Error Currently Used in PISA, Measurement",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/15366367.2023.2198915"
+    },
+    {
+      "id": "SRC_TEANCUM_BRIEFING",
+      "label": "TeancumTian/pisa-2025-analysis (GitHub, MIT): StatLink-Kopie und Briefing vom 14.09.2026",
+      "url": "https://github.com/TeancumTian/pisa-2025-analysis"
+    },
+    {
+      "id": "SRC_KIRENZ_OECDSTAT",
+      "label": "kirenz/datasets pisa.csv — OECD.Stat-Extrakt PISA-Mittelwerte 2003–2015 (Mathematik, TOT)",
+      "url": "https://github.com/kirenz/datasets/blob/master/pisa.csv"
+    },
+    {
+      "id": "SRC_WORLD_GEOJSON",
+      "label": "johan/world.geo.json — Natural Earth 1:110m Ländergrenzen (gemeinfrei)",
+      "url": "https://github.com/johan/world.geo.json"
+    },
+    {
+      "id": "SRC_MODEL_MEMORY",
+      "label": "Modellgedächtnis (Claude) — PISA 2012/2015/2018 Vol. I Tabellen; nicht abgerufen, nicht verifiziert",
+      "url": ""
+    },
+    {
+      "id": "SRC_DE_FINREG",
+      "label": "WpIG / WpHG / RDG / StBerG / FinDAG; DSGVO; VO (EU) 2024/1689 i. V. m. 2026/1744",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+    },
+    {
+      "id": "SRC_SCENARIO",
+      "label": "FinCoach AI Modell-/Darstellungsannahme",
+      "url": ""
+    }
+  ],
+  "audit_trail": [
+    {
+      "date": "2026-09-16",
+      "event": "Quellenprüfung: oecd.org, gpseducation, worldbank, wikipedia, datahub, ourworldindata per Egress-Proxy blockiert; raw.githubusercontent.com erreichbar."
+    },
+    {
+      "date": "2026-09-16",
+      "event": "StatLink-Workbook (1,08 MB) bezogen; 47 Blätter; Extraktion von 91 Systemen; Konsistenzprüfung gegen Ländernotiz DE/OECD/SGP/FRA bestanden."
+    },
+    {
+      "date": "2026-09-16",
+      "event": "Historienpaket: 84 OECD.Stat-Zellen, 222 berechnete 2022-Zellen, 360 offizielle 2025-Zellen, 405 Gedächtniszellen (markiert); Kalibrierung 44/44."
+    },
+    {
+      "date": "2026-09-16",
+      "event": "Datenregister mit 2.970 Zeilen (data/pisa-data-register.csv) erzeugt."
+    }
+  ],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-09-16",
+      "type": "base",
+      "summary": "Erstfassung: Studiendesign, Methodenwandel 2012–2025, Weltkarte über fünf Erhebungen mit Klassen-Schraffur, Ländervergleich aller 91 Systeme mit KI und Rangspannen, Deutschland-Detail, Verteilung P10–P90, Datenregister, Compliance-Klauseln, Live-QA."
+    }
+  ]
+}

@@ -49,6 +49,18 @@
   from = "/explorer"
   to = "/m301.html"
   status = 200
+[[redirects]]
+  from = "/m302"
+  to = "/m302.html"
+  status = 200
+[[redirects]]
+  from = "/deep-dive"
+  to = "/m302.html"
+  status = 200
+[[redirects]]
+  from = "/hub"
+  to = "/pisa-hub.html"
+  status = 200
 
 # 404 -> Startseite (SPA-artiges Fallback)
 [[redirects]]

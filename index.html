@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="fonts.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-  tailwind.config = { theme: { extend: {
+  if(window.tailwind) tailwind.config = { theme: { extend: {
     colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', muted:'#64748B', border:'#1E293B' } },
     fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
   }}}
@@ -50,6 +50,8 @@
       <a href="spacex-update.html" class="hover:text-tngb-cyan">Update</a>
       <a href="m300.html" class="hover:text-tngb-cyan">PISA 2025</a>
       <a href="m301.html" class="hover:text-tngb-cyan">PISA Explorer</a>
+      <a href="m302.html" class="hover:text-tngb-cyan">PISA 2025 Deep Dive</a>
+      <a href="pisa-hub.html" class="hover:text-tngb-cyan">PISA-Hub</a>
       <a href="impressum.html" class="hover:text-tngb-cyan">Impressum</a>
       <a href="datenschutz.html" class="hover:text-tngb-cyan">Datenschutz</a>
     </nav>
@@ -84,6 +86,9 @@
   <a href="ipo-prozess.html" class="card p-6 block hover:border-tngb-cyan transition-colors"><h3 class="text-tngb-orange font-bold mb-2">Prozess &amp; Beteiligte →</h3><p class="text-sm text-slate-300">Komplette Übersicht des IPO-Prozesses: alle Phasen, sämtliche Beteiligte und Zustimmungen, die Rolle der Banken (inkl. Sozial-/Ethikbanken) und alle Pflichten vor &amp; nach dem Börsengang.</p></a>
   <a href="m299.html" class="card p-6 block hover:border-tngb-cyan transition-colors"><h3 class="text-tngb-gold font-bold mb-2">Deep-Dive: IPO-Zuteilung (M299) →</h3><p class="text-sm text-slate-300">Vollwertiges FinCoach-AI-Modul zur internationalen Zuteilung: Quoten-Kaskade von der Gesamtemission über Länder &amp; Konsortium bis zu Broker-/Direktbanken in Deutschland — mit Simulator, M-DBOM-Provenienz und Compliance-/Datenqualitäts-/Styleguide-Checks.</p></a>
   <a href="spacex-update.html" class="card p-6 block hover:border-tngb-cyan transition-colors md:col-span-3 border-l-4 border-tngb-gold"><h3 class="text-tngb-gold font-bold mb-2">★ SpaceX Update — Post-IPO-Stand &amp; Zuteilung →</h3><p class="text-sm text-slate-300">Kompakter Single-Pager zum aktuellen Stand (Kurs $185, ~$2,42 Bln.) mit Fokus auf die <strong>Zuteilung</strong>: 85:10:5-Prinzip (USA/Europa/Asien), Broker-Quoten (ING ~25 %, Trade Republic ~12,9 %) und Zuteilungs-Simulator. Kurs-/Bewertungs-/Zuteilungszahlen sind report-/medienvorgegeben und nicht unabhängig verifiziert.</p></a>
+  <a href="m301.html" class="card p-6 block hover:border-tngb-cyan transition-colors border-l-4 border-tngb-emerald"><h3 class="text-tngb-emerald font-bold mb-2">Werkzeug M301: PISA Explorer →</h3><p class="text-sm text-slate-300">3D-Ländervergleich über alle 91 PISA-2025-Systeme mit frei belegbaren Achsen, Zeittrajektorien 2022→2025, Standardfehlern aus den publizierten OECD-Konfidenzintervallen, Signifikanz mit Linking Error, Explainability-Glossar und Hypothesen-Panel.</p></a>
+  <a href="m302.html" class="card p-6 block hover:border-tngb-cyan transition-colors border-l-4 border-tngb-gold"><h3 class="text-tngb-gold font-bold mb-2">★ Neu · Deep-Dive M302: PISA 2025 →</h3><p class="text-sm text-slate-300">Reiner Studien-Deep-Dive: Design, Methodenwandel 2012–2025, Weltkarte über fünf Erhebungen mit sichtbarer Datenherkunft, Ländervergleich aller 91 Systeme mit Konfidenzintervallen und Rangspannen (OECD-StatLink), Deutschland-Detail, Datenregister mit 2.970 gekennzeichneten Zahlen.</p></a>
+  <a href="pisa-hub.html" class="card p-6 block hover:border-tngb-cyan transition-colors border-l-4 border-tngb-lavender"><h3 class="text-tngb-lavender font-bold mb-2">PISA-Hub · Info-App →</h3><p class="text-sm text-slate-300">Argumentationsgraph, zwölfschrittige Kette und Kriterien-Matrix: wie M300, M301 und M302 logisch zusammenhängen.</p></a>
 </section>
 
 <!-- PRIVATFIRMEN-DISCLAIMER (M-DBOM-Pflicht) -->

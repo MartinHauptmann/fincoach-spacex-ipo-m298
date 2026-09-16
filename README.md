@@ -16,6 +16,8 @@ SpaceX-IPO-Analyse mit globalem Vergleich.
 | `m299.html` | Deep-Dive IPO-Zuteilung (M299): Quoten-Kaskade, Simulator, M-DBOM-Provenienz, Compliance-/Datenqualitäts-Checks |
 | `m300.html` | Deep-Dive PISA 2025 & Finanzbildung (M300): verifizierte OECD-Ergebnisse, Verifikationsprotokoll, Diagnostik-Instrumente, DCM-Rechner, OECD/INFE-Kopplung, KI-Anforderungskatalog mit Abnahmetests, Compliance-Klauseln CL-01…CL-12, Live-QA |
 | `m301.html` | PISA Explorer (M301): 3D-Ländervergleich mit Zeittrajektorien, SE/KI/Signifikanz inkl. Linking Error, Explainability-Glossar, Diagnostik-Hypothesen; Daten in `data/pisa-explorer.json`, Statistik-Engine `assets/pisa-stats.js` (Tests: `node assets/pisa-stats.test.js`) |
+| `m302.html` | PISA 2025 Deep Dive (M302): Studiendesign, Methodenwandel 2012–2025, Weltkarte über fünf Erhebungen, Ländervergleich 91 Systeme (OECD-StatLink), Datenregister; Daten in `data/pisa-2025-official.json`, `data/pisa-history.json`, `data/world-paths.json`, `data/pisa-data-register.csv` |
+| `pisa-hub.html` | PISA-Hub: interaktiver Argumentationsgraph, 12-Schritte-Kette und Kriterien-Matrix über M300/M301/M302 |
 | `provenance/*.dbom.json` | M-DBOM-Provenienz je Modul (Fakten, Verdicts, Konfidenzen, Quellen, Audit-Trail) |
 | `provenance/fincoach_module_check.py` | Statische Modul-Prüfung (Compliance / Datenqualität / Styleguide) — `python3 provenance/fincoach_module_check.py m300.html` |
 | `impressum.html` | Impressum nach § 5 DDG / § 18 MStV (ausgefüllt) |
@@ -52,7 +54,7 @@ Jedes Modul muss vor dem Release die dreistufige Prüfung bestehen (identisch al
 und als statischer Check per Skript):
 
 ```bash
-python3 provenance/fincoach_module_check.py m299.html m300.html m301.html   # Exit 0 = alle Pflichtprüfungen bestanden
+python3 provenance/fincoach_module_check.py m299.html m300.html m301.html m302.html pisa-hub.html   # Exit 0 = alle Pflichtprüfungen bestanden
 node assets/pisa-stats.test.js                                              # Statistik-Engine (M301)
 ```
 
@@ -65,6 +67,19 @@ node assets/pisa-stats.test.js                                              # St
 M300 enthält zusätzlich den Anforderungskatalog REQ-01…REQ-10 (Abnahmetests für KI-Lernsysteme) und
 die Compliance-Klauseln CL-01…CL-12 (DSGVO Art. 8/22/35, EU-KI-VO Anhang III inkl. Digital-Omnibus-Fristen,
 Zweckbindung Bildung ↔ Bankgeschäft, BFSG/WCAG).
+
+---
+
+### Datenherkunft der PISA-Module (Kurzfassung)
+
+| Klasse | Bedeutung | Vorkommen |
+|---|---|---|
+| OFFICIAL_STATLINK | OECD StatLink Band I 2025, Kap. 2 (stat.link/xgs41b) | alle 2025-Werte, 91 Systeme |
+| DERIVED_OFFICIAL / DERIVED_CI | aus offiziellen Werten berechnet (2022 = 2025 − Δ; SE = KI-Breite/3,92) | 2022-Mittel, 2025-SE |
+| OFFICIAL_COUNTRYNOTE | OECD-Ländernotiz, per Suchauszug verifiziert | DE-Detail (M300) |
+| SECONDARY_OECDSTAT | OECD.Stat-Spiegel 2003–2015 (kirenz/datasets) | Mathematik 2012/2015, 44 Systeme |
+| RECALLED_UNVERIFIED | Modellgedächtnis, nicht geprüft — **vor Nutzung ersetzen** | 2018 alle, 2012/2015 Lesen/NaWi |
+| EST / SCENARIO | Schätzung bzw. Modellannahme | SE 2022, Linking Error, DCM-Demo |
 
 ---
 
