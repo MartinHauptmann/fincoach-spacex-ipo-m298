@@ -85,7 +85,7 @@ def build(m):
     assert 'href="data/' not in h and "fetch('data/" not in h
     h=h.replace('''querySelector('link[href="fonts.css"]')''','''querySelector('link[href$="fonts.css"]')''')
     # Kein fetch() zur Laufzeit (R033: unter file:// keine Netzwerkfehler) — DBOM eingebettet, Pruefungen lesen inline
-    dj=json.load(open(os.path.join(ROOT,m['dbom']),encoding='utf-8'));dj['module']['id']=m['id'];dj['module']['external_dbom']=f'provenance/{m["mid"]}.dbom.json'
+    dj=json.load(open(os.path.join(ROOT,m['dbom']),encoding='utf-8'));dj['module']['id']=m['id'];dj['module']['external_dbom']=f'provenance/{m["mid"]}.dbom.json';dj['module']['related_modules']=[x['id'] for x in MODS.values() if x is not m]
     inline='<script type="application/json" id="dbom-inline">'+json.dumps(dj,ensure_ascii=False).replace('</','<\\/')+'</script>\n'
     h=h.replace('<script type="application/ld+json" id="module-provenance">',inline+'<script type="application/ld+json" id="module-provenance">',1)
     h=re.sub(r"fetch\('provenance/[a-z0-9]+\.dbom\.json'\)\.then\(r=>r\.json\(\)\)\.then\(d=>\{","Promise.resolve(JSON.parse(document.getElementById('dbom-inline').textContent)).then(d=>{",h)
