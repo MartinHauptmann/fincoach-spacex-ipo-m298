@@ -1,7 +1,7 @@
 {
  "meta": {
   "module": "M301",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "stichtag": "2026-09-16",
   "license": "OECD-Daten: OECD Terms & Conditions / CC BY 4.0, Quellenangabe je Wert; Aufbereitung FinCoach AI",
   "link_error_default": 3.0,
