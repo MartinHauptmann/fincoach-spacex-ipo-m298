@@ -99,9 +99,9 @@ pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\release-pisa.ps
 # 8a) Auditor einmalig Base-faehig machen (patches\run-audit-base-aware.patch, siehe Abschnitt 3):
 #     S-LINK-INTERN-RESOLVE prueft Links bei gesetztem -Base per HTTP relativ zur Seite statt gegen den Root-Ordner;
 #     S-TOKEN-FONT akzeptiert self-hosted @font-face (Inter, Space Grotesk, JetBrains Mono) als Alternative zum Google-Link.
-#     Ohne -Base bleibt das Verhalten unveraendert. Vorher pruefen, dass der Patch sauber anliegt (--check).
-git -C "C:\Users\User\AI Financecoach" apply --check "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\patches\run-audit-base-aware.patch"
-git -C "C:\Users\User\AI Financecoach" apply "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\patches\run-audit-base-aware.patch"
+#     Ohne -Base bleibt das Verhalten unveraendert. Anwendung textbasiert (git apply scheitert an CRLF im Arbeitsverzeichnis):
+pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\patches\apply-run-audit-patch.ps1" -DryRun
+pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\patches\apply-run-audit-patch.ps1"
 
 # 8b) Golden-Baseline der vier Module einmalig gegen die Publish-Fassung setzen (die erste Baseline entstand
 #     beim Root-Lauf mit 404-Seiten und altem Build-Stand; ueberschreibt nur scripts\regression\golden\modul-m479..m482.json)
