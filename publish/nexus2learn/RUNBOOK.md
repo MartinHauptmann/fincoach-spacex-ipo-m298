@@ -24,6 +24,7 @@ E-Bike-Modul, nur auf der Website, im Root unbekannt). Nummern vergibt ausschlie
 | `out/snippets/*` | `index-json-entries.json`, `modules-public-add.txt`, `sitemap-lines.xml`, `index-html-card.html` |
 | `media/m479.jpg` … `media/m482.jpg` | Hero-Teaser 640×400 (Konvention `generate-teasers.mjs`); `release-modules.ps1` erzeugt sie ohnehin neu |
 | `media/pisa-2025-serie-1200x627.png` | Open-Graph-Bild der Serie → `publish-nexus2learn/assets/og/` (alle vier Module verweisen darauf) |
+| `release-pisa.ps1` | gezielter Freigabe-Transfer nur der PISA-Serie ins Publish-Paket (Ersatz für `release-modules.ps1`, siehe Warnung in Abschnitt 2) |
 | `qa-and-teasers.js` | Headless-Prüfung (Fehler, externe Requests, Live-QA, Rücklink, 375 px) + Teaser; Playwright erforderlich |
 
 Was in allen vier Fassungen gleich ist: kein `fetch()` zur Laufzeit (DBOM eingebettet als `#dbom-inline`, Regel R033 file://-Fallback) · Fakten-/Quellen-IDs (`FACT_*`, `SRC_*`) unverändert, damit alle
@@ -80,26 +81,36 @@ Chart.js dort aus `vendor/chart-4.4.3.min.js` (statt CDN 4.4.4, API-kompatibel).
 
 ## 2 · Freigabe im Publish-Paket (`C:\Users\User\AI Financecoach\publish-nexus2learn` = Repo `nexus2learn-website`)
 
+**Warnung (Befund 2026-09-24): `release-modules.ps1` nicht aus diesem Root-Stand ausführen.** Das Skript entfernt alle
+HTMLs in `module\`, die es nicht in Root-Registry + Allowlist findet. Der Root kennt acht öffentliche Module nicht
+(M449, M465, M466, M468, M469, M471, M477, M478 wurden außerhalb des Root gebaut); der Lauf würde sie von der Website
+löschen. Zusätzlich stoppt der Companion-Drift-Wächter (services/agent-audit-renderer.js, templates/hero-visual/*.js
+sind auf der Website neuer als im Root). Beides ist unabhängig von PISA und vorher im Root zu bereinigen.
+
+Deshalb gezielter Transfer nur der PISA-Serie mit dem beiliegenden Skript (macht für die vier Module exakt die
+Schritte von `release-modules.ps1`, fasst nichts anderes an):
+
 ```powershell
-# 6) Allowlist: die vier IDs in modules-public.json ergaenzen (Snippet: out\snippets\modules-public-add.txt)
-notepad "C:\Users\User\AI Financecoach\publish-nexus2learn\modules-public.json"
+# 6) Vorschau, was passieren wuerde
+pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\release-pisa.ps1" -DryRun
+# 7) Transfer: Module mit Link-Rewrite nach module\, Companions, index.json-Eintraege, Teaser, OG-Bild, Sitemap, Allowlist
+pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\release-pisa.ps1"
 
-# 7) Transfer: kopiert HTML + Companions nach module\, schreibt module\index.json, erzeugt Teaser
-pwsh "C:\Users\User\AI Financecoach\publish-nexus2learn\tools\release-modules.ps1"
-#    Fallback ohne Teaser-Toolchain:
-pwsh "C:\Users\User\AI Financecoach\publish-nexus2learn\tools\release-modules.ps1" -SkipTeasers
-Copy-Item "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\media\m*.jpg" "C:\Users\User\AI Financecoach\publish-nexus2learn\module\assets\teaser\"   # nur bei uebereinstimmenden Nummern
-
-# 8) Sitemap: vier Zeilen aus out\snippets\sitemap-lines.xml eintragen
-notepad "C:\Users\User\AI Financecoach\publish-nexus2learn\sitemap.xml"
+# 8) Gates gegen das Publish-Paket (Vorschau-Server aus Abschnitt 1 laeuft auf 8089)
+foreach ($f in 'modul-m479-pisa-2025-deep-dive.html','modul-m480-pisa-explorer.html','modul-m481-pisa-2025-finanzbildung.html','modul-m482-pisa-hub.html') {
+  pwsh "C:\Users\User\AI Financecoach\scripts\styleguide\audit-module.ps1" -Module $f -Base http://localhost:8089/publish-nexus2learn/module
+  node "C:\Users\User\AI Financecoach\scripts\regression\check-interactive-diagrams.mjs" $f --base=http://localhost:8089/publish-nexus2learn/module
+  pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module $f -Base http://localhost:8089/publish-nexus2learn/module
+}
 
 # 9) Startseite (empfohlen): Karte aus out\snippets\index-html-card.html als erste Karte in
 #    Sektion "AKTUELL · FINCOACH AI ANALYSEN"
 notepad "C:\Users\User\AI Financecoach\publish-nexus2learn\index.html"
 
-# 10) Veroeffentlichen (Netlify-Auto-Deploy)
+# 10) Veroeffentlichen (Netlify-Auto-Deploy) — vorher git status pruefen: nur PISA-Dateien, index.json, Allowlist, Sitemap, ggf. index.html
+git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" status
 git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" add -A
-git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" commit -m "feat(pisa-2025): Serie freigegeben (Deep Dive, Explorer, Finanzbildung, Hub)"
+git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" commit -m "feat(pisa-2025): Serie freigegeben (M479 Deep Dive, M480 Explorer, M481 Finanzbildung, M482 Hub)"
 git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" push
 ```
 
