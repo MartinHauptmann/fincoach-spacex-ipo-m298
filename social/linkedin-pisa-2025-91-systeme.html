@@ -31,6 +31,10 @@ svg{width:100%;height:auto;display:block}
 .legend .sw{display:inline-block;width:14px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid rgba(255,255,255,.15)}
 .foot{font-size:13px;color:#7C8AA0;line-height:1.4;border-top:1px solid var(--border);padding-top:12px;display:flex;justify-content:space-between;gap:24px}
 .foot b{color:#A8B3C4;font-weight:600}
+.card.og{width:1200px;height:627px;padding:34px 44px 30px;display:grid;grid-template-columns:330px 1fr;grid-template-rows:auto 1fr;column-gap:26px;row-gap:8px}
+.og .top{grid-column:1/3}.og h1{font-size:40px;margin-top:0}.og .sub{font-size:15.5px;max-width:330px}.og .kpis,.og .legend{display:none}.og .foot{grid-column:1/3;padding-top:8px;font-size:11.5px;align-self:end}
+.og .left{display:flex;flex-direction:column;gap:12px}.og .chart{grid-column:2;grid-row:2;align-items:flex-start}.og .chart svg{height:432px;width:auto;max-width:100%}
+.og .mini{display:flex;flex-direction:column;gap:8px;margin-top:4px}.og .mini div{font-size:14px;color:#CBD5E1;line-height:1.35}.og .mini b{font-family:'Space Grotesk',Inter,sans-serif;font-size:26px;color:#fff;display:block;line-height:1}
 </style>
 </head>
 <body>
@@ -39,8 +43,8 @@ svg{width:100%;height:auto;display:block}
     <div class="brand"><svg viewBox="0 0 100 100" width="40" height="40" aria-hidden="true"><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity=".3" stroke="#E6399A" stroke-width="2"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity=".3" stroke="#00CFFF" stroke-width="2"/><path d="M 46,95 L 46,18 A 8,8 0 0 1 62,18 L 62,95 Z" fill="#00CC7A" fill-opacity=".3" stroke="#00CC7A" stroke-width="2"/><path d="M 66,95 L 66,40 A 8,8 0 0 1 82,40 L 82,95 Z" fill="#DFAF0F" fill-opacity=".3" stroke="#DFAF0F" stroke-width="2"/></svg><div><b>FinCoach AI</b><br><span>by TheNextGenerationBanking.com</span></div></div>
     <div class="badge">OECD PISA 2025 · Band I · Naturwissenschaften</div>
   </div>
-  <h1>91 Bildungssysteme.<br><em>Eine Skala.</em></h1>
-  <p class="sub">Mittelwert je System (Flagge), Balken = 95-%-Konfidenzintervall, farbige Fläche = Spannweite des Kontinents (UN M49) mit Median. Deutschland liegt statistisch auf OECD-Niveau.</p>
+  <div class="left"><h1>91 Bildungssysteme.<br><em>Eine Skala.</em></h1>
+  <p class="sub">Mittelwert je System (Flagge), Balken = 95-%-Konfidenzintervall, farbige Fläche = Spannweite des Kontinents (UN M49) mit Median. Deutschland liegt statistisch auf OECD-Niveau.</p><div class="mini" id="mini"></div></div>
   <div class="chart"><svg id="viz" viewBox="0 0 1000 520" role="img" aria-label="91 Systeme nach Naturwissenschafts-Mittelwert 2025, gruppiert nach Kontinenten"></svg></div>
   <div class="legend" id="legend"></div>
   <div class="kpis">
@@ -78,7 +82,7 @@ svg{width:100%;height:auto;display:block}
   ax+=`<line x1="${padL}" y1="${base}" x2="${W-padR}" y2="${base}" stroke="#64748B" stroke-width="1.2"/><line x1="${X(482)}" y1="8" x2="${X(482)}" y2="${base+26}" stroke="#CBD5E1" stroke-opacity=".8" stroke-dasharray="4 3" stroke-width="1.4"/><text x="${X(482)+7}" y="${base+40}" font-size="13" font-weight="700" fill="#E2E8F0" font-family="JetBrains Mono">▲ OECD-Mittel 482</text><text x="${padL}" y="${base+40}" text-anchor="start" font-size="12" fill="#7C8AA0" font-family="Inter">PISA-Punkte Naturwissenschaften 2025 (Mittelwert der 15-Jährigen je System)</text>`;
   svg.setAttribute('viewBox',`0 0 ${W} ${base+44}`);svg.innerHTML=s+g+call+ax;
   document.getElementById('legend').innerHTML=lanes.map(l=>`<span><span class="sw" style="background:${l.color}"></span>${l.label} (${l.n})</span>`).join('')+`<span><span class="sw" style="border:2px solid #00CFFF;background:transparent"></span>Deutschland</span><span><span class="sw" style="border:2px solid #DFAF0F;background:transparent"></span>Stichprobenvorbehalt</span><span><span class="sw" style="background:transparent;border:0;border-top:2px dashed #94A3B8;height:0;border-radius:0"></span>Median des Kontinents</span>`;
-  document.body.dataset.ready='1';
+  if(new URLSearchParams(location.search).get('og')==='1'){document.getElementById('card').classList.add('og');document.getElementById('mini').innerHTML='<div><b>486</b>Deutschland · KI 479–492 · Rang 15–34</div><div><b>22 / 9 / 60</b>über · gleichauf · unter OECD-Mittel 482</div><div><b>280 Pkt.</b>Spannweite Rang 1 bis Rang 91</div>';}document.body.dataset.ready='1';
 })();
 </script>
 </body>
