@@ -59,7 +59,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
   .scroll-fade{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
   .scroll-fade.visible{opacity:1;transform:none;}
   .no-js .scroll-fade{opacity:1;transform:none;}
-  .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#F1F5F9;margin-bottom:.35rem;}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#E2E8F0;margin-bottom:.35rem;}
   .section-badge{font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:4px;}
   .kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.35rem;position:relative;}
   .kpi-card.scenario-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px dashed rgba(255,107,0,0.35);border-radius:inherit;}
@@ -123,7 +123,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
   .bar-track{height:14px;border-radius:4px;background:rgba(100,116,139,.2);overflow:hidden;}
   .bar-fill{height:100%;border-radius:4px;}
   .q-cell{width:34px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;}
-  .q1{background:rgba(0,207,255,.22);color:#00CFFF;border:1px solid rgba(0,207,255,.5);} .q0{background:rgba(100,116,139,.12);color:#475569;border:1px solid rgba(100,116,139,.25);}
+  .q1{background:rgba(0,207,255,.22);color:#00CFFF;border:1px solid rgba(0,207,255,.5);} .q0{background:rgba(100,116,139,.12);color:#64748B;border:1px solid rgba(100,116,139,.25);}
   .resp-btn{cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:6px;padding:.25rem .6rem;font-size:.7rem;font-weight:700;font-family:'JetBrains Mono',monospace;}
   .resp-btn.r1{background:rgba(0,204,122,.2);color:#00CC7A;border-color:rgba(0,204,122,.5);}
   .resp-btn.r0{background:rgba(230,57,154,.2);color:#E6399A;border-color:rgba(230,57,154,.5);}
@@ -391,7 +391,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
   <div class="grid md:grid-cols-2 gap-6 mb-6">
     <div class="dep-box" data-source="FACT_OECD_SCORES_2025">
       <h3 class="font-head font-bold text-tngb-cyan mb-1">Punktwerte 2022 → 2025 · Deutschland vs. OECD</h3>
-      <div class="chart-box"><canvas id="chartScores"></canvas></div>
+      <div class="chart-box" style="height:260px;"><canvas id="chartScores"></canvas></div>
       <div class="overflow-x-auto mt-3" data-source="FACT_DEU_DELTA_2022_2025"><table>
         <thead><tr><th>Domäne</th><th>DE 2022</th><th>DE 2025</th><th>Δ</th><th>OECD 2022</th><th>OECD 2025</th></tr></thead>
         <tbody>
@@ -406,7 +406,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
 
     <div class="dep-box" data-source="FACT_DEU_LOW_PERFORMERS_2025">
       <h3 class="font-head font-bold text-tngb-magenta mb-1">Risikogruppe &amp; Spitzengruppe DE 2025</h3>
-      <div class="chart-box"><canvas id="chartGroups"></canvas></div>
+      <div class="chart-box" style="height:260px;"><canvas id="chartGroups"></canvas></div>
       <div class="overflow-x-auto mt-3"><table>
         <thead><tr><th>Domäne</th><th>unter Stufe 2</th><th>Stufe 5/6</th></tr></thead>
         <tbody data-source="FACT_DEU_TOP_PERFORMERS_2025">
@@ -422,7 +422,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
   <div class="grid md:grid-cols-2 gap-6 mb-6">
     <div class="dep-box" data-source="FACT_DEU_SCHOOLTYPE_GAP_2025">
       <h3 class="font-head font-bold text-tngb-gold mb-1">Institutionelle Segregation — Anteil unter Stufe 2 nach Schulart</h3>
-      <div class="chart-box"><canvas id="chartSchool"></canvas></div>
+      <div class="chart-box" style="height:260px;"><canvas id="chartSchool"></canvas></div>
       <div class="overflow-x-auto mt-3"><table>
         <thead><tr><th>Domäne</th><th>Gymnasium</th><th>nicht-gymnasial</th><th>Status</th></tr></thead>
         <tbody>
@@ -436,7 +436,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
 
     <div class="dep-box" data-source="FACT_DEU_ESCS_2025">
       <h3 class="font-head font-bold text-tngb-lavender mb-1">Sozioökonomischer Gradient (ESCS) &amp; Schulklima</h3>
-      <div class="chart-box"><canvas id="chartEscs"></canvas></div>
+      <div class="chart-box" style="height:260px;"><canvas id="chartEscs"></canvas></div>
       <div class="overflow-x-auto mt-3"><table>
         <thead><tr><th>Indikator</th><th>Deutschland</th><th>OECD</th></tr></thead>
         <tbody>
@@ -752,7 +752,83 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
     <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, keine Rechts- oder Steuerberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Finanzprodukten dar (RDG/StBerG/WpIG/FinDAG). Es ist <strong>keine pädagogische, psychologische oder sonderpädagogische Diagnostik</strong>; der DCM-Rechner und die Profilmodelle sind didaktische Demonstratoren (<span class="est-mark">EST</span>/SCENARIO) und nicht für reale Förderentscheidungen geeignet. PISA-Ergebnisse sind Populationsstatistiken und dürfen nicht auf Einzelpersonen übertragen werden. „PISA“ und „OECD“ sind Bezeichnungen der OECD, „FinCoach AI“ von TheNextGenerationBanking; Nennungen erfolgen rein beschreibend. DSGVO: Diese Seite ist statisch, setzt keine Tracker ein und speichert keine personenbezogenen Daten. Stichtag <span class="font-mono text-tngb-cyan">2026-09-10</span> · Rechtsstand 2026-09-10.</p>
   </div>
 
-  <footer class="border-t border-tngb-border pt-8 mt-4">
+  <section class="px-4 py-10 max-w-7xl mx-auto" id="agent-audit-section" style="border-top:1px solid var(--border)">
+  <div class="flex flex-wrap items-start justify-between gap-3 mb-4"><div><div class="text-xs mono text-tngb-cyan mb-1">13 · QUALITÄTSAGENTEN</div><h3 class="font-head font-bold text-xl text-white mb-1">Welche Agenten haben diesen Build geprüft?</h3><p class="text-xs text-tngb-muted">Pflicht-Audit-Trail laut FinCoach-Vorgaben · Build-ID, Stichtag und Status je Agent</p></div><div class="text-right text-xs mono text-tngb-muted"><div>Build: <span class="text-tngb-cyan">m481-pisa-2025-finanzbildung-v1.0.1-2026-09-24</span></div><div>Stichtag: <span class="text-tngb-cyan">2026-09-10</span></div><div>Status: <span style="color:#DFAF0F">pending (2 Pflicht-Agenten offen)</span></div></div></div>
+  <div id="agents-used-grid" class="grid md:grid-cols-2 gap-3 text-sm"><div class="dep-box" style="border-left:3px solid #00CC7A"><div class="flex items-center justify-between gap-2"><span class="mono text-xs text-white">fincoach-module-provenance</span><span class="badge b-ok" style="">passed</span></div><div class="text-xs text-tngb-muted mt-1">M-DBOM v1 mit Verdict/Konfidenz/Quelle je Fakt; jede Zahl traegt eine Herkunftsklasse (OFFICIAL_STATLINK, DERIVED_OFFICIAL, COMPUTED_MICRODATA, SCENARIO, INTERPRETATION); kein Wert aus Modellgedaechtnis.</div></div><div class="dep-box" style="border-left:3px solid #DFAF0F"><div class="flex items-center justify-between gap-2"><span class="mono text-xs text-white">fincoach-module-compliance-guardian</span><span class="badge b-ok" style="background:rgba(223,175,15,.18);color:#DFAF0F">passed-with-warnings</span></div><div class="text-xs text-tngb-muted mt-1">Gepueft mit dem modul-eigenen Checker und der Live-QA, nicht mit dem FinCoach-Guardian-Agenten; Verhalten unter file:// (R033), localStorage (safeLS) und CSP self erfuellt.</div></div><div class="dep-box" style="border-left:3px solid #FF6B00"><div class="flex items-center justify-between gap-2"><span class="mono text-xs text-white">fincoach-interdisciplinary-council</span><span class="badge b-ok" style="background:rgba(255,107,0,.18);color:#FF6B00">pending</span></div><div class="text-xs text-tngb-muted mt-1">Nicht durchgefuehrt: Modul ausserhalb der FinCoach-Pipeline entstanden (Herkunft M481). Vor Publish nachholen oder Ausnahme dokumentieren.</div></div><div class="dep-box" style="border-left:3px solid #FF6B00"><div class="flex items-center justify-between gap-2"><span class="mono text-xs text-white">fincoach-wikipedia-synthesis</span><span class="badge b-ok" style="background:rgba(255,107,0,.18);color:#FF6B00">pending</span></div><div class="text-xs text-tngb-muted mt-1">Nicht durchgefuehrt; Faktencheck erfolgte gegen OECD-Primaerquellen (StatLink, Laendernotiz, Technical Report) mit dokumentierten Diskrepanzen. Vor Publish nachholen oder Ausnahme dokumentieren.</div></div></div>
+  <details class="mt-4"><summary class="text-xs text-tngb-muted" style="cursor:pointer">▸ 3 Agent(en) bewusst ausgelassen — anzeigen</summary><div class="mt-2 grid md:grid-cols-2 gap-2 text-xs"><div class="dep-box"><span class="mono text-xs text-slate-300">fincoach-entity-network-cartographer</span><div class="text-xs text-tngb-muted mt-1">Studien-Deep-Dive ohne Akteurs-Netzwerk; Organisationen (OECD, IEA, ZIB) sind im Quellenverzeichnis benannt.</div></div><div class="dep-box"><span class="mono text-xs text-slate-300">fincoach-market-data</span><div class="text-xs text-tngb-muted mt-1">Keine Marktdaten; Datenbasis sind OECD-StatLink-Tabellen und Public-Use-Files.</div></div><div class="dep-box"><span class="mono text-xs text-slate-300">fincoach-world-governance</span><div class="text-xs text-tngb-muted mt-1">Kein Governance-Atlas-Bezug; Kontinent-/Buendniszuordnung ist als Referenzklasse im DBOM ausgewiesen.</div></div></div></details>
+  <div class="mt-4 text-xs mono text-tngb-muted" style="border-left:2px solid rgba(0,207,255,.4);padding-left:.5rem">Validiert gegen <a href="data/agent-usage-schema.json" target="_blank" class="text-tngb-cyan">data/agent-usage-schema.json</a> · maschinenlesbares Manifest unten</div>
+</section>
+<script type="application/json" id="module-agents-used">
+{
+  "module_id": "m481-pisa-2025-finanzbildung",
+  "build_id": "m481-pisa-2025-finanzbildung-v1.0.1-2026-09-24",
+  "build_timestamp": "2026-09-24T17:40:00Z",
+  "stichtag": "2026-09-10",
+  "module_type": "tiefenmodul",
+  "agents_used": [
+    {
+      "id": "fincoach-module-provenance",
+      "status": "passed",
+      "timestamp": "2026-09-24T17:40:00Z",
+      "output": "provenance/m481.dbom.json",
+      "stats": {
+        "total": 33,
+        "confirmed": 27,
+        "user_provided_unverified": 1,
+        "discrepant": 1,
+        "interpretation": 2,
+        "scenario_projection": 2
+      },
+      "note": "M-DBOM v1 mit Verdict/Konfidenz/Quelle je Fakt; jede Zahl traegt eine Herkunftsklasse (OFFICIAL_STATLINK, DERIVED_OFFICIAL, COMPUTED_MICRODATA, SCENARIO, INTERPRETATION); kein Wert aus Modellgedaechtnis."
+    },
+    {
+      "id": "fincoach-module-compliance-guardian",
+      "status": "passed-with-warnings",
+      "timestamp": "2026-09-24T17:40:00Z",
+      "output": "assets/m481/fincoach_module_check.py (C01-C11, D01-D14, S01-S10) + Live-QA im Modul",
+      "stats": {
+        "static_fail": 0,
+        "live_qa": "alle Checks bestanden"
+      },
+      "note": "Gepueft mit dem modul-eigenen Checker und der Live-QA, nicht mit dem FinCoach-Guardian-Agenten; Verhalten unter file:// (R033), localStorage (safeLS) und CSP self erfuellt."
+    },
+    {
+      "id": "fincoach-interdisciplinary-council",
+      "status": "pending",
+      "note": "Nicht durchgefuehrt: Modul ausserhalb der FinCoach-Pipeline entstanden (Herkunft M481). Vor Publish nachholen oder Ausnahme dokumentieren."
+    },
+    {
+      "id": "fincoach-wikipedia-synthesis",
+      "status": "pending",
+      "note": "Nicht durchgefuehrt; Faktencheck erfolgte gegen OECD-Primaerquellen (StatLink, Laendernotiz, Technical Report) mit dokumentierten Diskrepanzen. Vor Publish nachholen oder Ausnahme dokumentieren."
+    }
+  ],
+  "agents_skipped": [
+    {
+      "id": "fincoach-entity-network-cartographer",
+      "reason": "Studien-Deep-Dive ohne Akteurs-Netzwerk; Organisationen (OECD, IEA, ZIB) sind im Quellenverzeichnis benannt."
+    },
+    {
+      "id": "fincoach-market-data",
+      "reason": "Keine Marktdaten; Datenbasis sind OECD-StatLink-Tabellen und Public-Use-Files."
+    },
+    {
+      "id": "fincoach-world-governance",
+      "reason": "Kein Governance-Atlas-Bezug; Kontinent-/Buendniszuordnung ist als Referenzklasse im DBOM ausgewiesen."
+    }
+  ],
+  "open_issues": [
+    {
+      "id": "m481-pipeline-gates",
+      "title": "Council- und Wikipedia-Synthese-Agent nachholen oder Ausnahme dokumentieren (Modul aus externem Repository ueberfuehrt)",
+      "priority": "high",
+      "agent": "fincoach-module-lifecycle-auditor"
+    }
+  ],
+  "reaudit": "2026-09-24"
+}
+</script>
+<footer class="border-t border-tngb-border pt-8 mt-4">
     <div class="flex flex-col md:flex-row justify-between items-start gap-6">
       <div class="flex items-center gap-3">
         <svg viewBox="0 0 100 100" fill="none" width="40" height="40" aria-hidden="true">

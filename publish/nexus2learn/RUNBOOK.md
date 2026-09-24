@@ -60,15 +60,17 @@ Copy-Item "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\media\pisa
 pwsh "C:\Users\User\AI Financecoach\scripts\compliance\sync-modules.ps1"
 
 # 5) Gates laut RUNBOOK-DEEPDIVE-TO-PUBLISH.md Teil C
-#    WICHTIG: -Module erwartet den DATEINAMEN (die Skripte loesen ihn selbst gegen den Root auf); ein absoluter
-#    Pfad ergibt "Keine Module gefunden". Die Gates laufen ueber den Vorschau-Server (http), nicht file://:
-#    unter file:// loesen ../vendor/ und ../assets/fonts/ nicht auf (gilt fuer alle Root-Module).
+#    -Module erwartet den DATEINAMEN (die Skripte loesen ihn gegen den Root auf).
+#    Befund 2026-09-24: Der Root hat weder vendor\ noch assets\fonts\ (sie liegen in publish-nexus2learn\);
+#    ../vendor/ und ../assets/fonts/ (Konvention der Website-Module, auch M478) loesen im Root deshalb auf 404.
+#    Daher: erst Freigabe-Transfer (Schritt 6-7), dann Gates gegen das Publish-Paket als Base:
 Start-Process pwsh -ArgumentList '-NoExit','-Command',"npx http-server 'C:\Users\User\AI Financecoach' -c-1 -p 8089"
 foreach ($f in 'modul-m479-pisa-2025-deep-dive.html','modul-m480-pisa-explorer.html','modul-m481-pisa-2025-finanzbildung.html','modul-m482-pisa-hub.html') {
-  pwsh "C:\Users\User\AI Financecoach\scripts\styleguide\audit-module.ps1" -Module $f -Base http://localhost:8089
-  node "C:\Users\User\AI Financecoach\scripts\regression\check-interactive-diagrams.mjs" $f --base=http://localhost:8089
-  pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module $f -Base http://localhost:8089
+  pwsh "C:\Users\User\AI Financecoach\scripts\styleguide\audit-module.ps1" -Module $f -Base http://localhost:8089/publish-nexus2learn/module
+  node "C:\Users\User\AI Financecoach\scripts\regression\check-interactive-diagrams.mjs" $f --base=http://localhost:8089/publish-nexus2learn/module
+  pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module $f -Base http://localhost:8089/publish-nexus2learn/module
 }
+#    Alternative ohne Umweg: vendor\ und assets\fonts\ aus publish-nexus2learn\ in den Root kopieren (dann Base http://localhost:8089).
 ```
 
 Hinweise zu den Gates: Der Explorer hat einen Range-Slider (`#simLE`, Linking Error), der die Trend-Tabelle
@@ -101,16 +103,24 @@ git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" commit -m "feat(pisa-
 git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" push
 ```
 
-## 3 · Prüfergebnisse (Website-Klon, lokal, reservierte Nummern M479–M482)
+## 3 · Prüfergebnisse und Gate-Befunde (Stand 2026-09-24)
 
-| Modul | JS-Fehler | externe Requests | Live-QA | Rücklink `../module.html` | 375 px |
-|---|---|---|---|---|---|
-| Deep Dive | 0 | 0 | 35/35, Datenpakete konsistent | ja | kein Überlauf |
-| Explorer | 0 | 0 | 28/28, Engine-Selbsttest bestanden | ja | kein Überlauf |
-| Finanzbildung | 0 | 0 | 25/25, 48 Referenzen aufgelöst, 0 KaTeX-Fehler | ja | kein Überlauf |
-| Hub | 0 | 0 | 22/22, Graph konsistent | ja | kein Überlauf |
+Website-Klon (http und file://), alle vier Module: 0 JS-Fehler, 0 externe Requests, Live-QA vollständig grün
+(35/28/25/22 Checks), Rücklink `../module.html`, kein Überlauf bei 375 px, kein `<img>`, kein roher
+`localStorage`-Zugriff, kein `fetch()`.
 
-Keine Links mehr auf `m29x/m30x.html`, `modul.html`, `ipo-prozess.html`; Querverweise laufen über die Serien-Dateien.
+Gate-Lauf im Root (Base http://localhost:8089) vom 2026-09-24 und Reaktion:
+
+| Befund | Ursache | Status |
+|---|---|---|
+| `localstorage-guarded` (Regression) | roher `localStorage.getItem` | behoben: `safeLS`-Shim + Kapselung |
+| `F-IDA-STATIC` Explorer (99 Rasterbilder) | Flaggen-Icons als `<img>` | behoben: Inline-SVG |
+| `S-CANVAS-WRAP` (7×) | Canvas-Wrapper ohne Inline-Höhe | behoben: `style="height:…"` wie M478 |
+| `S-TOKEN-COLOR` | kategoriale Paletten und UI-Farben außerhalb der TNGB-Tokens | behoben: auf Tokens abgebildet (`COLORMAP` in `build.py`, auch in `pisa-regions.json`/`pisa-explorer.json`); Hinweis: die Token-Palette ist nicht auf Farbsinnschwäche validiert, die Reihen sind beschriftet |
+| `S-AGENT-AUDIT` | kein §13-Manifest | ergänzt: Sektion 13 + `module-agents-used`; Deep Dive und Finanzbildung (Typ `tiefenmodul`) führen Council und Wikipedia-Synthese ehrlich als **pending** (nicht durchgeführt) → `agent-audit-check.ps1` meldet Warnung, kein kritischer Befund; vor Publish nachholen oder Ausnahme dokumentieren |
+| `S-JS-ERROR` / `no-js-errors` (404) | `vendor\`/`assets\fonts\` fehlen im Root | Umgebung: Gates gegen Publish-Paket als Base (Schritt 5) oder Ordner in den Root kopieren |
+| `S-TOKEN-FONT` | Auditor verlangt einen Google-Fonts-`<link>`; die Website-CSP (`style-src 'self'`, `font-src 'self' data:`) verbietet ihn, M478 hat ihn ebenfalls nicht | Regelkonflikt Auditor ↔ CSP; Entscheidung: Auditor-Regel auf self-hosted `assets/fonts/fonts.css` erweitern oder Befund als bekannt akzeptieren |
+| `F-IDA-LEVEL/TOOLTIP/NO-DRILLDOWN/STATIC-LABELS` (WARN) | ECharts-spezifische Muster | keine Blocker; Module rendern mit eigenem SVG |
 
 ## 4 · Danach: Quelle der Wahrheit wechselt
 

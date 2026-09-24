@@ -11,39 +11,39 @@
   {
    "id": "EUR",
    "label": "Europa",
-   "color": "#008CDF"
+   "color": "#00CFFF"
   },
   {
    "id": "ASIA",
    "label": "Asien",
-   "color": "#CF630D"
+   "color": "#FF6B00"
   },
   {
    "id": "AFR",
    "label": "Afrika",
-   "color": "#966CD7"
+   "color": "#9933FF"
   },
   {
    "id": "NAM",
    "label": "Nordamerika",
-   "color": "#4A9C36"
+   "color": "#00CC7A"
   },
   {
    "id": "LAC",
    "label": "Lateinamerika & Karibik",
-   "color": "#CA5794"
+   "color": "#E6399A"
   },
   {
    "id": "OCE",
    "label": "Ozeanien",
-   "color": "#B27B00"
+   "color": "#DFAF0F"
   }
  ],
  "blocs": [
   {
    "id": "EU",
    "label": "EU-27",
-   "color": "#008CDF",
+   "color": "#00CFFF",
    "note": "Europäische Union, 27 Mitgliedstaaten (alle in PISA 2025 vertreten)",
    "members": [
     "Austria",
@@ -78,7 +78,7 @@
   {
    "id": "OECD",
    "label": "OECD-38",
-   "color": "#B45000",
+   "color": "#FF6B00",
    "note": "OECD-Mitglieder laut StatLink-Kennzeichnung (38, alle vertreten)",
    "members": [
     "Australia",
@@ -124,7 +124,7 @@
   {
    "id": "CPTPP",
    "label": "CPTPP",
-   "color": "#9D79D7",
+   "color": "#9933FF",
    "note": "Comprehensive and Progressive Agreement for Trans-Pacific Partnership, 12 Vertragsparteien (UK seit 2024); alle 12 vertreten",
    "members": [
     "Australia",
@@ -144,7 +144,7 @@
   {
    "id": "ASEAN",
    "label": "ASEAN",
-   "color": "#398526",
+   "color": "#00CC7A",
    "note": "Verband Südostasiatischer Nationen, 10 Mitglieder; 8 vertreten (ohne Laos, Myanmar)",
    "members": [
     "Brunei Darussalam",
@@ -160,7 +160,7 @@
   {
    "id": "USMCA",
    "label": "USMCA",
-   "color": "#CD6199",
+   "color": "#E6399A",
    "note": "Abkommen USA–Mexiko–Kanada (Nachfolger NAFTA); alle 3 vertreten",
    "members": [
     "Canada",
@@ -171,7 +171,7 @@
   {
    "id": "MERCOSUR",
    "label": "Mercosur",
-   "color": "#946900",
+   "color": "#DFAF0F",
    "note": "Vollmitglieder Argentinien, Brasilien, Paraguay, Uruguay, Bolivien (seit 2024); 4 vertreten. Assoziierte Staaten (u. a. Chile, Kolumbien, Ecuador, Peru) nicht gezählt",
    "members": [
     "Argentina",
@@ -183,7 +183,7 @@
   {
    "id": "PA",
    "label": "Pazifik-Allianz",
-   "color": "#00A6AE",
+   "color": "#4472C4",
    "note": "Alianza del Pacífico: Chile, Kolumbien, Mexiko, Peru; alle 4 vertreten",
    "members": [
     "Chile",
@@ -195,7 +195,7 @@
   {
    "id": "SICA",
    "label": "SICA",
-   "color": "#B9454C",
+   "color": "#E040A0",
    "note": "Zentralamerikanisches Integrationssystem, 8 Mitglieder; 4 vertreten (Costa Rica, Dominikanische Republik, El Salvador, Guatemala)",
    "members": [
     "Costa Rica",
@@ -207,7 +207,7 @@
   {
    "id": "GCC",
    "label": "Golf-Kooperationsrat",
-   "color": "#6B86E1",
+   "color": "#7DA0E0",
    "note": "GCC, 6 Mitglieder; 3 vertreten (Katar, Saudi-Arabien, VAE)",
    "members": [
     "Qatar",
@@ -218,7 +218,7 @@
   {
    "id": "EAEU",
    "label": "Eurasische WU",
-   "color": "#6B7F00",
+   "color": "#94A3B8",
    "note": "Eurasische Wirtschaftsunion, 5 Mitglieder; 3 vertreten (Armenien, Kasachstan, Kirgisistan)",
    "members": [
     "Armenia",
@@ -229,7 +229,7 @@
   {
    "id": "CEFTA",
    "label": "CEFTA",
-   "color": "#B16EC0",
+   "color": "#CBD5E1",
    "note": "Mitteleuropäisches Freihandelsabkommen (Westbalkan + Moldau), 7 Parteien; 6 vertreten (ohne Bosnien und Herzegowina)",
    "members": [
     "Albania",
@@ -243,7 +243,7 @@
   {
    "id": "AU",
    "label": "Afrikanische Union / AfCFTA",
-   "color": "#BB6802",
+   "color": "#E2E8F0",
    "note": "AU-Mitglieder und Vertragsparteien der Afrikanischen Kontinentalen Freihandelszone; 5 vertreten",
    "members": [
     "Kenya",

@@ -8,13 +8,13 @@
   "link_error_status": "EST",
   "note": "2025: Mittelwerte und 95-%-KI aus OECD StatLink Band I Kap. 2 (Tables I.2.o3–o6); SE = KI-Breite/(2·1,96) (PUBLISHED_CI). 2022: Mittelwert = 2025 − offizielle Veränderung (Table I.2.6); SE 2022 nicht publiziert → SE 2025 als Näherung (EST). Anteile unter Stufe 2 / Stufe 5–6 nur für Naturwissenschaften flächendeckend (Figure I.2.3); Lesen/Mathe nur für DE/OECD aus Ländernotiz. Linking Error EST.",
   "palette": [
-   "#3987e5",
-   "#d95926",
-   "#199e70",
-   "#c98500",
-   "#d55181",
-   "#9085e9",
-   "#008300"
+   "#00CFFF",
+   "#FF6B00",
+   "#00CC7A",
+   "#DFAF0F",
+   "#E6399A",
+   "#9933FF",
+   "#4472C4"
   ],
   "max_selected": 7
  },

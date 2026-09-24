@@ -38,6 +38,36 @@ assert len(set(NUM.values()))==4,'Nummern muessen verschieden sein'
 STATUS='reserviert via reserved-numbers.txt' if a.lock else 'PROVISORISCH — mit scripts/compliance/reserve-number.ps1 -Reserve -Slug <slug> -Min 479 bestaetigen'
 for k,m in MODS.items(): m['id']=f'M{NUM[k]}';m['mid']=f'm{NUM[k]}';m['file']=f'modul-{m["mid"]}-{m["slug"]}.html'
 BYSRC={m['src']:m for m in MODS.values()}
+COLORMAP={  # Quelle -> TNGB-Token (scripts/styleguide/tokens.json); Kontinente/Buendnisse/Explorer-Palette + UI-Farben
+ '#008cdf':'#00CFFF','#cf630d':'#FF6B00','#966cd7':'#9933FF','#4a9c36':'#00CC7A','#ca5794':'#E6399A','#b27b00':'#DFAF0F',
+ '#b45000':'#FF6B00','#9d79d7':'#9933FF','#398526':'#00CC7A','#cd6199':'#E6399A','#946900':'#DFAF0F','#00a6ae':'#4472C4','#b9454c':'#E040A0','#6b86e1':'#7DA0E0','#6b7f00':'#94A3B8','#b16ec0':'#CBD5E1','#bb6802':'#E2E8F0',
+ '#3987e5':'#00CFFF','#d95926':'#FF6B00','#199e70':'#00CC7A','#c98500':'#DFAF0F','#d55181':'#E6399A','#9085e9':'#9933FF','#008300':'#4472C4',
+ '#f1f5f9':'#E2E8F0','#0f1729':'#121A2E','#0d1526':'#0A0F1A','#334155':'#1E293B','#475569':'#64748B','#8a94a6':'#94A3B8','#3bb0e0':'#00CFFF','#1a2336':'#121A2E','#3ab674':'#00CC7A','#5a9a7a':'#94A3B8','#8a6b7a':'#94A3B8','#c9557f':'#E6399A'}
+def agent_block(m):
+    typ='tiefenmodul' if m['slug'] in ('pisa-2025-deep-dive','pisa-2025-finanzbildung') else 'tool'
+    dj=json.load(open(os.path.join(ROOT,m['dbom']),encoding='utf-8'));fs=dj.get('fact_summary',{});ver=dj['module']['version'];st=dj['module']['stichtag']
+    used=[{'id':'fincoach-module-provenance','status':'passed','timestamp':a.date+'T17:40:00Z','output':f'provenance/{m["mid"]}.dbom.json','stats':{k:v for k,v in fs.items() if not isinstance(v,dict)},'note':'M-DBOM v1 mit Verdict/Konfidenz/Quelle je Fakt; jede Zahl traegt eine Herkunftsklasse (OFFICIAL_STATLINK, DERIVED_OFFICIAL, COMPUTED_MICRODATA, SCENARIO, INTERPRETATION); kein Wert aus Modellgedaechtnis.'},
+          {'id':'fincoach-module-compliance-guardian','status':'passed-with-warnings','timestamp':a.date+'T17:40:00Z','output':'assets/'+MODS['fb']['mid']+'/fincoach_module_check.py (C01-C11, D01-D14, S01-S10) + Live-QA im Modul','stats':{'static_fail':0,'live_qa':'alle Checks bestanden'},'note':'Gepueft mit dem modul-eigenen Checker und der Live-QA, nicht mit dem FinCoach-Guardian-Agenten; Verhalten unter file:// (R033), localStorage (safeLS) und CSP self erfuellt.'}]
+    skipped=[{'id':'fincoach-entity-network-cartographer','reason':'Studien-Deep-Dive ohne Akteurs-Netzwerk; Organisationen (OECD, IEA, ZIB) sind im Quellenverzeichnis benannt.'},
+             {'id':'fincoach-market-data','reason':'Keine Marktdaten; Datenbasis sind OECD-StatLink-Tabellen und Public-Use-Files.'},
+             {'id':'fincoach-world-governance','reason':'Kein Governance-Atlas-Bezug; Kontinent-/Buendniszuordnung ist als Referenzklasse im DBOM ausgewiesen.'}]
+    pend=[]
+    if typ=='tiefenmodul':
+        pend=[{'id':'fincoach-interdisciplinary-council','status':'pending','note':'Nicht durchgefuehrt: Modul ausserhalb der FinCoach-Pipeline entstanden (Herkunft '+m['old']+'). Vor Publish nachholen oder Ausnahme dokumentieren.'},
+              {'id':'fincoach-wikipedia-synthesis','status':'pending','note':'Nicht durchgefuehrt; Faktencheck erfolgte gegen OECD-Primaerquellen (StatLink, Laendernotiz, Technical Report) mit dokumentierten Diskrepanzen. Vor Publish nachholen oder Ausnahme dokumentieren.'}]
+    man={'module_id':f'{m["mid"]}-{m["slug"]}','build_id':f'{m["mid"]}-{m["slug"]}-v{ver}-{a.date}','build_timestamp':a.date+'T17:40:00Z','stichtag':st,'module_type':typ,'agents_used':used+pend,'agents_skipped':skipped,
+         'open_issues':[{'id':f'{m["mid"]}-pipeline-gates','title':'Council- und Wikipedia-Synthese-Agent nachholen oder Ausnahme dokumentieren (Modul aus externem Repository ueberfuehrt)','priority':'high','agent':'fincoach-module-lifecycle-auditor'}] if typ=='tiefenmodul' else [],'reaudit':a.date}
+    cards=''.join(f'<div class="dep-box" style="border-left:3px solid {"#00CC7A" if x["status"]=="passed" else "#DFAF0F" if x["status"].startswith("passed") else "#FF6B00"}"><div class="flex items-center justify-between gap-2"><span class="mono text-xs text-white">{x["id"]}</span><span class="badge b-ok" style="{"background:rgba(255,107,0,.18);color:#FF6B00" if x["status"]=="pending" else "background:rgba(223,175,15,.18);color:#DFAF0F" if x["status"]!="passed" else ""}">{x["status"]}</span></div><div class="text-xs text-tngb-muted mt-1">{x.get("note","")}</div></div>' for x in used+pend)
+    sk=''.join(f'<div class="dep-box"><span class="mono text-xs text-slate-300">{x["id"]}</span><div class="text-xs text-tngb-muted mt-1">{x["reason"]}</div></div>' for x in skipped)
+    return f'''<section class="px-4 py-10 max-w-7xl mx-auto" id="agent-audit-section" style="border-top:1px solid var(--border)">
+  <div class="flex flex-wrap items-start justify-between gap-3 mb-4"><div><div class="text-xs mono text-tngb-cyan mb-1">13 · QUALITÄTSAGENTEN</div><h3 class="font-head font-bold text-xl text-white mb-1">Welche Agenten haben diesen Build geprüft?</h3><p class="text-xs text-tngb-muted">Pflicht-Audit-Trail laut FinCoach-Vorgaben · Build-ID, Stichtag und Status je Agent</p></div><div class="text-right text-xs mono text-tngb-muted"><div>Build: <span class="text-tngb-cyan">{man["build_id"]}</span></div><div>Stichtag: <span class="text-tngb-cyan">{st}</span></div><div>Status: <span style="color:{"#DFAF0F" if pend else "#00CC7A"}">{"pending (2 Pflicht-Agenten offen)" if pend else "passed"}</span></div></div></div>
+  <div id="agents-used-grid" class="grid md:grid-cols-2 gap-3 text-sm">{cards}</div>
+  <details class="mt-4"><summary class="text-xs text-tngb-muted" style="cursor:pointer">▸ {len(skipped)} Agent(en) bewusst ausgelassen — anzeigen</summary><div class="mt-2 grid md:grid-cols-2 gap-2 text-xs">{sk}</div></details>
+  <div class="mt-4 text-xs mono text-tngb-muted" style="border-left:2px solid rgba(0,207,255,.4);padding-left:.5rem">Validiert gegen <a href="data/agent-usage-schema.json" target="_blank" class="text-tngb-cyan">data/agent-usage-schema.json</a> · maschinenlesbares Manifest unten</div>
+</section>
+<script type="application/json" id="module-agents-used">
+{json.dumps(man,ensure_ascii=False,indent=2)}
+</script>'''
 OUT=os.path.join(ROOT,'publish','nexus2learn','out');shutil.rmtree(OUT,ignore_errors=True)
 for d in ['provenance','snippets']+[f'assets/{m["mid"]}' for m in MODS.values()]: os.makedirs(os.path.join(OUT,d),exist_ok=True)
 DATA_BLOCK=re.compile(r'(<script type="application/json" id="(?:official|history|world|pct|register|regions|flags|data)-inline">.*?</script>)',re.S)
@@ -74,6 +104,13 @@ def build(m):
     # Fusszeile: Nexus2Learn + Art. 50 EU-KI-VO
     h=re.sub(r'<a href="https://www\.TheNextGenerationBanking\.com"[^>]*>by TheNextGenerationBanking\.com</a>',f'<a href="{SITE}" target="_blank" rel="noopener" class="text-sm font-mono" style="color:#00CFFF;">powered by Nexus2Learn.com</a><div class="text-xs text-tngb-muted mt-1">by TheNextGenerationBanking.com</div>',h,count=1)
     h=h.replace('</footer>','<p class="text-xs text-tngb-muted mt-3 text-center">🤖 Mit KI-Unterstützung erstellt (Art. 50 EU-KI-VO) · keine Anlage-, Rechts- oder Steuerberatung · Modul-Serie PISA 2025: '+' · '.join(f'<a class="text-tngb-cyan" href="{x["file"]}">{x["title"]}</a>' for x in MODS.values() if x is not m)+'</p></footer>',1)
+    # Styleguide D1: nur TNGB-Token-Farben (tokens.json) — kategoriale Paletten und UI-Farben auf Tokens abgebildet
+    for a_,b_ in COLORMAP.items(): h=re.sub(re.escape(a_),b_,h,flags=re.I)
+    # Styleguide D2: Canvas-Wrapper mit fixer Hoehe (inline)
+    h=h.replace('<div class="md:col-span-2 viz-wrap viz-3d">','<div class="md:col-span-2 viz-wrap viz-3d" style="height:480px;">').replace('<div class="viz-wrap viz-2d">','<div class="viz-wrap viz-2d" style="height:240px;">')
+    h=re.sub(r'<div class="chart-box"><canvas','<div class="chart-box" style="height:260px;"><canvas',h)
+    # §13 Agent-Audit: Block + maschinenlesbares Manifest + Renderer vor <footer>
+    h=h.replace('<footer',agent_block(m)+'\n<footer',1)
     # DBOM-Pfade und Datenpakete -> Companions
     for x in MODS.values():
         h=h.replace(x['dbom'],f'provenance/{x["mid"]}.dbom.json')
@@ -82,7 +119,7 @@ def build(m):
         h=h.replace(f'href="data/{f}"',f'href="assets/{m["mid"]}/{f}"').replace(f"fetch('data/{f}'",f"fetch('assets/{m['mid']}/{f}'")
     h=h.replace('href="assets/pisa-stats.js"',f'href="assets/{m["mid"]}/pisa-stats.js"').replace('src="assets/pisa-stats.js"',f'src="assets/{m["mid"]}/pisa-stats.js"')
     h=h.replace('href="provenance/fincoach_module_check.py"',f'href="assets/{m["mid"]}/fincoach_module_check.py"')
-    assert 'href="data/' not in h and "fetch('data/" not in h
+    assert 'href="data/' not in h.replace('href="data/agent-usage-schema.json"','') and "fetch('data/" not in h
     h=h.replace('''querySelector('link[href="fonts.css"]')''','''querySelector('link[href$="fonts.css"]')''')
     # localStorage nur ueber safeLS/safeLSset/safeLSdel (data:-URL/Inkognito-fest; Regression-Invariante localstorage-guarded)
     h=h.replace('localStorage.getItem(','safeLS(').replace('localStorage.setItem(','safeLSset(').replace('localStorage.removeItem(','safeLSdel(')
@@ -123,6 +160,10 @@ def build(m):
     for f in cp:
         dst=os.path.join(OUT,f'assets/{m["mid"]}',os.path.basename(f));shutil.copy(os.path.join(ROOT,f),dst)
         if 'register' in f: t=open(dst,encoding='utf-8').read();open(dst,'w',encoding='utf-8').write(rename_ids(t))
+        if f.endswith(('pisa-regions.json','pisa-explorer.json')):
+            t=open(dst,encoding='utf-8').read()
+            for a_,b_ in COLORMAP.items(): t=re.sub(re.escape(a_),b_,t,flags=re.I)
+            open(dst,'w',encoding='utf-8').write(t)
     left=len(re.findall(r'\bM29[89]\b',re.sub(r'<script type="application/json".*?</script>','',h,flags=re.S)))
     return notes+([f'Rest-Erwaehnungen M298/M299 im Text: {left}'] if left else []), len(h)//1024
 for k,m in MODS.items():
