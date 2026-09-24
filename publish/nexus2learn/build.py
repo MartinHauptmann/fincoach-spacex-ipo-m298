@@ -84,6 +84,11 @@ def build(m):
     h=h.replace('href="provenance/fincoach_module_check.py"',f'href="assets/{m["mid"]}/fincoach_module_check.py"')
     assert 'href="data/' not in h and "fetch('data/" not in h
     h=h.replace('''querySelector('link[href="fonts.css"]')''','''querySelector('link[href$="fonts.css"]')''')
+    # localStorage nur ueber safeLS/safeLSset/safeLSdel (data:-URL/Inkognito-fest; Regression-Invariante localstorage-guarded)
+    h=h.replace('localStorage.getItem(','safeLS(').replace('localStorage.setItem(','safeLSset(').replace('localStorage.removeItem(','safeLSdel(')
+    SHIM='<script data-finchat-safels="1">window.safeLS=window.safeLS||function(k){try{return window.localStorage?localStorage.getItem(k):null;}catch(e){return null;}};window.safeLSset=window.safeLSset||function(k,v){try{if(window.localStorage)localStorage.setItem(k,v);}catch(e){}};window.safeLSdel=window.safeLSdel||function(k){try{if(window.localStorage)localStorage.removeItem(k);}catch(e){}};</script>'
+    h=h.replace('<head>','<head>\n'+SHIM,1)
+    assert not re.search(r'localStorage\.(getItem|setItem|removeItem)\s*\(', '\n'.join(l for l in h.split('\n') if 'safeLS' not in l)), m['src']
     # Kein fetch() zur Laufzeit (R033: unter file:// keine Netzwerkfehler) — DBOM eingebettet, Pruefungen lesen inline
     dj=json.load(open(os.path.join(ROOT,m['dbom']),encoding='utf-8'));dj['module']['id']=m['id'];dj['module']['external_dbom']=f'provenance/{m["mid"]}.dbom.json';dj['module']['related_modules']=[x['id'] for x in MODS.values() if x is not m]
     inline='<script type="application/json" id="dbom-inline">'+json.dumps(dj,ensure_ascii=False).replace('</','<\\/')+'</script>\n'
