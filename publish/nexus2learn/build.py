@@ -173,12 +173,19 @@ sn=os.path.join(OUT,'snippets')
 json.dump([{'id':m['id'],'number':NUM[k],'title':m['title'],'file':m['file'],'released':True} for k,m in MODS.items()],open(os.path.join(sn,'index-json-entries.json'),'w',encoding='utf-8'),ensure_ascii=False,indent=1)
 open(os.path.join(sn,'modules-public-add.txt'),'w').write(', '.join(f'"{m["id"]}"' for m in MODS.values())+'\n')
 open(os.path.join(sn,'sitemap-lines.xml'),'w').write(''.join(f'  <url><loc>{SITE}/module/{m["file"]}</loc><lastmod>{a.date}</lastmod><priority>0.8</priority></url>\n' for m in MODS.values()))
-D=MODS['deep'];open(os.path.join(sn,'index-html-card.html'),'w',encoding='utf-8').write(f'''<!-- Startseite, Sektion "AKTUELL · FINCOACH AI ANALYSEN": als erste Karte in das Karten-Grid einfuegen -->
-<a href="module/{D["file"]}" class="card p-6 block hover:border-cyan-400/50 transition" style="border:1px solid rgba(0,207,255,.55);border-radius:14px;background:#121A2E">
+D=MODS['deep'];open(os.path.join(sn,'index-html-card.html'),'w',encoding='utf-8').write(f'''<!-- Startseite, Sektion "AKTUELL · FINCOACH AI ANALYSEN": als erste Karte in das Karten-Grid einfuegen.
+     Karte ist ein <div> (kein <a>), weil verschachtelte Links ungueltiges HTML sind: Titel verlinkt, Serien-Links als Pill-Zeile. -->
+<div class="card p-6 hover:border-cyan-400/50 transition" style="border:1px solid rgba(0,207,255,.55);border-radius:14px;background:#121A2E">
   <div class="text-xs mono mb-1" style="color:#00CFFF">NEU &middot; {a.date} &middot; BILDUNG &amp; DATENKOMPETENZ &middot; {D["id"]}</div>
-  <h3 class="font-bold text-lg mb-1">PISA 2025 Deep Dive &mdash; 91 Bildungssysteme, jede Zahl mit Herkunft</h3>
-  <p class="text-sm text-slate-400">Weltkarte über fünf Erhebungen (2012–2025), vollständiger Ländervergleich aller <strong class="text-slate-200">91 Systeme mit Konfidenzintervallen und Rangspannen</strong>, Länderflaggen nach Kontinenten und Bündnissen, Deutschland im Detail, Register mit 7.319 Zahlen. Serie mit <a href="module/{MODS["explorer"]["file"]}" class="text-tngb-cyan">3D-Explorer</a>, <a href="module/{MODS["fb"]["file"]}" class="text-tngb-cyan">Brücke zur Finanzbildung</a> und <a href="module/{MODS["hub"]["file"]}" class="text-tngb-cyan">Hub</a>.</p>
-</a>
+  <h3 class="font-bold text-lg mb-1"><a href="module/{D["file"]}" class="hover:text-tngb-cyan">PISA 2025 Deep Dive &mdash; 91 Bildungssysteme, jede Zahl mit Herkunft</a></h3>
+  <p class="text-sm text-slate-400">Weltkarte über fünf Erhebungen (2012–2025), vollständiger Ländervergleich aller <strong class="text-slate-200">91 Systeme mit Konfidenzintervallen und Rangspannen</strong>, Länderflaggen nach Kontinenten und Bündnissen, Deutschland im Detail, Register mit 7.319 Zahlen. Eine Serie aus vier Modulen:</p>
+  <div class="flex flex-wrap gap-2 mt-3 text-xs mono">
+    <a href="module/{D["file"]}" class="pill" style="background:rgba(0,207,255,.14);color:#00CFFF;border:1px solid rgba(0,207,255,.5)">Deep Dive &rarr;</a>
+    <a href="module/{MODS["explorer"]["file"]}" class="pill" style="background:rgba(0,207,255,.10);color:#7DD3FC">3D-Explorer</a>
+    <a href="module/{MODS["fb"]["file"]}" class="pill" style="background:rgba(0,204,122,.10);color:#6EE7B7">Br&uuml;cke zur Finanzbildung</a>
+    <a href="module/{MODS["hub"]["file"]}" class="pill" style="background:rgba(153,51,255,.10);color:#C79BFF">Hub</a>
+  </div>
+</div>
 <!-- Optional: Hero-Pill -->
 <a href="module/{D["file"]}" class="pill" style="background:rgba(0,207,255,.14);color:#00CFFF;border:1px solid rgba(0,207,255,.5)">🆕 PISA 2025: vier Module, eine Serie</a>
 ''')

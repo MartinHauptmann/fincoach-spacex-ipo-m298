@@ -113,9 +113,10 @@ foreach ($f in 'modul-m479-pisa-2025-deep-dive.html','modul-m480-pisa-explorer.h
   pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module $f -Base http://localhost:8091/publish-nexus2learn/module
 }
 
-# 9) Startseite (empfohlen): Karte aus out\snippets\index-html-card.html als erste Karte in
-#    Sektion "AKTUELL · FINCOACH AI ANALYSEN"
-notepad "C:\Users\User\AI Financecoach\publish-nexus2learn\index.html"
+# 9) Startseite: Karte aus out\snippets\index-html-card.html als erste Karte in Sektion "AKTUELL · FINCOACH AI ANALYSEN"
+#    (Karte ist ein <div> mit Titel-Link und Pill-Zeile; verschachtelte <a> waeren ungueltiges HTML)
+pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\insert-index-card.ps1" -DryRun
+pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\insert-index-card.ps1"
 
 # 10) Veroeffentlichen (Netlify-Auto-Deploy) — vorher git status pruefen: nur PISA-Dateien, index.json, Allowlist, Sitemap, ggf. index.html
 git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" status
@@ -164,6 +165,7 @@ als Herkunft im DBOM (`module.publication.source_module_id`, `source_repo` nur i
 
 - Root-Repo: PISA-Dateien gezielt committen (vier HTMLs, vier DBOMs, `assets/m479..m481`, Registry, Matrix, `reserved-numbers.txt`);
   vorher `git diff --cached --stat` prüfen, weil Registry/Matrix/Reservierung Fremdänderungen tragen können.
+- Startseite: 49 px Ueberlauf bei 375 px besteht vor der Karte (Hero-Ueberschrift `.grad-text` ragt ueber den Rand); nicht Teil dieser Serie.
 - Publish-Paket: `module/modul-m449-…html` (+1137 Zeilen) und `module/assets/m449/` stammen aus dem abgebrochenen
   `release-modules.ps1`-Lauf, nicht aus dieser Serie; Entscheidung übernehmen oder verwerfen steht aus.
 
