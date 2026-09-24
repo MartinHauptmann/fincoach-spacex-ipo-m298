@@ -12,8 +12,14 @@ danach den Build mit der reservierten Nummer erneut ausfuehren.
 """
 import argparse, json, os, re, shutil
 ROOT=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-ap=argparse.ArgumentParser();ap.add_argument('--number',type=int,required=True);ap.add_argument('--date',default='2026-09-24');a=ap.parse_args()
-N=a.number;MID=f'M{N}';mid=f'm{N}';SLUG='pisa-2025-deep-dive';FILE=f'modul-{mid}-{SLUG}.html'
+ap=argparse.ArgumentParser();ap.add_argument('--number',type=int,help='reservierte Modulnummer (aus reserve-number.ps1)');ap.add_argument('--lock',help='Pfad zu reserved-numbers.txt: Nummer wird aus dem Eintrag slug=pisa-2025-deep-dive gelesen');ap.add_argument('--date',default='2026-09-24');a=ap.parse_args()
+N=a.number
+if a.lock:
+    hits=[l for l in open(a.lock,encoding='utf-8',errors='replace') if 'slug=pisa-2025-deep-dive' in l and re.match(r'M\d+\t(reserved|backfilled)',l)]
+    if not hits: raise SystemExit('Kein Eintrag slug=pisa-2025-deep-dive in '+a.lock+' — zuerst: pwsh scripts/compliance/reserve-number.ps1 -Reserve -Slug pisa-2025-deep-dive')
+    N=int(re.match(r'M(\d+)',hits[-1]).group(1));print('Nummer aus Lock:',hits[-1].strip())
+if not N: raise SystemExit('--number oder --lock angeben')
+MID=f'M{N}';mid=f'm{N}';SLUG='pisa-2025-deep-dive';FILE=f'modul-{mid}-{SLUG}.html'
 OUT=os.path.join(ROOT,'publish','nexus2learn','out');shutil.rmtree(OUT,ignore_errors=True)
 for d in ('provenance',f'assets/{mid}','snippets'): os.makedirs(os.path.join(OUT,d),exist_ok=True)
 SITE='https://www.nexus2learn.com';NETLIFY='https://fincoach-spacex-ipo-m298.netlify.app';REPO='https://github.com/MartinHauptmann/fincoach-spacex-ipo-m298'
@@ -61,7 +67,7 @@ open(os.path.join(OUT,FILE),'w',encoding='utf-8').write(html)
 # --- 2) DBOM
 d=json.load(open(os.path.join(ROOT,'provenance/m302.dbom.json'),encoding='utf-8'))
 d['module']['id']=MID;d['module']['external_dbom']=f'provenance/{mid}.dbom.json';d['module']['related_modules']=[]
-d['module']['publication']={'site':SITE,'path':f'/module/{FILE}','module_id':MID,'source_module_id':'M302','source_repo':REPO,'source_version':d['module']['version'],'number_status':'PROVISORISCH — mit scripts/compliance/reserve-number.ps1 -Reserve -Slug pisa-2025-deep-dive bestaetigen','prepared':a.date}
+d['module']['publication']={'site':SITE,'path':f'/module/{FILE}','module_id':MID,'source_module_id':'M302','source_repo':REPO,'source_version':d['module']['version'],'number_status':('reserviert via reserved-numbers.txt (slug=pisa-2025-deep-dive)' if a.lock else 'PROVISORISCH — mit scripts/compliance/reserve-number.ps1 -Reserve -Slug pisa-2025-deep-dive bestaetigen'),'prepared':a.date}
 d['module']['data_packages']=[f'assets/{mid}/'+os.path.basename(p) for p in d['module'].get('data_packages',[])]
 d.setdefault('changelog',[]).insert(0,{'version':d['module']['version'],'date':a.date,'type':'publication','summary':f'Nexus2Learn-Fassung als {MID}: Fonts und Tailwind self-hosted (CSP der Website), Querverweise auf die PISA-Schwestermodule extern, Datenpakete unter assets/{mid}/; Inhalte, Fakten und Quellen unveraendert (Repository-Kennung M302 v'+d['module']['version']+').'})
 json.dump(d,open(os.path.join(OUT,f'provenance/{mid}.dbom.json'),'w',encoding='utf-8'),ensure_ascii=False,indent=1)

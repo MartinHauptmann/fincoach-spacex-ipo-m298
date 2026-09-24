@@ -32,8 +32,10 @@ damit alle `data-source`-Referenzen weiter auflösen.
 pwsh scripts/compliance/reserve-number.ps1 -Reserve -Slug 'pisa-2025-deep-dive'
 #    -> liefert die Nummer NNN
 
-# 2) Paket mit der reservierten Nummer neu bauen (in diesem Repo)
+# 2) Paket mit der reservierten Nummer neu bauen (in diesem Repo) — entweder Nummer angeben
 python3 publish/nexus2learn/build.py --number NNN
+#    oder direkt aus dem Lockfile des Root lesen (Eintrag slug=pisa-2025-deep-dive):
+python3 publish/nexus2learn/build.py --lock 'C:/Users/User/AI Financecoach/reserved-numbers.txt'
 
 # 3) Dateien in den FinCoach-Root übernehmen
 #    out/modul-mNNN-pisa-2025-deep-dive.html  -> <Root>/modul-mNNN-pisa-2025-deep-dive.html
