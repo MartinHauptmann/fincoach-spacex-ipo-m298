@@ -45,19 +45,29 @@ foreach ($e in $entries) {
   Write-Host ("  {0} -> {1}" -f $e.file, $dst) -ForegroundColor Green
   if (-not $DryRun) { [System.IO.File]::WriteAllText($dst, $html, $utf8) }
   $copied++
-  foreach ($mm in $rxAsset.Matches($html)) {
-    $rel = $mm.Groups[1].Value
-    $aSrc = Join-Path $out $rel
-    if (Test-Path $aSrc) {
-      $aDst = Join-Path $modDir $rel
-      Write-Host ("     companion {0}" -f $rel) -ForegroundColor DarkGray
-      if (-not $DryRun) {
-        $aDir = Split-Path $aDst -Parent
-        if (-not (Test-Path $aDir)) { New-Item -ItemType Directory -Force -Path $aDir | Out-Null }
-        Copy-Item $aSrc $aDst -Force
-      }
-      $assets++
+  # Companions: (a) alles, was die HTML per src/href referenziert, (b) das komplette Datenpaket assets/mNNN/
+  # (im M-DBOM als Artefakte gelistet, teils nur eingebettet und nicht verlinkt), (c) provenance/mNNN.dbom.json
+  $rels = [System.Collections.Generic.List[string]]::new()
+  foreach ($mm in $rxAsset.Matches($html)) { $rels.Add($mm.Groups[1].Value) }
+  $idL = $e.id.ToLower()
+  $pkgDir = Join-Path $out ("assets\{0}" -f $idL)
+  if (Test-Path $pkgDir) {
+    foreach ($f in Get-ChildItem $pkgDir -File -Recurse) {
+      $rels.Add(("assets/{0}/{1}" -f $idL, $f.FullName.Substring($pkgDir.Length + 1).Replace('\','/')))
     }
+  }
+  $rels.Add(("provenance/{0}.dbom.json" -f $idL))
+  foreach ($rel in ($rels | Sort-Object -Unique)) {
+    $aSrc = Join-Path $out $rel
+    if (-not (Test-Path $aSrc)) { if ($rel -like 'provenance/*') { throw "DBOM fehlt im Paket: $aSrc" } else { continue } }
+    $aDst = Join-Path $modDir $rel
+    Write-Host ("     companion {0}" -f $rel) -ForegroundColor DarkGray
+    if (-not $DryRun) {
+      $aDir = Split-Path $aDst -Parent
+      if (-not (Test-Path $aDir)) { New-Item -ItemType Directory -Force -Path $aDir | Out-Null }
+      Copy-Item $aSrc $aDst -Force
+    }
+    $assets++
   }
   # Teaser (Fallback zu generate-teasers.mjs)
   $teaser = Join-Path $media ("{0}.jpg" -f $e.id.ToLower())

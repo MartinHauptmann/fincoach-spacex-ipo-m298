@@ -93,7 +93,7 @@ Schritte von `release-modules.ps1`, fasst nichts anderes an):
 ```powershell
 # 6) Vorschau, was passieren wuerde
 pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\release-pisa.ps1" -DryRun
-# 7) Transfer: Module mit Link-Rewrite nach module\, Companions, index.json-Eintraege, Teaser, OG-Bild, Sitemap, Allowlist
+# 7) Transfer: Module mit Link-Rewrite nach module\, Companions (komplettes assets\mNNN\ + DBOM, erwartet 16), index.json-Eintraege, Teaser, OG-Bild, Sitemap, Allowlist
 pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\release-pisa.ps1"
 
 # 8) Gates gegen das Publish-Paket (Vorschau-Server aus Abschnitt 1 laeuft auf 8089)
