@@ -1,0 +1,12 @@
+const { chromium } = require('playwright'); const fs=require('fs');
+(async () => { const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell', args: ['--no-sandbox'] });
+  const files = fs.readdirSync(process.argv[3] || '/home/user/nexus2learn-website/module').filter(f=>/^modul-m4(79|8[0-2])-/.test(f));
+  for (const f of files) {
+    const errors=[], failed=[], ext=[]; const page = await b.newPage({ viewport: { width: 1280, height: 800 } }); page.on('pageerror', e => errors.push(e.message)); page.on('requestfailed', r => failed.push(r.url().slice(-60))); page.on('request', r => { const u=r.url(); if(!u.startsWith('http://localhost:8766/') && !u.startsWith('data:')) ext.push(u); });
+    await page.goto('(process.argv[4]||'http://localhost:8766/module/')+'+f, { waitUntil: 'load', timeout: 90000 }); await page.waitForTimeout(3500);
+    const st = await page.evaluate(() => { const vis=el=>!!el&&el.getClientRects().length>0; const links=[...document.querySelectorAll('a[href]')].map(a=>a.getAttribute('href')).filter(h=>/^(m29|m30|modul\.html|ipo-|pisa-hub)/.test(h)); return { title: document.title.slice(0,60), audit: (document.getElementById('live-audit-status')||{innerText:'-'}).innerText.slice(0,70), fails: [...document.querySelectorAll('.check-fail')].map(e=>e.parentElement.innerText.slice(0,70)), back: !!document.querySelector('a[href="../module.html"]'), auditHidden: !vis(document.getElementById('live-audit-banner')), oldLinks: links, katexErr: document.querySelectorAll('.katex-error').length }; });
+    const mob = await b.newPage({ viewport: { width: 375, height: 812 } }); await mob.goto('(process.argv[4]||'http://localhost:8766/module/')+'+f, { waitUntil: 'load' }); await mob.waitForTimeout(1500); const ovf = await mob.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 2); await mob.close();
+    const ctx = await b.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 0.5 }); const tp = await ctx.newPage(); await tp.goto('(process.argv[4]||'http://localhost:8766/module/')+'+f, { waitUntil: 'load' }); await tp.waitForTimeout(3000); await tp.screenshot({ path: process.argv[2]+'/'+f.match(/^modul-(m\d+)/)[1]+'.jpg', type:'jpeg', quality:72 }); await ctx.close();
+    console.log(f, JSON.stringify(st), 'errors', errors, 'failed', failed, 'ext', ext, 'mobileOverflow', ovf); await page.close();
+  }
+  await b.close(); })();
