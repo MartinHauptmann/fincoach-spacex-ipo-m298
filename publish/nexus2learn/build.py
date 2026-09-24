@@ -47,13 +47,13 @@ def agent_block(m):
     typ='tiefenmodul' if m['slug'] in ('pisa-2025-deep-dive','pisa-2025-finanzbildung') else 'tool'
     dj=json.load(open(os.path.join(ROOT,m['dbom']),encoding='utf-8'));fs=dj.get('fact_summary',{});ver=dj['module']['version'];st=dj['module']['stichtag']
     used=[{'id':'fincoach-module-provenance','status':'passed','timestamp':a.date+'T17:40:00Z','output':f'provenance/{m["mid"]}.dbom.json','stats':{k:v for k,v in fs.items() if not isinstance(v,dict)},'note':'M-DBOM v1 mit Verdict/Konfidenz/Quelle je Fakt; jede Zahl traegt eine Herkunftsklasse (OFFICIAL_STATLINK, DERIVED_OFFICIAL, COMPUTED_MICRODATA, SCENARIO, INTERPRETATION); kein Wert aus Modellgedaechtnis.'},
-          {'id':'fincoach-module-compliance-guardian','status':'passed-with-warnings','timestamp':a.date+'T17:40:00Z','output':'assets/'+MODS['fb']['mid']+'/fincoach_module_check.py (C01-C11, D01-D14, S01-S10) + Live-QA im Modul','stats':{'static_fail':0,'live_qa':'alle Checks bestanden'},'note':'Gepueft mit dem modul-eigenen Checker und der Live-QA, nicht mit dem FinCoach-Guardian-Agenten; Verhalten unter file:// (R033), localStorage (safeLS) und CSP self erfuellt.'}]
+          {'id':'fincoach-module-compliance-guardian','status':'passed-with-warnings','timestamp':a.date+'T17:40:00Z','output':'assets/'+MODS['fb']['mid']+'/fincoach_module_check.py (C01-C11, D01-D14, S01-S10) + Live-QA im Modul','stats':{'static_fail':0,'live_qa':'alle Checks bestanden'},'note':'Geprueft mit dem modul-eigenen Checker und der Live-QA, nicht mit dem FinCoach-Guardian-Agenten; Verhalten unter file:// (R033), localStorage (safeLS) und CSP self erfuellt.'}]
     skipped=[{'id':'fincoach-entity-network-cartographer','reason':'Studien-Deep-Dive ohne Akteurs-Netzwerk; Organisationen (OECD, IEA, ZIB) sind im Quellenverzeichnis benannt.'},
              {'id':'fincoach-market-data','reason':'Keine Marktdaten; Datenbasis sind OECD-StatLink-Tabellen und Public-Use-Files.'},
              {'id':'fincoach-world-governance','reason':'Kein Governance-Atlas-Bezug; Kontinent-/Buendniszuordnung ist als Referenzklasse im DBOM ausgewiesen.'}]
     pend=[]
     if typ=='tiefenmodul':
-        pend=[{'id':'fincoach-interdisciplinary-council','status':'pending','note':'Nicht durchgefuehrt: Modul ausserhalb der FinCoach-Pipeline entstanden (Herkunft '+m['old']+'). Vor Publish nachholen oder Ausnahme dokumentieren.'},
+        pend=[{'id':'fincoach-interdisciplinary-council','status':'pending','note':'Nicht durchgefuehrt: Modul ausserhalb der FinCoach-Pipeline entstanden (Herkunft Repository-Kennung '+m['old']+'). Vor Publish nachholen oder Ausnahme dokumentieren.'},
               {'id':'fincoach-wikipedia-synthesis','status':'pending','note':'Nicht durchgefuehrt; Faktencheck erfolgte gegen OECD-Primaerquellen (StatLink, Laendernotiz, Technical Report) mit dokumentierten Diskrepanzen. Vor Publish nachholen oder Ausnahme dokumentieren.'}]
     man={'module_id':f'{m["mid"]}-{m["slug"]}','build_id':f'{m["mid"]}-{m["slug"]}-v{ver}-{a.date}','build_timestamp':a.date+'T17:40:00Z','stichtag':st,'module_type':typ,'agents_used':used+pend,'agents_skipped':skipped,
          'open_issues':[{'id':f'{m["mid"]}-pipeline-gates','title':'Council- und Wikipedia-Synthese-Agent nachholen oder Ausnahme dokumentieren (Modul aus externem Repository ueberfuehrt)','priority':'high','agent':'fincoach-module-lifecycle-auditor'}] if typ=='tiefenmodul' else [],'reaudit':a.date}
@@ -110,7 +110,6 @@ def build(m):
     h=h.replace('<div class="md:col-span-2 viz-wrap viz-3d">','<div class="md:col-span-2 viz-wrap viz-3d" style="height:480px;">').replace('<div class="viz-wrap viz-2d">','<div class="viz-wrap viz-2d" style="height:240px;">')
     h=re.sub(r'<div class="chart-box"><canvas','<div class="chart-box" style="height:260px;"><canvas',h)
     # §13 Agent-Audit: Block + maschinenlesbares Manifest + Renderer vor <footer>
-    h=h.replace('<footer',agent_block(m)+'\n<footer',1)
     # DBOM-Pfade und Datenpakete -> Companions
     for x in MODS.values():
         h=h.replace(x['dbom'],f'provenance/{x["mid"]}.dbom.json')
@@ -144,6 +143,7 @@ def build(m):
     for i in range(1,len(parts),2):
         if 'id="register-inline"' in parts[i]: parts[i]=rename_ids(parts[i])
     h=''.join(parts)
+    h=h.replace('<footer',agent_block(m)+'\n<footer',1)  # nach der Kennungs-Umbenennung: Herkunft bleibt literal
     open(os.path.join(OUT,m['file']),'w',encoding='utf-8').write(h)
     # DBOM
     d=json.load(open(os.path.join(ROOT,m['dbom']),encoding='utf-8'))
