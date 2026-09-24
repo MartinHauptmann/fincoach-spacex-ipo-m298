@@ -1,0 +1,30 @@
+[
+ {
+  "id": "M479",
+  "number": 479,
+  "title": "PISA 2025 Deep Dive",
+  "file": "modul-m479-pisa-2025-deep-dive.html",
+  "released": true
+ },
+ {
+  "id": "M480",
+  "number": 480,
+  "title": "PISA Explorer",
+  "file": "modul-m480-pisa-explorer.html",
+  "released": true
+ },
+ {
+  "id": "M481",
+  "number": 481,
+  "title": "PISA 2025 & Finanzbildung",
+  "file": "modul-m481-pisa-2025-finanzbildung.html",
+  "released": true
+ },
+ {
+  "id": "M482",
+  "number": 482,
+  "title": "PISA-Hub",
+  "file": "modul-m482-pisa-hub.html",
+  "released": true
+ }
+]

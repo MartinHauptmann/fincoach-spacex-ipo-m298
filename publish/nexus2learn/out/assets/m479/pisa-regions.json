@@ -1,0 +1,906 @@
+{
+ "meta": {
+  "purpose": "Kontinent- und Bündniszuordnung der 91 PISA-2025-Systeme für die Hero-Grafik in M302 (Flächen/Reihen)",
+  "class": "CLASSIFICATION_REFERENCE",
+  "continent_scheme": "UN M49 Geoscheme (Kontinent; Amerika geteilt in Nordamerika und Lateinamerika & Karibik). Zypern, Türkiye, Armenien, Aserbaidschan, Georgien und Israel gelten nach M49 als Westasien.",
+  "bloc_basis": "Offizielle Mitgliederlisten der jeweiligen Organisationen, Stand 2025; OECD-Zugehörigkeit aus dem OECD-StatLink (Kennzeichnung im Datensatz). Zuordnung ist keine OECD-Statistik und trägt keine Messunsicherheit; sie wurde aus Referenzwissen erstellt und nicht gegen die Originalregister abgerufen (Build-Umgebung ohne Zugriff auf un.org/europa.eu).",
+  "flags": "Flaggen aus lipis/flag-icons (MIT-Lizenz, 4:3), zu 48×36 px gerastert und als Data-URI eingebettet; Teil- und Regionalstichproben tragen die Flagge des Staates (siehe flag_note).",
+  "stichtag": "2026-09-16"
+ },
+ "continents": [
+  {
+   "id": "EUR",
+   "label": "Europa",
+   "color": "#008CDF"
+  },
+  {
+   "id": "ASIA",
+   "label": "Asien",
+   "color": "#CF630D"
+  },
+  {
+   "id": "AFR",
+   "label": "Afrika",
+   "color": "#966CD7"
+  },
+  {
+   "id": "NAM",
+   "label": "Nordamerika",
+   "color": "#4A9C36"
+  },
+  {
+   "id": "LAC",
+   "label": "Lateinamerika & Karibik",
+   "color": "#CA5794"
+  },
+  {
+   "id": "OCE",
+   "label": "Ozeanien",
+   "color": "#B27B00"
+  }
+ ],
+ "blocs": [
+  {
+   "id": "EU",
+   "label": "EU-27",
+   "color": "#008CDF",
+   "note": "Europäische Union, 27 Mitgliedstaaten (alle in PISA 2025 vertreten)",
+   "members": [
+    "Austria",
+    "Belgium",
+    "Bulgaria",
+    "Croatia",
+    "Cyprus",
+    "Czechia",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
+    "Germany",
+    "Greece",
+    "Hungary",
+    "Ireland",
+    "Italy",
+    "Latvia",
+    "Lithuania",
+    "Luxembourg",
+    "Malta",
+    "Netherlands",
+    "Poland",
+    "Portugal",
+    "Romania",
+    "Slovak Republic",
+    "Slovenia",
+    "Spain",
+    "Sweden"
+   ]
+  },
+  {
+   "id": "OECD",
+   "label": "OECD-38",
+   "color": "#B45000",
+   "note": "OECD-Mitglieder laut StatLink-Kennzeichnung (38, alle vertreten)",
+   "members": [
+    "Australia",
+    "Austria",
+    "Belgium",
+    "Canada",
+    "Chile",
+    "Colombia",
+    "Costa Rica",
+    "Czechia",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
+    "Germany",
+    "Greece",
+    "Hungary",
+    "Iceland",
+    "Ireland",
+    "Israel",
+    "Italy",
+    "Japan",
+    "Korea",
+    "Latvia",
+    "Lithuania",
+    "Luxembourg",
+    "Mexico",
+    "Netherlands",
+    "New Zealand",
+    "Norway",
+    "Poland",
+    "Portugal",
+    "Slovak Republic",
+    "Slovenia",
+    "Spain",
+    "Sweden",
+    "Switzerland",
+    "Türkiye",
+    "United Kingdom",
+    "United States"
+   ]
+  },
+  {
+   "id": "CPTPP",
+   "label": "CPTPP",
+   "color": "#9D79D7",
+   "note": "Comprehensive and Progressive Agreement for Trans-Pacific Partnership, 12 Vertragsparteien (UK seit 2024); alle 12 vertreten",
+   "members": [
+    "Australia",
+    "Brunei Darussalam",
+    "Canada",
+    "Chile",
+    "Japan",
+    "Malaysia",
+    "Mexico",
+    "New Zealand",
+    "Peru",
+    "Singapore",
+    "United Kingdom",
+    "Viet Nam"
+   ]
+  },
+  {
+   "id": "ASEAN",
+   "label": "ASEAN",
+   "color": "#398526",
+   "note": "Verband Südostasiatischer Nationen, 10 Mitglieder; 8 vertreten (ohne Laos, Myanmar)",
+   "members": [
+    "Brunei Darussalam",
+    "Cambodia",
+    "Indonesia",
+    "Malaysia",
+    "Philippines",
+    "Singapore",
+    "Thailand",
+    "Viet Nam"
+   ]
+  },
+  {
+   "id": "USMCA",
+   "label": "USMCA",
+   "color": "#CD6199",
+   "note": "Abkommen USA–Mexiko–Kanada (Nachfolger NAFTA); alle 3 vertreten",
+   "members": [
+    "Canada",
+    "Mexico",
+    "United States"
+   ]
+  },
+  {
+   "id": "MERCOSUR",
+   "label": "Mercosur",
+   "color": "#946900",
+   "note": "Vollmitglieder Argentinien, Brasilien, Paraguay, Uruguay, Bolivien (seit 2024); 4 vertreten. Assoziierte Staaten (u. a. Chile, Kolumbien, Ecuador, Peru) nicht gezählt",
+   "members": [
+    "Argentina",
+    "Brazil",
+    "Paraguay",
+    "Uruguay"
+   ]
+  },
+  {
+   "id": "PA",
+   "label": "Pazifik-Allianz",
+   "color": "#00A6AE",
+   "note": "Alianza del Pacífico: Chile, Kolumbien, Mexiko, Peru; alle 4 vertreten",
+   "members": [
+    "Chile",
+    "Colombia",
+    "Mexico",
+    "Peru"
+   ]
+  },
+  {
+   "id": "SICA",
+   "label": "SICA",
+   "color": "#B9454C",
+   "note": "Zentralamerikanisches Integrationssystem, 8 Mitglieder; 4 vertreten (Costa Rica, Dominikanische Republik, El Salvador, Guatemala)",
+   "members": [
+    "Costa Rica",
+    "Dominican Republic",
+    "El Salvador",
+    "Guatemala"
+   ]
+  },
+  {
+   "id": "GCC",
+   "label": "Golf-Kooperationsrat",
+   "color": "#6B86E1",
+   "note": "GCC, 6 Mitglieder; 3 vertreten (Katar, Saudi-Arabien, VAE)",
+   "members": [
+    "Qatar",
+    "Saudi Arabia",
+    "United Arab Emirates"
+   ]
+  },
+  {
+   "id": "EAEU",
+   "label": "Eurasische WU",
+   "color": "#6B7F00",
+   "note": "Eurasische Wirtschaftsunion, 5 Mitglieder; 3 vertreten (Armenien, Kasachstan, Kirgisistan)",
+   "members": [
+    "Armenia",
+    "Kazakhstan",
+    "Kyrgyzstan"
+   ]
+  },
+  {
+   "id": "CEFTA",
+   "label": "CEFTA",
+   "color": "#B16EC0",
+   "note": "Mitteleuropäisches Freihandelsabkommen (Westbalkan + Moldau), 7 Parteien; 6 vertreten (ohne Bosnien und Herzegowina)",
+   "members": [
+    "Albania",
+    "Kosovo",
+    "Moldova",
+    "Montenegro",
+    "North Macedonia",
+    "Serbia"
+   ]
+  },
+  {
+   "id": "AU",
+   "label": "Afrikanische Union / AfCFTA",
+   "color": "#BB6802",
+   "note": "AU-Mitglieder und Vertragsparteien der Afrikanischen Kontinentalen Freihandelszone; 5 vertreten",
+   "members": [
+    "Kenya",
+    "Mauritius",
+    "Morocco",
+    "Rwanda",
+    "Zambia"
+   ]
+  },
+  {
+   "id": "EFTA",
+   "label": "EFTA",
+   "color": "#94A3B8",
+   "lane": false,
+   "note": "Europäische Freihandelsassoziation, 4 Mitglieder; 3 vertreten (Island, Norwegen, Schweiz) – alle OECD-Mitglieder, daher keine eigene Reihe",
+   "members": [
+    "Iceland",
+    "Norway",
+    "Switzerland"
+   ]
+  },
+  {
+   "id": "CAN",
+   "label": "Andengemeinschaft",
+   "color": "#94A3B8",
+   "lane": false,
+   "note": "Comunidad Andina, 4 Mitglieder; 3 vertreten (Kolumbien, Ecuador, Peru) – keine eigene Reihe",
+   "members": [
+    "Colombia",
+    "Ecuador",
+    "Peru"
+   ]
+  }
+ ],
+ "systems": {
+  "Albania": {
+   "flag": "al",
+   "continent": "EUR",
+   "blocs": [
+    "CEFTA"
+   ]
+  },
+  "Argentina": {
+   "flag": "ar",
+   "continent": "LAC",
+   "blocs": [
+    "MERCOSUR"
+   ]
+  },
+  "Armenia": {
+   "flag": "am",
+   "continent": "ASIA",
+   "blocs": [
+    "EAEU"
+   ]
+  },
+  "Australia": {
+   "flag": "au",
+   "continent": "OCE",
+   "blocs": [
+    "CPTPP"
+   ]
+  },
+  "Austria": {
+   "flag": "at",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Azerbaijan": {
+   "flag": "az",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "B-S-J-Z (China)": {
+   "flag": "cn",
+   "continent": "ASIA",
+   "blocs": [],
+   "flag_note": "Flagge der Volksrepublik China; PISA-Teilstichprobe Peking, Shanghai, Jiangsu, Zhejiang"
+  },
+  "Belgium": {
+   "flag": "be",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Brazil": {
+   "flag": "br",
+   "continent": "LAC",
+   "blocs": [
+    "MERCOSUR"
+   ]
+  },
+  "Brunei Darussalam": {
+   "flag": "bn",
+   "continent": "ASIA",
+   "blocs": [
+    "CPTPP",
+    "ASEAN"
+   ]
+  },
+  "Bulgaria": {
+   "flag": "bg",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Cambodia": {
+   "flag": "kh",
+   "continent": "ASIA",
+   "blocs": [
+    "ASEAN"
+   ]
+  },
+  "Canada": {
+   "flag": "ca",
+   "continent": "NAM",
+   "blocs": [
+    "CPTPP",
+    "USMCA"
+   ]
+  },
+  "Chile": {
+   "flag": "cl",
+   "continent": "LAC",
+   "blocs": [
+    "CPTPP",
+    "PA"
+   ]
+  },
+  "Chinese Taipei": {
+   "flag": "tw",
+   "continent": "ASIA",
+   "blocs": [],
+   "flag_note": "Flagge wie im Flaggensatz flag-icons (tw); PISA-Bezeichnung „Chinese Taipei“"
+  },
+  "Colombia": {
+   "flag": "co",
+   "continent": "LAC",
+   "blocs": [
+    "PA",
+    "CAN"
+   ]
+  },
+  "Costa Rica": {
+   "flag": "cr",
+   "continent": "LAC",
+   "blocs": [
+    "SICA"
+   ]
+  },
+  "Croatia": {
+   "flag": "hr",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Cyprus": {
+   "flag": "cy",
+   "continent": "ASIA",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Czechia": {
+   "flag": "cz",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Denmark": {
+   "flag": "dk",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Dominican Republic": {
+   "flag": "do",
+   "continent": "LAC",
+   "blocs": [
+    "SICA"
+   ]
+  },
+  "Dushanbe (Tajikistan)": {
+   "flag": "tj",
+   "continent": "ASIA",
+   "blocs": [],
+   "flag_note": "Flagge Tadschikistans; PISA erhob nur die Hauptstadt Duschanbe"
+  },
+  "Ecuador": {
+   "flag": "ec",
+   "continent": "LAC",
+   "blocs": [
+    "CAN"
+   ]
+  },
+  "El Salvador": {
+   "flag": "sv",
+   "continent": "LAC",
+   "blocs": [
+    "SICA"
+   ]
+  },
+  "Estonia": {
+   "flag": "ee",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Finland": {
+   "flag": "fi",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "France": {
+   "flag": "fr",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Georgia": {
+   "flag": "ge",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "Germany": {
+   "flag": "de",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Greece": {
+   "flag": "gr",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Guatemala": {
+   "flag": "gt",
+   "continent": "LAC",
+   "blocs": [
+    "SICA"
+   ]
+  },
+  "Hong Kong (China)": {
+   "flag": "hk",
+   "continent": "ASIA",
+   "blocs": [],
+   "flag_note": "Regionalflagge Hongkong (Sonderverwaltungszone)"
+  },
+  "Hungary": {
+   "flag": "hu",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Iceland": {
+   "flag": "is",
+   "continent": "EUR",
+   "blocs": [
+    "EFTA"
+   ]
+  },
+  "Indonesia": {
+   "flag": "id",
+   "continent": "ASIA",
+   "blocs": [
+    "ASEAN"
+   ]
+  },
+  "Ireland": {
+   "flag": "ie",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Israel": {
+   "flag": "il",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "Italy": {
+   "flag": "it",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Japan": {
+   "flag": "jp",
+   "continent": "ASIA",
+   "blocs": [
+    "CPTPP"
+   ]
+  },
+  "Jordan": {
+   "flag": "jo",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "Kazakhstan": {
+   "flag": "kz",
+   "continent": "ASIA",
+   "blocs": [
+    "EAEU"
+   ]
+  },
+  "Kenya": {
+   "flag": "ke",
+   "continent": "AFR",
+   "blocs": [
+    "AU"
+   ]
+  },
+  "Korea": {
+   "flag": "kr",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "Kosovo": {
+   "flag": "xk",
+   "continent": "EUR",
+   "blocs": [
+    "CEFTA"
+   ],
+   "flag_note": "Flagge Kosovos (Code xk, kein ISO-3166-Code)"
+  },
+  "Kurdistan Region (Iraq)": {
+   "flag": "iq",
+   "continent": "ASIA",
+   "blocs": [],
+   "flag_note": "Flagge Iraks; eigene Regionalflagge nicht im Flaggensatz – Teilstichprobe Region Kurdistan"
+  },
+  "Kyrgyzstan": {
+   "flag": "kg",
+   "continent": "ASIA",
+   "blocs": [
+    "EAEU"
+   ]
+  },
+  "Latvia": {
+   "flag": "lv",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Lebanon": {
+   "flag": "lb",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "Lithuania": {
+   "flag": "lt",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Luxembourg": {
+   "flag": "lu",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Macao (China)": {
+   "flag": "mo",
+   "continent": "ASIA",
+   "blocs": [],
+   "flag_note": "Regionalflagge Macau (Sonderverwaltungszone)"
+  },
+  "Malaysia": {
+   "flag": "my",
+   "continent": "ASIA",
+   "blocs": [
+    "CPTPP",
+    "ASEAN"
+   ]
+  },
+  "Malta": {
+   "flag": "mt",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Mauritius": {
+   "flag": "mu",
+   "continent": "AFR",
+   "blocs": [
+    "AU"
+   ]
+  },
+  "Mexico": {
+   "flag": "mx",
+   "continent": "LAC",
+   "blocs": [
+    "CPTPP",
+    "USMCA",
+    "PA"
+   ]
+  },
+  "Moldova": {
+   "flag": "md",
+   "continent": "EUR",
+   "blocs": [
+    "CEFTA"
+   ]
+  },
+  "Mongolia": {
+   "flag": "mn",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "Montenegro": {
+   "flag": "me",
+   "continent": "EUR",
+   "blocs": [
+    "CEFTA"
+   ]
+  },
+  "Morocco": {
+   "flag": "ma",
+   "continent": "AFR",
+   "blocs": [
+    "AU"
+   ]
+  },
+  "Netherlands": {
+   "flag": "nl",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "New Zealand": {
+   "flag": "nz",
+   "continent": "OCE",
+   "blocs": [
+    "CPTPP"
+   ]
+  },
+  "North Macedonia": {
+   "flag": "mk",
+   "continent": "EUR",
+   "blocs": [
+    "CEFTA"
+   ]
+  },
+  "Norway": {
+   "flag": "no",
+   "continent": "EUR",
+   "blocs": [
+    "EFTA"
+   ]
+  },
+  "Palestinian Authority": {
+   "flag": "ps",
+   "continent": "ASIA",
+   "blocs": [],
+   "flag_note": "Flagge Palästinas (ISO ps)"
+  },
+  "Paraguay": {
+   "flag": "py",
+   "continent": "LAC",
+   "blocs": [
+    "MERCOSUR"
+   ]
+  },
+  "Peru": {
+   "flag": "pe",
+   "continent": "LAC",
+   "blocs": [
+    "CPTPP",
+    "PA",
+    "CAN"
+   ]
+  },
+  "Philippines": {
+   "flag": "ph",
+   "continent": "ASIA",
+   "blocs": [
+    "ASEAN"
+   ]
+  },
+  "Poland": {
+   "flag": "pl",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Portugal": {
+   "flag": "pt",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Qatar": {
+   "flag": "qa",
+   "continent": "ASIA",
+   "blocs": [
+    "GCC"
+   ]
+  },
+  "Romania": {
+   "flag": "ro",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Rwanda": {
+   "flag": "rw",
+   "continent": "AFR",
+   "blocs": [
+    "AU"
+   ]
+  },
+  "Saudi Arabia": {
+   "flag": "sa",
+   "continent": "ASIA",
+   "blocs": [
+    "GCC"
+   ]
+  },
+  "Serbia": {
+   "flag": "rs",
+   "continent": "EUR",
+   "blocs": [
+    "CEFTA"
+   ]
+  },
+  "Singapore": {
+   "flag": "sg",
+   "continent": "ASIA",
+   "blocs": [
+    "CPTPP",
+    "ASEAN"
+   ]
+  },
+  "Slovak Republic": {
+   "flag": "sk",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Slovenia": {
+   "flag": "si",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Spain": {
+   "flag": "es",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Sweden": {
+   "flag": "se",
+   "continent": "EUR",
+   "blocs": [
+    "EU"
+   ]
+  },
+  "Switzerland": {
+   "flag": "ch",
+   "continent": "EUR",
+   "blocs": [
+    "EFTA"
+   ]
+  },
+  "Thailand": {
+   "flag": "th",
+   "continent": "ASIA",
+   "blocs": [
+    "ASEAN"
+   ]
+  },
+  "Türkiye": {
+   "flag": "tr",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "Ukrainian regions (17 of 27)": {
+   "flag": "ua",
+   "continent": "EUR",
+   "blocs": [],
+   "flag_note": "Flagge der Ukraine; 17 von 27 Regionen erhoben"
+  },
+  "United Arab Emirates": {
+   "flag": "ae",
+   "continent": "ASIA",
+   "blocs": [
+    "GCC"
+   ]
+  },
+  "United Kingdom": {
+   "flag": "gb",
+   "continent": "EUR",
+   "blocs": [
+    "CPTPP"
+   ]
+  },
+  "United States": {
+   "flag": "us",
+   "continent": "NAM",
+   "blocs": [
+    "USMCA"
+   ]
+  },
+  "Uruguay": {
+   "flag": "uy",
+   "continent": "LAC",
+   "blocs": [
+    "MERCOSUR"
+   ]
+  },
+  "Uzbekistan": {
+   "flag": "uz",
+   "continent": "ASIA",
+   "blocs": []
+  },
+  "Viet Nam": {
+   "flag": "vn",
+   "continent": "ASIA",
+   "blocs": [
+    "CPTPP",
+    "ASEAN"
+   ]
+  },
+  "Zambia": {
+   "flag": "zm",
+   "continent": "AFR",
+   "blocs": [
+    "AU"
+   ]
+  }
+ }
+}

@@ -17,12 +17,12 @@ E-Bike-Modul, nur auf der Website, im Root unbekannt). Nummern vergibt ausschlie
 
 | Datei | Zweck |
 |---|---|
-| `build.py` | erzeugt `out/` für alle vier Module; Nummern aus `--lock <reserved-numbers.txt>` (je Slug) oder `--numbers deep=…,explorer=…,fb=…,hub=…` |
+| `build.py` | erzeugt `out/` für alle vier Module; Nummern aus `--lock <reserved-numbers.txt>` (je Slug) oder `--numbers deep=…,explorer=…,fb=…,hub=…`. **`out/` liegt fertig gebaut im Repository** (Nummern aus `reserved-numbers.excerpt.txt`, den vier Reservierungen vom 2026-09-24) |
 | `out/modul-m<NNN>-<slug>.html` (4×) | Root-Fassungen nach Website-Konventionen: `../assets/fonts/fonts.css`, `../vendor/tailwind.js`, KaTeX/Chart.js aus `../vendor/`, Geschwister-Links `index.html`/`impressum.html`/`datenschutz.html`/`modul-matrix.html` (werden von `release-modules.ps1` auf `../` umgeschrieben), Querverweise der Serie als `modul-m<NNN>-<slug>.html` |
 | `out/provenance/m<NNN>.dbom.json` (4×) | M-DBOM je Modul (Companion) mit `module.publication` (Herkunft, Status der Nummer) |
 | `out/assets/m<NNN>/*` | Companions: Deep Dive 8 Datenpakete · Explorer `pisa-explorer.json`, `pisa-stats.js`, Tests · Finanzbildung `fincoach_module_check.py` |
 | `out/snippets/*` | `index-json-entries.json`, `modules-public-add.txt`, `sitemap-lines.xml`, `index-html-card.html` |
-| `media/m<NNN>.jpg` (4×) | Hero-Teaser 640×400 (Konvention `generate-teasers.mjs`); mit provisorischen Nummern erzeugt, `release-modules.ps1` erzeugt sie ohnehin neu |
+| `media/m479.jpg` … `media/m482.jpg` | Hero-Teaser 640×400 (Konvention `generate-teasers.mjs`); `release-modules.ps1` erzeugt sie ohnehin neu |
 | `media/pisa-2025-serie-1200x627.png` | Open-Graph-Bild der Serie → `publish-nexus2learn/assets/og/` (alle vier Module verweisen darauf) |
 | `qa-and-teasers.js` | Headless-Prüfung (Fehler, externe Requests, Live-QA, Rücklink, 375 px) + Teaser; Playwright erforderlich |
 
@@ -43,15 +43,12 @@ $REPO = 'C:\Users\User\fincoach-spacex-ipo-m298'   # <- Pfad des lokalen Klons d
 notepad "C:\Users\User\AI Financecoach\reserved-numbers.txt"
 pwsh "C:\Users\User\AI Financecoach\scripts\compliance\reserve-number.ps1" -Backfill 449 -Slug 'ebike-kompakt-ergonomie-radbauer'
 
-# 1) Vier Nummern reservieren, oberhalb der hoechsten oeffentlich vergebenen Nummer (M478), je Slug eine Zeile
-pwsh "C:\Users\User\AI Financecoach\scripts\compliance\reserve-number.ps1" -Reserve -Slug 'pisa-2025-deep-dive'     -Min 479
-pwsh "C:\Users\User\AI Financecoach\scripts\compliance\reserve-number.ps1" -Reserve -Slug 'pisa-explorer'           -Min 479
-pwsh "C:\Users\User\AI Financecoach\scripts\compliance\reserve-number.ps1" -Reserve -Slug 'pisa-2025-finanzbildung' -Min 479
-pwsh "C:\Users\User\AI Financecoach\scripts\compliance\reserve-number.ps1" -Reserve -Slug 'pisa-hub'                -Min 479
+# 1) ERLEDIGT am 2026-09-24: M449 nachgetragen, reserviert M479 Deep Dive · M480 Explorer · M481 Finanzbildung · M482 Hub
 
-# 2) Paket bauen — liest alle vier Nummern aus dem Lockfile
-python "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\build.py" --lock "C:\Users\User\AI Financecoach\reserved-numbers.txt"
-#    Ergebnis: C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\out\
+# 2) Fertiges Paket holen (kein Python noetig — out\ ist mit den reservierten Nummern gebaut und im Repository)
+git clone --branch claude/pisa-2025-finanzbildung-qekrl6 https://github.com/MartinHauptmann/fincoach-spacex-ipo-m298 "C:\Users\User\fincoach-spacex-ipo-m298"
+#    bereits vorhanden? dann:  git -C "C:\Users\User\fincoach-spacex-ipo-m298" pull
+#    Inhalt: C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\out\  (4 Module, provenance\, assets\m479..m482\, snippets\)
 
 # 3) Dateien in den FinCoach-Root uebernehmen (Module, DBOMs, Companions, OG-Bild)
 Copy-Item "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\out\modul-m*.html"   "C:\Users\User\AI Financecoach\"
@@ -99,7 +96,7 @@ git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" commit -m "feat(pisa-
 git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" push
 ```
 
-## 3 · Prüfergebnisse der Vorbereitung (Website-Klon, lokal, provisorische Nummern 479–482)
+## 3 · Prüfergebnisse (Website-Klon, lokal, reservierte Nummern M479–M482)
 
 | Modul | JS-Fehler | externe Requests | Live-QA | Rücklink `../module.html` | 375 px |
 |---|---|---|---|---|---|
@@ -118,7 +115,7 @@ als Herkunft im DBOM (`module.publication.source_module_id`, `source_repo` nur i
 
 ## 5 · Offene Punkte
 
-1. Vier Reservierungen und Build mit `--lock` (Abschnitt 1). Teaser danach über `release-modules.ps1` neu.
+1. Reservierungen erledigt (M479–M482); Paket ist damit gebaut. Teaser entstehen bei `release-modules.ps1` neu (Fallback: `media/m479..m482.jpg`).
 2. Registry-Einträge entstehen durch `sync-modules.ps1`; ohne sie entfernt `release-modules.ps1` die Dateien wieder.
 3. Hub-Kriterienkatalog verweist auf die „FinCoach-Modulvorlage“ (vorher M298/M299); inhaltlich unverändert.
 4. Optional später: Umbenennung dieses Repositories und der Netlify-Site (rein kosmetisch, betrifft LinkedIn-Links).
