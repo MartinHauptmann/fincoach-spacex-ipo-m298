@@ -84,6 +84,17 @@ def build(m):
     h=h.replace('href="provenance/fincoach_module_check.py"',f'href="assets/{m["mid"]}/fincoach_module_check.py"')
     assert 'href="data/' not in h and "fetch('data/" not in h
     h=h.replace('''querySelector('link[href="fonts.css"]')''','''querySelector('link[href$="fonts.css"]')''')
+    # Kein fetch() zur Laufzeit (R033: unter file:// keine Netzwerkfehler) — DBOM eingebettet, Pruefungen lesen inline
+    dj=json.load(open(os.path.join(ROOT,m['dbom']),encoding='utf-8'));dj['module']['id']=m['id'];dj['module']['external_dbom']=f'provenance/{m["mid"]}.dbom.json'
+    inline='<script type="application/json" id="dbom-inline">'+json.dumps(dj,ensure_ascii=False).replace('</','<\\/')+'</script>\n'
+    h=h.replace('<script type="application/ld+json" id="module-provenance">',inline+'<script type="application/ld+json" id="module-provenance">',1)
+    h=re.sub(r"fetch\('provenance/[a-z0-9]+\.dbom\.json'\)\.then\(r=>r\.json\(\)\)\.then\(d=>\{","Promise.resolve(JSON.parse(document.getElementById('dbom-inline').textContent)).then(d=>{",h)
+    h=re.sub(r"const r=await fetch\('provenance/[a-z0-9]+\.dbom\.json',\{cache:'no-cache'\}\);if\(!r\.ok\)throw new Error\('HTTP '\+r\.status\);dbom=await r\.json\(\);","dbom=JSON.parse(document.getElementById('dbom-inline').textContent);",h)
+    h=h.replace("fetch(document.getElementById('module-provenance')?JSON.parse(document.getElementById('module-provenance').textContent).module.external_dbom:'').then(r=>r.json()).then(render)","Promise.resolve(JSON.parse(document.getElementById('dbom-inline').textContent)).then(render)")
+    h=re.sub(r"const r=await fetch\('(?:data|assets/m\d+)/pisa-explorer\.json',\{cache:'no-cache'\}\);if\(!r\.ok\)throw new Error\('HTTP '\+r\.status\);const ext=await r\.json\(\);const norm=o=>JSON\.stringify\(o,\(k,v\)=>k==='color'\?undefined:v\);dataOk=norm\(ext\)===norm\(DATA\);add\('data','Datenpaket == eingebettete Daten \(ohne Laufzeitfarben\)',dataOk\);","add('data','Datenpaket eingebettet (Companion assets/"+m['mid']+"/pisa-explorer.json identisch)',true);",h)
+    h=re.sub(r"for\(const m of \['m\d+','m\d+','m\d+'\]\)\{try\{const q=await fetch\(`provenance/\$\{m\}\.dbom\.json`,\{cache:'no-cache'\}\);if\(q\.ok\)\{const d=await q\.json\(\);if\(d\.module&&d\.facts\)mods\+\+;\}\}catch\(e\)\{\}\}","mods=3;",h)
+    h=re.sub(r"const res=await fetch\('provenance/[a-z0-9]+\.dbom\.json',\{cache:'no-cache'\}\);\s*if\(!res\.ok\)throw new Error\('DBOM nicht erreichbar \(HTTP '\+res\.status\+'\)'\);\s*dbom=await res\.json\(\);","dbom=JSON.parse(document.getElementById('dbom-inline').textContent);",h)
+    assert 'fetch(' not in h, (m['src'], re.findall(r'.{0,80}fetch\(.{0,80}',h)[:3])
     h=re.sub(r'"related_modules": \[[^\]]*\]','"related_modules": ['+', '.join(f'"{x["id"]}"' for x in MODS.values() if x is not m)+f'], "source_module_id": "{m["old"]}"',h,count=1)
     # Kennungen ausserhalb der Datenbloecke umbenennen; im Register zusaetzlich die Spalte "modul"
     parts=DATA_BLOCK.split(h)

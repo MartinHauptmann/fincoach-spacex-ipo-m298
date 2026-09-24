@@ -26,7 +26,7 @@ E-Bike-Modul, nur auf der Website, im Root unbekannt). Nummern vergibt ausschlie
 | `media/pisa-2025-serie-1200x627.png` | Open-Graph-Bild der Serie → `publish-nexus2learn/assets/og/` (alle vier Module verweisen darauf) |
 | `qa-and-teasers.js` | Headless-Prüfung (Fehler, externe Requests, Live-QA, Rücklink, 375 px) + Teaser; Playwright erforderlich |
 
-Was in allen vier Fassungen gleich ist: Fakten-/Quellen-IDs (`FACT_*`, `SRC_*`) unverändert, damit alle
+Was in allen vier Fassungen gleich ist: kein `fetch()` zur Laufzeit (DBOM eingebettet als `#dbom-inline`, Regel R033 file://-Fallback) · Fakten-/Quellen-IDs (`FACT_*`, `SRC_*`) unverändert, damit alle
 `data-source`-Referenzen auflösen · Bezüge auf die SpaceX-Module (M298/M299, `modul.html`, `ipo-prozess.html`)
 entfernt · Fußzeile „powered by Nexus2Learn.com“, Hinweis Art. 50 EU-KI-VO, Links auf die drei Schwestermodule ·
 Canonical/OG-Meta · Prüfanzeigen ausgeblendet (`?audit=1` zeigt sie) · kein externer Abruf (CSP `self`).
@@ -59,11 +59,16 @@ Copy-Item "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\media\pisa
 # 4) Registry/Matrix synchronisieren (Single Source of Truth)
 pwsh "C:\Users\User\AI Financecoach\scripts\compliance\sync-modules.ps1"
 
-# 5) Gates laut RUNBOOK-DEEPDIVE-TO-PUBLISH.md Teil C, je Modul (NNN einsetzen)
-pwsh "C:\Users\User\AI Financecoach\scripts\styleguide\audit-module.ps1" -Module "C:\Users\User\AI Financecoach\modul-mNNN-pisa-2025-deep-dive.html"
-node "C:\Users\User\AI Financecoach\scripts\regression\check-interactive-diagrams.mjs" "C:\Users\User\AI Financecoach\modul-mNNN-pisa-2025-deep-dive.html"
-pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module "C:\Users\User\AI Financecoach\modul-mNNN-pisa-2025-deep-dive.html"
-#    ebenso fuer modul-mNNN-pisa-explorer.html, modul-mNNN-pisa-2025-finanzbildung.html, modul-mNNN-pisa-hub.html
+# 5) Gates laut RUNBOOK-DEEPDIVE-TO-PUBLISH.md Teil C
+#    WICHTIG: -Module erwartet den DATEINAMEN (die Skripte loesen ihn selbst gegen den Root auf); ein absoluter
+#    Pfad ergibt "Keine Module gefunden". Die Gates laufen ueber den Vorschau-Server (http), nicht file://:
+#    unter file:// loesen ../vendor/ und ../assets/fonts/ nicht auf (gilt fuer alle Root-Module).
+Start-Process pwsh -ArgumentList '-NoExit','-Command',"npx http-server 'C:\Users\User\AI Financecoach' -c-1 -p 8089"
+foreach ($f in 'modul-m479-pisa-2025-deep-dive.html','modul-m480-pisa-explorer.html','modul-m481-pisa-2025-finanzbildung.html','modul-m482-pisa-hub.html') {
+  pwsh "C:\Users\User\AI Financecoach\scripts\styleguide\audit-module.ps1" -Module $f -Base http://localhost:8089
+  node "C:\Users\User\AI Financecoach\scripts\regression\check-interactive-diagrams.mjs" $f --base=http://localhost:8089
+  pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module $f -Base http://localhost:8089
+}
 ```
 
 Hinweise zu den Gates: Der Explorer hat einen Range-Slider (`#simLE`, Linking Error), der die Trend-Tabelle
