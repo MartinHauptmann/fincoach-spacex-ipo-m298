@@ -128,6 +128,11 @@ git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" push
 
 ## 3 · Prüfergebnisse und Gate-Befunde (Stand 2026-09-24)
 
+**Veröffentlicht am 2026-09-24**: nexus2learn-website `main` 5e7945a → 3e52f1b (28 Dateien). Live-Kontrolle per HEAD: die vier
+Modul-Seiten, `module/provenance/m479.dbom.json`, `module/assets/m479/pisa-regions.json`, Teaser m479 und das OG-Bild liefern 200.
+Gates vor dem Push gegen das Publish-Paket: Styleguide PASS (0 FAIL) ×4, Interactive PASS ×4, Guard „Keine Regressionen“ ×4.
+Root-Commit 3da1058c (Branch `feat/json-api-lovable-integration`): Auditor-Patch + Golden-Baselines.
+
 Website-Klon (http und file://), alle vier Module: 0 JS-Fehler, 0 externe Requests, Live-QA vollständig grün
 (35/28/25/22 Checks), Rücklink `../module.html`, kein Überlauf bei 375 px, kein `<img>`, kein roher
 `localStorage`-Zugriff, kein `fetch()`.
@@ -156,6 +161,11 @@ erfolgen dort; `build.py` in diesem Repository dient nur noch der einmaligen Üb
 als Herkunft im DBOM (`module.publication.source_module_id`, `source_repo` nur im DBOM, nicht auf der Seite).
 
 ## 5 · Offene Punkte
+
+- Root-Repo: PISA-Dateien gezielt committen (vier HTMLs, vier DBOMs, `assets/m479..m481`, Registry, Matrix, `reserved-numbers.txt`);
+  vorher `git diff --cached --stat` prüfen, weil Registry/Matrix/Reservierung Fremdänderungen tragen können.
+- Publish-Paket: `module/modul-m449-…html` (+1137 Zeilen) und `module/assets/m449/` stammen aus dem abgebrochenen
+  `release-modules.ps1`-Lauf, nicht aus dieser Serie; Entscheidung übernehmen oder verwerfen steht aus.
 
 1. Reservierungen erledigt (M479–M482); Paket ist damit gebaut. Teaser entstehen bei `release-modules.ps1` neu (Fallback: `media/m479..m482.jpg`).
 2. Registry-Einträge entstehen durch `sync-modules.ps1`; ohne sie entfernt `release-modules.ps1` die Dateien wieder.
