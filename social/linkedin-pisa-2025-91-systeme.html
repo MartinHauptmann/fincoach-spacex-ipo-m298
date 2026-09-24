@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<!-- Format 1200×1500 (4:5) für den LinkedIn-Feed; Render: 2× → 2400×3000 px -->
+<title>LinkedIn-Grafik: 91 Systeme Naturwissenschaften 2025</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+:root{--bg:#0A0F1A;--card:#121A2E;--ink:#E2E8F0;--muted:#94A3B8;--cyan:#00CFFF;--em:#00CC7A;--gold:#DFAF0F;--border:rgba(148,163,184,.18);}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.card{width:1200px;height:1500px;padding:56px 56px 48px;display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;background:radial-gradient(1200px 600px at 20% -10%,rgba(0,207,255,.10),transparent 60%),radial-gradient(900px 500px at 100% 100%,rgba(0,204,122,.08),transparent 60%),var(--bg)}
+.top{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px}
+.brand b{font-family:'Space Grotesk',Inter,sans-serif;font-size:22px;color:#fff;letter-spacing:.2px}
+.brand span{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--cyan)}
+.badge{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px;background:rgba(153,51,255,.16);color:#B884FF;border:1px solid rgba(153,51,255,.35)}
+h1{font-family:'Space Grotesk',Inter,sans-serif;font-weight:800;font-size:58px;line-height:1.02;color:#fff;letter-spacing:-.5px;margin-top:6px}
+h1 em{font-style:normal;background:linear-gradient(135deg,#00CFFF,#00CC7A 60%,#DFAF0F);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:21px;color:#CBD5E1;line-height:1.35;max-width:1040px}
+.chart{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+svg{width:100%;height:auto;display:block}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kpi{background:rgba(18,26,46,.85);border:1px solid var(--border);border-radius:16px;padding:16px 20px}
+.kpi .v{font-family:'Space Grotesk',Inter,sans-serif;font-weight:800;font-size:44px;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:22px;color:var(--muted);font-weight:600;margin-left:6px}
+.kpi .l{font-size:16px;color:var(--muted);margin-top:8px;line-height:1.3}
+.kpi.c .v{color:var(--cyan)}.kpi.e .v{color:var(--em)}.kpi.g .v{color:var(--gold)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14.5px;color:var(--muted);align-items:center}
+.legend .sw{display:inline-block;width:14px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid rgba(255,255,255,.15)}
+.foot{font-size:13px;color:#7C8AA0;line-height:1.4;border-top:1px solid var(--border);padding-top:12px;display:flex;justify-content:space-between;gap:24px}
+.foot b{color:#A8B3C4;font-weight:600}
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="top">
+    <div class="brand"><svg viewBox="0 0 100 100" width="40" height="40" aria-hidden="true"><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity=".3" stroke="#E6399A" stroke-width="2"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity=".3" stroke="#00CFFF" stroke-width="2"/><path d="M 46,95 L 46,18 A 8,8 0 0 1 62,18 L 62,95 Z" fill="#00CC7A" fill-opacity=".3" stroke="#00CC7A" stroke-width="2"/><path d="M 66,95 L 66,40 A 8,8 0 0 1 82,40 L 82,95 Z" fill="#DFAF0F" fill-opacity=".3" stroke="#DFAF0F" stroke-width="2"/></svg><div><b>FinCoach AI</b><br><span>by TheNextGenerationBanking.com</span></div></div>
+    <div class="badge">OECD PISA 2025 · Band I · Naturwissenschaften</div>
+  </div>
+  <h1>91 Bildungssysteme.<br><em>Eine Skala.</em></h1>
+  <p class="sub">Mittelwert je System (Flagge), Balken = 95-%-Konfidenzintervall, farbige Fläche = Spannweite des Kontinents (UN M49) mit Median. Deutschland liegt statistisch auf OECD-Niveau.</p>
+  <div class="chart"><svg id="viz" viewBox="0 0 1000 520" role="img" aria-label="91 Systeme nach Naturwissenschafts-Mittelwert 2025, gruppiert nach Kontinenten"></svg></div>
+  <div class="legend" id="legend"></div>
+  <div class="kpis">
+    <div class="kpi c"><div class="v">486<small>Pkt.</small></div><div class="l">Deutschland · KI 479–492 · Rangspanne 15–34 von 91 · vs. OECD-Mittel 482 nicht signifikant</div></div>
+    <div class="kpi e"><div class="v">22 <small>/ 9 / 60</small></div><div class="l">Systeme signifikant über · nicht unterscheidbar · signifikant unter dem OECD-Mittel (95-%-KI)</div></div>
+    <div class="kpi g"><div class="v">280<small>Pkt.</small></div><div class="l">Spannweite zwischen Rang 1 (B-S-J-Z China 597) und Rang 91 (Ruanda 317)</div></div>
+  </div>
+  <div class="foot"><div><b>Quelle:</b> OECD (2026), PISA 2025 Results (Volume I), Kap. 2, StatLink (Table I.2); SE aus publizierten KI. Kontinente nach UN M49; Flaggen: flag-icons (MIT); Teil- und Regionalstichproben tragen die Staatsflagge. Populationsstatistik, keine Aussage über Einzelpersonen.</div><div style="white-space:nowrap"><b>Deep Dive:</b> fincoach-spacex-ipo-m298.netlify.app/m302</div></div>
+</div>
+<script>
+(async()=>{
+  const [off,reg,fl]=await Promise.all(['../data/pisa-2025-official.json','../data/pisa-regions.json','../data/flags-48.json'].map(u=>fetch(u).then(r=>r.json())));
+  const FLAGS=fl.flags,SYS=off.systems,CONT=reg.continents;
+  const DE={'Germany':'Deutschland','B-S-J-Z (China)':'B-S-J-Z (China)','Singapore':'Singapur','Estonia':'Estland','Rwanda':'Ruanda'};
+  const items=Object.entries(SYS).filter(([n,d])=>d.mean&&d.mean.sci!=null).map(([n,d])=>{const r=reg.systems[n]||{};return{n,m:d.mean.sci,ci:d.ci95.sci,flag:d.flag_sampling,fl:r.flag,cont:r.continent};}).sort((a,b)=>a.m-b.m);
+  const mn=300,mx=620,W=1000,padL=24,padR=24;const X=v=>padL+(v-mn)/(mx-mn)*(W-padL-padR);
+  const med=a=>{const s=a.slice().sort((x,y)=>x-y),k=s.length;return k%2?s[(k-1)/2]:(s[k/2-1]+s[k/2])/2;};
+  const fw=18,fh=13.5,pitch=fh+2.5,gap=28,bin=6;const svg=document.getElementById('viz');
+  const lanes=CONT.map(c=>({...c,members:items.filter(i=>i.cont===c.id)})).filter(l=>l.members.length).map(l=>{const v=l.members.map(i=>i.m);l.min=l.members[0].m;l.max=l.members[l.members.length-1].m;l.med=med(v);l.n=v.length;return l;});
+  let y=gap,s='',g='',call='';
+  const CALL=new Set(['Germany','B-S-J-Z (China)','Singapore','Estonia','Rwanda']);
+  lanes.forEach(l=>{const bins={};l.members.forEach(it=>{const b=Math.floor(it.m/bin)*bin;it.stack=bins[b]||0;bins[b]=it.stack+1;});const rows=Math.max(...l.members.map(i=>i.stack))+1;const top=y,lh=20+rows*pitch+8;
+    const x0=X(l.min)-fw/2-6,x1=X(l.max)+fw/2+6;
+    s+=`<rect x="${x0}" y="${top}" width="${x1-x0}" height="${lh}" rx="8" fill="${l.color}" fill-opacity=".16" stroke="${l.color}" stroke-opacity=".55" stroke-width="1.2"/>`;
+    s+=`<line x1="${X(l.med)}" y1="${top+19}" x2="${X(l.med)}" y2="${top+lh-3}" stroke="${l.color}" stroke-width="1.8" stroke-dasharray="3 3"/>`;
+    const inside=x0<210;s+=`<text x="${inside?x0+8:x0-8}" y="${top+15}" text-anchor="${inside?'start':'end'}" font-size="13.5" font-weight="700" fill="${l.color}" font-family="Inter">${l.label} · n=${l.n} · Median ${Math.round(l.med)}</text>`;
+    l.members.forEach(it=>{const cy=top+lh-8-it.stack*pitch-fh/2,de=it.n==='Germany';const x=X(it.m);
+      g+=`<line x1="${X(it.ci[0])}" y1="${cy}" x2="${X(it.ci[1])}" y2="${cy}" stroke="${l.color}" stroke-opacity=".6" stroke-width="1.2"/>`;
+      g+=`<image href="${FLAGS[it.fl]}" x="${x-fw/2}" y="${cy-fh/2}" width="${fw}" height="${fh}" preserveAspectRatio="none"/><rect x="${x-fw/2}" y="${cy-fh/2}" width="${fw}" height="${fh}" rx="1.5" fill="none" stroke="${de?'#00CFFF':it.flag?'#DFAF0F':'#0A0F1A'}" stroke-width="${de?2.4:it.flag?1.8:1}"/>`;
+      if(CALL.has(it.n)){const t=`${DE[it.n]||it.n} ${Math.round(it.m)}`;const ty=it.n==='B-S-J-Z (China)'?top-24:top-9;const anchor=(it.n==='Germany'||it.n==='Singapore')?'end':x>W-120?'end':x<120?'start':'middle';const tx=(it.n==='Germany'||it.n==='Singapore')?x-7:anchor==='end'?x+12:anchor==='start'?x-10:x;
+        call+=`<line x1="${x}" y1="${cy-fh/2-1}" x2="${x}" y2="${ty+3}" stroke="${de?'#00CFFF':'#E2E8F0'}" stroke-opacity=".7" stroke-width="1" stroke-dasharray="2 2"/><text x="${tx}" y="${ty}" text-anchor="${anchor}" font-size="13.5" font-weight="800" fill="${de?'#00CFFF':'#F1F5F9'}" font-family="Inter" paint-order="stroke" stroke="#0A0F1A" stroke-width="4">${t}</text>`;}
+    });
+    y+=lh+gap;});
+  const base=y-gap+14;let ax='';for(let v=mn;v<=mx;v+=20)ax+=`<line x1="${X(v)}" y1="${base}" x2="${X(v)}" y2="${base+5}" stroke="#64748B"/><text x="${X(v)}" y="${base+20}" text-anchor="middle" font-size="12.5" fill="#94A3B8" font-family="JetBrains Mono">${v}</text>`;
+  ax+=`<line x1="${padL}" y1="${base}" x2="${W-padR}" y2="${base}" stroke="#64748B" stroke-width="1.2"/><line x1="${X(482)}" y1="8" x2="${X(482)}" y2="${base+26}" stroke="#CBD5E1" stroke-opacity=".8" stroke-dasharray="4 3" stroke-width="1.4"/><text x="${X(482)+7}" y="${base+40}" font-size="13" font-weight="700" fill="#E2E8F0" font-family="JetBrains Mono">▲ OECD-Mittel 482</text><text x="${padL}" y="${base+40}" text-anchor="start" font-size="12" fill="#7C8AA0" font-family="Inter">PISA-Punkte Naturwissenschaften 2025 (Mittelwert der 15-Jährigen je System)</text>`;
+  svg.setAttribute('viewBox',`0 0 ${W} ${base+44}`);svg.innerHTML=s+g+call+ax;
+  document.getElementById('legend').innerHTML=lanes.map(l=>`<span><span class="sw" style="background:${l.color}"></span>${l.label} (${l.n})</span>`).join('')+`<span><span class="sw" style="border:2px solid #00CFFF;background:transparent"></span>Deutschland</span><span><span class="sw" style="border:2px solid #DFAF0F;background:transparent"></span>Stichprobenvorbehalt</span><span><span class="sw" style="background:transparent;border:0;border-top:2px dashed #94A3B8;height:0;border-radius:0"></span>Median des Kontinents</span>`;
+  document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>
