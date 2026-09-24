@@ -4,10 +4,10 @@
  "module": {
   "id": "M302",
   "title": "PISA 2025 Deep Dive — Studie, Methodenwandel 2012–2025, Weltkarte, Ländervergleich, Datenregister",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "stichtag": "2026-09-16",
   "buildDate": "2026-09-16T00:00:00Z",
-  "predecessor_version": "1.2.0",
+  "predecessor_version": "1.3.0",
   "related_modules": [
    "M300",
    "M301"
@@ -419,9 +419,19 @@
   {
    "date": "2026-09-16",
    "event": "v1.3.0: Kontinent-/Bündniszuordnung (Referenzklasse, kein Messwert) und 91 Flaggen (flag-icons, MIT) ergänzt; Paletten mit OKLCH-Validator geprüft (alle Prüfungen bestanden)."
+  },
+  {
+   "date": "2026-09-24",
+   "event": "v1.3.1: Prüfanzeigen ausgeblendet (Prüfansicht per ?audit=1); Inhalte, Fakten und Quellen unverändert."
   }
  ],
  "changelog": [
+  {
+   "version": "1.3.1",
+   "date": "2026-09-24",
+   "type": "patch",
+   "summary": "Veröffentlichungsmodus: Provenienz-Leiste (M-DBOM), Live-Audit-Banner und QA-Kennzeichen sind standardmäßig ausgeblendet; die Prüfungen laufen unverändert und die Anzeigen erscheinen nur in der Prüfansicht (URL-Parameter ?audit=1). Keine inhaltliche Änderung."
+  },
   {
    "version": "1.3.0",
    "date": "2026-09-16",

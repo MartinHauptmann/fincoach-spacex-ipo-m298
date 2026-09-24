@@ -4,10 +4,10 @@
  "module": {
   "id": "M301",
   "title": "PISA Explorer — 3D-Ländervergleich mit korrekter PISA-Statistik, Explainability-Glossar und Diagnostik-Brücke",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "stichtag": "2026-09-16",
   "buildDate": "2026-09-10T00:00:00Z",
-  "predecessor_version": "1.1.0",
+  "predecessor_version": "1.2.0",
   "related_modules": [
    "M300"
   ],
@@ -328,9 +328,19 @@
   {
    "date": "2026-09-24",
    "event": "v1.2.0: Flaggen (flag-icons, MIT) und Kontinent-/Bündniszuordnung (Referenzklasse) übernommen; Live-QA um 3 Checks erweitert."
+  },
+  {
+   "date": "2026-09-24",
+   "event": "v1.2.1: Prüfanzeigen ausgeblendet (Prüfansicht per ?audit=1); Inhalte, Fakten und Quellen unverändert."
   }
  ],
  "changelog": [
+  {
+   "version": "1.2.1",
+   "date": "2026-09-24",
+   "type": "patch",
+   "summary": "Veröffentlichungsmodus: Provenienz-Leiste (M-DBOM), Live-Audit-Banner und QA-Kennzeichen sind standardmäßig ausgeblendet; die Prüfungen laufen unverändert und die Anzeigen erscheinen nur in der Prüfansicht (URL-Parameter ?audit=1). Keine inhaltliche Änderung."
+  },
   {
    "version": "1.2.0",
    "date": "2026-09-24",

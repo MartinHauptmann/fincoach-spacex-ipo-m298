@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="color-scheme" content="dark"/>
-<title>M301 v1.2.0 · PISA Explorer — 3D-Ländervergleich mit korrekter PISA-Statistik · FinCoach AI</title>
+<title>M301 v1.2.1 · PISA Explorer — 3D-Ländervergleich mit korrekter PISA-Statistik · FinCoach AI</title>
 <meta name="description" content="FinCoach AI PISA Explorer (M301): Länder als Punkte im 3D-Raum aus frei wählbaren PISA-2025-Kennzahlen (Mittelwerte, Risikogruppen, Spitzengruppen, P90–P10), Zeittrajektorien 2022→2025, Standardfehler, 95-%-Konfidenzintervalle, Signifikanz mit Linking Error, Explainability-Glossar und Diagnostik-Hypothesen-Panel. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <meta name="robots" content="index,follow"/>
 <meta property="og:type" content="article"/>
@@ -117,13 +117,14 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
   .hyp{border-left:3px solid var(--gold);padding:.5rem .8rem;background:rgba(223,175,15,.06);border-radius:0 8px 8px 0;font-size:.82rem;color:#CBD5E1;}
   .hyp b{color:var(--gold);}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
-</style>
+.audit-ui{display:none!important;}html.audit-on .audit-ui{display:revert!important;}
+</style><script>(function(){try{if(/[?&#]audit\b/.test(location.search+location.hash)||localStorage.getItem('fc_audit')==='1')document.documentElement.classList.add('audit-on');}catch(e){}})();</script>
 
 <script type="application/ld+json" id="module-provenance">
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M301", "title": "PISA Explorer — 3D-Ländervergleich mit korrekter PISA-Statistik, Explainability-Glossar und Diagnostik-Brücke", "version": "1.2.0", "stichtag": "2026-09-16", "related_modules": ["M300"], "external_dbom": "provenance/m301.dbom.json", "predecessor_version": "1.1.0" },
+  "module": { "id": "M301", "title": "PISA Explorer — 3D-Ländervergleich mit korrekter PISA-Statistik, Explainability-Glossar und Diagnostik-Brücke", "version": "1.2.1", "stichtag": "2026-09-16", "related_modules": ["M300"], "external_dbom": "provenance/m301.dbom.json", "predecessor_version": "1.1.0" },
   "fact_summary": {"total": 17, "confirmed": 12, "scenario_projection": 3, "interpretation": 2},
   "honest_disclosure": "Mittelwerte, Anteile und P90–P10 aus publizierten OECD-Tabellen (verifiziert 2026-09-10). Standardfehler und Linking Error sind typische Größenordnungen (EST) und per Datenpaket zu ersetzen; bis dahin sind Signifikanzaussagen methodische Demonstration. Systemvergleiche erlauben keine Aussagen über Einzelpersonen. Keine Anlage-, Rechts- oder Steuerberatung."
 }
@@ -163,9 +164,9 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
   <a href="#s12" data-dock="s12" title="Quellen & Glossar">12</a>
 </div>
 
-<div class="px-4 pt-4 max-w-7xl mx-auto">
+<div class="px-4 pt-4 max-w-7xl mx-auto audit-ui">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
-    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.2.0</span>
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.2.1</span>
     <span class="text-slate-300">16 Aussagen · 12 CONFIRMED · 3 SCENARIO (2022-SE/LE geschätzt) · 1 INTERPRETATION · 91 Systeme + OECD · Stichtag 2026-09-16</span>
     <span class="ml-auto flex items-center gap-2">
       <a href="provenance/m301.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM</a>
@@ -328,7 +329,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
 </section>
 <!-- S-QA -->
 <section id="s-qa" class="px-4 py-12 max-w-7xl mx-auto">
-  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">QA</span><h2 class="section-title">Qualitätssicherung — Compliance, Datenqualität, Styleguide</h2><span id="qa-pill"></span></div>
+  <div class="flex flex-wrap items-center gap-3 mb-6"><span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">QA</span><h2 class="section-title">Qualitätssicherung — Compliance, Datenqualität, Styleguide</h2><span id="qa-pill" class="audit-ui"></span></div>
   <div class="grid md:grid-cols-3 gap-4">
     <div class="dep-box"><h3 class="font-head font-bold text-tngb-magenta mb-3">① Compliance</h3><table><tbody id="qa-compliance"></tbody></table></div>
     <div class="dep-box"><h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität</h3><table><tbody id="qa-data"></tbody></table></div>
@@ -359,7 +360,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
     <div class="flex flex-col md:flex-row justify-between items-start gap-6">
       <div><div class="font-head font-bold text-white">FinCoach AI</div><a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="text-sm font-mono" style="color:#00CFFF;">by TheNextGenerationBanking.com</a></div>
       <div class="text-sm text-tngb-muted"><a href="index.html" class="block mb-1">← Hauptseite</a><a href="m300.html" class="block mb-1">M300 · PISA 2025 &amp; Finanzbildung</a><a href="impressum.html" class="block mb-1">Impressum</a><a href="datenschutz.html" class="block">Datenschutz</a></div>
-      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M301 · v1.2.0 · 2026-09-16<br/>Tier T3 · Welle 46 · Learning Analytics</div></div>
+      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M301 · v1.2.1 · 2026-09-16<br/>Tier T3 · Welle 46 · Learning Analytics</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. Die nächste Generation Banking.</p>
   </footer>
@@ -444,7 +445,7 @@ document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click'
   if(k==='default')setSelection(ENT.filter(e=>e.default).map(e=>e.code));else if(k==='top')setSelection(bySci.slice(0,7).concat(['OECD']));else if(k==='bottom')setSelection(bySci.slice(-7).concat(['OECD']));else setSelection([]);}));
 assignColors();
 
-/* ===== FLAGGEN & GRUPPENFLÄCHEN (v1.2.0) ===== */
+/* ===== FLAGGEN & GRUPPENFLÄCHEN (seit v1.2.0) ===== */
 const REGN=JSON.parse(document.getElementById('regions-inline').textContent),FLAGS=JSON.parse(document.getElementById('flags-inline').textContent).flags;window.REGN=REGN;window.FLAGS=FLAGS;
 const GB=Object.fromEntries(REGN.blocs.map(b=>[b.id,b])),GC=Object.fromEntries(REGN.continents.map(c=>[c.id,c]));
 ENT.forEach(e=>{const r=REGN.systems[e.name_en]||{};const x={fl:r.flag,fnote:r.flag_note||'',cont:r.continent,blocs:r.flag?(e.oecd?['OECD']:[]).concat(r.blocs||[]):[]};/* nicht enumerierbar: Datenpaket-Vergleich (JSON) bleibt unverändert */Object.entries(x).forEach(([k,v])=>Object.defineProperty(e,k,{value:v,enumerable:false,writable:true}));});

@@ -54,6 +54,8 @@ Jedes Modul muss vor dem Release die dreistufige Prüfung bestehen (identisch al
 und als statischer Check per Skript):
 
 ```bash
+
+Veröffentlichungsmodus: Provenienz-Leiste (M-DBOM), Live-Audit-Banner und QA-Kennzeichen sind in allen Modulen standardmäßig ausgeblendet (`.audit-ui`). Die Prüfungen laufen trotzdem; die Anzeigen erscheinen in der Prüfansicht über den URL-Parameter `?audit=1` (bzw. `localStorage.fc_audit = "1"`).
 python3 provenance/fincoach_module_check.py m299.html m300.html m301.html m302.html pisa-hub.html   # Exit 0 = alle Pflichtprüfungen bestanden
 node assets/pisa-stats.test.js                                              # Statistik-Engine (M301)
 ```

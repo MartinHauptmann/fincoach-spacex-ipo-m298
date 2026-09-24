@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="color-scheme" content="dark"/>
-<title>M300 v1.0.0 · PISA 2025 &amp; Finanzbildung — Kompetenzdiagnostik, OECD/INFE-Kopplung &amp; KI-Hyperindividualisierung · FinCoach AI</title>
+<title>M300 v1.0.1 · PISA 2025 &amp; Finanzbildung — Kompetenzdiagnostik, OECD/INFE-Kopplung &amp; KI-Hyperindividualisierung · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: Wissenschaftliche Auswertung der OECD-PISA-2025-Ergebnisse für Deutschland (Lesen 465, Mathematik 464, Naturwissenschaften 486), Verifikationsprotokoll des Research-Chats, PISA-Diagnostik-Instrumente (IRT, Kompetenzstufen, Logdaten, DCM), Kopplung mit dem OECD/INFE-Finanzkompetenz-Score, Hyperindividualisierung für Einzelne, Unternehmen und Communities, Anforderungskatalog für KI-Lernsysteme mit Abnahmetests, Compliance-Klauseln (DSGVO, EU-KI-VO, RDG/WpIG) und QA-Checks. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <meta name="robots" content="index,follow"/>
 <meta property="og:type" content="article"/>
@@ -125,14 +125,15 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
   .station::before{content:'';position:absolute;left:-6px;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--cyan);}
   .req-id{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#00CFFF;white-space:nowrap;}
   .cl-id{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#E6399A;white-space:nowrap;}
-</style>
+.audit-ui{display:none!important;}html.audit-on .audit-ui{display:revert!important;}
+</style><script>(function(){try{if(/[?&#]audit\b/.test(location.search+location.hash)||localStorage.getItem('fc_audit')==='1')document.documentElement.classList.add('audit-on');}catch(e){}})();</script>
 
 <!-- ============ M-DBOM · JSON-LD ============ -->
 <script type="application/ld+json" id="module-provenance">
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "PISA 2025 & Finanzbildung — Kompetenzdiagnostik, OECD/INFE-Kopplung & KI-gestützte Hyperindividualisierung", "version": "1.0.0", "stichtag": "2026-09-10", "related_modules": ["M298", "M299"], "external_dbom": "provenance/m300.dbom.json", "predecessor_version": null },
+  "module": { "id": "M300", "title": "PISA 2025 & Finanzbildung — Kompetenzdiagnostik, OECD/INFE-Kopplung & KI-gestützte Hyperindividualisierung", "version": "1.0.1", "stichtag": "2026-09-10", "related_modules": ["M298", "M299"], "external_dbom": "provenance/m300.dbom.json", "predecessor_version": null },
   "fact_summary": { "total": 33, "confirmed": 27, "user_provided_unverified": 1, "discrepant": 1, "interpretation": 2, "scenario_projection": 2 },
   "honest_disclosure": "Aus einem Research-Chatverlauf abgeleitet, der eine dokumentierte Halluzinations-Episode (PISA-2022-Werte als 2025 präsentiert, vor Embargo-Ende) enthielt. Alle 33 Aussagen wurden am 2026-09-10 einzeln gegen OECD-Band I / Ländernotiz Deutschland bzw. deren Fach-/Presseauswertung geprüft; 2 Abweichungen (111 vs. 125 Punkte; Mobbing-Abschlag gilt für 5 %, nicht 31 %) sind ausgewiesen. Profil-/Hyperindividualisierungsmodelle sind SCENARIO_PROJECTION. Keine Anlage-, Rechts- oder Steuerberatung."
 }
@@ -181,9 +182,9 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
 </div>
 
 <!-- ===== Provenienz-Banner ===== -->
-<div class="px-4 pt-4 max-w-7xl mx-auto">
+<div class="px-4 pt-4 max-w-7xl mx-auto audit-ui">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
-    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.0.0</span>
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul v1.0.1</span>
     <span class="text-slate-300">33 Aussagen · 27 CONFIRMED · 1 USER_PROVIDED · 1 DISCREPANT · 2 INTERPRETATION · 2 SCENARIO · Stichtag 2026-09-10</span>
     <span class="ml-auto flex items-center gap-2">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -664,7 +665,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
   <div class="flex flex-wrap items-center gap-3 mb-6">
     <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">QA</span>
     <h2 class="section-title">Qualitätssicherung — Compliance-, Datenqualitäts- &amp; Styleguide-Checks</h2>
-    <span id="qa-pill"></span>
+    <span id="qa-pill" class="audit-ui"></span>
   </div>
   <p class="text-sm text-slate-400 mb-6 max-w-3xl leading-relaxed">Jedes FinCoach-AI-Modul durchläuft eine dreistufige Prüfung. Die Checks werden beim Laden <strong>live im Browser</strong> ausgeführt (DOM-Prüfung, DBOM-Abgleich) und zusätzlich statisch per <code class="mono text-tngb-cyan">provenance/fincoach_module_check.py</code> vor jedem Release.</p>
   <div class="grid md:grid-cols-3 gap-4">
@@ -765,7 +766,7 @@ if(window.tailwind) tailwind.config = { theme: { extend: {
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.0.0 · 2026-09-10<br/>Tier T3 · Welle 46 · Financial Literacy / Learning Analytics</div></div>
+      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.0.1 · 2026-09-10<br/>Tier T3 · Welle 46 · Financial Literacy / Learning Analytics</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. PISA-Werte: OECD Band I (08.09.2026), einzeln verifiziert; Profilmodelle sind Szenario-Demonstratoren. Die nächste Generation Banking.</p>
   </footer>
