@@ -96,11 +96,21 @@ pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\release-pisa.ps
 # 7) Transfer: Module mit Link-Rewrite nach module\, Companions (komplettes assets\mNNN\ + DBOM, erwartet 16), index.json-Eintraege, Teaser, OG-Bild, Sitemap, Allowlist
 pwsh "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\release-pisa.ps1"
 
-# 8) Gates gegen das Publish-Paket (Vorschau-Server aus Abschnitt 1 laeuft auf 8089)
+# 8a) Auditor einmalig Base-faehig machen (patches\run-audit-base-aware.patch, siehe Abschnitt 3):
+#     S-LINK-INTERN-RESOLVE prueft Links bei gesetztem -Base per HTTP relativ zur Seite statt gegen den Root-Ordner;
+#     S-TOKEN-FONT akzeptiert self-hosted @font-face (Inter, Space Grotesk, JetBrains Mono) als Alternative zum Google-Link.
+#     Ohne -Base bleibt das Verhalten unveraendert. Vorher pruefen, dass der Patch sauber anliegt (--check).
+git -C "C:\Users\User\AI Financecoach" apply --check "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\patches\run-audit-base-aware.patch"
+git -C "C:\Users\User\AI Financecoach" apply "C:\Users\User\fincoach-spacex-ipo-m298\publish\nexus2learn\patches\run-audit-base-aware.patch"
+
+# 8b) Golden-Baseline der vier Module einmalig gegen die Publish-Fassung setzen (die erste Baseline entstand
+#     beim Root-Lauf mit 404-Seiten und altem Build-Stand; ueberschreibt nur scripts\regression\golden\modul-m479..m482.json)
+# 8c) Gates gegen das Publish-Paket (Vorschau-Server aus Abschnitt 1; Port frei waehlen, 8089 kann belegt sein)
 foreach ($f in 'modul-m479-pisa-2025-deep-dive.html','modul-m480-pisa-explorer.html','modul-m481-pisa-2025-finanzbildung.html','modul-m482-pisa-hub.html') {
-  pwsh "C:\Users\User\AI Financecoach\scripts\styleguide\audit-module.ps1" -Module $f -Base http://localhost:8089/publish-nexus2learn/module
-  node "C:\Users\User\AI Financecoach\scripts\regression\check-interactive-diagrams.mjs" $f --base=http://localhost:8089/publish-nexus2learn/module
-  pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module $f -Base http://localhost:8089/publish-nexus2learn/module
+  pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module $f -Base http://localhost:8091/publish-nexus2learn/module -Update
+  pwsh "C:\Users\User\AI Financecoach\scripts\styleguide\audit-module.ps1" -Module $f -Base http://localhost:8091/publish-nexus2learn/module
+  node "C:\Users\User\AI Financecoach\scripts\regression\check-interactive-diagrams.mjs" "C:\Users\User\AI Financecoach\publish-nexus2learn\module\$f" --base=http://localhost:8091/publish-nexus2learn/module
+  pwsh "C:\Users\User\AI Financecoach\scripts\regression\guard.ps1" -Module $f -Base http://localhost:8091/publish-nexus2learn/module
 }
 
 # 9) Startseite (empfohlen): Karte aus out\snippets\index-html-card.html als erste Karte in
@@ -109,7 +119,9 @@ notepad "C:\Users\User\AI Financecoach\publish-nexus2learn\index.html"
 
 # 10) Veroeffentlichen (Netlify-Auto-Deploy) — vorher git status pruefen: nur PISA-Dateien, index.json, Allowlist, Sitemap, ggf. index.html
 git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" status
-git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" add -A
+# nur PISA-Dateien stagen (im Paket koennen Fremdaenderungen liegen, z. B. M449 aus einem abgebrochenen release-modules.ps1-Lauf)
+git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" add module/index.json modules-public.json sitemap.xml assets/og/pisa-2025-serie-1200x627.png module/modul-m479-pisa-2025-deep-dive.html module/modul-m480-pisa-explorer.html module/modul-m481-pisa-2025-finanzbildung.html module/modul-m482-pisa-hub.html module/assets/m479 module/assets/m480 module/assets/m481 module/assets/teaser/m479.jpg module/assets/teaser/m480.jpg module/assets/teaser/m481.jpg module/assets/teaser/m482.jpg module/provenance/m479.dbom.json module/provenance/m480.dbom.json module/provenance/m481.dbom.json module/provenance/m482.dbom.json
+git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" status --short
 git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" commit -m "feat(pisa-2025): Serie freigegeben (M479 Deep Dive, M480 Explorer, M481 Finanzbildung, M482 Hub)"
 git -C "C:\Users\User\AI Financecoach\publish-nexus2learn" push
 ```
@@ -120,7 +132,9 @@ Website-Klon (http und file://), alle vier Module: 0 JS-Fehler, 0 externe Reques
 (35/28/25/22 Checks), Rücklink `../module.html`, kein Überlauf bei 375 px, kein `<img>`, kein roher
 `localStorage`-Zugriff, kein `fetch()`.
 
-Gate-Lauf im Root (Base http://localhost:8089) vom 2026-09-24 und Reaktion:
+Gate-Läufe vom 2026-09-24 (Root-Base, danach Publish-Base) und Reaktion. Nach Patch und Golden-Update, hier gegen den
+Website-Klon geprüft: Styleguide PASS für alle vier (0 FAIL; WARNs: Landmarks, Touch-Targets, Kontrast, Schriftgröße,
+Tooltip-Felder), Interactive PASS (nur ECharts-WARNs).
 
 | Befund | Ursache | Status |
 |---|---|---|
@@ -130,7 +144,9 @@ Gate-Lauf im Root (Base http://localhost:8089) vom 2026-09-24 und Reaktion:
 | `S-TOKEN-COLOR` | kategoriale Paletten und UI-Farben außerhalb der TNGB-Tokens | behoben: auf Tokens abgebildet (`COLORMAP` in `build.py`, auch in `pisa-regions.json`/`pisa-explorer.json`); Hinweis: die Token-Palette ist nicht auf Farbsinnschwäche validiert, die Reihen sind beschriftet |
 | `S-AGENT-AUDIT` | kein §13-Manifest | ergänzt: Sektion 13 + `module-agents-used`; Deep Dive und Finanzbildung (Typ `tiefenmodul`) führen Council und Wikipedia-Synthese ehrlich als **pending** (nicht durchgeführt) → `agent-audit-check.ps1` meldet Warnung, kein kritischer Befund; vor Publish nachholen oder Ausnahme dokumentieren |
 | `S-JS-ERROR` / `no-js-errors` (404) | `vendor\`/`assets\fonts\` fehlen im Root | Umgebung: Gates gegen Publish-Paket als Base (Schritt 5) oder Ordner in den Root kopieren |
-| `S-TOKEN-FONT` | Auditor verlangt einen Google-Fonts-`<link>`; die Website-CSP (`style-src 'self'`, `font-src 'self' data:`) verbietet ihn, M478 hat ihn ebenfalls nicht | Regelkonflikt Auditor ↔ CSP; Entscheidung: Auditor-Regel auf self-hosted `assets/fonts/fonts.css` erweitern oder Befund als bekannt akzeptieren |
+| `S-TOKEN-FONT` | Auditor verlangt einen Google-Fonts-`<link>`; die Website-CSP (`style-src 'self'`, `font-src 'self' data:`) verbietet ihn, M478 hat ihn ebenfalls nicht | Auditor-Patch `patches/run-audit-base-aware.patch`: self-hosted `@font-face` für alle drei Familien gilt als erfüllt |
+| `S-LINK-INTERN-RESOLVE` (6× je Modul: `../index.html`, `../module.html`, `../impressum.html`, `../datenschutz.html`) | Auditor löst `<a href>` aus dem DOM gegen den Root-Ordner auf; die Publish-Fassung liegt in `module\` und verlinkt nach oben | derselbe Patch: bei gesetztem `-Base` HTTP-HEAD relativ zur Seite, Duplikate zusammengefasst; ohne `-Base` unverändert |
+| `golden-snapshot` (Regression, 1 Abweichung je Modul) | erste Baseline entstand beim Root-Lauf (404 auf vendor/fonts, alter Build) | Baseline einmalig mit `guard.ps1 -Update` gegen die Publish-Fassung setzen (Schritt 8b) |
 | `F-IDA-LEVEL/TOOLTIP/NO-DRILLDOWN/STATIC-LABELS` (WARN) | ECharts-spezifische Muster | keine Blocker; Module rendern mit eigenem SVG |
 
 ## 4 · Danach: Quelle der Wahrheit wechselt

@@ -1,0 +1,44 @@
+diff --git a/scripts/styleguide/run-audit.mjs b/scripts/styleguide/run-audit.mjs
+index 603d84d..706e93a 100644
+--- a/scripts/styleguide/run-audit.mjs
++++ b/scripts/styleguide/run-audit.mjs
+@@ -114,7 +114,13 @@ async function inPageAudit(page, ctx){
+     // S-TOKEN-FONT — Google Fonts
+     const fontLink = [...document.querySelectorAll('link[href*="fonts.googleapis.com"]')]
+       .find(l => /Inter/.test(l.href) && /Space\+Grotesk/.test(l.href) && /JetBrains\+Mono/.test(l.href));
+-    if (!fontLink) F('S-TOKEN-FONT', 'FAIL', 'Pflicht-Schriftfamilien (Inter + Space Grotesk + JetBrains Mono) nicht alle eingebunden.');
++    // Self-hosted Alternative (Publish-Paket mit CSP ohne Google Fonts): @font-face-Regeln fuer alle drei Familien
++    const faceFamilies = new Set();
++    for (const sh of document.styleSheets) {
++      try { for (const r of sh.cssRules) if (r instanceof CSSFontFaceRule) faceFamilies.add(r.style.fontFamily.replace(/["']/g, '').trim()); } catch (e) {}
++    }
++    const selfHosted = ['Inter', 'Space Grotesk', 'JetBrains Mono'].every(f => faceFamilies.has(f));
++    if (!fontLink && !selfHosted) F('S-TOKEN-FONT', 'FAIL', 'Pflicht-Schriftfamilien (Inter + Space Grotesk + JetBrains Mono) nicht alle eingebunden.');
+ 
+     // S-TOKEN-COLOR — verbotene Eigen-Farben in inline-styles + <style>-Blöcken
+     const tol = new Set((ctx.colorTolerance||[]).map(c => c.toLowerCase()));
+@@ -324,11 +330,21 @@ async function resolveLocalLinks(page, findings){
+   const links = await page.evaluate(() => [...document.querySelectorAll('a[href]')]
+     .map(a => a.getAttribute('href'))
+     .filter(h => h && !/^(https?:|mailto:|tel:|javascript:|#)/.test(h)));
++  const seen = new Set();
+   for (const href of links) {
+     const cleaned = href.split('#')[0].split('?')[0];
+-    if (!cleaned) continue;
+-    const p = join(REPO, cleaned);
+-    if (!existsSync(p)) findings.push({ id:'S-LINK-INTERN-RESOLVE', severity:'FAIL', message:`Interner Link auf nicht existierende Datei: ${cleaned}` });
++    if (!cleaned || seen.has(cleaned)) continue;
++    seen.add(cleaned);
++    let missing;
++    if (BASE) {
++      // Bei gesetztem --base: relativ zur geladenen Seite per HTTP pruefen
++      // (Publish-Fassungen liegen in module/ und verlinken ../index.html usw.)
++      try { missing = (await page.request.head(new URL(cleaned, page.url()).href)).status() >= 400; }
++      catch (e) { missing = true; }
++    } else {
++      missing = !existsSync(join(REPO, cleaned));
++    }
++    if (missing) findings.push({ id:'S-LINK-INTERN-RESOLVE', severity:'FAIL', message:`Interner Link auf nicht existierende Datei: ${cleaned}` });
+   }
+ }
+ 
