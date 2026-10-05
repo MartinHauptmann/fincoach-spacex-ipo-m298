@@ -14,6 +14,7 @@ SpaceX-IPO-Analyse mit globalem Vergleich.
 | `modul.html` | Vollständiges Analyse-Modul (M298) inkl. Charts/Simulatoren — Schriften via `fonts.css` self-hosted |
 | `ipo-prozess.html` | Übersicht des IPO-Prozesses: Phasen, Beteiligte/Zustimmungen, Rolle der Banken, Pflichten vor & nach dem Börsengang |
 | `m299.html` | Deep-Dive IPO-Zuteilung (M299): Quoten-Kaskade, Simulator, M-DBOM-Provenienz, Compliance-/Datenqualitäts-Checks |
+| `prompts/m300-atas-options-xray-deep-dive-prompt.md` | Deep-Dive-Prime-Prompt M300 (ATAS Options X-Ray, Eurex vs. verbriefte Derivate, § 20 Abs. 6 EStG) mit Faktencheck K1–K12, Compliance-/Qualitäts-Gates und QA-Scorecard |
 | `impressum.html` | Impressum nach § 5 DDG / § 18 MStV (ausgefüllt) |
 | `datenschutz.html` | DSGVO-Datenschutzerklärung (ausgefüllt) |
 | `fonts.css` + `fonts/` | Self-gehostete Schriften (Inter, Space Grotesk, JetBrains Mono) — keine Google-CDN-Abrufe |
