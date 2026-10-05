@@ -14,7 +14,7 @@ und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
    wird dort als Platzhalter erwartet.
 3. `{{STICHTAG}}` durch das Analysedatum ersetzen und `{{CAT_LEVEL}}` durch die Zielstufe
    (`Einsteiger` | `Fortgeschritten` | `Experte`, Standard: `Experte`).
-4. Vor jeder Veröffentlichung die Ausgabe an der **QA-Scorecard** messen (Abschnitt 9 des Prompts).
+4. Vor jeder Veröffentlichung die Ausgabe an der **QA-Scorecard** messen (Abschnitt 7 „Ausgabestruktur“, Punkt 8 des Prompts).
    Steht ein Compliance-Gate auf ✗, wird nicht veröffentlicht.
 
 > **Hinweis zum Ausgangstext:** Bei der Erstellung dieses Prompts sind im Quelltext mehrere Aussagen
