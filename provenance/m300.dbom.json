@@ -1,0 +1,289 @@
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": {
+    "id": "M300",
+    "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
+    "version": "1.0.0",
+    "stichtag": "2026-10-05",
+    "buildDate": "2026-10-05T00:00:00Z",
+    "related_modules": [],
+    "external_dbom": "provenance/m300.dbom.json",
+    "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md",
+    "release_status": "UEBERARBEITUNG"
+  },
+  "fact_summary": {
+    "total": 18,
+    "confirmed_primary": 15,
+    "scenario_projection": 3,
+    "by_class": {
+      "REGULATORY_FRAMEWORK": 7,
+      "VENDOR_CLAIM": 5,
+      "MARKET_DATA": 2,
+      "MEDIA_REPORT": 1,
+      "MODEL_ASSUMPTION": 1,
+      "SCENARIO_PROJECTION": 2
+    }
+  },
+  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 89,5 %).",
+  "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
+  "facts": [
+    {
+      "id": "FACT_JSTG2024_REPEAL",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.9,
+      "claim": "§ 20 Abs. 6 Satz 5 und 6 EStG a. F. (20.000-€-Grenze Termingeschäfte / Forderungsausfall) durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG).",
+      "source_id": "SRC_BGBL_JSTG2024",
+      "caveat": "Satznummern in § 52 Abs. 28 nur per Snippet belegt."
+    },
+    {
+      "id": "FACT_BMF_2025",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um; Verlustvorträge aus Termingeschäften in offenen Fällen unbeschränkt verrechenbar.",
+      "source_id": "SRC_BMF_2025",
+      "caveat": "Randziffern nicht verifiziert."
+    },
+    {
+      "id": "FACT_BFH_ADV",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "BFH VIII B 113/23 vom 07.06.2024: AdV-Beschluss, summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG).",
+      "source_id": "SRC_BFH_VIIIB11323",
+      "caveat": "Kein Hauptsacheurteil."
+    },
+    {
+      "id": "FACT_STOCK_LOSS_S4",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.7,
+      "claim": "§ 20 Abs. 6 Satz 4 EStG (Aktienverluste nur mit Aktiengewinnen) gilt fort; BVerfG 2 BvL 3/21 anhängig.",
+      "source_id": "SRC_ESTG_20",
+      "caveat": "Verfahrensstand vor Veröffentlichung prüfen."
+    },
+    {
+      "id": "FACT_P15_KSTG",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "§ 15 Abs. 4 Satz 3–5 EStG gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften (gesonderter Verlustkreis für Termingeschäfte).",
+      "source_id": "SRC_ESTG_15",
+      "caveat": "Keine Rechtsformempfehlung."
+    },
+    {
+      "id": "FACT_MM_NO_HEDGE_DUTY",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "Keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging; Art. 17 Abs. 3 MiFID II / § 80 Abs. 2 WpHG regeln Quotierungspflichten.",
+      "source_id": "SRC_WPHG_80",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_XRAY_10_IND",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.85,
+      "claim": "Options X-Ray Suite umfasst zehn Indikatoren (Market State, Expected Move, GEX/Charm/Strike Heatmap, Big Trades, Flow, Flow Delta, Strike Profile, Surface Profile).",
+      "source_id": "SRC_ATAS_HELP",
+      "caveat": "Herstellerangabe."
+    },
+    {
+      "id": "FACT_XRAY_1MIN_SPX",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.85,
+      "claim": "Datenbasis 1-Minuten-CBOE-Feed mit Analytik von OptionsDepth; nur SPX-Optionen, Anzeige auf ES/MES/SPY.",
+      "source_id": "SRC_ATAS_LEARN",
+      "caveat": "Herstellerangabe."
+    },
+    {
+      "id": "FACT_ATAS_NO_OPT_TRADING",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.8,
+      "claim": "Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan).",
+      "source_id": "SRC_ATAS_LEARN",
+      "caveat": "Stand 2026-10-05."
+    },
+    {
+      "id": "FACT_CROSS_TRADING",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.85,
+      "claim": "ES/MES-Cross-Trading seit ATAS 8.0.12 (17.02.2026).",
+      "source_id": "SRC_ATAS_8012",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_IB_BAG",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.85,
+      "claim": "IB TWS API unterstützt Combo-Orders (secType BAG) mit bis zu 6 Legs und Netto-Limit.",
+      "source_id": "SRC_IB_API",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_SPX_0DTE_59",
+      "verdict": "CONFIRMED",
+      "class": "MARKET_DATA",
+      "confidence": 0.85,
+      "claim": "Anteil 0DTE am SPX-Optionsvolumen 2025 rund 59 %.",
+      "source_id": "SRC_CBOE_0DTE",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_EUREX_DAILY",
+      "verdict": "CONFIRMED",
+      "class": "MARKET_DATA",
+      "confidence": 0.7,
+      "claim": "Eurex: OEXP (seit 28.08.2023) und ODAP (seit 13.11.2023) als Optionen mit Tagesverfall; ADV ca. 30.900 bzw. 2.300 Kontrakte.",
+      "source_id": "SRC_EUREX_DAILY",
+      "caveat": "ADV-Werte aus Snippet."
+    },
+    {
+      "id": "FACT_BAFIN_TURBO",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten in Kraft seit 16.06.2026 (Risikohinweis, Wissenstest); Studie: Verlustquote 74,2 %.",
+      "source_id": "SRC_BAFIN_TURBO",
+      "caveat": ""
+    },
+    {
+      "id": "FACT_NO_EUREX_GEX",
+      "verdict": "CONFIRMED",
+      "class": "MEDIA_REPORT",
+      "confidence": 0.6,
+      "claim": "Keiner der verglichenen Anbieter bietet intraday-fähige Eurex-GEX; Gamma Cockpit liefert DAX-GEX auf Tagesbasis (Beta).",
+      "source_id": "SRC_VENDORS",
+      "caveat": "Nur Snippet-Belege."
+    },
+    {
+      "id": "FACT_DEALER_CONVENTION",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "MODEL_ASSUMPTION",
+      "confidence": 0.5,
+      "claim": "GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls).",
+      "source_id": "SRC_MODEL",
+      "caveat": "Modellannahme, kein Fakt."
+    },
+    {
+      "id": "FACT_GEX_EXAMPLE",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": 1.0,
+      "claim": "Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES.",
+      "source_id": "SRC_MODEL",
+      "caveat": "Hypothetische Werte."
+    },
+    {
+      "id": "FACT_ROADMAP",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": 0.0,
+      "claim": "Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge.",
+      "source_id": "SRC_USER_TEXT",
+      "caveat": "Keine Prognose."
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC_BGBL_JSTG2024",
+      "title": "Jahressteuergesetz 2024, BGBl. 2024 I Nr. 387",
+      "url": "https://www.recht.bund.de/bgbl/1/2024/387/regelungstext.pdf"
+    },
+    {
+      "id": "SRC_BMF_2025",
+      "title": "BMF-Schreiben Einzelfragen zur Abgeltungsteuer, 14.05.2025",
+      "url": "https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Abgeltungsteuer/2025-05-14-einzelfragen-zur-abgeltungsteuer.pdf"
+    },
+    {
+      "id": "SRC_BFH_VIIIB11323",
+      "title": "BFH, Beschluss v. 07.06.2024, VIII B 113/23",
+      "url": "https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE202410113/"
+    },
+    {
+      "id": "SRC_ESTG_20",
+      "title": "§ 20 EStG (EStH 2025)",
+      "url": "https://esth.bundesfinanzministerium.de/esth/2025/A-Einkommensteuergesetz/II-Einkommen-2-24b/8-Die-einzelnen-Einkunftsarten-13-24b/e-Kapitalvermoegen-20/Paragraf-20/paragraf-20.html"
+    },
+    {
+      "id": "SRC_ESTG_15",
+      "title": "§ 15 EStG",
+      "url": "https://www.gesetze-im-internet.de/estg/__15.html"
+    },
+    {
+      "id": "SRC_BFH_IR2514",
+      "title": "BFH, Urteil v. 06.07.2016, I R 25/14",
+      "url": "https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE201610211/"
+    },
+    {
+      "id": "SRC_WPHG_80",
+      "title": "§ 80 WpHG / BaFin FAQ HFT-Gesetz",
+      "url": "https://www.bafin.de/SharedDocs/FAQs/DE/HFT-Gesetz/160_hft_faq.html"
+    },
+    {
+      "id": "SRC_ATAS_HELP",
+      "title": "ATAS Hilfe · Options X-Ray",
+      "url": "https://help.atas.net/en/support/solutions/articles/72000662222-options-x-ray-expected-move"
+    },
+    {
+      "id": "SRC_ATAS_LEARN",
+      "title": "ATAS Learn · Options",
+      "url": "https://learn.atas.net/options/"
+    },
+    {
+      "id": "SRC_ATAS_8012",
+      "title": "ATAS 8.0.12 · Cross-Trading",
+      "url": "https://help.atas.net/en/support/solutions/articles/72000657084-cross-trading"
+    },
+    {
+      "id": "SRC_IB_API",
+      "title": "IB TWS API · Spread Contracts",
+      "url": "https://interactivebrokers.github.io/tws-api/spread_contracts.html"
+    },
+    {
+      "id": "SRC_CBOE_0DTE",
+      "title": "Cboe Insights · SPX 0DTE",
+      "url": "https://www.cboe.com/insights/posts/spx-0-dte-options-jump-to-record-62-share-in-august/"
+    },
+    {
+      "id": "SRC_EUREX_DAILY",
+      "title": "Eurex · Daily Options (OEXP/ODAP)",
+      "url": "https://www.eurex.com/ex-en/markets/idx/daily-opt"
+    },
+    {
+      "id": "SRC_BAFIN_TURBO",
+      "title": "BaFin · Allgemeinverfügung Turbo-Zertifikate",
+      "url": "https://www.bafin.de/SharedDocs/Downloads/DE/Aufsichtsrecht/Verfuegungen/dl_vf_allgemeinverfuegung_turbo_zertifikate.html"
+    },
+    {
+      "id": "SRC_VENDORS",
+      "title": "Anbieterseiten SpotGamma, MenthorQ, Volland, Bookmap, Gamma Cockpit (Snippets)",
+      "url": "https://gammacockpit.com/"
+    },
+    {
+      "id": "SRC_MODEL",
+      "title": "FinCoach-Referenzmodell (BSM-Greeks)",
+      "url": ""
+    },
+    {
+      "id": "SRC_USER_TEXT",
+      "title": "Quelltext 2026-10-05 (USER_PROVIDED)",
+      "url": ""
+    }
+  ],
+  "audit_trail": [
+    {
+      "date": "2026-10-05",
+      "event": "Erstellung v1.0.0 aus Analyse M300 (Prompt v1.0.0)",
+      "qa_score_pct": 89.5,
+      "release": "UEBERARBEITUNG"
+    }
+  ]
+}
