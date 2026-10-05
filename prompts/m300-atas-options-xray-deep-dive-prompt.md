@@ -211,7 +211,7 @@ Modul 6 · DACH-Marktspezifika: Börsenoptionen vs. verbriefte Derivate
   Gegenüberstellung von Eurex-Listed-Options und Optionsscheinen/Knock-outs: Kontrahentenrisiko
   (CCP-Clearing durch Eurex Clearing vs. Emittentenbonität), Spreads, Pricing (Market-Maker-
   Quotes vs. Emittenten-Quote-Making), Liquiditätsmodell, Kosten (PRIIPs-KID), Zugang für
-  Privatanleger (Termingeschäftsfähigkeit/Angemessenheitsprüfung, Mindestgrößen). Die steuerliche
+  Privatanleger (Angemessenheitsprüfung nach § 63 Abs. 10 WpHG, Mindestgrößen). Die steuerliche
   Einordnung erfolgt AUSSCHLIESSLICH auf Basis des in K1–K4 geprüften Rechtsstands, mit Zeitachse
   und klarer Trennung zwischen Rechtslage bis zur Abschaffung und aktueller Rechtslage. Warum
   GEX-/Charm-Modelle bei Optionsscheinen nur eingeschränkt übertragbar sind: siehe K7.
