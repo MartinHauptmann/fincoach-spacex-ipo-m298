@@ -149,6 +149,35 @@ def main():
         report("L03b Freigabestatus", BLOCKER, badge in html.upper() or (badge == "ÜBERARBEITUNG" and "ÜBERARBEITUNG" in html),
                f"Regel ergibt {badge}")
 
+    # L10b · kein ✓ für ein Gate, zu dem ein offener Pflichtpunkt existiert (data-gate auf <li> und Gate-Zelle)
+    open_gates = set(re.findall(r'<li[^>]*data-gate="([CQ]\d+)"', html))
+    passed_gates = {lab.split()[0] for lab, cls in c.qa_rows if "check-pass" in cls}
+    clash = sorted(open_gates & passed_gates)
+    report("L10b ✓ trotz Offen-Punkt", BLOCKER, not clash, "✓ trotz offenem Punkt: " + ", ".join(clash) if clash else f"{len(open_gates)} Gates mit Offen-Punkten, keines auf ✓")
+
+    if dbom:
+        # L14 · Quellen: jede DBOM-Quelle von ≥ 1 Fakt genutzt, jeder Fakt mit existierender Quelle
+        src_ids = {x["id"] for x in dbom.get("sources", [])}
+        used = {f.get("source_id") for f in dbom.get("facts", [])}
+        unused, dangling = sorted(src_ids - used), sorted(used - src_ids)
+        report("L14 Quellen ↔ Fakten", WARN, not unused and not dangling,
+               (f"ungenutzt: {', '.join(unused)}" if unused else "") + (f" fehlend: {', '.join(dangling)}" if dangling else "") or "konsistent")
+
+    # L12 · Rückwärtsbindung: Zahlen mit Einheit in S01–S11 brauchen data-source oder data-est (heuristisch)
+    unbound_nums = 0
+    for sec in re.finditer(r'<section id="s(0[1-9]|1[01])".*?</section>', html, re.S):
+        for blk in re.split(r"(?=<(?:div|p|tr|li)\b)", sec.group(0)):
+            if "data-source=" in blk or "data-est" in blk or "est-mark" in blk:
+                continue
+            txt = re.sub(r"<[^>]+>", " ", blk)
+            unbound_nums += len(re.findall(r"\d[\d.,]*\s?(?:%|Gbps|Mio\.|Mrd\.|€|\$|Kontrakte)", txt))
+    report("L12 Rückwärtsbindung", WARN, unbound_nums == 0, f"{unbound_nums} Zahlenangaben mit Einheit ohne data-source/EST-Kennzeichnung")
+
+    # L15 · keine handgeschriebenen Messwerte in der QA-Sektion
+    qa_sec = re.search(r'<section id="s-qa".*?</section>', html, re.S)
+    hand = re.findall(r"\d+ (?:Elemente|Treffer)", qa_sec.group(0)) if qa_sec else []
+    report("L15 QA-Messwerte", WARN, not hand, "handgeschrieben: " + ", ".join(hand) if hand else "keine handgeschriebenen Messwerte")
+
     w = max(len(r[0]) for r in results)
     blockers = 0
     for rule, level, ok, msg in results:

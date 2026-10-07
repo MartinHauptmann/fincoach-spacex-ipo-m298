@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -27,7 +27,7 @@
       "VENDOR_CLAIM": 5
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 89,5 % nach Korrektur M2–M6; vorher 81,6 % laut Prüfbericht 2026-10-07).",
+  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 78,9 % nach unabhängiger Zweitprüfung 2026-10-07; zuvor ausgewiesene 89,5 % enthielten 4 unbelegte ✓).",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -294,6 +294,12 @@
       "qa_score_before_pct": 81.6,
       "release": "UEBERARBEITUNG",
       "report": "analysen/m300-qa-report-2026-10-07.md"
+    },
+    {
+      "date": "2026-10-07",
+      "event": "Unabhängige Zweitprüfung (fincoach-qa-reviewer): C4, Q2, Q4, Q7 von ✓ auf ◐; neue Fehlerklassen L11–L16",
+      "qa_score_pct": 78.9,
+      "release": "UEBERARBEITUNG"
     }
   ]
 }

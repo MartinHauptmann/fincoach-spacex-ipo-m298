@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.0.1 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.0.2 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm, ES-Äquivalente), Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der aktuelle Rechtsstand zur Verlustverrechnung bei Termingeschäften (JStG 2024). Mit Faktencheck K1–K12, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
@@ -103,9 +103,9 @@ tailwind.config = { theme: { extend: {
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.0.1", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.0.2", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 18, "confirmed_primary": 14, "media_report": 1, "scenario_projection": 3, "vendor_claim": 5 },
-  "honest_disclosure": "Primärquellen nur über Suchtreffer-Snippets eingesehen (Netzwerksperre bei der Recherche). Herstellerangaben als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 89,5 % nach Korrektur M2–M6; Prüfbericht 2026-10-07)."
+  "honest_disclosure": "Primärquellen nur über Suchtreffer-Snippets eingesehen (Netzwerksperre bei der Recherche). Herstellerangaben als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 78,9 % nach Zweitprüfung; Prüfbericht 2026-10-07)."
 }
 </script>
 </head>
@@ -154,7 +154,7 @@ tailwind.config = { theme: { extend: {
 <!-- ===== Provenienz-Banner ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.0.1</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.0.2</span>
     <span class="text-slate-300"><span data-dbom-count="total">18</span> Fakten · <span data-dbom-count="confirmed">14</span> belegt (davon <span data-dbom-count="vendor">5</span> Herstellerangaben) · <span data-dbom-count="media">1</span> Medienangabe · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -202,7 +202,7 @@ tailwind.config = { theme: { extend: {
       Ein geprüfter Deep-Dive auf einen Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen jede Aussage des Ausgangstexts gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">14</span> belegte Fakten, <span data-dbom-count="media">1</span> Medienangabe, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>89,5</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">14</span> belegte Fakten, <span data-dbom-count="media">1</span> Medienangabe, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
     </p>
 
     <div class="caveat-box mb-4 max-w-3xl text-sm text-slate-300 leading-relaxed" role="note" data-qa="hero-disclaimer">
@@ -552,9 +552,9 @@ tailwind.config = { theme: { extend: {
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>89,5</span> % · <span data-qa-points>17</span> / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>78,9</span> % · <span data-qa-points>15</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
-    <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Prüfbericht 2026-10-07: vor Korrektur 81,6 % (C1, Q4, Q7 ◐), nach M2–M6 neu bewertet.</span>
+    <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Prüfbericht 2026-10-07: vor Korrektur 81,6 %; nach M2–M6 und unabhängiger Zweitprüfung neu bewertet (C4, Q2, Q4, Q7 ◐).</span>
   </div>
   <div class="grid md:grid-cols-3 gap-4">
     <div class="dep-box">
@@ -563,7 +563,7 @@ tailwind.config = { theme: { extend: {
         <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-pass" title="Kurz-Disclaimer im Hero seit 2026-10-07 (M2)">✓</td></tr>
         <tr><td>C2 Keine Anlageempfehlung (MAR)</td><td class="check-pass">✓</td></tr>
         <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-part" title="Primärquellen nur per Snippet eingesehen">◐</td></tr>
-        <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-pass">✓</td></tr>
+        <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-part" data-gate="C4" title="Interessenkonflikte vom Herausgeber noch nicht bestätigt (L10b)">◐</td></tr>
         <tr><td>C5 Marken beschreibend</td><td class="check-pass">✓</td></tr>
         <tr><td>C6 UWG-konforme Begriffe</td><td class="check-pass">✓</td></tr>
         <tr><td>C7 Ausgewogene Risikodarstellung</td><td class="check-pass">✓</td></tr>
@@ -575,12 +575,12 @@ tailwind.config = { theme: { extend: {
       <h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität (Q1–Q10)</h3>
       <table><tbody>
         <tr><td>Q1 Faktencheck K1–K12 vollständig</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q2 Aktualität / a. F. markiert</td><td class="check-pass">✓</td></tr>
+        <tr><td>Q2 Aktualität / a. F. markiert</td><td class="check-part" data-gate="Q2" title="BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b)">◐</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q4 Provenienz je Fakt</td><td class="check-pass" title="Verdict FACT_NO_EUREX_GEX korrigiert, K5-Fakt gebunden (M3, M5)">✓</td></tr>
+        <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="Zweitprüfung: Zahlen ohne DBOM-Fakt (L12), DBOM Analyse ≠ Seite (L13), Quellenliste nicht aus DBOM (L14)">◐</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-part" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-pass" title="Zählungen aus DBOM gebunden (M3)">✓</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="Zweitprüfung: Fließtext S09/Fazit weicht von Matrix ab (L11, L06); K10 Seite ◐ vs. Analyse ✓">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass">✓</td></tr>
         <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" title="Unsichere Fundstellen markiert; KPI Eurex-GEX auf 0 von 5 belegt korrigiert (M4)">◐</td></tr>
         <tr><td>Q10 Formatvorgaben</td><td class="check-pass">✓</td></tr>
@@ -592,7 +592,7 @@ tailwind.config = { theme: { extend: {
       <h3 class="font-head font-bold text-tngb-gold mb-3">③ Styleguide</h3>
       <table><tbody>
         <tr><td>TNGB-Farbtokens &amp; Fonts (body-Basis)</td><td class="check-pass" title="Gemessen in Plain- und Viewer-Fassung, 0 Fremdfarben-Elemente">✓</td></tr>
-        <tr><td>Kontrast-Audit WCAG AA</td><td class="check-part" title="125 Elemente aus Styleguide-Tokens unter 4,5:1 (Muted, Magenta, Lavender) – Styleguide-Entscheidung M7 offen">◐</td></tr>
+        <tr><td>Kontrast-Audit WCAG AA</td><td class="check-part" title="Styleguide-Tokens (Muted, Magenta, Lavender) unter 4,5:1 – Anzahl siehe Ausgabe qa/render_audit.cjs (L09, L15); Styleguide-Entscheidung M7 offen">◐</td></tr>
         <tr><td>CAT-Level (Einsteiger→Experte)</td><td class="check-pass">✓</td></tr>
         <tr><td>NavDock &amp; Sektions-Badges</td><td class="check-pass">✓</td></tr>
         <tr><td>Provenienz- &amp; Live-Audit-Banner</td><td class="check-pass">✓</td></tr>
@@ -601,11 +601,13 @@ tailwind.config = { theme: { extend: {
       </tbody></table>
       <h4 class="font-head font-bold text-white mt-5 mb-2 text-sm">Offen vor Freigabe</h4>
       <ul class="tick text-xs">
-        <li>§ 52 Abs. 28 EStG und BMF-Randziffern am Original prüfen</li>
-        <li>Stand BVerfG 2 BvL 3/21 prüfen</li>
-        <li>ATAS-Start (04.09.2026) und Preise prüfen</li>
-        <li>Wettbewerbspreise und Eurex-Multiplikatoren bestätigen</li>
-        <li>Interessenkonflikte durch Herausgeber bestätigen</li>
+        <li data-gate="C3">§ 52 Abs. 28 EStG und BMF-Randziffern am Original prüfen</li>
+        <li data-gate="Q2">Stand BVerfG 2 BvL 3/21 prüfen</li>
+        <li data-gate="Q2">ATAS-Start (04.09.2026) und Preise prüfen</li>
+        <li data-gate="Q2">Wettbewerbspreise und Eurex-Multiplikatoren bestätigen</li>
+        <li data-gate="C4">Interessenkonflikte durch Herausgeber bestätigen</li>
+        <li data-gate="Q7">Zweitprüfung 2026-10-07: S09-Fließtext und Fazit-Allaussage an Matrix angleichen</li>
+        <li data-gate="Q4">Zweitprüfung 2026-10-07: Zahlen ohne DBOM-Fakt binden, DBOMs abgleichen, Quellenliste aus DBOM</li>
       </ul>
     </div>
   </div>
@@ -676,7 +678,7 @@ tailwind.config = { theme: { extend: {
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.0.1 · 2026-10-07<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.0.2 · 2026-10-07<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>

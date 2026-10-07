@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L10 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L16 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -35,6 +35,14 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L07 / Q7:** Faktenzahlen nie von Hand schreiben, sondern als `<span data-dbom-count="total|confirmed|media|scenario|vendor">`.
   Der Live-Audit befüllt sie, der Check vergleicht sie. Das JSON-LD `fact_summary` entspricht der externen DBOM.
 - **L08 / Q4:** Jeder DBOM-Fakt ist an mindestens ein Element mit `data-source="FACT_…"` gebunden.
+- **L10b:** Jeder Punkt der Liste „Offen vor Freigabe“ trägt `data-gate="Cx|Qx"`. Ein Gate mit offenem Punkt ist nie ✓.
+- **L11:** Wertende Vergleichssätze müssen sich aus den Zellen der eigenen Tabelle ableiten lassen.
+- **L12:** Jede Zahl mit Einheit, Prozent, Datum oder Fundstelle hat `data-source` oder EST-Kennzeichnung.
+- **L13:** Es gibt eine führende DBOM (extern); die Analyse nutzt deren IDs; Phase-A-Ergebnisse sind auf Seite und
+  Analyse identisch.
+- **L14:** Die Quellenliste wird aus `dbom.sources` erzeugt; jede Quelle hat ≥ 1 Fakt.
+- **L15:** Keine Messwerte von Hand in die QA-Sektion übertragen, sondern auf die Skriptausgabe verweisen.
+- **L16:** Bei CONFIRMED müssen der Bezugszeitraum der Quelle und der Claim übereinstimmen (Feld `period`).
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 
@@ -57,6 +65,9 @@ Q7 Widerspruchsfreiheit · Q8 Glossar · Q9 keine Überzeichnung/Halluzination �
    - [ ] Formeln nachgerechnet und Zahlenbeispiel mit Probe (Q3)
    - [ ] Screenshots Viewer-Fassung der Sektionen mit Tabellen, Formeln und Diagrammen angesehen
    - [ ] Rechtsstand-Aussagen mit Stichtag und Fundstelle (C3)
+   - [ ] Jeder Wertungssatz gegen seine Tabelle gelesen (L11)
+   - [ ] Bezugszeitraum jeder CONFIRMED-Quelle = Zeitraum im Claim (L16)
+   - [ ] Phase-A-Ergebnisse Seite = Analyse (L13)
 4. **Gates bewerten:** Nur Gates mit belegtem Testlauf oder dokumentierter Einzelprüfung dürfen ✓ sein (L10). Die
    Testausgaben von Schritt 1 und 2 gehören wörtlich in den QA-Bericht oder die Commit-Nachricht.
 5. **Neuer Fehler gefunden?** → Abschnitt 5.

@@ -1,5 +1,8 @@
 # FinCoach AI · Fehlerkatalog (Lessons Learned)
 
+> L10b–L16 stammen aus der unabhängigen Zweitprüfung durch den Agenten `fincoach-qa-reviewer` am 2026-10-07.
+> Sie belegen, dass die Zweitprüfung Fehlerklassen findet, die die automatischen Tests noch nicht kannten.
+
 Jeder Fehler, der eine Veröffentlichung erreicht hat oder im Review gefunden wurde, bekommt hier eine **L-Nummer**.
 Ein Eintrag gilt erst als abgeschlossen, wenn drei Dinge existieren:
 
@@ -25,6 +28,14 @@ Ein Fehler, für den sich kein Test schreiben lässt, bekommt einen Pflichtpunkt
 | L08 | 2026-10-07 | M300 | K5-Fakt ohne Seitenbindung, vom Live-Audit nicht prüfbar | Fakten in DBOM angelegt, Bindung vergessen | Jeder DBOM-Fakt hat mindestens ein Element mit `data-source` | `check_module` L08a, L08b | c56f4d5: ✗ · v1.0.1: ✓ |
 | L09 | 2026-10-07 | alle | Styleguide-Tokens #64748B, #E6399A, #9933FF unter WCAG AA (125–129 Elemente) | Token-Definition, nicht Umsetzung | **Offen (Styleguide-Entscheidung M7):** bis dahin als WARN gemeldet, nicht blockierend | `render_audit` L09 (WARN) | – |
 | L10 | 2026-10-07 | Prozess | Styleguide-Check auf ✓ gesetzt, ohne in der Zielumgebung gemessen zu haben | Test nur in einer Umgebung; Check „behauptet“ statt gemessen | Kein ✓ ohne Messung. Ein Gate gilt erst als bestanden, wenn `check_module.py` **und** `render_audit.cjs` mit Exit 0 laufen; die Ausgabe gehört in den Bericht | Skill-Pflicht (Schritt 4) | – |
+
+| L10b | 2026-10-07 | M300 | Nach M2–M6 standen C4, Q2, Q4 und Q7 auf ✓, obwohl Offen-Punkte und Widersprüche bestanden (Zweitprüfung: 78,9 % statt 89,5 %) | Gates einzeln „abgehakt“, ohne Abgleich mit der eigenen Offen-Liste | Offen-Punkte tragen `data-gate`; ein Gate mit Offen-Punkt darf nicht ✓ sein | `check_module` L10b | v1.0.1 mit `data-gate`, C4 auf ✓ gesetzt: ✗ · v1.0.2: ✓ |
+| L11 | 2026-10-07 | M300 | Fließtext „SpotGamma und Volland stärker bei höheren Greeks“ widerspricht der eigenen Matrix | Wertender Satz aus der Analyse übernommen, nicht gegen die Tabelle gelesen | Jeder Vergleichs- oder Wertungssatz muss sich aus den Zellen der zugehörigen Tabelle ableiten lassen | manuell (Skill-Checkliste) | – |
+| L12 | 2026-10-07 | M300 | Zahlen (OPRA, BSW-Quoten, BGBl.-Fundstellen, Preise) ohne DBOM-Fakt | L08 prüfte nur DBOM → Seite, nicht Seite → DBOM | Jede Zahl mit Einheit, Prozent, Datum oder Fundstelle braucht `data-source` oder EST-Kennzeichnung | `check_module` L12 (WARN, heuristisch) | v1.0.2: ! 6 Angaben |
+| L13 | 2026-10-07 | M300 | DBOM der Analyse und externe DBOM haben verschiedene Faktensätze; K10 auf der Seite ◐, in der Analyse ✓ | Zwei Provenienzlisten getrennt gepflegt | Eine führende DBOM (extern). Die Analyse referenziert deren IDs, Phase-A-Ergebnisse sind auf Seite und Analyse identisch | offen: Test erfordert ID-Mapping, bis dahin manuell | – |
+| L14 | 2026-10-07 | M300 | Quellenliste der Seite spiegelt die DBOM nicht; eine Quelle von keinem Fakt genutzt | Liste von Hand gepflegt | Quellenliste aus `dbom.sources` rendern; jede Quelle ≥ 1 Fakt, jeder Fakt mit existierender Quelle | `check_module` L14 (WARN) | v1.0.2: ! SRC_BFH_IR2514 |
+| L15 | 2026-10-07 | M300 | Tooltip nannte „125 Elemente“, gemessen 129 | Messwert von Hand in die QA-Sektion übertragen | Messwerte nie von Hand; auf die Skriptausgabe verweisen | `check_module` L15 (WARN) | v1.0.1: ! · v1.0.2: ✓ |
+| L16 | 2026-10-07 | M300 | „0DTE 59 % Gesamtjahr 2025“ mit einer Quelle zum August-Rekord (62 %) belegt | Bezugszeitraum der Quelle nicht mit dem Claim abgeglichen | CONFIRMED-Fakten führen ein Feld `period`; Quelle und Claim müssen denselben Zeitraum haben | manuell, Schema-Erweiterung geplant | – |
 
 ---
 
