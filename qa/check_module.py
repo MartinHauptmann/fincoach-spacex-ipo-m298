@@ -217,6 +217,43 @@ def main():
     hand = re.findall(r"\d+ (?:Elemente|Treffer)", qa_sec.group(0)) if qa_sec else []
     report("L15 QA-Messwerte", WARN, not hand, "handgeschrieben: " + ", ".join(hand) if hand else "keine handgeschriebenen Messwerte")
 
+    if dbom:
+        facts = {f["id"]: f for f in dbom.get("facts", [])}
+        srcs = {x["id"]: x for x in dbom.get("sources", [])}
+        # L17 · Zahl im gebundenen Element muss im Fakt stehen (claim, period, caveat)
+        class Bind(HTMLParser):
+            def __init__(self):
+                super().__init__(); self.stack = []; self.miss = []
+            def handle_starttag(self, tag, attrs):
+                if tag in ("br", "img", "input", "meta", "link", "hr"): return
+                self.stack.append((tag, dict(attrs).get("data-source")))
+            def handle_endtag(self, tag):
+                while self.stack:
+                    if self.stack.pop()[0] == tag: break
+            def handle_data(self, data):
+                fid = next((f for _, f in reversed(self.stack) if f), None)
+                if not fid or fid not in facts: return
+                f = facts[fid]; hay = " ".join(str(f.get(k, "")) for k in ("claim", "period", "caveat")).replace("\u00a0", " ")
+                for m in re.findall(r"\d[\d.,]*(?=\s?(?:%|Gbps|Mio\.|Mrd\.|€|\$|Kontrakte|Legs))", data):
+                    if m.rstrip(".,") not in hay: self.miss.append(f"{fid}: {m}")
+        b = Bind(); b.feed(html)
+        report("L17 Zahl ∈ Fakt", WARN, not b.miss, ("nicht im gebundenen Fakt: " + ", ".join(sorted(set(b.miss))[:8])) if b.miss else "alle gebundenen Zahlen im Fakt enthalten")
+        # L19 · CONFIRMED: keine Sekundärquelle als Teilbeleg; period mit Jahreszahl
+        weak = [f["id"] for f in facts.values() if f["verdict"] == "CONFIRMED" and any("Sekundär" in srcs.get(a, {}).get("title", "") for a in f.get("additional_sources", []))]
+        nodate = [f["id"] for f in facts.values() if f["verdict"] == "CONFIRMED" and not re.search(r"\b(19|20)\d\d\b", f.get("period", "")) ]
+        report("L19 schwächster Teilbeleg", WARN, not weak and not nodate,
+               "; ".join(x for x in [("Sekundär-Teilbeleg: " + ", ".join(weak)) if weak else "", ("period ohne Datum: " + ", ".join(nodate)) if nodate else ""] if x) or "konsistent")
+    # L18 · Quantor-Nenner Seite = Analyse
+    if mds:
+        words = {"zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6, "sieben": 7}
+        pg = {int(m) for m in re.findall(r">\d+ von (\d+)<", html)}
+        an = {words[w] for w in re.findall(r"(?:keinem|keiner|alle) der (zwei|drei|vier|fünf|sechs|sieben) Anbieter", md)}
+        report("L18 Quantor-Nenner", WARN, not (pg and an) or pg == an, f"Seite {sorted(pg)} · Analyse {sorted(an)}")
+    # L20 · externe Ressourcen: SRI und Datenschutz
+    ext = re.findall(r'<(?:script|link)[^>]+(?:src|href)="(https?://[^"]+)"[^>]*>', html)
+    nosri = [u for u in ext if not re.search(r'integrity="', re.search(re.escape(u) + r'"[^>]*>', html).group(0))]
+    report("L20 externe Ressourcen", WARN, not nosri, f"{len(nosri)} ohne SRI/Einwilligung: " + ", ".join(sorted({re.sub(r'^https?://([^/]+).*', r'\1', u) for u in nosri})) if nosri else "keine")
+
     w = max(len(r[0]) for r in results)
     blockers = 0
     for rule, level, ok, msg in results:

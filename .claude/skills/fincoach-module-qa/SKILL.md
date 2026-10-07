@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L16 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L21 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -45,6 +45,11 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L14:** Die Quellenliste wird aus `dbom.sources` erzeugt; jede Quelle hat ≥ 1 Fakt.
 - **L15:** Keine Messwerte von Hand in die QA-Sektion übertragen, sondern auf die Skriptausgabe verweisen.
 - **L16:** Bei CONFIRMED müssen der Bezugszeitraum der Quelle und der Claim übereinstimmen (Feld `period`).
+- **L17:** Eine gebundene Zahl muss im `claim`, `period` oder `caveat` des gebundenen Fakts stehen.
+- **L18:** Die Grundmenge eines Quantors ist einmal definiert; n. v.-Fälle gehören nicht in den Nenner; Seite = Analyse = DBOM.
+- **L19:** Zusammengesetzte Claims tragen das schwächste Verdict ihrer Teile; `period` enthält ein Datum.
+- **L20 / C9:** Externe Ressourcen self-hosten oder mit Einwilligung und SRI; C9 nur ✓, wenn L20 sauber ist.
+- **L21:** Abgeleitete Kennzahlen (Konfidenz-Spannen, Scores) nie von Hand.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

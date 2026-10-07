@@ -37,6 +37,12 @@ Ein Fehler, für den sich kein Test schreiben lässt, bekommt einen Pflichtpunkt
 | L15 | 2026-10-07 | M300 | Tooltip nannte „125 Elemente“, gemessen 129 | Messwert von Hand in die QA-Sektion übertragen | Messwerte nie von Hand; auf die Skriptausgabe verweisen | `check_module` L15 (WARN) | v1.0.1: ! · v1.0.2: ✓ |
 | L16 | 2026-10-07 | M300 | „0DTE 59 % Gesamtjahr 2025“ mit einer Quelle zum August-Rekord (62 %) belegt | Bezugszeitraum der Quelle nicht mit dem Claim abgeglichen | CONFIRMED-Fakten führen ein Feld `period`; Quelle und Claim müssen denselben Zeitraum haben | `check_module` L16 (BLOCKER: CONFIRMED braucht `period`) + manuell (Zeitraum = Claim) | 018c8ce: ✗ 14 Fakten · v1.1.0: ✓ |
 
+| L17 | 2026-10-07 | M300 | Zahlen hingen an einem Fakt, der sie nicht enthält (59 % an FACT_EUREX_DAILY, 30 Gbps an FACT_OPRA_CAPACITY) | L12 prüfte nur, ob irgendeine Bindung existiert, nicht ob sie passt | Jede gebundene Zahl steht im `claim`, `period` oder `caveat` des gebundenen Fakts | `check_module` L17 (WARN → BLOCKER nach Behebung) | v1.1.0: ! 2 Fälle |
+| L18 | 2026-10-07 | M300 | Quantor-Nenner widersprüchlich: Seite „0 von 5“, Analyse „keinem der sechs“; n. v.-Fall im Nenner | Nenner nicht aus derselben Grundmenge abgeleitet | Grundmenge eines Quantors einmal definieren (DBOM), n. v.-Fälle nicht in den Nenner, Seite = Analyse = DBOM | `check_module` L18 (WARN) | v1.1.0: ! 5 ≠ 6 |
+| L19 | 2026-10-07 | M300 | CONFIRMED-Fakten mit Sekundär- oder offenen Teilbelegen; `period` ohne Datum | Zusammengesetzte Claims erhielten das Verdict ihres stärksten Teils | Zusammengesetzte Claims bekommen das **schwächste** Verdict ihrer Teile oder werden geteilt; `period` enthält ein Datum | `check_module` L19 (WARN) | v1.1.0: ! 2 Fakten |
+| L20 | 2026-10-07 | M300 | C9 ✓, obwohl Skripte von jsDelivr/Tailwind-CDN ohne Einwilligung und ohne SRI geladen werden | C9 nur an der Datenschutzerklärung geprüft, nicht an den tatsächlichen Abrufen | Externe Ressourcen self-hosten oder mit Einwilligung und SRI laden; C9 nur ✓, wenn L20 sauber ist | `check_module` L20 (WARN) | v1.1.0: ! 5 Ressourcen |
+| L21 | 2026-10-07 | M300 | Konfidenz-Spannen in S12 von Hand geschrieben und im Widerspruch zur DBOM (0,60 vs. 0,55); Analyse-Scorecard weicht von der Seite ab | Abgeleitete Kennzahlen außerhalb der Bindungen (L07) | Spannen und Scores nur aus der DBOM bzw. den Gate-Zellen ableiten; Analyse verweist auf die gemessene Seite | manuell, Test geplant | – |
+
 ---
 
 ## Offene Befunde in Altmodulen (vom Check gefunden, nicht behoben)
@@ -62,3 +68,18 @@ Ein Fehler, für den sich kein Test schreiben lässt, bekommt einen Pflichtpunkt
 - **L16:** Cboe-Quelle auf die Jahresmeldung 2025 umgestellt; `period` für alle CONFIRMED.
 - **C8:** § 80 Abs. 4 WpHG (Pflichten) bzw. Abs. 5 (Definition) statt Abs. 2.
 - **Neu:** Verdict `UNVERIFIED` für Primärquellen mit unklarem Bezugszeitraum (L05c: Liste zulässiger Verdicts).
+
+### Offene Inhaltsbefunde der zweiten Zweitprüfung (v1.1.0 → zur Freigabe vorgelegt)
+
+- **L11:** S09 „breiteste Abdeckung von Futures-Optionen“ (MenthorQ) und „einziger Echtzeit-Flow“ (SpotGamma) lassen sich nicht
+  aus der Matrix ableiten; Analyse „Volland keine Ausführung“ statt n. v.
+- **L18:** Eurex-GEX-Nenner vereinheitlichen.
+- **L17/L19/L13:**
+  - Faktbindungen korrigieren
+  - FACT_TERMIN_HISTORY, FACT_EUREX_SPECS, FACT_BAFIN_TURBO und FACT_EUREX_DAILY abstufen oder teilen
+  - Quellen S1–S38 der Analyse in `dbom.sources` überführen
+- **L12-Lücken:** Abgedeckt werden müssen auch die per JS gerenderten K-Tabelle, Glossar, REG-Modal, Fazit, Datums- und
+  Fundstellenangaben sowie Tatsachenbehauptungen ohne Zahl.
+- **C8:** S11-Adressat von § 80 WpHG präzisieren.
+- **C9:** CDN-Ressourcen self-hosten (L20).
+- **Rechner:** ES-Umrechnung fest auf 50 USD.

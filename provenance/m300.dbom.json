@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -28,7 +28,7 @@
       "VENDOR_CLAIM": 5
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 78,9 % nach unabhängiger Zweitprüfung 2026-10-07; zuvor ausgewiesene 89,5 % enthielten 4 unbelegte ✓).",
+  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 76,3 % nach zweiter unabhängiger Zweitprüfung 2026-10-07).",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -420,6 +420,12 @@
     {
       "date": "2026-10-07",
       "event": "v1.1.0: Textkorrekturen nach Zweitprüfung (L11 S09-Text, L06 Fazit, L12 fünf neue Fakten, L13 eine führende DBOM, L14 Quellen aus DBOM, L16 period-Feld und Cboe-Jahresquelle, § 80 Abs. 4/5 WpHG)"
+    },
+    {
+      "date": "2026-10-07",
+      "event": "v1.1.1: Zweite Zweitprüfung – C9 auf ◐; neue Fehlerklassen L17–L21 (WARN-Tests), Offen-Punkte für Q4, Q7, Q9, C8, C9",
+      "qa_score_pct": 76.3,
+      "release": "UEBERARBEITUNG"
     }
   ]
 }
