@@ -106,6 +106,13 @@ def main():
         bad = [f["id"] for f in facts.values() if f["verdict"] == "CONFIRMED"
                and (f["class"] in ("MEDIA_REPORT", "MODEL_ASSUMPTION", "SCENARIO_PROJECTION") or f["confidence"] < 0.7)]
         report("L05 Verdict-Klasse", BLOCKER, not bad, "CONFIRMED trotz Medien/Modell/Konf.<0,7: " + ", ".join(bad) if bad else "konsistent")
+        # L05c · nur zulässige Verdicts
+        allowed = {"CONFIRMED", "MEDIA_REPORT", "UNVERIFIED", "SCENARIO_PROJECTION"}
+        badv = [f["id"] for f in facts.values() if f["verdict"] not in allowed]
+        report("L05c Verdict zulässig", BLOCKER, not badv, "unzulässig: " + ", ".join(badv) if badv else "alle Verdicts zulässig")
+        # L16 · CONFIRMED braucht Bezugszeitraum
+        noper = [f["id"] for f in facts.values() if f["verdict"] == "CONFIRMED" and not f.get("period")]
+        report("L16 Bezugszeitraum", BLOCKER, not noper, "CONFIRMED ohne period: " + ", ".join(noper) if noper else "alle CONFIRMED mit period")
         # L05b · grün umrandete KPI (confirmed-kpi) nur für CONFIRMED-Fakten
         wrong_kpi = [fid for fid, cls in c.refs if "confirmed-kpi" in cls and facts.get(fid, {}).get("verdict") != "CONFIRMED"]
         report("L05b KPI-Stil", BLOCKER, not wrong_kpi, "confirmed-kpi auf nicht bestätigtem Fakt: " + ", ".join(wrong_kpi) if wrong_kpi else "KPI-Stile konsistent")
@@ -113,6 +120,7 @@ def main():
         F = list(facts.values())
         cnt = {"total": len(F), "confirmed": sum(f["verdict"] == "CONFIRMED" for f in F),
                "media": sum(f["verdict"] == "MEDIA_REPORT" for f in F),
+               "unverified": sum(f["verdict"] == "UNVERIFIED" for f in F),
                "scenario": sum(f["verdict"] == "SCENARIO_PROJECTION" for f in F),
                "vendor": sum(f["class"] == "VENDOR_CLAIM" for f in F)}
         diffs = [f"{k}: Text {v} ≠ DBOM {cnt[k]}" for k, v in re.findall(r'data-dbom-count="(\w+)"[^>]*>(\d+)<', html) if k in cnt and int(v) != cnt[k]]
@@ -158,20 +166,51 @@ def main():
     if dbom:
         # L14 · Quellen: jede DBOM-Quelle von ≥ 1 Fakt genutzt, jeder Fakt mit existierender Quelle
         src_ids = {x["id"] for x in dbom.get("sources", [])}
-        used = {f.get("source_id") for f in dbom.get("facts", [])}
+        used = {s for f in dbom.get("facts", []) for s in [f.get("source_id"), *f.get("additional_sources", [])] if s}
         unused, dangling = sorted(src_ids - used), sorted(used - src_ids)
-        report("L14 Quellen ↔ Fakten", WARN, not unused and not dangling,
+        report("L14 Quellen ↔ Fakten", BLOCKER, not unused and not dangling,
                (f"ungenutzt: {', '.join(unused)}" if unused else "") + (f" fehlend: {', '.join(dangling)}" if dangling else "") or "konsistent")
 
-    # L12 · Rückwärtsbindung: Zahlen mit Einheit in S01–S11 brauchen data-source oder data-est (heuristisch)
-    unbound_nums = 0
-    for sec in re.finditer(r'<section id="s(0[1-9]|1[01])".*?</section>', html, re.S):
-        for blk in re.split(r"(?=<(?:div|p|tr|li)\b)", sec.group(0)):
-            if "data-source=" in blk or "data-est" in blk or "est-mark" in blk:
-                continue
-            txt = re.sub(r"<[^>]+>", " ", blk)
-            unbound_nums += len(re.findall(r"\d[\d.,]*\s?(?:%|Gbps|Mio\.|Mrd\.|€|\$|Kontrakte)", txt))
-    report("L12 Rückwärtsbindung", WARN, unbound_nums == 0, f"{unbound_nums} Zahlenangaben mit Einheit ohne data-source/EST-Kennzeichnung")
+    # L12 · Rückwärtsbindung: Zahlen mit Einheit in S01–S11 brauchen in der Elternkette data-source,
+    #       data-est/data-def oder ein EST-Zeichen im selben Element
+    class NumScan(HTMLParser):
+        def __init__(self):
+            super().__init__(); self.stack = []; self.hits = []; self.sec = None
+        def handle_starttag(self, tag, attrs):
+            a = dict(attrs)
+            if tag == "section": self.sec = a.get("id", "")
+            if tag in ("br", "img", "input", "meta", "link", "hr"): return
+            node = {"tag": tag, "bound": any(k in a for k in ("data-source", "data-est", "data-def")), "texts": [], "est": False}
+            if "est-mark" in (a.get("class") or "") and self.stack: self.stack[-1]["est"] = True
+            self.stack.append(node)
+        def handle_endtag(self, tag):
+            while self.stack:
+                n = self.stack.pop()
+                if n["tag"] == tag:
+                    if not n["est"]:
+                        for t in n["texts"]: self.hits.append(t)
+                    elif self.stack: pass
+                    break
+        def handle_data(self, data):
+            if not self.stack or not re.match(r"s(0[1-9]|1[01])$", self.sec or ""): return
+            if any(n["bound"] for n in self.stack): return
+            for m in re.findall(r"\d[\d.,]*\s?(?:%|Gbps|Mio\.|Mrd\.|€|\$|Kontrakte)", data):
+                self.stack[-1]["texts"].append(f"{self.sec}: {m.strip()}")
+    ns = NumScan(); ns.feed(html)
+    report("L12 Rückwärtsbindung", BLOCKER, not ns.hits, ("ungebunden: " + ", ".join(ns.hits[:8])) if ns.hits else "alle Zahlenangaben mit Einheit gebunden")
+
+    # L13 · Phase-A-Ergebnisse Seite = Analyse; eine führende DBOM
+    md_path = page.parent / "analysen"
+    mds = list(md_path.glob(f"m{mod.group(1)}-*deep-dive*.md")) if md_path.exists() else []
+    if mds:
+        md = mds[0].read_text(encoding="utf-8")
+        md_k = {k: r for k, r in re.findall(r"\*\*(K\d+) ·.*?\*\*Ergebnis: ([✓◐✗])", md, re.S)}
+        sym = {"ok": "✓", "part": "◐", "no": "✗"}
+        page_k = {k: sym.get(r, "?") for k, r in re.findall(r'\["(K\d+)","[^"]*","[^"]*","(ok|part|no)"', html)}
+        diff = [f"{k}: Seite {page_k.get(k)} ≠ Analyse {md_k.get(k)}" for k in sorted(set(md_k) | set(page_k), key=lambda x: int(x[1:])) if md_k.get(k) != page_k.get(k)]
+        report("L13 Phase A Seite = Analyse", BLOCKER, not diff and bool(md_k), "; ".join(diff) if diff else f"{len(md_k)} Ergebnisse identisch")
+        lead = f"provenance/m{mod.group(1)}.dbom.json" in md and '"facts": [' not in md
+        report("L13b eine führende DBOM", BLOCKER, lead, "Analyse verweist auf externe DBOM, keine eigene Faktenliste" if lead else "Analyse führt eigene Faktenliste oder verweist nicht auf die externe DBOM")
 
     # L15 · keine handgeschriebenen Messwerte in der QA-Sektion
     qa_sec = re.search(r'<section id="s-qa".*?</section>', html, re.S)

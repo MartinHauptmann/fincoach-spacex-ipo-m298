@@ -28,16 +28,18 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L04 / C1:** Jede Ausgabeform (Markdown, HTML, Artifact) hat am Anfang **und** am Ende den Beratungsausschluss. Im
   HTML steht er als Kurzfassung im Hero (`data-qa="hero-disclaimer"`), vollständig in der Schlusssektion.
 - **L05 / Q4:** `verdict: CONFIRMED` nur bei Primär- oder Herstellerquelle **und** Konfidenz ≥ 0,7. Medienangaben
-  erhalten `MEDIA_REPORT`, Modellannahmen und Szenarien `SCENARIO_PROJECTION`. Die KPI-Klasse `confirmed-kpi` steht nur
+  erhalten `MEDIA_REPORT`, Primärquellen mit unklarem Bezugszeitraum `UNVERIFIED`, Modellannahmen und Szenarien
+  `SCENARIO_PROJECTION`. Andere Verdicts sind unzulässig (L05c). Die KPI-Klasse `confirmed-kpi` steht nur
   auf CONFIRMED-Fakten, alles andere bekommt `scenario-kpi`.
 - **L06 / Q9:** Quantor-Aussagen wie „0 von N“, „alle“, „kein Anbieter“ nur über **belegte** Fälle. n. v.-Fälle stehen
   im selben Element.
-- **L07 / Q7:** Faktenzahlen nie von Hand schreiben, sondern als `<span data-dbom-count="total|confirmed|media|scenario|vendor">`.
+- **L07 / Q7:** Faktenzahlen nie von Hand schreiben, sondern als `<span data-dbom-count="total|confirmed|media|unverified|scenario|vendor">`.
   Der Live-Audit befüllt sie, der Check vergleicht sie. Das JSON-LD `fact_summary` entspricht der externen DBOM.
 - **L08 / Q4:** Jeder DBOM-Fakt ist an mindestens ein Element mit `data-source="FACT_…"` gebunden.
 - **L10b:** Jeder Punkt der Liste „Offen vor Freigabe“ trägt `data-gate="Cx|Qx"`. Ein Gate mit offenem Punkt ist nie ✓.
 - **L11:** Wertende Vergleichssätze müssen sich aus den Zellen der eigenen Tabelle ableiten lassen.
-- **L12:** Jede Zahl mit Einheit, Prozent, Datum oder Fundstelle hat `data-source` oder EST-Kennzeichnung.
+- **L12:** Jede Zahl mit Einheit oder Prozent hat in der Elternkette `data-source`, `data-est` oder `data-def`
+  (Definition/Konvention) oder ein EST-Zeichen im selben Element.
 - **L13:** Es gibt eine führende DBOM (extern); die Analyse nutzt deren IDs; Phase-A-Ergebnisse sind auf Seite und
   Analyse identisch.
 - **L14:** Die Quellenliste wird aus `dbom.sources` erzeugt; jede Quelle hat ≥ 1 Fakt.

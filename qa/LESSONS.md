@@ -31,11 +31,11 @@ Ein Fehler, für den sich kein Test schreiben lässt, bekommt einen Pflichtpunkt
 
 | L10b | 2026-10-07 | M300 | Nach M2–M6 standen C4, Q2, Q4 und Q7 auf ✓, obwohl Offen-Punkte und Widersprüche bestanden (Zweitprüfung: 78,9 % statt 89,5 %) | Gates einzeln „abgehakt“, ohne Abgleich mit der eigenen Offen-Liste | Offen-Punkte tragen `data-gate`; ein Gate mit Offen-Punkt darf nicht ✓ sein | `check_module` L10b | v1.0.1 mit `data-gate`, C4 auf ✓ gesetzt: ✗ · v1.0.2: ✓ |
 | L11 | 2026-10-07 | M300 | Fließtext „SpotGamma und Volland stärker bei höheren Greeks“ widerspricht der eigenen Matrix | Wertender Satz aus der Analyse übernommen, nicht gegen die Tabelle gelesen | Jeder Vergleichs- oder Wertungssatz muss sich aus den Zellen der zugehörigen Tabelle ableiten lassen | manuell (Skill-Checkliste) | – |
-| L12 | 2026-10-07 | M300 | Zahlen (OPRA, BSW-Quoten, BGBl.-Fundstellen, Preise) ohne DBOM-Fakt | L08 prüfte nur DBOM → Seite, nicht Seite → DBOM | Jede Zahl mit Einheit, Prozent, Datum oder Fundstelle braucht `data-source` oder EST-Kennzeichnung | `check_module` L12 (WARN, heuristisch) | v1.0.2: ! 6 Angaben |
-| L13 | 2026-10-07 | M300 | DBOM der Analyse und externe DBOM haben verschiedene Faktensätze; K10 auf der Seite ◐, in der Analyse ✓ | Zwei Provenienzlisten getrennt gepflegt | Eine führende DBOM (extern). Die Analyse referenziert deren IDs, Phase-A-Ergebnisse sind auf Seite und Analyse identisch | offen: Test erfordert ID-Mapping, bis dahin manuell | – |
-| L14 | 2026-10-07 | M300 | Quellenliste der Seite spiegelt die DBOM nicht; eine Quelle von keinem Fakt genutzt | Liste von Hand gepflegt | Quellenliste aus `dbom.sources` rendern; jede Quelle ≥ 1 Fakt, jeder Fakt mit existierender Quelle | `check_module` L14 (WARN) | v1.0.2: ! SRC_BFH_IR2514 |
+| L12 | 2026-10-07 | M300 | Zahlen (OPRA, BSW-Quoten, BGBl.-Fundstellen, Preise) ohne DBOM-Fakt | L08 prüfte nur DBOM → Seite, nicht Seite → DBOM | Jede Zahl mit Einheit, Prozent, Datum oder Fundstelle braucht `data-source` oder EST-Kennzeichnung | `check_module` L12 (BLOCKER, Elternkette) | 018c8ce: ✗ 8 Angaben · v1.1.0: ✓ |
+| L13 | 2026-10-07 | M300 | DBOM der Analyse und externe DBOM haben verschiedene Faktensätze; K10 auf der Seite ◐, in der Analyse ✓ | Zwei Provenienzlisten getrennt gepflegt | Eine führende DBOM (extern). Die Analyse referenziert deren IDs, Phase-A-Ergebnisse sind auf Seite und Analyse identisch | `check_module` L13, L13b (BLOCKER) | 018c8ce: ✗ K2/K3/K10, eigene Faktenliste · v1.1.0: ✓ |
+| L14 | 2026-10-07 | M300 | Quellenliste der Seite spiegelt die DBOM nicht; eine Quelle von keinem Fakt genutzt | Liste von Hand gepflegt | Quellenliste aus `dbom.sources` rendern; jede Quelle ≥ 1 Fakt, jeder Fakt mit existierender Quelle | `check_module` L14 (BLOCKER, inkl. `additional_sources`) | 018c8ce: ✗ SRC_BFH_IR2514 · v1.1.0: ✓ |
 | L15 | 2026-10-07 | M300 | Tooltip nannte „125 Elemente“, gemessen 129 | Messwert von Hand in die QA-Sektion übertragen | Messwerte nie von Hand; auf die Skriptausgabe verweisen | `check_module` L15 (WARN) | v1.0.1: ! · v1.0.2: ✓ |
-| L16 | 2026-10-07 | M300 | „0DTE 59 % Gesamtjahr 2025“ mit einer Quelle zum August-Rekord (62 %) belegt | Bezugszeitraum der Quelle nicht mit dem Claim abgeglichen | CONFIRMED-Fakten führen ein Feld `period`; Quelle und Claim müssen denselben Zeitraum haben | manuell, Schema-Erweiterung geplant | – |
+| L16 | 2026-10-07 | M300 | „0DTE 59 % Gesamtjahr 2025“ mit einer Quelle zum August-Rekord (62 %) belegt | Bezugszeitraum der Quelle nicht mit dem Claim abgeglichen | CONFIRMED-Fakten führen ein Feld `period`; Quelle und Claim müssen denselben Zeitraum haben | `check_module` L16 (BLOCKER: CONFIRMED braucht `period`) + manuell (Zeitraum = Claim) | 018c8ce: ✗ 14 Fakten · v1.1.0: ✓ |
 
 ---
 
@@ -50,3 +50,15 @@ Ein Fehler, für den sich kein Test schreiben lässt, bekommt einen Pflichtpunkt
 - L08b: 5 Fakten ungebunden
 
 `modul.html` (M298) ist ungeprüft. Behebung ist Maßnahme M12 im Prüfbericht `analysen/m300-qa-report-2026-10-07.md`.
+
+### Behobene Inhaltsbefunde der Zweitprüfung (v1.1.0)
+
+- **L11:** S09-Satz aus der Matrix abgeleitet (Volland: Gamma/Vanna/Charm belegt; SpotGamma: HIRO).
+- **L06:** Fazit und Analyse „… belegt (MenthorQ: n. v.)“.
+- **L12:** Neue Fakten `FACT_TERMIN_HISTORY`, `FACT_OPRA_CAPACITY`, `FACT_OPRA_BURSTS`, `FACT_BSW_SHARES` (UNVERIFIED),
+  `FACT_VENDOR_PRICES`, `FACT_EUREX_SPECS`.
+- **L13:** Analyse nutzt die externe DBOM; K2, K3, K10 und K11 angeglichen.
+- **L14:** Quellenliste aus `dbom.sources` gerendert.
+- **L16:** Cboe-Quelle auf die Jahresmeldung 2025 umgestellt; `period` für alle CONFIRMED.
+- **C8:** § 80 Abs. 4 WpHG (Pflichten) bzw. Abs. 5 (Definition) statt Abs. 2.
+- **Neu:** Verdict `UNVERIFIED` für Primärquellen mit unklarem Bezugszeitraum (L05c: Liste zulässiger Verdicts).
