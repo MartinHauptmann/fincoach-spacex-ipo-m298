@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.0.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.0.1 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm, ES-Äquivalente), Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der aktuelle Rechtsstand zur Verlustverrechnung bei Termingeschäften (JStG 2024). Mit Faktencheck K1–K12, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
@@ -103,9 +103,9 @@ tailwind.config = { theme: { extend: {
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.0.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
-  "fact_summary": { "total": 18, "confirmed_primary": 15, "scenario_projection": 3 },
-  "honest_disclosure": "Primärquellen nur über Suchtreffer-Snippets eingesehen (Netzwerksperre bei der Recherche). Herstellerangaben als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 89,5 %)."
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.0.1", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "fact_summary": { "total": 18, "confirmed_primary": 14, "media_report": 1, "scenario_projection": 3, "vendor_claim": 5 },
+  "honest_disclosure": "Primärquellen nur über Suchtreffer-Snippets eingesehen (Netzwerksperre bei der Recherche). Herstellerangaben als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 89,5 % nach Korrektur M2–M6; Prüfbericht 2026-10-07)."
 }
 </script>
 </head>
@@ -154,8 +154,8 @@ tailwind.config = { theme: { extend: {
 <!-- ===== Provenienz-Banner ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.0.0</span>
-    <span class="text-slate-300">18 Fakten · 15 belegt (davon 6 Herstellerangaben) · 3 SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.0.1</span>
+    <span class="text-slate-300"><span data-dbom-count="total">18</span> Fakten · <span data-dbom-count="confirmed">14</span> belegt (davon <span data-dbom-count="vendor">5</span> Herstellerangaben) · <span data-dbom-count="media">1</span> Medienangabe · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
       <a href="analysen/m300-atas-options-xray-deep-dive.md" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">↗ Volltext-Analyse</a>
@@ -202,9 +202,14 @@ tailwind.config = { theme: { extend: {
       Ein geprüfter Deep-Dive auf einen Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen jede Aussage des Ausgangstexts gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · 15 belegte Fakten, 3 SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA 89,5 %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">14</span> belegte Fakten, <span data-dbom-count="media">1</span> Medienangabe, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>89,5</span> %).</span>
     </p>
 
+    <div class="caveat-box mb-4 max-w-3xl text-sm text-slate-300 leading-relaxed" role="note" data-qa="hero-disclaimer">
+      <strong class="text-tngb-magenta">Keine Anlage-, Rechts- oder Steuerberatung.</strong> Allgemeine Information zu Bildungszwecken, keine Anlageempfehlung im Sinne der MAR.
+      Optionen, Futures, Optionsscheine und Knock-outs sind Hebelprodukte mit Totalverlustrisiko; bei Futures und Stillhaltergeschäften sind Verluste über den Einsatz hinaus möglich.
+      Vollständiger Disclaimer in <a href="#s12" class="text-tngb-cyan hover:underline">S12</a>.
+    </div>
     <div class="caveat-box mb-4 max-w-3xl">
       <div class="flex items-start gap-3">
         <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
@@ -245,10 +250,10 @@ tailwind.config = { theme: { extend: {
         <div class="text-xs text-tngb-muted mt-1">Gesamtjahr 2025 (Cboe)</div>
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">MARKT</span><span class="dbom-conf">Konf. 0.85</span></div>
       </div>
-      <div class="kpi-card confirmed-kpi" style="border-color:#DFAF0F;" data-source="FACT_NO_EUREX_GEX">
-        <div class="text-2xl md:text-3xl font-head font-extrabold" style="color:#DFAF0F;">0 von 6</div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">Anbieter mit Eurex-GEX intraday</div>
-        <div class="text-xs text-tngb-muted mt-1">im Vergleichsfeld; DAX-GEX nur EOD (Gamma Cockpit)</div>
+      <div class="kpi-card scenario-kpi" style="border-color:#DFAF0F;" data-source="FACT_NO_EUREX_GEX">
+        <div class="text-2xl md:text-3xl font-head font-extrabold" style="color:#DFAF0F;">0 von 5</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Anbieter mit Eurex-GEX intraday (belegt)</div>
+        <div class="text-xs text-tngb-muted mt-1">MenthorQ: n. v.; DAX-GEX nur EOD (Gamma Cockpit)</div>
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">MEDIEN</span><span class="dbom-conf">Konf. 0.60</span></div>
       </div>
     </div>
@@ -286,7 +291,7 @@ tailwind.config = { theme: { extend: {
     </div>
     <div class="lvl-content active" data-s02c="experte">
       <p class="prose-p">GEX-Modelle aggregieren Dollar-Gamma je Strike unter einer Annahme über die Gegenpartei (Dealer-Positionskonvention, <span class="dbom-class-badge">MODELL</span>). Daraus leiten sie Regime (Long/Short Gamma), Umschlagpunkte (GEX-Flip) und Konzentrationen (Call/Put Walls) ab. Für SPX ist die Datenlage vergleichsweise gut, weil die Cboe nach Teilnehmertyp markierte Open-Close-Daten bereitstellt.</p>
-      <p class="prose-p">Die Modelle beschreiben Verhalten, keine Rechtspflicht. Market Maker hedgen aus Risiko- und Kapitalkalkül. Sie können über Futures, ETFs, Kassamarkt, OTC-Derivate oder internes Netting absichern (<a href="#s03" class="text-tngb-cyan hover:underline">K5</a>). Die Prognosegüte hängt daher vollständig von der Positionsannahme und der Datenfrische ab.</p>
+      <p class="prose-p" data-source="FACT_MM_NO_HEDGE_DUTY">Die Modelle beschreiben Verhalten, keine Rechtspflicht. Market Maker hedgen aus Risiko- und Kapitalkalkül. Sie können über Futures, ETFs, Kassamarkt, OTC-Derivate oder internes Netting absichern (<a href="#s03" class="text-tngb-cyan hover:underline">K5</a>). Die Prognosegüte hängt daher vollständig von der Positionsannahme und der Datenfrische ab.</p>
     </div>
   </div>
 </section>
@@ -547,15 +552,15 @@ tailwind.config = { theme: { extend: {
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn">Score 89,5 % · 17 / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>89,5</span> % · <span data-qa-points>17</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
-    <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %.</span>
+    <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Prüfbericht 2026-10-07: vor Korrektur 81,6 % (C1, Q4, Q7 ◐), nach M2–M6 neu bewertet.</span>
   </div>
   <div class="grid md:grid-cols-3 gap-4">
     <div class="dep-box">
       <h3 class="font-head font-bold text-tngb-magenta mb-3">① Compliance (C1–C9)</h3>
       <table><tbody>
-        <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-pass">✓</td></tr>
+        <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-pass" title="Kurz-Disclaimer im Hero seit 2026-10-07 (M2)">✓</td></tr>
         <tr><td>C2 Keine Anlageempfehlung (MAR)</td><td class="check-pass">✓</td></tr>
         <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-part" title="Primärquellen nur per Snippet eingesehen">◐</td></tr>
         <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-pass">✓</td></tr>
@@ -572,12 +577,12 @@ tailwind.config = { theme: { extend: {
         <tr><td>Q1 Faktencheck K1–K12 vollständig</td><td class="check-pass">✓</td></tr>
         <tr><td>Q2 Aktualität / a. F. markiert</td><td class="check-pass">✓</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q4 Provenienz je Fakt</td><td class="check-pass">✓</td></tr>
+        <tr><td>Q4 Provenienz je Fakt</td><td class="check-pass" title="Verdict FACT_NO_EUREX_GEX korrigiert, K5-Fakt gebunden (M3, M5)">✓</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-part" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-pass">✓</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-pass" title="Zählungen aus DBOM gebunden (M3)">✓</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q9 Keine Halluzinationen</td><td class="check-part" title="Unsichere Fundstellen markiert">◐</td></tr>
+        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" title="Unsichere Fundstellen markiert; KPI Eurex-GEX auf 0 von 5 belegt korrigiert (M4)">◐</td></tr>
         <tr><td>Q10 Formatvorgaben</td><td class="check-pass">✓</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
@@ -586,7 +591,8 @@ tailwind.config = { theme: { extend: {
     <div class="dep-box">
       <h3 class="font-head font-bold text-tngb-gold mb-3">③ Styleguide</h3>
       <table><tbody>
-        <tr><td>TNGB-Farbtokens &amp; Fonts</td><td class="check-pass">✓</td></tr>
+        <tr><td>TNGB-Farbtokens &amp; Fonts (body-Basis)</td><td class="check-pass" title="Gemessen in Plain- und Viewer-Fassung, 0 Fremdfarben-Elemente">✓</td></tr>
+        <tr><td>Kontrast-Audit WCAG AA</td><td class="check-part" title="125 Elemente aus Styleguide-Tokens unter 4,5:1 (Muted, Magenta, Lavender) – Styleguide-Entscheidung M7 offen">◐</td></tr>
         <tr><td>CAT-Level (Einsteiger→Experte)</td><td class="check-pass">✓</td></tr>
         <tr><td>NavDock &amp; Sektions-Badges</td><td class="check-pass">✓</td></tr>
         <tr><td>Provenienz- &amp; Live-Audit-Banner</td><td class="check-pass">✓</td></tr>
@@ -670,7 +676,7 @@ tailwind.config = { theme: { extend: {
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.0.0 · 2026-10-05<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.0.1 · 2026-10-07<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
@@ -856,6 +862,19 @@ setLevel('experte');
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',renderMath); else renderMath();
 </script>
 
+<!-- ====== QA-SCORE AUS GATE-ZELLEN ====== -->
+<script>
+(function qaScore(){
+  let pts=0,n=0,open=0;
+  document.querySelectorAll('#s-qa tr').forEach(tr=>{const t=tr.cells[0]&&tr.cells[0].textContent.trim();if(!/^[CQ]\d+\s/.test(t||''))return;
+    const c=tr.cells[1];n++;if(c.classList.contains('check-pass'))pts+=1;else{open++;if(c.classList.contains('check-part'))pts+=0.5;}});
+  const pct=n?(pts/n*100):0;
+  document.querySelectorAll('[data-qa-score]').forEach(el=>el.textContent=pct.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1}));
+  document.querySelectorAll('[data-qa-points]').forEach(el=>el.textContent=pts.toLocaleString('de-DE'));
+  window.QA_OPEN=open;
+})();
+</script>
+
 <!-- ====== LIVE-DBOM-AUDIT ====== -->
 <script>
 (async function liveAudit(){
@@ -875,15 +894,18 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
       if(!valid.has(id)){missing++;miss.add(id);el.style.outline='2px dashed #E6399A';el.title='DBOM-MISSING: '+id;}
       else{const info=map[id];el.title='['+info.verdict+' · '+info['class']+' · Konf. '+info.confidence+'] '+info.claim+(info.caveat?' · '+info.caveat:'');el.setAttribute('data-tooltip','');}
     });
-    const total=(dbom.facts||[]).length,conf=(dbom.facts||[]).filter(f=>f.verdict==='CONFIRMED').length,
-      scen=(dbom.facts||[]).filter(f=>f.verdict==='SCENARIO_PROJECTION').length;
-    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · Schema <code>'+dbom.$schema_id+'</code> · '+total+' Fakten ('+conf+' belegt, '+scen+' scenario) · '+refs.length+' HTML-Referenzen geprüft';
+    const F=dbom.facts||[];
+    const cnt={total:F.length,confirmed:F.filter(f=>f.verdict==='CONFIRMED').length,media:F.filter(f=>f.verdict==='MEDIA_REPORT').length,
+      scenario:F.filter(f=>f.verdict==='SCENARIO_PROJECTION').length,vendor:F.filter(f=>f['class']==='VENDOR_CLAIM').length};
+    document.querySelectorAll('[data-dbom-count]').forEach(el=>{const k=el.dataset.dbomCount;if(k in cnt)el.textContent=cnt[k];});
+    const unbound=F.filter(f=>!document.querySelector('[data-source="'+f.id+'"]')).map(f=>f.id);
+    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · Schema <code>'+dbom.$schema_id+'</code> · '+cnt.total+' Fakten ('+cnt.confirmed+' belegt, '+cnt.media+' Medien, '+cnt.scenario+' scenario) · '+refs.length+' HTML-Referenzen geprüft'+(unbound.length?' · ⚠ ungebunden: '+unbound.join(', '):'');
     if(qaDbom){qaDbom.textContent='✓';qaDbom.className='check-pass';}
     if(missing===0){
       banner.classList.remove('err');banner.classList.add('warn');
       status.innerHTML='✓ DBOM-Integrität OK · alle '+refs.length+' data-source-Referenzen aufgelöst · Stichtag '+dbom.module.stichtag+' · Freigabe: Überarbeitung';
       if(qaRefs){qaRefs.textContent='✓ ('+refs.length+')';qaRefs.className='check-pass';}
-      if(qaPill)qaPill.innerHTML='<span class="compliance-pill warn">QA · 4 Punkte offen</span>';
+      if(qaPill)qaPill.innerHTML='<span class="compliance-pill warn">QA · '+(window.QA_OPEN||0)+' Punkte offen</span>';
       if(score)score.innerHTML='<span class="compliance-pill good">M300 Integrität · 100 %</span>';
     }else{
       banner.classList.add('err');

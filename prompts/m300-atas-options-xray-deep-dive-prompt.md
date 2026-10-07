@@ -2,7 +2,7 @@
 
 **Thema:** ATAS Options X-Ray, Dealer-Hedging-Analytik, Eurex-Börsenoptionen vs. verbriefte Derivate im DACH-Raum
 und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
-**Prompt-Version:** 1.0.0 · **Erstellt:** 2026-10-05 · **Status:** Entwurf, fachliche Freigabe ausstehend
+**Prompt-Version:** 1.1.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-07 (Lehren L03–L08 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
 **Modul-ID:** M300 ist ein Platzhalter und kann frei angepasst werden
 
 ---
@@ -16,6 +16,9 @@ und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
    (`Einsteiger` | `Fortgeschritten` | `Experte`, Standard: `Experte`).
 4. Vor jeder Veröffentlichung die Ausgabe an der **QA-Scorecard** messen (Abschnitt 7 „Ausgabestruktur“, Punkt 8 des Prompts).
    Steht ein Compliance-Gate auf ✗, wird nicht veröffentlicht.
+5. Wird aus der Ausgabe eine HTML-Seite oder ein Artifact gebaut, gilt zusätzlich der Skill
+   `.claude/skills/fincoach-module-qa/SKILL.md`. Dazu gehören `python3 qa/check_module.py` und
+   `node qa/render_audit.cjs`, beide mit Exit 0.
 
 > **Hinweis zum Ausgangstext:** Bei der Erstellung dieses Prompts sind im Quelltext mehrere Aussagen
 > aufgefallen, die rechtlich oder fachlich überholt sind oder geprüft werden müssen. Der wichtigste Punkt:
@@ -254,6 +257,7 @@ Modul 8 · Fazit und Synthese
 C1  Disclaimer am Anfang und am Ende: keine Anlage-, Rechts- oder Steuerberatung im Sinne von
     WpIG/KWG, RDG und StBerG; allgemeine Information; Totalverlustrisiko bei Derivaten, Hebel,
     Knock-out-Risiko; Hinweis, dass Derivate nur für erfahrene Anleger geeignet sind.
+    Gilt für JEDE Ausgabeform (Markdown, HTML-Seite, Artifact), nicht nur für diese Analyse [L04].
 C2  Keine Anlageempfehlung im Sinne von Art. 3 Abs. 1 Nr. 34/35 MAR: keine konkreten Kauf-,
     Verkaufs- oder Halteempfehlungen, Kursziele oder Timing zu einzelnen Instrumenten. Wäre doch
     eine erforderlich, gelten die Offenlegungspflichten nach Delegierter VO (EU) 2016/958.
@@ -281,18 +285,23 @@ Q2  Aktualität: jede rechtliche und produktbezogene Aussage mit Stichtag; über
 Q3  Mathematische Konsistenz: Formeln dimensional korrekt, Vorzeichenkonventionen einheitlich,
     Multiplikatoren korrekt, Zahlenbeispiel rechnerisch nachvollziehbar (Rechenweg angeben).
 Q4  Provenienz: jeder Fakt mit genau einem Provenienz-Tag und einer Konfidenz;
-    SCENARIO_PROJECTION nie im Indikativ als Tatsache.
+    SCENARIO_PROJECTION nie im Indikativ als Tatsache. CONFIRMED nur bei Primär- oder
+    Herstellerquelle UND Konfidenz ≥ 0,7; Medienangaben bleiben MEDIA_REPORT, auch wenn sie
+    plausibel sind [L05]. Jeder Fakt der M-DBOM wird in der Ausgabe referenziert [L08].
 Q5  Quellenqualität: Primärquellen für Recht und Kontraktspezifikationen; Herstellerdoku für
     Produktfunktionen; Sekundärquellen nur ergänzend.
 Q6  Vollständigkeit: alle acht Module bearbeitet, die Wettbewerbsmatrix vollständig ausgefüllt
     oder mit [N. V.] markiert.
 Q7  Widerspruchsfreiheit: Fazit (Modul 8) steht nicht im Widerspruch zu Phase A
-    (insbesondere zu K1 und K3).
+    (insbesondere zu K1 und K3). Alle Zählungen (Fakten je Provenienz-Tag, Herstellerangaben,
+    Score) werden aus M-DBOM bzw. Scorecard ABGELEITET und gegengerechnet, nie geschätzt [L03, L07].
 Q8  Verständlichkeit: Glossar mit mindestens 15 Fachbegriffen (u. a. GEX, Charm, Vanna, 0DTE,
     OPRA, MBO, Absorption, Sweep, Call/Put Wall, GEX-Flip, Termingeschäft, Knock-out, CCP,
     PRIIPs-KID, Quartalsverfall).
-Q9  Keine Halluzinationen: Aktenzeichen, Paragraphen, Produktnamen, Kontraktdaten stichprobenartig
-    gegengeprüft; nicht prüfbare Angaben entfernt oder als [N. V.] gekennzeichnet.
+Q9  Keine Halluzinationen oder Überzeichnungen: Aktenzeichen, Paragraphen, Produktnamen,
+    Kontraktdaten stichprobenartig gegengeprüft; nicht prüfbare Angaben entfernt oder als [N. V.]
+    gekennzeichnet. Allaussagen („0 von N“, „kein Anbieter“, „alle“) nur über belegte Fälle;
+    [N. V.]-Fälle im selben Satz nennen [L06].
 Q10 Formatvorgaben aus Abschnitt 4 eingehalten.
 
 ──────────────────────────────────────────────
@@ -326,6 +335,9 @@ Prüfe deinen Entwurf vor der finalen Ausgabe noch einmal als Compliance-Prüfer
     streichen.
 (4) Wird ATAS sprachlich bevorzugt? → neutralisieren.
 (5) Stimmen Executive Summary, Fazit und Scorecard miteinander überein?
+(6) Ist jedes ✓ der Scorecard durch eine konkrete Prüfung belegt? Ein ✓ ohne Prüfung ist ◐ [L10].
+(7) Stimmen alle Zählungen im Text mit der M-DBOM überein (nachzählen, nicht übernehmen) [L07]?
+(8) Steht der Kurz-Disclaimer am Anfang der Ausgabe [L04]?
 Gib erst danach das Ergebnis aus. Die Selbstprüfung selbst erscheint nur als QA-Scorecard.
 
 ──────────────────────────────────────────────

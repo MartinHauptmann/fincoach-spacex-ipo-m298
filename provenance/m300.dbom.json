@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -14,18 +14,20 @@
   },
   "fact_summary": {
     "total": 18,
-    "confirmed_primary": 15,
+    "confirmed_primary": 14,
+    "media_report": 1,
     "scenario_projection": 3,
+    "vendor_claim": 5,
     "by_class": {
-      "REGULATORY_FRAMEWORK": 7,
-      "VENDOR_CLAIM": 5,
       "MARKET_DATA": 2,
       "MEDIA_REPORT": 1,
       "MODEL_ASSUMPTION": 1,
-      "SCENARIO_PROJECTION": 2
+      "REGULATORY_FRAMEWORK": 7,
+      "SCENARIO_PROJECTION": 2,
+      "VENDOR_CLAIM": 5
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 89,5 %).",
+  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 89,5 % nach Korrektur M2–M6; vorher 81,6 % laut Prüfbericht 2026-10-07).",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -156,12 +158,12 @@
     },
     {
       "id": "FACT_NO_EUREX_GEX",
-      "verdict": "CONFIRMED",
+      "verdict": "MEDIA_REPORT",
       "class": "MEDIA_REPORT",
       "confidence": 0.6,
       "claim": "Keiner der verglichenen Anbieter bietet intraday-fähige Eurex-GEX; Gamma Cockpit liefert DAX-GEX auf Tagesbasis (Beta).",
       "source_id": "SRC_VENDORS",
-      "caveat": "Nur Snippet-Belege."
+      "caveat": "Nur Snippet-Belege; MenthorQ n. v. → 0 von 5 belegt."
     },
     {
       "id": "FACT_DEALER_CONVENTION",
@@ -284,6 +286,14 @@
       "event": "Erstellung v1.0.0 aus Analyse M300 (Prompt v1.0.0)",
       "qa_score_pct": 89.5,
       "release": "UEBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-07",
+      "event": "v1.0.1: Styleguide-body-Basis (M1), Kurz-Disclaimer (M2), Verdict FACT_NO_EUREX_GEX → MEDIA_REPORT und datengebundene Zählungen (M3), KPI 0 von 5 belegt (M4), FACT_MM_NO_HEDGE_DUTY gebunden (M5), QA-Score aus Gate-Zellen berechnet (M6)",
+      "qa_score_pct": 89.5,
+      "qa_score_before_pct": 81.6,
+      "release": "UEBERARBEITUNG",
+      "report": "analysen/m300-qa-report-2026-10-07.md"
     }
   ]
 }
