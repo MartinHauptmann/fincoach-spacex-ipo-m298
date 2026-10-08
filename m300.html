@@ -100,7 +100,7 @@
   "$schema_id": "fincoach.m-dbom.v1",
   "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.3.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 44, "confirmed_primary": 25, "media_report": 7, "unverified": 9, "scenario_projection": 3, "vendor_claim": 10 },
-  "honest_disclosure": "Primärquellen nur über Suchtreffer-Snippets eingesehen (Netzwerksperre bei der Recherche). Herstellerangaben als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 73,7 % nach zweiter Zweitprüfung; Prüfbericht 2026-10-07)."
+  "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
 </script>
 </head>
@@ -593,7 +593,7 @@
   <div class="flex flex-wrap items-center gap-3 mb-6">
     <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>73,7</span> % · <span data-qa-points>14</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
-    <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Prüfbericht 2026-10-07: vor Korrektur 81,6 %; nach M2–M6 und zwei unabhängigen Zweitprüfungen neu bewertet.</span>
+    <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Prüfbericht 2026-10-07: vor Korrektur 81,6 %; nach M2–M6 und vier unabhängigen Zweitprüfungen neu bewertet.</span>
   </div>
   <div class="grid md:grid-cols-3 gap-4">
     <div class="dep-box">
@@ -620,9 +620,9 @@
         <tr><td>Q5 Quellenqualität</td><td class="check-part" data-gate="Q5" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-pass">✓</td></tr>
         <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="v1.2.0: S09 aus Matrix abgeleitet (L11), L13/L13c/L18 bestanden; ✓ erst nach unabhängiger Zweitprüfung (L10)">◐</td></tr>
-        <tr><td>Q8 Glossar</td><td class="check-part" data-gate="Q8" title="v1.3.0: um 8 Begriffe ergänzt; ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q8 Glossar</td><td class="check-pass" title="26 Begriffe; Pflichtbegriffe von der vierten Zweitprüfung bestätigt">✓</td></tr>
         <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="v1.2.0: Quantor-Nenner = DBOM-Basis (L18); unsichere Fundstellen markiert; ✓ erst nach Zweitprüfung">◐</td></tr>
-        <tr><td>Q10 Formatvorgaben</td><td class="check-pass">✓</td></tr>
+        <tr><td>Q10 Formatvorgaben</td><td class="check-part" data-gate="Q10" title="Fachbegriffe nicht beim ersten Auftreten erklärt (vierte Zweitprüfung)">◐</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
       </tbody></table>
@@ -648,6 +648,12 @@
         <li data-gate="Q2" data-source="FACT_BSW_SHARES" data-open>Bezugszeitraum der BSW-Umsatzstatistik klären</li>
         <li data-gate="Q5" data-open>Primärquellen im Volltext lesen (BGBl., BMF, BFH, Eurex, ATAS)</li>
         <li data-gate="C4" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>
+        <li data-gate="C8" data-source="FACT_PRIIPS_UWG FACT_ANGEMESSENHEIT" data-open>PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>
+        <li data-gate="C9" data-open>Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis</li>
+        <li data-gate="Q4" data-open>Zweitprüfung v1.3.0: Faktbindungen K2, K3, K4 und Steuer-Zeitachse korrigieren; FACT_PRODUCT_STRUCTURE mit passender Quelle</li>
+        <li data-gate="Q7" data-open>Zweitprüfung v1.3.0: Aufzählung im Wettbewerbsvergleich um IBKR TWS ergänzen und an die Analyse angleichen</li>
+        <li data-gate="Q9" data-open>Zweitprüfung v1.3.0: ODAP-Verfälle belegen; Hero-Satz „jede Aussage“ abschwächen</li>
+        <li data-gate="Q10" data-open>Fachbegriffe beim ersten Auftreten erklären (AdV, Stillhalter, Strike, Quanto, Bezugsverhältnis, Expected Move)</li>
       </ul>
     </div>
   </div>

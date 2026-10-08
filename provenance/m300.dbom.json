@@ -28,7 +28,7 @@
       "VENDOR_CLAIM": 10
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 76,3 % nach zweiter unabhängiger Zweitprüfung 2026-10-07).",
+  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 bis 2026-10-08 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat. Die meisten Fakten stützen sich auf Suchtreffer-Snippets, die auf Primär- oder Herstellerquellen verweisen; einzelne Fakten beruhen auf Fachwissen (FACT_PRODUCT_STRUCTURE), auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -924,6 +924,12 @@
     {
       "date": "2026-10-08",
       "event": "v1.3.0: dritte Zweitprüfung – Fundstellen in Claims (L25), offener BVerfG-Teil abgetrennt (L26), neue Fakten OptionsDepth-Abdeckung, Eurex-OI, Produktstruktur (L12)"
+    },
+    {
+      "date": "2026-10-08",
+      "event": "Vierte Zweitprüfung (v1.3.0): Q8 ✓, Q10 ◐; 9 Inhalts- und 6 Testbefunde in Offen-Liste und Fehlerkatalog (L36–L41)",
+      "qa_score_pct": 73.7,
+      "release": "UEBERARBEITUNG"
     }
   ]
 }

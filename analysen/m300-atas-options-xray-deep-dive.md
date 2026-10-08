@@ -694,6 +694,12 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Bezugszeitraum der BSW-Umsatzstatistik klären
 - Primärquellen im Volltext lesen (BGBl., BMF, BFH, Eurex, ATAS)
 - Interessenkonflikte durch Herausgeber bestätigen
+- PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
+- Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
+- Zweitprüfung v1.3.0: Faktbindungen K2, K3, K4 und Steuer-Zeitachse korrigieren; FACT_PRODUCT_STRUCTURE mit passender Quelle
+- Zweitprüfung v1.3.0: Aufzählung im Wettbewerbsvergleich um IBKR TWS ergänzen und an die Analyse angleichen
+- Zweitprüfung v1.3.0: ODAP-Verfälle belegen; Hero-Satz „jede Aussage“ abschwächen
+- Fachbegriffe beim ersten Auftreten erklären (AdV, Stillhalter, Strike, Quanto, Bezugsverhältnis, Expected Move)
 
 ---
 

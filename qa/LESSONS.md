@@ -59,6 +59,13 @@ Ein Fehler, für den sich kein Test schreiben lässt, bekommt einen Pflichtpunkt
 | L34 | 2026-10-08 | M300 | Offen-Liste: Seite 5, Analyse 8 Punkte | Zwei Listen von Hand gepflegt | Offen-Liste nur auf der Seite pflegen; `qa/sync_module.py` überträgt sie in die Analyse | `check_module` L34 (BLOCKER) | 9dcc84a: ✗ · v1.3.0: ✓ |
 | L35 | 2026-10-08 | QA | Zahlen, Score, Spannen, Pills und Tabellen wurden nach jeder Änderung von Hand nachgezogen (Ursache von L03, L07, L21, L34) | Kein Werkzeug für abgeleitete Werte | Abgeleitete Werte nur mit `python3 qa/sync_module.py <seite>` schreiben, danach prüfen | Prozess (Skill Schritt 0) | – |
 
+| L36 | 2026-10-08 | M300 | K2 zitiert „2 BvL 3/21“ ohne Bindung an den UNVERIFIED-Fakt; K4 „BFH I R 25/14“ nur als Quelle, nicht im Claim | L25-Muster kennt keine Aktenzeichen und Normteile ohne § | Aktenzeichen und Normteile („Satz 6“) im Claim des gebundenen Fakts | offen: L25-Muster um Aktenzeichen/Normteile erweitern | geplant: K2, K4 müssen fehlschlagen |
+| L37 | 2026-10-08 | M300 | DBOM-`honest_disclosure` nannte veralteten Score (76,3 %) und „alle Fakten belegt“ | Phrasen- und Score-Prüfung nur auf der Seite | L28-Phrasenliste und Score-Abgleich auch auf die DBOM anwenden; DBOM nennt keinen Score mehr | offen: Test auf DBOM ausdehnen | v1.3.0 korrigiert (Text ohne Score) |
+| L38 | 2026-10-08 | Site | Datenschutzerklärung behauptet sessionStorage, Stand-Datum veraltet, Log-Speicherdauer fehlt | Datenschutztext nicht gegen gemessenes Verhalten geprüft | `render_audit` protokolliert Cookies/Storage; Aussagen im Datenschutztext dagegen prüfen | offen | – |
+| L39 | 2026-10-08 | M300 | FACT_PRODUCT_STRUCTURE mit Quelle SRC_MODEL (BSM-Modell) und Konfidenz 0,8 | Keine Passungsregel Quelle ↔ Claim | `tier=internal` erlaubt höchstens UNVERIFIED mit Konfidenz ≤ 0,6; interne Quelle passend benennen | offen | – |
+| L40 | 2026-10-08 | QA | ◐-Gates ohne Abschlusskriterium; 5 von 9 UNVERIFIED-Fakten ohne Offen-Punkt | L10b prüft nur Offen-Punkt ⇒ kein ✓, nicht die Umkehrung | Jedes ◐-Gate und jeder UNVERIFIED-Fakt hat einen Offen-Punkt mit `data-gate` | offen (◐-Gates in v1.3.0 manuell ergänzt) | – |
+| L41 | 2026-10-08 | M300 | Fachbegriffe (AdV, Stillhalter, Strike, Quanto, Bezugsverhältnis, Expected Move) ohne Erklärung; Glossar-Ausnahme `data-def` deckt Fundstellen | Q10 ✓ ohne Messung; L29 erlaubt Fundstellen in Definitionen | Fachbegriffe beim ersten Auftreten erklären oder ins Glossar; Fundstellen auch in `data-def` binden | offen | – |
+
 ---
 
 ## Offene Befunde in Altmodulen (vom Check gefunden, nicht behoben)
