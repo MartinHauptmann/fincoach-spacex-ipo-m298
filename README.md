@@ -16,9 +16,9 @@ SpaceX-IPO-Analyse mit globalem Vergleich.
 | `m299.html` | Deep-Dive IPO-Zuteilung (M299): Quoten-Kaskade, Simulator, M-DBOM-Provenienz, Compliance-/Datenqualitäts-Checks |
 | `prompts/m300-atas-options-xray-deep-dive-prompt.md` | Deep-Dive-Prime-Prompt M300 (ATAS Options X-Ray, Eurex vs. verbriefte Derivate, § 20 Abs. 6 EStG) mit Faktencheck K1–K12, Compliance-/Qualitäts-Gates und QA-Scorecard |
 | `m300.html` | Deep-Dive-Seite M300 im M299-Stil: Faktencheck K1–K12, GEX-/ES-Rechner, Wettbewerbsmatrix, DACH-Vergleich, QA-Scorecard, Live-DBOM-Audit (`provenance/m300.dbom.json`) — Status: Überarbeitung |
-| `qa/check_module.py`, `qa/render_audit.cjs` | Pflicht-Prüfskripte vor jeder Veröffentlichung (statisch und Browser in Plain-, Viewer- und 390-px-Fassung) |
+| `qa/sync_module.py`, `qa/check_module.py`, `qa/render_audit.cjs` | Pflicht-Prüfskripte vor jeder Veröffentlichung (statisch und Browser in Plain-, Viewer- und 390-px-Fassung) |
 | `vendor/` | Selbst gehostete Bibliotheken (Chart.js 4.4.4, KaTeX 0.16.9, Tailwind 3.4.19 statisch) inkl. Lizenzen und Build-Skript – keine CDN-Abrufe (L20) |
-| `qa/LESSONS.md` | Fehlerkatalog L01–L24: Symptom, Ursache, Regel, Test, Regressionsnachweis |
+| `qa/LESSONS.md` | Fehlerkatalog L01–L35: Symptom, Ursache, Regel, Test, Regressionsnachweis |
 | `.claude/skills/fincoach-module-qa/`, `.claude/agents/fincoach-qa-reviewer.md`, `CLAUDE.md` | QA-Skill, unabhängiger Prüf-Agent und Projektregeln für Claude |
 | `analysen/m300-qa-report-2026-10-07.md` | QA-Prüfbericht M300 (Lesbarkeitsfehler, Neubewertung aller Gates, Maßnahmen M1–M12) |
 | `analysen/m300-atas-options-xray-deep-dive.md` | Ausgeführte Deep-Dive-Analyse M300 (Stichtag 2026-10-05) inkl. Faktencheck, M-DBOM und QA-Scorecard — Status: Überarbeitung |

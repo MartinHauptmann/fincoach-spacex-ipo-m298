@@ -74,9 +74,23 @@ async function audit(browser, url, vp) {
       for (let i = 0; i < ts.length; i++) for (let j = i + 1; j < ts.length; j++) { const A = ts[i].r, B = ts[j].r;
         const ox = Math.min(A.right, B.right) - Math.max(A.left, B.left), oy = Math.min(A.bottom, B.bottom) - Math.max(A.top, B.top);
         if (ox > 1 && oy > 1) svgOverlap.push(`„${ts[i].t}“ × „${ts[j].t}“`); } });
-    return { svgOverlap, katex: document.querySelectorAll('.katex').length, katexErr: document.querySelectorAll('.katex-error').length, charts: window.Chart ? Object.keys(Chart.instances || {}).length : 0, out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
+    const svgSmall = [];
+    document.querySelectorAll('svg text').forEach(t => { const m = t.getScreenCTM(); if (!m) return; const px = parseFloat(getComputedStyle(t).fontSize) * Math.hypot(m.a, m.b);
+      if (px && px < 11) svgSmall.push(`„${t.textContent.trim().slice(0, 20)}“ ${px.toFixed(1)}px`); });
+    return { svgSmall, svgOverlap, katex: document.querySelectorAll('.katex').length, katexErr: document.querySelectorAll('.katex-error').length, charts: window.Chart ? Object.keys(Chart.instances || {}).length : 0, out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
   });
-  await ctx.close(); return { ...r, errs, ext: vendor ? ext.filter(u => !/cdn\.(jsdelivr\.net|tailwindcss\.com)/.test(u)) : ext, failed };
+  let modalOk = null;
+  if (await p.$('.reg-tag')) {
+    const vis = p.locator('.reg-tag').first();
+    await vis.scrollIntoViewIfNeeded(); await vis.click();
+    const inside = () => p.evaluate(() => !!document.activeElement && !!document.activeElement.closest('.modal-overlay.open'));
+    let ok = await inside();
+    for (let i = 0; i < 4; i++) { await p.keyboard.press('Tab'); ok = ok && await inside(); }
+    await p.keyboard.press('Escape');
+    const back = await p.evaluate(() => document.activeElement && document.activeElement.classList.contains('reg-tag'));
+    modalOk = ok && back;
+  }
+  await ctx.close(); return { modalOk, ...r, errs, ext: vendor ? ext.filter(u => !/cdn\.(jsdelivr\.net|tailwindcss\.com)/.test(u)) : ext, failed };
 }
 
 (async () => {
@@ -87,6 +101,8 @@ async function audit(browser, url, vp) {
   await b.close(); srv.close();
   let blockers = 0; const line = (ok, lvl, rule, msg) => { if (!ok && lvl === 'BLOCKER') blockers++; console.log(`${ok ? '✓' : lvl === 'BLOCKER' ? '✗' : '!'} ${rule.padEnd(26)} [${lvl}] ${msg}`); };
   for (const [n, r] of [['plain', plain], ['viewer', viewer], ['viewer-390px', mobile]]) {
+    line(!r.svgSmall.length, 'BLOCKER', `L31 SVG-Schrift ≥ 11 px (${n})`, r.svgSmall.length ? r.svgSmall.slice(0, 3).join('; ') + (r.svgSmall.length > 3 ? ` (+${r.svgSmall.length - 3})` : '') : 'alle Beschriftungen ≥ 11 px');
+    if (r.modalOk !== null) line(r.modalOk, 'BLOCKER', `L31 Dialog-Fokus (${n})`, r.modalOk ? 'Fokus im Dialog, Tab bleibt innen, Escape kehrt zurück' : 'Fokusführung des Dialogs fehlerhaft');
     line(!r.svgOverlap.length, 'BLOCKER', `L24 SVG-Texte (${n})`, r.svgOverlap.length ? 'Überlappung: ' + r.svgOverlap.slice(0, 3).join('; ') : 'keine Überlappung');
     line(!r.errs.length, 'BLOCKER', `JS-Fehler (${n})`, r.errs.length ? r.errs.join(' | ') : 'keine');
     line(!r.ext.length, 'BLOCKER', `L20 Drittanbieter-Abrufe (${n})`, r.ext.length ? [...new Set(r.ext.map(u => new URL(u).host))].join(', ') : 'keine');

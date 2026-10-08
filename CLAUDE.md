@@ -6,7 +6,8 @@ Statische Website mit Analyse-Modulen (`modul.html` = M298, `m299.html`, `m300.h
 ## Verbindlich bei jeder Änderung an einem Modul
 
 - Vor Veröffentlichung, Artifact-Publish oder Commit einer Modulseite: Skill **`fincoach-module-qa`** befolgen.
-- Beide Prüfskripte müssen mit Exit 0 laufen:
+- Abgeleitete Werte nur mit `python3 qa/sync_module.py <seite>` schreiben (L35).
+- Beide Prüfskripte müssen mit Exit 0 laufen (Browser-Audit auch für `impressum.html` und `datenschutz.html`, L30):
   - `python3 qa/check_module.py <seite>`
   - `node qa/render_audit.cjs <seite>`
   Die Ausgabe gehört in Bericht oder Commit.

@@ -25,6 +25,20 @@ FACT_PATTERN = re.compile(
 SCOPE = re.compile(r"^(s0[1-9]|s1[01]|s-fz)$")  # Inhaltssektionen
 
 
+def element_inner(html, m):
+    """Inhalt eines Elements bis zum passenden Schluss-Tag (verschachtelt gezählt)."""
+    tag = m.group(1)
+    depth, pos = 1, m.end()
+    pat = re.compile(r"<(/?)" + tag + r"\b[^>]*>")
+    while depth:
+        n = pat.search(html, pos)
+        if not n:
+            return html[m.end():]
+        depth += -1 if n.group(1) else 1
+        pos = n.end()
+    return html[m.end():n.start()]
+
+
 def report(rule, level, ok, msg):
     results.append((rule, level, ok, msg))
 
@@ -191,10 +205,50 @@ def main():
         basis = {f["id"]: f["basis"] for f in F if "basis" in f}
         pg = [(int(a), int(b)) for a, b in re.findall(r">(\d+) von (\d+)<", html)]
         words = {"zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6, "sieben": 7}
-        an = {words[w] for w in re.findall(r"(?:keinem|keiner|alle) der (zwei|drei|vier|fünf|sechs|sieben)(?: \w+)? Anbieter", md)}
+        an = {words[w] for w in re.findall(r"(?:keinem|keiner|alle) der (zwei|drei|vier|fünf|sechs|sieben)\b[^.]{0,80}?Anbieter", md)}
         det = {b["determinable"] for b in basis.values()}
-        ok18 = (not pg or {n for _, n in pg} <= det) and (not an or an <= det)
+        # L33: ein Abgleich besteht nie über eine leere Menge, wenn eine DBOM-Basis existiert
+        ok18 = bool(det) and bool(pg) and (bool(an) or not md) and {n for _, n in pg} <= det and an <= det
         report("L18 Quantor-Nenner", BLOCKER, ok18, f"Seite {sorted({n for _, n in pg})} · Analyse {sorted(an)} · DBOM-Basis {sorted(det)}")
+
+        # L21b · Konfidenz-Pills aus der DBOM
+        conf_bad = [f"{fid}: {v}" for fid, v in re.findall(r'data-dbom-conf="(\w+)">([\d,]+)<', html)
+                    if fid in facts and abs(float(v.replace(",", ".")) - facts[fid]["confidence"]) > 1e-9]
+        hand_conf = re.findall(r'class="dbom-conf">Konf\. [\d.,]+<', html)
+        report("L21b Konfidenz-Pills", BLOCKER, not conf_bad and not hand_conf, "; ".join(conf_bad + hand_conf) or "alle Pills an DBOM gebunden")
+        # L26 · Fakt mit offenem Pflichtpunkt ist nicht CONFIRMED
+        open_facts = {fid for li in re.findall(r"<li[^>]*data-open[^>]*>", html) for m in re.findall(r'data-source="([^"]+)"', li) for fid in m.split()}
+        oc = sorted(f for f in open_facts if facts.get(f, {}).get("verdict") == "CONFIRMED")
+        report("L26 Offen ⇒ nicht CONFIRMED", BLOCKER, not oc, "CONFIRMED trotz Offen-Punkt: " + ", ".join(oc) if oc else f"{len(open_facts)} Fakten in der Offen-Liste, keiner CONFIRMED")
+        # L27 · sichtbares Verdict-Badge, wenn alle gebundenen Fakten nicht CONFIRMED sind
+        BADGE = {"MEDIA_REPORT": "MEDIEN", "UNVERIFIED": "UNGEPRÜFT", "SCENARIO_PROJECTION": "SCENARIO|MODELL"}
+        nobadge = []
+        for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
+            ids = [i for i in m.group(2).split() if i in facts]
+            if not ids or any(facts[i]["verdict"] == "CONFIRMED" for i in ids) or "data-open" in m.group(0):
+                continue
+            inner = element_inner(html, m)
+            need = "|".join(BADGE[facts[i]["verdict"]] for i in ids)
+            if not re.search(need, inner):
+                nobadge.append(ids[0])
+        for row in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else []):
+            ids = [i for i in re.findall(r"FACT_[A-Z0-9_]+", row) if i in facts]
+            if any(facts[i]["verdict"] != "CONFIRMED" for i in ids) and not re.search(r"Medienangabe|ungeprüft|Modellannahme", row):
+                nobadge.append(row[2:6].strip('",'))
+        report("L27 Verdict-Badge", BLOCKER, not nobadge, "ohne Badge: " + ", ".join(sorted(set(nobadge))[:8]) if nobadge else "alle nicht bestätigten Bindungen gekennzeichnet")
+        # L25 · Fundstellen und Zahlen in K-Tabelle/Modal stehen im gebundenen Fakt
+        def norm(x):
+            return re.sub(r"\s+", "", x)
+        tok = re.compile(r"§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\bArt\.\s?\d+|\b\d{4}\b|\d[\d.,]*\s?(?:%|€|\$)")
+        js_miss = []
+        for blob in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else []) + ([b for _, b in re.findall(r"\n\s*(\w+):\{(.*?)\}(?:,|$)", js_reg.group(1))] if js_reg else []):
+            ids = [i for i in re.findall(r"FACT_[A-Z0-9_]+", blob) if i in facts]
+            hay = norm(" ".join(str(facts[i].get(k, "")) for i in ids for k in ("claim", "period", "caveat")))
+            text = re.sub(r'FACT_[A-Z0-9_]+|u:"[^"]*"|https?://\S+', "", blob)
+            for tk in tok.findall(text):
+                if norm(tk) not in hay:
+                    js_miss.append(f"{(ids or ['?'])[0]}: {tk}")
+        report("L25 Fundstellen in JS-Inhalten", BLOCKER, not js_miss, ("nicht im Fakt: " + ", ".join(sorted(set(js_miss))[:8]) + (f" (+{len(set(js_miss)) - 8})" if len(set(js_miss)) > 8 else "")) if js_miss else "alle Fundstellen/Zahlen der K-Tabelle und des Modals im Fakt")
 
     # ---------- L12 · Rückwärtsbindung (statisch) und JS-Tabellen
     unb = [f"{x['sec']}: {mm.group(0).strip()}" for x in t.texts if SCOPE.match(x["sec"] or "") and not x["bound"] for mm in FACT_PATTERN.finditer(x["text"])]
@@ -221,6 +275,34 @@ def main():
             miss = sorted(cited - refs, key=lambda x: int(x[1:]))
             report("L13c Quellen Analyse = DBOM", BLOCKER, not miss and listed == (refs - {"–"}),
                    ("zitiert, aber nicht in DBOM: " + ", ".join(miss)) if miss else ("Quellenliste der Analyse = dbom.sources" if listed == (refs - {"–"}) else f"Quellenliste der Analyse weicht ab ({len(listed)} vs. {len(refs - {'–'})})"))
+
+    # ---------- L28 · keine Überbehauptungen in Methodik/Transparenz
+    over = re.findall(r"[Aa]lle Fakten sind|geprüfte[rn]? Deep-Dive|vollständig belegt|(?<!nicht )(?<!un)verifiziert(?![^<]{0,30}nicht)", re.sub(r"<script.*?</script>", "", html, flags=re.S))
+    report("L28 Überbehauptungen", BLOCKER, not over, "gefunden: " + ", ".join(sorted(set(over))) if over else "keine")
+    # ---------- L29 · data-def nur auf Blattelementen
+    blk = [m.group(1) for m in re.finditer(r'<(\w+)\b[^>]*data-def="[^"]*"[^>]*>(.*?)</\1>', html, re.S) if re.search(r"<(div|p|section|table|ul|ol|figure|svg)\b", m.group(2))]
+    report("L29 data-def nur Blatt", BLOCKER, not blk, f"{len(blk)} data-def-Container mit Blockinhalt" if blk else "data-def nur auf Blattelementen")
+    # ---------- L31 · Barrierefreiheit (statisch)
+    canv = re.findall(r"<canvas\b[^>]*>", html)
+    bad_c = [c for c in canv if 'role="img"' not in c or "aria-label" not in c]
+    report("L31 Canvas zugänglich", BLOCKER, not bad_c, f"{len(bad_c)} canvas ohne role=img/aria-label" if bad_c else f"{len(canv)} canvas mit role=img und aria-label")
+    report("L31b reduzierte Bewegung", BLOCKER, "prefers-reduced-motion" in html or "scroll-fade" not in html, "prefers-reduced-motion berücksichtigt" if "prefers-reduced-motion" in html else "Einblend-Animation ohne prefers-reduced-motion")
+    # ---------- L32 · Lizenzen und Versionen der selbst gehosteten Dateien
+    root = page.parent
+    if "fonts.css" in html:
+        ofl = sorted(p.name for p in (root / "fonts").glob("LICENSE-*-OFL.txt"))
+        report("L32 Schriftlizenzen", BLOCKER, len(ofl) >= 3, f"{len(ofl)} OFL-Lizenzdateien in fonts/")
+    kx = root / "vendor/katex/katex.min.js"
+    if "vendor/katex" in html and kx.exists():
+        v = re.search(r'version:"(\d+)\.(\d+)\.(\d+)"', kx.read_text(encoding="utf-8", errors="ignore"))
+        ver = tuple(map(int, v.groups())) if v else (0, 0, 0)
+        report("L32b KaTeX ≥ 0.16.10", BLOCKER, ver >= (0, 16, 10), "KaTeX " + ".".join(map(str, ver)))
+    # ---------- L34 · Offen-Liste Seite = Analyse
+    if md:
+        po = [re.sub(r"\s+", " ", t).strip() for t in re.findall(r"<li[^>]*data-open[^>]*>([^<]*)</li>", html)]
+        sec7 = re.search(r"## 7 · Offene Prüfpunkte vor Veröffentlichung\n\n((?:- .*\n)+)", md)
+        mo = [x[2:].strip() for x in sec7.group(1).splitlines()] if sec7 else []
+        report("L34 Offen-Liste Seite = Analyse", BLOCKER, bool(po) and po == mo, f"{len(po)} Punkte identisch" if po == mo and po else f"Seite {len(po)} · Analyse {len(mo)} Punkte, abweichend")
 
     # ---------- QA-Sektion
     pts = sum(1 if "check-pass" in cls else 0.5 if "check-part" in cls else 0 for _, cls in t.qa_rows)

@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L24 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L35 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -57,6 +57,19 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   Primär- oder Herstellerquelle (`tier`) als Hauptbeleg; Sekundärquellen nur als `supporting_sources`. `period` enthält ein Datum.
 - **L20 / C9:** Externe Ressourcen self-hosten oder mit Einwilligung und SRI; C9 nur ✓, wenn L20 sauber ist.
 - **L21:** Abgeleitete Kennzahlen (Konfidenz-Spannen, Scores) nie von Hand.
+- **L25:** Fundstellen, Jahreszahlen und Beträge in K-Tabelle und Modal stehen im Claim der gebundenen Fakten; KPIs binden
+  alle Fakten, deren Werte sie zeigen.
+- **L26:** Offen-Punkte tragen `data-open`, `data-gate` und ggf. `data-source`; ein dort genannter Fakt ist nie CONFIRMED.
+- **L27:** Elemente mit ausschließlich nicht bestätigten Fakten tragen ein sichtbares Badge (MEDIEN, UNGEPRÜFT, SCENARIO).
+- **L28:** Keine Pauschalaussagen zum Prüfstatus („geprüft“, „alle Fakten belegt“, „verifiziert“).
+- **L29:** `data-def` nur auf Blattelementen.
+- **L30:** Verlinkte Pflichtseiten (Impressum, Datenschutz) mit `render_audit.cjs` prüfen; Datenschutztext = gemessene Abrufe.
+- **L31:** SVG-Schrift ≥ 11 px in allen Ansichten; Dialoge mit Fokusführung; Canvas mit `role="img"`, `aria-label` und
+  Fallback-Text; `prefers-reduced-motion`.
+- **L32:** Lizenzdateien für Schriften und Bibliotheken; Versionen vor Release gegen Sicherheitshinweise prüfen.
+- **L33:** Ein Test besteht nie über eine leere Menge.
+- **L34/L35:** Abgeleitete Werte (Zählungen, Score, Spannen, Pills, Quellen-, Fakten- und Offen-Tabellen der Analyse) nur
+  mit `python3 qa/sync_module.py <seite>` schreiben.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 
@@ -69,6 +82,7 @@ Q7 Widerspruchsfreiheit · Q8 Glossar · Q9 keine Überzeichnung/Halluzination �
 
 ## 4 · Ablauf vor jeder Veröffentlichung (Pflicht)
 
+0. **Synchronisieren:** `python3 qa/sync_module.py mXXX.html` (abgeleitete Werte aus DBOM und Gate-Zellen)
 1. **Statische Prüfung:** `python3 qa/check_module.py mXXX.html` → muss mit Exit 0 enden
 2. **Browser-Audit in allen Zielumgebungen:** `node qa/render_audit.cjs mXXX.html [--vendor DIR]` → Exit 0. Er prüft
    Plain, Viewer und 390 px.

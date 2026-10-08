@@ -6,8 +6,7 @@
 <title>Datenschutzerklärung · FinCoach AI · TheNextGenerationBanking</title>
 <meta name="robots" content="index,follow">
 <link rel="stylesheet" href="fonts.css">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={theme:{extend:{colors:{tngb:{bg:'#0A0F1A',card:'#121A2E',cyan:'#00CFFF',muted:'#64748B',border:'#1E293B'}},fontFamily:{sans:['Inter','sans-serif'],display:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']}}}}</script>
+<link rel="stylesheet" href="vendor/tailwind.css">
 <style>body{background:#0A0F1A;color:#E2E8F0;font-family:'Inter',sans-serif;}h1,h2{font-family:'Space Grotesk',sans-serif;}.mono{font-family:'JetBrains Mono',monospace;}.ph{background:rgba(223,175,15,.12);border:1px dashed #DFAF0F;color:#DFAF0F;padding:.1rem .4rem;border-radius:.3rem;}a{color:#00CFFF;}</style>
 </head>
 <body>
@@ -55,12 +54,13 @@
     <h2 class="text-xl font-semibold">3 · Schriftarten &amp; externe Ressourcen (CDNs)</h2>
     <p><strong>Schriftarten (Google Fonts) werden lokal selbst gehostet</strong> (Self-Hosting). Beim Laden der
       Schriften erfolgt <strong>keine</strong> Verbindung zu Google-Servern und keine Übermittlung der IP-Adresse an Google.</p>
-    <p>Zur Darstellung werden weiterhin folgende Bibliotheken über Drittanbieter-CDNs geladen:
-      <strong>Tailwind CSS</strong> (cdn.tailwindcss.com), <strong>KaTeX</strong> und <strong>Chart.js</strong> (jsDelivr,
+    <p><strong>Lokal gehostete Bibliotheken:</strong> Das Modul M300 sowie Impressum und Datenschutzerklärung laden
+      Tailwind CSS, KaTeX und Chart.js von diesem Server. Dabei findet keine Übermittlung der IP-Adresse an Drittanbieter statt.</p>
+    <p>Die übrigen Seiten (Startseite, M298, M299, IPO-Prozess, SpaceX-Update) laden diese Bibliotheken derzeit noch über
+      Drittanbieter-CDNs: <strong>Tailwind CSS</strong> (cdn.tailwindcss.com), <strong>KaTeX</strong> und <strong>Chart.js</strong> (jsDelivr,
       cdn.jsdelivr.net). Dabei wird die IP-Adresse technisch bedingt an den jeweiligen Anbieter übermittelt.
-      Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an performanter, sicherer Auslieferung).</p>
-    <p class="text-xs text-tngb-muted">Hinweis: Für vollständige Vermeidung jeglicher Drittland-Transfers können auch
-      diese Bibliotheken lokal gehostet werden.</p>
+      Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an performanter, sicherer Auslieferung).
+      Die Umstellung auf lokale Auslieferung ist vorgesehen.</p>
   </section>
 
   <section class="space-y-2">
