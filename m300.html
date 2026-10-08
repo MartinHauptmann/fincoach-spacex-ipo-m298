@@ -3,20 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.1.1 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.2.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm, ES-Äquivalente), Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der aktuelle Rechtsstand zur Verlustverrechnung bei Termingeschäften (JStG 2024). Mit Faktencheck K1–K12, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = { theme: { extend: {
-  colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', indigo:'#4472C4', coral:'#E040A0', muted:'#64748B', border:'#1E293B' } },
-  fontFamily: { sans:['Inter','system-ui','sans-serif'], head:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
-}}}
-</script>
+<link rel="stylesheet" href="vendor/tailwind.css"/>
+<link rel="stylesheet" href="vendor/katex/katex.min.css"/>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/auto-render.min.js"></script>
+<script src="vendor/chartjs/chart.umd.min.js"></script>
 <style>
   :root{ --bg:#0A0F1A; --card:#121A2E; --cyan:#00CFFF; --emerald:#00CC7A; --magenta:#E6399A; --orange:#FF6B00; --lavender:#9933FF; --gold:#DFAF0F; --indigo:#4472C4; --coral:#E040A0; --muted:#64748B; --border:#1E293B; }
   *{box-sizing:border-box;}
@@ -103,8 +97,8 @@ tailwind.config = { theme: { extend: {
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.1.1", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
-  "fact_summary": { "total": 24, "confirmed_primary": 17, "media_report": 3, "unverified": 1, "scenario_projection": 3, "vendor_claim": 5 },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.2.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "fact_summary": { "total": 40, "confirmed_primary": 23, "media_report": 7, "unverified": 7, "scenario_projection": 3, "vendor_claim": 9 },
   "honest_disclosure": "Primärquellen nur über Suchtreffer-Snippets eingesehen (Netzwerksperre bei der Recherche). Herstellerangaben als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 76,3 % nach zweiter Zweitprüfung; Prüfbericht 2026-10-07)."
 }
 </script>
@@ -154,8 +148,8 @@ tailwind.config = { theme: { extend: {
 <!-- ===== Provenienz-Banner ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.1.1</span>
-    <span class="text-slate-300"><span data-dbom-count="total">24</span> Fakten · <span data-dbom-count="confirmed">17</span> belegt (davon <span data-dbom-count="vendor">5</span> Herstellerangaben) · <span data-dbom-count="media">3</span> Medienangaben · <span data-dbom-count="unverified">1</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.2.0</span>
+    <span class="text-slate-300"><span data-dbom-count="total">40</span> Fakten · <span data-dbom-count="confirmed">23</span> belegt (davon <span data-dbom-count="vendor">9</span> Herstellerangaben) · <span data-dbom-count="media">7</span> Medienangaben · <span data-dbom-count="unverified">7</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
       <a href="analysen/m300-atas-options-xray-deep-dive.md" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">↗ Volltext-Analyse</a>
@@ -192,28 +186,62 @@ tailwind.config = { theme: { extend: {
       <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Options Analytics · Orderflow</span>
       <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">Deep-Dive-Prime · Experte</span>
     </div>
+    <div class="grid lg:grid-cols-5 gap-8 items-center mb-6" data-qa="hero-grid">
+    <div class="lg:col-span-3">
     <h1 class="text-4xl md:text-5xl font-head font-extrabold text-white mb-3 leading-tight">
       Options X-Ray, Dealer-<span style="background:linear-gradient(135deg,#00CFFF 0%,#9933FF 55%,#E6399A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">Greeks</span> &amp; der DACH-Markt
     </h1>
     <p class="text-xl font-head font-semibold mb-3" style="color:#00CFFF;">
       Was die GEX-/Charm-Analytik von ATAS leistet, wo ihre Modellgrenzen liegen und warum die Steuerbegründung für Optionsscheine nicht mehr trägt
     </p>
-    <p class="text-base text-slate-400 max-w-3xl mb-6 leading-relaxed">
+    <p class="text-base text-slate-400 mb-2 leading-relaxed">
       Ein geprüfter Deep-Dive auf einen Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen jede Aussage des Ausgangstexts gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">17</span> belegte Fakten, <span data-dbom-count="media">3</span> Medienangaben, <span data-dbom-count="unverified">1</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>76,3</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">23</span> belegte Fakten, <span data-dbom-count="media">7</span> Medienangaben, <span data-dbom-count="unverified">7</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>76,3</span> %).</span>
     </p>
+    </div>
+    <div class="lg:col-span-2" data-qa="hero-graphic">
+      <figure class="dep-box" style="padding:.75rem;margin:0;" data-def="Schema">
+        <svg viewBox="0 0 480 384" width="100%" role="img" aria-labelledby="heroSvgT heroSvgD" style="display:block;height:auto;">
+          <title id="heroSvgT">Wie Options-Positionierung den Futures-Markt bewegt</title>
+          <desc id="heroSvgD">Schema: SPX-Optionen erzeugen über Gamma, Charm und Vanna Hedge-Bedarf der Dealer, der als ES- und MES-Orders im Futures-Orderbuch ankommt. Rechts ein hypothetisches Netto-GEX-Profil: oberhalb des GEX-Flips dämpfendes Long-Gamma, darunter verstärkendes Short-Gamma.</desc>
+          <text x="20" y="28" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1">SCHEMA · ILLUSTRATIV, KEINE MARKTDATEN</text>
+          <g font-family="Space Grotesk, sans-serif">
+            <rect x="20" y="50" width="230" height="62" rx="10" fill="rgba(0,207,255,0.08)" stroke="#00CFFF"/>
+            <text x="135" y="77" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">SPX-Optionen</text>
+            <text x="135" y="97" text-anchor="middle" fill="#94A3B8" font-size="12" font-family="JetBrains Mono, monospace">Open Interest · Flow</text>
+            <rect x="20" y="148" width="230" height="62" rx="10" fill="rgba(153,51,255,0.10)" stroke="#9933FF"/>
+            <text x="135" y="175" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">Dealer-Hedge</text>
+            <text x="135" y="195" text-anchor="middle" fill="#94A3B8" font-size="12" font-family="JetBrains Mono, monospace">Δ-Neutralisierung</text>
+            <rect x="20" y="246" width="230" height="62" rx="10" fill="rgba(0,204,122,0.08)" stroke="#00CC7A"/>
+            <text x="135" y="273" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">Futures-Orderbuch</text>
+            <text x="135" y="293" text-anchor="middle" fill="#94A3B8" font-size="12" font-family="JetBrains Mono, monospace">Footprint · MBO</text>
+          </g>
+          <g stroke="#94A3B8" stroke-width="1.5" fill="none"><path d="M135 114 V144"/><path d="M135 212 V242"/></g>
+          <g fill="#94A3B8"><path d="M130 140 L135 147 L140 140 Z"/><path d="M130 238 L135 245 L140 238 Z"/></g>
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#CBD5E1"><text x="146" y="133">Γ · Charm · Vanna</text><text x="146" y="231">ES/MES-Orders</text></g>
+          <text x="290" y="48" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="12">Preis ↑ · Netto-GEX</text>
+          <line x1="372" y1="54" x2="372" y2="322" stroke="#1E293B" stroke-width="1.5"/>
+          <rect x="372.0" y="58" width="60.8" height="16" rx="3" fill="#00CC7A"/><rect x="372.0" y="82" width="57.0" height="16" rx="3" fill="#00CC7A"/><rect x="372.0" y="106" width="87.4" height="16" rx="3" fill="#00CC7A"/><rect x="372.0" y="130" width="53.2" height="16" rx="3" fill="#00CC7A"/><rect x="372.0" y="154" width="41.8" height="16" rx="3" fill="#00CC7A"/><rect x="372.0" y="178" width="30.4" height="16" rx="3" fill="#00CC7A"/><rect x="372.0" y="202" width="15.2" height="16" rx="3" fill="#00CC7A"/><rect x="356.8" y="226" width="15.2" height="16" rx="3" fill="#E6399A"/><rect x="334.0" y="250" width="38.0" height="16" rx="3" fill="#E6399A"/><rect x="299.8" y="274" width="72.2" height="16" rx="3" fill="#E6399A"/><rect x="318.8" y="298" width="53.2" height="16" rx="3" fill="#E6399A"/>
+          <line x1="290" y1="217" x2="466" y2="217" stroke="#00CFFF" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="466" y="212" text-anchor="end" fill="#00CFFF" font-family="JetBrains Mono, monospace" font-size="12">GEX-Flip</text>
+          <text x="290" y="348" fill="#00CC7A" font-family="JetBrains Mono, monospace" font-size="12">▲ Long Γ dämpft</text>
+          <text x="290" y="370" fill="#E6399A" font-family="JetBrains Mono, monospace" font-size="12">▼ Short Γ verstärkt</text>
+        </svg>
+      </figure>
+    </div>
+    </div>
 
-    <div class="caveat-box mb-4 max-w-3xl text-sm text-slate-300 leading-relaxed" role="note" data-qa="hero-disclaimer">
+    <div class="caveat-box mb-4 text-sm text-slate-300 leading-relaxed" role="note" data-qa="hero-disclaimer">
       <strong class="text-tngb-magenta">Keine Anlage-, Rechts- oder Steuerberatung.</strong> Allgemeine Information zu Bildungszwecken, keine Anlageempfehlung im Sinne der MAR.
       Optionen, Futures, Optionsscheine und Knock-outs sind Hebelprodukte mit Totalverlustrisiko; bei Futures und Stillhaltergeschäften sind Verluste über den Einsatz hinaus möglich.
       Vollständiger Disclaimer in <a href="#s12" class="text-tngb-cyan hover:underline">S12</a>.
     </div>
-    <div class="caveat-box mb-4 max-w-3xl">
+    <div class="caveat-box mb-4">
       <div class="flex items-start gap-3">
         <span class="text-tngb-magenta text-lg leading-none mt-0.5">⚠</span>
-        <div class="text-sm text-slate-300 leading-relaxed">
+        <div class="text-sm text-slate-300 leading-relaxed" data-source="FACT_JSTG2024_REPEAL FACT_P15_KSTG">
           <strong class="text-tngb-magenta">Korrektur des Ausgangstexts:</strong> Die 20.000-€-Grenze für Verluste aus
           Termingeschäften (§ 20 Abs. 6 Satz 5 EStG a. F.) ist <strong>kein geltendes Recht mehr</strong>. Das
           Jahressteuergesetz 2024 hat sie in allen offenen Fällen aufgehoben. Die These, Privatanleger würden aus
@@ -222,7 +250,7 @@ tailwind.config = { theme: { extend: {
         </div>
       </div>
     </div>
-    <div class="info-box mb-8 max-w-3xl text-sm text-slate-300 leading-relaxed">
+    <div class="info-box mb-8 text-sm text-slate-300 leading-relaxed">
       <strong class="text-tngb-cyan">Daten-Transparenz:</strong> Die Recherche lief in einer Umgebung, die den direkten
       Abruf der meisten Primärquellen gesperrt hat. Alle Fakten sind über Suchtreffer belegt, die auf diese Quellen
       verweisen. Herstellerangaben tragen das Kennzeichen <span class="dbom-class-badge dc-vendor">VENDOR</span>, Modelle
@@ -252,19 +280,19 @@ tailwind.config = { theme: { extend: {
       </div>
       <div class="kpi-card scenario-kpi" style="border-color:#DFAF0F;" data-source="FACT_NO_EUREX_GEX">
         <div class="text-2xl md:text-3xl font-head font-extrabold" style="color:#DFAF0F;">0 von 5</div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">Anbieter mit Eurex-GEX intraday (belegt)</div>
-        <div class="text-xs text-tngb-muted mt-1">MenthorQ: n. v.; DAX-GEX nur EOD (Gamma Cockpit)</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">bestimmbare Anbieter mit Eurex-GEX intraday</div>
+        <div class="text-xs text-tngb-muted mt-1">6 verglichen · MenthorQ n. v. · DAX-GEX nur EOD (Gamma Cockpit)</div>
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">MEDIEN</span><span class="dbom-conf">Konf. 0.60</span></div>
       </div>
     </div>
 
     <div class="flex flex-wrap gap-2">
-      <button class="reg-tag" style="color:#E6399A;border-color:rgba(230,57,154,0.4);background:rgba(230,57,154,0.08);" data-reg="jstg">JStG 2024 · § 20 Abs. 6 EStG</button>
-      <button class="reg-tag" style="color:#FF6B00;border-color:rgba(255,107,0,0.4);background:rgba(255,107,0,0.08);" data-reg="p15">§ 15 Abs. 4 EStG · KapGes</button>
-      <button class="reg-tag" style="color:#00CFFF;border-color:rgba(0,207,255,0.4);background:rgba(0,207,255,0.08);" data-reg="mifid17">MiFID II Art. 17 · Algo/MM</button>
-      <button class="reg-tag" style="color:#9933FF;border-color:rgba(153,51,255,0.4);background:rgba(153,51,255,0.08);" data-reg="mar">MAR · Anlageempfehlung</button>
-      <button class="reg-tag" style="color:#DFAF0F;border-color:rgba(223,175,15,0.4);background:rgba(223,175,15,0.08);" data-reg="turbo">BaFin · Turbo-Zertifikate</button>
-      <button class="reg-tag" style="color:#00CC7A;border-color:rgba(0,204,122,0.4);background:rgba(0,204,122,0.08);" data-reg="priips">PRIIPs · UWG</button>
+      <button class="reg-tag" style="color:#E6399A;border-color:rgba(230,57,154,0.4);background:rgba(230,57,154,0.08);" data-reg="jstg" data-source="FACT_JSTG2024_REPEAL">JStG 2024 · § 20 Abs. 6 EStG</button>
+      <button class="reg-tag" style="color:#FF6B00;border-color:rgba(255,107,0,0.4);background:rgba(255,107,0,0.08);" data-reg="p15" data-source="FACT_P15_KSTG">§ 15 Abs. 4 EStG · KapGes</button>
+      <button class="reg-tag" style="color:#00CFFF;border-color:rgba(0,207,255,0.4);background:rgba(0,207,255,0.08);" data-reg="mifid17" data-source="FACT_ALGO_TRADING FACT_MM_NO_HEDGE_DUTY">MiFID II Art. 17 · Algo/MM</button>
+      <button class="reg-tag" style="color:#9933FF;border-color:rgba(153,51,255,0.4);background:rgba(153,51,255,0.08);" data-reg="mar" data-source="FACT_MAR_RECO">MAR · Anlageempfehlung</button>
+      <button class="reg-tag" style="color:#DFAF0F;border-color:rgba(223,175,15,0.4);background:rgba(223,175,15,0.08);" data-reg="turbo" data-source="FACT_BAFIN_TURBO">BaFin · Turbo-Zertifikate</button>
+      <button class="reg-tag" style="color:#00CC7A;border-color:rgba(0,204,122,0.4);background:rgba(0,204,122,0.08);" data-reg="priips" data-source="FACT_PRIIPS_UWG">PRIIPs · UWG</button>
     </div>
   </div>
 </section>
@@ -280,7 +308,7 @@ tailwind.config = { theme: { extend: {
     <button class="tab-btn" data-s02="fortgeschritten">Fortgeschritten</button>
     <button class="tab-btn active-tab" data-s02="experte">Experte</button>
   </div>
-  <div class="dep-box max-w-4xl">
+  <div class="dep-box">
     <div class="lvl-content" data-s02c="einsteiger">
       <p class="prose-p">Wer eine Option verkauft, zum Beispiel ein Market Maker, trägt ein Kursrisiko. Um es zu begrenzen, kauft oder verkauft er den zugrunde liegenden Index-Future. Wenn sehr viele Optionen auf denselben Index offen sind, können diese Absicherungsgeschäfte den Future-Kurs spürbar beeinflussen.</p>
       <p class="prose-p">Werkzeuge wie ATAS Options X-Ray versuchen zu schätzen, an welchen Kursmarken viel Absicherung nötig wird. Sie zeigen diese Marken direkt im Future-Chart. Das sind <strong>Wahrscheinlichkeitszonen, keine Garantien</strong>.</p>
@@ -290,7 +318,7 @@ tailwind.config = { theme: { extend: {
       <p class="prose-p">Zusätzlich verändert der Zeitablauf (<strong>Charm</strong>) und die implizite Volatilität (<strong>Vanna</strong>) das Delta. Das erzeugt Absicherungsflüsse, auch wenn sich der Kurs nicht bewegt, besonders bei 0DTE-Optionen.</p>
     </div>
     <div class="lvl-content active" data-s02c="experte">
-      <p class="prose-p">GEX-Modelle aggregieren Dollar-Gamma je Strike unter einer Annahme über die Gegenpartei (Dealer-Positionskonvention, <span class="dbom-class-badge">MODELL</span>). Daraus leiten sie Regime (Long/Short Gamma), Umschlagpunkte (GEX-Flip) und Konzentrationen (Call/Put Walls) ab. Für SPX ist die Datenlage vergleichsweise gut, weil die Cboe nach Teilnehmertyp markierte Open-Close-Daten bereitstellt.</p>
+      <p class="prose-p" data-source="FACT_CBOE_OPENCLOSE">GEX-Modelle aggregieren Dollar-Gamma je Strike unter einer Annahme über die Gegenpartei (Dealer-Positionskonvention, <span class="dbom-class-badge">MODELL</span>). Daraus leiten sie Regime (Long/Short Gamma), Umschlagpunkte (GEX-Flip) und Konzentrationen (Call/Put Walls) ab. Für SPX ist die Datenlage vergleichsweise gut, weil die Cboe nach Teilnehmertyp markierte Open-Close-Daten bereitstellt.</p>
       <p class="prose-p" data-source="FACT_MM_NO_HEDGE_DUTY">Die Modelle beschreiben Verhalten, keine Rechtspflicht. Market Maker hedgen aus Risiko- und Kapitalkalkül. Sie können über Futures, ETFs, Kassamarkt, OTC-Derivate oder internes Netting absichern (<a href="#s03" class="text-tngb-cyan hover:underline">K5</a>). Die Prognosegüte hängt daher vollständig von der Positionsannahme und der Datenfrische ab.</p>
     </div>
   </div>
@@ -302,7 +330,7 @@ tailwind.config = { theme: { extend: {
     <span class="section-badge" style="background:rgba(230,57,154,0.15);color:#E6399A;">S03 · PHASE A</span>
     <h2 class="section-title">Faktencheck K1–K12: Was am Ausgangstext stimmt und was nicht</h2>
   </div>
-  <p class="text-sm text-slate-400 mb-4 max-w-3xl">Zeile anklicken für Begründung und Fundstelle. Ergebnis: <span class="badge b-ok">✓ bestätigt</span> <span class="badge b-part">◐ präzisiert</span> <span class="badge b-no">✗ falsch/überholt</span></p>
+  <p class="text-sm text-slate-400 mb-4">Zeile anklicken für Begründung und Fundstelle. Ergebnis: <span class="badge b-ok">✓ bestätigt</span> <span class="badge b-part">◐ präzisiert</span> <span class="badge b-no">✗ falsch/überholt</span></p>
   <div class="dep-box table-wrap">
     <table id="k-table">
       <thead><tr><th>Nr.</th><th>Prüfpunkt</th><th>Aussage im Ausgangstext</th><th>Ergebnis</th><th>Schwere</th></tr></thead>
@@ -320,15 +348,15 @@ tailwind.config = { theme: { extend: {
   <div class="grid md:grid-cols-2 gap-6">
     <div class="dep-box">
       <h3 class="font-head font-bold text-white mb-4">Zeitachse</h3>
-      <div class="tl-item" style="--dot:#64748B"><div class="font-mono text-xs text-tngb-muted">21.12.2019</div><div class="text-sm text-slate-200" data-source="FACT_TERMIN_HISTORY">Einführung der Verlustverrechnungsbeschränkung (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021.</div></div>
-      <div class="tl-item" style="--dot:#FF6B00"><div class="font-mono text-xs text-tngb-muted">21.12.2020</div><div class="text-sm text-slate-200" data-source="FACT_TERMIN_HISTORY">JStG 2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €.</div></div>
-      <div class="tl-item" style="--dot:#DFAF0F"><div class="font-mono text-xs text-tngb-muted">07.06.2024</div><div class="text-sm text-slate-200" data-source="FACT_BFH_ADV">BFH VIII B 113/23 (AdV, summarisch): ernstliche Zweifel an der Verfassungsmäßigkeit.</div></div>
-      <div class="tl-item" style="--dot:#E6399A"><div class="font-mono text-xs text-tngb-muted">02.12.2024</div><div class="text-sm text-slate-200" data-source="FACT_JSTG2024_REPEAL">JStG 2024 (BGBl. 2024 I Nr. 387) hebt § 20 Abs. 6 Satz 5 und 6 auf, anwendbar in allen offenen Fällen.</div></div>
-      <div class="tl-item" style="--dot:#00CFFF"><div class="font-mono text-xs text-tngb-muted">14.05.2025</div><div class="text-sm text-slate-200" data-source="FACT_BMF_2025">BMF-Schreiben „Einzelfragen zur Abgeltungsteuer“ setzt die Aufhebung um.</div></div>
-      <div class="tl-item" style="--dot:#00CC7A;border-left-color:transparent"><div class="font-mono text-xs text-tngb-muted">Stand 05.10.2026</div><div class="text-sm text-slate-200" data-source="FACT_STOCK_LOSS_S4">Es gilt nur noch die Beschränkung für Aktienverluste (§ 20 Abs. 6 Satz 4). Sie liegt beim BVerfG (2 BvL 3/21).</div></div>
+      <div class="tl-item" style="--dot:#64748B" data-source="FACT_TERMIN_2019"><div class="font-mono text-xs text-tngb-muted">21.12.2019</div><div class="text-sm text-slate-200">Einführung der Verlustverrechnungsbeschränkung (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021.</div></div>
+      <div class="tl-item" style="--dot:#FF6B00" data-source="FACT_TERMIN_2020_RAISE"><div class="font-mono text-xs text-tngb-muted">21.12.2020</div><div class="text-sm text-slate-200">JStG 2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €. <span class="dbom-class-badge">MEDIEN</span></div></div>
+      <div class="tl-item" style="--dot:#DFAF0F" data-source="FACT_BFH_ADV"><div class="font-mono text-xs text-tngb-muted">07.06.2024</div><div class="text-sm text-slate-200">BFH VIII B 113/23 (AdV, summarisch): ernstliche Zweifel an der Verfassungsmäßigkeit.</div></div>
+      <div class="tl-item" style="--dot:#E6399A" data-source="FACT_JSTG2024_REPEAL"><div class="font-mono text-xs text-tngb-muted">02.12.2024</div><div class="text-sm text-slate-200">JStG 2024 (BGBl. 2024 I Nr. 387) hebt § 20 Abs. 6 Satz 5 und 6 auf, anwendbar in allen offenen Fällen.</div></div>
+      <div class="tl-item" style="--dot:#00CFFF" data-source="FACT_BMF_2025"><div class="font-mono text-xs text-tngb-muted">14.05.2025</div><div class="text-sm text-slate-200">BMF-Schreiben „Einzelfragen zur Abgeltungsteuer“ setzt die Aufhebung um.</div></div>
+      <div class="tl-item" style="--dot:#00CC7A;border-left-color:transparent" data-source="FACT_STOCK_LOSS_S4"><div class="font-mono text-xs text-tngb-muted">Stand 05.10.2026</div><div class="text-sm text-slate-200">Es gilt nur noch die Beschränkung für Aktienverluste (§ 20 Abs. 6 Satz 4). Sie liegt beim BVerfG (2 BvL 3/21).</div></div>
     </div>
     <div class="flex flex-col gap-4">
-      <div class="dep-box border-l-4" style="border-color:#E6399A;">
+      <div class="dep-box border-l-4" style="border-color:#E6399A;" data-source="FACT_OS_KO_NOT_TERMIN FACT_JSTG2024_REPEAL">
         <h3 class="font-head font-bold text-tngb-magenta mb-2">Was das für die „Verdrängungsthese“ heißt</h3>
         <p class="text-sm text-slate-300 leading-relaxed">Von 2021 bis 2024 war die Benachteiligung börsengehandelter Optionen real. Bei Spreads konnten Steuern auf wirtschaftlich nicht vorhandene Gewinne anfallen. Optionsscheine und Knock-outs waren nach Auffassung der Finanzverwaltung keine Termingeschäfte. Der Totalverlust beim Knock-out fiel allerdings unter Satz 6 a. F., ebenfalls mit 20.000-€-Grenze. Heute unterscheidet das Steuerrecht nicht mehr zwischen den Produktwelten.</p>
       </div>
@@ -336,7 +364,7 @@ tailwind.config = { theme: { extend: {
         <h3 class="font-head font-bold text-tngb-orange mb-2">Kapitalgesellschaft ist kein Freifahrtschein</h3>
         <p class="text-sm text-slate-300 leading-relaxed">§ 15 Abs. 4 Satz 3 EStG gilt über § 8 Abs. 1 KStG auch für eine vermögensverwaltende GmbH. Verluste aus Termingeschäften sind dort nur mit Gewinnen aus Termingeschäften verrechenbar (eigener Verlustkreis, ohne Betragsgrenze). Ausnahmen bestehen für Institute und Sicherungsgeschäfte (Satz 4), mit Rückausnahme für Aktien-Hedges (Satz 5). <em>Keine Empfehlung zur Rechtsformwahl.</em></p>
       </div>
-      <div class="dep-box text-xs text-tngb-muted">Allgemeine Information mit Rechtsstand 05.10.2026. Ob Altjahre (2021–2024) korrigiert werden können, hängt davon ab, ob die Bescheide noch offen sind. Das muss im Einzelfall ein Steuerberater prüfen.</div>
+      <div class="dep-box text-xs text-tngb-muted" data-def="Hinweis">Allgemeine Information mit Rechtsstand 05.10.2026. Ob Altjahre (2021–2024) korrigiert werden können, hängt davon ab, ob die Bescheide noch offen sind. Das muss im Einzelfall ein Steuerberater prüfen.</div>
     </div>
   </div>
 </section>
@@ -390,6 +418,8 @@ tailwind.config = { theme: { extend: {
         <label>Kontrakt-Multiplikator \(M\)<input type="number" id="gM" value="100" min="1" step="1"/></label>
         <label>Dealer-Position \(s\)<select id="gSign"><option value="1">long Gamma (+1)</option><option value="-1">short Gamma (−1)</option></select></label>
         <label>Kursbewegung in %<input type="number" id="gMove" value="1" step="0.25"/></label>
+        <label>Futures-Multiplikator (ES = 50)<input type="number" id="gF" value="50" min="1" step="1"/></label>
+        <label>Micro-Multiplikator (MES = 5)<input type="number" id="gFm" value="5" min="1" step="1"/></label>
       </div>
     </div>
     <div class="sim-out" id="gOut"></div>
@@ -403,9 +433,9 @@ tailwind.config = { theme: { extend: {
     <h2 class="section-title">Datenfeed, Latenz und Ausführung</h2>
   </div>
   <div class="grid md:grid-cols-3 gap-4 mb-6">
-    <div class="dep-box" data-source="FACT_OPRA_CAPACITY"><div class="text-xs font-mono text-tngb-muted">OPRA · Kapazität je Stream</div><div class="text-2xl font-head font-bold text-tngb-magenta" data-source="FACT_OPRA_CAPACITY">&gt; 30 Gbps</div><div class="text-xs text-slate-400" data-source="FACT_OPRA_CAPACITY">Projektion Sept. 2025: 37,3 Gbps Spitzenlast je Stream im 1-ms-Fenster</div><div class="text-xs text-slate-400 mt-1" data-source="FACT_OPRA_BURSTS">gemessene Bursts &gt; 180 Mio. Nachrichten/s (April 2025) <span class="dbom-class-badge">MEDIEN</span></div></div>
+    <div class="dep-box" data-source="FACT_OPRA_CAPACITY"><div class="text-xs font-mono text-tngb-muted">OPRA · Kapazität je Stream</div><div class="text-2xl font-head font-bold text-tngb-magenta" data-source="FACT_OPRA_CAPACITY">37,3 Gbps</div><div class="text-xs text-slate-400" data-source="FACT_OPRA_CAPACITY">Projektion Sept. 2025: Spitzenlast je Stream im 1-ms-Fenster</div><div class="text-xs text-slate-400 mt-1" data-source="FACT_OPRA_BURSTS">gemessene Bursts &gt; 180 Mio. Nachrichten/s (April 2025) <span class="dbom-class-badge">MEDIEN</span></div></div>
     <div class="dep-box" data-source="FACT_XRAY_1MIN_SPX"><div class="text-xs font-mono text-tngb-muted">Options X-Ray</div><div class="text-2xl font-head font-bold text-tngb-cyan">60 s</div><div class="text-xs text-slate-400">serverseitiger Snapshot, CBOE-Daten mit OptionsDepth-Analytik; Client-Last gering <span class="est-mark">EST</span></div></div>
-    <div class="dep-box"><div class="text-xs font-mono text-tngb-muted">Options Chain Suite</div><div class="text-2xl font-head font-bold text-tngb-emerald">EOD</div><div class="text-xs text-slate-400">täglicher OI-Snapshot · ES, NQ, CL, GC · blind für Intraday-0DTE</div></div>
+    <div class="dep-box" data-source="FACT_CHAIN_SUITE"><div class="text-xs font-mono text-tngb-muted">Options Chain Suite</div><div class="text-2xl font-head font-bold text-tngb-emerald">EOD</div><div class="text-xs text-slate-400">täglicher OI-Snapshot · ES, NQ, CL, GC · blind für Intraday-0DTE</div></div>
   </div>
   <div class="grid lg:grid-cols-2 gap-6">
     <div class="dep-box">
@@ -417,8 +447,8 @@ tailwind.config = { theme: { extend: {
     <div class="dep-box">
       <h3 class="font-head font-bold text-white mb-2">Ausführung: Futures ja, Optionen nein</h3>
       <table><tbody>
-        <tr><td>Handelsanbindungen</td><td>Rithmic, CQG, Interactive Brokers (TWS)</td></tr>
-        <tr><td>X-Ray-Voraussetzung</td><td>Rithmic oder IB; CQG in Entwicklung <span class="badge b-v">VENDOR</span></td></tr>
+        <tr data-source="FACT_ATAS_CONNECTIONS"><td>Handelsanbindungen</td><td>Rithmic, CQG, Interactive Brokers (TWS)</td></tr>
+        <tr data-source="FACT_XRAY_CONNECTIVITY"><td>X-Ray-Voraussetzung</td><td>Rithmic oder IB; CQG in Entwicklung <span class="badge b-v">VENDOR</span></td></tr>
         <tr data-source="FACT_CROSS_TRADING"><td>Cross-Trading</td><td>ES-Chart → MES-Ausführung, seit 8.0.12 (17.02.2026)</td></tr>
         <tr data-source="FACT_ATAS_NO_OPT_TRADING"><td>Options Board / Strategy Analyzer</td><td>Beta, Ultra-Plan; <strong>Optionshandel in ATAS derzeit nicht möglich</strong></td></tr>
         <tr data-source="FACT_IB_BAG"><td>Multi-Leg-Routing</td><td>fehlt in ATAS; IB-API unterstützt Combo-Orders (BAG, bis 6 Legs) bereits nativ</td></tr>
@@ -452,19 +482,19 @@ tailwind.config = { theme: { extend: {
     <table>
       <thead><tr><th>Merkmal</th><th>ATAS X-Ray</th><th>SpotGamma</th><th>MenthorQ</th><th>Volland</th><th>Bookmap</th><th>IBKR TWS</th></tr></thead>
       <tbody>
-        <tr><td>Kernfokus</td><td>Orderflow + Dealer-Positionierung</td><td>Gamma-Levels, Research</td><td>Gamma-Levels, Modelle, Ausbildung</td><td>Notional-Greeks Dealer-Buch</td><td>Orderbuch-Heatmap, Ausführung</td><td>Broker, Portfoliorisiko</td></tr>
-        <tr><td>Optionsdaten-Frequenz</td><td>1 Min.</td><td>HIRO/TRACE intraday; Levels vor Eröffnung</td><td>EOD + alle 5 Min.</td><td>EOD bis alle 5 Min.</td><td>keine nativen</td><td>Echtzeit (Abo)</td></tr>
-        <tr><td>GEX / Vanna / Charm</td><td>✓ / n. v. / ✓</td><td>✓ / Modell / n. v.</td><td>✓ / n. v. / n. v.</td><td>✓ / ✓ / ✓</td><td>nur Add-ons</td><td>nur eigene Positionen</td></tr>
-        <tr><td>Abdeckung</td><td>SPX intraday; ES, NQ, CL, GC (EOD)</td><td>SPX, NDX, ETFs, &gt; 3.500 Aktien</td><td>~1.300–1.400 Werte inkl. Futures-Optionen</td><td>Top-200 nach Notional</td><td>Futures, Aktien, Krypto</td><td>global inkl. ODAX/OESX</td></tr>
+        <tr data-source="FACT_COMPETITOR_MATRIX"><td>Kernfokus</td><td>Orderflow + Dealer-Positionierung</td><td>Gamma-Levels, Research</td><td>Gamma-Levels, Modelle, Ausbildung</td><td>Notional-Greeks Dealer-Buch</td><td>Orderbuch-Heatmap, Ausführung</td><td>Broker, Portfoliorisiko</td></tr>
+        <tr data-source="FACT_COMPETITOR_MATRIX"><td>Optionsdaten-Frequenz</td><td>1 Min.</td><td>HIRO/TRACE intraday; Levels vor Eröffnung</td><td>EOD + alle 5 Min.</td><td>EOD bis alle 5 Min.</td><td>keine nativen</td><td>Echtzeit (Abo)</td></tr>
+        <tr data-source="FACT_COMPETITOR_MATRIX"><td>GEX / Vanna / Charm</td><td>✓ / n. v. / ✓</td><td>✓ / Modell / n. v.</td><td>✓ / n. v. / n. v.</td><td>✓ / ✓ / ✓</td><td>nur Add-ons</td><td>nur eigene Positionen</td></tr>
+        <tr data-source="FACT_COMPETITOR_MATRIX"><td>Abdeckung</td><td>SPX intraday; ES, NQ, CL, GC (EOD)</td><td>SPX, NDX, ETFs, &gt; 3.500 Aktien</td><td>~1.300–1.400 Werte inkl. Futures-Optionen</td><td>Top-200 nach Notional</td><td>Futures, Aktien, Krypto</td><td>global inkl. ODAX/OESX</td></tr>
         <tr data-source="FACT_NO_EUREX_GEX"><td>Eurex-GEX</td><td>nein</td><td>nein</td><td>n. v.</td><td>nein</td><td>nein</td><td>nur Rohdaten</td></tr>
-        <tr><td>Orderflow / MBO</td><td>Footprint, MBO-Bundle</td><td>–</td><td>–</td><td>–</td><td>Heatmap, MBO via Rithmic</td><td>–</td></tr>
-        <tr><td>Ausführung</td><td>Futures ja, Optionen nein</td><td>nein</td><td>über Partnerplattformen</td><td>n. v.</td><td>ja</td><td>ja, vollständig</td></tr>
+        <tr data-source="FACT_COMPETITOR_MATRIX"><td>Orderflow / MBO</td><td>Footprint, MBO-Bundle</td><td>–</td><td>–</td><td>–</td><td>Heatmap, MBO via Rithmic</td><td>–</td></tr>
+        <tr data-source="FACT_COMPETITOR_MATRIX"><td>Ausführung</td><td>Futures ja, Optionen nein</td><td>nein</td><td>über Partnerplattformen</td><td>n. v.</td><td>ja</td><td>ja, vollständig</td></tr>
         <tr data-source="FACT_VENDOR_PRICES"><td>Preis/Monat <span class="est-mark">EST</span> <span class="dbom-class-badge">MEDIEN</span></td><td>Ultra ca. 50–90 €</td><td>ca. 67–224 $</td><td>129 / 349 $</td><td>150–1.000 $</td><td>39–99 $ + Daten</td><td>Plattform frei + Datenabos</td></tr>
       </tbody>
     </table>
   </div>
   <p class="text-xs text-tngb-muted mt-3">Stand 2026-10-05, Herstellerangaben (VENDOR_CLAIM) bzw. Drittquellen; „n. v.“ = nicht verifizierbar. Preise sind Richtwerte und beim Anbieter zu prüfen. Europäisches Zusatzangebot: Gamma Cockpit (DAX-GEX aus ODAX-Daten, nur Tageswerte, Beta).</p>
-  <div class="info-box mt-4 text-sm text-slate-300 leading-relaxed">ATAS verbindet im Vergleichsfeld als einziger Anbieter Dealer-Positionierung im Minutentakt mit nativem MBO-/Footprint-Werkzeug in einer Oberfläche. Volland ist laut Matrix der einzige Anbieter mit belegter Abdeckung von Gamma, Vanna und Charm; SpotGamma bietet mit HIRO als einziger einen Echtzeit-Flow-Indikator. MenthorQ hat die breiteste Abdeckung von Futures-Optionen. Die TWS bietet die vollständigste Ausführung, aber keine marktweite Positionierung.</div>
+  <div class="info-box mt-4 text-sm text-slate-300 leading-relaxed" data-source="FACT_COMPETITOR_MATRIX">Ableitung aus der Matrix: ATAS verbindet als einziger Anbieter im Vergleichsfeld native Optionsdaten im Minutentakt mit nativem MBO-/Footprint-Werkzeug in einer Oberfläche; Bookmap hat MBO, aber keine nativen Optionsmetriken. Volland ist der einzige Anbieter mit belegter Abdeckung von Gamma, Vanna und Charm. Intraday-Flow-Analytik bieten SpotGamma (HIRO/TRACE) und ATAS (Flow, Flow Delta). Eigene Ausführung bieten ATAS (nur Futures), Bookmap und die TWS; für Volland ist sie n. v.</div>
 </section>
 
 <!-- ===== S10 DACH ===== -->
@@ -482,10 +512,10 @@ tailwind.config = { theme: { extend: {
           <tr><td>Kontrahentenrisiko</td><td>CCP (Eurex Clearing)</td><td>Emittentenbonität</td></tr>
           <tr><td>Preisbildung</td><td>Orderbuch, mehrere Market Maker</td><td>Quote-Making durch Emittenten</td></tr>
           <tr><td>Volatilität im Preis</td><td>marktgebildete IV</td><td>Emittenten-IV, kann abweichen</td></tr>
-          <tr data-source="FACT_EUREX_SPECS"><td>Größe</td><td>ODAX 5 €/Pkt.; ODXS kleiner</td><td>frei über Bezugsverhältnis</td></tr>
+          <tr data-source="FACT_ODAX_SPECS"><td>Größe</td><td>ODAX 5 €/Pkt.; ODXS kleiner</td><td>frei über Bezugsverhältnis</td></tr>
           <tr><td>Stillhalter möglich</td><td>ja (Margin)</td><td>nein</td></tr>
-          <tr data-source="FACT_BAFIN_TURBO"><td>Zugang Privatanleger</td><td>Angemessenheitsprüfung (§ 63 Abs. 10 WpHG); nicht bei allen Brokern</td><td>breit; Turbos seit 16.06.2026 mit Wissenstest + Risikohinweis</td></tr>
-          <tr><td>Kostenausweis</td><td>Gebühren, MiFID-II-Ex-ante-Kosten</td><td>PRIIPs-KID + MiFID-II-Kosten</td></tr>
+          <tr><td>Zugang Privatanleger</td><td data-source="FACT_ANGEMESSENHEIT">Angemessenheitsprüfung (§ 63 Abs. 10 WpHG) <span class="dbom-class-badge">UNGEPRÜFT</span>; nicht bei allen Brokern</td><td data-source="FACT_BAFIN_TURBO">breit; Turbos seit 16.06.2026 mit Wissenstest + Risikohinweis</td></tr>
+          <tr data-source="FACT_PRIIPS_UWG"><td>Kostenausweis</td><td>Gebühren, MiFID-II-Ex-ante-Kosten</td><td>PRIIPs-KID + MiFID-II-Kosten</td></tr>
           <tr data-source="FACT_JSTG2024_REPEAL"><td>Steuer (PV, offene Fälle)</td><td>keine Sonderbeschränkung mehr</td><td>keine Sonderbeschränkung</td></tr>
           <tr><td>Öffentliches OI je Strike</td><td>ja, täglich</td><td>nein</td></tr>
         </tbody>
@@ -495,13 +525,13 @@ tailwind.config = { theme: { extend: {
       <div class="dep-box">
         <h3 class="font-head font-bold text-white mb-2">Volumen im Vergleich</h3>
         <div style="height:200px;"><canvas id="chartVol" aria-label="Optionen mit Tagesverfall: ADV Eurex"></canvas></div>
-        <p class="text-xs text-tngb-muted mt-2" data-source="FACT_EUREX_DAILY">Durchschnittlicher Tagesumsatz (ADV) seit Start in Kontrakten: OEXP ca. 30.900, ODAP ca. 2.300. Beide sind End-of-Day-Optionen mit Verfällen über mehrere Tage, also kein reines 0DTE. Ein direkter Vergleich mit dem SPX-0DTE-Anteil (59 % des Volumens 2025) zeigt daher nur die Größenordnung.</p>
+        <p class="text-xs text-tngb-muted mt-2"><span data-source="FACT_EUREX_DAILY_ADV">Durchschnittlicher Tagesumsatz (ADV) seit Produktstart: OEXP ca. 30.900 Kontrakte, ODAP ca. 2.300 Kontrakte <span class="dbom-class-badge">UNGEPRÜFT</span></span>. <span data-source="FACT_EUREX_DAILY_LAUNCH">Beide sind End-of-Day-Optionen (seit 28.08.2023 bzw. 13.11.2023) mit Verfällen über mehrere Handelstage, also kein reines 0DTE.</span> <span data-source="FACT_SPX_0DTE_59">Ein Vergleich mit dem SPX-0DTE-Anteil (59 % des SPX-Optionsvolumens 2025) zeigt daher nur die Größenordnung.</span></p>
       </div>
-      <div class="dep-box border-l-4" style="border-color:#9933FF;">
+      <div class="dep-box border-l-4" style="border-color:#9933FF;" data-source="FACT_ISSUER_HEDGING">
         <h3 class="font-head font-bold mb-2" style="color:#9933FF;">Warum GEX bei Optionsscheinen nicht greift</h3>
         <p class="text-sm text-slate-300 leading-relaxed">Es fehlt an Beobachtbarkeit: Offene Positionen kennt nur der Emittent, er nettet sein Buch vor dem Hedge, und der Hedge läuft teils börslich, teils außerbörslich. Eine Spur im FDAX gibt es (K7). Sie lässt sich aber keiner Strike-Struktur zuordnen.</p>
       </div>
-      <div class="dep-box text-xs text-slate-400"><span data-source="FACT_BSW_SHARES">BSW-Statistik (veröffentlicht 30.06.2026, Bezugszeitraum n. v.): Hebelprodukte ca. 84 % des Börsenumsatzes verbriefter Derivate, davon Knock-outs ca. 59 %, Optionsscheine ca. 19 % <span class="dbom-class-badge">UNGEPRÜFT</span></span>. <span data-source="FACT_BAFIN_TURBO">BaFin-Studie: Verlustquote bei Turbo-Zertifikaten 74,2 %.</span></div>
+      <div class="dep-box text-xs text-slate-400"><span data-source="FACT_BSW_SHARES">BSW-Statistik (Bezugszeitraum n. v.), jeweils Anteil am Gesamtumsatz verbriefter Derivate: Hebelprodukte ca. 84 %, darunter Knock-outs ca. 59 % und Optionsscheine ca. 19 % <span class="dbom-class-badge">UNGEPRÜFT</span></span>. <span data-source="FACT_BAFIN_STUDY">BaFin-Studie (Untersuchungszeitraum 2019–2023): Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste <span class="dbom-class-badge">UNGEPRÜFT</span>.</span></div>
     </div>
   </div>
 </section>
@@ -525,8 +555,8 @@ tailwind.config = { theme: { extend: {
     </table>
   </div>
   <div class="grid md:grid-cols-2 gap-4 mt-4">
-    <div class="dep-box text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-orange">Automatisches Delta-Hedging:</strong> Eine Software, die selbständig Orders auslöst, macht den Nutzer zum algorithmischen Händler. Wer gewerblich handelt und unter die Definition fällt, unterliegt Art. 17 MiFID II bzw. § 80 Abs. 2 WpHG. Trifft die Software Entscheidungen für Kunden, ist eine Erlaubnispflicht nach WpIG/KWG zu prüfen. Empfohlen <span class="dbom-class-badge">SCENARIO</span> ist ein halbautomatischer Vorschlag mit Bestätigung, Pre-Trade-Limits und Kill-Switch.</div>
-    <div class="dep-box text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-gold">Fair-Value-Tool:</strong> Bewertet wird gegen die ODAX-Volatilitätsfläche statt gegen US-Optionen. Laufzeit, Strike, Bezugsverhältnis, Zins, Dividende und Quanto-Effekte werden angepasst, die Emittentenbonität als realer Wert berücksichtigt. Das Ergebnis ist eine neutrale „Fair-Value-Differenz“ mit offener Methodik, abgeglichen mit dem PRIIPs-KID. Begriffe wie „verdeckte Marge“ sind wegen UWG-Risiken zu vermeiden.</div>
+    <div class="dep-box text-sm text-slate-300 leading-relaxed" data-source="FACT_ALGO_TRADING"><strong class="text-tngb-orange">Automatisches Delta-Hedging:</strong> Löst eine Software selbständig Orders aus, handelt es sich um algorithmischen Handel. Die Pflichten nach Art. 17 MiFID II bzw. § 80 Abs. 2 WpHG richten sich an Wertpapierdienstleistungsunternehmen, nicht unmittelbar an Privatanleger. Für ATAS als Anbieter ist zu prüfen, ob eine Funktion, die für Kunden Entscheidungen trifft, eine Erlaubnispflicht nach WpIG/KWG auslöst. Empfohlen <span class="dbom-class-badge">SCENARIO</span> ist ein halbautomatischer Vorschlag mit Bestätigung, Pre-Trade-Limits und Kill-Switch.</div>
+    <div class="dep-box text-sm text-slate-300 leading-relaxed" data-source="FACT_PRIIPS_UWG"><strong class="text-tngb-gold">Fair-Value-Tool:</strong> Bewertet wird gegen die ODAX-Volatilitätsfläche statt gegen US-Optionen. Laufzeit, Strike, Bezugsverhältnis, Zins, Dividende und Quanto-Effekte werden angepasst, die Emittentenbonität als realer Wert berücksichtigt. Das Ergebnis ist eine neutrale „Fair-Value-Differenz“ mit offener Methodik, abgeglichen mit dem PRIIPs-KID. Begriffe wie „verdeckte Marge“ sind wegen UWG-Risiken zu vermeiden.</div>
   </div>
 </section>
 
@@ -541,7 +571,7 @@ tailwind.config = { theme: { extend: {
     <div class="dep-box border-t-4" style="border-top-color:#DFAF0F;"><h3 class="font-head font-bold text-tngb-gold mb-2">◐ Relativiert</h3><ul class="tick"><li>Market Maker hedgen aus Kalkül, nicht aus gesetzlichem Zwang.</li><li>GEX beruht auf einer Positionsannahme; beim SPX gut, anderswo schwächer fundiert.</li><li>Optionsscheine hinterlassen eine schwache, nicht zurechenbare Hedge-Spur, aber keine Nullspur.</li></ul></div>
     <div class="dep-box border-t-4" style="border-top-color:#E6399A;"><h3 class="font-head font-bold text-tngb-magenta mb-2">✗ Entfällt</h3><ul class="tick"><li>Die 20.000-€-Grenze als aktuelle Barriere (JStG 2024).</li><li>„Rechtsunsicherheit bis zum BVerfG“ für Termingeschäfte.</li><li>„Keine Verlustbeschränkung“ für Kapitalgesellschaften.</li></ul></div>
   </div>
-  <div class="info-box mt-6 text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-cyan">Neue strategische These <span class="dbom-class-badge">SCENARIO</span>:</strong> Der Wert einer Eurex-Erweiterung liegt nicht im Umgehen einer Steuerbarriere, sondern in einer Analyselücke. <span data-source="FACT_NO_EUREX_GEX">Für ODAX und OESX ist im Vergleichsfeld für keinen Anbieter eine Dealer-Positionierung innerhalb des Tages belegt (MenthorQ: n. v.).</span> Ob ATAS diese Lücke füllen kann, hängt von Datenlizenzen, Validierung und der offenen Kommunikation der schwächeren Positionsannahme ab.</div>
+  <div class="info-box mt-6 text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-cyan">Neue strategische These <span class="dbom-class-badge">SCENARIO</span>:</strong> Der Wert einer Eurex-Erweiterung liegt nicht im Umgehen einer Steuerbarriere, sondern in einer Analyselücke. <span data-source="FACT_NO_EUREX_GEX">Für ODAX und OESX bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern eine Dealer-Positionierung innerhalb des Tages (MenthorQ: n. v.).</span> Ob ATAS diese Lücke füllen kann, hängt von Datenlizenzen, Validierung und der offenen Kommunikation der schwächeren Positionsannahme ab.</div>
 </section>
 
 <!-- ===== S-QA COMPLIANCE / DATENQUALITÄT / STYLEGUIDE ===== -->
@@ -567,8 +597,8 @@ tailwind.config = { theme: { extend: {
         <tr><td>C5 Marken beschreibend</td><td class="check-pass">✓</td></tr>
         <tr><td>C6 UWG-konforme Begriffe</td><td class="check-pass">✓</td></tr>
         <tr><td>C7 Ausgewogene Risikodarstellung</td><td class="check-pass">✓</td></tr>
-        <tr><td>C8 Regulatorische Bezüge belegt</td><td class="check-part" title="PRIIPs/Art. 24 MiFID II/§ 6 UWG nicht neu am Original geprüft">◐</td></tr>
-        <tr><td>C9 Datenschutz</td><td class="check-part" data-gate="C9" title="CDN-Abrufe (jsDelivr, Tailwind) ohne Einwilligung und ohne SRI; in datenschutz.html offengelegt, Rechtsrisiko ungeprüft (L20)">◐</td></tr>
+        <tr><td>C8 Regulatorische Bezüge belegt</td><td class="check-part" data-gate="C8" title="§ 80 WpHG verifiziert; PRIIPs/UWG und § 63 Abs. 10 WpHG nur UNVERIFIED">◐</td></tr>
+        <tr><td>C9 Datenschutz</td><td class="check-part" data-gate="C9" title="v1.2.0: alle Bibliotheken selbst gehostet, 0 Drittanbieter-Abrufe (L20); ✓ erst nach unabhängiger Zweitprüfung (L10)">◐</td></tr>
       </tbody></table>
     </div>
     <div class="dep-box">
@@ -577,12 +607,12 @@ tailwind.config = { theme: { extend: {
         <tr><td>Q1 Faktencheck K1–K12 vollständig</td><td class="check-pass">✓</td></tr>
         <tr><td>Q2 Aktualität / a. F. markiert</td><td class="check-part" data-gate="Q2" title="BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b)">◐</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="v1.1.0: L12, L13b, L14, L16 automatisch bestanden; ✓ erst nach unabhängiger Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="v1.2.0: L05–L08, L12–L14, L16, L17, L19, L21 automatisch bestanden; ✓ erst nach unabhängiger Zweitprüfung (L10)">◐</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-part" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="v1.1.0: S09-Text aus Matrix abgeleitet (L11), Fazit mit n. v.-Fall (L06), L13 Seite = Analyse bestanden; ✓ erst nach unabhängiger Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="v1.2.0: S09 aus Matrix abgeleitet (L11), L13/L13c/L18 bestanden; ✓ erst nach unabhängiger Zweitprüfung (L10)">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" title="Unsichere Fundstellen markiert; KPI Eurex-GEX auf 0 von 5 belegt korrigiert (M4)">◐</td></tr>
+        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="v1.2.0: Quantor-Nenner = DBOM-Basis (L18); unsichere Fundstellen markiert; ✓ erst nach Zweitprüfung">◐</td></tr>
         <tr><td>Q10 Formatvorgaben</td><td class="check-pass">✓</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
@@ -603,14 +633,9 @@ tailwind.config = { theme: { extend: {
       <ul class="tick text-xs">
         <li data-gate="C3">§ 52 Abs. 28 EStG und BMF-Randziffern am Original prüfen</li>
         <li data-gate="Q2">Stand BVerfG 2 BvL 3/21 prüfen</li>
-        <li data-gate="Q2">ATAS-Start (04.09.2026) und Preise prüfen</li>
+        <li data-gate="Q2" data-source="FACT_XRAY_LAUNCH">ATAS-Start (04.09.2026) und Preise prüfen</li>
         <li data-gate="Q2">Wettbewerbspreise und Eurex-Multiplikatoren bestätigen</li>
         <li data-gate="C4">Interessenkonflikte durch Herausgeber bestätigen</li>
-        <li data-gate="Q7">Zweitprüfung v1.1.0: S09-Wertungen „breiteste Abdeckung“ und „einziger Echtzeit-Flow“ an Matrix angleichen (L11)</li>
-        <li data-gate="Q9">Zweitprüfung v1.1.0: Eurex-GEX-Nenner auf Seite, Analyse und DBOM vereinheitlichen, n. v. aus dem Nenner (L18)</li>
-        <li data-gate="Q4">Zweitprüfung v1.1.0: Faktbindungen korrigieren, CONFIRMED mit Sekundär-/offenen Teilen abstufen, zweite Quellenliste der Analyse in DBOM überführen (L17, L19, L13)</li>
-        <li data-gate="C8">Zweitprüfung v1.1.0: S11-Formulierung zu § 80 WpHG (Adressat Wertpapierdienstleistungsunternehmen) präzisieren</li>
-        <li data-gate="C9">CDN-Ressourcen self-hosten oder Einwilligung/SRI ergänzen (L20)</li>
       </ul>
     </div>
   </div>
@@ -646,12 +671,12 @@ tailwind.config = { theme: { extend: {
   <h3 class="font-head font-bold text-white mb-3">Methodik &amp; Limitationen</h3>
   <div class="grid md:grid-cols-3 gap-4 mb-10">
     <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Gesetz, BMF, BFH, BaFin, Eurex, Cboe sowie Herstellerdokumentation, jeweils über Suchtreffer auf die Primärquelle (Volltextabruf gesperrt). Wettbewerbsdaten teils aus Drittquellen.</p></div>
-    <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Rechtsrahmen 0,70–0,90; Herstellerangaben 0,80–0,85; Wettbewerb 0,60; Modellannahme 0,50. Szenarien tragen keine Prognose-Konfidenz.</p></div>
+    <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Aus der DBOM berechnet: Rechtsrahmen <span data-dbom-range="REGULATORY_FRAMEWORK">0,65–0,9</span>; Herstellerangaben <span data-dbom-range="VENDOR_CLAIM">0,6–0,85</span>; Marktdaten <span data-dbom-range="MARKET_DATA">0,6–0,85</span>; Medienangaben <span data-dbom-range="MEDIA_REPORT">0,55–0,65</span>; Modellannahme <span data-dbom-range="MODEL_ASSUMPTION">0,5–0,5</span>. Szenarien tragen keine Prognose-Konfidenz.</p></div>
     <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Die Berechnungslogik des Herstellers ist nicht offengelegt. Die Dealer-Positionsannahme ist nicht beobachtbar. Für Eurex fehlen Teilnehmer-markierte Daten. Für X-Ray gibt es keine veröffentlichte Validierungsstatistik.</p></div>
   </div>
 
   <h3 class="font-head font-bold text-white mb-3">Glossar (folgt globalem Wissensniveau)</h3>
-  <div id="glossar" class="grid md:grid-cols-2 gap-3 mb-10"></div>
+  <div id="glossar" class="grid md:grid-cols-2 gap-3 mb-10" data-def="Glossar"></div>
 
   <h3 class="font-head font-bold text-white mb-3">Primär- &amp; Rahmenquellen</h3>
   <div id="sources" class="grid md:grid-cols-2 gap-3 mb-10 text-sm"></div>
@@ -681,7 +706,7 @@ tailwind.config = { theme: { extend: {
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.1.1 · 2026-10-07<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.2.0 · 2026-10-08<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
@@ -717,12 +742,12 @@ document.querySelectorAll('#s02-tabs .tab-btn').forEach(b=>b.addEventListener('c
 
 /* ====== REG MODAL ====== */
 const REG={
-  jstg:{t:"JStG 2024 · § 20 Abs. 6 Satz 5/6 EStG a. F.",b:"Das Jahressteuergesetz 2024 (BGBl. 2024 I Nr. 387) hat die Verlustverrechnungsbeschränkungen für Termingeschäfte (20.000 €) und für Forderungsausfälle aufgehoben. Nach § 52 Abs. 28 EStG gilt das in allen offenen Fällen. Umsetzung durch BMF-Schreiben vom 14.05.2025. Weiter gilt § 20 Abs. 6 Satz 4 (Aktienverluste).",u:"https://www.recht.bund.de/bgbl/1/2024/387/regelungstext.pdf"},
-  p15:{t:"§ 15 Abs. 4 Satz 3–5 EStG",b:"Verluste aus Termingeschäften im Betriebsvermögen sind nur mit Gewinnen aus Termingeschäften verrechenbar. Über § 8 Abs. 1 KStG gilt das auch für Kapitalgesellschaften. Ausnahmen bestehen für Institute und Absicherungsgeschäfte, mit Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG / § 8b KStG).",u:"https://www.gesetze-im-internet.de/estg/__15.html"},
-  mifid17:{t:"MiFID II Art. 17 / § 80 WpHG",b:"§ 80 Abs. 2 WpHG regelt die Pflichten beim algorithmischen Handel: Risikokontrollen, Notfallvorkehrungen, Dokumentation. Wer algorithmisch eine Market-Making-Strategie verfolgt (Definition in Abs. 5), muss nach Abs. 4 kontinuierlich quotieren und einen schriftlichen Vertrag mit dem Handelsplatz schließen. Eine Pflicht zum Delta-Hedging über das Orderbuch enthalten diese Normen nicht.",u:"https://www.gesetze-im-internet.de/wphg/__80.html"},
-  mar:{t:"MAR · Anlageempfehlung",b:"Art. 3 Abs. 1 Nr. 34/35 MAR definiert Anlageempfehlungen und Empfehlungen zu Anlagestrategien. Wer sie veröffentlicht, muss sie objektiv darstellen und Interessenkonflikte offenlegen (Delegierte VO (EU) 2016/958). Dieses Modul beschreibt Mechanik nur generisch und gibt keine Empfehlungen.",u:"https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32016R0958"},
-  turbo:{t:"BaFin · Allgemeinverfügung Turbo-Zertifikate",b:"Die Allgemeinverfügung ist am 15.10.2025 ergangen und seit 16.06.2026 in Kraft (Art. 42 MiFIR, § 15 WpHG). Sie verlangt einen standardisierten Risikohinweis und einen Wissenstest vor dem Kauf und verbietet Kaufanreize. Die zugrunde liegende BaFin-Studie ergab eine Verlustquote von 74,2 % bei Privatanlegern.",u:"https://www.bafin.de/SharedDocs/Downloads/DE/Aufsichtsrecht/Verfuegungen/dl_vf_allgemeinverfuegung_turbo_zertifikate.html"},
-  priips:{t:"PRIIPs-KID · § 6 UWG",b:"Emittentenkosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen. Vergleichende Darstellungen von Emittenten müssen objektiv und nachprüfbar sein (§ 6 UWG). Wertende Begriffe wie „verdeckte Marge“ sind daher zu vermeiden.",u:"https://eur-lex.europa.eu/eli/reg/2014/1286/oj"}
+  jstg:{f:["FACT_JSTG2024_REPEAL"],t:"JStG 2024 · § 20 Abs. 6 Satz 5/6 EStG a. F.",b:"Das Jahressteuergesetz 2024 (BGBl. 2024 I Nr. 387) hat die Verlustverrechnungsbeschränkungen für Termingeschäfte (20.000 €) und für Forderungsausfälle aufgehoben. Nach § 52 Abs. 28 EStG gilt das in allen offenen Fällen. Umsetzung durch BMF-Schreiben vom 14.05.2025. Weiter gilt § 20 Abs. 6 Satz 4 (Aktienverluste).",u:"https://www.recht.bund.de/bgbl/1/2024/387/regelungstext.pdf"},
+  p15:{f:["FACT_P15_KSTG"],t:"§ 15 Abs. 4 Satz 3–5 EStG",b:"Verluste aus Termingeschäften im Betriebsvermögen sind nur mit Gewinnen aus Termingeschäften verrechenbar. Über § 8 Abs. 1 KStG gilt das auch für Kapitalgesellschaften. Ausnahmen bestehen für Institute und Absicherungsgeschäfte, mit Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG / § 8b KStG).",u:"https://www.gesetze-im-internet.de/estg/__15.html"},
+  mifid17:{f:["FACT_ALGO_TRADING","FACT_MM_NO_HEDGE_DUTY"],t:"MiFID II Art. 17 / § 80 WpHG",b:"§ 80 Abs. 2 WpHG regelt die Pflichten beim algorithmischen Handel: Risikokontrollen, Notfallvorkehrungen, Dokumentation. Wer algorithmisch eine Market-Making-Strategie verfolgt (Definition in Abs. 5), muss nach Abs. 4 kontinuierlich quotieren und einen schriftlichen Vertrag mit dem Handelsplatz schließen. Eine Pflicht zum Delta-Hedging über das Orderbuch enthalten diese Normen nicht.",u:"https://www.gesetze-im-internet.de/wphg/__80.html"},
+  mar:{f:["FACT_MAR_RECO"],t:"MAR · Anlageempfehlung",b:"Art. 3 Abs. 1 Nr. 34/35 MAR definiert Anlageempfehlungen und Empfehlungen zu Anlagestrategien. Wer sie veröffentlicht, muss sie objektiv darstellen und Interessenkonflikte offenlegen (Delegierte VO (EU) 2016/958). Dieses Modul beschreibt Mechanik nur generisch und gibt keine Empfehlungen.",u:"https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32016R0958"},
+  turbo:{f:["FACT_BAFIN_TURBO","FACT_BAFIN_STUDY"],t:"BaFin · Allgemeinverfügung Turbo-Zertifikate",b:"Die Allgemeinverfügung ist am 15.10.2025 ergangen und seit 16.06.2026 in Kraft (Art. 42 MiFIR, § 15 WpHG). Sie verlangt einen standardisierten Risikohinweis und einen Wissenstest vor dem Kauf und verbietet Kaufanreize. Die zugrunde liegende BaFin-Studie (Untersuchungszeitraum 2019–2023, nicht im Volltext geprüft) ergab, dass rund 74,2 % der Kleinanleger Verluste erlitten.",u:"https://www.bafin.de/SharedDocs/Downloads/DE/Aufsichtsrecht/Verfuegungen/dl_vf_allgemeinverfuegung_turbo_zertifikate.html"},
+  priips:{f:["FACT_PRIIPS_UWG"],t:"PRIIPs-KID · § 6 UWG",b:"Emittentenkosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen. Vergleichende Darstellungen von Emittenten müssen objektiv und nachprüfbar sein (§ 6 UWG). Wertende Begriffe wie „verdeckte Marge“ sind daher zu vermeiden.",u:"https://eur-lex.europa.eu/eli/reg/2014/1286/oj"}
 };
 const modal=document.getElementById('regModal');
 document.querySelectorAll('.reg-tag').forEach(b=>b.addEventListener('click',()=>{
@@ -738,24 +763,24 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape') modal.classList.re
 
 /* ====== FAKTENCHECK K1–K12 ====== */
 const KS=[
-  ["K1","Rechtsstand § 20 Abs. 6 S. 5/6 EStG","20.000-€-Grenze gilt „seit 2021“ fort","no","crit","Das JStG 2024 (BGBl. 2024 I Nr. 387) hat die Sätze 5 und 6 aufgehoben, anwendbar in allen offenen Fällen (§ 52 Abs. 28 EStG); Umsetzung durch BMF-Schreiben vom 14.05.2025. Das Normzitat im Ausgangstext ist zudem falsch: Gemeint ist Satz 5, nicht Satz 6."],
-  ["K2","BFH VIII B 113/23","„mehrere Beschlüsse“; Unsicherheit bis zum BVerfG","no","crit","Belegt ist ein AdV-Beschluss vom 07.06.2024 (summarische Prüfung, Streitjahr 2021). Durch die Aufhebung ist die Frage für Termingeschäfte erledigt. Anhängig bleibt 2 BvL 3/21 zu Aktienverlusten, ein anderer Sachverhalt."],
-  ["K3","Abgrenzung Termingeschäft","Optionsscheine/KO steuerlich bevorzugt, Anleger „gedrängt“","part","major","Die Einordnung als Nicht-Termingeschäft ist korrekt (BMF seit 03.06.2021). Der Knock-out-Totalverlust fiel aber unter Satz 6 a. F. Die Verdrängungsthese trägt heute nicht mehr."],
-  ["K4","Kapitalgesellschaft","„keine Verlustverrechnungsbeschränkung“","no","crit","Über § 8 Abs. 1 KStG gilt § 15 Abs. 4 Satz 3 EStG: eigener Verlustkreis für Termingeschäfte (BFH I R 25/14). Ausnahmen bestehen nur für Institute und Sicherungsgeschäfte."],
-  ["K5","Hedging-Pflicht Market Maker","Market Maker „gesetzlich gezwungen“, über das Orderbuch zu hedgen","no","major","Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition in Abs. 5) regeln Quotierungs- und Vertragspflichten. Delta-Hedging ist Risikomanagement und kann über viele Kanäle erfolgen."],
-  ["K6","GEX-Prämisse","Dealer-Hedging als feste Mechanik","part","major","Die Positionskonvention ist eine Modellannahme. Beim SPX ist sie durch Teilnehmer-markierte Cboe-Daten besser fundiert, bleibt aber anfällig für Spreads, Overwriting und Intraday-Volumen."],
-  ["K7","Emittenten-Hedging","„keine“ Hedging-Spuren im FDAX","part","hint","Emittenten hedgen dynamisch, auch über Basiswert und Gegengeschäfte. Die Spur ist schwach und nicht zurechenbar, aber nicht null."],
-  ["K8","ATAS-Produktangaben","10 Indikatoren, CBOE/OptionsDepth, 60 s, nur SPX","ok","hint","Bestätigt durch Hilfe- und Lernseiten des Herstellers. Ergänzung: Optionen in ATAS derzeit nicht handelbar; Options Board/Strategy Analyzer als Beta."],
-  ["K9","Wettbewerber","Vergleich SpotGamma, MenthorQ, Volland, Bookmap, TWS","part","hint","Weitgehend belegt (Hersteller- und Drittquellen); einzelne Felder n. v.; Preise sind Richtwerte."],
-  ["K10","Eurex-Spezifikationen","FDAX/FESX-Optionsketten, „Hexensabbat“","part","hint","Gelistet sind Indexoptionen (ODAX 5 €/Pkt., OESX 10 €/Pkt.), keine Optionen auf die Futures. Fachbegriff: Quartalsverfall. Optionen mit Tagesverfall existieren (OEXP, ODAP)."],
-  ["K11","IBKR-Combo-Orders","native Spread-Engine fehlt","part","major","Für ATAS zutreffend, aber zu präzisieren. Die IB-API unterstützt BAG-Combo-Orders (bis 6 Legs, Netto-Limit) bereits. Die Lücke liegt in UI, Risikoprüfung und Positionsführung."],
-  ["K12","Warrant-Fair-Value-Tool","„verdeckte Marge“, „künstliche Spread-Ausweitung“","part","major","Wertende Begriffe mit UWG-Risiko. Neutral: Fair-Value-Differenz, Emittentenaufschlag. Abgleich mit PRIIPs-KID; Emittentenbonität ist ein realer Wert, keine Marge."]
+  ["K1","Rechtsstand § 20 Abs. 6 S. 5/6 EStG","20.000-€-Grenze gilt „seit 2021“ fort","no","crit","Das JStG 2024 (BGBl. 2024 I Nr. 387) hat die Sätze 5 und 6 aufgehoben, anwendbar in allen offenen Fällen (§ 52 Abs. 28 EStG); Umsetzung durch BMF-Schreiben vom 14.05.2025. Das Normzitat im Ausgangstext ist zudem falsch: Gemeint ist Satz 5, nicht Satz 6.","FACT_JSTG2024_REPEAL FACT_BMF_2025"],
+  ["K2","BFH VIII B 113/23","„mehrere Beschlüsse“; Unsicherheit bis zum BVerfG","no","crit","Belegt ist ein AdV-Beschluss vom 07.06.2024 (summarische Prüfung, Streitjahr 2021). Durch die Aufhebung ist die Frage für Termingeschäfte erledigt. Anhängig bleibt 2 BvL 3/21 zu Aktienverlusten, ein anderer Sachverhalt.","FACT_BFH_ADV FACT_STOCK_LOSS_S4"],
+  ["K3","Abgrenzung Termingeschäft","Optionsscheine/KO steuerlich bevorzugt, Anleger „gedrängt“","part","major","Die Einordnung als Nicht-Termingeschäft ist korrekt (BMF seit 03.06.2021). Der Knock-out-Totalverlust fiel aber unter Satz 6 a. F. Die Verdrängungsthese trägt heute nicht mehr.","FACT_OS_KO_NOT_TERMIN FACT_STOCK_LOSS_S4"],
+  ["K4","Kapitalgesellschaft","„keine Verlustverrechnungsbeschränkung“","no","crit","Über § 8 Abs. 1 KStG gilt § 15 Abs. 4 Satz 3 EStG: eigener Verlustkreis für Termingeschäfte (BFH I R 25/14). Ausnahmen bestehen nur für Institute und Sicherungsgeschäfte.","FACT_P15_KSTG"],
+  ["K5","Hedging-Pflicht Market Maker","Market Maker „gesetzlich gezwungen“, über das Orderbuch zu hedgen","no","major","Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition in Abs. 5) regeln Quotierungs- und Vertragspflichten. Delta-Hedging ist Risikomanagement und kann über viele Kanäle erfolgen.","FACT_MM_NO_HEDGE_DUTY"],
+  ["K6","GEX-Prämisse","Dealer-Hedging als feste Mechanik","part","major","Die Positionskonvention ist eine Modellannahme. Beim SPX ist sie durch Teilnehmer-markierte Cboe-Daten besser fundiert, bleibt aber anfällig für Spreads, Overwriting und Intraday-Volumen.","FACT_DEALER_CONVENTION FACT_CBOE_OPENCLOSE"],
+  ["K7","Emittenten-Hedging","„keine“ Hedging-Spuren im FDAX","part","hint","Emittenten hedgen dynamisch, auch über Basiswert und Gegengeschäfte. Die Spur ist schwach und nicht zurechenbar, aber nicht null.","FACT_ISSUER_HEDGING"],
+  ["K8","ATAS-Produktangaben","10 Indikatoren, CBOE/OptionsDepth, 60 s, nur SPX","ok","hint","Bestätigt durch Hilfe- und Lernseiten des Herstellers. Ergänzung: Optionen in ATAS derzeit nicht handelbar; Options Board/Strategy Analyzer als Beta.","FACT_XRAY_10_IND FACT_XRAY_1MIN_SPX FACT_ATAS_NO_OPT_TRADING"],
+  ["K9","Wettbewerber","Vergleich SpotGamma, MenthorQ, Volland, Bookmap, TWS","part","hint","Weitgehend belegt (Hersteller- und Drittquellen); einzelne Felder n. v.; Preise sind Richtwerte.","FACT_COMPETITOR_MATRIX"],
+  ["K10","Eurex-Spezifikationen","FDAX/FESX-Optionsketten, „Hexensabbat“","part","hint","Gelistet sind Indexoptionen (ODAX 5 €/Pkt., OESX 10 €/Pkt.), keine Optionen auf die Futures. Fachbegriff: Quartalsverfall. Optionen mit Tagesverfall existieren (OEXP, ODAP).","FACT_ODAX_SPECS FACT_OESX_MULT FACT_EUREX_DAILY_LAUNCH"],
+  ["K11","IBKR-Combo-Orders","native Spread-Engine fehlt","part","major","Für ATAS zutreffend, aber zu präzisieren. Die IB-API unterstützt BAG-Combo-Orders (bis 6 Legs, Netto-Limit) bereits. Die Lücke liegt in UI, Risikoprüfung und Positionsführung.","FACT_IB_BAG"],
+  ["K12","Warrant-Fair-Value-Tool","„verdeckte Marge“, „künstliche Spread-Ausweitung“","part","major","Wertende Begriffe mit UWG-Risiko. Neutral: Fair-Value-Differenz, Emittentenaufschlag. Abgleich mit PRIIPs-KID; Emittentenbonität ist ein realer Wert, keine Marge.","FACT_PRIIPS_UWG"]
 ];
 const RES={ok:'<span class="badge b-ok">✓ bestätigt</span>',part:'<span class="badge b-part">◐ präzisiert</span>',no:'<span class="badge b-no">✗ falsch/überholt</span>'};
 const SEV={crit:'<span class="badge b-crit">KRITISCH</span>',major:'<span class="badge b-major">WESENTLICH</span>',hint:'<span class="badge b-hint">HINWEIS</span>'};
 (function renderK(){
   const tb=document.querySelector('#k-table tbody');
-  tb.innerHTML=KS.map((k,i)=>`<tr class="k-row" data-k="${i}" tabindex="0" aria-expanded="false"><td class="mono text-tngb-cyan">${k[0]}</td><td class="font-semibold text-slate-200">${k[1]}</td><td class="text-slate-400">${k[2]}</td><td>${RES[k[3]]}</td><td>${SEV[k[4]]}</td></tr><tr class="k-detail" id="kd${i}"><td></td><td colspan="4" class="text-slate-300 text-sm" style="background:rgba(0,207,255,.04);">${k[5]}</td></tr>`).join('');
+  tb.innerHTML=KS.map((k,i)=>`<tr class="k-row" data-k="${i}" data-source="${k[6]}" tabindex="0" aria-expanded="false"><td class="mono text-tngb-cyan">${k[0]}</td><td class="font-semibold text-slate-200">${k[1]}</td><td class="text-slate-400">${k[2]}</td><td>${RES[k[3]]}</td><td>${SEV[k[4]]}</td></tr><tr class="k-detail" id="kd${i}"><td></td><td colspan="4" class="text-slate-300 text-sm" style="background:rgba(0,207,255,.04);">${k[5]}</td></tr>`).join('');
   tb.querySelectorAll('.k-row').forEach(r=>{
     const toggle=()=>{const d=document.getElementById('kd'+r.dataset.k);const o=d.classList.toggle('open');r.setAttribute('aria-expanded',o);};
     r.addEventListener('click',toggle);
@@ -765,21 +790,21 @@ const SEV={crit:'<span class="badge b-crit">KRITISCH</span>',major:'<span class=
 
 /* ====== GLOSSAR ====== */
 const GLOSSAR=[
-  ["0DTE","Optionen, die am selben Tag verfallen.","Zero Days to Expiration; beim SPX an jedem Wochentag.","Ca. 59 % des SPX-Volumens 2025; erzeugt Intraday-Positionen ohne OI-Spur."],
+  ["0DTE","Optionen, die am selben Tag verfallen.","Zero Days to Expiration; beim SPX an jedem Wochentag.","Großer Teil des SPX-Volumens (Kennzahl in S01); erzeugt Intraday-Positionen ohne OI-Spur."],
   ["GEX","Schätzung, wie stark Absicherungsgeschäfte den Markt bewegen könnten.","Gamma Exposure: aggregiertes Dollar-Gamma der Dealer-Positionen.","\\(\\sum s_i\\Gamma_i OI_i M S^2\\cdot 0{,}01\\); Vorzeichen hängt an der Positionsannahme."],
   ["GEX-Flip","Kursmarke, an der sich das Marktverhalten ändert.","Preis, an dem das Netto-Gamma das Vorzeichen wechselt.","Grenze zwischen dämpfendem und verstärkendem Hedging-Regime."],
   ["Call/Put Wall","Kursmarken mit besonders vielen offenen Optionen.","Strikes mit der höchsten Call- bzw. Put-Gamma-Konzentration.","Modellhafte Widerstands-/Unterstützungszonen; keine Preisgarantie."],
   ["Charm","Wie sich die Absicherung allein durch Zeitablauf ändert.","Änderung des Deltas pro Zeiteinheit.","\\(\\partial\\Delta/\\partial t\\); stark bei 0DTE und vor Verfall."],
   ["Vanna","Wie sich die Absicherung bei Volatilitätsänderung ändert.","Änderung des Deltas pro Änderung der impliziten Volatilität.","\\(\\partial\\Delta/\\partial\\sigma\\); treibt Flows nach IV-Crush/-Spikes."],
   ["ES-Äquivalent","Umrechnung in Anzahl Futures-Kontrakte.","Hedge-Delta geteilt durch ES-Multiplikator (50 $).","SPX-Multiplikator 100 / ES 50 / MES 5; Basis SPX↔ES beachten."],
-  ["OPRA","Zentraler Datenstrom aller US-Optionskurse.","Options Price Reporting Authority.","Spitzen > 30 Gbps je Stream; für Desktop-Clients ungefiltert nicht verarbeitbar."],
+  ["OPRA","Zentraler Datenstrom aller US-Optionskurse.","Options Price Reporting Authority.","Datenraten weit jenseits von Desktop-Kapazitäten (Kennzahlen in S07); ungefiltert nicht verarbeitbar."],
   ["MBO","Orderbuch mit jeder einzelnen Order.","Market by Order (Level 3).","Erlaubt Queue-Position, Iceberg- und Sweep-Erkennung."],
   ["Footprint","Chart mit Volumen pro Preisstufe.","Volumen getrennt nach Bid/Ask je Kerze.","Grundlage für Absorption und Delta-Divergenz."],
   ["Absorption","Viel Kaufdruck, aber der Preis steigt nicht.","Aggressives Volumen wird von passiven Orders aufgenommen.","Bestätigungssignal für Wall-Thesen im Long-Gamma-Regime."],
   ["Sweep","Eine große Order räumt mehrere Preisstufen ab.","Aggressive Order über mehrere Levels in einem Zug.","Widerlegungssignal für Wall-Thesen; oft Short-Gamma-Beschleunigung."],
   ["Iceberg","Große Order, von der nur ein Teil sichtbar ist.","Order mit verdecktem Volumen, die nachgefüllt wird.","Im MBO über wiederholte Ausführungen derselben Order-ID erkennbar."],
   ["Termingeschäft (steuerlich)","Geschäft, dessen Wert von einem anderen abhängt.","Steuerlich § 20 Abs. 2 S. 1 Nr. 3 EStG.","Sonderbeschränkung (§ 20 Abs. 6 S. 5 a. F.) durch JStG 2024 aufgehoben."],
-  ["Knock-out-Zertifikat","Hebelpapier, das an einer Schwelle wertlos wird.","Verbriefte Schuldverschreibung mit Knock-out-Barriere.","Seit 16.06.2026 BaFin-Wissenstest vor dem Kauf."],
+  ["Knock-out-Zertifikat","Hebelpapier, das an einer Schwelle wertlos wird.","Verbriefte Schuldverschreibung mit Knock-out-Barriere.","Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10)."],
   ["CCP","Zentrale Stelle zwischen Käufer und Verkäufer.","Central Counterparty, hier Eurex Clearing.","Ersetzt bilaterales Kontrahentenrisiko durch Margin-System."],
   ["PRIIPs-KID","Pflicht-Infoblatt zu Kosten und Risiken.","EU-Basisinformationsblatt (VO 1286/2014).","Referenz für Kostenvergleiche verbriefter Derivate."],
   ["Quartalsverfall","Großer Verfallstag im März, Juni, September, Dezember.","Dritter Freitag der Quartalsmonate.","Umgangssprachlich „Hexensabbat“; OI-Verschiebungen davor relevant."]
@@ -812,13 +837,13 @@ mk('chartVol',{type:'bar',data:{labels:['OEXP (ESTX 50, EoD)','ODAP (DAX, EoD)']
 const fmt=(v,d=0)=>v.toLocaleString('de-DE',{maximumFractionDigits:d,minimumFractionDigits:d});
 function num(id){const v=parseFloat(document.getElementById(id).value);return isFinite(v)?v:0;}
 function refreshGex(){
-  const S=num('gS'),OI=num('gOI'),G=num('gG'),M=num('gM'),s=+document.getElementById('gSign').value,mv=num('gMove');
+  const S=num('gS'),OI=num('gOI'),G=num('gG'),M=num('gM'),s=+document.getElementById('gSign').value,mv=num('gMove'),MF=num('gF')||50,MFm=num('gFm')||5;
   const unitsPerPt=G*OI*M;                // Delta-Änderung in Indexeinheiten je Punkt
   const gex1=s*G*OI*M*S*S*0.01;           // USD je 1 %
   const dS=S*mv/100;                      // Punkte der gewählten Bewegung
   const dDelta=s*unitsPerPt*dS;           // Delta-Änderung der Dealer (Indexeinheiten)
   const hedge=-dDelta;                    // Gegenläufige Hedge-Order
-  const es=hedge/50, mes=hedge/5;
+  const es=hedge/MF, mes=hedge/MFm;
   const dir=hedge>0?'kaufen':hedge<0?'verkaufen':'—';
   const col=s>0?'#00CC7A':'#E6399A';
   document.getElementById('gOut').innerHTML=
@@ -826,10 +851,10 @@ function refreshGex(){
     `<div class="text-sm mb-1">Delta-Änderung je Indexpunkt: <span class="mono text-tngb-cyan">${fmt(unitsPerPt,1)}</span> Indexeinheiten</div>`+
     `<div class="text-sm mb-1">GEX je 1 %: <strong class="mono" style="color:${col}">${fmt(gex1/1e6,1)} Mio. USD</strong></div>`+
     `<div class="text-sm mb-3">Bewegung ${fmt(mv,2)} % = <span class="mono">${fmt(dS,1)}</span> Punkte</div>`+
-    `<div class="text-sm">Modellhafte Hedge-Reaktion der Dealer: <strong style="color:${col}">${fmt(Math.abs(es),0)} ES</strong> bzw. <strong style="color:${col}">${fmt(Math.abs(mes),0)} MES</strong> ${dir}</div>`+
-    `<div class="text-xs text-tngb-muted mt-3">${s>0?'Long Gamma: Die Hedge-Order läuft gegen die Bewegung (dämpfend).':'Short Gamma: Die Hedge-Order läuft mit der Bewegung (verstärkend).'} Lineare Näherung; Gamma ändert sich mit Kurs, Zeit und IV. Probe: ES × 50 × S ≈ GEX × Bewegung in %.</div>`;
+    `<div class="text-sm">Modellhafte Hedge-Reaktion der Dealer: <strong style="color:${col}">${fmt(Math.abs(es),0)} Futures</strong> bzw. <strong style="color:${col}">${fmt(Math.abs(mes),0)} Micro-Futures</strong> ${dir}</div>`+
+    `<div class="text-xs text-tngb-muted mt-3">${s>0?'Long Gamma: Die Hedge-Order läuft gegen die Bewegung (dämpfend).':'Short Gamma: Die Hedge-Order läuft mit der Bewegung (verstärkend).'} Lineare Näherung; Gamma ändert sich mit Kurs, Zeit und IV. Probe: Futures × ${fmt(MF,0)} × S ≈ GEX × Bewegung in %.</div>`;
 }
-['gS','gOI','gG','gM','gSign','gMove'].forEach(id=>{const e=document.getElementById(id);if(e){e.addEventListener('input',refreshGex);e.addEventListener('change',refreshGex);}});
+['gS','gOI','gG','gM','gSign','gMove','gF','gFm'].forEach(id=>{const e=document.getElementById(id);if(e){e.addEventListener('input',refreshGex);e.addEventListener('change',refreshGex);}});
 refreshGex();
 
 /* ====== NAVDOCK + SCROLL-FADE ====== */
@@ -881,19 +906,25 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
     const map=Object.fromEntries((dbom.facts||[]).map(f=>[f.id,f]));
     const refs=document.querySelectorAll('[data-source^="FACT_"]');
     let missing=0;const miss=new Set();
-    refs.forEach(el=>{const id=el.dataset.source;
-      if(!valid.has(id)){missing++;miss.add(id);el.style.outline='2px dashed #E6399A';el.title='DBOM-MISSING: '+id;}
-      else{const info=map[id];el.title='['+info.verdict+' · '+info['class']+' · Konf. '+info.confidence+'] '+info.claim+(info.caveat?' · '+info.caveat:'');el.setAttribute('data-tooltip','');}
+    refs.forEach(el=>{const ids=el.dataset.source.split(/\s+/).filter(Boolean);
+      const bad=ids.filter(id=>!valid.has(id));
+      if(bad.length){missing+=bad.length;bad.forEach(id=>miss.add(id));el.style.outline='2px dashed #E6399A';el.title='DBOM-MISSING: '+bad.join(', ');}
+      else{el.title=ids.map(id=>{const info=map[id];return '['+info.verdict+' · '+info['class']+' · Konf. '+info.confidence+(info.period?' · '+info.period:'')+'] '+info.claim+(info.caveat?' · '+info.caveat:'');}).join('\n');el.setAttribute('data-tooltip','');}
     });
+
     const F=dbom.facts||[];
     const cnt={total:F.length,confirmed:F.filter(f=>f.verdict==='CONFIRMED').length,media:F.filter(f=>f.verdict==='MEDIA_REPORT').length,
       scenario:F.filter(f=>f.verdict==='SCENARIO_PROJECTION').length,vendor:F.filter(f=>f['class']==='VENDOR_CLAIM').length};
     cnt.unverified=F.filter(f=>f.verdict==='UNVERIFIED').length;
     document.querySelectorAll('[data-dbom-count]').forEach(el=>{const k=el.dataset.dbomCount;if(k in cnt)el.textContent=cnt[k];});
+    const rng={};F.forEach(f=>{(rng[f['class']]=rng[f['class']]||[]).push(f.confidence);});
+    const dc=v=>String(v).replace('.',',');
+    document.querySelectorAll('[data-dbom-range]').forEach(el=>{const r=rng[el.dataset.dbomRange];if(r)el.textContent=dc(Math.min(...r))+'–'+dc(Math.max(...r));});
     const srcEl=document.getElementById('sources');
-    if(srcEl&&dbom.sources){const use={};F.forEach(f=>[f.source_id,...(f.additional_sources||[])].forEach(s=>{(use[s]=use[s]||[]).push(f.id);}));
+    if(srcEl&&dbom.sources){const use={};F.forEach(f=>[f.source_id,...(f.supporting_sources||[]),...(f.additional_sources||[])].forEach(s=>{(use[s]=use[s]||[]).push(f.id);}));
       const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-      srcEl.innerHTML=dbom.sources.map(x=>{const inner=`<div class="text-tngb-cyan font-semibold">${esc(x.title)}</div><div class="text-xs text-slate-400">${(use[x.id]||[]).length} Fakt(en) · <span class="mono">${esc(x.id)}</span></div>`;
+      srcEl.innerHTML=dbom.sources.map(x=>{const tier={primary:'Primärquelle',vendor:'Herstellerquelle',secondary:'Sekundärquelle',internal:'intern'}[x.tier]||x.tier;
+        const inner=`<div class="text-tngb-cyan font-semibold">${esc(x.ref&&x.ref!=='–'?x.ref+' · ':'')}${esc(x.title)}</div><div class="text-xs text-slate-400">${tier} · ${(use[x.id]||[]).length} Fakt(en) · <span class="mono">${esc(x.id)}</span></div>`;
         return x.url?`<a class="dep-box block hover:border-tngb-cyan transition" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div class="dep-box">${inner}</div>`;}).join('')+
         `<a class="dep-box block hover:border-tngb-cyan transition md:col-span-2" href="analysen/m300-atas-options-xray-deep-dive.md"><div class="text-tngb-cyan font-semibold">Vollständiges Quellenverzeichnis der Analyse</div><div class="text-xs text-slate-400">Volltext-Analyse M300, Abschnitt 5</div></a>`;}
     const unbound=F.filter(f=>!document.querySelector('[data-source="'+f.id+'"]')).map(f=>f.id);

@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L21 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L24 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -20,6 +20,12 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   Grund: Einbettungen wie Artifact-Viewer, iFrame oder CMS setzen eigene `body`-Regeln, die die Vererbung von `html`
   überschreiben.
 - **L02:** `Chart.defaults.color='#94A3B8'` vor dem ersten `new Chart(...)`
+- **L20:** Keine Drittanbieter-CDNs. Bibliotheken liegen in `vendor/` (Chart.js, KaTeX, statisch gebautes Tailwind:
+  `sh vendor/build-tailwind.sh`, neue Seiten in `vendor/tailwind.config.cjs` → `content` eintragen).
+- **L22:** S01 enthält eine zugängliche Hero-Grafik (`<svg role="img">` mit `<title>` und `<desc>` oder `<img alt>`);
+  Schemata sind als „illustrativ, keine Marktdaten“ gekennzeichnet.
+- **L23:** `caveat-box` und `info-box` laufen über die volle Inhaltsbreite (kein `max-w-*`).
+- **L24:** SVG-Beschriftungen dürfen sich nicht überlappen (Browser-Messung).
 - **L09 (offen):** #64748B nicht für Lauftext unter 18,66 px fett verwenden, sobald die Styleguide-Entscheidung M7
   gefallen ist. Bis dahin meldet der Audit dies als WARN.
 
@@ -47,7 +53,8 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L16:** Bei CONFIRMED müssen der Bezugszeitraum der Quelle und der Claim übereinstimmen (Feld `period`).
 - **L17:** Eine gebundene Zahl muss im `claim`, `period` oder `caveat` des gebundenen Fakts stehen.
 - **L18:** Die Grundmenge eines Quantors ist einmal definiert; n. v.-Fälle gehören nicht in den Nenner; Seite = Analyse = DBOM.
-- **L19:** Zusammengesetzte Claims tragen das schwächste Verdict ihrer Teile; `period` enthält ein Datum.
+- **L19:** Zusammengesetzte Claims werden geteilt oder tragen das schwächste Verdict ihrer Teile. CONFIRMED braucht eine
+  Primär- oder Herstellerquelle (`tier`) als Hauptbeleg; Sekundärquellen nur als `supporting_sources`. `period` enthält ein Datum.
 - **L20 / C9:** Externe Ressourcen self-hosten oder mit Einwilligung und SRI; C9 nur ✓, wenn L20 sauber ist.
 - **L21:** Abgeleitete Kennzahlen (Konfidenz-Spannen, Scores) nie von Hand.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
@@ -65,8 +72,8 @@ Q7 Widerspruchsfreiheit · Q8 Glossar · Q9 keine Überzeichnung/Halluzination �
 1. **Statische Prüfung:** `python3 qa/check_module.py mXXX.html` → muss mit Exit 0 enden
 2. **Browser-Audit in allen Zielumgebungen:** `node qa/render_audit.cjs mXXX.html [--vendor DIR]` → Exit 0. Er prüft
    Plain, Viewer und 390 px.
-   Ohne CDN-Zugriff `--vendor` mit lokalen Kopien von chart.umd.js, katex.min.js, auto-render.min.js, katex.min.css und
-   einem mit der Seiten-Konfiguration kompilierten Tailwind-v3-CSS (tw.css).
+   Für selbst gehostete Seiten (L20) ohne weitere Optionen; `--vendor DIR` nur noch für Altseiten mit CDN-Einbindung.
+   Der Audit prüft zusätzlich Laufzeit-Abrufe an Dritte, lokale Dateien, Formeln, Diagramme und SVG-Überlappungen.
 3. **Manuelle Pflichtpunkte**, die kein Skript prüfen kann. Jeden einzeln abhaken und im Bericht nennen:
    - [ ] Jede Allaussage gegen die Quelltabelle gelesen (L06)
    - [ ] Formeln nachgerechnet und Zahlenbeispiel mit Probe (Q3)

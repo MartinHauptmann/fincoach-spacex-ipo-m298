@@ -47,7 +47,9 @@ async function route(ctx) {
 
 async function audit(browser, url, vp) {
   const ctx = await browser.newContext({ viewport: vp }); await route(ctx);
-  const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+  const p = await ctx.newPage(); const errs = [], ext = [], failed = []; p.on('pageerror', e => errs.push(e.message));
+  p.on('request', q => { const u = q.url(); if (/^https?:/.test(u) && !u.startsWith(`http://localhost:${port}`)) ext.push(u); });
+  p.on('requestfailed', q => { if (q.url().startsWith(`http://localhost:${port}`)) failed.push(q.url()); });
   await p.goto(url, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.querySelectorAll('.scroll-fade').forEach(e => e.classList.add('visible')));
   await p.waitForTimeout(600);
@@ -67,9 +69,14 @@ async function audit(browser, url, vp) {
       const size = parseFloat(cs.fontSize), large = size >= 24 || (size >= 18.66 && +cs.fontWeight >= 700);
       out.push({ sec: (el.closest('section') || {}).id || 'top', text: own.slice(0, 40), fgRaw: hex(parse(cs.color)), fg: hex(fg), bg: hex(bg), ratio: +((Math.max(x, y) + .05) / (Math.min(x, y) + .05)).toFixed(2), need: large ? 3 : 4.5, font: cs.fontFamily.split(',')[0] });
     });
-    return { out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
+    const svgOverlap = [];
+    document.querySelectorAll('svg').forEach(sv => { const ts = [...sv.querySelectorAll('text')].map(t => ({ t: t.textContent.trim(), r: t.getBoundingClientRect() })).filter(x => x.r.width && x.r.height);
+      for (let i = 0; i < ts.length; i++) for (let j = i + 1; j < ts.length; j++) { const A = ts[i].r, B = ts[j].r;
+        const ox = Math.min(A.right, B.right) - Math.max(A.left, B.left), oy = Math.min(A.bottom, B.bottom) - Math.max(A.top, B.top);
+        if (ox > 1 && oy > 1) svgOverlap.push(`„${ts[i].t}“ × „${ts[j].t}“`); } });
+    return { svgOverlap, katex: document.querySelectorAll('.katex').length, katexErr: document.querySelectorAll('.katex-error').length, charts: window.Chart ? Object.keys(Chart.instances || {}).length : 0, out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
   });
-  await ctx.close(); return { ...r, errs };
+  await ctx.close(); return { ...r, errs, ext: vendor ? ext.filter(u => !/cdn\.(jsdelivr\.net|tailwindcss\.com)/.test(u)) : ext, failed };
 }
 
 (async () => {
@@ -80,7 +87,12 @@ async function audit(browser, url, vp) {
   await b.close(); srv.close();
   let blockers = 0; const line = (ok, lvl, rule, msg) => { if (!ok && lvl === 'BLOCKER') blockers++; console.log(`${ok ? '✓' : lvl === 'BLOCKER' ? '✗' : '!'} ${rule.padEnd(26)} [${lvl}] ${msg}`); };
   for (const [n, r] of [['plain', plain], ['viewer', viewer], ['viewer-390px', mobile]]) {
+    line(!r.svgOverlap.length, 'BLOCKER', `L24 SVG-Texte (${n})`, r.svgOverlap.length ? 'Überlappung: ' + r.svgOverlap.slice(0, 3).join('; ') : 'keine Überlappung');
     line(!r.errs.length, 'BLOCKER', `JS-Fehler (${n})`, r.errs.length ? r.errs.join(' | ') : 'keine');
+    line(!r.ext.length, 'BLOCKER', `L20 Drittanbieter-Abrufe (${n})`, r.ext.length ? [...new Set(r.ext.map(u => new URL(u).host))].join(', ') : 'keine');
+    line(!r.failed.length, 'BLOCKER', `Lokale Dateien (${n})`, r.failed.length ? r.failed.slice(0, 3).join(', ') : 'alle geladen');
+    line(r.katexErr === 0 && (r.katex > 0 || !/\\\(|\\\[/.test(fs.readFileSync(path.join(root, file), 'utf8'))), 'BLOCKER', `Formeln (${n})`, `${r.katex} gesetzt, ${r.katexErr} Fehler`);
+    line(r.charts > 0 || !/new Chart\(/.test(fs.readFileSync(path.join(root, file), 'utf8')), 'BLOCKER', `Diagramme (${n})`, `${r.charts} Instanzen`);
     const hard = r.out.filter(o => o.ratio < o.need && !TOKENS.includes(o.fgRaw));
     line(!hard.length, 'BLOCKER', `L01 Fremdfarben (${n})`, hard.length ? `${hard.length} Elemente, z. B. ${hard.slice(0, 3).map(h => `${h.fg} auf ${h.bg} (${h.ratio}) „${h.text}“`).join('; ')}` : '0 Elemente unter AA außerhalb der Styleguide-Tokens');
     const debt = r.out.filter(o => o.ratio < o.need && TOKENS.includes(o.fgRaw));

@@ -398,27 +398,27 @@ M = MEDIA_REPORT. Die Reihenfolge ist keine Rangfolge.
 | Preis/Monat (Richtwert) | Ultra ca. 50–90 € (M) | ca. 67–224 $ (M) | 129 / 349 $ (M) | 150–1.000 $ (M) | 39–99 $ + Daten (M) | Plattform frei, Datenabos (V) |
 | Zielgruppe | aktive Futures-Trader, Semi-Profis | Retail bis Profi | Retail, Ausbildung | fortgeschritten/Profi | Retail bis Profi | Retail bis institutionell |
 
-Das Bild ist deutlich. ATAS ist der einzige Anbieter in der Matrix, der eine Dealer-Positionierung im
-Minutentakt mit einem nativen MBO- und Footprint-Werkzeugkasten in einer Oberfläche verbindet. Bookmap
-erreicht Ähnliches nur über Add-ons von Drittanbietern. Volland ist laut Matrix der einzige Anbieter mit
-belegter Abdeckung von Gamma, Vanna und Charm; SpotGamma bietet mit HIRO als einziger einen Echtzeit-Flow-Indikator.
-Beide bieten keine Ausführung. MenthorQ deckt
-mit Futures-Optionen auf Rohstoffe und Zinsen das breiteste Universum ab, aktualisiert intraday aber nur
-alle fünf Minuten. Die TWS hat die umfassendsten Rohdaten und die vollständige Ausführung, rechnet aber
-keine marktweite Dealer-Positionierung. **Für Eurex-Optionen ist bei keinem der sechs Anbieter eine
-GEX-Analytik belegt (MenthorQ: n. v.).** Als europäisches Angebot wurde nur Gamma Cockpit gefunden: DAX-GEX auf Basis von
+Aus der Matrix lässt sich Folgendes ableiten. ATAS ist der einzige Anbieter im Vergleichsfeld, der native
+Optionsdaten im Minutentakt mit einem nativen MBO- und Footprint-Werkzeugkasten in einer Oberfläche verbindet;
+Bookmap hat MBO, aber keine nativen Optionsmetriken. Volland ist der einzige Anbieter mit belegter Abdeckung von
+Gamma, Vanna und Charm. Intraday-Flow-Analytik bieten SpotGamma (HIRO/TRACE) und ATAS (Flow, Flow Delta).
+MenthorQ deckt Futures-Optionen nativ ab und aktualisiert intraday alle fünf Minuten. Eigene Ausführung bieten
+ATAS (nur Futures), Bookmap und die TWS; für Volland ist sie n. v. Die TWS rechnet keine marktweite
+Dealer-Positionierung. **Für Eurex-Optionen bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern
+eine intraday-fähige GEX-Analytik (MenthorQ: n. v.).** Als europäisches Angebot wurde nur Gamma Cockpit gefunden: DAX-GEX auf Basis von
 ODAX-Daten, nur auf Tagesbasis, als kostenlose Beta (Stand 2026-10-05, [N. V.] zur Lizenzlage).
 
 ### Modul 6 · DACH-Marktspezifika: Börsenoptionen vs. verbriefte Derivate
 
 Der deutschsprachige Markt hat eine besondere Struktur. Am Börsenumsatz verbriefter Derivate stellen
-Hebelprodukte nach BSW-Statistik rund 84 % (Stand 30.06.2026, Bezugszeitraum [N. V.]). Davon entfallen
-etwa 59 % auf Knock-outs und 19 % auf klassische Optionsscheine. Gehandelt wird vor allem an der Euwax in
+Hebelprodukte nach BSW-Statistik rund 84 % (Bezugszeitraum [N. V.]). Darunter entfallen etwa 59 % auf
+Knock-outs und 19 % auf klassische Optionsscheine, jeweils bezogen auf den Gesamtumsatz. Gehandelt wird vor allem an der Euwax in
 Stuttgart, an der Börse Frankfurt (Zertifikate) und auf gettex. An der Eurex dagegen konzentriert sich das
 professionelle Geschäft in Indexoptionen. OESX kommt nach einem Eurex-Whitepaper auf ein ADV von rund
 698.000 Kontrakten (Stand November 2025, Konfidenz 0,6). Die Optionen mit Tagesverfall sind noch klein:
-OEXP hat seit Start ein ADV von rund 30.900 Kontrakten, ODAP von rund 2.300. Zum Vergleich: In den USA
-entfielen 2025 rund 59 % des SPX-Optionsvolumens auf 0DTE.
+OEXP hat seit Start ein ADV von rund 30.900 Kontrakten, ODAP von rund 2.300 (Stand der Quelle [N. V.]). Beide
+sind End-of-Day-Optionen mit Verfällen über mehrere Handelstage, also kein reines 0DTE. Der Vergleich mit den
+USA, wo 2025 rund 59 % des SPX-Optionsvolumens auf 0DTE entfielen, zeigt daher nur die Größenordnung.
 
 Die beiden Produktwelten unterscheiden sich in den folgenden Merkmalen:
 
@@ -431,7 +431,7 @@ Die beiden Produktwelten unterscheiden sich in den folgenden Merkmalen:
 | Volatilität im Preis | marktgebildete IV | Emittenten-IV, kann von der Börsen-IV abweichen |
 | Kontraktgröße | ODAX 5 €/Pkt., ODXS kleiner | frei stückelbar über Bezugsverhältnis |
 | Stillhalterposition | möglich (Margin) | nicht möglich |
-| Zugang Privatanleger | Angemessenheitsprüfung (§ 63 Abs. 10 WpHG); Eurex-Zugang nicht bei allen Brokern | breit verfügbar; für Turbos seit 16.06.2026 Wissenstest und Risikohinweis (BaFin-Allgemeinverfügung) |
+| Zugang Privatanleger | Angemessenheitsprüfung (§ 63 Abs. 10 WpHG, nur über Praxisformulare belegt); Eurex-Zugang nicht bei allen Brokern | breit verfügbar; für Turbos seit 16.06.2026 Wissenstest und Risikohinweis (BaFin-Allgemeinverfügung) |
 | Kostenausweis | Gebühren, Ex-ante-Kosten nach MiFID II | PRIIPs-KID mit Emittentenkosten + MiFID-II-Kosten |
 | Steuer (Privatvermögen, offene Fälle) | Einkünfte aus Kapitalvermögen; keine Sonderbeschränkung mehr (JStG 2024) | Einkünfte aus Kapitalvermögen; keine Sonderbeschränkung |
 
@@ -446,8 +446,8 @@ Gegenwart gilt: Die Steuer unterscheidet nicht mehr zwischen beiden Produktwelte
 Beschränkung für Aktienverluste nach Satz 4. Die vom Quelltext beschriebene steuerliche Verzerrung ist
 damit Geschichte. Die Marktstruktur mit dominanten Hebelzertifikaten erklärt sich heute eher aus
 Gewohnheit, Vertriebswegen, kleiner Stückelung und Brokerangeboten. Für Knock-outs kommen seit Juni 2026
-neue Zugangshürden hinzu: Die BaFin verweist in ihrer Studie auf eine Verlustquote von 74,2 % bei
-Privatanlegern.
+neue Zugangshürden hinzu. Die zugrunde liegende BaFin-Studie ergab für den Untersuchungszeitraum 2019–2023,
+dass rund 74,2 % der Kleinanleger mit Turbo-Zertifikaten Verluste erlitten (Studie nicht im Volltext geprüft).
 
 Warum lassen sich die Hedging-Modelle von Options X-Ray nicht auf Optionsscheine übertragen? Der Grund ist
 nicht ein „Versagen“, sondern die Beobachtbarkeit. Ein GEX-Modell braucht drei Dinge: offene Positionen je
@@ -490,11 +490,11 @@ nur nach nachgewiesener Validierung.
 **Multi-Leg-Ausführung und automatisiertes Delta-Hedging.** Die Combo-Order ist über die IB-API verfügbar.
 ATAS müsste ein Strategie-Ticket bauen, mit Netto-Limitpreis, Risikoprüfung vor der Order (Margin, maximaler
 Verlust, Ausübungsrisiko) und Positionsführung über alle Legs. Weit größere Folgen hat das vorgeschlagene
-**automatische Delta-Hedging bei GEX-Schwellenwerten**. Eine Software, die Orders selbständig auslöst,
-macht den Nutzer zum algorithmischen Händler. Wer gewerblich handelt und unter die Definition fällt,
-unterliegt damit den Pflichten nach Art. 17 MiFID II bzw. § 80 Abs. 2 WpHG. Trifft die Software
-Anlageentscheidungen für den Kunden, ist zu prüfen, ob eine erlaubnispflichtige Tätigkeit nach WpIG oder
-KWG vorliegt, etwa Finanzportfolioverwaltung. Unabhängig davon braucht es Pre-Trade-Limits, einen
+**automatische Delta-Hedging bei GEX-Schwellenwerten**. Löst eine Software Orders selbständig aus, handelt es
+sich um algorithmischen Handel. Die Pflichten nach Art. 17 MiFID II bzw. § 80 Abs. 2 WpHG richten sich an
+Wertpapierdienstleistungsunternehmen, nicht unmittelbar an Privatanleger. Für ATAS als Anbieter ist zu prüfen,
+ob eine Funktion, die Anlageentscheidungen für Kunden trifft, eine erlaubnispflichtige Tätigkeit nach WpIG oder
+KWG darstellt, etwa Finanzportfolioverwaltung. Unabhängig davon braucht es Pre-Trade-Limits, einen
 Kill-Switch und eine klare Haftungsregel. Ein Hedge auf Basis eines bis zu 60 Sekunden alten Profils
 kann in schnellen Märkten prozyklisch wirken (Modul 2). Empfohlen ist **[SZENARIO]** daher ein
 halbautomatischer Vorschlag mit manueller Bestätigung statt einer vollautomatischen Auslösung.
@@ -569,86 +569,112 @@ Diese Bewertung ist ein Szenario und keine Prognose.
 
 ---
 
-## 5 · Quellenverzeichnis (abgerufen 2026-10-05, nur Suchtreffer-Snippets, siehe Methodischer Vorbehalt)
+## 5 · Quellenverzeichnis
 
-**Primärquellen (Gesetz, Verwaltung, Gerichte, Börsen, Hersteller)**
+Abgerufen 2026-10-05 bis 2026-10-08, überwiegend über Suchtreffer-Snippets (siehe Methodischer Vorbehalt). Das
+Verzeichnis ist ein Auszug aus `provenance/m300.dbom.json` (Lehre L13/L14) und wird von dort erzeugt, nicht von
+Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 
-- S1 · Jahressteuergesetz 2024, BGBl. 2024 I Nr. 387 – https://www.recht.bund.de/bgbl/1/2024/387/regelungstext.pdf
-- S2 · BT-Drs. 20/13419, 20/13420, 20/12780 – https://dserver.bundestag.de/btd/20/134/2013420.pdf · https://dserver.bundestag.de/btd/20/127/2012780.pdf
-- S3 · Gesetz zur Einführung einer Pflicht zur Mitteilung grenzüberschreitender Steuergestaltungen (BGBl. I 2019 S. 2875) – https://www.bzst.de/SharedDocs/Downloads/DE/DAC6/dac6_gesetz_grenzueberschreitender_steuergestaltungen.pdf
-- S4 · BMF-Schreiben „Einzelfragen zur Abgeltungsteuer“ vom 14.05.2025 – https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Abgeltungsteuer/2025-05-14-einzelfragen-zur-abgeltungsteuer.pdf
-- S5 · BFH, Beschluss vom 07.06.2024, VIII B 113/23 – https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE202410113/
-- S7 · BMF-Schreiben vom 03.06.2021 (Anhang 19 EStH) – https://ao.bundesfinanzministerium.de/esth/2024/C-Anhaenge/Anhang-19/II/anhang-19-II.html
-- S8 · § 20 EStG (EStH 2025) – https://esth.bundesfinanzministerium.de/esth/2025/A-Einkommensteuergesetz/II-Einkommen-2-24b/8-Die-einzelnen-Einkunftsarten-13-24b/e-Kapitalvermoegen-20/Paragraf-20/paragraf-20.html
-- S9 · BaFin-Allgemeinverfügung Turbo-Zertifikate und Studie – https://www.bafin.de/SharedDocs/Downloads/DE/Aufsichtsrecht/Verfuegungen/dl_vf_allgemeinverfuegung_turbo_zertifikate.html · https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2025/Studie_250521_Turbo_Zertifikate.html
-- S10 · BaFin FAQ HFT-Gesetz – https://www.bafin.de/SharedDocs/FAQs/DE/HFT-Gesetz/160_hft_faq.html
-- S11 · § 80 WpHG – https://dejure.org/gesetze/WpHG/80.html
-- S13 · § 15 EStG – https://www.gesetze-im-internet.de/estg/__15.html
-- S14 · BFH, Urteil vom 06.07.2016, I R 25/14 – https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE201610211/
-- S15 · ATAS Hilfe: Options X-Ray Expected Move / Charm Heatmap / Big Trades – https://help.atas.net/en/support/solutions/articles/72000662222-options-x-ray-expected-move · https://help.atas.net/en/support/solutions/articles/72000662221-options-x-ray-charm-heatmap · https://help.atas.net/en/support/solutions/articles/72000662220-options-x-ray-big-trades
-- S16 · ATAS Learn: Options – https://learn.atas.net/options/
-- S17 · ATAS Changelog / Pricing – https://feedback.atas.net/changelog · https://atas.net/pricing/
-- S18 · ATAS Options Chain Suite / GEX Profile – https://help.atas.net/en/support/solutions/articles/72000661536-options-gex-profile
-- S19 · ATAS Connections – https://atas.net/connections/
-- S20 · ATAS 8.0.12 / Cross-Trading – https://atas.net/blog/latest-8-0-12/ · https://help.atas.net/en/support/solutions/articles/72000657084-cross-trading
-- S21 · ATAS MBO-Bundle und Optionsanalyse – https://feedback.atas.net/changelog/new-mbo-bundle-and-options-analysis-are-now-in-atas
-- S22 · IB TWS API Spread Contracts – https://interactivebrokers.github.io/tws-api/spread_contracts.html
-- S29 · Eurex Produktseiten ODAX, FDXM, FDXS, OESX, Daily Options – https://www.eurex.com/ex-en/markets/idx/dax/DAX-Options-139884 · https://www.eurex.com/ex-en/markets/idx/daily-opt · https://www.eurex.com/ex-en/markets/idx/dax/DAX-End-of-Day-Options-3734538
-- S30 · Eurex Circulars OEXP (047/23, 117/25) – https://www.eurex.com/ex-en/find/circulars/circular-3564732 · https://www.eurex.com/ex-en/find/circulars/circular-4844340
-- S31 · Eurex Whitepaper EURO STOXX 50 Options / Daily-Options-Präsentation – https://www.eurex.com/resource/blob/4687974/32104aa4015b03b1044e28d1a315fdb8/data/whitepaper-liquidity-reboot-a-new-chapter-for-EURO-STOXX-50-Options.pdf · https://www.eurex.com/resource/blob/3617154/068c57ac37e964429b57ff10fcd78f53/data/presentation-daily-options.pdf
-- S32 · Cboe · Trading Volume December and Full Year 2025 (0DTE-Anteil 59 %, Gesamtjahr 2025) – https://ir.cboe.com/news/news-details/2026/Cboe-Global-Markets-Reports-Trading-Volume-for-December-and-Full-Year-2025/default.aspx
-- S33 · OPRA Capacity Projections – https://cdn.opraplan.com/documents/notices/OPRA_Capacity_Projections_Update_0925.pdf
-- S34 · BSW Börsenumsätze – https://www.derbsw.de/de/boersenumsaetze/
-- S35 · Delegierte VO (EU) 2016/958 – https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32016R0958
-
-**Sekundärquellen**
-
-- S6 · FG Rheinland-Pfalz 1 V 1674/23 (tax-news) – https://www.tax-news.de/news/fg-rheinland-pfalz-haelt-verfassungsmaessigkeit-der-verlustverrechnungsbeschraenkung-bei-termingeschaeften-fuer-zweifelhaft/
-- S12 · Emittenten-Hedging – https://zertifikate.morganstanley.com/services/produktwissen/optionsscheine/ · https://www.ideas-magazin.de/informationen/wissen/produkt-know-how/hedging-statisch-oder-dynamisch/
-- S23 · SpotGamma – https://spotgamma.com/subscribe-to-spotgamma/ · https://spotgamma.com/hiro-indicator/
-- S24 · MenthorQ – https://menthorq.com/pricing/ · https://menthorq.com/guide/menthorq-asset-coverage/
-- S25 · Volland – https://orats.com/volland · https://vol.land/VollandUserGuide_Jun24.pdf
-- S26 · Bookmap – https://bookmap.com/en/packages-comparison · https://www.quantvps.com/blog/bookmap-pricing
-- S27 · IBKR TWS – https://www.interactivebrokers.com/en/software/pdfhighlights/PDF-OptionTrader.php
-- S28 · Gamma Cockpit – https://gammacockpit.com/
-- S36 · CMS: Aufhebung der Verlustabzugsbeschränkung – https://cms.law/de/deu/legal-updates/Ade-Verlustabzugsbeschraenkung-fuer-Termingeschaefte-Gesetzgeber-bereinigt-Verfassungswidrigkeit
-- S37 · Databento OPRA – https://databento.com/blog/beyond-40-gbps-processing-opra-in-real-time
-- S38 · 2 BvL 3/21 Stand – https://www.steuertipps.de/altersvorsorge-rente-finanzen/aktienverluste-nur-mit-aktiengewinnen-verrechenbar-verfassungswidrig
+| Nr. | Quelle | Stufe | DBOM-ID | URL |
+|---|---|---|---|---|
+| S1 | Jahressteuergesetz 2024, BGBl. 2024 I Nr. 387 | Primärquelle | `SRC_BGBL_JSTG2024` | https://www.recht.bund.de/bgbl/1/2024/387/regelungstext.pdf |
+| S2 | BT-Drs. 20/13419, 20/13420, 20/12780 (JStG 2024) | Primärquelle | `SRC_BT_DRS` | https://dserver.bundestag.de/btd/20/134/2013420.pdf |
+| S3 | Gesetz zur Einführung einer Pflicht zur Mitteilung grenzüberschreitender Steuergestaltungen (BGBl. I 2019 S. 2875) | Primärquelle | `SRC_BZST_2019` | https://www.bzst.de/SharedDocs/Downloads/DE/DAC6/dac6_gesetz_grenzueberschreitender_steuergestaltungen.pdf |
+| S4 | BMF-Schreiben Einzelfragen zur Abgeltungsteuer, 14.05.2025 | Primärquelle | `SRC_BMF_2025` | https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Abgeltungsteuer/2025-05-14-einzelfragen-zur-abgeltungsteuer.pdf |
+| S5 | BFH, Beschluss v. 07.06.2024, VIII B 113/23 | Primärquelle | `SRC_BFH_VIIIB11323` | https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE202410113/ |
+| S6 | FG Rheinland-Pfalz 1 V 1674/23 (tax-news, Sekundärquelle) | Sekundärquelle | `SRC_FG_RLP` | https://www.tax-news.de/news/fg-rheinland-pfalz-haelt-verfassungsmaessigkeit-der-verlustverrechnungsbeschraenkung-bei-termingeschaeften-fuer-zweifelhaft/ |
+| S7 | BMF-Schreiben vom 03.06.2021 (Anhang 19 EStH) | Primärquelle | `SRC_BMF_2021` | https://ao.bundesfinanzministerium.de/esth/2024/C-Anhaenge/Anhang-19/II/anhang-19-II.html |
+| S8 | § 20 EStG (EStH 2025) | Primärquelle | `SRC_ESTG_20` | https://esth.bundesfinanzministerium.de/esth/2025/A-Einkommensteuergesetz/II-Einkommen-2-24b/8-Die-einzelnen-Einkunftsarten-13-24b/e-Kapitalvermoegen-20/Paragraf-20/paragraf-20.html |
+| S9 | BaFin · Allgemeinverfügung Turbo-Zertifikate | Primärquelle | `SRC_BAFIN_TURBO` | https://www.bafin.de/SharedDocs/Downloads/DE/Aufsichtsrecht/Verfuegungen/dl_vf_allgemeinverfuegung_turbo_zertifikate.html |
+| S10 | BaFin · FAQ HFT-Gesetz | Primärquelle | `SRC_BAFIN_HFT` | https://www.bafin.de/SharedDocs/FAQs/DE/HFT-Gesetz/160_hft_faq.html |
+| S11 | § 80 WpHG (Abs. 2 algorithmischer Handel; Abs. 4 Market-Making-Pflichten; Abs. 5 Definition) | Primärquelle | `SRC_WPHG_80` | https://www.gesetze-im-internet.de/wphg/__80.html |
+| S12 | Emittenten-Hedging (Morgan Stanley Produktwissen, ideas-Magazin; Sekundärquellen) | Sekundärquelle | `SRC_ISSUER_HEDGE` | https://zertifikate.morganstanley.com/services/produktwissen/optionsscheine/ |
+| S13 | § 15 EStG | Primärquelle | `SRC_ESTG_15` | https://www.gesetze-im-internet.de/estg/__15.html |
+| S14 | BFH, Urteil v. 06.07.2016, I R 25/14 | Primärquelle | `SRC_BFH_IR2514` | https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE201610211/ |
+| S15 | ATAS Hilfe · Options X-Ray | Herstellerquelle | `SRC_ATAS_HELP` | https://help.atas.net/en/support/solutions/articles/72000662222-options-x-ray-expected-move |
+| S16 | ATAS Learn · Options | Herstellerquelle | `SRC_ATAS_LEARN` | https://learn.atas.net/options/ |
+| S17 | ATAS Changelog | Herstellerquelle | `SRC_ATAS_CHANGELOG` | https://feedback.atas.net/changelog |
+| S18 | ATAS Hilfe · Options Chain Suite / GEX Profile | Herstellerquelle | `SRC_ATAS_CHAIN` | https://help.atas.net/en/support/solutions/articles/72000661536-options-gex-profile |
+| S19 | ATAS · Connections | Herstellerquelle | `SRC_ATAS_CONNECTIONS` | https://atas.net/connections/ |
+| S20 | ATAS 8.0.12 · Cross-Trading | Herstellerquelle | `SRC_ATAS_8012` | https://help.atas.net/en/support/solutions/articles/72000657084-cross-trading |
+| S21 | ATAS Changelog · MBO-Bundle und Optionsanalyse | Herstellerquelle | `SRC_ATAS_MBO` | https://feedback.atas.net/changelog/new-mbo-bundle-and-options-analysis-are-now-in-atas |
+| S22 | IB TWS API · Spread Contracts | Herstellerquelle | `SRC_IB_API` | https://interactivebrokers.github.io/tws-api/spread_contracts.html |
+| S23 | SpotGamma (Preise, HIRO) | Herstellerquelle | `SRC_SPOTGAMMA` | https://spotgamma.com/hiro-indicator/ |
+| S24 | MenthorQ (Preise, Abdeckung) | Herstellerquelle | `SRC_MENTHORQ` | https://menthorq.com/guide/menthorq-asset-coverage/ |
+| S25 | Volland (ORATS-Partnerseite, User Guide) | Sekundärquelle | `SRC_VOLLAND` | https://orats.com/volland |
+| S26 | Bookmap (Pakete, Konnektivität) | Herstellerquelle | `SRC_BOOKMAP` | https://bookmap.com/en/packages-comparison |
+| S27 | Interactive Brokers · OptionTrader / TWS | Herstellerquelle | `SRC_IBKR` | https://www.interactivebrokers.com/en/software/pdfhighlights/PDF-OptionTrader.php |
+| S28 | Gamma Cockpit (DAX-GEX, Beta) | Herstellerquelle | `SRC_GAMMACOCKPIT` | https://gammacockpit.com/ |
+| S29 | Eurex · Produktseiten DAX-Optionen (ODAX), Micro-DAX-Optionen (ODXS), EURO STOXX 50 Options | Primärquelle | `SRC_EUREX_SPECS` | https://www.eurex.com/ex-en/markets/idx/dax/DAX-Options-139884 |
+| S30 | Eurex Circulars OEXP 047/23 und 117/25 | Primärquelle | `SRC_EUREX_CIRCULARS` | https://www.eurex.com/ex-en/find/circulars/circular-4844340 |
+| S31 | Eurex · Whitepaper EURO STOXX 50 Options / Präsentation Daily Options | Primärquelle | `SRC_EUREX_WHITEPAPER` | https://www.eurex.com/resource/blob/3617154/068c57ac37e964429b57ff10fcd78f53/data/presentation-daily-options.pdf |
+| S32 | Cboe · Trading Volume December and Full Year 2025 | Primärquelle | `SRC_CBOE_FY2025` | https://ir.cboe.com/news/news-details/2026/Cboe-Global-Markets-Reports-Trading-Volume-for-December-and-Full-Year-2025/default.aspx |
+| S33 | OPRA · Capacity Projections Update (Sept. 2025) | Primärquelle | `SRC_OPRA` | https://cdn.opraplan.com/documents/notices/OPRA_Capacity_Projections_Update_0925.pdf |
+| S34 | BSW · Börsenumsätze verbriefter Derivate | Primärquelle | `SRC_BSW` | https://www.derbsw.de/de/boersenumsaetze/ |
+| S35 | Delegierte VO (EU) 2016/958 (Anlageempfehlungen) | Primärquelle | `SRC_DELVO_958` | https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32016R0958 |
+| S36 | CMS · Aufhebung der Verlustabzugsbeschränkung (Sekundärquelle) | Sekundärquelle | `SRC_CMS` | https://cms.law/de/deu/legal-updates/Ade-Verlustabzugsbeschraenkung-fuer-Termingeschaefte-Gesetzgeber-bereinigt-Verfassungswidrigkeit |
+| S37 | Databento · Processing OPRA in real time (Sekundärquelle) | Sekundärquelle | `SRC_DATABENTO` | https://databento.com/blog/beyond-40-gbps-processing-opra-in-real-time |
+| S38 | steuertipps.de · Stand 2 BvL 3/21 (Sekundärquelle) | Sekundärquelle | `SRC_STEUERTIPPS` | https://www.steuertipps.de/altersvorsorge-rente-finanzen/aktienverluste-nur-mit-aktiengewinnen-verrechenbar-verfassungswidrig |
+| S39 | Preisseiten ATAS, SpotGamma, MenthorQ, ORATS/Volland, Bookmap (Snippets/Drittquellen; Sekundärquelle) | Sekundärquelle | `SRC_PRICES` | https://atas.net/pricing/ |
+| S40 | Handelsblatt · Erhöhung auf 20.000 € durch JStG 2020 (Sekundärquelle) | Sekundärquelle | `SRC_HB_JSTG2020` | https://www.handelsblatt.com/finanzen/steuern-recht/steuern/umstrittene-regelung-groko-bessert-bei-steuerlicher-verlustverrechnung-von-termingeschaeften-nach/26697238.html |
+| S41 | BaFin · Studie Turbo-Zertifikate (2025) | Primärquelle | `SRC_BAFIN_STUDY` | https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2025/Studie_250521_Turbo_Zertifikate.html |
+| S42 | MenthorQ · Cboe Market-Maker-Tagged Data erklärt (Sekundärquelle) | Sekundärquelle | `SRC_MENTHORQ_GUIDE` | https://menthorq.com/guide/cboe-market-maker-tagged-data-explained/ |
+| S44 | VO (EU) Nr. 1286/2014 (PRIIPs) | Primärquelle | `SRC_PRIIPS` | https://eur-lex.europa.eu/eli/reg/2014/1286/oj |
+| S45 | test.de · Studie zu Turbo-Zertifikaten (Sekundärquelle) | Sekundärquelle | `SRC_TESTDE` | https://www.test.de/Studie-zu-Turbo-Zertifikaten-Die-meisten-Anleger-machen-mit-Turbo-Zertifikaten-Verluste-6227752-0/ |
+| S46 | Eurex · Daily Options (OEXP/ODAP) | Primärquelle | `SRC_EUREX_DAILY` | https://www.eurex.com/ex-en/markets/idx/daily-opt |
+| S47 | § 63 WpHG (Wohlverhaltenspflichten) | Primärquelle | `SRC_WPHG_63` | https://www.gesetze-im-internet.de/wphg/__63.html |
+| S48 | Sutor Bank · Formular Angemessenheit nach § 63 Abs. 10 WpHG (Sekundärquelle) | Sekundärquelle | `SRC_SUTOR` | https://www.sutorbank.de/fileadmin/Dateien/Service/Formulare/Investmentsparvertraege/Angaben-zur-Feststellung-der-Angemessenheit.pdf |
 
 ---
 
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.1.0,
-24 Fakten.
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.2.0,
+40 Fakten, 49 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
 |---|---|---|---|---|---|
-| `FACT_JSTG2024_REPEAL` | CONFIRMED | REGULATORY_FRAMEWORK | 0,9 | Rechtsstand 2026-10-05 | § 20 Abs. 6 Satz 5 und 6 EStG a. F. (20.000-€-Grenze Termingeschäfte / Forderungsausfall) durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG). |
+| `FACT_JSTG2024_REPEAL` | CONFIRMED | REGULATORY_FRAMEWORK | 0,9 | Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024) | § 20 Abs. 6 Satz 5 und 6 EStG a. F. (20.000-€-Grenze Termingeschäfte / Forderungsausfall) durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG). |
 | `FACT_BMF_2025` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | BMF-Schreiben 14.05.2025 | BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um; Verlustvorträge aus Termingeschäften in offenen Fällen unbeschränkt verrechenbar. |
+| `FACT_TERMIN_2019` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Gesetz vom 21.12.2019, Anwendung ab 01.01.2021 | Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte durch Gesetz vom 21.12.2019 (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021. |
+| `FACT_TERMIN_2020_RAISE` | MEDIA_REPORT | REGULATORY_FRAMEWORK | 0,65 | JStG 2020 vom 21.12.2020 | JStG 2020 vom 21.12.2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €. |
 | `FACT_BFH_ADV` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Beschluss 07.06.2024 | BFH VIII B 113/23 vom 07.06.2024: AdV-Beschluss, summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG). |
 | `FACT_STOCK_LOSS_S4` | CONFIRMED | REGULATORY_FRAMEWORK | 0,7 | Rechtsstand 2026-10-05 | § 20 Abs. 6 Satz 4 EStG (Aktienverluste nur mit Aktiengewinnen) gilt fort; BVerfG 2 BvL 3/21 anhängig. |
+| `FACT_OS_KO_NOT_TERMIN` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | BMF 03.06.2021, fortgeführt 14.05.2025 | Optionsscheine und Knock-out-Zertifikate sind nach Auffassung der Finanzverwaltung keine Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5 EStG a. F. |
 | `FACT_P15_KSTG` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 15 Abs. 4 Satz 3–5 EStG gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften (gesonderter Verlustkreis für Termingeschäfte). |
 | `FACT_MM_NO_HEDGE_DUTY` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | Keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging; Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition Abs. 5) regeln Quotierungs- und Vertragspflichten. |
+| `FACT_ALGO_TRADING` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 80 Abs. 2 WpHG verpflichtet Wertpapierdienstleistungsunternehmen, die algorithmischen Handel betreiben, zu Risikokontrollen, Notfallvorkehrungen und Dokumentation (Umsetzung Art. 17 MiFID II). |
+| `FACT_MAR_RECO` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten. |
+| `FACT_PRIIPS_UWG` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,75 | Rechtsstand 2026-10-05 | Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG. |
+| `FACT_ANGEMESSENHEIT` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,7 | Rechtsstand 2026-10-05 | Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG. |
+| `FACT_BAFIN_TURBO` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026 | BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten vom 15.10.2025, in Kraft seit 16.06.2026: standardisierter Risikohinweis, Wissenstest, Verbot von Kaufanreizen. |
+| `FACT_BAFIN_STUDY` | UNVERIFIED | MARKET_DATA | 0,7 | Untersuchungszeitraum 2019–2023 | BaFin-Studie: Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste; Untersuchungszeitraum 2019–2023. |
 | `FACT_XRAY_10_IND` | CONFIRMED | VENDOR_CLAIM | 0,85 | Herstellerdoku Stand 2026-10-05 | Options X-Ray Suite umfasst zehn Indikatoren (Market State, Expected Move, GEX/Charm/Strike Heatmap, Big Trades, Flow, Flow Delta, Strike Profile, Surface Profile). |
 | `FACT_XRAY_1MIN_SPX` | CONFIRMED | VENDOR_CLAIM | 0,85 | Herstellerdoku Stand 2026-10-05 | Datenbasis 1-Minuten-CBOE-Feed mit Analytik von OptionsDepth; nur SPX-Optionen, Anzeige auf ES/MES/SPY. |
+| `FACT_XRAY_CONNECTIVITY` | CONFIRMED | VENDOR_CLAIM | 0,7 | Changelog Stand 2026-10-05 | Options X-Ray setzt eine Verbindung über Rithmic oder Interactive Brokers voraus; CQG ist in Entwicklung. |
+| `FACT_XRAY_LAUNCH` | UNVERIFIED | VENDOR_CLAIM | 0,6 | Changelog Stand 2026-10-05 | Start der Options X-Ray Suite am 04.09.2026. |
+| `FACT_ATAS_CONNECTIONS` | CONFIRMED | VENDOR_CLAIM | 0,85 | Herstellerdoku Stand 2026-10-05 | ATAS bindet als Handelsverbindungen Rithmic, CQG und Interactive Brokers (über TWS) an, als Datenfeeds dxFeed und IQFeed. |
+| `FACT_CHAIN_SUITE` | CONFIRMED | VENDOR_CLAIM | 0,85 | Herstellerdoku Stand 2026-10-05 | Die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD) und deckt ES, NQ, CL und GC ab. |
 | `FACT_ATAS_NO_OPT_TRADING` | CONFIRMED | VENDOR_CLAIM | 0,8 | Herstellerdoku Stand 2026-10-05 | Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan). |
 | `FACT_CROSS_TRADING` | CONFIRMED | VENDOR_CLAIM | 0,85 | ATAS 8.0.12 (17.02.2026) | ES/MES-Cross-Trading seit ATAS 8.0.12 (17.02.2026). |
 | `FACT_IB_BAG` | CONFIRMED | VENDOR_CLAIM | 0,85 | API-Doku Stand 2026-10-05 | IB TWS API unterstützt Combo-Orders (secType BAG) mit bis zu 6 Legs und Netto-Limit. |
+| `FACT_CBOE_OPENCLOSE` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | SPX-Optionen werden nur an der Cboe gehandelt; Cboe stellt nach Teilnehmertyp markierte Open-Close-Daten bereit, auf die sich OptionsDepth stützt. |
 | `FACT_SPX_0DTE_59` | CONFIRMED | MARKET_DATA | 0,85 | Gesamtjahr 2025 | Anteil 0DTE am SPX-Optionsvolumen 2025 rund 59 %. |
-| `FACT_EUREX_DAILY` | CONFIRMED | MARKET_DATA | 0,7 | ADV seit Produktstart (Eurex-Präsentation) | Eurex: OEXP (seit 28.08.2023) und ODAP (seit 13.11.2023) als Optionen mit Tagesverfall; ADV ca. 30.900 bzw. 2.300 Kontrakte. |
-| `FACT_BAFIN_TURBO` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026 | BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten in Kraft seit 16.06.2026 (Risikohinweis, Wissenstest); Studie: Verlustquote 74,2 %. |
-| `FACT_NO_EUREX_GEX` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | – | Für keinen der verglichenen Anbieter ist intraday-fähige Eurex-GEX belegt (MenthorQ: n. v.); Gamma Cockpit liefert DAX-GEX nur auf Tagesbasis (Beta). |
+| `FACT_OPRA_CAPACITY` | CONFIRMED | MARKET_DATA | 0,7 | Projektion Sept. 2025 | OPRA-Kapazitätsprojektion: Spitzenlast je Stream 37,3 Gbps im 1-ms-Fenster. |
+| `FACT_OPRA_BURSTS` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | April 2025 | Gemessene OPRA-Bursts über 180 Mio. Nachrichten/s (1-ms-Fenster). |
+| `FACT_ODAX_SPECS` | CONFIRMED | MARKET_DATA | 0,85 | Produktseite Stand 2026-10-05 | ODAX: 5 € je Indexpunkt, europäisch, Barausgleich, Basiswert DAX-Index; Micro-DAX-Optionen (ODXS) sind gelistet. |
+| `FACT_OESX_MULT` | UNVERIFIED | MARKET_DATA | 0,7 | Stand 2026-10-05 | OESX: 10 € je Indexpunkt; Optionen auf DAX- bzw. EURO-STOXX-50-Futures wurden nicht gefunden. |
+| `FACT_EUREX_DAILY_LAUNCH` | CONFIRMED | MARKET_DATA | 0,85 | Eurex-Circulars 2023–2026 | Eurex: OEXP (EURO STOXX 50 End-of-Day Options) seit 28.08.2023, ODAP (DAX End-of-Day Options) seit 13.11.2023; OEXP seit 05.01.2026 mit Verfällen an zehn Handelstagen. |
+| `FACT_EUREX_DAILY_ADV` | UNVERIFIED | MARKET_DATA | 0,6 | seit Produktstart, Stand n. v. | ADV seit Produktstart: OEXP ca. 30.900 Kontrakte, ODAP ca. 2.300 Kontrakte. |
+| `FACT_BSW_SHARES` | UNVERIFIED | MARKET_DATA | 0,6 | n. v. | Anteile am Börsenumsatz verbriefter Derivate (jeweils am Gesamtumsatz): Hebelprodukte ca. 84 %, darunter Knock-outs ca. 59 % und Optionsscheine ca. 19 %. |
+| `FACT_ISSUER_HEDGING` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Emittenten sichern ihr Nettorisiko laufend dynamisch ab, über den Basiswert oder passende Gegengeschäfte. |
+| `FACT_COMPETITOR_MATRIX` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Stand 2026-10-05 | Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz, Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS. |
+| `FACT_VENDOR_PRICES` | MEDIA_REPORT | MEDIA_REPORT | 0,55 | Stand 2026-10-05 | Monatspreise der Anbieter: ATAS Ultra ca. 50–90 €, SpotGamma ca. 67–224 $, MenthorQ 129/349 $, Volland 150–1.000 $, Bookmap 39–99 $. |
+| `FACT_NO_EUREX_GEX` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). |
 | `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | 0,5 | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
 | `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | 1,0 | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
 | `FACT_ROADMAP` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | 0,0 | – | Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. |
-| `FACT_TERMIN_HISTORY` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtslage 2019–2024 | Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte 2019 (10.000 €, ab 2021); Erhöhung auf 20.000 € durch JStG 2020 (BGBl. I 2020 S. 3096). |
-| `FACT_OPRA_CAPACITY` | CONFIRMED | MARKET_DATA | 0,7 | Projektion Sept. 2025 | OPRA-Kapazitätsprojektion: Spitzenlast je Stream 37,3 Gbps im 1-ms-Fenster. |
-| `FACT_OPRA_BURSTS` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | April 2025 | Gemessene OPRA-Bursts über 180 Mio. Nachrichten/s (1-ms-Fenster). |
-| `FACT_BSW_SHARES` | UNVERIFIED | MARKET_DATA | 0,6 | n. v. | Hebelprodukte ca. 84 % des Börsenumsatzes verbriefter Derivate; Knock-outs ca. 59 %, Optionsscheine ca. 19 %. |
-| `FACT_VENDOR_PRICES` | MEDIA_REPORT | MEDIA_REPORT | 0,55 | Stand 2026-10-05 | Monatspreise der Anbieter: ATAS Ultra ca. 50–90 €, SpotGamma ca. 67–224 $, MenthorQ 129/349 $, Volland 150–1.000 $, Bookmap 39–99 $. |
-| `FACT_EUREX_SPECS` | CONFIRMED | MARKET_DATA | 0,8 | Kontraktspezifikation Stand 2026-10-05 | ODAX: 5 € je Indexpunkt, europäisch, Barausgleich, Basiswert DAX-Index; OESX: 10 € je Punkt; Micro-DAX-Optionen (ODXS) gelistet. |
 
 ---
 

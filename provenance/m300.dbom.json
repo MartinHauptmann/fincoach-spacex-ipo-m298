@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,19 +13,19 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 24,
-    "confirmed_primary": 17,
-    "media_report": 3,
-    "unverified": 1,
+    "total": 40,
+    "confirmed_primary": 23,
+    "media_report": 7,
+    "unverified": 7,
     "scenario_projection": 3,
-    "vendor_claim": 5,
+    "vendor_claim": 9,
     "by_class": {
-      "MARKET_DATA": 5,
-      "MEDIA_REPORT": 3,
+      "MARKET_DATA": 8,
+      "MEDIA_REPORT": 6,
       "MODEL_ASSUMPTION": 1,
-      "REGULATORY_FRAMEWORK": 8,
+      "REGULATORY_FRAMEWORK": 14,
       "SCENARIO_PROJECTION": 2,
-      "VENDOR_CLAIM": 5
+      "VENDOR_CLAIM": 9
     }
   },
   "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 in einer Umgebung, die den direkten Abruf der meisten Primärquellen (BGBl., BMF, BFH, Eurex, ATAS, Anbieterseiten) gesperrt hat. Alle Fakten sind über Suchtreffer-Snippets belegt, die auf diese Primärquellen verweisen, aber nicht im Volltext gelesen. Herstellerangaben sind als VENDOR_CLAIM, Modellannahmen und Roadmap als SCENARIO_PROJECTION gekennzeichnet. Freigabestatus: ÜBERARBEITUNG (QA-Score 76,3 % nach zweiter unabhängiger Zweitprüfung 2026-10-07).",
@@ -39,7 +39,11 @@
       "claim": "§ 20 Abs. 6 Satz 5 und 6 EStG a. F. (20.000-€-Grenze Termingeschäfte / Forderungsausfall) durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG).",
       "source_id": "SRC_BGBL_JSTG2024",
       "caveat": "Satznummern in § 52 Abs. 28 nur per Snippet belegt.",
-      "period": "Rechtsstand 2026-10-05"
+      "period": "Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024)",
+      "supporting_sources": [
+        "SRC_BT_DRS",
+        "SRC_CMS"
+      ]
     },
     {
       "id": "FACT_BMF_2025",
@@ -52,6 +56,26 @@
       "period": "BMF-Schreiben 14.05.2025"
     },
     {
+      "id": "FACT_TERMIN_2019",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte durch Gesetz vom 21.12.2019 (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021.",
+      "source_id": "SRC_BZST_2019",
+      "caveat": "",
+      "period": "Gesetz vom 21.12.2019, Anwendung ab 01.01.2021"
+    },
+    {
+      "id": "FACT_TERMIN_2020_RAISE",
+      "verdict": "MEDIA_REPORT",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.65,
+      "claim": "JStG 2020 vom 21.12.2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €.",
+      "source_id": "SRC_HB_JSTG2020",
+      "caveat": "Nur sekundär belegt; BGBl. am Original prüfen.",
+      "period": "JStG 2020 vom 21.12.2020"
+    },
+    {
       "id": "FACT_BFH_ADV",
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
@@ -59,7 +83,10 @@
       "claim": "BFH VIII B 113/23 vom 07.06.2024: AdV-Beschluss, summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG).",
       "source_id": "SRC_BFH_VIIIB11323",
       "caveat": "Kein Hauptsacheurteil.",
-      "period": "Beschluss 07.06.2024"
+      "period": "Beschluss 07.06.2024",
+      "supporting_sources": [
+        "SRC_FG_RLP"
+      ]
     },
     {
       "id": "FACT_STOCK_LOSS_S4",
@@ -69,7 +96,23 @@
       "claim": "§ 20 Abs. 6 Satz 4 EStG (Aktienverluste nur mit Aktiengewinnen) gilt fort; BVerfG 2 BvL 3/21 anhängig.",
       "source_id": "SRC_ESTG_20",
       "caveat": "Verfahrensstand vor Veröffentlichung prüfen.",
-      "period": "Rechtsstand 2026-10-05"
+      "period": "Rechtsstand 2026-10-05",
+      "supporting_sources": [
+        "SRC_STEUERTIPPS"
+      ]
+    },
+    {
+      "id": "FACT_OS_KO_NOT_TERMIN",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "Optionsscheine und Knock-out-Zertifikate sind nach Auffassung der Finanzverwaltung keine Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5 EStG a. F.",
+      "source_id": "SRC_BMF_2021",
+      "caveat": "Randziffern nicht verifiziert.",
+      "period": "BMF 03.06.2021, fortgeführt 14.05.2025",
+      "supporting_sources": [
+        "SRC_BMF_2025"
+      ]
     },
     {
       "id": "FACT_P15_KSTG",
@@ -79,10 +122,10 @@
       "claim": "§ 15 Abs. 4 Satz 3–5 EStG gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften (gesonderter Verlustkreis für Termingeschäfte).",
       "source_id": "SRC_ESTG_15",
       "caveat": "Keine Rechtsformempfehlung.",
-      "additional_sources": [
+      "period": "Rechtsstand 2026-10-05",
+      "supporting_sources": [
         "SRC_BFH_IR2514"
-      ],
-      "period": "Rechtsstand 2026-10-05"
+      ]
     },
     {
       "id": "FACT_MM_NO_HEDGE_DUTY",
@@ -92,7 +135,79 @@
       "claim": "Keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging; Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition Abs. 5) regeln Quotierungs- und Vertragspflichten.",
       "source_id": "SRC_WPHG_80",
       "caveat": "",
+      "period": "Rechtsstand 2026-10-05",
+      "supporting_sources": [
+        "SRC_BAFIN_HFT"
+      ]
+    },
+    {
+      "id": "FACT_ALGO_TRADING",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "§ 80 Abs. 2 WpHG verpflichtet Wertpapierdienstleistungsunternehmen, die algorithmischen Handel betreiben, zu Risikokontrollen, Notfallvorkehrungen und Dokumentation (Umsetzung Art. 17 MiFID II).",
+      "source_id": "SRC_WPHG_80",
+      "caveat": "Adressat sind Wertpapierdienstleistungsunternehmen, nicht Privatanleger.",
+      "period": "Rechtsstand 2026-10-05",
+      "supporting_sources": [
+        "SRC_BAFIN_HFT"
+      ]
+    },
+    {
+      "id": "FACT_MAR_RECO",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten.",
+      "source_id": "SRC_DELVO_958",
+      "caveat": "",
       "period": "Rechtsstand 2026-10-05"
+    },
+    {
+      "id": "FACT_PRIIPS_UWG",
+      "verdict": "UNVERIFIED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.75,
+      "claim": "Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG.",
+      "source_id": "SRC_PRIIPS",
+      "caveat": "Nicht am Original neu geprüft.",
+      "period": "Rechtsstand 2026-10-05"
+    },
+    {
+      "id": "FACT_ANGEMESSENHEIT",
+      "verdict": "UNVERIFIED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.7,
+      "claim": "Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG.",
+      "source_id": "SRC_WPHG_63",
+      "caveat": "Nur über Praxisformulare belegt, Gesetzestext nicht eingesehen.",
+      "period": "Rechtsstand 2026-10-05",
+      "supporting_sources": [
+        "SRC_SUTOR"
+      ]
+    },
+    {
+      "id": "FACT_BAFIN_TURBO",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.85,
+      "claim": "BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten vom 15.10.2025, in Kraft seit 16.06.2026: standardisierter Risikohinweis, Wissenstest, Verbot von Kaufanreizen.",
+      "source_id": "SRC_BAFIN_TURBO",
+      "caveat": "",
+      "period": "Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026"
+    },
+    {
+      "id": "FACT_BAFIN_STUDY",
+      "verdict": "UNVERIFIED",
+      "class": "MARKET_DATA",
+      "confidence": 0.7,
+      "claim": "BaFin-Studie: Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste; Untersuchungszeitraum 2019–2023.",
+      "source_id": "SRC_BAFIN_STUDY",
+      "caveat": "Studie nicht im Volltext gelesen; Zeitraum nur sekundär belegt.",
+      "period": "Untersuchungszeitraum 2019–2023",
+      "supporting_sources": [
+        "SRC_TESTDE"
+      ]
     },
     {
       "id": "FACT_XRAY_10_IND",
@@ -112,6 +227,49 @@
       "claim": "Datenbasis 1-Minuten-CBOE-Feed mit Analytik von OptionsDepth; nur SPX-Optionen, Anzeige auf ES/MES/SPY.",
       "source_id": "SRC_ATAS_LEARN",
       "caveat": "Herstellerangabe.",
+      "period": "Herstellerdoku Stand 2026-10-05",
+      "supporting_sources": [
+        "SRC_ATAS_HELP"
+      ]
+    },
+    {
+      "id": "FACT_XRAY_CONNECTIVITY",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.7,
+      "claim": "Options X-Ray setzt eine Verbindung über Rithmic oder Interactive Brokers voraus; CQG ist in Entwicklung.",
+      "source_id": "SRC_ATAS_CHANGELOG",
+      "caveat": "Nur über Changelog-Snippet belegt.",
+      "period": "Changelog Stand 2026-10-05"
+    },
+    {
+      "id": "FACT_XRAY_LAUNCH",
+      "verdict": "UNVERIFIED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.6,
+      "claim": "Start der Options X-Ray Suite am 04.09.2026.",
+      "source_id": "SRC_ATAS_CHANGELOG",
+      "caveat": "Nur Snippet; am Changelog prüfen.",
+      "period": "Changelog Stand 2026-10-05"
+    },
+    {
+      "id": "FACT_ATAS_CONNECTIONS",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.85,
+      "claim": "ATAS bindet als Handelsverbindungen Rithmic, CQG und Interactive Brokers (über TWS) an, als Datenfeeds dxFeed und IQFeed.",
+      "source_id": "SRC_ATAS_CONNECTIONS",
+      "caveat": "",
+      "period": "Herstellerdoku Stand 2026-10-05"
+    },
+    {
+      "id": "FACT_CHAIN_SUITE",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.85,
+      "claim": "Die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD) und deckt ES, NQ, CL und GC ab.",
+      "source_id": "SRC_ATAS_CHAIN",
+      "caveat": "",
       "period": "Herstellerdoku Stand 2026-10-05"
     },
     {
@@ -121,8 +279,11 @@
       "confidence": 0.8,
       "claim": "Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan).",
       "source_id": "SRC_ATAS_LEARN",
-      "caveat": "Stand 2026-10-05.",
-      "period": "Herstellerdoku Stand 2026-10-05"
+      "caveat": "",
+      "period": "Herstellerdoku Stand 2026-10-05",
+      "supporting_sources": [
+        "SRC_ATAS_MBO"
+      ]
     },
     {
       "id": "FACT_CROSS_TRADING",
@@ -145,6 +306,16 @@
       "period": "API-Doku Stand 2026-10-05"
     },
     {
+      "id": "FACT_CBOE_OPENCLOSE",
+      "verdict": "MEDIA_REPORT",
+      "class": "MEDIA_REPORT",
+      "confidence": 0.6,
+      "claim": "SPX-Optionen werden nur an der Cboe gehandelt; Cboe stellt nach Teilnehmertyp markierte Open-Close-Daten bereit, auf die sich OptionsDepth stützt.",
+      "source_id": "SRC_MENTHORQ_GUIDE",
+      "caveat": "Sekundärquelle.",
+      "period": "Stand 2026-10-05"
+    },
+    {
       "id": "FACT_SPX_0DTE_59",
       "verdict": "CONFIRMED",
       "class": "MARKET_DATA",
@@ -153,75 +324,6 @@
       "source_id": "SRC_CBOE_FY2025",
       "caveat": "",
       "period": "Gesamtjahr 2025"
-    },
-    {
-      "id": "FACT_EUREX_DAILY",
-      "verdict": "CONFIRMED",
-      "class": "MARKET_DATA",
-      "confidence": 0.7,
-      "claim": "Eurex: OEXP (seit 28.08.2023) und ODAP (seit 13.11.2023) als Optionen mit Tagesverfall; ADV ca. 30.900 bzw. 2.300 Kontrakte.",
-      "source_id": "SRC_EUREX_DAILY",
-      "caveat": "ADV-Werte aus Snippet.",
-      "period": "ADV seit Produktstart (Eurex-Präsentation)"
-    },
-    {
-      "id": "FACT_BAFIN_TURBO",
-      "verdict": "CONFIRMED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.85,
-      "claim": "BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten in Kraft seit 16.06.2026 (Risikohinweis, Wissenstest); Studie: Verlustquote 74,2 %.",
-      "source_id": "SRC_BAFIN_TURBO",
-      "caveat": "",
-      "period": "Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026"
-    },
-    {
-      "id": "FACT_NO_EUREX_GEX",
-      "verdict": "MEDIA_REPORT",
-      "class": "MEDIA_REPORT",
-      "confidence": 0.6,
-      "claim": "Für keinen der verglichenen Anbieter ist intraday-fähige Eurex-GEX belegt (MenthorQ: n. v.); Gamma Cockpit liefert DAX-GEX nur auf Tagesbasis (Beta).",
-      "source_id": "SRC_VENDORS",
-      "caveat": "Nur Snippet-Belege; MenthorQ n. v. → 0 von 5 belegt."
-    },
-    {
-      "id": "FACT_DEALER_CONVENTION",
-      "verdict": "SCENARIO_PROJECTION",
-      "class": "MODEL_ASSUMPTION",
-      "confidence": 0.5,
-      "claim": "GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls).",
-      "source_id": "SRC_MODEL",
-      "caveat": "Modellannahme, kein Fakt."
-    },
-    {
-      "id": "FACT_GEX_EXAMPLE",
-      "verdict": "SCENARIO_PROJECTION",
-      "class": "SCENARIO_PROJECTION",
-      "confidence": 1.0,
-      "claim": "Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES.",
-      "source_id": "SRC_MODEL",
-      "caveat": "Hypothetische Werte."
-    },
-    {
-      "id": "FACT_ROADMAP",
-      "verdict": "SCENARIO_PROJECTION",
-      "class": "SCENARIO_PROJECTION",
-      "confidence": 0.0,
-      "claim": "Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge.",
-      "source_id": "SRC_USER_TEXT",
-      "caveat": "Keine Prognose."
-    },
-    {
-      "id": "FACT_TERMIN_HISTORY",
-      "verdict": "CONFIRMED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.85,
-      "claim": "Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte 2019 (10.000 €, ab 2021); Erhöhung auf 20.000 € durch JStG 2020 (BGBl. I 2020 S. 3096).",
-      "source_id": "SRC_BZST_2019",
-      "caveat": "Erhöhung 2020 nur sekundär belegt.",
-      "period": "Rechtslage 2019–2024",
-      "additional_sources": [
-        "SRC_HB_JSTG2020"
-      ]
     },
     {
       "id": "FACT_OPRA_CAPACITY",
@@ -244,14 +346,83 @@
       "period": "April 2025"
     },
     {
+      "id": "FACT_ODAX_SPECS",
+      "verdict": "CONFIRMED",
+      "class": "MARKET_DATA",
+      "confidence": 0.85,
+      "claim": "ODAX: 5 € je Indexpunkt, europäisch, Barausgleich, Basiswert DAX-Index; Micro-DAX-Optionen (ODXS) sind gelistet.",
+      "source_id": "SRC_EUREX_SPECS",
+      "caveat": "",
+      "period": "Produktseite Stand 2026-10-05"
+    },
+    {
+      "id": "FACT_OESX_MULT",
+      "verdict": "UNVERIFIED",
+      "class": "MARKET_DATA",
+      "confidence": 0.7,
+      "claim": "OESX: 10 € je Indexpunkt; Optionen auf DAX- bzw. EURO-STOXX-50-Futures wurden nicht gefunden.",
+      "source_id": "SRC_EUREX_SPECS",
+      "caveat": "Standardangabe, nicht am Original bestätigt.",
+      "period": "Stand 2026-10-05"
+    },
+    {
+      "id": "FACT_EUREX_DAILY_LAUNCH",
+      "verdict": "CONFIRMED",
+      "class": "MARKET_DATA",
+      "confidence": 0.85,
+      "claim": "Eurex: OEXP (EURO STOXX 50 End-of-Day Options) seit 28.08.2023, ODAP (DAX End-of-Day Options) seit 13.11.2023; OEXP seit 05.01.2026 mit Verfällen an zehn Handelstagen.",
+      "source_id": "SRC_EUREX_CIRCULARS",
+      "caveat": "",
+      "period": "Eurex-Circulars 2023–2026",
+      "supporting_sources": [
+        "SRC_EUREX_DAILY"
+      ]
+    },
+    {
+      "id": "FACT_EUREX_DAILY_ADV",
+      "verdict": "UNVERIFIED",
+      "class": "MARKET_DATA",
+      "confidence": 0.6,
+      "claim": "ADV seit Produktstart: OEXP ca. 30.900 Kontrakte, ODAP ca. 2.300 Kontrakte.",
+      "source_id": "SRC_EUREX_WHITEPAPER",
+      "caveat": "Stand der Präsentation n. v.",
+      "period": "seit Produktstart, Stand n. v."
+    },
+    {
       "id": "FACT_BSW_SHARES",
       "verdict": "UNVERIFIED",
       "class": "MARKET_DATA",
       "confidence": 0.6,
-      "claim": "Hebelprodukte ca. 84 % des Börsenumsatzes verbriefter Derivate; Knock-outs ca. 59 %, Optionsscheine ca. 19 %.",
+      "claim": "Anteile am Börsenumsatz verbriefter Derivate (jeweils am Gesamtumsatz): Hebelprodukte ca. 84 %, darunter Knock-outs ca. 59 % und Optionsscheine ca. 19 %.",
       "source_id": "SRC_BSW",
-      "caveat": "Bezugszeitraum n. v. (Stand 30.06.2026 veröffentlicht).",
+      "caveat": "Bezugszeitraum n. v. (veröffentlicht 07.07.2026, Stand 30.06.2026).",
       "period": "n. v."
+    },
+    {
+      "id": "FACT_ISSUER_HEDGING",
+      "verdict": "MEDIA_REPORT",
+      "class": "MEDIA_REPORT",
+      "confidence": 0.6,
+      "claim": "Emittenten sichern ihr Nettorisiko laufend dynamisch ab, über den Basiswert oder passende Gegengeschäfte.",
+      "source_id": "SRC_ISSUER_HEDGE",
+      "caveat": "Keine Primärquelle zum Hedging über FDAX/ODAX gefunden.",
+      "period": "Stand 2026-10-05"
+    },
+    {
+      "id": "FACT_COMPETITOR_MATRIX",
+      "verdict": "MEDIA_REPORT",
+      "class": "MEDIA_REPORT",
+      "confidence": 0.65,
+      "claim": "Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz, Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS.",
+      "source_id": "SRC_SPOTGAMMA",
+      "caveat": "Snippets von Anbieter- und Drittseiten; Felder ohne Beleg als n. v.",
+      "period": "Stand 2026-10-05",
+      "supporting_sources": [
+        "SRC_MENTHORQ",
+        "SRC_VOLLAND",
+        "SRC_BOOKMAP",
+        "SRC_IBKR"
+      ]
     },
     {
       "id": "FACT_VENDOR_PRICES",
@@ -264,136 +435,404 @@
       "period": "Stand 2026-10-05"
     },
     {
-      "id": "FACT_EUREX_SPECS",
-      "verdict": "CONFIRMED",
-      "class": "MARKET_DATA",
-      "confidence": 0.8,
-      "claim": "ODAX: 5 € je Indexpunkt, europäisch, Barausgleich, Basiswert DAX-Index; OESX: 10 € je Punkt; Micro-DAX-Optionen (ODXS) gelistet.",
-      "source_id": "SRC_EUREX_SPECS",
-      "caveat": "OESX-Multiplikator nur Standardangabe; am Original bestätigen.",
-      "period": "Kontraktspezifikation Stand 2026-10-05"
+      "id": "FACT_NO_EUREX_GEX",
+      "verdict": "MEDIA_REPORT",
+      "class": "MEDIA_REPORT",
+      "confidence": 0.6,
+      "claim": "Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta).",
+      "source_id": "SRC_GAMMACOCKPIT",
+      "caveat": "Nur Snippet-Belege.",
+      "period": "Stand 2026-10-05",
+      "supporting_sources": [
+        "SRC_SPOTGAMMA",
+        "SRC_MENTHORQ",
+        "SRC_VOLLAND",
+        "SRC_BOOKMAP",
+        "SRC_IBKR"
+      ],
+      "basis": {
+        "compared": 6,
+        "determinable": 5,
+        "positive": 0,
+        "not_verifiable": [
+          "MenthorQ"
+        ]
+      }
+    },
+    {
+      "id": "FACT_DEALER_CONVENTION",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "MODEL_ASSUMPTION",
+      "confidence": 0.5,
+      "claim": "GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls).",
+      "source_id": "SRC_MODEL",
+      "caveat": "Modellannahme, kein Fakt.",
+      "period": "–"
+    },
+    {
+      "id": "FACT_GEX_EXAMPLE",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": 1.0,
+      "claim": "Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES.",
+      "source_id": "SRC_MODEL",
+      "caveat": "Hypothetische Werte.",
+      "period": "–"
+    },
+    {
+      "id": "FACT_ROADMAP",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": 0.0,
+      "claim": "Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge.",
+      "source_id": "SRC_USER_TEXT",
+      "caveat": "Keine Prognose.",
+      "period": "–"
     }
   ],
   "sources": [
     {
       "id": "SRC_BGBL_JSTG2024",
+      "ref": "S1",
+      "tier": "primary",
       "title": "Jahressteuergesetz 2024, BGBl. 2024 I Nr. 387",
       "url": "https://www.recht.bund.de/bgbl/1/2024/387/regelungstext.pdf"
     },
     {
+      "id": "SRC_BT_DRS",
+      "ref": "S2",
+      "tier": "primary",
+      "title": "BT-Drs. 20/13419, 20/13420, 20/12780 (JStG 2024)",
+      "url": "https://dserver.bundestag.de/btd/20/134/2013420.pdf"
+    },
+    {
+      "id": "SRC_BZST_2019",
+      "ref": "S3",
+      "tier": "primary",
+      "title": "Gesetz zur Einführung einer Pflicht zur Mitteilung grenzüberschreitender Steuergestaltungen (BGBl. I 2019 S. 2875)",
+      "url": "https://www.bzst.de/SharedDocs/Downloads/DE/DAC6/dac6_gesetz_grenzueberschreitender_steuergestaltungen.pdf"
+    },
+    {
       "id": "SRC_BMF_2025",
+      "ref": "S4",
+      "tier": "primary",
       "title": "BMF-Schreiben Einzelfragen zur Abgeltungsteuer, 14.05.2025",
       "url": "https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Abgeltungsteuer/2025-05-14-einzelfragen-zur-abgeltungsteuer.pdf"
     },
     {
       "id": "SRC_BFH_VIIIB11323",
+      "ref": "S5",
+      "tier": "primary",
       "title": "BFH, Beschluss v. 07.06.2024, VIII B 113/23",
       "url": "https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE202410113/"
     },
     {
+      "id": "SRC_FG_RLP",
+      "ref": "S6",
+      "tier": "secondary",
+      "title": "FG Rheinland-Pfalz 1 V 1674/23 (tax-news, Sekundärquelle)",
+      "url": "https://www.tax-news.de/news/fg-rheinland-pfalz-haelt-verfassungsmaessigkeit-der-verlustverrechnungsbeschraenkung-bei-termingeschaeften-fuer-zweifelhaft/"
+    },
+    {
+      "id": "SRC_BMF_2021",
+      "ref": "S7",
+      "tier": "primary",
+      "title": "BMF-Schreiben vom 03.06.2021 (Anhang 19 EStH)",
+      "url": "https://ao.bundesfinanzministerium.de/esth/2024/C-Anhaenge/Anhang-19/II/anhang-19-II.html"
+    },
+    {
       "id": "SRC_ESTG_20",
+      "ref": "S8",
+      "tier": "primary",
       "title": "§ 20 EStG (EStH 2025)",
       "url": "https://esth.bundesfinanzministerium.de/esth/2025/A-Einkommensteuergesetz/II-Einkommen-2-24b/8-Die-einzelnen-Einkunftsarten-13-24b/e-Kapitalvermoegen-20/Paragraf-20/paragraf-20.html"
     },
     {
+      "id": "SRC_BAFIN_TURBO",
+      "ref": "S9",
+      "tier": "primary",
+      "title": "BaFin · Allgemeinverfügung Turbo-Zertifikate",
+      "url": "https://www.bafin.de/SharedDocs/Downloads/DE/Aufsichtsrecht/Verfuegungen/dl_vf_allgemeinverfuegung_turbo_zertifikate.html"
+    },
+    {
+      "id": "SRC_BAFIN_HFT",
+      "ref": "S10",
+      "tier": "primary",
+      "title": "BaFin · FAQ HFT-Gesetz",
+      "url": "https://www.bafin.de/SharedDocs/FAQs/DE/HFT-Gesetz/160_hft_faq.html"
+    },
+    {
+      "id": "SRC_WPHG_80",
+      "ref": "S11",
+      "tier": "primary",
+      "title": "§ 80 WpHG (Abs. 2 algorithmischer Handel; Abs. 4 Market-Making-Pflichten; Abs. 5 Definition)",
+      "url": "https://www.gesetze-im-internet.de/wphg/__80.html"
+    },
+    {
+      "id": "SRC_ISSUER_HEDGE",
+      "ref": "S12",
+      "tier": "secondary",
+      "title": "Emittenten-Hedging (Morgan Stanley Produktwissen, ideas-Magazin; Sekundärquellen)",
+      "url": "https://zertifikate.morganstanley.com/services/produktwissen/optionsscheine/"
+    },
+    {
       "id": "SRC_ESTG_15",
+      "ref": "S13",
+      "tier": "primary",
       "title": "§ 15 EStG",
       "url": "https://www.gesetze-im-internet.de/estg/__15.html"
     },
     {
       "id": "SRC_BFH_IR2514",
+      "ref": "S14",
+      "tier": "primary",
       "title": "BFH, Urteil v. 06.07.2016, I R 25/14",
       "url": "https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE201610211/"
     },
     {
-      "id": "SRC_WPHG_80",
-      "title": "§ 80 WpHG (Abs. 2 algorithmischer Handel; Abs. 4 Market-Making-Pflichten; Abs. 5 Definition)",
-      "url": "https://www.gesetze-im-internet.de/wphg/__80.html"
-    },
-    {
       "id": "SRC_ATAS_HELP",
+      "ref": "S15",
+      "tier": "vendor",
       "title": "ATAS Hilfe · Options X-Ray",
       "url": "https://help.atas.net/en/support/solutions/articles/72000662222-options-x-ray-expected-move"
     },
     {
       "id": "SRC_ATAS_LEARN",
+      "ref": "S16",
+      "tier": "vendor",
       "title": "ATAS Learn · Options",
       "url": "https://learn.atas.net/options/"
     },
     {
+      "id": "SRC_ATAS_CHANGELOG",
+      "ref": "S17",
+      "tier": "vendor",
+      "title": "ATAS Changelog",
+      "url": "https://feedback.atas.net/changelog"
+    },
+    {
+      "id": "SRC_ATAS_CHAIN",
+      "ref": "S18",
+      "tier": "vendor",
+      "title": "ATAS Hilfe · Options Chain Suite / GEX Profile",
+      "url": "https://help.atas.net/en/support/solutions/articles/72000661536-options-gex-profile"
+    },
+    {
+      "id": "SRC_ATAS_CONNECTIONS",
+      "ref": "S19",
+      "tier": "vendor",
+      "title": "ATAS · Connections",
+      "url": "https://atas.net/connections/"
+    },
+    {
       "id": "SRC_ATAS_8012",
+      "ref": "S20",
+      "tier": "vendor",
       "title": "ATAS 8.0.12 · Cross-Trading",
       "url": "https://help.atas.net/en/support/solutions/articles/72000657084-cross-trading"
     },
     {
+      "id": "SRC_ATAS_MBO",
+      "ref": "S21",
+      "tier": "vendor",
+      "title": "ATAS Changelog · MBO-Bundle und Optionsanalyse",
+      "url": "https://feedback.atas.net/changelog/new-mbo-bundle-and-options-analysis-are-now-in-atas"
+    },
+    {
       "id": "SRC_IB_API",
+      "ref": "S22",
+      "tier": "vendor",
       "title": "IB TWS API · Spread Contracts",
       "url": "https://interactivebrokers.github.io/tws-api/spread_contracts.html"
     },
     {
+      "id": "SRC_SPOTGAMMA",
+      "ref": "S23",
+      "tier": "vendor",
+      "title": "SpotGamma (Preise, HIRO)",
+      "url": "https://spotgamma.com/hiro-indicator/"
+    },
+    {
+      "id": "SRC_MENTHORQ",
+      "ref": "S24",
+      "tier": "vendor",
+      "title": "MenthorQ (Preise, Abdeckung)",
+      "url": "https://menthorq.com/guide/menthorq-asset-coverage/"
+    },
+    {
+      "id": "SRC_VOLLAND",
+      "ref": "S25",
+      "tier": "secondary",
+      "title": "Volland (ORATS-Partnerseite, User Guide)",
+      "url": "https://orats.com/volland"
+    },
+    {
+      "id": "SRC_BOOKMAP",
+      "ref": "S26",
+      "tier": "vendor",
+      "title": "Bookmap (Pakete, Konnektivität)",
+      "url": "https://bookmap.com/en/packages-comparison"
+    },
+    {
+      "id": "SRC_IBKR",
+      "ref": "S27",
+      "tier": "vendor",
+      "title": "Interactive Brokers · OptionTrader / TWS",
+      "url": "https://www.interactivebrokers.com/en/software/pdfhighlights/PDF-OptionTrader.php"
+    },
+    {
+      "id": "SRC_GAMMACOCKPIT",
+      "ref": "S28",
+      "tier": "vendor",
+      "title": "Gamma Cockpit (DAX-GEX, Beta)",
+      "url": "https://gammacockpit.com/"
+    },
+    {
+      "id": "SRC_EUREX_SPECS",
+      "ref": "S29",
+      "tier": "primary",
+      "title": "Eurex · Produktseiten DAX-Optionen (ODAX), Micro-DAX-Optionen (ODXS), EURO STOXX 50 Options",
+      "url": "https://www.eurex.com/ex-en/markets/idx/dax/DAX-Options-139884"
+    },
+    {
+      "id": "SRC_EUREX_CIRCULARS",
+      "ref": "S30",
+      "tier": "primary",
+      "title": "Eurex Circulars OEXP 047/23 und 117/25",
+      "url": "https://www.eurex.com/ex-en/find/circulars/circular-4844340"
+    },
+    {
+      "id": "SRC_EUREX_WHITEPAPER",
+      "ref": "S31",
+      "tier": "primary",
+      "title": "Eurex · Whitepaper EURO STOXX 50 Options / Präsentation Daily Options",
+      "url": "https://www.eurex.com/resource/blob/3617154/068c57ac37e964429b57ff10fcd78f53/data/presentation-daily-options.pdf"
+    },
+    {
+      "id": "SRC_CBOE_FY2025",
+      "ref": "S32",
+      "tier": "primary",
+      "title": "Cboe · Trading Volume December and Full Year 2025",
+      "url": "https://ir.cboe.com/news/news-details/2026/Cboe-Global-Markets-Reports-Trading-Volume-for-December-and-Full-Year-2025/default.aspx"
+    },
+    {
+      "id": "SRC_OPRA",
+      "ref": "S33",
+      "tier": "primary",
+      "title": "OPRA · Capacity Projections Update (Sept. 2025)",
+      "url": "https://cdn.opraplan.com/documents/notices/OPRA_Capacity_Projections_Update_0925.pdf"
+    },
+    {
+      "id": "SRC_BSW",
+      "ref": "S34",
+      "tier": "primary",
+      "title": "BSW · Börsenumsätze verbriefter Derivate",
+      "url": "https://www.derbsw.de/de/boersenumsaetze/"
+    },
+    {
+      "id": "SRC_DELVO_958",
+      "ref": "S35",
+      "tier": "primary",
+      "title": "Delegierte VO (EU) 2016/958 (Anlageempfehlungen)",
+      "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32016R0958"
+    },
+    {
+      "id": "SRC_CMS",
+      "ref": "S36",
+      "tier": "secondary",
+      "title": "CMS · Aufhebung der Verlustabzugsbeschränkung (Sekundärquelle)",
+      "url": "https://cms.law/de/deu/legal-updates/Ade-Verlustabzugsbeschraenkung-fuer-Termingeschaefte-Gesetzgeber-bereinigt-Verfassungswidrigkeit"
+    },
+    {
+      "id": "SRC_DATABENTO",
+      "ref": "S37",
+      "tier": "secondary",
+      "title": "Databento · Processing OPRA in real time (Sekundärquelle)",
+      "url": "https://databento.com/blog/beyond-40-gbps-processing-opra-in-real-time"
+    },
+    {
+      "id": "SRC_STEUERTIPPS",
+      "ref": "S38",
+      "tier": "secondary",
+      "title": "steuertipps.de · Stand 2 BvL 3/21 (Sekundärquelle)",
+      "url": "https://www.steuertipps.de/altersvorsorge-rente-finanzen/aktienverluste-nur-mit-aktiengewinnen-verrechenbar-verfassungswidrig"
+    },
+    {
+      "id": "SRC_PRICES",
+      "ref": "S39",
+      "tier": "secondary",
+      "title": "Preisseiten ATAS, SpotGamma, MenthorQ, ORATS/Volland, Bookmap (Snippets/Drittquellen; Sekundärquelle)",
+      "url": "https://atas.net/pricing/"
+    },
+    {
+      "id": "SRC_HB_JSTG2020",
+      "ref": "S40",
+      "tier": "secondary",
+      "title": "Handelsblatt · Erhöhung auf 20.000 € durch JStG 2020 (Sekundärquelle)",
+      "url": "https://www.handelsblatt.com/finanzen/steuern-recht/steuern/umstrittene-regelung-groko-bessert-bei-steuerlicher-verlustverrechnung-von-termingeschaeften-nach/26697238.html"
+    },
+    {
+      "id": "SRC_BAFIN_STUDY",
+      "ref": "S41",
+      "tier": "primary",
+      "title": "BaFin · Studie Turbo-Zertifikate (2025)",
+      "url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2025/Studie_250521_Turbo_Zertifikate.html"
+    },
+    {
+      "id": "SRC_MENTHORQ_GUIDE",
+      "ref": "S42",
+      "tier": "secondary",
+      "title": "MenthorQ · Cboe Market-Maker-Tagged Data erklärt (Sekundärquelle)",
+      "url": "https://menthorq.com/guide/cboe-market-maker-tagged-data-explained/"
+    },
+    {
+      "id": "SRC_PRIIPS",
+      "ref": "S44",
+      "tier": "primary",
+      "title": "VO (EU) Nr. 1286/2014 (PRIIPs)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2014/1286/oj"
+    },
+    {
+      "id": "SRC_TESTDE",
+      "ref": "S45",
+      "tier": "secondary",
+      "title": "test.de · Studie zu Turbo-Zertifikaten (Sekundärquelle)",
+      "url": "https://www.test.de/Studie-zu-Turbo-Zertifikaten-Die-meisten-Anleger-machen-mit-Turbo-Zertifikaten-Verluste-6227752-0/"
+    },
+    {
       "id": "SRC_EUREX_DAILY",
+      "ref": "S46",
+      "tier": "primary",
       "title": "Eurex · Daily Options (OEXP/ODAP)",
       "url": "https://www.eurex.com/ex-en/markets/idx/daily-opt"
     },
     {
-      "id": "SRC_BAFIN_TURBO",
-      "title": "BaFin · Allgemeinverfügung Turbo-Zertifikate",
-      "url": "https://www.bafin.de/SharedDocs/Downloads/DE/Aufsichtsrecht/Verfuegungen/dl_vf_allgemeinverfuegung_turbo_zertifikate.html"
+      "id": "SRC_WPHG_63",
+      "ref": "S47",
+      "tier": "primary",
+      "title": "§ 63 WpHG (Wohlverhaltenspflichten)",
+      "url": "https://www.gesetze-im-internet.de/wphg/__63.html"
     },
     {
-      "id": "SRC_VENDORS",
-      "title": "Anbieterseiten SpotGamma, MenthorQ, Volland, Bookmap, Gamma Cockpit (Snippets)",
-      "url": "https://gammacockpit.com/"
+      "id": "SRC_SUTOR",
+      "ref": "S48",
+      "tier": "secondary",
+      "title": "Sutor Bank · Formular Angemessenheit nach § 63 Abs. 10 WpHG (Sekundärquelle)",
+      "url": "https://www.sutorbank.de/fileadmin/Dateien/Service/Formulare/Investmentsparvertraege/Angaben-zur-Feststellung-der-Angemessenheit.pdf"
     },
     {
       "id": "SRC_MODEL",
+      "ref": "–",
+      "tier": "internal",
       "title": "FinCoach-Referenzmodell (BSM-Greeks)",
       "url": ""
     },
     {
       "id": "SRC_USER_TEXT",
+      "ref": "–",
+      "tier": "internal",
       "title": "Quelltext 2026-10-05 (USER_PROVIDED)",
       "url": ""
-    },
-    {
-      "id": "SRC_CBOE_FY2025",
-      "title": "Cboe · Trading Volume December and Full Year 2025",
-      "url": "https://ir.cboe.com/news/news-details/2026/Cboe-Global-Markets-Reports-Trading-Volume-for-December-and-Full-Year-2025/default.aspx"
-    },
-    {
-      "id": "SRC_BZST_2019",
-      "title": "Gesetz zur Einführung einer Pflicht zur Mitteilung grenzüberschreitender Steuergestaltungen (BGBl. I 2019 S. 2875)",
-      "url": "https://www.bzst.de/SharedDocs/Downloads/DE/DAC6/dac6_gesetz_grenzueberschreitender_steuergestaltungen.pdf"
-    },
-    {
-      "id": "SRC_HB_JSTG2020",
-      "title": "Handelsblatt · Erhöhung auf 20.000 € durch JStG 2020 (Sekundärquelle)",
-      "url": "https://www.handelsblatt.com/finanzen/steuern-recht/steuern/umstrittene-regelung-groko-bessert-bei-steuerlicher-verlustverrechnung-von-termingeschaeften-nach/26697238.html"
-    },
-    {
-      "id": "SRC_OPRA",
-      "title": "OPRA · Capacity Projections Update (Sept. 2025)",
-      "url": "https://cdn.opraplan.com/documents/notices/OPRA_Capacity_Projections_Update_0925.pdf"
-    },
-    {
-      "id": "SRC_DATABENTO",
-      "title": "Databento · Processing OPRA in real time (Sekundärquelle)",
-      "url": "https://databento.com/blog/beyond-40-gbps-processing-opra-in-real-time"
-    },
-    {
-      "id": "SRC_BSW",
-      "title": "BSW · Börsenumsätze verbriefter Derivate",
-      "url": "https://www.derbsw.de/de/boersenumsaetze/"
-    },
-    {
-      "id": "SRC_PRICES",
-      "title": "Preisseiten ATAS, SpotGamma, MenthorQ, ORATS/Volland, Bookmap (Snippets/Drittquellen)",
-      "url": "https://atas.net/pricing/"
-    },
-    {
-      "id": "SRC_EUREX_SPECS",
-      "title": "Eurex · Produktseiten DAX-Optionen (ODAX), Micro-DAX-Optionen (ODXS), EURO STOXX 50 Options",
-      "url": "https://www.eurex.com/ex-en/markets/idx/dax/DAX-Options-139884"
     }
   ],
   "audit_trail": [
@@ -426,6 +865,10 @@
       "event": "v1.1.1: Zweite Zweitprüfung – C9 auf ◐; neue Fehlerklassen L17–L21 (WARN-Tests), Offen-Punkte für Q4, Q7, Q9, C8, C9",
       "qa_score_pct": 76.3,
       "release": "UEBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-08",
+      "event": "v1.2.0: DBOM neu aufgebaut – alle Analysequellen (S1–S48) mit ref/tier; zusammengesetzte Fakten geteilt (L19); neue Fakten für Aussagen ohne Zahl (L12); supporting_sources statt additional_sources; Quantor-Basis für FACT_NO_EUREX_GEX (L18)"
     }
   ]
 }

@@ -12,6 +12,8 @@ Statische Website mit Analyse-Modulen (`modul.html` = M298, `m299.html`, `m300.h
   Die Ausgabe gehört in Bericht oder Commit.
 - **Kein ✓ ohne Messung** (L10). Wurde nicht gemessen, gilt ◐.
 - Styleguide-Basis auch auf `body` setzen (L01); Faktenzahlen und QA-Score nie von Hand schreiben (L03, L07).
+- Bibliotheken nur aus `vendor/` laden, keine CDNs (L20); Tailwind nach Klassenänderungen mit `sh vendor/build-tailwind.sh` neu bauen.
+- Hero mit zugänglicher Grafik (L22); Hinweisboxen über volle Breite (L23).
 - Neuer Fehler → `qa/LESSONS.md` + Regel im Skill + Test im Skript + Regressionsnachweis (Skill, Abschnitt 5).
 - Vor Freigabe oder öffentlichem Teilen: Agent **`fincoach-qa-reviewer`** als unabhängige Zweitprüfung.
 
