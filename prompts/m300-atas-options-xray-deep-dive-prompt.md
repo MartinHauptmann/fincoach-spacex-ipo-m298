@@ -2,7 +2,7 @@
 
 **Thema:** ATAS Options X-Ray, Dealer-Hedging-Analytik, Eurex-Börsenoptionen vs. verbriefte Derivate im DACH-Raum
 und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
-**Prompt-Version:** 1.1.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-07 (Lehren L03–L08 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
+**Prompt-Version:** 1.2.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-08 (Lehren L03–L44 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
 **Modul-ID:** M300 ist ein Platzhalter und kann frei angepasst werden
 
 ---
@@ -257,7 +257,8 @@ Modul 8 · Fazit und Synthese
 C1  Disclaimer am Anfang und am Ende: keine Anlage-, Rechts- oder Steuerberatung im Sinne von
     WpIG/KWG, RDG und StBerG; allgemeine Information; Totalverlustrisiko bei Derivaten, Hebel,
     Knock-out-Risiko; Hinweis, dass Derivate nur für erfahrene Anleger geeignet sind.
-    Gilt für JEDE Ausgabeform (Markdown, HTML-Seite, Artifact), nicht nur für diese Analyse [L04].
+    Gilt für JEDE Ausgabeform (Markdown, HTML-Seite, Artifact), nicht nur für diese Analyse [L04] Alle Bestandteile
+    in JEDEM Disclaimer (Kurzfassung und Vollfassung) [L42].
 C2  Keine Anlageempfehlung im Sinne von Art. 3 Abs. 1 Nr. 34/35 MAR: keine konkreten Kauf-,
     Verkaufs- oder Halteempfehlungen, Kursziele oder Timing zu einzelnen Instrumenten. Wäre doch
     eine erforderlich, gelten die Offenlegungspflichten nach Delegierter VO (EU) 2016/958.

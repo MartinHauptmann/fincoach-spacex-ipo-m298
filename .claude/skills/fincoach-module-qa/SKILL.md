@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L41 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L45 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -82,6 +82,18 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   Abschlusskriterium.
 - **L41 / Q10:** Fachbegriffe beim ersten Auftreten in `<dfn>` mit sichtbarer Erklärung (Liste `qa/fachbegriffe.json`,
   neue Begriffe dort ergänzen). Fundstellen in Glossar-Einträgen (`data-def`) sind an Fakten gebunden (5. Feld in `GLOSSAR`).
+- **L41b:** Gewertet wird das erste *sichtbare* Vorkommen. Jede sichtbare Großbuchstaben-Abkürzung steht in
+  `qa/fachbegriffe.json`: unter `terms` (wird erklärt, `<dfn>` oder `<abbr title>`) oder unter `known` (Eigenname,
+  Produktcode, Normkürzel, UI-Label). Neue Abkürzung → bewusst einordnen.
+- **L26b:** Nennt ein Offen-Punkt eine Fundstelle aus einem Fakt, bindet er diesen Fakt (`data-source`); der Fakt ist dann
+  nicht CONFIRMED (L26). Teilaussagen mit offenem Punkt werden als eigener Fakt abgetrennt.
+- **L36b:** Normteile ohne § („S. 5“, „Sätze“, „Abs. 3“, „Nr. 387“) zählen wie Fundstellen; `data-def` befreit keine
+  Fundstelle von der Faktbindung.
+- **L42 / C1:** Jeder Disclaimer (Hero, Schluss, Analyse Anfang und Ende) enthält alle C1-Pflichtbestandteile:
+  Beratungsausschluss, allgemeine Information, Totalverlust, Hebel, Knock-out, Eignung nur für erfahrene Anleger.
+- **L43:** Daten, Paragraphen und Aktenzeichen der Analyse stehen in einem DBOM-Fakt; unbelegte Angaben entfernen.
+- **L44:** Die Version steht nur in der DBOM; `sync_module.py` überträgt sie.
+- **L45:** Das Live-Audit-Banner zeigt keine Warnung (Browser-Audit liest es aus).
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

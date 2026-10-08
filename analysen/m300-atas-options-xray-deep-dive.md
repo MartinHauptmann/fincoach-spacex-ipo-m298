@@ -5,10 +5,10 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.0.0 (Entwurf) |
+| Version | 1.5.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
-| Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.0.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
+| Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.2.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
 | Freigabeempfehlung | **ÜBERARBEITUNG** (siehe QA-Scorecard, Abschnitt 8) |
 
 > **Disclaimer (Kurzfassung):** Diese Analyse ist eine allgemeine Information zu Bildungszwecken. Sie ist
@@ -16,7 +16,8 @@
 > und keine Steuerberatung im Sinne des StBerG. Sie enthält keine Anlageempfehlung im Sinne von Art. 3 Abs. 1
 > Nr. 35 MAR. Optionen, Futures, Optionsscheine und Knock-out-Zertifikate sind Hebelprodukte mit dem
 > Risiko des Totalverlusts. Bei Futures und Stillhaltergeschäften (Verkauf von Optionen gegen Prämie) können die Verluste den Kapitaleinsatz
-> übersteigen. Steuerliche Aussagen geben den recherchierten Rechtsstand zum Stichtag wieder und ersetzen
+> übersteigen. Diese Produkte sind nur für erfahrene Anleger geeignet, die Hebel- und Knock-out-Mechanik
+> verstehen und Verluste bis zum Totalverlust tragen können. Steuerliche Aussagen geben den recherchierten Rechtsstand zum Stichtag wieder und ersetzen
 > keine individuelle Prüfung durch Steuerberater oder Rechtsanwalt.
 
 > **Methodischer Vorbehalt:** Die Recherche lief über eine Netzwerkumgebung, die den direkten Abruf der
@@ -37,7 +38,7 @@ Nach § 52 Abs. 28 EStG ist das in allen offenen Fällen anzuwenden. Die Finanzv
 BMF-Schreiben vom 14.05.2025 umgesetzt. Damit entfallen auch die These, Privatanleger würden aus
 steuerlichen Gründen in Optionsscheine gedrängt, und die angebliche Rechtsunsicherheit „bis zu einer
 Entscheidung des BVerfG“. Weiter gilt nur die Beschränkung für Aktienverluste nach § 20 Abs. 6 Satz 4 EStG.
-Sie liegt beim BVerfG unter 2 BvL 3/21. Zweitens trifft die Aussage nicht zu, für eine vermögensverwaltende
+Dazu ist laut Sekundärquelle (ungeprüft) beim BVerfG die Vorlage 2 BvL 3/21 anhängig. Zweitens trifft die Aussage nicht zu, für eine vermögensverwaltende
 Kapitalgesellschaft gebe es keine Verlustbeschränkung bei Termingeschäften. § 15 Abs. 4 Satz 3 EStG gilt
 über § 8 Abs. 1 KStG und bildet einen gesonderten Verlustkreis. Drittens sind Market Maker nicht gesetzlich
 verpflichtet, über das zentrale Orderbuch zu hedgen. Das Delta-Hedging folgt aus dem Risikomanagement.
@@ -63,7 +64,7 @@ Legende Prüfergebnis: ✓ bestätigt · ◐ teilweise/präzisiert · ✗ falsch
 | A02 | Besteuerung „fiktiver Gewinne“ bei Spreads trotz Nettoverlust | Steuer/Recht | CONFIRMED | ◐ | Für 2021–2024 zutreffend beschrieben (asymmetrische Besteuerung, so auch BFH). Heute in offenen Fällen behoben | S5 | 0,85 |
 | A03 | BFH äußerte in „mehreren Beschlüssen“ Zweifel (VIII B 113/23) | Steuer/Recht | CONFIRMED | ◐ | Belegt ist **ein** BFH-Beschluss vom 07.06.2024 im Verfahren über die Aussetzung der Vollziehung (AdV; summarische Prüfung, Streitjahr 2021); Vorinstanz FG Rheinland-Pfalz 1 V 1674/23. Weitere BFH-Beschlüsse nicht gefunden | S5, S6 | 0,85 |
 | A04 | Rechtsunsicherheit bleibt bis zur BVerfG-Entscheidung | Steuer/Recht | MEDIA_REPORT | ✗ | Durch die Aufhebung überholt; kein BVerfG-Verfahren speziell zu Termingeschäften gefunden | S1, S4 | 0,80 |
-| A05 | Optionsscheine/Knock-outs sind laut Finanzverwaltung keine Termingeschäfte | Steuer/Recht | CONFIRMED | ✓ | Seit BMF 03.06.2021, fortgeführt 19.05.2022 und 14.05.2025. Randziffern [N. V.] | S4, S7 | 0,85 |
+| A05 | Optionsscheine/Knock-outs sind laut Finanzverwaltung keine Termingeschäfte | Steuer/Recht | CONFIRMED | ✓ | Seit BMF 03.06.2021, fortgeführt bis 14.05.2025. Randziffern [N. V.] | S4, S7 | 0,85 |
 | A06 | Optionsschein-Verluste uneingeschränkt mit Aktien-/Zinsgewinnen verrechenbar | Steuer/Recht | CONFIRMED | ◐ | Richtung zutreffend; Aktien*verluste* bleiben nach § 20 Abs. 6 S. 4 auf Aktiengewinne beschränkt. Knock-out-Totalverlust unterlag früher Satz 6 a. F. | S4, S8 | 0,85 |
 | A07 | Privatanleger werden in bankemittierte Produkte gedrängt | Markt | USER_PROVIDED | ✗ (heute) | Steuerlich nur 2021–2024 plausibel. Aktuell spricht eher die BaFin-Allgemeinverfügung zu Turbo-Zertifikaten (seit 16.06.2026) für zusätzliche Hürden bei Knock-outs | S9 | 0,75 |
 | A08 | Market Maker sind gesetzlich gezwungen, über das zentrale Orderbuch zu hedgen | Mikrostruktur | USER_PROVIDED | ✗ | Keine Rechtspflicht. MiFID II Art. 17 Abs. 3 / § 80 Abs. 4 WpHG regeln Quotierungs-, keine Hedgingpflichten | S10, S11 | 0,85 |
@@ -87,15 +88,13 @@ Legende Prüfergebnis: ✓ bestätigt · ◐ teilweise/präzisiert · ✗ falsch
 auf das Gesetz zur Einführung einer Pflicht zur Mitteilung grenzüberschreitender Steuergestaltungen vom
 21.12.2019 zurück (BGBl. I S. 2875). Sie galt für Termingeschäfte ab dem 01.01.2021 und war zunächst auf
 10.000 € begrenzt. Das Jahressteuergesetz 2020 vom 21.12.2020 (BGBl. I S. 3096) hob die Grenze auf 20.000 €
-an. Das Jahressteuergesetz 2024 vom 02.12.2024 (BGBl. 2024 I Nr. 387, Bundestag 18.10.2024, Bundesrat
-22.11.2024) hob die Sätze 5 und 6 in Artikel 3 auf. Nach der Anwendungsregel in § 52 Abs. 28 EStG sind sie
+an. Das Jahressteuergesetz 2024 vom 02.12.2024 (BGBl. 2024 I Nr. 387) hob die Sätze 5 und 6 in Artikel 3 auf. Nach der Anwendungsregel in § 52 Abs. 28 EStG sind sie
 „in allen offenen Fällen nicht mehr anzuwenden“. Die Satznummern 25/26 sind nur per Snippet belegt
 (Konfidenz 0,7). Das BMF-Schreiben „Einzelfragen zur Abgeltungsteuer“ vom 14.05.2025
 (IV C 1 – S 2252/00075/016/070) setzt das um. Bestehende Verlustvorträge aus Termingeschäften sind
 danach in offenen Fällen unbeschränkt verrechenbar. Im Steuerabzugsverfahren der Banken wirkte die
 Beschränkung nie unmittelbar. Termingeschäftsverluste wurden bescheinigt und erst in der Veranlagung
-berücksichtigt. Nach Kundeninformationen von Instituten gilt im Abzugsverfahren seit 01.01.2025 die volle
-Verrechnung (Konfidenz 0,6). **Ergebnis: ✗ im Quelltext; die Regelung ist kein geltendes Recht mehr.**
+berücksichtigt. Wie die Institute das im Abzugsverfahren umsetzen, ist [N. V.]. **Ergebnis: ✗ im Quelltext; die Regelung ist kein geltendes Recht mehr.**
 
 **K2 · BFH VIII B 113/23.** Es handelt sich um einen Beschluss vom 07.06.2024 im Verfahren über die Aussetzung
 der Vollziehung (§ 69 Abs. 3 FGO). Der Senat prüfte nur summarisch und kam zu dem Ergebnis, die Regelung sei
@@ -110,7 +109,7 @@ fortgeführt. Beim Knock-out-Ereignis griff bis zur Aufhebung nach Auffassung de
 Wertloswerden), ebenfalls mit einer Grenze von 20.000 €. Der vom Quelltext behauptete einseitige
 Steuervorteil verbriefter Produkte war daher schon unter altem Recht kleiner als dargestellt. Nach der
 Aufhebung besteht er nicht mehr. Unverändert gilt nur § 20 Abs. 6 Satz 4 (Aktienverluste). Dazu ist beim
-BVerfG die Vorlage 2 BvL 3/21 anhängig. Bescheide ergehen insoweit vorläufig. Eine Entscheidung wurde bis
+BVerfG laut Sekundärquelle (ungeprüft) die Vorlage 2 BvL 3/21 anhängig. Eine Entscheidung wurde bis
 zum Stichtag nicht gefunden (Konfidenz 0,6). **Ergebnis: ◐** (Einordnung ✓, Verdrängungsthese ✗).
 
 **K4 · Kapitalgesellschaft.** § 15 Abs. 4 Satz 3 EStG schließt aus, dass Verluste aus Termingeschäften mit
@@ -166,7 +165,7 @@ Drittseiten; mehrere Felder sind [N. V.]. **Ergebnis: ◐.**
 Optionen auf DAX- oder Euro-Stoxx-50-Futures wurden nicht gefunden. Gelistet sind Indexoptionen
 einschließlich Micro-DAX-Optionen (ODXS). Für den kurzfristigen Bereich gibt es zwei Produkte. OEXP
 (EURO STOXX 50 End-of-Day Options) startete am 28.08.2023. Seit 05.01.2026 hat OEXP Verfälle an zehn
-Handelstagen, seit 06.07.2026 zusätzlich Monatsend-Verfälle. ODAP (DAX End-of-Day Options) startete am
+Handelstagen. ODAP (DAX End-of-Day Options) startete am
 13.11.2023. Der Fachbegriff für den „Hexensabbat“ ist Quartalsverfall: dritter Freitag in März, Juni,
 September und Dezember. ODAX und OESX haben zusätzlich Monatsverfälle. Open Interest veröffentlicht
 Eurex täglich über die Statistiken und den Extended Market Data Service, nicht über EOBI. **Ergebnis: ◐** (präzisiert: Indexoptionen statt Optionen auf Futures, Quartalsverfall statt „Hexensabbat“).
@@ -178,7 +177,7 @@ also nicht im Routing, sondern in der Plattform darüber: Strategie-UI, Pre-Trad
 Preisfindung für das Paket, Schutz vor Legging-Risiko und Positionsführung. **Ergebnis: ◐** (Befund zutreffend, Ursache präzisiert).
 
 **K12 · Warrant-Fair-Value-Tool.** „Verdeckte Marge“ und „künstliche Spread-Ausweitung“ sind wertende,
-im Sinne von §§ 4, 6 UWG riskante Begriffe. Neutral sind „Fair-Value-Differenz“, „Emittentenaufschlag“
+im Sinne von § 4 Nr. 1 und § 6 UWG riskante Begriffe. Neutral sind „Fair-Value-Differenz“, „Emittentenaufschlag“
 und „Geld-Brief-Spanne“. Die Kosten des Emittenten sind über das PRIIPs-Basisinformationsblatt und die
 Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen. Ein Tool sollte gegen diese
 Angaben abgleichen statt gegen eine eigene „Marge“. **Ergebnis: ◐.**
@@ -441,7 +440,7 @@ Die beiden Produktwelten unterscheiden sich in den folgenden Merkmalen:
 Zur **steuerlichen Zeitachse:** Von 2021 bis 2024 benachteiligte § 20 Abs. 6 Satz 5 EStG a. F.
 Privatanleger mit börsengehandelten Optionen und Futures tatsächlich. Verluste aus Glattstellungen und
 verfallenen Long-Optionen ließen sich nur bis 20.000 € im Jahr verrechnen. Bei Spread-Strategien konnten
-dadurch Steuern auf einen wirtschaftlich nicht vorhandenen Gewinn anfallen. Verbriefte Produkte waren von
+dadurch Steuern ohne Gesamtgewinn anfallen (Ableitung aus der Verlustverrechnungsbeschränkung). Verbriefte Produkte waren von
 Satz 5 nicht erfasst. Knock-out-Totalverluste fielen nach Auffassung der Finanzverwaltung aber unter Satz 6 a. F. (`FACT_KO_SATZ6`, UNVERIFIED, Sekundärbeleg S51). Das JStG 2024 hat beide Sätze
 für alle offenen Fälle gestrichen. Ob ein Anleger Altjahre korrigieren kann, hängt davon ab, ob seine
 Bescheide noch offen sind. Das ist eine Frage des Einzelfalls und vom Steuerberater zu prüfen. Für die
@@ -510,7 +509,7 @@ US-Basiswerten mit Quanto-Effekt (Währungssicherung bei Basiswerten in Fremdwä
 ist ein realer ökonomischer Unterschied und gehört nicht in die „Marge“. Das Ergebnis sollte als
 „Fair-Value-Differenz“ mit offener Methodik und Konfidenzband ausgewiesen und mit den Kostenangaben im
 PRIIPs-KID abgeglichen werden. Wertende Begriffe und Ranglisten einzelner Emittenten bergen das Risiko
-von Abmahnungen nach §§ 4, 6 UWG (K12).
+von Abmahnungen nach § 4 Nr. 1 und § 6 UWG (K12).
 
 ### Modul 8 · Fazit und Synthese
 
@@ -567,7 +566,7 @@ Diese Bewertung ist ein Szenario und keine Prognose.
 | PRIIPs-KID | EU-Basisinformationsblatt für verpackte Anlageprodukte mit Kosten- und Risikoangaben |
 | Quartalsverfall | Gleichzeitiger Verfall von Index-Futures und -Optionen am dritten Freitag im März, Juni, September und Dezember |
 | Sweep | Aggressive Order, die mehrere Preisstufen in einem Zug abräumt |
-| Termingeschäft (steuerlich) | Geschäft mit Differenzausgleich bzw. vom Basiswert abgeleitetem Wert; steuerlich nach § 20 Abs. 2 S. 1 Nr. 3 EStG |
+| Termingeschäft (steuerlich) | Geschäft mit Differenzausgleich bzw. vom Basiswert abgeleitetem Wert; steuerlich Einkünfte nach § 20 EStG |
 | Vanna | Änderung des Optionsdeltas bei Änderung der impliziten Volatilität |
 
 ---
@@ -636,25 +635,26 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.4.0,
-45 Fakten, 53 Quellen.
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.5.0,
+46 Fakten, 53 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
 |---|---|---|---|---|---|
-| `FACT_JSTG2024_REPEAL` | CONFIRMED | REGULATORY_FRAMEWORK | 0,9 | Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024) | § 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG). |
+| `FACT_JSTG2024_REPEAL` | CONFIRMED | REGULATORY_FRAMEWORK | 0,9 | Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024) | § 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch das JStG 2024 (BGBl. 2024 I Nr. 387) aufgehoben. |
+| `FACT_P52_ABS28` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,6 | Rechtsstand 2026-10-05 | Die Aufhebung von § 20 Abs. 6 Satz 5 und 6 EStG a. F. ist nach § 52 Abs. 28 EStG in allen offenen Fällen anzuwenden. |
 | `FACT_BMF_2025` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | BMF-Schreiben 14.05.2025 | BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um; Verlustvorträge aus Termingeschäften in offenen Fällen unbeschränkt verrechenbar. |
 | `FACT_TERMIN_2019` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Gesetz vom 21.12.2019, Anwendung ab 01.01.2021 | Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte durch Gesetz vom 21.12.2019 (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021. |
 | `FACT_TERMIN_2020_RAISE` | MEDIA_REPORT | REGULATORY_FRAMEWORK | 0,65 | JStG 2020 vom 21.12.2020 | JStG 2020 vom 21.12.2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €. |
-| `FACT_BFH_ADV` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Beschluss 07.06.2024 | BFH VIII B 113/23 vom 07.06.2024: AdV-Beschluss (Streitjahr 2021), summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG). |
+| `FACT_BFH_ADV` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Beschluss 07.06.2024 | BFH VIII B 113/23 vom 07.06.2024: Beschluss über die Aussetzung der Vollziehung (§ 69 Abs. 3 FGO; Streitjahr 2021), summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG). |
 | `FACT_STOCK_LOSS_S4` | CONFIRMED | REGULATORY_FRAMEWORK | 0,7 | Rechtsstand 2026-10-05 | § 20 Abs. 6 Satz 4 EStG (Aktienverluste nur mit Aktiengewinnen) gilt fort. |
 | `FACT_BVERFG_PENDING` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,6 | Stand 05.10.2026 | Zu § 20 Abs. 6 Satz 4 EStG ist beim BVerfG die Vorlage 2 BvL 3/21 anhängig; eine Entscheidung wurde bis 05.10.2026 nicht gefunden. |
 | `FACT_OS_KO_NOT_TERMIN` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | BMF 03.06.2021, fortgeführt 14.05.2025 | Optionsscheine und Knock-out-Zertifikate sind nach Auffassung der Finanzverwaltung keine Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5 EStG a. F. |
 | `FACT_KO_SATZ6` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,6 | BMF 03.06.2021 bis Aufhebung durch JStG 2024 | Nach Auffassung der Finanzverwaltung (BMF 03.06.2021) fiel der Totalverlust eines Knock-out-Zertifikats als Verlust aus wertlosen Wirtschaftsgütern unter § 20 Abs. 6 Satz 6 EStG a. F. |
-| `FACT_P15_KSTG` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften; Satz 4: Ausnahmen für Institute und Absicherungsgeschäfte; Satz 5: Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b KStG). Rechtsprechung: BFH I R 25/14 vom 06.07.2016. |
+| `FACT_P15_KSTG` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften; Satz 4: Ausnahmen für Institute und Absicherungsgeschäfte; Satz 5: Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b Abs. 2 KStG). Rechtsprechung: BFH I R 25/14 vom 06.07.2016. |
 | `FACT_MM_NO_HEDGE_DUTY` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | Keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging; Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition Abs. 5) regeln Quotierungs- und Vertragspflichten. |
 | `FACT_ALGO_TRADING` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 80 Abs. 2 WpHG verpflichtet Wertpapierdienstleistungsunternehmen, die algorithmischen Handel betreiben, zu Risikokontrollen, Notfallvorkehrungen und Dokumentation (Umsetzung Art. 17 MiFID II). |
 | `FACT_MAR_RECO` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten. |
-| `FACT_PRIIPS_UWG` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,75 | Rechtsstand 2026-10-05 | Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG. |
+| `FACT_PRIIPS_UWG` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,75 | Rechtsstand 2026-10-05 | Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG. |
 | `FACT_ANGEMESSENHEIT` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,7 | Rechtsstand 2026-10-05 | Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG. |
 | `FACT_BAFIN_TURBO` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026 | BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten vom 15.10.2025 (Art. 42 MiFIR, § 15 WpHG), in Kraft seit 16.06.2026: standardisierter Risikohinweis, Wissenstest, Verbot von Kaufanreizen. |
 | `FACT_BAFIN_STUDY` | UNVERIFIED | MARKET_DATA | 0,7 | Untersuchungszeitraum 2019–2023 | BaFin-Studie: Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste; Untersuchungszeitraum 2019–2023. |
@@ -701,13 +701,13 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- § 52 Abs. 28 EStG als eigenen UNVERIFIED-Fakt abtrennen; Offen-Punkte mit Fundstellen an Fakten binden (L26b)
-- Disclaimer in Hero, Schluss und Analyse um „nur für erfahrene Anleger geeignet“ ergänzen (L42, Freigabe Herausgeber)
+- Ergänzte Disclaimer v1.5.0 (Eignung nur für erfahrene Anleger, L42) durch unabhängige Zweitprüfung bestätigen
+- Faktbindungen v1.5.0 (§ 52 Abs. 28 als eigener Fakt, Normteile, Definitionen) durch unabhängige Zweitprüfung bestätigen
 - Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
 - Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
 - Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
-- Analyse: Monatsend-Verfälle, „Bescheide vorläufig“, Spread-Satz und BVerfG-Hinweis der Executive Summary belegen, kennzeichnen oder angleichen (L43)
-- AdV beim ersten sichtbaren Auftreten (S04) sowie EOD, IV, Margin, PV, KapGes, a. F. erklären; Version der Analyse angleichen (L41b, L44)
+- Analyse-Korrekturen v1.5.0 (unbelegte Daten entfernt, BVerfG gekennzeichnet, L43) durch unabhängige Zweitprüfung bestätigen
+- Fachbegriffe und Abkürzungen v1.5.0 (erstes sichtbares Auftreten, L41b) und einheitliche Version (L44) durch unabhängige Zweitprüfung bestätigen
 
 ---
 
@@ -752,7 +752,8 @@ Sie ist keine Rechtsdienstleistung im Sinne des RDG und keine Hilfeleistung in S
 StBerG. Sie enthält keine Anlageempfehlung und keine Empfehlung einer Anlagestrategie im Sinne von Art. 3
 Abs. 1 Nr. 34 und 35 MAR. Derivate wie Optionen, Futures, Optionsscheine und Knock-out-Zertifikate sind
 komplexe Produkte mit Hebelwirkung. Sie können zum Totalverlust führen. Bei Futures und Stillhaltergeschäften
-sind Verluste über den Kapitaleinsatz hinaus möglich. Verbriefte Derivate tragen zusätzlich das
+sind Verluste über den Kapitaleinsatz hinaus möglich. Diese Produkte sind nur für erfahrene Anleger geeignet,
+die Hebel- und Knock-out-Mechanik verstehen und Verluste bis zum Totalverlust tragen können. Verbriefte Derivate tragen zusätzlich das
 Emittentenrisiko. Vergangene Marktmuster und Modellausgaben sind kein verlässlicher Indikator für künftige
 Entwicklungen. Steuerliche Ausführungen geben den recherchierten Rechtsstand zum 05.10.2026 wieder und
 können sich ändern. Für Ihre persönliche Situation wenden Sie sich an einen Steuerberater oder Rechtsanwalt.

@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,17 +13,17 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 45,
+    "total": 46,
     "confirmed_primary": 25,
     "media_report": 7,
-    "unverified": 10,
+    "unverified": 11,
     "scenario_projection": 3,
     "vendor_claim": 10,
     "by_class": {
       "MARKET_DATA": 9,
       "MEDIA_REPORT": 6,
       "MODEL_ASSUMPTION": 1,
-      "REGULATORY_FRAMEWORK": 17,
+      "REGULATORY_FRAMEWORK": 18,
       "SCENARIO_PROJECTION": 2,
       "VENDOR_CLAIM": 10
     }
@@ -36,10 +36,24 @@
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.9,
-      "claim": "§ 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG).",
+      "claim": "§ 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch das JStG 2024 (BGBl. 2024 I Nr. 387) aufgehoben.",
       "source_id": "SRC_BGBL_JSTG2024",
-      "caveat": "Satznummern in § 52 Abs. 28 nur per Snippet belegt.",
+      "caveat": "",
       "period": "Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024)",
+      "supporting_sources": [
+        "SRC_BT_DRS",
+        "SRC_CMS"
+      ]
+    },
+    {
+      "id": "FACT_P52_ABS28",
+      "verdict": "UNVERIFIED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.6,
+      "claim": "Die Aufhebung von § 20 Abs. 6 Satz 5 und 6 EStG a. F. ist nach § 52 Abs. 28 EStG in allen offenen Fällen anzuwenden.",
+      "source_id": "SRC_BGBL_JSTG2024",
+      "caveat": "Satznummern in § 52 Abs. 28 EStG nur per Snippet belegt; Wortlaut am Original prüfen.",
+      "period": "Rechtsstand 2026-10-05",
       "supporting_sources": [
         "SRC_BT_DRS",
         "SRC_CMS"
@@ -80,7 +94,7 @@
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.85,
-      "claim": "BFH VIII B 113/23 vom 07.06.2024: AdV-Beschluss (Streitjahr 2021), summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG).",
+      "claim": "BFH VIII B 113/23 vom 07.06.2024: Beschluss über die Aussetzung der Vollziehung (§ 69 Abs. 3 FGO; Streitjahr 2021), summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG).",
       "source_id": "SRC_BFH_VIIIB11323",
       "caveat": "Kein Hauptsacheurteil.",
       "period": "Beschluss 07.06.2024",
@@ -139,7 +153,7 @@
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.85,
-      "claim": "§ 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften; Satz 4: Ausnahmen für Institute und Absicherungsgeschäfte; Satz 5: Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b KStG). Rechtsprechung: BFH I R 25/14 vom 06.07.2016.",
+      "claim": "§ 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften; Satz 4: Ausnahmen für Institute und Absicherungsgeschäfte; Satz 5: Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b Abs. 2 KStG). Rechtsprechung: BFH I R 25/14 vom 06.07.2016.",
       "source_id": "SRC_ESTG_15",
       "caveat": "Keine Rechtsformempfehlung.",
       "period": "Rechtsstand 2026-10-05",
@@ -188,7 +202,7 @@
       "verdict": "UNVERIFIED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.75,
-      "claim": "Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG.",
+      "claim": "Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG.",
       "source_id": "SRC_PRIIPS",
       "caveat": "Nicht am Original neu geprüft.",
       "period": "Rechtsstand 2026-10-05"
@@ -962,6 +976,12 @@
       "date": "2026-10-08",
       "event": "v1.4.0: Befunde der vierten Zweitprüfung umgesetzt – K2 an FACT_BVERFG_PENDING gebunden, FACT_KO_SATZ6 (UNVERIFIED) neu, Claims FACT_JSTG2024_REPEAL/FACT_P15_KSTG um Normteile und BFH I R 25/14 ergänzt, FACT_PRODUCT_STRUCTURE auf interne Quelle SRC_FACHWISSEN mit Konf. 0,5; Glossar-Fundstellen gebunden; Tests L36–L41 ergänzt",
       "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-08",
+      "event": "v1.5.0: Befunde der fünften Zweitprüfung umgesetzt – § 52 Abs. 28 EStG als FACT_P52_ABS28 (UNVERIFIED) abgetrennt; Claims FACT_JSTG2024_REPEAL (BGBl.), FACT_BFH_ADV (§ 69 Abs. 3 FGO), FACT_P15_KSTG (§ 8b Abs. 2 KStG), FACT_PRIIPS_UWG (§ 4 Nr. 1 UWG) präzisiert; Disclaimer um Eignungshinweis ergänzt; Tests L26b, L36b, L41b, L42, L43, L44",
+      "qa_score_pct": null,
       "release": "ÜBERARBEITUNG"
     }
   ]

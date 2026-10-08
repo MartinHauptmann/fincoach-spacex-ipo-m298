@@ -65,6 +65,7 @@ def main():
         md = re.sub(r"(\| Nr\. \| Quelle \| Stufe \| DBOM-ID \| URL \|\n\|---\|---\|---\|---\|---\|\n)(?:\|.*\|\n)+", lambda m: m.group(1) + tbl + "\n", md)
         frows = "\n".join(f"| `{f['id']}` | {f['verdict']} | {f['class']} | {de(f['confidence'])} | {f.get('period', '–')} | {f['claim']} |" for f in F)
         md = re.sub(r"(\| ID \| Verdict \| Klasse \| Konf\. \| Bezugszeitraum \| Claim \|\n\|---\|---\|---\|---\|---\|---\|\n)(?:\|.*\|\n)+", lambda m: m.group(1) + frows + "\n", md)
+        md = re.sub(r"^\| Version \| [\d.]+", f"| Version | {d['module']['version']}", md, count=1, flags=re.M)  # L44
         md = re.sub(r"Stand: Modul v[\d.]+,\n\d+ Fakten, \d+ Quellen\.", f"Stand: Modul v{d['module']['version']},\n{len(F)} Fakten, {len(d['sources'])} Quellen.", md)
         md = re.sub(r"(## 7 · Offene Prüfpunkte vor Veröffentlichung\n\n)(?:- .*\n)+", lambda m: m.group(1) + "".join(f"- {t}\n" for t in open_items), md)
         mds[0].write_text(md, encoding="utf-8")

@@ -25,7 +25,14 @@ FACT_PATTERN = re.compile(
 # L28/L37: Überbehauptungen zum Prüfstatus
 OVERCLAIM = r"[Aa]lle Fakten sind|geprüfte[rn]? Deep-Dive|vollständig belegt|(?<!nicht )(?<!un)verifiziert(?![^<]{0,30}nicht)|prüfen jede Aussage"
 # L36: Aktenzeichen (BFH/BVerfG) und Normteile ohne §, die im gebundenen Fakt stehen müssen
-AZ_NORM = r"\b(?:[IVX]+ [A-Z]|\d BvL|\d BvR) \d+/\d{2}\b|\bSatz \d+\b"
+AZ_NORM = (r"\b(?:[IVX]+ [A-Z]{1,2}|\d BvL|\d BvR) \d+/\d{2}\b"      # Aktenzeichen BFH/BVerfG
+           r"|\b(?:Satz|Sätze|S\.)\s?\d+\b|\bAbs\.\s?\d+\b|\bNr\.\s?\d+\b")  # L36b: Normteile ohne §
+
+
+def nz(x):
+    """Vergleichsform: ohne Leerraum, „S.“/„Sätze“ = „Satz“."""
+    return re.sub(r"\s+", "", re.sub(r"\bS\.(?=\s?\d)|\bSätze\b", "Satz", x))
+FACT_PATTERN = re.compile(FACT_PATTERN.pattern + "|" + AZ_NORM)  # L36b
 SCOPE = re.compile(r"^(s0[1-9]|s1[01]|s-fz)$")  # Inhaltssektionen
 
 
@@ -79,7 +86,7 @@ class Tree(HTMLParser):
         if tag in VOID:
             return
         bound = any(k in a for k in ("data-source", "data-est", "data-def")) or tag in ("script", "style", "svg")
-        node = {"tag": tag, "bound": bound, "src": a.get("data-source"), "est": False, "texts": []}
+        node = {"tag": tag, "bound": bound, "src": a.get("data-source"), "def": a.get("data-def"), "est": False, "texts": []}
         if "est-mark" in cls and self.stack:
             self.stack[-1]["est"] = True
         self.stack.append(node)
@@ -106,7 +113,8 @@ class Tree(HTMLParser):
             return
         chain_bound = any(n["bound"] for n in self.stack)
         src = next((n["src"] for n in reversed(self.stack) if n["src"]), None)
-        self.stack[-1]["texts"].append({"sec": self.sec, "text": data, "bound": chain_bound, "src": src})
+        dfn = next((n["def"] for n in reversed(self.stack) if n.get("def")), None)
+        self.stack[-1]["texts"].append({"sec": self.sec, "text": data, "bound": chain_bound, "src": src, "def": dfn})
 
 
 def main():
@@ -142,6 +150,18 @@ def main():
     hero_txt = hero.group(0) if hero else ""
     report("L04 Hero-Disclaimer", BLOCKER, bool(re.search(r"keine Anlage-?,? ?(Rechts|Anlageberatung)", hero_txt, re.I)) and "Totalverlust" in hero_txt,
            "Beratungsausschluss und Totalverlusthinweis im Hero")
+    # L42 · C1-Pflichtbestandteile in jedem Disclaimer (Hero, Schluss, Analyse Anfang/Ende)
+    C1_PARTS = {"Beratungsausschluss": r"keine Anlage", "allgemeine Information": r"Information|Bildung", "Totalverlust": r"Totalverlust",
+                "Hebel": r"Hebel", "Knock-out": r"Knock-out", "nur erfahrene Anleger": r"erfahrene[nr]? Anleger"}
+    hd = re.search(r'<(\w+)[^>]*data-qa="hero-disclaimer"[^>]*>', html)
+    closing = re.findall(r'<div class="caveat-box[^"]*">\s*<h3[^>]*>Disclaimer.*?</div>', html, re.S)
+    discl = {"Hero": element_inner(html, hd) if hd else "", "Schluss": closing[-1] if closing else ""}
+    if md:
+        k1 = re.search(r"> \*\*Disclaimer \(Kurzfassung\):\*\*.*?(?=\n\n)", md, re.S)
+        k9 = re.search(r"\*\*Disclaimer\.\*\*.*?(?=\n\n)", md, re.S)
+        discl.update({"Analyse Anfang": re.sub(r"\n> ?", " ", k1.group(0)) if k1 else "", "Analyse Ende": re.sub(r"\n", " ", k9.group(0)) if k9 else ""})
+    c1_miss = [f"{w}: {p}" for w, txt in discl.items() for p, rx in C1_PARTS.items() if not re.search(rx, txt)]
+    report("L42 C1-Pflichtbestandteile", BLOCKER, not c1_miss, "fehlt: " + ", ".join(c1_miss[:6]) if c1_miss else f"{len(discl)} Disclaimer vollständig")
 
     # ---------- Provenienz
     js_ks = re.search(r"const KS=\[(.*?)\n\];", html, re.S)
@@ -224,6 +244,23 @@ def main():
         open_facts = {fid for li in re.findall(r"<li[^>]*data-open[^>]*>", html) for m in re.findall(r'data-source="([^"]+)"', li) for fid in m.split()}
         oc = sorted(f for f in open_facts if facts.get(f, {}).get("verdict") == "CONFIRMED")
         report("L26 Offen ⇒ nicht CONFIRMED", BLOCKER, not oc, "CONFIRMED trotz Offen-Punkt: " + ", ".join(oc) if oc else f"{len(open_facts)} Fakten in der Offen-Liste, keiner CONFIRMED")
+        # L26b · Offen-Punkte, die eine Fundstelle aus einem Fakt nennen, binden diesen Fakt
+        l26b = []
+        for li in re.finditer(r"<li([^>]*data-open[^>]*)>([^<]*)</li>", html):
+            ids = set(re.findall(r"FACT_[A-Z0-9_]+", li.group(1)))
+            for tk in re.findall(r"§\s?\d+[a-z]?\s?Abs\.\s?\d+|" + AZ_NORM, li.group(2)):
+                hit = {f["id"] for f in F if nz(tk) in nz(f["claim"])}
+                if hit and not hit & ids:
+                    l26b.append(f"„{tk}“ → {', '.join(sorted(hit))}")
+        report("L26b Offen-Punkt mit Fundstelle gebunden", BLOCKER, not l26b, "ungebunden: " + "; ".join(l26b[:4]) if l26b else "Fundstellen in Offen-Punkten an ihre Fakten gebunden")
+        # L43 · Analyse: Daten, Paragraphen und Aktenzeichen vor Abschnitt 5 stehen in einem DBOM-Fakt
+        if md:
+            hay_all = nz(" ".join(str(f.get(k, "")) for f in F for k in ("claim", "period", "caveat")))
+            body = re.split(r"\n## 5 · ", md)[0]
+            md_miss = [f"Z. {i}: {tk}" for i, ln in enumerate(body.splitlines(), 1)
+                       for tk in re.findall(r"\b\d{2}\.\d{2}\.\d{4}\b|§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\b(?:[IVX]+ [A-Z]{1,2}|\d BvL|\d BvR) \d+/\d{2}\b", ln)
+                       if nz(tk) not in hay_all]
+            report("L43 Analyse-Angaben ∈ DBOM", BLOCKER, not md_miss, "ohne Fakt: " + ", ".join(md_miss[:8]) + (f" (+{len(md_miss) - 8})" if len(md_miss) > 8 else "") if md_miss else "alle Daten und Fundstellen der Analyse in der DBOM")
         # L40 · Rückweg zu L10b: jeder UNVERIFIED-Fakt hat einen Offen-Punkt
         uv_open = sorted(f["id"] for f in F if f["verdict"] == "UNVERIFIED" and f["id"] not in open_facts)
         report("L40 UNVERIFIED ⇒ Offen-Punkt", BLOCKER, not uv_open, "ohne Offen-Punkt: " + ", ".join(uv_open) if uv_open else f"alle {sum(f['verdict'] == 'UNVERIFIED' for f in F)} UNVERIFIED-Fakten in der Offen-Liste")
@@ -236,7 +273,7 @@ def main():
         dtext = json.dumps({k: v for k, v in dbom.items() if k != "audit_trail"}, ensure_ascii=False)
         over_d = re.findall(OVERCLAIM, dtext)
         page_pct = re.findall(r"data-qa-score>([\d,]+)<", html)
-        sc_d = [x for x in re.findall(r"QA-Score\D{0,20}?([\d]+,\d) ?%", dtext) if x not in page_pct]
+        sc_d = [x for x in re.findall(r"Score\D{0,30}?(\d+[,.]\d) ?%", dtext) if x.replace(".", ",") not in page_pct]
         report("L37 DBOM-Freitexte", BLOCKER, not over_d and not sc_d, "; ".join(([f"Überbehauptung: {', '.join(sorted(set(over_d)))}"] if over_d else []) + ([f"Score {', '.join(sc_d)} ≠ Seite"] if sc_d else [])) or "keine Überbehauptung, kein abweichender Score")
         # L27 · sichtbares Verdict-Badge, wenn alle gebundenen Fakten nicht CONFIRMED sind
         BADGE = {"MEDIA_REPORT": "MEDIEN", "UNVERIFIED": "UNGEPRÜFT", "SCENARIO_PROJECTION": "SCENARIO|MODELL"}
@@ -255,8 +292,7 @@ def main():
                 nobadge.append(row[2:6].strip('",'))
         report("L27 Verdict-Badge", BLOCKER, not nobadge, "ohne Badge: " + ", ".join(sorted(set(nobadge))[:8]) if nobadge else "alle nicht bestätigten Bindungen gekennzeichnet")
         # L25 · Fundstellen und Zahlen in K-Tabelle/Modal stehen im gebundenen Fakt
-        def norm(x):
-            return re.sub(r"\s+", "", x)
+        norm = nz
         tok = re.compile(r"§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\bArt\.\s?\d+|\b\d{4}\b|\d[\d.,]*\s?(?:%|€|\$)|" + AZ_NORM)
         js_miss = []
         for blob in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else []) + ([b for _, b in re.findall(r"\n\s*(\w+):\{(.*?)\}(?:,|$)", js_reg.group(1))] if js_reg else []):
@@ -276,6 +312,10 @@ def main():
         js_az = [m for m in js_miss if re.search(AZ_NORM, m)]
         report("L36 Aktenzeichen/Normteil ∈ Fakt", BLOCKER, not az_miss and not js_az,
                ("nicht im gebundenen Fakt: " + ", ".join(sorted(set(az_miss + js_az))[:8])) if az_miss or js_az else "alle Aktenzeichen und Normteile im gebundenen Fakt")
+        # L36b · data-def befreit keine Fundstellen: Paragraph/Aktenzeichen/Normteil in data-def braucht data-source
+        def_az = [f"{x['sec']}: {m.group(0)}" for x in t.texts if x.get("def") and not x["src"] and SCOPE.match(x["sec"] or "")
+                  for m in re.finditer(r"§\s?\d+|" + AZ_NORM, x["text"])]
+        report("L36b Fundstellen in data-def", BLOCKER, not def_az, "ohne Faktbindung: " + ", ".join(def_az[:6]) if def_az else "keine ungebundenen Fundstellen in Definitionen")
         # L41a · Glossar: Fundstellen in data-def-Einträgen brauchen eine Faktbindung (L29 erweitert)
         js_gl = re.search(r"const GLOSSAR=\[(.*?)\n\];", html, re.S)
         gl_miss = []
@@ -286,7 +326,7 @@ def main():
             for tk in re.findall(r"§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\bArt\.\s?\d+|\bVO\b[^\"]{0,12}?\d+/\d{4}|" + AZ_NORM, txt):
                 if norm(tk) not in hay:
                     gl_miss.append(f"{row[1:row.index(chr(34), 1)]}: {tk}")
-        rend = bool(js_gl) and bool(re.search(r"data-def=\"Glossar\"[^>]*\$\{[^}]*data-source", html) or re.search(r"data-source=[^>]*data-def=\"Glossar\"", html) or "g[4]" in html)
+        rend = bool(re.search(r'data-def="Glossar"[^>]{0,40}data-source="\$\{g\[4\]\}"', html))
         need_r = bool(js_gl) and "FACT_" in js_gl.group(1)
         report("L41a Glossar-Fundstellen gebunden", BLOCKER, not gl_miss and (rend or not need_r), ("ungebunden: " + ", ".join(gl_miss[:6])) if gl_miss else ("Glossar-Renderer setzt data-source" if rend else ("Glossar-Renderer ohne data-source" if need_r else "keine Fundstellen im Glossar")) if js_gl else "kein Glossar")
 
@@ -315,6 +355,14 @@ def main():
             miss = sorted(cited - refs, key=lambda x: int(x[1:]))
             report("L13c Quellen Analyse = DBOM", BLOCKER, not miss and listed == (refs - {"–"}),
                    ("zitiert, aber nicht in DBOM: " + ", ".join(miss)) if miss else ("Quellenliste der Analyse = dbom.sources" if listed == (refs - {"–"}) else f"Quellenliste der Analyse weicht ab ({len(listed)} vs. {len(refs - {'–'})})"))
+
+    # ---------- L44 · eine Version in Titel, Kopf, JSON-LD, DBOM und Analyse
+    if dbom:
+        v = dbom["module"]["version"]
+        seen = re.findall(r"\bv(\d+\.\d+\.\d+)\b", re.sub(r"<script.*?</script>", "", html, flags=re.S)[:20000]) + re.findall(r'"version": "(\d+\.\d+\.\d+)", "stichtag"', html)
+        mv = re.findall(r"^\| Version \| (\d+\.\d+\.\d+)", md, re.M) if md else []
+        bad_v = sorted(set(x for x in seen + mv if x != v))
+        report("L44 Version einheitlich", BLOCKER, bool(seen) and not bad_v and (bool(mv) or not md), f"DBOM {v}; abweichend: {', '.join(bad_v)}" if bad_v else (f"überall {v}" if mv or not md else "Analyse ohne Versionszeile"))
 
     # ---------- L28 · keine Überbehauptungen in Methodik/Transparenz
     over = re.findall(OVERCLAIM, re.sub(r"<script.*?</script>", "", html, flags=re.S))

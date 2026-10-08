@@ -50,7 +50,7 @@ async function audit(browser, url, vp) {
   const p = await ctx.newPage(); const errs = [], ext = [], failed = []; p.on('pageerror', e => errs.push(e.message));
   p.on('request', q => { const u = q.url(); if (/^https?:/.test(u) && !u.startsWith(`http://localhost:${port}`)) ext.push(u); });
   p.on('requestfailed', q => { if (q.url().startsWith(`http://localhost:${port}`)) failed.push(q.url()); });
-  const terms = (() => { try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'fachbegriffe.json'), 'utf8')).terms; } catch { return []; } })();
+  const terms = (() => { try { const j = JSON.parse(fs.readFileSync(path.join(__dirname, 'fachbegriffe.json'), 'utf8')); return { terms: j.terms || [], known: j.known || [] }; } catch { return { terms: [], known: [] }; } })();
   await p.addInitScript(t => { window.__TERMS = t; }, terms);
   await p.goto(url, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.querySelectorAll('.scroll-fade').forEach(e => e.classList.add('visible')));
@@ -79,16 +79,22 @@ async function audit(browser, url, vp) {
     const svgSmall = [];
     document.querySelectorAll('svg text').forEach(t => { const m = t.getScreenCTM(); if (!m) return; const px = parseFloat(getComputedStyle(t).fontSize) * Math.hypot(m.a, m.b);
       if (px && px < 11) svgSmall.push(`„${t.textContent.trim().slice(0, 20)}“ ${px.toFixed(1)}px`); });
-    // L41 · Fachbegriffe: erstes Vorkommen in DOM-Reihenfolge steht in <dfn>/<abbr title> oder der Begriff ist ein Glossar-Eintrag
-    const termsUndef = [];
+    // L41/L41b · Fachbegriffe: erstes SICHTBARES Vorkommen in <dfn>/<abbr title> oder Glossar-Eintrag; jede Großbuchstaben-Abkürzung ist eingeordnet
+    const termsUndef = [], abbrUnknown = new Set();
     const gl = [...document.querySelectorAll('#glossar .font-head')].map(e => e.textContent.trim().toLowerCase());
-    for (const term of (window.__TERMS || [])) {
-      if (gl.some(g => g.includes(term.toLowerCase()))) continue;
-      const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest('script,style,#s-qa,title,desc') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
-      const re = new RegExp(term + '(?!r)'); let n; while ((n = w.nextNode())) if (re.test(n.textContent)) break;  // „Quantor“ ≠ „Quanto“
+    const vis = () => document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest('script,style,#s-qa,#sources,title,desc,svg,canvas,.katex,footer') || !n.parentElement.checkVisibility() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    const T = window.__TERMS || { terms: [], known: [] };
+    for (const term of T.terms) {
+      if (gl.some(g => g === term.toLowerCase() || g.startsWith(term.toLowerCase() + ' ') || g.includes('(' + term.toLowerCase() + ')'))) continue;
+      const re = new RegExp('(^|[^A-Za-zÄÖÜäöü])' + term.replace(/\./g, '\\.') + (/[a-z]/.test(term) ? '(?!r\\b)' : '(?![A-Za-zäöü])'));  // Wort: Komposita ja, „Quantor“ nein
+      const w = vis(); let n; while ((n = w.nextNode())) if (re.test(n.textContent)) break;
       if (n && !n.parentElement.closest('dfn,abbr[title]')) termsUndef.push(`${term} (${(n.parentElement.closest('section') || {}).id || 'top'})`);
     }
-    return { termsUndef, svgSmall, svgOverlap, katex: document.querySelectorAll('.katex').length, katexErr: document.querySelectorAll('.katex-error').length, charts: window.Chart ? Object.keys(Chart.instances || {}).length : 0, out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
+    { const w = vis(); let n; while ((n = w.nextNode())) for (const m of n.textContent.matchAll(/(?<![A-Za-zÄÖÜäöü0-9_])[A-ZÄÖÜ][A-ZÄÖÜ0-9]+(?![A-Za-zÄÖÜäöü0-9_])/g))
+        if (!/^[SK]\d+$/.test(m[0]) && !T.known.includes(m[0]) && !T.terms.includes(m[0])) abbrUnknown.add(m[0]); }
+    // L45 · Live-Audit-Banner darf keine Warnung zeigen
+    const liveWarn = [...document.querySelectorAll('body *')].filter(e => e.tagName !== 'SCRIPT' && e.tagName !== 'STYLE' && (!e.children.length || e.tagName === 'SPAN')).map(e => e.textContent).find(t => /⚠\s*ungebunden/.test(t)) || '';
+    return { liveWarn: liveWarn.slice(0, 160), abbrUnknown: [...abbrUnknown], termsUndef, svgSmall, svgOverlap, katex: document.querySelectorAll('.katex').length, katexErr: document.querySelectorAll('.katex-error').length, charts: window.Chart ? Object.keys(Chart.instances || {}).length : 0, out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
   });
   let modalOk = null;
   if (await p.$('.reg-tag')) {
@@ -125,7 +131,7 @@ async function audit(browser, url, vp) {
       await ctx.close();
     }
     const txt = fs.readFileSync(path.join(root, file), 'utf8').replace(/<[^>]+>/g, ' ');
-    const claimed = ['sessionStorage', 'localStorage'].filter(a => new RegExp(a + '[^.]{0,80}(genutzt|gespeichert|verwendet|speicher)').test(txt));
+    const claimed = ['sessionStorage', 'localStorage'].filter(a => [...txt.matchAll(new RegExp('[^.]*' + a + '[^.]*\\.', 'g'))].some(m => /(genutzt|gespeichert|verwendet|speicher)/.test(m[0]) && !/\b(nicht|kein\w*)\b/.test(m[0])));  // Satz mit Nutzungsaussage, ohne Verneinung
     const wrong = claimed.filter(a => !used.has(a)).map(a => `${a} behauptet, nicht gemessen`).concat([...used].filter(a => a !== 'cookie' && !claimed.includes(a)).map(a => `${a} genutzt, nicht erklärt`));
     const stand = (txt.match(/Stand:\s*(\d{4}-\d{2}-\d{2})/) || [])[1];
     let changed = null; try { changed = require('child_process').execSync(`git log -1 --format=%cs -- ${file}`, { cwd: root }).toString().trim(); } catch {}
@@ -137,7 +143,11 @@ async function audit(browser, url, vp) {
   for (const [n, r] of [['plain', plain], ['viewer', viewer], ['viewer-390px', mobile]]) {
     line(!r.svgSmall.length, 'BLOCKER', `L31 SVG-Schrift ≥ 11 px (${n})`, r.svgSmall.length ? r.svgSmall.slice(0, 3).join('; ') + (r.svgSmall.length > 3 ? ` (+${r.svgSmall.length - 3})` : '') : 'alle Beschriftungen ≥ 11 px');
     if (r.modalOk !== null) line(r.modalOk, 'BLOCKER', `L31 Dialog-Fokus (${n})`, r.modalOk ? 'Fokus im Dialog, Tab bleibt innen, Escape kehrt zurück' : 'Fokusführung des Dialogs fehlerhaft');
-    if (n === 'plain') line(!r.termsUndef.length, 'BLOCKER', 'L41 Fachbegriffe erklärt', r.termsUndef.length ? 'erstes Vorkommen ohne <dfn>/<abbr>: ' + r.termsUndef.join(', ') : 'alle Fachbegriffe beim ersten Auftreten erklärt oder im Glossar');
+    if (n === 'plain' && /^(m\d{3}|modul)\.html$/.test(file)) {  // L41 gilt für Modulseiten
+      line(!r.termsUndef.length, 'BLOCKER', 'L41 Fachbegriffe erklärt', r.termsUndef.length ? 'erstes sichtbares Vorkommen ohne <dfn>/<abbr>: ' + r.termsUndef.join(', ') : 'alle Fachbegriffe beim ersten sichtbaren Auftreten erklärt oder im Glossar');
+      line(!r.abbrUnknown.length, 'BLOCKER', 'L41b Abkürzungen eingeordnet', r.abbrUnknown.length ? 'nicht in qa/fachbegriffe.json: ' + r.abbrUnknown.join(', ') : 'alle sichtbaren Abkürzungen erklärt oder als bekannt geführt');
+    }
+    line(!r.liveWarn, 'BLOCKER', `L45 Live-Audit ohne Warnung (${n})`, r.liveWarn ? r.liveWarn.replace(/.*(⚠)/, '$1') : 'keine Warnung im Live-Audit');
     line(!r.svgOverlap.length, 'BLOCKER', `L24 SVG-Texte (${n})`, r.svgOverlap.length ? 'Überlappung: ' + r.svgOverlap.slice(0, 3).join('; ') : 'keine Überlappung');
     line(!r.errs.length, 'BLOCKER', `JS-Fehler (${n})`, r.errs.length ? r.errs.join(' | ') : 'keine');
     line(!r.ext.length, 'BLOCKER', `L20 Drittanbieter-Abrufe (${n})`, r.ext.length ? [...new Set(r.ext.map(u => new URL(u).host))].join(', ') : 'keine');
