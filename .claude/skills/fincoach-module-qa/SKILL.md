@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L35 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L41 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -70,6 +70,18 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L33:** Ein Test besteht nie über eine leere Menge.
 - **L34/L35:** Abgeleitete Werte (Zählungen, Score, Spannen, Pills, Quellen-, Fakten- und Offen-Tabellen der Analyse) nur
   mit `python3 qa/sync_module.py <seite>` schreiben.
+- **L36:** Aktenzeichen (z. B. „I R 25/14“, „2 BvL 3/21“) und Normteile ohne § („Satz 6“) stehen im Claim des
+  gebundenen Fakts – in Sektionen, K-Tabelle und Modal. Wer einen UNVERIFIED-Teil nennt, bindet auch diesen Fakt.
+- **L37:** DBOM-Freitexte (`honest_disclosure` usw.) enthalten keine Überbehauptungen und keinen Score, der von der
+  Seite abweicht; am besten gar keinen Score.
+- **L38:** Speicher- und Cookie-Angaben im Datenschutztext entsprechen der Messung an allen Modulseiten; „Stand“ ist
+  nicht älter als die letzte Änderung der Datei (Audit der Datenschutzseite, derzeit WARN).
+- **L39:** Quellen mit `tier=internal` tragen nur UNVERIFIED (Konfidenz ≤ 0,6) oder SCENARIO_PROJECTION; die interne
+  Quelle muss zum Claim passen (Modell ≠ Fachableitung ≠ Nutzertext).
+- **L40:** Jedes ◐/✗-Gate und jeder UNVERIFIED-Fakt hat einen Offen-Punkt mit `data-gate` (und `data-source`) als
+  Abschlusskriterium.
+- **L41 / Q10:** Fachbegriffe beim ersten Auftreten in `<dfn>` mit sichtbarer Erklärung (Liste `qa/fachbegriffe.json`,
+  neue Begriffe dort ergänzen). Fundstellen in Glossar-Einträgen (`data-def`) sind an Fakten gebunden (5. Feld in `GLOSSAR`).
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

@@ -22,6 +22,10 @@ FACT_PATTERN = re.compile(
     r"|\b\d{2}\.\d{2}\.\d{4}\b"                                  # Datum
     r"|§\s?\d+|\bArt\.\s?\d+|\bBGBl\b|\b[IVX]+ [A-Z] \d+/\d+\b"  # Fundstelle / Aktenzeichen
 )
+# L28/L37: Überbehauptungen zum Prüfstatus
+OVERCLAIM = r"[Aa]lle Fakten sind|geprüfte[rn]? Deep-Dive|vollständig belegt|(?<!nicht )(?<!un)verifiziert(?![^<]{0,30}nicht)|prüfen jede Aussage"
+# L36: Aktenzeichen (BFH/BVerfG) und Normteile ohne §, die im gebundenen Fakt stehen müssen
+AZ_NORM = r"\b(?:[IVX]+ [A-Z]|\d BvL|\d BvR) \d+/\d{2}\b|\bSatz \d+\b"
 SCOPE = re.compile(r"^(s0[1-9]|s1[01]|s-fz)$")  # Inhaltssektionen
 
 
@@ -220,6 +224,20 @@ def main():
         open_facts = {fid for li in re.findall(r"<li[^>]*data-open[^>]*>", html) for m in re.findall(r'data-source="([^"]+)"', li) for fid in m.split()}
         oc = sorted(f for f in open_facts if facts.get(f, {}).get("verdict") == "CONFIRMED")
         report("L26 Offen ⇒ nicht CONFIRMED", BLOCKER, not oc, "CONFIRMED trotz Offen-Punkt: " + ", ".join(oc) if oc else f"{len(open_facts)} Fakten in der Offen-Liste, keiner CONFIRMED")
+        # L40 · Rückweg zu L10b: jeder UNVERIFIED-Fakt hat einen Offen-Punkt
+        uv_open = sorted(f["id"] for f in F if f["verdict"] == "UNVERIFIED" and f["id"] not in open_facts)
+        report("L40 UNVERIFIED ⇒ Offen-Punkt", BLOCKER, not uv_open, "ohne Offen-Punkt: " + ", ".join(uv_open) if uv_open else f"alle {sum(f['verdict'] == 'UNVERIFIED' for f in F)} UNVERIFIED-Fakten in der Offen-Liste")
+        # L39 · Quelle passt zum Beleggrad: interne Quellen höchstens UNVERIFIED (Konf. ≤ 0,6) oder SCENARIO_PROJECTION
+        tier = {x["id"]: x.get("tier") for x in dbom["sources"]}
+        bad39 = [f"{f['id']} ({f['verdict']}, {f['confidence']})" for f in F if tier.get(f["source_id"]) == "internal"
+                 and not (f["verdict"] == "SCENARIO_PROJECTION" or (f["verdict"] == "UNVERIFIED" and f["confidence"] <= 0.6))]
+        report("L39 interne Quelle ⇒ schwaches Verdict", BLOCKER, not bad39, "zu stark belegt: " + ", ".join(bad39) if bad39 else "interne Quellen nur mit UNVERIFIED ≤ 0,6 oder SCENARIO_PROJECTION")
+        # L37 · DBOM-Freitexte: keine Überbehauptungen, kein abweichender Score (Verlauf im audit_trail ausgenommen)
+        dtext = json.dumps({k: v for k, v in dbom.items() if k != "audit_trail"}, ensure_ascii=False)
+        over_d = re.findall(OVERCLAIM, dtext)
+        page_pct = re.findall(r"data-qa-score>([\d,]+)<", html)
+        sc_d = [x for x in re.findall(r"QA-Score\D{0,20}?([\d]+,\d) ?%", dtext) if x not in page_pct]
+        report("L37 DBOM-Freitexte", BLOCKER, not over_d and not sc_d, "; ".join(([f"Überbehauptung: {', '.join(sorted(set(over_d)))}"] if over_d else []) + ([f"Score {', '.join(sc_d)} ≠ Seite"] if sc_d else [])) or "keine Überbehauptung, kein abweichender Score")
         # L27 · sichtbares Verdict-Badge, wenn alle gebundenen Fakten nicht CONFIRMED sind
         BADGE = {"MEDIA_REPORT": "MEDIEN", "UNVERIFIED": "UNGEPRÜFT", "SCENARIO_PROJECTION": "SCENARIO|MODELL"}
         nobadge = []
@@ -239,7 +257,7 @@ def main():
         # L25 · Fundstellen und Zahlen in K-Tabelle/Modal stehen im gebundenen Fakt
         def norm(x):
             return re.sub(r"\s+", "", x)
-        tok = re.compile(r"§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\bArt\.\s?\d+|\b\d{4}\b|\d[\d.,]*\s?(?:%|€|\$)")
+        tok = re.compile(r"§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\bArt\.\s?\d+|\b\d{4}\b|\d[\d.,]*\s?(?:%|€|\$)|" + AZ_NORM)
         js_miss = []
         for blob in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else []) + ([b for _, b in re.findall(r"\n\s*(\w+):\{(.*?)\}(?:,|$)", js_reg.group(1))] if js_reg else []):
             ids = [i for i in re.findall(r"FACT_[A-Z0-9_]+", blob) if i in facts]
@@ -249,6 +267,28 @@ def main():
                 if norm(tk) not in hay:
                     js_miss.append(f"{(ids or ['?'])[0]}: {tk}")
         report("L25 Fundstellen in JS-Inhalten", BLOCKER, not js_miss, ("nicht im Fakt: " + ", ".join(sorted(set(js_miss))[:8]) + (f" (+{len(set(js_miss)) - 8})" if len(set(js_miss)) > 8 else "")) if js_miss else "alle Fundstellen/Zahlen der K-Tabelle und des Modals im Fakt")
+        # L36 · Aktenzeichen und Normteile in statischen Sektionen stehen im gebundenen Fakt
+        az_miss = []
+        for x in t.texts:
+            if x["src"] and SCOPE.match(x["sec"] or ""):
+                hay = norm(" ".join(str(facts[s].get(k, "")) for s in x["src"].split() if s in facts for k in ("claim", "period", "caveat")))
+                az_miss += [f"{x['src'].split()[0]}: {m}" for m in re.findall(AZ_NORM, x["text"]) if norm(m) not in hay]
+        js_az = [m for m in js_miss if re.search(AZ_NORM, m)]
+        report("L36 Aktenzeichen/Normteil ∈ Fakt", BLOCKER, not az_miss and not js_az,
+               ("nicht im gebundenen Fakt: " + ", ".join(sorted(set(az_miss + js_az))[:8])) if az_miss or js_az else "alle Aktenzeichen und Normteile im gebundenen Fakt")
+        # L41a · Glossar: Fundstellen in data-def-Einträgen brauchen eine Faktbindung (L29 erweitert)
+        js_gl = re.search(r"const GLOSSAR=\[(.*?)\n\];", html, re.S)
+        gl_miss = []
+        for row in (re.findall(r'^\s*\[(".*?)\],?$', js_gl.group(1), re.M) if js_gl else []):
+            ids = [i for i in re.findall(r"FACT_[A-Z0-9_]+", row) if i in facts]
+            hay = norm(" ".join(str(facts[i].get(k, "")) for i in ids for k in ("claim", "period", "caveat")))
+            txt = re.sub(r'FACT_[A-Z0-9_]+|\\\\\(.*?\\\\\)', "", row)
+            for tk in re.findall(r"§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\bArt\.\s?\d+|\bVO\b[^\"]{0,12}?\d+/\d{4}|" + AZ_NORM, txt):
+                if norm(tk) not in hay:
+                    gl_miss.append(f"{row[1:row.index(chr(34), 1)]}: {tk}")
+        rend = bool(js_gl) and bool(re.search(r"data-def=\"Glossar\"[^>]*\$\{[^}]*data-source", html) or re.search(r"data-source=[^>]*data-def=\"Glossar\"", html) or "g[4]" in html)
+        need_r = bool(js_gl) and "FACT_" in js_gl.group(1)
+        report("L41a Glossar-Fundstellen gebunden", BLOCKER, not gl_miss and (rend or not need_r), ("ungebunden: " + ", ".join(gl_miss[:6])) if gl_miss else ("Glossar-Renderer setzt data-source" if rend else ("Glossar-Renderer ohne data-source" if need_r else "keine Fundstellen im Glossar")) if js_gl else "kein Glossar")
 
     # ---------- L12 · Rückwärtsbindung (statisch) und JS-Tabellen
     unb = [f"{x['sec']}: {mm.group(0).strip()}" for x in t.texts if SCOPE.match(x["sec"] or "") and not x["bound"] for mm in FACT_PATTERN.finditer(x["text"])]
@@ -270,14 +310,14 @@ def main():
         report("L13b eine führende DBOM", BLOCKER, lead, "Analyse verweist auf externe DBOM" if lead else "Analyse führt eigene Faktenliste")
         if dbom:
             refs = {s.get("ref") for s in dbom["sources"]}
-            cited = set(re.findall(r"\bS\d+\b", md))
+            cited = set(re.findall(r"\bS[1-9]\d*\b", md))  # S04 = Sektion, S4 = Quelle
             listed = set(re.findall(r"^\| (S\d+) \|", md, re.M))
             miss = sorted(cited - refs, key=lambda x: int(x[1:]))
             report("L13c Quellen Analyse = DBOM", BLOCKER, not miss and listed == (refs - {"–"}),
                    ("zitiert, aber nicht in DBOM: " + ", ".join(miss)) if miss else ("Quellenliste der Analyse = dbom.sources" if listed == (refs - {"–"}) else f"Quellenliste der Analyse weicht ab ({len(listed)} vs. {len(refs - {'–'})})"))
 
     # ---------- L28 · keine Überbehauptungen in Methodik/Transparenz
-    over = re.findall(r"[Aa]lle Fakten sind|geprüfte[rn]? Deep-Dive|vollständig belegt|(?<!nicht )(?<!un)verifiziert(?![^<]{0,30}nicht)", re.sub(r"<script.*?</script>", "", html, flags=re.S))
+    over = re.findall(OVERCLAIM, re.sub(r"<script.*?</script>", "", html, flags=re.S))
     report("L28 Überbehauptungen", BLOCKER, not over, "gefunden: " + ", ".join(sorted(set(over))) if over else "keine")
     # ---------- L29 · data-def nur auf Blattelementen
     blk = [m.group(1) for m in re.finditer(r'<(\w+)\b[^>]*data-def="[^"]*"[^>]*>(.*?)</\1>', html, re.S) if re.search(r"<(div|p|section|table|ul|ol|figure|svg)\b", m.group(2))]
@@ -318,6 +358,9 @@ def main():
     passed = {lab.split()[0] for lab, cls in t.qa_rows if "check-pass" in cls}
     clash = sorted(open_gates & passed)
     report("L10b ✓ trotz Offen-Punkt", BLOCKER, not clash, "✓ trotz offenem Punkt: " + ", ".join(clash) if clash else f"{len(open_gates)} Gates mit Offen-Punkten, keines auf ✓")
+    # L40 · jedes nicht bestandene Gate hat einen Offen-Punkt als Abschlusskriterium
+    no_crit = sorted({lab.split()[0] for lab, cls in t.qa_rows if "check-pass" not in cls} - open_gates, key=lambda g: (g[0], int(g[1:])))
+    report("L40 ◐/✗ ⇒ Offen-Punkt", BLOCKER, bool(t.qa_rows) and not no_crit, ("ohne Abschlusskriterium: " + ", ".join(no_crit)) if no_crit else ("keine Gate-Tabelle" if not t.qa_rows else f"{len([1 for _, c in t.qa_rows if 'check-pass' not in c])} nicht bestandene Gates mit Offen-Punkt"))
     qa_sec = re.search(r'<section id="s-qa".*?</section>', html, re.S)
     hand = re.findall(r"\d+ (?:Elemente|Treffer)", qa_sec.group(0)) if qa_sec else []
     report("L15 QA-Messwerte", WARN, not hand, "handgeschrieben: " + ", ".join(hand) if hand else "keine handgeschriebenen Messwerte")

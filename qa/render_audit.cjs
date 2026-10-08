@@ -50,6 +50,8 @@ async function audit(browser, url, vp) {
   const p = await ctx.newPage(); const errs = [], ext = [], failed = []; p.on('pageerror', e => errs.push(e.message));
   p.on('request', q => { const u = q.url(); if (/^https?:/.test(u) && !u.startsWith(`http://localhost:${port}`)) ext.push(u); });
   p.on('requestfailed', q => { if (q.url().startsWith(`http://localhost:${port}`)) failed.push(q.url()); });
+  const terms = (() => { try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'fachbegriffe.json'), 'utf8')).terms; } catch { return []; } })();
+  await p.addInitScript(t => { window.__TERMS = t; }, terms);
   await p.goto(url, { waitUntil: 'networkidle' });
   await p.evaluate(() => document.querySelectorAll('.scroll-fade').forEach(e => e.classList.add('visible')));
   await p.waitForTimeout(600);
@@ -77,7 +79,16 @@ async function audit(browser, url, vp) {
     const svgSmall = [];
     document.querySelectorAll('svg text').forEach(t => { const m = t.getScreenCTM(); if (!m) return; const px = parseFloat(getComputedStyle(t).fontSize) * Math.hypot(m.a, m.b);
       if (px && px < 11) svgSmall.push(`„${t.textContent.trim().slice(0, 20)}“ ${px.toFixed(1)}px`); });
-    return { svgSmall, svgOverlap, katex: document.querySelectorAll('.katex').length, katexErr: document.querySelectorAll('.katex-error').length, charts: window.Chart ? Object.keys(Chart.instances || {}).length : 0, out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
+    // L41 · Fachbegriffe: erstes Vorkommen in DOM-Reihenfolge steht in <dfn>/<abbr title> oder der Begriff ist ein Glossar-Eintrag
+    const termsUndef = [];
+    const gl = [...document.querySelectorAll('#glossar .font-head')].map(e => e.textContent.trim().toLowerCase());
+    for (const term of (window.__TERMS || [])) {
+      if (gl.some(g => g.includes(term.toLowerCase()))) continue;
+      const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest('script,style,#s-qa,title,desc') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+      const re = new RegExp(term + '(?!r)'); let n; while ((n = w.nextNode())) if (re.test(n.textContent)) break;  // „Quantor“ ≠ „Quanto“
+      if (n && !n.parentElement.closest('dfn,abbr[title]')) termsUndef.push(`${term} (${(n.parentElement.closest('section') || {}).id || 'top'})`);
+    }
+    return { termsUndef, svgSmall, svgOverlap, katex: document.querySelectorAll('.katex').length, katexErr: document.querySelectorAll('.katex-error').length, charts: window.Chart ? Object.keys(Chart.instances || {}).length : 0, out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
   });
   let modalOk = null;
   if (await p.$('.reg-tag')) {
@@ -98,11 +109,35 @@ async function audit(browser, url, vp) {
   const plain = await audit(b, `${base}/${file}`, { width: 1366, height: 900 });
   const viewer = await audit(b, `${base}/__viewer`, { width: 1366, height: 900 });
   const mobile = await audit(b, `${base}/__viewer`, { width: 390, height: 844 });
+  // L38 · Datenschutztext gegen gemessenes Speicherverhalten der Modulseiten (nur beim Audit der Datenschutzseite)
+  let l38 = null;
+  if (/datenschutz/i.test(file)) {
+    const mods = fs.readdirSync(root).filter(f => /^(m\d{3}|modul)\.html$/.test(f)); const used = new Set();
+    for (const m of mods) {
+      const src = fs.readFileSync(path.join(root, m), 'utf8').replace(/<li[^>]*data-open[^>]*>[^<]*<\/li>/g, '');
+      for (const api of ['sessionStorage', 'localStorage']) if (new RegExp(api + '\\s*[.\\[]').test(src)) used.add(api);
+      if (/document\.cookie\s*=/.test(src)) used.add('cookie');
+      const ctx = await b.newContext(); await ctx.route(u => !u.href.startsWith(base), r => r.abort());
+      const pg = await ctx.newPage(); await pg.goto(`${base}/${m}`, { waitUntil: 'load' }).catch(() => {});
+      await pg.waitForTimeout(300);
+      const st = await pg.evaluate(() => ({ s: sessionStorage.length, l: localStorage.length })).catch(() => ({ s: 0, l: 0 }));
+      if (st.s) used.add('sessionStorage'); if (st.l) used.add('localStorage'); if ((await ctx.cookies()).length) used.add('cookie');
+      await ctx.close();
+    }
+    const txt = fs.readFileSync(path.join(root, file), 'utf8').replace(/<[^>]+>/g, ' ');
+    const claimed = ['sessionStorage', 'localStorage'].filter(a => new RegExp(a + '[^.]{0,80}(genutzt|gespeichert|verwendet|speicher)').test(txt));
+    const wrong = claimed.filter(a => !used.has(a)).map(a => `${a} behauptet, nicht gemessen`).concat([...used].filter(a => a !== 'cookie' && !claimed.includes(a)).map(a => `${a} genutzt, nicht erklärt`));
+    const stand = (txt.match(/Stand:\s*(\d{4}-\d{2}-\d{2})/) || [])[1];
+    let changed = null; try { changed = require('child_process').execSync(`git log -1 --format=%cs -- ${file}`, { cwd: root }).toString().trim(); } catch {}
+    if (stand && changed && stand < changed) wrong.push(`Stand ${stand} älter als letzte Änderung ${changed}`);
+    l38 = { wrong, mods: mods.length };
+  }
   await b.close(); srv.close();
   let blockers = 0; const line = (ok, lvl, rule, msg) => { if (!ok && lvl === 'BLOCKER') blockers++; console.log(`${ok ? '✓' : lvl === 'BLOCKER' ? '✗' : '!'} ${rule.padEnd(26)} [${lvl}] ${msg}`); };
   for (const [n, r] of [['plain', plain], ['viewer', viewer], ['viewer-390px', mobile]]) {
     line(!r.svgSmall.length, 'BLOCKER', `L31 SVG-Schrift ≥ 11 px (${n})`, r.svgSmall.length ? r.svgSmall.slice(0, 3).join('; ') + (r.svgSmall.length > 3 ? ` (+${r.svgSmall.length - 3})` : '') : 'alle Beschriftungen ≥ 11 px');
     if (r.modalOk !== null) line(r.modalOk, 'BLOCKER', `L31 Dialog-Fokus (${n})`, r.modalOk ? 'Fokus im Dialog, Tab bleibt innen, Escape kehrt zurück' : 'Fokusführung des Dialogs fehlerhaft');
+    if (n === 'plain') line(!r.termsUndef.length, 'BLOCKER', 'L41 Fachbegriffe erklärt', r.termsUndef.length ? 'erstes Vorkommen ohne <dfn>/<abbr>: ' + r.termsUndef.join(', ') : 'alle Fachbegriffe beim ersten Auftreten erklärt oder im Glossar');
     line(!r.svgOverlap.length, 'BLOCKER', `L24 SVG-Texte (${n})`, r.svgOverlap.length ? 'Überlappung: ' + r.svgOverlap.slice(0, 3).join('; ') : 'keine Überlappung');
     line(!r.errs.length, 'BLOCKER', `JS-Fehler (${n})`, r.errs.length ? r.errs.join(' | ') : 'keine');
     line(!r.ext.length, 'BLOCKER', `L20 Drittanbieter-Abrufe (${n})`, r.ext.length ? [...new Set(r.ext.map(u => new URL(u).host))].join(', ') : 'keine');
@@ -116,6 +151,8 @@ async function audit(browser, url, vp) {
     line(/Inter/.test(r.bodyFont) && r.bodyColor === 'rgb(226, 232, 240)', 'BLOCKER', `L01 body-Basis (${n})`, `${r.bodyFont.split(',')[0]} · ${r.bodyColor}`);
     if (r.chartColor !== null) line(r.chartColor === '#94A3B8', 'BLOCKER', `L02 Chart-Farbe (${n})`, r.chartColor);
   }
+  // WARN bis zur Freigabe der Textänderung durch den Herausgeber (Punkt 3), danach BLOCKER
+  if (l38) line(!l38.wrong.length, 'WARN', 'L38 Datenschutz = Messung', l38.wrong.length ? l38.wrong.join('; ') : `Speicherangaben = Messung an ${l38.mods} Modulseiten`);
   const fails = o => o.out.filter(x => x.ratio < x.need).length;
   line(fails(plain) === fails(viewer), 'BLOCKER', 'L01 viewer = plain', `plain ${fails(plain)} · viewer ${fails(viewer)} Elemente unter AA`);
   line(mobile.overflow <= 0, 'BLOCKER', 'Layout 390 px', mobile.overflow > 0 ? `${mobile.overflow}px horizontaler Überlauf` : 'kein horizontales Scrollen');

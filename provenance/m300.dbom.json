@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,17 +13,17 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 44,
+    "total": 45,
     "confirmed_primary": 25,
     "media_report": 7,
-    "unverified": 9,
+    "unverified": 10,
     "scenario_projection": 3,
     "vendor_claim": 10,
     "by_class": {
-      "MARKET_DATA": 10,
+      "MARKET_DATA": 9,
       "MEDIA_REPORT": 6,
       "MODEL_ASSUMPTION": 1,
-      "REGULATORY_FRAMEWORK": 15,
+      "REGULATORY_FRAMEWORK": 17,
       "SCENARIO_PROJECTION": 2,
       "VENDOR_CLAIM": 10
     }
@@ -36,7 +36,7 @@
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.9,
-      "claim": "§ 20 Abs. 6 Satz 5 und 6 EStG a. F. (20.000-€-Grenze Termingeschäfte / Forderungsausfall) durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG).",
+      "claim": "§ 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG).",
       "source_id": "SRC_BGBL_JSTG2024",
       "caveat": "Satznummern in § 52 Abs. 28 nur per Snippet belegt.",
       "period": "Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024)",
@@ -122,11 +122,24 @@
       ]
     },
     {
+      "id": "FACT_KO_SATZ6",
+      "verdict": "UNVERIFIED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.6,
+      "claim": "Nach Auffassung der Finanzverwaltung (BMF 03.06.2021) fiel der Totalverlust eines Knock-out-Zertifikats als Verlust aus wertlosen Wirtschaftsgütern unter § 20 Abs. 6 Satz 6 EStG a. F.",
+      "source_id": "SRC_DZB_2021",
+      "caveat": "Nur Sekundärbeleg (Bankinformation, Suchtreffer-Snippet); Randziffer im BMF-Schreiben nicht geprüft. BFH VIII R 37/15 wertet den Knock-out ohne Restzahlung als Einlösung zu null.",
+      "period": "BMF 03.06.2021 bis Aufhebung durch JStG 2024",
+      "supporting_sources": [
+        "SRC_BMF_2021"
+      ]
+    },
+    {
       "id": "FACT_P15_KSTG",
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.85,
-      "claim": "§ 15 Abs. 4 Satz 3–5 EStG gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften (gesonderter Verlustkreis für Termingeschäfte); Ausnahmen für Institute und Absicherungsgeschäfte, Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b KStG).",
+      "claim": "§ 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften; Satz 4: Ausnahmen für Institute und Absicherungsgeschäfte; Satz 5: Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b KStG). Rechtsprechung: BFH I R 25/14 vom 06.07.2016.",
       "source_id": "SRC_ESTG_15",
       "caveat": "Keine Rechtsformempfehlung.",
       "period": "Rechtsstand 2026-10-05",
@@ -385,11 +398,11 @@
     {
       "id": "FACT_PRODUCT_STRUCTURE",
       "verdict": "UNVERIFIED",
-      "class": "MARKET_DATA",
-      "confidence": 0.8,
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.5,
       "claim": "Strukturvergleich Eurex-Optionen vs. Optionsscheine/Knock-outs: Rechtsnatur, Kontrahentenrisiko (CCP vs. Emittent), Preisbildung, Volatilität im Preis, Stillhalterfähigkeit.",
-      "source_id": "SRC_MODEL",
-      "caveat": "Fachwissen, nicht einzeln belegt.",
+      "source_id": "SRC_FACHWISSEN",
+      "caveat": "Fachliche Ableitung ohne Einzelbeleg; vor Freigabe mit Eurex-Clearing- und Emittentenunterlagen belegen.",
       "period": "Stand 2026-10-05"
     },
     {
@@ -884,6 +897,20 @@
       "tier": "primary",
       "title": "Eurex · Statistiken / Extended Market Data Service (Open Interest)",
       "url": "https://www.eurex.com/ex-en/data/statistics"
+    },
+    {
+      "id": "SRC_FACHWISSEN",
+      "ref": "–",
+      "tier": "internal",
+      "title": "FinCoach-Fachableitung (nicht einzeln belegt)",
+      "url": ""
+    },
+    {
+      "id": "SRC_DZB_2021",
+      "ref": "S51",
+      "tier": "secondary",
+      "title": "DZ BANK Steuerinformation Ausgabe 2/2021 (Knock-out-Verluste und § 20 Abs. 6 Satz 6 EStG)",
+      "url": "https://www.pax-bank.de/content/dam/f0395-0/externeinhalte/pdf/verbund/DZB%20Steuerinformation%20Ausgabe%202%202021.pdf"
     }
   ],
   "audit_trail": [
@@ -930,6 +957,12 @@
       "event": "Vierte Zweitprüfung (v1.3.0): Q8 ✓, Q10 ◐; 9 Inhalts- und 6 Testbefunde in Offen-Liste und Fehlerkatalog (L36–L41)",
       "qa_score_pct": 73.7,
       "release": "UEBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-08",
+      "event": "v1.4.0: Befunde der vierten Zweitprüfung umgesetzt – K2 an FACT_BVERFG_PENDING gebunden, FACT_KO_SATZ6 (UNVERIFIED) neu, Claims FACT_JSTG2024_REPEAL/FACT_P15_KSTG um Normteile und BFH I R 25/14 ergänzt, FACT_PRODUCT_STRUCTURE auf interne Quelle SRC_FACHWISSEN mit Konf. 0,5; Glossar-Fundstellen gebunden; Tests L36–L41 ergänzt",
+      "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
     }
   ]
 }

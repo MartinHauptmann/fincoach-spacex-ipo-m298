@@ -15,7 +15,7 @@
 > keine Anlageberatung oder Anlagevermittlung im Sinne von WpIG/KWG, keine Rechtsberatung im Sinne des RDG
 > und keine Steuerberatung im Sinne des StBerG. Sie enthält keine Anlageempfehlung im Sinne von Art. 3 Abs. 1
 > Nr. 35 MAR. Optionen, Futures, Optionsscheine und Knock-out-Zertifikate sind Hebelprodukte mit dem
-> Risiko des Totalverlusts. Bei Futures und Stillhaltergeschäften können die Verluste den Kapitaleinsatz
+> Risiko des Totalverlusts. Bei Futures und Stillhaltergeschäften (Verkauf von Optionen gegen Prämie) können die Verluste den Kapitaleinsatz
 > übersteigen. Steuerliche Aussagen geben den recherchierten Rechtsstand zum Stichtag wieder und ersetzen
 > keine individuelle Prüfung durch Steuerberater oder Rechtsanwalt.
 
@@ -61,7 +61,7 @@ Legende Prüfergebnis: ✓ bestätigt · ◐ teilweise/präzisiert · ✗ falsch
 |---|---|---|---|---|---|---|---|
 | A01 | Verluste aus Termingeschäften seit 2021 nur bis 20.000 €/Jahr verrechenbar (§ 20 Abs. 6 S. 6 EStG) | Steuer/Recht | CONFIRMED | ✗ | Norm war **Satz 5** (Satz 6 betraf Forderungsausfall). Eingeführt 2019 mit 10.000 €, durch JStG 2020 auf 20.000 € erhöht, durch JStG 2024 aufgehoben (alle offenen Fälle) | S1–S4 | 0,90 |
 | A02 | Besteuerung „fiktiver Gewinne“ bei Spreads trotz Nettoverlust | Steuer/Recht | CONFIRMED | ◐ | Für 2021–2024 zutreffend beschrieben (asymmetrische Besteuerung, so auch BFH). Heute in offenen Fällen behoben | S5 | 0,85 |
-| A03 | BFH äußerte in „mehreren Beschlüssen“ Zweifel (VIII B 113/23) | Steuer/Recht | CONFIRMED | ◐ | Belegt ist **ein** BFH-Beschluss vom 07.06.2024 im AdV-Verfahren (summarische Prüfung, Streitjahr 2021); Vorinstanz FG Rheinland-Pfalz 1 V 1674/23. Weitere BFH-Beschlüsse nicht gefunden | S5, S6 | 0,85 |
+| A03 | BFH äußerte in „mehreren Beschlüssen“ Zweifel (VIII B 113/23) | Steuer/Recht | CONFIRMED | ◐ | Belegt ist **ein** BFH-Beschluss vom 07.06.2024 im Verfahren über die Aussetzung der Vollziehung (AdV; summarische Prüfung, Streitjahr 2021); Vorinstanz FG Rheinland-Pfalz 1 V 1674/23. Weitere BFH-Beschlüsse nicht gefunden | S5, S6 | 0,85 |
 | A04 | Rechtsunsicherheit bleibt bis zur BVerfG-Entscheidung | Steuer/Recht | MEDIA_REPORT | ✗ | Durch die Aufhebung überholt; kein BVerfG-Verfahren speziell zu Termingeschäften gefunden | S1, S4 | 0,80 |
 | A05 | Optionsscheine/Knock-outs sind laut Finanzverwaltung keine Termingeschäfte | Steuer/Recht | CONFIRMED | ✓ | Seit BMF 03.06.2021, fortgeführt 19.05.2022 und 14.05.2025. Randziffern [N. V.] | S4, S7 | 0,85 |
 | A06 | Optionsschein-Verluste uneingeschränkt mit Aktien-/Zinsgewinnen verrechenbar | Steuer/Recht | CONFIRMED | ◐ | Richtung zutreffend; Aktien*verluste* bleiben nach § 20 Abs. 6 S. 4 auf Aktiengewinne beschränkt. Knock-out-Totalverlust unterlag früher Satz 6 a. F. | S4, S8 | 0,85 |
@@ -106,7 +106,7 @@ Die Bezeichnung „mehrere Beschlüsse“ ist nicht belegt, und die Aussage „R
 **K3 · Abgrenzung Termingeschäft.** Die Finanzverwaltung ordnet Optionsscheine (Kapitalforderungen) und
 Zertifikate einschließlich Knock-out-Produkten nicht als Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5
 a. F. ein. Das gilt seit dem BMF-Schreiben vom 03.06.2021 und ist in den Fassungen von 2022 und 2025
-fortgeführt. Beim Knock-out-Ereignis griff bis zur Aufhebung allerdings Satz 6 a. F. (Ausfall oder
+fortgeführt. Beim Knock-out-Ereignis griff bis zur Aufhebung nach Auffassung der Finanzverwaltung (Sekundärbeleg S51, ungeprüft) allerdings Satz 6 a. F. (Ausfall oder
 Wertloswerden), ebenfalls mit einer Grenze von 20.000 €. Der vom Quelltext behauptete einseitige
 Steuervorteil verbriefter Produkte war daher schon unter altem Recht kleiner als dargestellt. Nach der
 Aufhebung besteht er nicht mehr. Unverändert gilt nur § 20 Abs. 6 Satz 4 (Aktienverluste). Dazu ist beim
@@ -206,7 +206,7 @@ Angaben abgleichen statt gegen eine eigene „Marge“. **Ergebnis: ◐.**
 ### Modul 1 · Technologische Dekonstruktion der Options X-Ray Suite
 
 Die Suite wandelt die Positionierung im SPX-Optionsmarkt in Informationen um, die auf einem Futures-Chart
-verwertbar sind. Die zehn Indikatoren erfüllen dabei drei Funktionen. **Market State**, **Expected Move**
+verwertbar sind. Die zehn Indikatoren erfüllen dabei drei Funktionen. **Market State**, **Expected Move** (aus der impliziten Volatilität abgeleitete erwartete Schwankungsbreite)
 und das **Surface Profile** beschreiben das Regime: Sie sagen, ob der Markt in einem dämpfenden oder
 beschleunigenden Gamma-Umfeld liegt und welche Bandbreite die implizite Volatilität einpreist. Market State
 trennt nach Herstellerangabe beobachtete Daten sichtbar von Modellausgaben. Diese Unterscheidung ist auch
@@ -296,8 +296,8 @@ Footprint-Daten (Modul 4).
 
 Mit der Entscheidung für serverseitig berechnete Minuten-Snapshots verlagert ATAS das Rechenproblem vom
 Client auf den Datenpartner. Der Vergleich zeigt die Größenordnung: Das gesamte US-Optionstape (OPRA) ist
-für Spitzenlasten von mehr als 30 Gbps je Stream ausgelegt. Die Kapazitätsprojektion der OPRA nennt
-37,3 Gbps im 1-ms-Fenster. Sekundärquellen berichten 2025 von Bursts mit über 180 Mio. Nachrichten pro
+auf hohe Spitzenlasten ausgelegt: Die Kapazitätsprojektion der OPRA (Sept. 2025) nennt 37,3 Gbps
+je Stream im 1-ms-Fenster. Sekundärquellen berichten 2025 von Bursts mit über 180 Mio. Nachrichten pro
 Sekunde. Ein Desktop-Client kann das weder empfangen noch bewerten. Für die Suite genügt zwar die
 SPX-Kette, weil SPX-Optionen nur an der Cboe gehandelt werden. Aber auch deren laufende
 Greek-Neuberechnung über Tausende Serien, einschließlich IV-Fit und Positionszuordnung, ist serverseitig
@@ -401,7 +401,9 @@ M = MEDIA_REPORT. Die Reihenfolge ist keine Rangfolge.
 Aus der Matrix lässt sich Folgendes ableiten. ATAS ist der einzige Anbieter im Vergleichsfeld, der native
 Optionsdaten im Minutentakt mit einem nativen MBO- und Footprint-Werkzeugkasten in einer Oberfläche verbindet;
 Bookmap hat MBO, aber keine nativen Optionsmetriken. Volland ist der einzige Anbieter mit belegter Abdeckung von
-Gamma, Vanna und Charm. Intraday-Flow-Analytik bieten SpotGamma (HIRO/TRACE) und ATAS (Flow, Flow Delta).
+Gamma, Vanna und Charm. Optionsdaten innerhalb des Tages liefern ATAS (1 Min.), SpotGamma (HIRO/TRACE),
+MenthorQ und Volland (je bis alle 5 Min.) sowie die IBKR TWS (Echtzeit, Abo); Intraday-Flow-Analytik bieten
+davon SpotGamma (HIRO/TRACE) und ATAS (Flow, Flow Delta).
 MenthorQ deckt Futures-Optionen nativ ab und aktualisiert intraday alle fünf Minuten. Eigene Ausführung bieten
 ATAS (nur Futures), Bookmap und die TWS; für Volland ist sie n. v. Die TWS rechnet keine marktweite
 Dealer-Positionierung. **Für Eurex-Optionen bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern
@@ -414,10 +416,11 @@ Der deutschsprachige Markt hat eine besondere Struktur. Am Börsenumsatz verbrie
 Hebelprodukte nach BSW-Statistik rund 84 % (Bezugszeitraum [N. V.]). Darunter entfallen etwa 59 % auf
 Knock-outs und 19 % auf klassische Optionsscheine, jeweils bezogen auf den Gesamtumsatz. Gehandelt wird vor allem an der Euwax in
 Stuttgart, an der Börse Frankfurt (Zertifikate) und auf gettex. An der Eurex dagegen konzentriert sich das
-professionelle Geschäft in Indexoptionen. OESX kommt nach einem Eurex-Whitepaper auf ein ADV von rund
-698.000 Kontrakten (Stand November 2025, Konfidenz 0,6). Die Optionen mit Tagesverfall sind noch klein:
+professionelle Geschäft in Indexoptionen (eine belegte ADV-Zahl für OESX liegt in der DBOM nicht vor).
+Die Optionen mit Tagesverfall sind noch klein:
 OEXP hat seit Start ein ADV von rund 30.900 Kontrakten, ODAP von rund 2.300 (Stand der Quelle [N. V.]). Beide
-sind End-of-Day-Optionen mit Verfällen über mehrere Handelstage, also kein reines 0DTE. Der Vergleich mit den
+sind End-of-Day-Optionen. OEXP hat seit 05.01.2026 Verfälle an zehn Handelstagen und ist damit kein reines
+0DTE; die Verfallsstruktur von ODAP ist [N. V.]. Der Vergleich mit den
 USA, wo 2025 rund 59 % des SPX-Optionsvolumens auf 0DTE entfielen, zeigt daher nur die Größenordnung.
 
 Die beiden Produktwelten unterscheiden sich in den folgenden Merkmalen:
@@ -439,7 +442,7 @@ Zur **steuerlichen Zeitachse:** Von 2021 bis 2024 benachteiligte § 20 Abs. 6 Sa
 Privatanleger mit börsengehandelten Optionen und Futures tatsächlich. Verluste aus Glattstellungen und
 verfallenen Long-Optionen ließen sich nur bis 20.000 € im Jahr verrechnen. Bei Spread-Strategien konnten
 dadurch Steuern auf einen wirtschaftlich nicht vorhandenen Gewinn anfallen. Verbriefte Produkte waren von
-Satz 5 nicht erfasst. Knock-out-Totalverluste fielen aber unter Satz 6 a. F. Das JStG 2024 hat beide Sätze
+Satz 5 nicht erfasst. Knock-out-Totalverluste fielen nach Auffassung der Finanzverwaltung aber unter Satz 6 a. F. (`FACT_KO_SATZ6`, UNVERIFIED, Sekundärbeleg S51). Das JStG 2024 hat beide Sätze
 für alle offenen Fälle gestrichen. Ob ein Anleger Altjahre korrigieren kann, hängt davon ab, ob seine
 Bescheide noch offen sind. Das ist eine Frage des Einzelfalls und vom Steuerberater zu prüfen. Für die
 Gegenwart gilt: Die Steuer unterscheidet nicht mehr zwischen beiden Produktwelten. Bestehen bleibt nur die
@@ -502,8 +505,8 @@ halbautomatischer Vorschlag mit manueller Bestätigung statt einer vollautomatis
 **Warrant-Fair-Value-Tool.** Das Tool würde echten Transparenzgewinn bringen, wenn es methodisch sauber
 gebaut ist. Es müsste die Emittenten-Quote eines Optionsscheins mit einem theoretischen Wert vergleichen.
 Dieser Wert entsteht aus der Volatilitätsfläche der Börsenoptionen (für DAX-Basiswerte aus ODAX, nicht aus
-US-Optionen), mit Laufzeit-, Strike- und Bezugsverhältnisanpassung, Zins- und Dividendenannahme, bei
-US-Basiswerten mit Quanto-Effekt und mit einem Abschlag für die Emittentenbonität. Das Kontrahentenrisiko
+US-Optionen), mit Anpassung an Laufzeit, Strike (Basispreis) und Bezugsverhältnis (Scheine je Einheit des Basiswerts), Zins- und Dividendenannahme, bei
+US-Basiswerten mit Quanto-Effekt (Währungssicherung bei Basiswerten in Fremdwährung) und mit einem Abschlag für die Emittentenbonität. Das Kontrahentenrisiko
 ist ein realer ökonomischer Unterschied und gehört nicht in die „Marge“. Das Ergebnis sollte als
 „Fair-Value-Differenz“ mit offener Methodik und Konfidenzband ausgewiesen und mit den Kostenangaben im
 PRIIPs-KID abgeglichen werden. Wertende Begriffe und Ranglisten einzelner Emittenten bergen das Risiko
@@ -626,18 +629,19 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 | S48 | Sutor Bank · Formular Angemessenheit nach § 63 Abs. 10 WpHG (Sekundärquelle) | Sekundärquelle | `SRC_SUTOR` | https://www.sutorbank.de/fileadmin/Dateien/Service/Formulare/Investmentsparvertraege/Angaben-zur-Feststellung-der-Angemessenheit.pdf |
 | S49 | OptionsDepth (Abdeckung, API) | Herstellerquelle | `SRC_OPTIONSDEPTH` | https://optionsdepth.com/ |
 | S50 | Eurex · Statistiken / Extended Market Data Service (Open Interest) | Primärquelle | `SRC_EUREX_STATS` | https://www.eurex.com/ex-en/data/statistics |
+| S51 | DZ BANK Steuerinformation Ausgabe 2/2021 (Knock-out-Verluste und § 20 Abs. 6 Satz 6 EStG) | Sekundärquelle | `SRC_DZB_2021` | https://www.pax-bank.de/content/dam/f0395-0/externeinhalte/pdf/verbund/DZB%20Steuerinformation%20Ausgabe%202%202021.pdf |
 
 ---
 
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.3.0,
-44 Fakten, 51 Quellen.
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.4.0,
+45 Fakten, 53 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
 |---|---|---|---|---|---|
-| `FACT_JSTG2024_REPEAL` | CONFIRMED | REGULATORY_FRAMEWORK | 0,9 | Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024) | § 20 Abs. 6 Satz 5 und 6 EStG a. F. (20.000-€-Grenze Termingeschäfte / Forderungsausfall) durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG). |
+| `FACT_JSTG2024_REPEAL` | CONFIRMED | REGULATORY_FRAMEWORK | 0,9 | Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024) | § 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch JStG 2024 aufgehoben; Anwendung in allen offenen Fällen (§ 52 Abs. 28 EStG). |
 | `FACT_BMF_2025` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | BMF-Schreiben 14.05.2025 | BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um; Verlustvorträge aus Termingeschäften in offenen Fällen unbeschränkt verrechenbar. |
 | `FACT_TERMIN_2019` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Gesetz vom 21.12.2019, Anwendung ab 01.01.2021 | Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte durch Gesetz vom 21.12.2019 (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021. |
 | `FACT_TERMIN_2020_RAISE` | MEDIA_REPORT | REGULATORY_FRAMEWORK | 0,65 | JStG 2020 vom 21.12.2020 | JStG 2020 vom 21.12.2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €. |
@@ -645,7 +649,8 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_STOCK_LOSS_S4` | CONFIRMED | REGULATORY_FRAMEWORK | 0,7 | Rechtsstand 2026-10-05 | § 20 Abs. 6 Satz 4 EStG (Aktienverluste nur mit Aktiengewinnen) gilt fort. |
 | `FACT_BVERFG_PENDING` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,6 | Stand 05.10.2026 | Zu § 20 Abs. 6 Satz 4 EStG ist beim BVerfG die Vorlage 2 BvL 3/21 anhängig; eine Entscheidung wurde bis 05.10.2026 nicht gefunden. |
 | `FACT_OS_KO_NOT_TERMIN` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | BMF 03.06.2021, fortgeführt 14.05.2025 | Optionsscheine und Knock-out-Zertifikate sind nach Auffassung der Finanzverwaltung keine Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5 EStG a. F. |
-| `FACT_P15_KSTG` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 15 Abs. 4 Satz 3–5 EStG gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften (gesonderter Verlustkreis für Termingeschäfte); Ausnahmen für Institute und Absicherungsgeschäfte, Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b KStG). |
+| `FACT_KO_SATZ6` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,6 | BMF 03.06.2021 bis Aufhebung durch JStG 2024 | Nach Auffassung der Finanzverwaltung (BMF 03.06.2021) fiel der Totalverlust eines Knock-out-Zertifikats als Verlust aus wertlosen Wirtschaftsgütern unter § 20 Abs. 6 Satz 6 EStG a. F. |
+| `FACT_P15_KSTG` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften; Satz 4: Ausnahmen für Institute und Absicherungsgeschäfte; Satz 5: Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b KStG). Rechtsprechung: BFH I R 25/14 vom 06.07.2016. |
 | `FACT_MM_NO_HEDGE_DUTY` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | Keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging; Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition Abs. 5) regeln Quotierungs- und Vertragspflichten. |
 | `FACT_ALGO_TRADING` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 80 Abs. 2 WpHG verpflichtet Wertpapierdienstleistungsunternehmen, die algorithmischen Handel betreiben, zu Risikokontrollen, Notfallvorkehrungen und Dokumentation (Umsetzung Art. 17 MiFID II). |
 | `FACT_MAR_RECO` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten. |
@@ -669,7 +674,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_OPRA_BURSTS` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | April 2025 | Gemessene OPRA-Bursts über 180 Mio. Nachrichten/s (1-ms-Fenster). |
 | `FACT_ODAX_SPECS` | CONFIRMED | MARKET_DATA | 0,85 | Produktseite Stand 2026-10-05 | ODAX: 5 € je Indexpunkt, europäisch, Barausgleich, Basiswert DAX-Index; Micro-DAX-Optionen (ODXS) sind gelistet. |
 | `FACT_EUREX_OI` | CONFIRMED | MARKET_DATA | 0,85 | Stand 2026-10-05 | Eurex veröffentlicht das Open Interest je Serie täglich über die Statistiken und den Extended Market Data Service, nicht über EOBI. |
-| `FACT_PRODUCT_STRUCTURE` | UNVERIFIED | MARKET_DATA | 0,8 | Stand 2026-10-05 | Strukturvergleich Eurex-Optionen vs. Optionsscheine/Knock-outs: Rechtsnatur, Kontrahentenrisiko (CCP vs. Emittent), Preisbildung, Volatilität im Preis, Stillhalterfähigkeit. |
+| `FACT_PRODUCT_STRUCTURE` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,5 | Stand 2026-10-05 | Strukturvergleich Eurex-Optionen vs. Optionsscheine/Knock-outs: Rechtsnatur, Kontrahentenrisiko (CCP vs. Emittent), Preisbildung, Volatilität im Preis, Stillhalterfähigkeit. |
 | `FACT_OESX_MULT` | UNVERIFIED | MARKET_DATA | 0,7 | Stand 2026-10-05 | OESX: 10 € je Indexpunkt; Optionen auf DAX- bzw. EURO-STOXX-50-Futures wurden nicht gefunden. |
 | `FACT_EUREX_DAILY_LAUNCH` | CONFIRMED | MARKET_DATA | 0,85 | Eurex-Circulars 2023–2026 | Eurex: OEXP (EURO STOXX 50 End-of-Day Options) seit 28.08.2023, ODAP (DAX End-of-Day Options) seit 13.11.2023; OEXP seit 05.01.2026 mit Verfällen an zehn Handelstagen. |
 | `FACT_EUREX_DAILY_ADV` | UNVERIFIED | MARKET_DATA | 0,6 | seit Produktstart, Stand n. v. | ADV seit Produktstart: OEXP ca. 30.900 Kontrakte, ODAP ca. 2.300 Kontrakte. |
@@ -696,10 +701,13 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Zweitprüfung v1.3.0: Faktbindungen K2, K3, K4 und Steuer-Zeitachse korrigieren; FACT_PRODUCT_STRUCTURE mit passender Quelle
-- Zweitprüfung v1.3.0: Aufzählung im Wettbewerbsvergleich um IBKR TWS ergänzen und an die Analyse angleichen
-- Zweitprüfung v1.3.0: ODAP-Verfälle belegen; Hero-Satz „jede Aussage“ abschwächen
-- Fachbegriffe beim ersten Auftreten erklären (AdV, Stillhalter, Strike, Quanto, Bezugsverhältnis, Expected Move)
+- Faktbindungen v1.4.0 (K2–K4, Steuer-Zeitachse, Glossar) durch unabhängige Zweitprüfung bestätigen
+- Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
+- Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
+- Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
+- Wettbewerbsvergleich v1.4.0 (Seite = Analyse, IBKR TWS) durch unabhängige Zweitprüfung bestätigen
+- Korrekturen v1.4.0 (Hero-Satz, ODAP-Verfälle, OPRA-Überschrift) durch unabhängige Zweitprüfung bestätigen
+- Fachbegriff-Erklärungen v1.4.0 durch unabhängige Zweitprüfung bestätigen
 
 ---
 

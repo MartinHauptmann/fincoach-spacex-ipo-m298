@@ -1,0 +1,4 @@
+{
+  "_doc": "L41: Fachbegriffe, die beim ersten Auftreten auf der Seite erklärt werden müssen (erstes Vorkommen in <dfn> oder <abbr title>, oder Begriff im Glossar). Neue Begriffe aus Zweitprüfungen hier ergänzen.",
+  "terms": ["AdV", "Stillhalter", "Strike", "Quanto", "Bezugsverhältnis", "Expected Move"]
+}

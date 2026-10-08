@@ -288,6 +288,8 @@ Q4  Provenienz: jeder Fakt mit genau einem Provenienz-Tag und einer Konfidenz;
     SCENARIO_PROJECTION nie im Indikativ als Tatsache. CONFIRMED nur bei Primär- oder
     Herstellerquelle UND Konfidenz ≥ 0,7; Medienangaben bleiben MEDIA_REPORT, auch wenn sie
     plausibel sind [L05]. Jeder Fakt der M-DBOM wird in der Ausgabe referenziert [L08].
+    Aktenzeichen und Normteile stehen im Claim des gebundenen Fakts [L36]; interne Quellen
+    (Modell, Fachableitung, Nutzertext) höchstens UNVERIFIED mit Konfidenz ≤ 0,6 [L39].
 Q5  Quellenqualität: Primärquellen für Recht und Kontraktspezifikationen; Herstellerdoku für
     Produktfunktionen; Sekundärquellen nur ergänzend.
 Q6  Vollständigkeit: alle acht Module bearbeitet, die Wettbewerbsmatrix vollständig ausgefüllt
@@ -302,7 +304,8 @@ Q9  Keine Halluzinationen oder Überzeichnungen: Aktenzeichen, Paragraphen, Prod
     Kontraktdaten stichprobenartig gegengeprüft; nicht prüfbare Angaben entfernt oder als [N. V.]
     gekennzeichnet. Allaussagen („0 von N“, „kein Anbieter“, „alle“) nur über belegte Fälle;
     [N. V.]-Fälle im selben Satz nennen [L06].
-Q10 Formatvorgaben aus Abschnitt 4 eingehalten.
+Q10 Formatvorgaben aus Abschnitt 4 eingehalten; jeder Fachbegriff wird beim ersten Auftreten erklärt
+    (z. B. AdV, Stillhalter, Strike, Quanto, Bezugsverhältnis, Expected Move) [L41].
 
 ──────────────────────────────────────────────
 7 · AUSGABESTRUKTUR (genau diese Reihenfolge)
