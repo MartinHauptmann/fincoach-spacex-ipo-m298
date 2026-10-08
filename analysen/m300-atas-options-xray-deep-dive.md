@@ -698,12 +698,12 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Bindung „offene Fälle“ an den abgetrennten Fakt v1.6.0 (L46) durch unabhängige Zweitprüfung bestätigen
+- Analyse: „offene Fälle“, 2 BvL 3/21 und Strukturtabelle Modul 6 mit Fakt-ID bzw. „ungeprüft“ kennzeichnen; (V)-Kürzel der Matrix an MEDIA_REPORT angleichen (L51, L05d)
 - Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
 - Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
 - Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
-- Analyse-Korrekturen v1.6.0 (BFH-Modalität, unbelegte Angaben, BVerfG-Prognose; L43, L47) durch unabhängige Zweitprüfung bestätigen
-- Konfidenzen und Scorecard der Analyse per Sync, K10 angeglichen (v1.6.0, L48, L49) durch unabhängige Zweitprüfung bestätigen
+- Analyse: weitere unbelegte Angaben (Monatsverfälle, Handelsplätze, Chain-Suite-Indikatoren, Lizenz-/Beta-Angaben, US 500, Abzugsverfahren) belegen oder entfernen (L43)
+- Analyse: Spalte „Konf.“ der A-Tabelle und „Konf.“-Schreibweise aus der DBOM (L48b); A03 vs. Quelle S6; BMF-Fakt „in offenen Fällen“ begründen
 
 ---
 

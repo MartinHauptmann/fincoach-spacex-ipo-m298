@@ -1007,6 +1007,12 @@
       "event": "v1.6.0: Befunde der sechsten Zweitprüfung umgesetzt – „offene Fälle“ an FACT_P52_ABS28 gebunden (markers, L46); BFH-Modalität korrigiert (L47); Analyse-Konfidenzen mit Fakt-ID aus DBOM (L48); Analyse-Scorecard per Sync (L49); unbelegte Analyse-Angaben entfernt (L43); Tests verschärft (L50)",
       "qa_score_pct": null,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-08",
+      "event": "Siebte Zweitprüfung v1.6.0: Seite N1–N8 bestätigt; Analyse-Befunde und Testlücken als L51, L48b, L05d, L52, L42b offen; Gates unverändert",
+      "qa_score_pct": 76.3,
+      "release": "ÜBERARBEITUNG"
     }
   ]
 }
