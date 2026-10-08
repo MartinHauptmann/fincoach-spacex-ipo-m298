@@ -600,7 +600,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <div class="dep-box">
       <h3 class="font-head font-bold text-tngb-magenta mb-3">① Compliance (C1–C9)</h3>
       <table><tbody>
-        <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-pass" title="Kurz-Disclaimer im Hero seit 2026-10-07 (M2)">✓</td></tr>
+        <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-part" data-gate="C1" title="Fünfte Zweitprüfung: Pflichtbestandteil „nur für erfahrene Anleger“ fehlt in Hero, Schluss und Analyse (L42)">◐</td></tr>
         <tr><td>C2 Keine Anlageempfehlung (MAR)</td><td class="check-pass">✓</td></tr>
         <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-part" data-gate="C3" title="Primärquellen nur per Snippet eingesehen">◐</td></tr>
         <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-part" data-gate="C4" title="Interessenkonflikte vom Herausgeber noch nicht bestätigt (L10b)">◐</td></tr>
@@ -620,7 +620,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="v1.4.0: Bindungen K2–K4, S04, Glossar korrigiert (L36, L39, L41a); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-part" data-gate="Q5" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="v1.4.0: S09-Aufzählung vollständig, Seite = Analyse; ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-pass" title="Fünfte Zweitprüfung: Fazit ohne Widerspruch zu K1/K3, S09 Seite = Analyse, Zählungen per L07/L18/L21 getestet">✓</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="26 Begriffe; Pflichtbegriffe von der vierten Zweitprüfung bestätigt">✓</td></tr>
         <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="v1.4.0: Hero-Satz, ODAP-Verfälle, OPRA-Überschrift korrigiert; ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
         <tr><td>Q10 Formatvorgaben</td><td class="check-part" data-gate="Q10" title="v1.4.0: Fachbegriffe beim ersten Auftreten als &lt;dfn&gt; erklärt (L41-Test); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
@@ -651,13 +651,13 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <li data-gate="C4" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>
         <li data-gate="C8" data-source="FACT_PRIIPS_UWG FACT_ANGEMESSENHEIT" data-open>PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>
         <li data-gate="C9" data-open>Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis</li>
-        <li data-gate="Q4" data-open>Faktbindungen v1.4.0 (K2–K4, Steuer-Zeitachse, Glossar) durch unabhängige Zweitprüfung bestätigen</li>
+        <li data-gate="Q4" data-open>§ 52 Abs. 28 EStG als eigenen UNVERIFIED-Fakt abtrennen; Offen-Punkte mit Fundstellen an Fakten binden (L26b)</li>
+        <li data-gate="C1" data-open>Disclaimer in Hero, Schluss und Analyse um „nur für erfahrene Anleger geeignet“ ergänzen (L42, Freigabe Herausgeber)</li>
         <li data-gate="Q2" data-source="FACT_KO_SATZ6" data-open>Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen</li>
         <li data-gate="Q5" data-source="FACT_PRODUCT_STRUCTURE" data-open>Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen</li>
         <li data-gate="Q2" data-source="FACT_EUREX_DAILY_ADV FACT_BAFIN_STUDY" data-open>Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen</li>
-        <li data-gate="Q7" data-open>Wettbewerbsvergleich v1.4.0 (Seite = Analyse, IBKR TWS) durch unabhängige Zweitprüfung bestätigen</li>
-        <li data-gate="Q9" data-open>Korrekturen v1.4.0 (Hero-Satz, ODAP-Verfälle, OPRA-Überschrift) durch unabhängige Zweitprüfung bestätigen</li>
-        <li data-gate="Q10" data-open>Fachbegriff-Erklärungen v1.4.0 durch unabhängige Zweitprüfung bestätigen</li>
+                <li data-gate="Q9" data-open>Analyse: Monatsend-Verfälle, „Bescheide vorläufig“, Spread-Satz und BVerfG-Hinweis der Executive Summary belegen, kennzeichnen oder angleichen (L43)</li>
+        <li data-gate="Q10" data-open>AdV beim ersten sichtbaren Auftreten (S04) sowie EOD, IV, Margin, PV, KapGes, a. F. erklären; Version der Analyse angleichen (L41b, L44)</li>
       </ul>
     </div>
   </div>

@@ -701,13 +701,13 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Faktbindungen v1.4.0 (K2–K4, Steuer-Zeitachse, Glossar) durch unabhängige Zweitprüfung bestätigen
+- § 52 Abs. 28 EStG als eigenen UNVERIFIED-Fakt abtrennen; Offen-Punkte mit Fundstellen an Fakten binden (L26b)
+- Disclaimer in Hero, Schluss und Analyse um „nur für erfahrene Anleger geeignet“ ergänzen (L42, Freigabe Herausgeber)
 - Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
 - Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
 - Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
-- Wettbewerbsvergleich v1.4.0 (Seite = Analyse, IBKR TWS) durch unabhängige Zweitprüfung bestätigen
-- Korrekturen v1.4.0 (Hero-Satz, ODAP-Verfälle, OPRA-Überschrift) durch unabhängige Zweitprüfung bestätigen
-- Fachbegriff-Erklärungen v1.4.0 durch unabhängige Zweitprüfung bestätigen
+- Analyse: Monatsend-Verfälle, „Bescheide vorläufig“, Spread-Satz und BVerfG-Hinweis der Executive Summary belegen, kennzeichnen oder angleichen (L43)
+- AdV beim ersten sichtbaren Auftreten (S04) sowie EOD, IV, Margin, PV, KapGes, a. F. erklären; Version der Analyse angleichen (L41b, L44)
 
 ---
 
