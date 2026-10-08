@@ -29,15 +29,22 @@ AZ_NORM = (r"\b(?:[IVX]+ [A-Z]{1,2}|\d BvL|\d BvR) \d+/\d{2}\b"      # Aktenzeic
            r"|\b(?:Satz|Sätze|S\.)\s?\d+\b|\bAbs\.\s?\d+\b|\bNr\.\s?\d+\b")  # L36b: Normteile ohne §
 
 
+def norm_txt(x):
+    """L52: Markup entfernen, Entities auflösen, Leerraum zusammenfassen, Kleinschreibung."""
+    import html as _h
+    return re.sub(r"\s+", " ", _h.unescape(re.sub(r"<[^>]+>", " ", x))).strip().casefold()
+
+
 def nz(x):
     """Vergleichsform: ohne Leerraum, „S.“/„Sätze“ = „Satz“."""
     return re.sub(r"\s+", "", re.sub(r"\bS\.(?=\s?\d)|\bSätze\b", "Satz", x))
 FACT_PATTERN = re.compile(FACT_PATTERN.pattern + "|" + AZ_NORM)  # L36b
 # L43/L50: belegpflichtige Angaben in der Analyse
 MD_TOK = (r"\b\d{2}\.\d{2}\.\d{4}\b|§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\b(?:[IVX]+ [A-Z]{1,2}|\d BvL|\d BvR|\d{1,2} [A-Z]{1,2}) \d+/\d{2}\b"
-          r"|\bArt(?:ikel|\.)\s?\d+|\bIV [A-Z] \d+ – S \d+|\d[\d.,]*\s?€|\b\d+\.\d+\.\d+\b|\b(?:19|20)\d{2}\b|\bSatznummern? \d+")
+          r"|\bArt(?:ikel|\.)\s?\d+|\bIV [A-Z] \d+ – S \d+|\d[\d.,]*\s?(?:€|%|USD|\$)|\b\d+\.\d+\.\d+\b|\b(?:19|20)\d{2}\b|\bSatznummern? \d+"
+          r"|\b(?:Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b|\bFG [A-ZÄÖÜ][\wäöü-]+")  # L52
 # L47: starke rechtliche Bewertungen müssen wörtlich im Claim stehen
-STRONG = r"voraussichtlich (?:nicht )?(?:mit [^.]{0,40}?)?vereinbar|verfassungswidrig|\bnichtig\b|rechtswidrig"
+STRONG = r"voraussichtlich (?:nicht )?(?:mit [^.]{0,40}?)?vereinbar|unvereinbar|verfassungswidrig\w*|\bnichtig\w*|rechtswidrig\w*"  # L52: normalisiert, Synonyme
 SCOPE = re.compile(r"^(s0[1-9]|s1[01]|s-fz)$")  # Inhaltssektionen
 
 
@@ -159,10 +166,15 @@ def main():
     # L42 · C1-Pflichtbestandteile in jedem Disclaimer (Hero, Schluss, Analyse Anfang/Ende)
     C1_PARTS = {"Beratungsausschluss": r"keine Anlage", "allgemeine Information": r"Information|Bildung", "Totalverlust": r"Totalverlust",
                 "Hebel": r"Hebel", "Knock-out": r"Knock-out", "nur erfahrene Anleger": r"nur\s+für\s+erfahrene\s+Anleger"}
-    NEG = re.compile(r"\b(ohne|kein\w*|nicht|un)\s*$|un$", re.I)  # L50: Verneinung direkt davor zählt nicht
+    NEG = re.compile(r"\b(ohne|kein\w*|nicht|ausgeschlossen|nie)\b|(?<![a-zäöü])un(?=erfahren)", re.I)  # L42b: Verneinung im ganzen Teilsatz
 
     def c1_has(rx, txt):
-        return any(not NEG.search(txt[max(0, m.start() - 12):m.start()]) for m in re.finditer(r"(?<![A-Za-zäöü])(?:" + rx + ")", txt))
+        txt = re.sub(r"\s+", " ", txt)
+        for m in re.finditer(r"(?<![A-Za-zäöü])(?:" + rx + ")", txt):
+            a = max(txt.rfind(c, 0, m.start()) for c in ".;:,!?"); b = min([i for i in (txt.find(c, m.end()) for c in ".;:,!?") if i > -1] or [len(txt)])
+            if rx == r"keine Anlage" or not NEG.search(txt[a + 1:b]):
+                return True
+        return False
     hd = re.search(r'<(\w+)[^>]*data-qa="hero-disclaimer"[^>]*>', html)
     closing = re.findall(r'<div class="caveat-box[^"]*">\s*<h3[^>]*>Disclaimer.*?</div>', html, re.S)
     discl = {"Hero": element_inner(html, hd) if hd else "", "Schluss": closing[-1] if closing else ""}
@@ -268,6 +280,7 @@ def main():
             hay_all = nz(" ".join(str(f.get(k, "")) for f in F for k in ("claim", "period", "caveat")))
             body = re.split(r"\n## 5 · ", md)[0]
             body = "\n" * body[:body.find("\n## 1 ")].count("\n") + body[body.find("\n## 1 "):]  # Titelblock (Version, Prompt) ausgenommen, Zeilen bleiben
+            body = re.sub(r"\$\$.*?\$\$|\$[^$]+?\$", lambda m: "\n" * m.group(0).count("\n"), body, flags=re.S)  # Formeln (Modell) ausgenommen, Zeilen bleiben
             md_miss = [f"Z. {i}: {tk}" for i, ln in enumerate(body.splitlines(), 1)
                        for tk in re.findall(MD_TOK, ln)
                        if nz(tk) not in hay_all]
@@ -277,22 +290,38 @@ def main():
         for f in F:
             for mk in f.get("markers", []):
                 for x in t.texts:
-                    if mk in x["text"] and x["sec"] != "s-qa" and not x.get("code") and f["id"] not in (x["src"] or "").split():
-                        l46.append(f"{x['sec']}: „{mk}“ ohne {f['id']}")
+                    if mk in x["text"] and x["sec"] != "s-qa" and not x.get("code") and (x["src"] or "").split() != [f["id"]]:
+                        l46.append(f"{x['sec']}: „{mk}“ nicht allein an {f['id']}")  # L52: innerstes Element bindet den Fakt allein
                 for blob in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else []) + ([b for _, b in re.findall(r"\n\s*(\w+):\{(.*?)\}(?:,|$)", js_reg.group(1))] if js_reg else []):
-                    if mk in re.sub(r"<[^>]+>", "", blob) and f["id"] not in blob:
+                    if mk in re.sub(r"<[^>]+>", "", blob) and (f["id"] not in blob or (f["verdict"] != "CONFIRMED" and not re.search(r"ungeprüft|Medienangabe|Modell", blob))):
                         l46.append(f"JS „{mk}“ ohne {f['id']}")
         report("L46 Leitphrasen gebunden", BLOCKER, not l46 and any(f.get("markers") for f in F), "; ".join(sorted(set(l46))[:5]) if l46 else ("alle Leitphrasen an ihren Fakt gebunden" if any(f.get("markers") for f in F) else "keine markers in der DBOM"))
+        # L51 · Leitphrasen in der Analyse: Absatz/Zeile nennt den Fakt
+        l51 = []
+        if md:
+            for para in re.split(r"\n\s*\n|\n(?=[-|] )", re.split(r"\n## 5 · ", md)[0]):
+                for f in F:
+                    for mk in f.get("markers", []):
+                        if mk in re.sub(r"\s+", " ", para) and f["id"] not in para:
+                            l51.append(f"„{mk}“ ohne {f['id']}: {re.sub(chr(10), ' ', para)[:50]}…")
+        report("L51 Leitphrasen in der Analyse", BLOCKER, not l51, "; ".join(l51[:3]) if l51 else "alle Leitphrasen der Analyse nennen ihren Fakt")
         # L47 · starke rechtliche Bewertung nur, wenn ein Claim sie wörtlich trägt
         claims_nz = nz(" ".join(f["claim"] for f in F))
         page_txt = re.sub(r"<[^>]+>", " ", re.sub(r"<style\b.*?</style>", "", html, flags=re.S))
         md_body = re.split(r"\n## 5 · ", md)[0] if md else ""  # Quellenverzeichnis (Titel, URLs) ausgenommen
-        l47 = [m.group(0) for src in (page_txt, md_body) for m in re.finditer(STRONG, src) if nz(m.group(0)) not in claims_nz]
+        claims_cf = norm_txt(" ".join(f["claim"] for f in F))
+        l47 = [m.group(0) for src in (page_txt, md_body) for m in re.finditer(STRONG, norm_txt(src)) if m.group(0) not in claims_cf]
         report("L47 Modalität = Claim", BLOCKER, not l47, "ohne Claim: " + ", ".join(sorted(set(l47))[:5]) if l47 else "keine stärkere Rechtsbewertung als im Claim")
         if md:
             # L48 · Konfidenzen in der Analyse nur mit Fakt-ID und = DBOM
             l48 = []
-            for m in re.finditer(r"Konfidenz\s+(\d,\d+)", body):
+            VL = {"belegt": "CONFIRMED", "medienangabe": "MEDIA_REPORT", "ungeprüft": "UNVERIFIED", "scenario_projection": "SCENARIO_PROJECTION"}
+            for m in re.finditer(r"\(`(FACT_[A-Z0-9_]+)`, (belegt|Medienangabe|ungeprüft|SCENARIO_PROJECTION)", body):  # L05d: Verdict-Label = DBOM
+                if m.group(1) in facts and facts[m.group(1)]["verdict"] != VL[m.group(2).casefold()]:
+                    l48.append(f"{m.group(1)}: Label {m.group(2)} ≠ {facts[m.group(1)]['verdict']}")
+            if re.search(r"\((?:V|M|P|S)\)", body):
+                l48.append("Provenienzkürzel (V)/(M)/(P)/(S) statt Fakt-ID")
+            for m in re.finditer(r"Konf(?:\.|idenz)\s*(\d,\d+)", body):  # L48b: auch „Konf.“
                 par = body[body.rfind("(", 0, m.start()):m.start()]
                 ids = re.findall(r"`(FACT_[A-Z0-9_]+)`", par)
                 if not ids:
@@ -300,10 +329,26 @@ def main():
                 elif ids[-1] in facts and abs(float(m.group(1).replace(",", ".")) - facts[ids[-1]]["confidence"]) > 1e-9:
                     l48.append(f"{ids[-1]}: {m.group(1)} ≠ DBOM")
             report("L48 Analyse-Konfidenzen", BLOCKER, not l48, "; ".join(l48[:5]) if l48 else "alle Konfidenzen mit Fakt-ID und = DBOM")
+            # L53 · Analyse = faktgebundene Kurzfassung: Sync-Blöcke vorhanden; Handtext mit Angaben nennt eine Fakt-ID
+            blocks = {b: re.search(r"<!-- sync:%s -->\n(.*?)<!-- /sync:%s -->" % (b, b), md, re.S) for b in ("K", "KORR", "MOD", "GLOSSAR")}
+            nk = len(re.findall(r'^\s*\["K\d+",', js_ks.group(1), re.M)) if js_ks else 0
+            l53 = [f"Block {b} fehlt/leer" for b, m in blocks.items() if not m or not m.group(1).strip()]
+            if blocks["K"] and len(re.findall(r"^\*\*K\d+ ·", blocks["K"].group(1), re.M)) != nk:
+                l53.append("K-Block ≠ KS")
+            hand = re.sub(r"<!-- sync:(\w+) -->.*?<!-- /sync:\1 -->", "", body, flags=re.S)
+            hand = re.sub(r"\$\$.*?\$\$|\$[^$]+?\$", "", hand, flags=re.S)
+            for para in re.split(r"\n\s*\n|\n(?=- )", hand):
+                if re.search(MD_TOK, para) and "FACT_" not in para and not para.lstrip().startswith(("#", ">", "|")):
+                    l53.append("ohne Fakt-ID: " + re.sub(r"\s+", " ", para)[:60] + "…")
+            report("L53 Analyse faktgebunden", BLOCKER, not l53, "; ".join(l53[:3]) if l53 else f"Sync-Blöcke vollständig ({nk} K), Handtext mit Angaben faktgebunden")
             # L49 · Analyse-Scorecard = Seite (per Sync erzeugt)
             m8 = re.search(r"## 8 · QA-Scorecard\n(.*?)\n---", md, re.S)
             sc = re.findall(r"= \*\*([\d,]+) %\*\*", m8.group(1)) if m8 else []
             pg = re.findall(r"data-qa-score>([\d,]+)<", html)
+            sym = {"check-pass": "✓", "check-part": "◐", "check-fail": "✗"}
+            rows8 = dict(re.findall(r"^\| ([CQ]\d+) [^|]*\| ([✓◐✗]) \|", m8.group(1), re.M)) if m8 else {}
+            rowdiff = [g for g, c in ((lab.split()[0], c) for lab, c in t.qa_rows) if rows8.get(g) != sym.get(c.split()[0] if c else "", "?")]
+            sc = sc if not rowdiff else sc + ["Zeilen " + ",".join(rowdiff)]
             report("L49 Analyse-Scorecard", BLOCKER, bool(sc) and bool(pg) and set(sc) == {pg[0]} and "Automatisch erzeugt" in m8.group(1),
                    f"Analyse {', '.join(sc) or '–'} % · Seite {pg[0] if pg else '–'} %" + ("" if m8 and "Automatisch erzeugt" in m8.group(1) else " · nicht per Sync erzeugt"))
         # L40 · Rückweg zu L10b: jeder UNVERIFIED-Fakt hat einen Offen-Punkt
@@ -405,8 +450,8 @@ def main():
     if dbom:
         v = dbom["module"]["version"]
         visible = re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)\b.*?</\1>", "", html, flags=re.S))  # L50: ganze Seite, nur sichtbarer Text
-        seen = re.findall(r"\bv(\d+\.\d+\.\d+)\b", visible) + re.findall(r'"version": "(\d+\.\d+\.\d+)", "stichtag"', html)
-        mv = (re.findall(r"^\| Version \| (\d+\.\d+\.\d+)", md, re.M) + re.findall(r"\bModul v(\d+\.\d+\.\d+)", md)) if md else []
+        seen = re.findall(r"(?i)\b(?:v|version\s)(\d+\.\d+\.\d+)\b", visible)  # L52: auch „Version x.y.z“ + re.findall(r'"version": "(\d+\.\d+\.\d+)", "stichtag"', html)
+        mv = (re.findall(r"^\| Version \| (\d+\.\d+\.\d+)", md, re.M) + re.findall(r"\bModul v(\d+\.\d+\.\d+)", md)) if md else []  # „Version x.y.z“ in der Analyse = Herstellerversionen (z. B. ATAS 8.0.12), daher nur Kopfzeile/„Modul v“
         bad_v = sorted(set(x for x in seen + mv if x != v))
         report("L44 Version einheitlich", BLOCKER, bool(seen) and not bad_v and (bool(mv) or not md), f"DBOM {v}; abweichend: {', '.join(bad_v)}" if bad_v else (f"überall {v}" if mv or not md else "Analyse ohne Versionszeile"))
 

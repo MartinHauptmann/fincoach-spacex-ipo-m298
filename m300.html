@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.6.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.7.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm, ES-Äquivalente), Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der aktuelle Rechtsstand zur Verlustverrechnung bei Termingeschäften (JStG 2024). Mit Faktencheck K1–K12, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -99,7 +99,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.6.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.7.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 46, "confirmed_primary": 25, "media_report": 7, "unverified": 11, "scenario_projection": 3, "vendor_claim": 10 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
@@ -150,7 +150,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.6.0</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.7.0</span>
     <span class="text-slate-300"><span data-dbom-count="total">46</span> Fakten · <span data-dbom-count="confirmed">25</span> belegt (davon <span data-dbom-count="vendor">10</span> Herstellerangaben) · <span data-dbom-count="media">7</span> Medienangaben · <span data-dbom-count="unverified">11</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -361,7 +361,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <div class="tl-item" style="--dot:#DFAF0F" data-source="FACT_BFH_ADV"><div class="font-mono text-xs text-tngb-muted">07.06.2024</div><div class="text-sm text-slate-200">BFH VIII B 113/23 (<dfn>AdV</dfn> = Aussetzung der Vollziehung, summarisch): ernstliche Zweifel an der Verfassungsmäßigkeit.</div></div>
       <div class="tl-item" style="--dot:#E6399A" data-source="FACT_JSTG2024_REPEAL"><div class="font-mono text-xs text-tngb-muted">02.12.2024</div><div class="text-sm text-slate-200">JStG 2024 (BGBl. 2024 I Nr. 387) hebt § 20 Abs. 6 Satz 5 und 6 auf, <span data-source="FACT_P52_ABS28">anwendbar in allen offenen Fällen <span class="dbom-class-badge">UNGEPRÜFT</span></span>.</div></div>
       <div class="tl-item" style="--dot:#00CFFF" data-source="FACT_BMF_2025"><div class="font-mono text-xs text-tngb-muted">14.05.2025</div><div class="text-sm text-slate-200">BMF-Schreiben „Einzelfragen zur Abgeltungsteuer“ setzt die Aufhebung um.</div></div>
-      <div class="tl-item" style="--dot:#00CC7A;border-left-color:transparent" data-source="FACT_STOCK_LOSS_S4 FACT_BVERFG_PENDING"><div class="font-mono text-xs text-tngb-muted">Stand 05.10.2026</div><div class="text-sm text-slate-200">Es gilt nur noch die Beschränkung für Aktienverluste (§ 20 Abs. 6 Satz 4). Dazu ist beim BVerfG die Vorlage 2 BvL 3/21 anhängig <span class="dbom-class-badge">UNGEPRÜFT</span>.</div></div>
+      <div class="tl-item" style="--dot:#00CC7A;border-left-color:transparent" data-source="FACT_STOCK_LOSS_S4 FACT_BVERFG_PENDING"><div class="font-mono text-xs text-tngb-muted">Stand 05.10.2026</div><div class="text-sm text-slate-200">Es gilt nur noch die Beschränkung für Aktienverluste (§ 20 Abs. 6 Satz 4). <span data-source="FACT_BVERFG_PENDING">Dazu ist beim BVerfG die Vorlage 2 BvL 3/21 anhängig <span class="dbom-class-badge">UNGEPRÜFT</span></span>.</div></div>
     </div>
     <div class="flex flex-col gap-4">
       <div class="dep-box border-l-4" style="border-color:#E6399A;" data-source="FACT_OS_KO_NOT_TERMIN FACT_JSTG2024_REPEAL FACT_TERMIN_2019">
@@ -617,12 +617,12 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>Q1 Faktencheck K1–K12 vollständig</td><td class="check-pass">✓</td></tr>
         <tr><td>Q2 Aktualität / a. F. markiert</td><td class="check-part" data-gate="Q2" title="BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b)">◐</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="v1.6.0: „offene Fälle“ an FACT_P52_ABS28 gebunden (L46); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="v1.7.0: Analyse faktgebunden, Kennzeichnung je Fakt-ID (L51, L53); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-part" data-gate="Q5" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="v1.6.0: Analyse-Konfidenzen und Scorecard per Sync (L48, L49), K10 angeglichen; ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="v1.7.0: Analyse ohne Hand-Konfidenzen, Labels = DBOM (L48b, L05d); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="Pflichtbegriffe von der vierten Zweitprüfung bestätigt">✓</td></tr>
-        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="v1.6.0: BFH-Modalität (L47) und unbelegte Analyse-Angaben (L43) korrigiert; ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="v1.7.0: Analyse auf DBOM-Fakten gestrafft (L43, L53); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
         <tr><td>Q10 Formatvorgaben</td><td class="check-pass" title="Sechste Zweitprüfung: Erklärungen sachlich korrekt, Version einheitlich; L41/L41b/L44-Tests">✓</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
@@ -651,12 +651,12 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <li data-gate="C4" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>
         <li data-gate="C8" data-source="FACT_PRIIPS_UWG FACT_ANGEMESSENHEIT" data-open>PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>
         <li data-gate="C9" data-open>Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis</li>
-        <li data-gate="Q4" data-source="FACT_P52_ABS28 FACT_BVERFG_PENDING FACT_PRODUCT_STRUCTURE" data-open>Analyse: „offene Fälle“, 2 BvL 3/21 und Strukturtabelle Modul 6 mit Fakt-ID bzw. „ungeprüft“ kennzeichnen; (V)-Kürzel der Matrix an MEDIA_REPORT angleichen (L51, L05d)</li>
+        <li data-gate="Q4" data-source="FACT_P52_ABS28 FACT_BVERFG_PENDING FACT_PRODUCT_STRUCTURE" data-open>Faktgebundene Analyse v1.7.0 (Kennzeichnung je Fakt-ID, L51, L53) durch unabhängige Zweitprüfung bestätigen</li>
         <li data-gate="Q2" data-source="FACT_KO_SATZ6" data-open>Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen</li>
         <li data-gate="Q5" data-source="FACT_PRODUCT_STRUCTURE" data-open>Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen</li>
         <li data-gate="Q2" data-source="FACT_EUREX_DAILY_ADV FACT_BAFIN_STUDY" data-open>Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen</li>
-                <li data-gate="Q9" data-open>Analyse: weitere unbelegte Angaben (Monatsverfälle, Handelsplätze, Chain-Suite-Indikatoren, Lizenz-/Beta-Angaben, US 500, Abzugsverfahren) belegen oder entfernen (L43)</li>
-        <li data-gate="Q7" data-open>Analyse: Spalte „Konf.“ der A-Tabelle und „Konf.“-Schreibweise aus der DBOM (L48b); A03 vs. Quelle S6; BMF-Fakt „in offenen Fällen“ begründen</li>
+                <li data-gate="Q9" data-open>Gestraffte Analyse v1.7.0 (unbelegte Angaben entfallen, L43, L53) durch unabhängige Zweitprüfung bestätigen</li>
+        <li data-gate="Q7" data-open>Analyse v1.7.0 ohne Hand-Konfidenzen und Provenienzkürzel, BMF-Fakt ohne Teilaussage „offene Fälle“ (L48b, L05d) durch unabhängige Zweitprüfung bestätigen</li>
       </ul>
     </div>
   </div>
@@ -727,7 +727,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.6.0 · 2026-10-08<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.7.0 · 2026-10-08<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
@@ -831,7 +831,7 @@ const GLOSSAR=[
   ["Call/Put Wall","Kursmarken mit besonders vielen offenen Optionen.","Strikes mit der höchsten Call- bzw. Put-Gamma-Konzentration.","Modellhafte Widerstands-/Unterstützungszonen; keine Preisgarantie."],
   ["Charm","Wie sich die Absicherung allein durch Zeitablauf ändert.","Änderung des Deltas pro Zeiteinheit.","\\(\\partial\\Delta/\\partial t\\); stark bei 0DTE und vor Verfall."],
   ["Vanna","Wie sich die Absicherung bei Volatilitätsänderung ändert.","Änderung des Deltas pro Änderung der impliziten Volatilität.","\\(\\partial\\Delta/\\partial\\sigma\\); treibt Flows nach IV-Crush/-Spikes."],
-  ["ES-Äquivalent","Umrechnung in Anzahl Futures-Kontrakte.","Hedge-Delta geteilt durch ES-Multiplikator (50 $).","SPX-Multiplikator 100 / ES 50 / MES 5; Basis SPX↔ES beachten."],
+  ["ES-Äquivalent","Umrechnung in Anzahl Futures-Kontrakte.","Hedge-Delta geteilt durch den ES-Multiplikator (50).","SPX-Multiplikator 100 / ES 50 / MES 5; Basis SPX↔ES beachten."],
   ["OPRA","Zentraler Datenstrom aller US-Optionskurse.","Options Price Reporting Authority.","Datenraten weit jenseits von Desktop-Kapazitäten (Kennzahlen in S07); ungefiltert nicht verarbeitbar."],
   ["MBO","Orderbuch mit jeder einzelnen Order.","Market by Order (Level 3).","Erlaubt Queue-Position, Iceberg- und Sweep-Erkennung."],
   ["Footprint","Chart mit Volumen pro Preisstufe.","Volumen getrennt nach Bid/Ask je Kerze.","Grundlage für Absorption und Delta-Divergenz."],

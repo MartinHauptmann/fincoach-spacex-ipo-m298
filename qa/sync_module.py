@@ -69,6 +69,33 @@ def main():
         md = re.sub(r"^\| Version \| [\d.]+", f"| Version | {d['module']['version']}", md, count=1, flags=re.M)  # L44
         md = re.sub(r"Stand: Modul v[\d.]+,\n\d+ Fakten, \d+ Quellen\.", f"Stand: Modul v{d['module']['version']},\n{len(F)} Fakten, {len(d['sources'])} Quellen.", md)
         md = re.sub(r"(## 7 · Offene Prüfpunkte vor Veröffentlichung\n\n)(?:- .*\n)+", lambda m: m.group(1) + "".join(f"- {t}\n" for t in open_items), md)
+        # L53: Phase A, Module und Glossar der Analyse aus Seite (KS, GLOSSAR) und DBOM erzeugen
+        VLAB = {"CONFIRMED": "belegt", "MEDIA_REPORT": "Medienangabe", "UNVERIFIED": "ungeprüft", "SCENARIO_PROJECTION": "SCENARIO_PROJECTION"}
+
+        def flab(fid):
+            f = facts[fid]
+            return f"(`{fid}`, {VLAB[f['verdict']]}, Konfidenz {de(f['confidence'])})"
+
+        def plain(x):
+            return html.unescape(re.sub(r"<[^>]+>", "", x)).replace("\\(", "$").replace("\\)", "$")
+
+        def block(md, name, content):
+            return re.sub(r"(<!-- sync:%s -->\n).*?(<!-- /sync:%s -->)" % (name, name), lambda m: m.group(1) + content + m.group(2), md, count=1, flags=re.S)
+        ks_js = re.search(r"const KS=\[(.*?)\n\];", s, re.S)
+        ks = [json.loads(r) for r in re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', ks_js.group(1), re.M)] if ks_js else []
+        RES = {"ok": "✓", "part": "◐", "no": "✗"}
+        SEV = {"crit": "KRITISCH", "major": "WESENTLICH", "hint": "HINWEIS"}
+        kblk = "".join(f"**{k[0]} · {plain(k[1])}.** Quelltext: {plain(k[2])}. {plain(k[5])} Belege: {', '.join(flab(i) for i in k[6].split())}. **Ergebnis: {RES[k[3]]}** ({SEV.get(k[4], k[4])})\n\n" for k in ks)
+        md = block(md, "K", kblk)
+        korr = "| Nr. | Schwere | Prüfpunkt | Ergebnis |\n|---|---|---|---|\n" + "".join(f"| {k[0]} | {SEV.get(k[4], k[4])} | {plain(k[1])}: {plain(k[2])} | {RES[k[3]]} |\n" for k in ks if k[3] != "ok")
+        md = block(md, "KORR", korr + "\n")
+        mods = "".join(f"#### {m['title']}\n\n" + "".join(f"- {plain(facts[i]['claim'])} {flab(i)}\n" for i in m["facts"]) + (f"\n{m['note']}\n" if m.get("note") else "") + "\n" for m in d.get("analysis_modules", []))
+        md = block(md, "MOD", mods)
+        gl_js = re.search(r"const GLOSSAR=\[(.*?)\n\];", s, re.S)
+        gl = [json.loads(r) for r in re.findall(r'^\s*(\[".*\])\s*,?\s*$', gl_js.group(1), re.M)] if gl_js else []
+        glt = "| Begriff | Definition (Fortgeschritten) | Einordnung (Experte) |\n|---|---|---|\n" + "".join(
+            f"| {plain(g[0])} | {plain(g[2])} | {plain(g[3])}{' (' + ', '.join('`' + i + '`' for i in g[4].split()) + ')' if len(g) > 4 else ''} |\n" for g in gl)
+        md = block(md, "GLOSSAR", glt + "\n")
         # L48: Konfidenzen im Fließtext stehen mit Fakt-ID und kommen aus der DBOM
         md = re.sub(r"(`(FACT_[A-Z0-9_]+)`[^)`]*?Konfidenz )(\d,\d+)", lambda m: m.group(1) + de(facts[m.group(2)]["confidence"]) if m.group(2) in facts else m.group(0), md)
         # L49: QA-Scorecard der Analyse aus den Gate-Zellen der Seite

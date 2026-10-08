@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L50 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L53 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -101,6 +101,13 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L48:** Konfidenzen in der Analyse nur als „(`FACT_…`, …, Konfidenz x,y)“; der Wert kommt per Sync aus der DBOM.
 - **L49:** Die QA-Scorecard der Analyse (Abschnitt 8) erzeugt `sync_module.py` aus den Gate-Zellen.
 - **L50:** Jeder neue Test wird vor dem Commit mit mindestens einer Umgehung (Verneinung, Markup, anderer Ort) gegengeprüft.
+- **L51:** Kennzeichnungsregeln gelten auch für die Analyse: Absatz/Zeile mit Leitphrase nennt den Fakt.
+- **L48b / L05d:** In der Analyse keine Hand-Konfidenzen und keine Provenienzkürzel; Angaben als
+  „(`FACT_…`, belegt|Medienangabe|ungeprüft|SCENARIO_PROJECTION, Konfidenz x,y)“ – Label und Wert aus der DBOM.
+- **L52:** Phrasentests normalisieren den Text (Markup, Leerraum, Groß-/Kleinschreibung) und vergleichen zeilenweise.
+- **L53:** Die Analyse ist eine faktgebundene Kurzfassung. Phase A, Module 1–8 und Glossar stehen in
+  `<!-- sync:… -->`-Blöcken und werden nur von `sync_module.py` geschrieben (Modulzuordnung: `analysis_modules` in der
+  DBOM). Handtext (Kurzfazit, Modellrechnung, Disclaimer) nennt bei jeder Angabe eine Fakt-ID.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

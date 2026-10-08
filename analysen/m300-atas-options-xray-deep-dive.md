@@ -5,10 +5,10 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.6.0 (Entwurf) |
+| Version | 1.7.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
-| Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.3.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
+| Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.4.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
 | Freigabeempfehlung | **ÜBERARBEITUNG** (siehe QA-Scorecard, Abschnitt 8) |
 
 > **Disclaimer (Kurzfassung):** Diese Analyse ist eine allgemeine Information zu Bildungszwecken. Sie ist
@@ -24,194 +24,173 @@
 > meisten Primärquellen gesperrt hat, darunter gesetze-im-internet.de, recht.bund.de, bundesfinanzministerium.de,
 > bundesfinanzhof.de, eurex.com, atas.net und die Anbieterseiten. Die Befunde beruhen auf Suchtreffern, die
 > auf diese Primärquellen verweisen. Die URLs sind im Quellenverzeichnis aufgeführt. Fundstellen, deren
-> Wortlaut nicht vollständig einsehbar war, sind mit Konfidenz < 0,9 oder **[N. V.]** markiert.
+> Wortlaut nicht vollständig einsehbar war, tragen ein schwächeres Verdict oder **[N. V.]**.
 > Vor einer Veröffentlichung sind sie am Original zu prüfen.
+
+> **Aufbau (ab v1.7.0):** Diese Analyse ist eine faktgebundene Kurzfassung. Jede Tatsachenbehauptung nennt
+> ihre Fakt-ID aus `provenance/m300.dbom.json`; Verdict und Konfidenz stehen dort. Abschnitt 2, die Module in
+> Abschnitt 3 und das Glossar erzeugt `qa/sync_module.py` aus Modulseite und DBOM (L53). Die ausführliche
+> Darstellung mit Diagrammen und Rechner steht auf der Modulseite `m300.html`.
 
 ---
 
 ## 1 · Executive Summary
 
-Der Quelltext beschreibt einen steuerlichen Rahmen, der so nicht mehr gilt. Die Verlustverrechnungsgrenze
-von 20.000 € für Termingeschäfte (§ 20 Abs. 6 Satz 5 EStG a. F.) und die parallele Grenze für
-Forderungsausfälle (Satz 6 a. F.) hat das **Jahressteuergesetz 2024** (BGBl. 2024 I Nr. 387) aufgehoben.
-Nach § 52 Abs. 28 EStG ist das in allen offenen Fällen anzuwenden. Die Finanzverwaltung hat das im
-BMF-Schreiben vom 14.05.2025 umgesetzt. Damit entfallen auch die These, Privatanleger würden aus
-steuerlichen Gründen in Optionsscheine gedrängt, und die angebliche Rechtsunsicherheit „bis zu einer
-Entscheidung des BVerfG“. Weiter gilt nur die Beschränkung für Aktienverluste nach § 20 Abs. 6 Satz 4 EStG.
-Dazu ist laut Sekundärquelle (ungeprüft) beim BVerfG die Vorlage 2 BvL 3/21 anhängig. Zweitens trifft die Aussage nicht zu, für eine vermögensverwaltende
-Kapitalgesellschaft gebe es keine Verlustbeschränkung bei Termingeschäften. § 15 Abs. 4 Satz 3 EStG gilt
-über § 8 Abs. 1 KStG und bildet einen gesonderten Verlustkreis. Drittens sind Market Maker nicht gesetzlich
-verpflichtet, über das zentrale Orderbuch zu hedgen. Das Delta-Hedging folgt aus dem Risikomanagement.
+Kernergebnisse; jede Aussage mit Fakt-ID:
 
-Die Produktaussagen zu ATAS halten der Prüfung weitgehend stand. Die Options X-Ray Suite hat zehn
-Indikatoren, rechnet auf einem 1-Minuten-Feed der CBOE mit Analytik von OptionsDepth und deckt nur
-SPX-Optionen ab, angezeigt auf ES-, MES- und SPY-Charts. Optionen sind in ATAS derzeit nicht handelbar.
-Die tragfähige strategische Kernthese lautet daher anders als im Quelltext: Wertvoll ist die Verbindung
-von Dealer-Positionierung und Orderflow-Mikrostruktur in einem Arbeitsbereich. Für Europa entsteht der
-Bedarf durch die fehlende intraday-fähige Eurex-GEX-Analytik, nicht durch das Steuerrecht.
+- **Rechtsstand:** § 20 Abs. 6 Satz 5 und 6 EStG a. F. mit der 20.000-€-Grenze hat das JStG 2024 aufgehoben
+  (`FACT_JSTG2024_REPEAL`). Dass dies nach § 52 Abs. 28 EStG in allen offenen Fällen gilt, ist nur per Snippet
+  belegt (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6). Das BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um
+  (`FACT_BMF_2025`).
+- **Kapitalgesellschaften:** § 15 Abs. 4 Satz 3 EStG gilt über § 8 Abs. 1 KStG auch für sie (`FACT_P15_KSTG`).
+- **Market Maker:** Eine gesetzliche Pflicht zum Orderbuch-Hedging besteht nicht (`FACT_MM_NO_HEDGE_DUTY`).
+- **Produkt:** Die Suite umfasst zehn Indikatoren auf Basis eines 1-Minuten-CBOE-Feeds, nur für SPX-Optionen
+  (`FACT_XRAY_10_IND`, `FACT_XRAY_1MIN_SPX`). Optionen sind in ATAS derzeit nicht handelbar (`FACT_ATAS_NO_OPT_TRADING`).
+- **Modell:** Das GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (`FACT_DEALER_CONVENTION`,
+  SCENARIO_PROJECTION, Konfidenz 0,5).
+- **Wettbewerb:** Intraday-fähige Eurex-GEX bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern;
+  für MenthorQ ist das n. v. (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6).
+- **Einschätzung [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge damit in dieser Analyselücke, nicht in einem
+  Steuervorteil (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0). Das ist keine Prognose.
 
 ---
 
-## 2 · Phase A: Fakten- und Rechtsstandsprüfung
+## 2 · Phase A: Faktenprüfung K1–K12
 
-### 2.1 Claim-Tabelle
+### 2.1 Prüfprotokoll
 
-Legende Prüfergebnis: ✓ bestätigt · ◐ teilweise/präzisiert · ✗ falsch/überholt · ? nicht verifizierbar.
+<!-- sync:K -->
+**K1 · Rechtsstand § 20 Abs. 6 S. 5/6 EStG.** Quelltext: 20.000-€-Grenze gilt „seit 2021“ fort. Das JStG 2024 (BGBl. 2024 I Nr. 387) hat die Sätze 5 und 6 aufgehoben, anwendbar in allen offenen Fällen (§ 52 Abs. 28 EStG, Satznummern ungeprüft); Umsetzung durch BMF-Schreiben vom 14.05.2025. Das Normzitat im Ausgangstext ist zudem falsch: Gemeint ist Satz 5, nicht Satz 6. Belege: (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9), (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6), (`FACT_BMF_2025`, belegt, Konfidenz 0,85), (`FACT_TERMIN_2019`, belegt, Konfidenz 0,85). **Ergebnis: ✗** (KRITISCH)
 
-| ID | Claim (Kurzform) | Kategorie | Provenienz | Ergebnis | Korrektur / Präzisierung | Quelle | Konf. |
-|---|---|---|---|---|---|---|---|
-| A01 | Verluste aus Termingeschäften seit 2021 nur bis 20.000 €/Jahr verrechenbar (§ 20 Abs. 6 S. 6 EStG) | Steuer/Recht | CONFIRMED | ✗ | Norm war **Satz 5** (Satz 6 betraf Forderungsausfall). Eingeführt 2019 mit 10.000 €, durch JStG 2020 auf 20.000 € erhöht, durch JStG 2024 aufgehoben (alle offenen Fälle) | S1–S4 | 0,90 |
-| A02 | Besteuerung „fiktiver Gewinne“ bei Spreads trotz Nettoverlust | Steuer/Recht | CONFIRMED | ◐ | Für 2021–2024 zutreffend beschrieben (asymmetrische Besteuerung, so auch BFH). Heute in offenen Fällen behoben | S5 | 0,85 |
-| A03 | BFH äußerte in „mehreren Beschlüssen“ Zweifel (VIII B 113/23) | Steuer/Recht | CONFIRMED | ◐ | Belegt ist **ein** BFH-Beschluss vom 07.06.2024 im Verfahren über die Aussetzung der Vollziehung (AdV; summarische Prüfung, Streitjahr 2021). Vorinstanz: FG Rheinland-Pfalz (Aktenzeichen [N. V.]). Weitere BFH-Beschlüsse nicht gefunden | S5, S6 | 0,85 |
-| A04 | Rechtsunsicherheit bleibt bis zur BVerfG-Entscheidung | Steuer/Recht | MEDIA_REPORT | ✗ | Durch die Aufhebung überholt; kein BVerfG-Verfahren speziell zu Termingeschäften gefunden | S1, S4 | 0,80 |
-| A05 | Optionsscheine/Knock-outs sind laut Finanzverwaltung keine Termingeschäfte | Steuer/Recht | CONFIRMED | ✓ | Seit BMF 03.06.2021, fortgeführt bis 14.05.2025. Randziffern [N. V.] | S4, S7 | 0,85 |
-| A06 | Optionsschein-Verluste uneingeschränkt mit Aktien-/Zinsgewinnen verrechenbar | Steuer/Recht | CONFIRMED | ◐ | Richtung zutreffend; Aktien*verluste* bleiben nach § 20 Abs. 6 S. 4 auf Aktiengewinne beschränkt. Knock-out-Totalverlust unterlag früher Satz 6 a. F. | S4, S8 | 0,85 |
-| A07 | Privatanleger werden in bankemittierte Produkte gedrängt | Markt | USER_PROVIDED | ✗ (heute) | Steuerlich nur 2021–2024 plausibel. Aktuell spricht eher die BaFin-Allgemeinverfügung zu Turbo-Zertifikaten (seit 16.06.2026) für zusätzliche Hürden bei Knock-outs | S9 | 0,75 |
-| A08 | Market Maker sind gesetzlich gezwungen, über das zentrale Orderbuch zu hedgen | Mikrostruktur | USER_PROVIDED | ✗ | Keine Rechtspflicht. MiFID II Art. 17 Abs. 3 / § 80 Abs. 4 WpHG regeln Quotierungs-, keine Hedgingpflichten | S10, S11 | 0,85 |
-| A09 | Emittenten netten intern, hedgen über OTC-Swaps; keine Orderbuchspuren im FDAX | Mikrostruktur | USER_PROVIDED | ◐ | Netting ist plausibel; Hedging erfolgt aber auch über Basiswert und „passende Gegengeschäfte“. Wirkung im FDAX nicht null, aber nicht zurechenbar | S12 | 0,60 |
-| A10 | Für vermögensverwaltende Kapitalgesellschaften gilt keine Verlustverrechnungsbeschränkung | Steuer/Recht | USER_PROVIDED | ✗ | § 15 Abs. 4 S. 3 EStG i. V. m. § 8 Abs. 1 KStG: gesonderter Verlustkreis für Termingeschäfte; Ausnahme nur für Institute/Absicherung (S. 4), Rückausnahme für Aktien-Hedges (S. 5) | S13, S14 | 0,85 |
-| A11 | Options X-Ray besteht aus zehn Indikatoren (Market State … Surface Profile) | Produkt | VENDOR_CLAIM | ✓ | Liste stimmt mit Hersteller-Hilfeseiten überein. Start laut Changelog 04.09.2026 (Konf. 0,6) | S15, S16 | 0,85 |
-| A12 | Datenbasis CBOE/OptionsDepth, 60-Sekunden-Snapshots | Produkt | VENDOR_CLAIM | ✓ | „1-minute CBOE feed … data and analytics by OptionsDepth“; Neuberechnung jede Minute | S16, S17 | 0,85 |
-| A13 | Beschränkung auf den SPX-Komplex | Produkt | VENDOR_CLAIM | ✓ | Nur SPX-Optionen; Anzeige nur auf ES, MES, SPY, US 500. Die separate Options Chain Suite (EOD) deckt ES, NQ, CL, GC ab | S15, S18 | 0,85 |
-| A14 | Broker-Konnektivität Rithmic, IB, CQG | Produkt | VENDOR_CLAIM | ◐ | Für ATAS allgemein ✓. Options X-Ray benötigt laut Changelog Rithmic oder IB; CQG „in Entwicklung“ | S19, S17 | 0,70 |
-| A15 | ES/MES-Cross-Trading vorhanden | Produkt | VENDOR_CLAIM | ✓ | Seit Version 8.0.12 (17.02.2026); weitere Paare [N. V.] | S20 | 0,85 |
-| A16 | Options Board und Strategy Analyzer in Entwicklung | Produkt | VENDOR_CLAIM | ◐ | Beide als **Beta** verfügbar (Ultra-Plan); Optionshandel in ATAS derzeit nicht möglich | S21, S16 | 0,80 |
-| A17 | Fehlende native Multi-Leg-Spread-Routing-Engine | Produkt | VENDOR_CLAIM | ✓ | Zutreffend. Die IB-API unterstützt Combo-Orders (BAG, bis 6 Legs) bereits nativ | S22 | 0,85 |
-| A18 | NDX/NQ zeigt überproportionale 0DTE-Dynamik | Markt | USER_PROVIDED | ? | Keine belastbare Quantifizierung gefunden | – | 0,30 |
-| A19 | Wettbewerbsfelder (SpotGamma, MenthorQ, Volland, Bookmap, TWS) | Wettbewerb | MEDIA_REPORT | ◐ | Siehe Modul 5; mehrere Felder [N. V.] | S23–S28 | 0,65 |
-| A20 | Vier Roadmap-Erweiterungen | Vorschlag | SCENARIO_PROJECTION | – | Bewertung in Modul 7 | – | – |
-| A21 | Warrant-Fair-Value-Tool zeigt „verdeckte Marge“ | Vorschlag | SCENARIO_PROJECTION | ◐ | Begriff wertend; neutral: Fair-Value-Differenz/Emittentenaufschlag (K12) | – | – |
+**K2 · BFH VIII B 113/23.** Quelltext: „mehrere Beschlüsse“; Unsicherheit bis zum BVerfG. Belegt ist ein Beschluss über die AdV (Aussetzung der Vollziehung) vom 07.06.2024 (summarische Prüfung, Streitjahr 2021). Durch die Aufhebung ist die Frage für Termingeschäfte erledigt. Anhängig bleibt laut Sekundärquelle (ungeprüft) 2 BvL 3/21 zu Aktienverlusten, ein anderer Sachverhalt. Belege: (`FACT_BFH_ADV`, belegt, Konfidenz 0,85), (`FACT_STOCK_LOSS_S4`, belegt, Konfidenz 0,7), (`FACT_BVERFG_PENDING`, ungeprüft, Konfidenz 0,6). **Ergebnis: ✗** (KRITISCH)
 
-### 2.2 Prüfprotokoll K1–K12
+**K3 · Abgrenzung Termingeschäft.** Quelltext: Optionsscheine/Knock-outs steuerlich bevorzugt, Anleger „gedrängt“. Die Einordnung als Nicht-Termingeschäft ist korrekt (BMF seit 03.06.2021). Der Knock-out-Totalverlust fiel nach Auffassung der Finanzverwaltung aber unter Satz 6 a. F. (Sekundärbeleg, ungeprüft). Die Verdrängungsthese trägt heute nicht mehr. Belege: (`FACT_OS_KO_NOT_TERMIN`, belegt, Konfidenz 0,85), (`FACT_KO_SATZ6`, ungeprüft, Konfidenz 0,6), (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9). **Ergebnis: ◐** (WESENTLICH)
 
-**K1 · Rechtsstand § 20 Abs. 6 Satz 5/6 EStG.** Die Verlustverrechnungsbeschränkung für Termingeschäfte geht
-auf das Gesetz zur Einführung einer Pflicht zur Mitteilung grenzüberschreitender Steuergestaltungen vom
-21.12.2019 zurück (BGBl. I S. 2875). Sie galt für Termingeschäfte ab dem 01.01.2021 und war zunächst auf
-10.000 € begrenzt. Das Jahressteuergesetz 2020 vom 21.12.2020 (BGBl. I S. 3096) hob die Grenze auf 20.000 €
-an. Das Jahressteuergesetz 2024 vom 02.12.2024 (BGBl. 2024 I Nr. 387) hob die Sätze 5 und 6 auf. Nach der Anwendungsregel in § 52 Abs. 28 EStG gilt das in allen offenen
-Fällen; Wortlaut und Satznummern sind nur per Snippet belegt (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6). Das BMF-Schreiben „Einzelfragen zur Abgeltungsteuer“ vom 14.05.2025
-setzt das um. Bestehende Verlustvorträge aus Termingeschäften sind
-danach in offenen Fällen unbeschränkt verrechenbar. Im Steuerabzugsverfahren der Banken wirkte die
-Beschränkung nie unmittelbar. Termingeschäftsverluste wurden bescheinigt und erst in der Veranlagung
-berücksichtigt. Wie die Institute das im Abzugsverfahren umsetzen, ist [N. V.]. **Ergebnis: ✗ im Quelltext; die Regelung ist kein geltendes Recht mehr.**
+**K4 · Kapitalgesellschaft.** Quelltext: „keine Verlustverrechnungsbeschränkung“. Über § 8 Abs. 1 KStG gilt § 15 Abs. 4 Satz 3 EStG: eigener Verlustkreis für Termingeschäfte (BFH I R 25/14). Ausnahmen bestehen nur für Institute und Sicherungsgeschäfte. Belege: (`FACT_P15_KSTG`, belegt, Konfidenz 0,85). **Ergebnis: ✗** (KRITISCH)
 
-**K2 · BFH VIII B 113/23.** Es handelt sich um einen Beschluss vom 07.06.2024 im Verfahren über die Aussetzung
-der Vollziehung (§ 69 Abs. 3 FGO). Der Senat prüfte nur summarisch und äußerte ernstliche Zweifel an der Vereinbarkeit
-der Regelung mit Art. 3 Abs. 1 GG. Die Begründung im Einzelnen ist [N. V.]. Ein Hauptsacheurteil oder eine Vorlage an das BVerfG wurde nicht gefunden.
-Die Bezeichnung „mehrere Beschlüsse“ ist nicht belegt, und die Aussage „Rechtsunsicherheit bis zur BVerfG-Entscheidung“ ist durch die Aufhebung überholt. **Ergebnis: ✗** (Beschluss selbst korrekt zitiert).
+**K5 · Hedging-Pflicht Market Maker.** Quelltext: Market Maker „gesetzlich gezwungen“, über das Orderbuch zu hedgen. Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition in Abs. 5) regeln Quotierungs- und Vertragspflichten. Delta-Hedging ist Risikomanagement und kann über viele Kanäle erfolgen. Belege: (`FACT_MM_NO_HEDGE_DUTY`, belegt, Konfidenz 0,85). **Ergebnis: ✗** (WESENTLICH)
 
-**K3 · Abgrenzung Termingeschäft.** Die Finanzverwaltung ordnet Optionsscheine (Kapitalforderungen) und
-Zertifikate einschließlich Knock-out-Produkten nicht als Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5
-a. F. ein. Das gilt seit dem BMF-Schreiben vom 03.06.2021 und ist bis zur Fassung vom 14.05.2025
-fortgeführt. Beim Knock-out-Ereignis griff bis zur Aufhebung nach Auffassung der Finanzverwaltung (Sekundärbeleg S51, ungeprüft) allerdings Satz 6 a. F. (Ausfall oder
-Wertloswerden), ebenfalls mit einer Grenze von 20.000 €. Der vom Quelltext behauptete einseitige
-Steuervorteil verbriefter Produkte war daher schon unter altem Recht kleiner als dargestellt. Nach der
-Aufhebung besteht er nicht mehr. Unverändert gilt nur § 20 Abs. 6 Satz 4 (Aktienverluste). Dazu ist beim
-BVerfG laut Sekundärquelle (ungeprüft) die Vorlage 2 BvL 3/21 anhängig. Eine Entscheidung wurde bis zum Stichtag nicht gefunden (`FACT_BVERFG_PENDING`, Konfidenz 0,6). **Ergebnis: ◐** (Einordnung ✓, Verdrängungsthese ✗).
+**K6 · GEX-Prämisse.** Quelltext: Dealer-Hedging als feste Mechanik. Die Positionskonvention ist eine Modellannahme. Beim SPX ist sie durch Teilnehmer-markierte Cboe-Daten besser fundiert, bleibt aber anfällig für Spreads, Overwriting und Intraday-Volumen. (Modellannahme; Cboe-Daten: Medienangabe) Belege: (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, Konfidenz 0,5), (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6). **Ergebnis: ◐** (WESENTLICH)
 
-**K4 · Kapitalgesellschaft.** § 15 Abs. 4 Satz 3 EStG schließt aus, dass Verluste aus Termingeschäften mit
-anderen Einkünften ausgeglichen werden. Sie sind nur mit Gewinnen aus Termingeschäften verrechenbar
-(gesonderter Verlustkreis, ohne betragsmäßige Obergrenze). Über § 8 Abs. 1 KStG gilt das auch für
-Kapitalgesellschaften (z. B. BFH I R 25/14 vom 06.07.2016). Satz 4 nimmt Geschäfte von Kredit- und
-Finanzdienstleistungsinstituten sowie Absicherungsgeschäfte aus. Satz 5 enthält eine Rückausnahme für die
-Absicherung von Aktiengeschäften, deren Gewinne nach § 3 Nr. 40 EStG bzw. § 8b Abs. 2 KStG ganz oder
-teilweise steuerfrei sind. Das JStG 2024 hat § 15 Abs. 4 nach den Rechercheergebnissen nicht geändert.
-Eine Empfehlung zur Rechtsformwahl lässt sich daraus nicht ableiten und wird hier nicht ausgesprochen.
-**Ergebnis: ✗ im Quelltext.**
+**K7 · Emittenten-Hedging.** Quelltext: „keine“ Hedging-Spuren im FDAX. Emittenten hedgen dynamisch, auch über Basiswert und Gegengeschäfte. Die Spur ist schwach und nicht zurechenbar, aber nicht null. (Medienangabe) Belege: (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6). **Ergebnis: ◐** (HINWEIS)
 
-**K5 · Hedging-Pflicht der Market Maker.** Art. 17 Abs. 3 MiFID II und § 80 Abs. 4 WpHG (Definition der
-Market-Making-Strategie in Abs. 5) verpflichten Wertpapierfirmen mit algorithmischer Market-Making-Strategie, kontinuierlich zu quotieren und eine
-Vereinbarung mit dem Handelsplatz zu schließen. Eine Pflicht, das resultierende Delta über das
-Orderbuch des Basiswerts zu neutralisieren, enthalten diese Normen nicht. Delta-Hedging ist ökonomisch
-naheliegend und durch Eigenkapital- und Risikolimits motiviert. Es kann aber über Futures, ETFs,
-Kassamarkt, OTC-Derivate oder internes Netting gegenläufiger Bestände erfolgen. **Ergebnis: ✗.** Die
-GEX-Logik bleibt als Verhaltensmodell brauchbar. Sie darf aber nicht als rechtlicher Automatismus
-dargestellt werden.
+**K8 · ATAS-Produktangaben.** Quelltext: 10 Indikatoren, CBOE/OptionsDepth, 60 s, nur SPX. Bestätigt durch Hilfe- und Lernseiten des Herstellers. Ergänzung: Optionen in ATAS derzeit nicht handelbar; Options Board/Strategy Analyzer als Beta. Belege: (`FACT_XRAY_10_IND`, belegt, Konfidenz 0,85), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8). **Ergebnis: ✓** (HINWEIS)
 
-**K6 · GEX-Prämisse.** Jede GEX-Berechnung braucht eine Annahme über die Gegenpartei. Die klassische
-Konvention lautet „Kunden kaufen Puts und verkaufen Calls, Dealer halten die Gegenposition“. Sie ist eine
-**MODEL_ASSUMPTION**. OptionsDepth stützt sich nach eigener Darstellung auf nach Teilnehmertyp markierte
-CBOE-Daten (Open-Close-Daten). Das ist für SPX-Optionen, die nur an der Cboe gehandelt werden, eine deutlich bessere Grundlage als eine reine Tape-Klassifikation
-(`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6). Restfehler bleiben trotzdem:
-Ein Market Maker im Sinne der Datenmarkierung ist nicht zwingend der Risikoträger mit Hedgebedarf. Kombi-
-und Spread-Trades verzerren die Strike-Zuordnung. Overwriting- und Dispersionsprogramme sowie Volumen,
-das intraday eröffnet und geschlossen wird, hinterlassen keine Spur im Open Interest. **Ergebnis: ◐.**
+**K9 · Wettbewerber.** Quelltext: Vergleich SpotGamma, MenthorQ, Volland, Bookmap, TWS. Weitgehend belegt (Hersteller- und Drittquellen); einzelne Felder n. v.; Preise sind Richtwerte. (Medienangaben) Belege: (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65). **Ergebnis: ◐** (HINWEIS)
 
-**K7 · Emittenten-Hedging bei Optionsscheinen.** Emittenten sichern das Nettorisiko ihrer Bücher laufend
-dynamisch ab, über den Basiswert oder über „passende Gegengeschäfte“
-(`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6). Eine Primärquelle,
-die das Hedging des Nettodeltas speziell über FDAX oder ODAX belegt, wurde nicht gefunden. Die Aussage
-„keine Hedging-Kaskaden im FDAX“ ist daher zu stark. Zutreffend ist: Die Spur ist nach dem Netting klein,
-zeitlich verteilt, nicht öffentlich zurechenbar und lässt sich nicht aus Börsendaten rekonstruieren.
-**Ergebnis: ◐.**
+**K10 · Eurex-Spezifikationen.** Quelltext: FDAX/FESX-Optionsketten, „Hexensabbat“. Gelistet sind Indexoptionen (ODAX 5 €/Pkt., OESX 10 €/Pkt.), keine Optionen auf die Futures. Fachbegriff: Quartalsverfall. End-of-Day-Optionen existieren (OEXP, ODAP); Verfälle an zehn Handelstagen sind nur für OEXP belegt. (OESX-Multiplikator und „keine Optionen auf Futures“: ungeprüft) Belege: (`FACT_ODAX_SPECS`, belegt, Konfidenz 0,85), (`FACT_OESX_MULT`, ungeprüft, Konfidenz 0,7), (`FACT_EUREX_DAILY_LAUNCH`, belegt, Konfidenz 0,85). **Ergebnis: ◐** (HINWEIS)
 
-**K8 · ATAS-Produktangaben.** Die Indikatorliste, die Datenquelle (1-Minuten-CBOE-Feed, Analytik
-OptionsDepth), die SPX-Beschränkung und das ES/MES-Cross-Trading sind über Hilfe- und Lernseiten des
-Herstellers belegt. Options Board und Strategy Analyzer existieren als Beta. Optionen sind in ATAS nach
-Herstellerangabe derzeit nicht handelbar. Der Start der Suite am 04.09.2026 ist nur über einen Snippet belegt (`FACT_XRAY_LAUNCH`, Konfidenz 0,6). **Ergebnis: ✓ mit Präzisierungen.**
+**K11 · IBKR-Combo-Orders.** Quelltext: native Spread-Engine fehlt. Für ATAS zutreffend, aber zu präzisieren. Die IB-API unterstützt BAG-Combo-Orders (bis 6 Legs, Netto-Limit) bereits. Die Lücke liegt in UI, Risikoprüfung und Positionsführung. Belege: (`FACT_IB_BAG`, belegt, Konfidenz 0,85). **Ergebnis: ◐** (WESENTLICH)
 
-**K9 · Wettbewerber.** Siehe Modul 5. Preise und Frequenzen stammen aus Snippets von Anbieter- und
-Drittseiten; mehrere Felder sind [N. V.]. **Ergebnis: ◐.**
+**K12 · Warrant-Fair-Value-Tool.** Quelltext: „verdeckte Marge“, „künstliche Spread-Ausweitung“. Wertende Begriffe mit UWG-Risiko. Neutral: Fair-Value-Differenz, Emittentenaufschlag. Abgleich mit PRIIPs-KID; Emittentenbonität ist ein realer Wert, keine Marge. (Rechtsgrundlagen PRIIPs/UWG: ungeprüft) Belege: (`FACT_PRIIPS_UWG`, ungeprüft, Konfidenz 0,75). **Ergebnis: ◐** (WESENTLICH)
 
-**K10 · Eurex-Spezifikationen.** Die Kontraktgrößen sind:
+<!-- /sync:K -->
 
-- ODAX 5 €/Pkt., europäisch, Barausgleich, Basiswert DAX-Index (`FACT_ODAX_SPECS`, Konfidenz 0,85)
-- OESX 10 €/Pkt. (`FACT_OESX_MULT`, ungeprüft, Konfidenz 0,7)
-- Kontraktgrößen von FDAX, FDXM, FDXS und FESX: in der DBOM nicht belegt [N. V.]
+### 2.2 Korrekturliste zum Quelltext
 
-Optionen auf DAX- oder Euro-Stoxx-50-Futures wurden nicht gefunden. Gelistet sind Indexoptionen
-einschließlich Micro-DAX-Optionen (ODXS). Für den kurzfristigen Bereich gibt es zwei Produkte. OEXP
-(EURO STOXX 50 End-of-Day Options) startete am 28.08.2023. Seit 05.01.2026 hat OEXP Verfälle an zehn
-Handelstagen. ODAP (DAX End-of-Day Options) startete am
-13.11.2023. Der Fachbegriff für den „Hexensabbat“ ist Quartalsverfall: dritter Freitag in März, Juni,
-September und Dezember. ODAX und OESX haben zusätzlich Monatsverfälle. Open Interest veröffentlicht
-Eurex täglich über die Statistiken und den Extended Market Data Service, nicht über EOBI. **Ergebnis: ◐** (präzisiert: Indexoptionen statt Optionen auf Futures, Quartalsverfall statt „Hexensabbat“).
+<!-- sync:KORR -->
+| Nr. | Schwere | Prüfpunkt | Ergebnis |
+|---|---|---|---|
+| K1 | KRITISCH | Rechtsstand § 20 Abs. 6 S. 5/6 EStG: 20.000-€-Grenze gilt „seit 2021“ fort | ✗ |
+| K2 | KRITISCH | BFH VIII B 113/23: „mehrere Beschlüsse“; Unsicherheit bis zum BVerfG | ✗ |
+| K3 | WESENTLICH | Abgrenzung Termingeschäft: Optionsscheine/Knock-outs steuerlich bevorzugt, Anleger „gedrängt“ | ◐ |
+| K4 | KRITISCH | Kapitalgesellschaft: „keine Verlustverrechnungsbeschränkung“ | ✗ |
+| K5 | WESENTLICH | Hedging-Pflicht Market Maker: Market Maker „gesetzlich gezwungen“, über das Orderbuch zu hedgen | ✗ |
+| K6 | WESENTLICH | GEX-Prämisse: Dealer-Hedging als feste Mechanik | ◐ |
+| K7 | HINWEIS | Emittenten-Hedging: „keine“ Hedging-Spuren im FDAX | ◐ |
+| K9 | HINWEIS | Wettbewerber: Vergleich SpotGamma, MenthorQ, Volland, Bookmap, TWS | ◐ |
+| K10 | HINWEIS | Eurex-Spezifikationen: FDAX/FESX-Optionsketten, „Hexensabbat“ | ◐ |
+| K11 | WESENTLICH | IBKR-Combo-Orders: native Spread-Engine fehlt | ◐ |
+| K12 | WESENTLICH | Warrant-Fair-Value-Tool: „verdeckte Marge“, „künstliche Spread-Ausweitung“ | ◐ |
 
-**K11 · IBKR-Combo-Orders.** Die TWS-API unterstützt Spreads als Kontrakt mit `secType = "BAG"` und bis
-zu sechs `ComboLeg`-Elementen. Möglich sind ein Netto-Limitpreis und optional Preise je Leg. Vertical,
-Calendar, Diagonal, Straddle und Iron Condor sind damit abbildbar. Die eigentliche Lücke bei ATAS liegt
-also nicht im Routing, sondern in der Plattform darüber: Strategie-UI, Pre-Trade-Risikoprüfung,
-Preisfindung für das Paket, Schutz vor Legging-Risiko und Positionsführung. **Ergebnis: ◐** (Befund zutreffend, Ursache präzisiert).
-
-**K12 · Warrant-Fair-Value-Tool.** „Verdeckte Marge“ und „künstliche Spread-Ausweitung“ sind wertende,
-im Sinne von § 4 Nr. 1 und § 6 UWG riskante Begriffe. Neutral sind „Fair-Value-Differenz“, „Emittentenaufschlag“
-und „Geld-Brief-Spanne“. Die Kosten des Emittenten sind über das PRIIPs-Basisinformationsblatt und die
-Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen. Ein Tool sollte gegen diese
-Angaben abgleichen statt gegen eine eigene „Marge“. **Ergebnis: ◐.**
-
-### 2.3 Korrekturliste zum Quelltext
-
-| # | Schweregrad | Korrektur |
-|---|---|---|
-| 1 | KRITISCH | Die 20.000-€-Grenze ist durch das JStG 2024 aufgehoben (alle offenen Fälle). Normzitat im Quelltext ist zudem falsch (Satz 5, nicht Satz 6). |
-| 2 | KRITISCH | Die „Rechtsunsicherheit bis zur BVerfG-Entscheidung“ besteht für Termingeschäfte nicht mehr. Anhängig ist 2 BvL 3/21 zu Aktienverlusten (Satz 4), also ein anderer Sachverhalt. |
-| 3 | KRITISCH | Für vermögensverwaltende Kapitalgesellschaften gilt § 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis). „Keine Beschränkung“ ist falsch. |
-| 4 | WESENTLICH | Es gibt keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging. |
-| 5 | WESENTLICH | Die steuerliche Verdrängung in verbriefte Produkte ist heute keine tragfähige Kausalität. Als regulatorischer Faktor ist die BaFin-Allgemeinverfügung zu Turbo-Zertifikaten (in Kraft seit 16.06.2026) zu ergänzen. |
-| 6 | WESENTLICH | Wertende Begriffe beim Warrant-Tool sind neutral zu ersetzen (UWG). |
-| 7 | WESENTLICH | ATAS ermöglicht derzeit keinen Optionshandel. Options Board und Strategy Analyzer sind Beta. Die IB-API unterstützt Combo-Orders bereits. |
-| 8 | HINWEIS | Nur ein BFH-Beschluss ist belegt (AdV, summarisch). |
-| 9 | HINWEIS | Emittenten-Hedging hinterlässt eine schwache, nicht zurechenbare Börsenspur, keine „Nullspur“. |
-| 10 | HINWEIS | „Hexensabbat“ heißt fachlich Quartalsverfall. Eurex hat mit OEXP und ODAP bereits End-of-Day-Optionen; Verfälle an zehn Handelstagen sind für OEXP belegt. |
-| 11 | HINWEIS | Die Options Chain Suite (EOD) deckt bereits ES, NQ, CL und GC ab. Die Multi-Asset-Forderung betrifft nur die Intraday-Analytik von X-Ray. |
+<!-- /sync:KORR -->
 
 ---
 
-## 3 · Phase B: Deep-Dive-Analyse
+## 3 · Phase B: Module 1–8 (faktgebundene Kurzfassung)
 
-### Modul 1 · Technologische Dekonstruktion der Options X-Ray Suite
+Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 und sind als Einschätzung markiert.
 
-Die Suite wandelt die Positionierung im SPX-Optionsmarkt in Informationen um, die auf einem Futures-Chart
-verwertbar sind. Die zehn Indikatoren erfüllen dabei drei Funktionen. **Market State**, **Expected Move** (aus der impliziten Volatilität abgeleitete erwartete Schwankungsbreite)
-und das **Surface Profile** beschreiben das Regime: Sie sagen, ob der Markt in einem dämpfenden oder
-beschleunigenden Gamma-Umfeld liegt und welche Bandbreite die implizite Volatilität einpreist. Market State
-trennt nach Herstellerangabe beobachtete Daten sichtbar von Modellausgaben. Diese Unterscheidung ist auch
-aus Compliance-Sicht wertvoll. **GEX Heatmap**, **Charm Heatmap**, **Strike Heatmap** und **Strike Profile**
-übersetzen die Exponierung je Strike und Verfall in Preiszonen auf der Chartachse. **Big Trades**, **Flow**
-und **Flow Delta** schließlich bilden den Strom neuer Abschlüsse ab und sollen zeigen, wie sich die
-Positionierung innerhalb des Tages verschiebt. Die genaue Berechnungslogik der Indikatoren ist nicht
-öffentlich dokumentiert. Die folgenden Formeln sind deshalb die fachübliche Referenzmodellierung **[MODELL]**
-und nicht die belegte Implementierung des Herstellers.
+<!-- sync:MOD -->
+#### Modul 1 · Technologische Dekonstruktion der Options X-Ray Suite
+
+- Options X-Ray Suite umfasst zehn Indikatoren (Market State, Expected Move, GEX/Charm/Strike Heatmap, Big Trades, Flow, Flow Delta, Strike Profile, Surface Profile). (`FACT_XRAY_10_IND`, belegt, Konfidenz 0,85)
+- Datenbasis 1-Minuten-CBOE-Feed mit Analytik von OptionsDepth; nur SPX-Optionen, Anzeige auf ES/MES/SPY. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
+- OptionsDepth deckt derzeit nur SPX und VIX ab. (`FACT_OPTIONSDEPTH_SCOPE`, belegt, Konfidenz 0,75)
+- SPX-Optionen werden nur an der Cboe gehandelt; Cboe stellt nach Teilnehmertyp markierte Open-Close-Daten bereit, auf die sich OptionsDepth stützt. (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6)
+- GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, Konfidenz 0,5)
+- Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. (`FACT_GEX_EXAMPLE`, SCENARIO_PROJECTION, Konfidenz 1,0)
+
+#### Modul 2 · Datenfeed-Architektur, Latenzprofil und Validierung
+
+- Options X-Ray setzt eine Verbindung über Rithmic oder Interactive Brokers voraus; CQG ist in Entwicklung. (`FACT_XRAY_CONNECTIVITY`, belegt, Konfidenz 0,7)
+- Start der Options X-Ray Suite am 04.09.2026. (`FACT_XRAY_LAUNCH`, ungeprüft, Konfidenz 0,6)
+- OPRA-Kapazitätsprojektion: Spitzenlast je Stream 37,3 Gbps im 1-ms-Fenster. (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7)
+- Gemessene OPRA-Bursts über 180 Mio. Nachrichten/s (1-ms-Fenster). (`FACT_OPRA_BURSTS`, Medienangabe, Konfidenz 0,6)
+- Die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD) und deckt ES, NQ, CL und GC ab. (`FACT_CHAIN_SUITE`, belegt, Konfidenz 0,85)
+
+#### Modul 3 · Handels- und Ausführungsmöglichkeiten
+
+- ATAS bindet als Handelsverbindungen Rithmic, CQG und Interactive Brokers (über TWS) an, als Datenfeeds dxFeed und IQFeed. (`FACT_ATAS_CONNECTIONS`, belegt, Konfidenz 0,85)
+- Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan). (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
+- ES/MES-Cross-Trading seit ATAS 8.0.12 (17.02.2026). (`FACT_CROSS_TRADING`, belegt, Konfidenz 0,85)
+- IB TWS API unterstützt Combo-Orders (secType BAG) mit bis zu 6 Legs und Netto-Limit. (`FACT_IB_BAG`, belegt, Konfidenz 0,85)
+- § 80 Abs. 2 WpHG verpflichtet Wertpapierdienstleistungsunternehmen, die algorithmischen Handel betreiben, zu Risikokontrollen, Notfallvorkehrungen und Dokumentation (Umsetzung Art. 17 MiFID II). (`FACT_ALGO_TRADING`, belegt, Konfidenz 0,85)
+- Keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging; Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition Abs. 5) regeln Quotierungs- und Vertragspflichten. (`FACT_MM_NO_HEDGE_DUTY`, belegt, Konfidenz 0,85)
+
+#### Modul 4 · Mikro-Makro-Synergien im praktischen Trading
+
+- Anteil 0DTE am SPX-Optionsvolumen 2025 rund 59 %. (`FACT_SPX_0DTE_59`, belegt, Konfidenz 0,85)
+- Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten. (`FACT_MAR_RECO`, belegt, Konfidenz 0,85)
+
+#### Modul 5 · Globaler Wettbewerbsvergleich (Matrix auf der Modulseite, S09)
+
+- Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz, Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS. (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65)
+- Monatspreise der Anbieter: ATAS Ultra ca. 50–90 €, SpotGamma ca. 67–224 $, MenthorQ 129/349 $, Volland 150–1.000 $, Bookmap 39–99 $. (`FACT_VENDOR_PRICES`, Medienangabe, Konfidenz 0,55)
+- Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6)
+
+#### Modul 6 · DACH-Marktspezifika und Rechtsstand
+
+- § 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch das JStG 2024 (BGBl. 2024 I Nr. 387) aufgehoben. (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9)
+- Die Aufhebung von § 20 Abs. 6 Satz 5 und 6 EStG a. F. ist nach § 52 Abs. 28 EStG in allen offenen Fällen anzuwenden. (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6)
+- BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um; bestehende Verlustvorträge aus Termingeschäften sind danach unbeschränkt verrechenbar. (`FACT_BMF_2025`, belegt, Konfidenz 0,85)
+- Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte durch Gesetz vom 21.12.2019 (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021. (`FACT_TERMIN_2019`, belegt, Konfidenz 0,85)
+- JStG 2020 vom 21.12.2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €. (`FACT_TERMIN_2020_RAISE`, Medienangabe, Konfidenz 0,65)
+- BFH VIII B 113/23 vom 07.06.2024: Beschluss über die Aussetzung der Vollziehung (§ 69 Abs. 3 FGO; Streitjahr 2021), summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG). (`FACT_BFH_ADV`, belegt, Konfidenz 0,85)
+- § 20 Abs. 6 Satz 4 EStG (Aktienverluste nur mit Aktiengewinnen) gilt fort. (`FACT_STOCK_LOSS_S4`, belegt, Konfidenz 0,7)
+- Zu § 20 Abs. 6 Satz 4 EStG ist beim BVerfG die Vorlage 2 BvL 3/21 anhängig; eine Entscheidung wurde bis 05.10.2026 nicht gefunden. (`FACT_BVERFG_PENDING`, ungeprüft, Konfidenz 0,6)
+- Optionsscheine und Knock-out-Zertifikate sind nach Auffassung der Finanzverwaltung keine Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5 EStG a. F. (`FACT_OS_KO_NOT_TERMIN`, belegt, Konfidenz 0,85)
+- Nach Auffassung der Finanzverwaltung (BMF 03.06.2021) fiel der Totalverlust eines Knock-out-Zertifikats als Verlust aus wertlosen Wirtschaftsgütern unter § 20 Abs. 6 Satz 6 EStG a. F. (`FACT_KO_SATZ6`, ungeprüft, Konfidenz 0,6)
+- § 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften; Satz 4: Ausnahmen für Institute und Absicherungsgeschäfte; Satz 5: Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b Abs. 2 KStG). Rechtsprechung: BFH I R 25/14 vom 06.07.2016. (`FACT_P15_KSTG`, belegt, Konfidenz 0,85)
+- ODAX: 5 € je Indexpunkt, europäisch, Barausgleich, Basiswert DAX-Index; Micro-DAX-Optionen (ODXS) sind gelistet. (`FACT_ODAX_SPECS`, belegt, Konfidenz 0,85)
+- OESX: 10 € je Indexpunkt; Optionen auf DAX- bzw. EURO-STOXX-50-Futures wurden nicht gefunden. (`FACT_OESX_MULT`, ungeprüft, Konfidenz 0,7)
+- Eurex veröffentlicht das Open Interest je Serie täglich über die Statistiken und den Extended Market Data Service, nicht über EOBI. (`FACT_EUREX_OI`, belegt, Konfidenz 0,85)
+- Eurex: OEXP (EURO STOXX 50 End-of-Day Options) seit 28.08.2023, ODAP (DAX End-of-Day Options) seit 13.11.2023; OEXP seit 05.01.2026 mit Verfällen an zehn Handelstagen. (`FACT_EUREX_DAILY_LAUNCH`, belegt, Konfidenz 0,85)
+- ADV seit Produktstart: OEXP ca. 30.900 Kontrakte, ODAP ca. 2.300 Kontrakte. (`FACT_EUREX_DAILY_ADV`, ungeprüft, Konfidenz 0,6)
+- Anteile am Börsenumsatz verbriefter Derivate (jeweils am Gesamtumsatz): Hebelprodukte ca. 84 %, darunter Knock-outs ca. 59 % und Optionsscheine ca. 19 %. (`FACT_BSW_SHARES`, ungeprüft, Konfidenz 0,6)
+- Emittenten sichern ihr Nettorisiko laufend dynamisch ab, über den Basiswert oder passende Gegengeschäfte. (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6)
+- Strukturvergleich Eurex-Optionen vs. Optionsscheine/Knock-outs: Rechtsnatur, Kontrahentenrisiko (CCP vs. Emittent), Preisbildung, Volatilität im Preis, Stillhalterfähigkeit. (`FACT_PRODUCT_STRUCTURE`, ungeprüft, Konfidenz 0,5)
+- BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten vom 15.10.2025 (Art. 42 MiFIR, § 15 WpHG), in Kraft seit 16.06.2026: standardisierter Risikohinweis, Wissenstest, Verbot von Kaufanreizen. (`FACT_BAFIN_TURBO`, belegt, Konfidenz 0,85)
+- BaFin-Studie: Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste; Untersuchungszeitraum 2019–2023. (`FACT_BAFIN_STUDY`, ungeprüft, Konfidenz 0,7)
+- Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG. (`FACT_PRIIPS_UWG`, ungeprüft, Konfidenz 0,75)
+- Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG. (`FACT_ANGEMESSENHEIT`, ungeprüft, Konfidenz 0,7)
+
+#### Modul 7 · Strategische Produkt-Roadmap [SZENARIO]
+
+- Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0,0)
+
+#### Modul 8 · Fazit [Einschätzung]
+
+
+Belegt sind Produktumfang (Modul 1–3) und Rechtsstand (Modul 6); die GEX-Profile beruhen auf einer Modellannahme (`FACT_DEALER_CONVENTION`). Die strategische These zur Eurex-Erweiterung ist ein Szenario (`FACT_ROADMAP`) und keine Prognose.
+
+<!-- /sync:MOD -->
+
+### 3.9 Modellrechnung [MODELL]
+
+Die Berechnungslogik der Indikatoren ist nicht öffentlich dokumentiert. Die folgenden Formeln sind die
+fachübliche Referenzmodellierung und nicht die belegte Implementierung des Herstellers (`FACT_DEALER_CONVENTION`,
+`FACT_GEX_EXAMPLE`).
 
 Ausgangspunkt ist das Dollar-Gamma je Strike. Es gibt an, um wie viele Dollar sich das Hedge-Delta der
 Dealer bei einer Bewegung des Basiswerts um ein Prozent verändert:
@@ -230,7 +209,7 @@ ergibt das Netto-Gamma-Exposure. Der Preis, bei dem es das Vorzeichen wechselt, 
 Dealer, der netto long Gamma ist, erhält bei steigenden Kursen zusätzliches Long-Delta und verkauft Futures,
 um neutral zu bleiben. Bei fallenden Kursen kauft er. Sein Hedging wirkt gegen die Bewegung und verringert
 die realisierte Volatilität. Im Short-Gamma-Regime kehrt sich das um: Der Dealer muss steigenden Kursen
-hinterherkaufen und fallenden hinterherverkaufen. Sein Hedging verstärkt die Bewegung. Daraus folgt der
+hinterherkaufen und fallenden hinterherverkaufen. Sein Hedging verstärkt die Bewegung. Daraus folgt modellgemäß der
 Effekt zweiter Ordnung, der für Orderflow-Händler entscheidend ist. Prozyklische Hedge-Orders treffen auf
 ein Orderbuch, aus dem Market Maker in Stressphasen ihre Limits zurückziehen. Die Markttiefe sinkt also
 gerade dann, wenn der Hedge-Bedarf steigt. Als Effekt dritter Ordnung kann die gestiegene realisierte
@@ -277,7 +256,7 @@ Bei der Umrechnung ist die Basis zwischen SPX-Kassaindex und ES-Future zu beacht
 Dividenden bis zum Futures-Verfall. Preisniveaus aus der SPX-Kette müssen mit dieser Basis auf den ES-Chart
 verschoben werden, sonst liegen die Walls um die Basis versetzt.
 
-**Zahlenbeispiel [SZENARIO, hypothetische Werte]:** Angenommen sind ein SPX-Stand $S = 6.500$, ein Strike mit
+**Zahlenbeispiel [SZENARIO, hypothetische Werte; `FACT_GEX_EXAMPLE`]:** Angenommen sind ein SPX-Stand $S = 6.500$, ein Strike mit
 $OI = 10.000$ Calls, $\Gamma = 0{,}0020$ je Punkt und Dealer long ($s = +1$). Dann gilt
 $\Gamma\cdot OI\cdot M = 0{,}002 \cdot 10.000 \cdot 100 = 2.000$ Indexeinheiten Delta je Punkt. Eine
 Bewegung von 1 % entspricht $65$ Punkten. Daraus ergibt sich eine Delta-Änderung von $2.000 \cdot 65 =
@@ -288,283 +267,41 @@ modellgemäß rund 2.600 ES verkaufen. Ob diese Menge das Orderbuch spürbar bew
 Markttiefe in diesem Moment ab. Dieses Bindeglied liefert erst die Kombination mit MBO- und
 Footprint-Daten (Modul 4).
 
-### Modul 2 · Datenfeed-Architektur, Latenzprofil und Validierung
-
-Mit der Entscheidung für serverseitig berechnete Minuten-Snapshots verlagert ATAS das Rechenproblem vom
-Client auf den Datenpartner. Der Vergleich zeigt die Größenordnung: Das gesamte US-Optionstape (OPRA) ist
-auf hohe Spitzenlasten ausgelegt: Die Kapazitätsprojektion der OPRA (Sept. 2025) nennt 37,3 Gbps
-je Stream im 1-ms-Fenster. Sekundärquellen berichten 2025 von Bursts mit über 180 Mio. Nachrichten pro
-Sekunde. Ein Desktop-Client kann das weder empfangen noch bewerten. Für die Suite genügt zwar die
-SPX-Kette, weil SPX-Optionen nur an der Cboe gehandelt werden. Aber auch deren laufende
-Greek-Neuberechnung über Tausende Serien, einschließlich IV-Fit und Positionszuordnung, ist serverseitig
-besser aufgehoben. Der Minutentakt reduziert die Last auf dem Client auf wenige Kilobyte je Update
-**[EST]**.
-
-Der Preis dafür ist Analyse-Latenz. Sie ist sauber von Ausführungs-Slippage zu trennen. Die Ausführung des
-Futures erfolgt unabhängig vom Snapshot in Echtzeit über Rithmic oder IB. Der Snapshot bestimmt nur, wie
-aktuell die Landkarte ist, auf der die Entscheidung getroffen wird. Bei Makroereignissen (CPI, FOMC, NFP)
-bewegt sich der ES innerhalb von Sekunden über mehrere Gamma-Zonen. Das Profil auf dem Chart zeigt dann
-bis zu 60 Sekunden lang einen Zustand vor dem Ereignis. In diesem Fenster entstehen drei Fehlerarten. Erstens
-verschieben sich Gamma-Walls, weil sich die IV-Fläche ändert (Vanna), obwohl sich das Open Interest nicht
-geändert hat. Zweitens löst Volumen, das neue Positionen eröffnet, Hedges aus, die im letzten Snapshot noch
-fehlen. Drittens verdeckt die zeitliche Unterabtastung eine kurze Bewegung durch einen Level und zurück
-(Aliasing). Praktisch heißt das: In den ersten ein bis zwei Minuten nach einer Veröffentlichung trägt das
-Optionsprofil kaum Information. Der Orderflow im Future ist dann führend.
-
-Die **Options Chain Suite** ist dazu das clientseitige Gegenstück auf Tagesbasis. Sie arbeitet mit dem
-täglichen Open-Interest-Snapshot und vier Indikatoren (OI Profile, Key Levels einschließlich Max Pain,
-Expected Move, GEX Profile) für ES, NQ, CL und GC. Sie ist breiter in der Abdeckung, aber strukturell
-blind für 0DTE-Positionen, die innerhalb des Tages eröffnet und geschlossen werden. Diese machten 2025 rund
-59 % des SPX-Volumens aus (Cboe).
-
-Zur **Validierung** sind vier Verfahren geeignet. Die Summen je Strike werden mit dem veröffentlichten
-Cboe-Open-Interest des Folgetags abgeglichen. Die Stabilität der Walls zwischen aufeinanderfolgenden
-Snapshots wird gemessen. Ereignisstudien prüfen, ob sich die realisierte Volatilität im Long- und im
-Short-Gamma-Regime unterscheidet. Backtests müssen frei von Look-ahead-Bias sein: Die Daten dürfen erst ab
-ihrer tatsächlichen Verfügbarkeit verwendet werden, beim Open Interest also T+1. Ohne veröffentlichte
-Validierungsstatistik des Herstellers bleibt die Prognosegüte der Suite **[N. V.]**.
-
-### Modul 3 · Handels- und Ausführungsmöglichkeiten
-
-ATAS bindet als Handelsverbindungen Rithmic, CQG und Interactive Brokers (über eine laufende TWS) an, als
-reine Datenfeeds dxFeed und IQFeed. Options X-Ray setzt nach Herstellerangabe eine Verbindung über Rithmic
-oder IB voraus. CQG ist dort in Entwicklung. Seit Version 8.0.12 vom 17.02.2026 gibt es **Cross-Trading**:
-Analyse und Order-Eingabe finden auf dem ES-Chart statt, die Ausführung erfolgt im MES. Diese Trennung ist
-für kleinere Konten nützlich, weil die Liquiditätsinformation des ES mit der Positionsgröße des Micro-Kontrakts
-kombiniert wird.
-
-Die Optionsseite ist dagegen bisher reine Analyse. **Options Board** (Strike-Verfall-Matrix mit Kursen,
-Greeks und IV-Skew) und **Options Strategy Analyzer** (P&L-, Volatilitäts-, Zeit- und Delta-Hedge-Szenarien)
-sind als Beta im Ultra-Plan verfügbar. Optionen selbst lassen sich in ATAS laut Herstellerseite derzeit
-nicht handeln. Ein Optionshändler arbeitet also mit zwei Plattformen: Die Struktur wird in ATAS analysiert,
-die Ausführung erfolgt in der TWS oder bei einem anderen Broker. Damit entstehen Medienbrüche,
-Übertragungsfehler und Zeitverlust. Weil die IB-API Combo-Orders (BAG) mit Netto-Limit bereits nativ
-unterstützt (K11), ist der Weg zu einem integrierten Ticket technisch kürzer, als der Quelltext suggeriert.
-Der eigentliche Aufwand liegt in Risikoprüfung, Preisfindung und Positionsführung (Modul 7).
-
-### Modul 4 · Mikro-Makro-Synergien im praktischen Trading
-
-> **Compliance-Hinweis:** Die folgenden Konstellationen sind generische, lehrhafte Beschreibungen von
-> Marktmechanik. Sie enthalten keine Kursziele, Einstiegsmarken oder Richtungsaussagen zu einem bestimmten
-> Instrument und sind keine Handelsempfehlung. Gamma-Levels sind Wahrscheinlichkeitszonen und keine
-> Preisgarantien.
-
-Optionsdaten liefern die Landkarte: Wo sitzt Hedge-Bedarf und in welche Richtung wirkt er? Orderflow-Daten
-zeigen, ob dieser Bedarf im Moment tatsächlich ausgeführt wird. Erst beides zusammen ergibt ein prüfbares
-Bild. In einem **Long-Gamma-Regime** innerhalb des Expected-Move-Korridors legt das Modell nahe, dass
-Bewegungen an einer Call- oder Put-Wall eher abgebremst werden. Ob das zutrifft, zeigt der Footprint
-an dieser Stelle. **Absorption**, also hohes aggressives Volumen ohne Preisfortschritt, und im MBO-Bild
-nachgefüllte Limitorders (Icebergs) bestätigen die These. Ein **Sweep**, der mehrere Preisstufen auf einmal
-abräumt, ohne dass die Liquidität zurückkehrt, widerlegt sie. Das Setup ist erst nach dieser Bestätigung
-gültig. Es ist ungültig, sobald der Preis die Wall mit anhaltender Delta-Dominanz und ohne Rückkehr der
-Liquidität durchbricht.
-
-Im **Short-Gamma-Regime** unterhalb des GEX-Flips kehrt sich die Logik um. Hier interessieren weniger
-Umkehrzonen als Beschleunigungszonen. Eine **Delta-Divergenz** (neues Preistief bei schwächerem negativem
-kumuliertem Delta) ist in diesem Regime ein schwächeres Signal als im Long-Gamma-Umfeld, weil prozyklisches
-Hedging Trends verlängern kann. Ein **Gamma-Squeeze** entsteht, wenn der Preis in eine Zone mit dichtem
-Short-Gamma läuft. Jeder Tick erhöht dann den Hedge-Bedarf in Bewegungsrichtung. Für eine Bewegung
-$\Delta S$ ist das ungefähr $-\,\text{GEX}_{\text{netto}}\cdot \Delta S/(0{,}01\,S)$ in Dollar Delta. Geht
-die Markttiefe gleichzeitig zurück, verstärken sich Bewegung und Hedge-Bedarf gegenseitig. Ein
-**Charm-Squeeze** ist leiser: Am Nachmittag vor einem großen Verfall muss Delta zurückgekauft oder
-verkauft werden, auch wenn sich der Preis kaum bewegt. Der Flow steigt typischerweise in der letzten
-Handelsstunde. Im Footprint erscheint er als einseitiges, gleichmäßig verteiltes Volumen ohne große
-Einzelorders **[MODELL]**.
-
-Für alle Konstellationen gelten dieselben Grenzen. Das Profil ist bis zu 60 Sekunden alt (Modul 2). Die
-Dealer-Annahme kann falsch sein (K6). Makroereignisse überlagern jede Mikrostruktur. Und das Risiko einer
-einzelnen Position bestimmt sich nicht aus Gamma-Levels, sondern aus Positionsgröße und Stop-Disziplin.
-
-### Modul 5 · Globaler Wettbewerbsvergleich
-
-Die Matrix stützt sich auf Anbieterseiten und Drittquellen, die nur über Suchtreffer einsehbar waren (Stand
-2026-10-05). Preise sind Richtwerte, vor Verwendung beim Anbieter zu prüfen. Provenienz: V = VENDOR_CLAIM,
-M = MEDIA_REPORT. Die Reihenfolge ist keine Rangfolge.
-
-| Merkmal | ATAS (Options X-Ray) | SpotGamma | MenthorQ | Volland | Bookmap | IBKR TWS |
-|---|---|---|---|---|---|---|
-| Kernfokus | Orderflow-Plattform + Dealer-Positionierung (V) | Dealer-Gamma-Levels, Research (V) | Gamma-Levels, Modelle, Ausbildung (V) | Notional-Greeks des Dealer-Buchs (V) | Orderbuch-Heatmap, Ausführung (V) | Broker-Plattform, Portfoliorisiko (V) |
-| Datenfrequenz Optionen | 1 Min. (V) | HIRO/TRACE intraday real-time; Levels vor Eröffnung (V) | EOD + alle 5 Min. intraday (V) | EOD bis alle 5 Min. je Tarif (V) | keine nativen Optionsmetriken (V) | Echtzeit (Kursdaten-Abo) (V) |
-| Datenquelle | CBOE via OptionsDepth (V) | [N. V.] | [N. V.] | Trade-Feed, Anbieter [N. V.] | Rithmic, dxFeed, CQG (Futures) (V) | Börsendaten je Abo (V) |
-| GEX / Vanna / Charm | ✓ / [N. V.] / ✓ (V) | ✓ / Vanna-Modell / [N. V.] (V) | ✓ / [N. V.] / [N. V.] (V) | ✓ / ✓ / ✓ (V) | nur über Add-ons (V) | nein, nur eigene Positions-Greeks (V) |
-| Abdeckung | SPX (intraday); ES, NQ, CL, GC (EOD) (V) | SPX, NDX, ETFs, >3.500 Aktien (V) | ~1.300–1.400 Werte inkl. Futures-Optionen ES, NQ, CL, GC u. a. (V) | Top-200 nach Options-Notional (V) | Futures, Aktien, Krypto (V) | global inkl. Eurex ODAX/OESX (V) |
-| Eurex-GEX | nein | nein | [N. V.] | nein | nein | Rohdaten, keine GEX |
-| Orderflow / MBO | Footprint, MBO-Bundle (Iceberg, Sweeps, Stop Runs) (V) | nein | nein | nein | Heatmap, MBO via Rithmic (V) | nein |
-| Ausführung | Futures ja; Optionen nein (V) | nein | über Partnerplattformen (V) | [N. V.] | ja (V) | ja, vollständig (V) |
-| Preis/Monat (Richtwert) | Ultra ca. 50–90 € (M) | ca. 67–224 $ (M) | 129 / 349 $ (M) | 150–1.000 $ (M) | 39–99 $ + Daten (M) | Plattform frei, Datenabos (V) |
-| Zielgruppe | aktive Futures-Trader, Semi-Profis | Retail bis Profi | Retail, Ausbildung | fortgeschritten/Profi | Retail bis Profi | Retail bis institutionell |
-
-Aus der Matrix lässt sich Folgendes ableiten. ATAS ist der einzige Anbieter im Vergleichsfeld, der native
-Optionsdaten im Minutentakt mit einem nativen MBO- und Footprint-Werkzeugkasten in einer Oberfläche verbindet;
-Bookmap hat MBO, aber keine nativen Optionsmetriken. Volland ist der einzige Anbieter mit belegter Abdeckung von
-Gamma, Vanna und Charm. Optionsdaten innerhalb des Tages liefern ATAS (1 Min.), SpotGamma (HIRO/TRACE),
-MenthorQ und Volland (je bis alle 5 Min.) sowie die IBKR TWS (Echtzeit, Abo); Intraday-Flow-Analytik bieten
-davon SpotGamma (HIRO/TRACE) und ATAS (Flow, Flow Delta).
-MenthorQ deckt Futures-Optionen nativ ab und aktualisiert intraday alle fünf Minuten. Eigene Ausführung bieten
-ATAS (nur Futures), Bookmap und die TWS; für Volland ist sie n. v. Die TWS rechnet keine marktweite
-Dealer-Positionierung. **Für Eurex-Optionen bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern
-eine intraday-fähige GEX-Analytik (MenthorQ: n. v.).** Als europäisches Angebot wurde nur Gamma Cockpit gefunden: DAX-GEX auf Basis von
-ODAX-Daten, nur auf Tagesbasis, als kostenlose Beta (Stand 2026-10-05, [N. V.] zur Lizenzlage).
-
-### Modul 6 · DACH-Marktspezifika: Börsenoptionen vs. verbriefte Derivate
-
-Der deutschsprachige Markt hat eine besondere Struktur. Am Börsenumsatz verbriefter Derivate stellen
-Hebelprodukte nach BSW-Statistik rund 84 % (Bezugszeitraum [N. V.]). Darunter entfallen etwa 59 % auf
-Knock-outs und 19 % auf klassische Optionsscheine, jeweils bezogen auf den Gesamtumsatz. Gehandelt wird vor allem an der Euwax in
-Stuttgart, an der Börse Frankfurt (Zertifikate) und auf gettex. An der Eurex dagegen konzentriert sich das
-professionelle Geschäft in Indexoptionen (eine belegte ADV-Zahl für OESX liegt in der DBOM nicht vor).
-Die Optionen mit Tagesverfall sind noch klein:
-OEXP hat seit Start ein ADV von rund 30.900 Kontrakten, ODAP von rund 2.300 (Stand der Quelle [N. V.]). Beide
-sind End-of-Day-Optionen. OEXP hat seit 05.01.2026 Verfälle an zehn Handelstagen und ist damit kein reines
-0DTE; die Verfallsstruktur von ODAP ist [N. V.]. Der Vergleich mit den
-USA, wo 2025 rund 59 % des SPX-Optionsvolumens auf 0DTE entfielen, zeigt daher nur die Größenordnung.
-
-Die beiden Produktwelten unterscheiden sich in den folgenden Merkmalen:
-
-| Merkmal | Eurex-Börsenoptionen (ODAX/OESX) | Optionsscheine / Knock-outs |
-|---|---|---|
-| Rechtsnatur | standardisierter Terminkontrakt | Inhaberschuldverschreibung des Emittenten |
-| Kontrahentenrisiko | zentrale Gegenpartei (Eurex Clearing) | Bonität des Emittenten (Totalausfall bei Insolvenz möglich) |
-| Preisbildung | Orderbuch mit mehreren Market Makern | Quote-Making durch den Emittenten |
-| Spreads | marktabhängig, in liquiden Serien eng [EST] | vom Emittenten gesetzt, bei Knock-outs oft eng, bei Optionsscheinen IV-abhängig [EST] |
-| Volatilität im Preis | marktgebildete IV | Emittenten-IV, kann von der Börsen-IV abweichen |
-| Kontraktgröße | ODAX 5 €/Pkt., ODXS kleiner | frei stückelbar über Bezugsverhältnis |
-| Stillhalterposition | möglich (Margin) | nicht möglich |
-| Zugang Privatanleger | Angemessenheitsprüfung (§ 63 Abs. 10 WpHG, nur über Praxisformulare belegt); Eurex-Zugang nicht bei allen Brokern | breit verfügbar; für Turbos seit 16.06.2026 Wissenstest und Risikohinweis (BaFin-Allgemeinverfügung) |
-| Kostenausweis | Gebühren, Ex-ante-Kosten nach MiFID II | PRIIPs-KID mit Emittentenkosten + MiFID-II-Kosten |
-| Steuer (Privatvermögen, offene Fälle) | Einkünfte aus Kapitalvermögen; keine Sonderbeschränkung mehr (JStG 2024) | Einkünfte aus Kapitalvermögen; keine Sonderbeschränkung |
-
-Zur **steuerlichen Zeitachse:** Von 2021 bis 2024 benachteiligte § 20 Abs. 6 Satz 5 EStG a. F.
-Privatanleger mit börsengehandelten Optionen und Futures tatsächlich. Verluste aus Glattstellungen und
-verfallenen Long-Optionen ließen sich nur bis 20.000 € im Jahr verrechnen. Bei Spread-Strategien konnten
-dadurch Steuern ohne Gesamtgewinn anfallen (Ableitung aus der Verlustverrechnungsbeschränkung). Verbriefte Produkte waren von
-Satz 5 nicht erfasst. Knock-out-Totalverluste fielen nach Auffassung der Finanzverwaltung aber unter Satz 6 a. F. (`FACT_KO_SATZ6`, UNVERIFIED, Sekundärbeleg S51). Das JStG 2024 hat beide Sätze
-für alle offenen Fälle gestrichen. Ob ein Anleger Altjahre korrigieren kann, hängt davon ab, ob seine
-Bescheide noch offen sind. Das ist eine Frage des Einzelfalls und vom Steuerberater zu prüfen. Für die
-Gegenwart gilt: Die Steuer unterscheidet nicht mehr zwischen beiden Produktwelten. Bestehen bleibt nur die
-Beschränkung für Aktienverluste nach Satz 4. Die vom Quelltext beschriebene steuerliche Verzerrung ist
-damit Geschichte. Die Marktstruktur mit dominanten Hebelzertifikaten erklärt sich heute eher aus
-Gewohnheit, Vertriebswegen, kleiner Stückelung und Brokerangeboten. Für Knock-outs kommen seit Juni 2026
-neue Zugangshürden hinzu. Die zugrunde liegende BaFin-Studie ergab für den Untersuchungszeitraum 2019–2023,
-dass rund 74,2 % der Kleinanleger mit Turbo-Zertifikaten Verluste erlitten (Studie nicht im Volltext geprüft).
-
-Warum lassen sich die Hedging-Modelle von Options X-Ray nicht auf Optionsscheine übertragen? Der Grund ist
-nicht ein „Versagen“, sondern die Beobachtbarkeit. Ein GEX-Modell braucht drei Dinge: offene Positionen je
-Strike, eine Annahme über den Risikoträger und einen Markt, in dem dessen Hedge auftritt. Beim Optionsschein
-ist die offene Position nur dem Emittenten bekannt. Ein öffentliches Open Interest je Basispreis wie bei
-Eurex gibt es nicht. Der Risikoträger ist mit dem Emittenten bekannt, aber er nettet sein Buch, bevor er
-hedgt. Gehedgt wird teils über Basiswert und Börsenderivate, teils außerbörslich. Eine Spur im FDAX gibt es
-also durchaus (K7). Sie lässt sich aber weder einer Strike-Struktur zuordnen noch vorhersagen. Für
-Eurex-Optionen sind alle drei Bedingungen grundsätzlich erfüllbar. Open Interest je Serie wird täglich
-veröffentlicht. Nach Teilnehmertyp markierte Open-Close-Daten wie bei der Cboe sind für Eurex allerdings
-nicht belegt **[N. V.]**. Die Positionsannahme ist deshalb dort schwächer fundiert als beim SPX.
-
-### Modul 7 · Strategische Produkt-Roadmap [SZENARIO]
-
-Alle vier Vorschläge sind Szenarien. Ihre Umsetzung, ihr Zeitplan und ihr Erfolg sind offen.
-
-| Erweiterung | Nutzen | Datenverfügbarkeit / -kosten | Technische Komplexität | Regulatorische Implikationen | Hauptrisiko |
-|---|---|---|---|---|---|
-| Multi-Asset (NDX/NQ, CL, GC, Single Stocks) intraday | hoch | abhängig vom Datenpartner; OptionsDepth deckt nach Recherche nur SPX/VIX ab | mittel bis hoch | gering | Datenpartner-Abhängigkeit, schwächere Positionsdaten außerhalb der Cboe |
-| Eurex-X-Ray (FDAX/FESX) | hoch (Alleinstellung) | Eurex-Daten lizenzpflichtig; OI täglich; Teilnehmermarkierung [N. V.] | hoch | gering (Datenlizenz) | geringe 0DTE-Liquidität; schwächere Positionsannahme |
-| Multi-Leg-Ausführung + Auto-Delta-Hedging | sehr hoch für die Plattformbindung | IB-API vorhanden (BAG) | hoch | hoch bei automatischer Orderauslösung | Haftung, Fehlorders, Aufsichtsrecht |
-| Warrant-Fair-Value-Tool (DACH) | mittel (Transparenz) | Emittentenquotes + Eurex-IV + Zins/Dividende | mittel | mittel (UWG, Marken) | Methodenangriffe durch Emittenten, Fehlinterpretation |
-
-**Multi-Asset-Ausbau.** Für ES, NQ, CL und GC hat ATAS mit der Options Chain Suite bereits eine Abdeckung
-auf Tagesbasis. Der Ausbau betrifft also die Intraday-Analytik. Der Engpass ist der Datenpartner: Laut
-Recherche deckt OptionsDepth nur SPX und VIX ab. Für NDX und Futures-Optionen bräuchte ATAS deshalb einen
-zweiten Datenpartner oder eine eigene Pipeline. Außerdem fehlen außerhalb der Cboe vergleichbar markierte
-Positionsdaten. Für Einzelaktien mit mehreren Handelsplätzen müssten die Positionen stärker modelliert
-werden, was die Aussagekraft mindert. Die Begründung des Quelltexts mit „überproportionaler
-NDX-0DTE-Dynamik“ ist nicht belegt (A18). Tragfähig ist sie als Nachfragethese der Futures-Händler im NQ.
-
-**Eurex-Modul.** Es ist strategisch das stärkste Alleinstellungsmerkmal. Für keinen der verglichenen Anbieter
-ist intraday-fähige Eurex-GEX belegt (MenthorQ: n. v.). Gamma Cockpit liefert für den DAX nur Tageswerte. Dem stehen drei
-Erschwernisse gegenüber. Eurex-Daten über EOBI/EMDI und EMDS sind lizenzpflichtig. Die 0DTE-Segmente sind
-um Größenordnungen kleiner als in den USA, sodass Charm-Effekte im Tagesverlauf schwächer sind. Und die
-Positionsannahme ist ohne Teilnehmermarkierung schwächer fundiert. Ein glaubwürdiges Modul wäre deshalb
-zweistufig: zuerst Tagesprofile auf Basis des Open Interest mit klarer Quartalsverfall-Analyse, intraday
-nur nach nachgewiesener Validierung.
-
-**Multi-Leg-Ausführung und automatisiertes Delta-Hedging.** Die Combo-Order ist über die IB-API verfügbar.
-ATAS müsste ein Strategie-Ticket bauen, mit Netto-Limitpreis, Risikoprüfung vor der Order (Margin, maximaler
-Verlust, Ausübungsrisiko) und Positionsführung über alle Legs. Weit größere Folgen hat das vorgeschlagene
-**automatische Delta-Hedging bei GEX-Schwellenwerten**. Löst eine Software Orders selbständig aus, handelt es
-sich um algorithmischen Handel. Die Pflichten nach Art. 17 MiFID II bzw. § 80 Abs. 2 WpHG richten sich an
-Wertpapierdienstleistungsunternehmen, nicht unmittelbar an Privatanleger. Für ATAS als Anbieter ist zu prüfen,
-ob eine Funktion, die Anlageentscheidungen für Kunden trifft, eine erlaubnispflichtige Tätigkeit nach WpIG oder
-KWG darstellt, etwa Finanzportfolioverwaltung. Unabhängig davon braucht es Pre-Trade-Limits, einen
-Kill-Switch und eine klare Haftungsregel. Ein Hedge auf Basis eines bis zu 60 Sekunden alten Profils
-kann in schnellen Märkten prozyklisch wirken (Modul 2). Empfohlen ist **[SZENARIO]** daher ein
-halbautomatischer Vorschlag mit manueller Bestätigung statt einer vollautomatischen Auslösung.
-
-**Warrant-Fair-Value-Tool.** Das Tool würde echten Transparenzgewinn bringen, wenn es methodisch sauber
-gebaut ist. Es müsste die Emittenten-Quote eines Optionsscheins mit einem theoretischen Wert vergleichen.
-Dieser Wert entsteht aus der Volatilitätsfläche der Börsenoptionen (für DAX-Basiswerte aus ODAX, nicht aus
-US-Optionen), mit Anpassung an Laufzeit, Strike (Basispreis) und Bezugsverhältnis (Scheine je Einheit des Basiswerts), Zins- und Dividendenannahme, bei
-US-Basiswerten mit Quanto-Effekt (Währungssicherung bei Basiswerten in Fremdwährung) und mit einem Abschlag für die Emittentenbonität. Das Kontrahentenrisiko
-ist ein realer ökonomischer Unterschied und gehört nicht in die „Marge“. Das Ergebnis sollte als
-„Fair-Value-Differenz“ mit offener Methodik und Konfidenzband ausgewiesen und mit den Kostenangaben im
-PRIIPs-KID abgeglichen werden. Wertende Begriffe und Ranglisten einzelner Emittenten bergen das Risiko
-von Abmahnungen nach § 4 Nr. 1 und § 6 UWG (K12).
-
-### Modul 8 · Fazit und Synthese
-
-Drei Kernaussagen des Quelltexts **halten der Prüfung stand**:
-- Options X-Ray überführt SPX-Optionsdaten in ES-Hedge-Äquivalente und macht damit die Positionierung im
-  Optionsmarkt für Orderflow-Händler nutzbar.
-- Die Minuten-Snapshots lösen das Skalierungsproblem roher Optionsfeeds um den Preis von Analyse-Latenz bei
-  Makroereignissen.
-- Für den Optionshandel selbst fehlt eine native Ausführung.
-
-Die Kombination aus Positionierungsdaten und MBO-/Footprint-Analyse in einer Oberfläche bleibt nach
-Rechercheergebnis ein echtes Differenzierungsmerkmal gegenüber reinen Analyseanbietern.
-
-**Zu relativieren** sind die mikrostrukturellen Begründungen. Market Maker hedgen aus ökonomischem Kalkül,
-nicht aus gesetzlichem Zwang. GEX-Profile beruhen auf einer Positionsannahme, die beim SPX dank markierter
-Cboe-Daten vergleichsweise gut, anderswo deutlich schwächer fundiert ist. Optionsscheine erzeugen eine
-schwache und nicht zurechenbare Hedgespur, aber nicht gar keine.
-
-**Entfallen** muss die steuerliche Rahmenerzählung. Die 20.000-€-Grenze für Termingeschäfte ist seit dem
-JStG 2024 für alle offenen Fälle aufgehoben. Ob die Aufhebung verfassungsrechtliche Fragen zu Altjahren
-erledigt, ist hier nicht bewertet. Kapitalgesellschaften sind über § 15 Abs. 4 Satz 3 EStG nicht frei von einer Verlustbeschränkung
-für Termingeschäfte.
-
-Die strategische These für den DACH-Markt muss deshalb neu begründet werden. Der Wert einer Eurex-Erweiterung
-liegt nicht darin, eine Steuerbarriere zu umgehen. Er liegt in einer Analyselücke: Für ODAX und OESX ist
-im Vergleichsfeld für keinen Anbieter eine intraday-fähige Dealer-Positionierung belegt (MenthorQ: n. v.). Ob ATAS diese Lücke füllen kann,
-hängt von Datenlizenzen, Validierung und einer ehrlichen Kommunikation der schwächeren Positionsannahme ab.
-Diese Bewertung ist ein Szenario und keine Prognose.
-
 ---
 
 ## 4 · Glossar
 
-| Begriff | Erklärung |
-|---|---|
-| 0DTE | Optionen mit Verfall am selben Handelstag („zero days to expiration“) |
-| Absorption | Hohes aggressives Volumen, das von passiven Orders aufgenommen wird, ohne dass sich der Preis bewegt |
-| Angemessenheitsprüfung | Prüfung von Kenntnissen und Erfahrungen des Kunden vor dem Handel komplexer Produkte (§ 63 Abs. 10 WpHG) |
-| BAG / Combo-Order | IB-Ordertyp, der mehrere Optionslegs als ein Paket mit Netto-Limit handelt |
-| Call Wall / Put Wall | Strike mit der höchsten Call- bzw. Put-Gamma-Konzentration; modellhaft eine Widerstands- bzw. Unterstützungszone |
-| CCP | Zentrale Gegenpartei (hier Eurex Clearing), die zwischen Käufer und Verkäufer tritt |
-| Charm | Änderung des Optionsdeltas durch Zeitablauf |
-| Delta-Divergenz | Abweichung zwischen Preisentwicklung und kumuliertem Delta (Käufer- minus Verkäuferaggression) |
-| EOBI / EMDI / EMDS | Eurex-Marktdatenschnittstellen: Einzelorderbuch / aggregiertes Orderbuch / Settlement- und OI-Daten |
-| ES-Äquivalent | Umrechnung eines Options-Hedge-Deltas in eine Anzahl E-mini-S&P-500-Futures |
-| Footprint | Chartform mit dem Volumen je Preisstufe, getrennt nach Bid und Ask |
-| GEX | Gamma Exposure: aggregiertes Dollar-Gamma der (angenommenen) Dealer-Positionen |
-| GEX-Flip | Preisniveau, an dem das Netto-Gamma-Exposure das Vorzeichen wechselt |
-| Iceberg | Großorder, von der nur ein Teil im Orderbuch sichtbar ist und die nachgefüllt wird |
-| Knock-out-Zertifikat | Hebelzertifikat, das beim Berühren einer Schwelle (fast) wertlos verfällt |
-| MBO | Market by Order: Orderbuchdaten auf Ebene einzelner Orders |
-| OPRA | Options Price Reporting Authority: konsolidierter US-Optionsdatenfeed |
-| Optionsschein | Vom Emittenten begebenes, verbrieftes Optionsrecht (Schuldverschreibung) |
-| PRIIPs-KID | EU-Basisinformationsblatt für verpackte Anlageprodukte mit Kosten- und Risikoangaben |
-| Quartalsverfall | Gleichzeitiger Verfall von Index-Futures und -Optionen am dritten Freitag im März, Juni, September und Dezember |
-| Sweep | Aggressive Order, die mehrere Preisstufen in einem Zug abräumt |
-| Termingeschäft (steuerlich) | Geschäft mit Differenzausgleich bzw. vom Basiswert abgeleitetem Wert; steuerlich Einkünfte nach § 20 EStG |
-| Vanna | Änderung des Optionsdeltas bei Änderung der impliziten Volatilität |
+<!-- sync:GLOSSAR -->
+| Begriff | Definition (Fortgeschritten) | Einordnung (Experte) |
+|---|---|---|
+| Delta | Erste Ableitung des Optionspreises nach dem Basiswert. | $\Delta=\partial V/\partial S$; Grundlage jeder Hedge-Menge. |
+| Gamma | Zweite Ableitung des Optionspreises nach dem Basiswert. | $\Gamma=\partial^2 V/\partial S^2$; bestimmt den Nachsicherungsbedarf. |
+| Open Interest | Bestand nicht glattgestellter Kontrakte je Serie. | Wird nach Handelsschluss veröffentlicht (T+1); Basis der GEX-Profile. |
+| Implizite Volatilität | Aus dem Optionspreis zurückgerechnete Volatilität. | Fläche über Strike und Laufzeit; Eingang für Vanna-Effekte. |
+| Delta-Divergenz | Abweichung zwischen Preisverlauf und kumuliertem Delta. | Schwächeres Umkehrsignal im Short-Gamma-Regime. |
+| BAG / Combo-Order | IB-Ordertyp für Spreads mit Netto-Limit. | Schützt vor Legging-Risiko; in ATAS derzeit nicht integriert. (`FACT_IB_BAG`, `FACT_ATAS_NO_OPT_TRADING`) |
+| Angemessenheitsprüfung | Abfrage von Kenntnissen und Erfahrungen vor dem Handel. | Für komplexe Produkte vorgeschrieben (Fundstelle in S10, ungeprüft). |
+| Optionsschein | Verbriefte Option, rechtlich eine Schuldverschreibung. | Emittentenrisiko; kein öffentliches Open Interest je Strike. |
+| 0DTE | Zero Days to Expiration; beim SPX an jedem Wochentag. | Großer Teil des SPX-Volumens (Kennzahl in S01); erzeugt Intraday-Positionen ohne OI-Spur. |
+| GEX | Gamma Exposure: aggregiertes Dollar-Gamma der Dealer-Positionen. | $\sum s_i\Gamma_i OI_i M S^2\cdot 0{,}01$; Vorzeichen hängt an der Positionsannahme. |
+| GEX-Flip | Preis, an dem das Netto-Gamma das Vorzeichen wechselt. | Grenze zwischen dämpfendem und verstärkendem Hedging-Regime. |
+| Call/Put Wall | Strikes mit der höchsten Call- bzw. Put-Gamma-Konzentration. | Modellhafte Widerstands-/Unterstützungszonen; keine Preisgarantie. |
+| Charm | Änderung des Deltas pro Zeiteinheit. | $\partial\Delta/\partial t$; stark bei 0DTE und vor Verfall. |
+| Vanna | Änderung des Deltas pro Änderung der impliziten Volatilität. | $\partial\Delta/\partial\sigma$; treibt Flows nach IV-Crush/-Spikes. |
+| ES-Äquivalent | Hedge-Delta geteilt durch den ES-Multiplikator (50). | SPX-Multiplikator 100 / ES 50 / MES 5; Basis SPX↔ES beachten. |
+| OPRA | Options Price Reporting Authority. | Datenraten weit jenseits von Desktop-Kapazitäten (Kennzahlen in S07); ungefiltert nicht verarbeitbar. |
+| MBO | Market by Order (Level 3). | Erlaubt Queue-Position, Iceberg- und Sweep-Erkennung. |
+| Footprint | Volumen getrennt nach Bid/Ask je Kerze. | Grundlage für Absorption und Delta-Divergenz. |
+| Absorption | Aggressives Volumen wird von passiven Orders aufgenommen. | Bestätigungssignal für Wall-Thesen im Long-Gamma-Regime. |
+| Sweep | Aggressive Order über mehrere Levels in einem Zug. | Widerlegungssignal für Wall-Thesen; oft Short-Gamma-Beschleunigung. |
+| Iceberg | Order mit verdecktem Volumen, die nachgefüllt wird. | Im MBO über wiederholte Ausführungen derselben Order-ID erkennbar. |
+| Termingeschäft (steuerlich) | Options-, Futures- oder Swapgeschäft mit Differenzausgleich oder Lieferung; Einkünfte nach § 20 EStG. | Sonderbeschränkung (§ 20 Abs. 6 Satz 5 a. F.) durch JStG 2024 aufgehoben. (`FACT_JSTG2024_REPEAL`) |
+| Knock-out-Zertifikat | Verbriefte Schuldverschreibung mit Knock-out-Barriere. | Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10). (`FACT_BAFIN_TURBO`) |
+| CCP | Central Counterparty, hier Eurex Clearing. | Ersetzt bilaterales Kontrahentenrisiko durch Margin-System. |
+| PRIIPs-KID | EU-Basisinformationsblatt (VO (EU) 1286/2014, Fundstelle ungeprüft). | Referenz für Kostenvergleiche verbriefter Derivate. (`FACT_PRIIPS_UWG`) |
+| Quartalsverfall | Dritter Freitag der Quartalsmonate. | Umgangssprachlich „Hexensabbat“; OI-Verschiebungen davor relevant. |
+
+<!-- /sync:GLOSSAR -->
 
 ---
 
@@ -632,14 +369,14 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.6.0,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.7.0,
 46 Fakten, 53 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
 |---|---|---|---|---|---|
 | `FACT_JSTG2024_REPEAL` | CONFIRMED | REGULATORY_FRAMEWORK | 0,9 | Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024) | § 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch das JStG 2024 (BGBl. 2024 I Nr. 387) aufgehoben. |
 | `FACT_P52_ABS28` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,6 | Rechtsstand 2026-10-05 | Die Aufhebung von § 20 Abs. 6 Satz 5 und 6 EStG a. F. ist nach § 52 Abs. 28 EStG in allen offenen Fällen anzuwenden. |
-| `FACT_BMF_2025` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | BMF-Schreiben 14.05.2025 | BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um; Verlustvorträge aus Termingeschäften in offenen Fällen unbeschränkt verrechenbar. |
+| `FACT_BMF_2025` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | BMF-Schreiben 14.05.2025 | BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um; bestehende Verlustvorträge aus Termingeschäften sind danach unbeschränkt verrechenbar. |
 | `FACT_TERMIN_2019` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Gesetz vom 21.12.2019, Anwendung ab 01.01.2021 | Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte durch Gesetz vom 21.12.2019 (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021. |
 | `FACT_TERMIN_2020_RAISE` | MEDIA_REPORT | REGULATORY_FRAMEWORK | 0,65 | JStG 2020 vom 21.12.2020 | JStG 2020 vom 21.12.2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €. |
 | `FACT_BFH_ADV` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Beschluss 07.06.2024 | BFH VIII B 113/23 vom 07.06.2024: Beschluss über die Aussetzung der Vollziehung (§ 69 Abs. 3 FGO; Streitjahr 2021), summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG). |
@@ -698,12 +435,12 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Analyse: „offene Fälle“, 2 BvL 3/21 und Strukturtabelle Modul 6 mit Fakt-ID bzw. „ungeprüft“ kennzeichnen; (V)-Kürzel der Matrix an MEDIA_REPORT angleichen (L51, L05d)
+- Faktgebundene Analyse v1.7.0 (Kennzeichnung je Fakt-ID, L51, L53) durch unabhängige Zweitprüfung bestätigen
 - Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
 - Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
 - Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
-- Analyse: weitere unbelegte Angaben (Monatsverfälle, Handelsplätze, Chain-Suite-Indikatoren, Lizenz-/Beta-Angaben, US 500, Abzugsverfahren) belegen oder entfernen (L43)
-- Analyse: Spalte „Konf.“ der A-Tabelle und „Konf.“-Schreibweise aus der DBOM (L48b); A03 vs. Quelle S6; BMF-Fakt „in offenen Fällen“ begründen
+- Gestraffte Analyse v1.7.0 (unbelegte Angaben entfallen, L43, L53) durch unabhängige Zweitprüfung bestätigen
+- Analyse v1.7.0 ohne Hand-Konfidenzen und Provenienzkürzel, BMF-Fakt ohne Teilaussage „offene Fälle“ (L48b, L05d) durch unabhängige Zweitprüfung bestätigen
 
 ---
 
@@ -725,12 +462,12 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q1 Faktencheck K1–K12 vollständig | ✓ | – |
 | Q2 Aktualität / a. F. markiert | ◐ | BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b) |
 | Q3 Mathematische Konsistenz | ✓ | – |
-| Q4 Provenienz je Fakt | ◐ | v1.6.0: „offene Fälle“ an FACT_P52_ABS28 gebunden (L46); ✓ erst nach Zweitprüfung (L10) |
+| Q4 Provenienz je Fakt | ◐ | v1.7.0: Analyse faktgebunden, Kennzeichnung je Fakt-ID (L51, L53); ✓ erst nach Zweitprüfung (L10) |
 | Q5 Quellenqualität | ◐ | Primärquellen identifiziert, nicht im Volltext gelesen |
 | Q6 Vollständigkeit | ✓ | – |
-| Q7 Widerspruchsfreiheit | ◐ | v1.6.0: Analyse-Konfidenzen und Scorecard per Sync (L48, L49), K10 angeglichen; ✓ erst nach Zweitprüfung (L10) |
+| Q7 Widerspruchsfreiheit | ◐ | v1.7.0: Analyse ohne Hand-Konfidenzen, Labels = DBOM (L48b, L05d); ✓ erst nach Zweitprüfung (L10) |
 | Q8 Glossar | ✓ | Pflichtbegriffe von der vierten Zweitprüfung bestätigt |
-| Q9 Keine Überzeichnung / Halluzination | ◐ | v1.6.0: BFH-Modalität (L47) und unbelegte Analyse-Angaben (L43) korrigiert; ✓ erst nach Zweitprüfung (L10) |
+| Q9 Keine Überzeichnung / Halluzination | ◐ | v1.7.0: Analyse auf DBOM-Fakten gestrafft (L43, L53); ✓ erst nach Zweitprüfung (L10) |
 | Q10 Formatvorgaben | ✓ | Sechste Zweitprüfung: Erklärungen sachlich korrekt, Version einheitlich; L41/L41b/L44-Tests |
 
 **Gesamtscore:** 10 × ✓ + 9 × ◐ = 14,5 von 19 Punkten = **76,3 %**.
