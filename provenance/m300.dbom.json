@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -57,6 +57,10 @@
       "supporting_sources": [
         "SRC_BT_DRS",
         "SRC_CMS"
+      ],
+      "markers": [
+        "offenen Fälle",
+        "offene Fälle"
       ]
     },
     {
@@ -120,7 +124,10 @@
       "claim": "Zu § 20 Abs. 6 Satz 4 EStG ist beim BVerfG die Vorlage 2 BvL 3/21 anhängig; eine Entscheidung wurde bis 05.10.2026 nicht gefunden.",
       "source_id": "SRC_STEUERTIPPS",
       "caveat": "Verfahrensstand nur sekundär; auf bundesverfassungsgericht.de prüfen.",
-      "period": "Stand 05.10.2026"
+      "period": "Stand 05.10.2026",
+      "markers": [
+        "2 BvL 3/21"
+      ]
     },
     {
       "id": "FACT_OS_KO_NOT_TERMIN",
@@ -146,6 +153,11 @@
       "period": "BMF 03.06.2021 bis Aufhebung durch JStG 2024",
       "supporting_sources": [
         "SRC_BMF_2021"
+      ],
+      "markers": [
+        "Knock-out-Totalverlust",
+        "Totalverlust beim Knock-out",
+        "Totalverlust laut Finanzverwaltung"
       ]
     },
     {
@@ -988,6 +1000,12 @@
       "date": "2026-10-08",
       "event": "Sechste Zweitprüfung v1.5.0: C1 und Q10 ✓, Q7 ◐ (Analyse-Konfidenzen und Scorecard); neue offene Fehlerklassen L46–L50; L45 (Live-Audit-Selektor) in v1.5.0 behoben",
       "qa_score_pct": 76.3,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-08",
+      "event": "v1.6.0: Befunde der sechsten Zweitprüfung umgesetzt – „offene Fälle“ an FACT_P52_ABS28 gebunden (markers, L46); BFH-Modalität korrigiert (L47); Analyse-Konfidenzen mit Fakt-ID aus DBOM (L48); Analyse-Scorecard per Sync (L49); unbelegte Analyse-Angaben entfernt (L43); Tests verschärft (L50)",
+      "qa_score_pct": null,
       "release": "ÜBERARBEITUNG"
     }
   ]

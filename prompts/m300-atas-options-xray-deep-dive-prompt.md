@@ -2,7 +2,7 @@
 
 **Thema:** ATAS Options X-Ray, Dealer-Hedging-Analytik, Eurex-Börsenoptionen vs. verbriefte Derivate im DACH-Raum
 und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
-**Prompt-Version:** 1.2.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-08 (Lehren L03–L44 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
+**Prompt-Version:** 1.3.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-08 (Lehren L03–L50 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
 **Modul-ID:** M300 ist ein Platzhalter und kann frei angepasst werden
 
 ---
@@ -305,6 +305,7 @@ Q9  Keine Halluzinationen oder Überzeichnungen: Aktenzeichen, Paragraphen, Prod
     Kontraktdaten stichprobenartig gegengeprüft; nicht prüfbare Angaben entfernt oder als [N. V.]
     gekennzeichnet. Allaussagen („0 von N“, „kein Anbieter“, „alle“) nur über belegte Fälle;
     [N. V.]-Fälle im selben Satz nennen [L06].
+    Rechtsbewertungen nicht stärker als die Quelle (Zweifel ≠ Unvereinbarkeit) [L47].
 Q10 Formatvorgaben aus Abschnitt 4 eingehalten; jeder Fachbegriff wird beim ersten Auftreten erklärt
     (z. B. AdV, Stillhalter, Strike, Quanto, Bezugsverhältnis, Expected Move) [L41].
 

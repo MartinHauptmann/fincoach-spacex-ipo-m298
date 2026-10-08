@@ -7,6 +7,7 @@ Schreibt alle Werte, die aus der DBOM oder den Gate-Zellen folgen, in Seite und 
   - Analyse: Abschnitt 5 (Quellen), Abschnitt 6 (Fakten), Abschnitt 7 (Offen-Liste = Seite)
 Nie von Hand nachziehen – immer dieses Skript laufen lassen, danach check_module.py.
 """
+import html
 import json
 import re
 import sys
@@ -68,6 +69,21 @@ def main():
         md = re.sub(r"^\| Version \| [\d.]+", f"| Version | {d['module']['version']}", md, count=1, flags=re.M)  # L44
         md = re.sub(r"Stand: Modul v[\d.]+,\n\d+ Fakten, \d+ Quellen\.", f"Stand: Modul v{d['module']['version']},\n{len(F)} Fakten, {len(d['sources'])} Quellen.", md)
         md = re.sub(r"(## 7 · Offene Prüfpunkte vor Veröffentlichung\n\n)(?:- .*\n)+", lambda m: m.group(1) + "".join(f"- {t}\n" for t in open_items), md)
+        # L48: Konfidenzen im Fließtext stehen mit Fakt-ID und kommen aus der DBOM
+        md = re.sub(r"(`(FACT_[A-Z0-9_]+)`[^)`]*?Konfidenz )(\d,\d+)", lambda m: m.group(1) + de(facts[m.group(2)]["confidence"]) if m.group(2) in facts else m.group(0), md)
+        # L49: QA-Scorecard der Analyse aus den Gate-Zellen der Seite
+        rows_qa = [(lab, c, (re.search(r'title="([^"]*)"', rest) or [None, ""])[1])
+                   for lab, c, rest in re.findall(r'<tr><td>([CQ]\d+ [^<]*)</td><td class="(check-\w+)"([^>]*)>', qa)]
+        sym = {"check-pass": "✓", "check-part": "◐", "check-fail": "✗"}
+        tbl8 = "\n".join(f"| {lab} | {sym[c]} | {html.unescape(t) or '–'} |" for lab, c, t in rows_qa)
+        c_ok = all(c == "check-pass" for lab, c, _ in rows_qa if lab.startswith("C"))
+        rel = "FREIGABE" if c_ok and pct >= 90 else "ÜBERARBEITUNG"
+        n_ok = sum(c == "check-pass" for _, c, _ in rows_qa); n_part = sum(c == "check-part" for _, c, _ in rows_qa)
+        sec8 = ("> **Automatisch erzeugt** aus den Gate-Zellen von `m%s.html` (`qa/sync_module.py`, L49). Nicht von Hand ändern.\n\n"
+                "| Gate | Status | Begründung |\n|---|---|---|\n%s\n\n"
+                "**Gesamtscore:** %d × ✓ + %d × ◐ = %s von %d Punkten = **%s %%**.\n**Freigabeempfehlung: %s.**\n") % (
+                    mod, tbl8, n_ok, n_part, de(pts, 1) if pts % 1 else str(int(pts)), len(cells), de(pct, 1), rel)
+        md = re.sub(r"(## 8 · QA-Scorecard\n\n).*?(?=\n---\n)", lambda m: m.group(1) + sec8, md, count=1, flags=re.S)
         mds[0].write_text(md, encoding="utf-8")
     print(f"synchronisiert: {cnt} · QA {de(pct, 1)} % ({pts}/{len(cells)}) · Offen-Liste {len(open_items)} Punkte")
 

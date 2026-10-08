@@ -5,10 +5,10 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.5.0 (Entwurf) |
+| Version | 1.6.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
-| Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.2.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
+| Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.3.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
 | Freigabeempfehlung | **ÜBERARBEITUNG** (siehe QA-Scorecard, Abschnitt 8) |
 
 > **Disclaimer (Kurzfassung):** Diese Analyse ist eine allgemeine Information zu Bildungszwecken. Sie ist
@@ -62,7 +62,7 @@ Legende Prüfergebnis: ✓ bestätigt · ◐ teilweise/präzisiert · ✗ falsch
 |---|---|---|---|---|---|---|---|
 | A01 | Verluste aus Termingeschäften seit 2021 nur bis 20.000 €/Jahr verrechenbar (§ 20 Abs. 6 S. 6 EStG) | Steuer/Recht | CONFIRMED | ✗ | Norm war **Satz 5** (Satz 6 betraf Forderungsausfall). Eingeführt 2019 mit 10.000 €, durch JStG 2020 auf 20.000 € erhöht, durch JStG 2024 aufgehoben (alle offenen Fälle) | S1–S4 | 0,90 |
 | A02 | Besteuerung „fiktiver Gewinne“ bei Spreads trotz Nettoverlust | Steuer/Recht | CONFIRMED | ◐ | Für 2021–2024 zutreffend beschrieben (asymmetrische Besteuerung, so auch BFH). Heute in offenen Fällen behoben | S5 | 0,85 |
-| A03 | BFH äußerte in „mehreren Beschlüssen“ Zweifel (VIII B 113/23) | Steuer/Recht | CONFIRMED | ◐ | Belegt ist **ein** BFH-Beschluss vom 07.06.2024 im Verfahren über die Aussetzung der Vollziehung (AdV; summarische Prüfung, Streitjahr 2021); Vorinstanz FG Rheinland-Pfalz 1 V 1674/23. Weitere BFH-Beschlüsse nicht gefunden | S5, S6 | 0,85 |
+| A03 | BFH äußerte in „mehreren Beschlüssen“ Zweifel (VIII B 113/23) | Steuer/Recht | CONFIRMED | ◐ | Belegt ist **ein** BFH-Beschluss vom 07.06.2024 im Verfahren über die Aussetzung der Vollziehung (AdV; summarische Prüfung, Streitjahr 2021). Vorinstanz: FG Rheinland-Pfalz (Aktenzeichen [N. V.]). Weitere BFH-Beschlüsse nicht gefunden | S5, S6 | 0,85 |
 | A04 | Rechtsunsicherheit bleibt bis zur BVerfG-Entscheidung | Steuer/Recht | MEDIA_REPORT | ✗ | Durch die Aufhebung überholt; kein BVerfG-Verfahren speziell zu Termingeschäften gefunden | S1, S4 | 0,80 |
 | A05 | Optionsscheine/Knock-outs sind laut Finanzverwaltung keine Termingeschäfte | Steuer/Recht | CONFIRMED | ✓ | Seit BMF 03.06.2021, fortgeführt bis 14.05.2025. Randziffern [N. V.] | S4, S7 | 0,85 |
 | A06 | Optionsschein-Verluste uneingeschränkt mit Aktien-/Zinsgewinnen verrechenbar | Steuer/Recht | CONFIRMED | ◐ | Richtung zutreffend; Aktien*verluste* bleiben nach § 20 Abs. 6 S. 4 auf Aktiengewinne beschränkt. Knock-out-Totalverlust unterlag früher Satz 6 a. F. | S4, S8 | 0,85 |
@@ -74,8 +74,8 @@ Legende Prüfergebnis: ✓ bestätigt · ◐ teilweise/präzisiert · ✗ falsch
 | A12 | Datenbasis CBOE/OptionsDepth, 60-Sekunden-Snapshots | Produkt | VENDOR_CLAIM | ✓ | „1-minute CBOE feed … data and analytics by OptionsDepth“; Neuberechnung jede Minute | S16, S17 | 0,85 |
 | A13 | Beschränkung auf den SPX-Komplex | Produkt | VENDOR_CLAIM | ✓ | Nur SPX-Optionen; Anzeige nur auf ES, MES, SPY, US 500. Die separate Options Chain Suite (EOD) deckt ES, NQ, CL, GC ab | S15, S18 | 0,85 |
 | A14 | Broker-Konnektivität Rithmic, IB, CQG | Produkt | VENDOR_CLAIM | ◐ | Für ATAS allgemein ✓. Options X-Ray benötigt laut Changelog Rithmic oder IB; CQG „in Entwicklung“ | S19, S17 | 0,70 |
-| A15 | ES/MES-Cross-Trading vorhanden | Produkt | VENDOR_CLAIM | ✓ | Seit Version 8.0.12 (17.02.2026), auch NQ/MNQ, YM/MYM, RTY/M2K | S20 | 0,85 |
-| A16 | Options Board und Strategy Analyzer in Entwicklung | Produkt | VENDOR_CLAIM | ◐ | Beide als **Beta** verfügbar (ab 8.0.14, Ultra-Plan); Optionshandel in ATAS derzeit nicht möglich | S21, S16 | 0,80 |
+| A15 | ES/MES-Cross-Trading vorhanden | Produkt | VENDOR_CLAIM | ✓ | Seit Version 8.0.12 (17.02.2026); weitere Paare [N. V.] | S20 | 0,85 |
+| A16 | Options Board und Strategy Analyzer in Entwicklung | Produkt | VENDOR_CLAIM | ◐ | Beide als **Beta** verfügbar (Ultra-Plan); Optionshandel in ATAS derzeit nicht möglich | S21, S16 | 0,80 |
 | A17 | Fehlende native Multi-Leg-Spread-Routing-Engine | Produkt | VENDOR_CLAIM | ✓ | Zutreffend. Die IB-API unterstützt Combo-Orders (BAG, bis 6 Legs) bereits nativ | S22 | 0,85 |
 | A18 | NDX/NQ zeigt überproportionale 0DTE-Dynamik | Markt | USER_PROVIDED | ? | Keine belastbare Quantifizierung gefunden | – | 0,30 |
 | A19 | Wettbewerbsfelder (SpotGamma, MenthorQ, Volland, Bookmap, TWS) | Wettbewerb | MEDIA_REPORT | ◐ | Siehe Modul 5; mehrere Felder [N. V.] | S23–S28 | 0,65 |
@@ -88,29 +88,26 @@ Legende Prüfergebnis: ✓ bestätigt · ◐ teilweise/präzisiert · ✗ falsch
 auf das Gesetz zur Einführung einer Pflicht zur Mitteilung grenzüberschreitender Steuergestaltungen vom
 21.12.2019 zurück (BGBl. I S. 2875). Sie galt für Termingeschäfte ab dem 01.01.2021 und war zunächst auf
 10.000 € begrenzt. Das Jahressteuergesetz 2020 vom 21.12.2020 (BGBl. I S. 3096) hob die Grenze auf 20.000 €
-an. Das Jahressteuergesetz 2024 vom 02.12.2024 (BGBl. 2024 I Nr. 387) hob die Sätze 5 und 6 in Artikel 3 auf. Nach der Anwendungsregel in § 52 Abs. 28 EStG sind sie
-„in allen offenen Fällen nicht mehr anzuwenden“. Die Satznummern 25/26 sind nur per Snippet belegt
-(Konfidenz 0,7). Das BMF-Schreiben „Einzelfragen zur Abgeltungsteuer“ vom 14.05.2025
-(IV C 1 – S 2252/00075/016/070) setzt das um. Bestehende Verlustvorträge aus Termingeschäften sind
+an. Das Jahressteuergesetz 2024 vom 02.12.2024 (BGBl. 2024 I Nr. 387) hob die Sätze 5 und 6 auf. Nach der Anwendungsregel in § 52 Abs. 28 EStG gilt das in allen offenen
+Fällen; Wortlaut und Satznummern sind nur per Snippet belegt (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6). Das BMF-Schreiben „Einzelfragen zur Abgeltungsteuer“ vom 14.05.2025
+setzt das um. Bestehende Verlustvorträge aus Termingeschäften sind
 danach in offenen Fällen unbeschränkt verrechenbar. Im Steuerabzugsverfahren der Banken wirkte die
 Beschränkung nie unmittelbar. Termingeschäftsverluste wurden bescheinigt und erst in der Veranlagung
 berücksichtigt. Wie die Institute das im Abzugsverfahren umsetzen, ist [N. V.]. **Ergebnis: ✗ im Quelltext; die Regelung ist kein geltendes Recht mehr.**
 
 **K2 · BFH VIII B 113/23.** Es handelt sich um einen Beschluss vom 07.06.2024 im Verfahren über die Aussetzung
-der Vollziehung (§ 69 Abs. 3 FGO). Der Senat prüfte nur summarisch und kam zu dem Ergebnis, die Regelung sei
-mit Art. 3 Abs. 1 GG voraussichtlich nicht vereinbar. Begründet wurde das mit dem objektiven Nettoprinzip
-und der asymmetrischen Besteuerung. Ein Hauptsacheurteil oder eine Vorlage an das BVerfG wurde nicht gefunden.
+der Vollziehung (§ 69 Abs. 3 FGO). Der Senat prüfte nur summarisch und äußerte ernstliche Zweifel an der Vereinbarkeit
+der Regelung mit Art. 3 Abs. 1 GG. Die Begründung im Einzelnen ist [N. V.]. Ein Hauptsacheurteil oder eine Vorlage an das BVerfG wurde nicht gefunden.
 Die Bezeichnung „mehrere Beschlüsse“ ist nicht belegt, und die Aussage „Rechtsunsicherheit bis zur BVerfG-Entscheidung“ ist durch die Aufhebung überholt. **Ergebnis: ✗** (Beschluss selbst korrekt zitiert).
 
 **K3 · Abgrenzung Termingeschäft.** Die Finanzverwaltung ordnet Optionsscheine (Kapitalforderungen) und
 Zertifikate einschließlich Knock-out-Produkten nicht als Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5
-a. F. ein. Das gilt seit dem BMF-Schreiben vom 03.06.2021 und ist in den Fassungen von 2022 und 2025
+a. F. ein. Das gilt seit dem BMF-Schreiben vom 03.06.2021 und ist bis zur Fassung vom 14.05.2025
 fortgeführt. Beim Knock-out-Ereignis griff bis zur Aufhebung nach Auffassung der Finanzverwaltung (Sekundärbeleg S51, ungeprüft) allerdings Satz 6 a. F. (Ausfall oder
 Wertloswerden), ebenfalls mit einer Grenze von 20.000 €. Der vom Quelltext behauptete einseitige
 Steuervorteil verbriefter Produkte war daher schon unter altem Recht kleiner als dargestellt. Nach der
 Aufhebung besteht er nicht mehr. Unverändert gilt nur § 20 Abs. 6 Satz 4 (Aktienverluste). Dazu ist beim
-BVerfG laut Sekundärquelle (ungeprüft) die Vorlage 2 BvL 3/21 anhängig. Eine Entscheidung wurde bis
-zum Stichtag nicht gefunden (Konfidenz 0,6). **Ergebnis: ◐** (Einordnung ✓, Verdrängungsthese ✗).
+BVerfG laut Sekundärquelle (ungeprüft) die Vorlage 2 BvL 3/21 anhängig. Eine Entscheidung wurde bis zum Stichtag nicht gefunden (`FACT_BVERFG_PENDING`, Konfidenz 0,6). **Ergebnis: ◐** (Einordnung ✓, Verdrängungsthese ✗).
 
 **K4 · Kapitalgesellschaft.** § 15 Abs. 4 Satz 3 EStG schließt aus, dass Verluste aus Termingeschäften mit
 anderen Einkünften ausgeglichen werden. Sie sind nur mit Gewinnen aus Termingeschäften verrechenbar
@@ -134,14 +131,15 @@ dargestellt werden.
 **K6 · GEX-Prämisse.** Jede GEX-Berechnung braucht eine Annahme über die Gegenpartei. Die klassische
 Konvention lautet „Kunden kaufen Puts und verkaufen Calls, Dealer halten die Gegenposition“. Sie ist eine
 **MODEL_ASSUMPTION**. OptionsDepth stützt sich nach eigener Darstellung auf nach Teilnehmertyp markierte
-CBOE-Daten (Open-Close-Daten). Das ist für SPX-Optionen, die nur an der Cboe gehandelt werden, eine
-deutlich bessere Grundlage als eine reine Tape-Klassifikation (Konfidenz 0,7). Restfehler bleiben trotzdem:
+CBOE-Daten (Open-Close-Daten). Das ist für SPX-Optionen, die nur an der Cboe gehandelt werden, eine deutlich bessere Grundlage als eine reine Tape-Klassifikation
+(`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6). Restfehler bleiben trotzdem:
 Ein Market Maker im Sinne der Datenmarkierung ist nicht zwingend der Risikoträger mit Hedgebedarf. Kombi-
 und Spread-Trades verzerren die Strike-Zuordnung. Overwriting- und Dispersionsprogramme sowie Volumen,
 das intraday eröffnet und geschlossen wird, hinterlassen keine Spur im Open Interest. **Ergebnis: ◐.**
 
 **K7 · Emittenten-Hedging bei Optionsscheinen.** Emittenten sichern das Nettorisiko ihrer Bücher laufend
-dynamisch ab, über den Basiswert oder über „passende Gegengeschäfte“ (Konfidenz 0,6). Eine Primärquelle,
+dynamisch ab, über den Basiswert oder über „passende Gegengeschäfte“
+(`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6). Eine Primärquelle,
 die das Hedging des Nettodeltas speziell über FDAX oder ODAX belegt, wurde nicht gefunden. Die Aussage
 „keine Hedging-Kaskaden im FDAX“ ist daher zu stark. Zutreffend ist: Die Spur ist nach dem Netting klein,
 zeitlich verteilt, nicht öffentlich zurechenbar und lässt sich nicht aus Börsendaten rekonstruieren.
@@ -150,17 +148,16 @@ zeitlich verteilt, nicht öffentlich zurechenbar und lässt sich nicht aus Börs
 **K8 · ATAS-Produktangaben.** Die Indikatorliste, die Datenquelle (1-Minuten-CBOE-Feed, Analytik
 OptionsDepth), die SPX-Beschränkung und das ES/MES-Cross-Trading sind über Hilfe- und Lernseiten des
 Herstellers belegt. Options Board und Strategy Analyzer existieren als Beta. Optionen sind in ATAS nach
-Herstellerangabe derzeit nicht handelbar. Der Start der Suite am 04.09.2026 ist nur über einen Snippet
-belegt (Konfidenz 0,6). **Ergebnis: ✓ mit Präzisierungen.**
+Herstellerangabe derzeit nicht handelbar. Der Start der Suite am 04.09.2026 ist nur über einen Snippet belegt (`FACT_XRAY_LAUNCH`, Konfidenz 0,6). **Ergebnis: ✓ mit Präzisierungen.**
 
 **K9 · Wettbewerber.** Siehe Modul 5. Preise und Frequenzen stammen aus Snippets von Anbieter- und
 Drittseiten; mehrere Felder sind [N. V.]. **Ergebnis: ◐.**
 
 **K10 · Eurex-Spezifikationen.** Die Kontraktgrößen sind:
 
-- FDXM 5 €/Pkt. und FDXS 1 €/Pkt. (belegt)
-- ODAX 5 €/Pkt., europäisch, Barausgleich, Basiswert DAX-Index (belegt)
-- FDAX 25 €/Pkt. sowie FESX und OESX je 10 €/Pkt. (Standardangaben, Konfidenz 0,8)
+- ODAX 5 €/Pkt., europäisch, Barausgleich, Basiswert DAX-Index (`FACT_ODAX_SPECS`, Konfidenz 0,85)
+- OESX 10 €/Pkt. (`FACT_OESX_MULT`, ungeprüft, Konfidenz 0,7)
+- Kontraktgrößen von FDAX, FDXM, FDXS und FESX: in der DBOM nicht belegt [N. V.]
 
 Optionen auf DAX- oder Euro-Stoxx-50-Futures wurden nicht gefunden. Gelistet sind Indexoptionen
 einschließlich Micro-DAX-Optionen (ODXS). Für den kurzfristigen Bereich gibt es zwei Produkte. OEXP
@@ -195,7 +192,7 @@ Angaben abgleichen statt gegen eine eigene „Marge“. **Ergebnis: ◐.**
 | 7 | WESENTLICH | ATAS ermöglicht derzeit keinen Optionshandel. Options Board und Strategy Analyzer sind Beta. Die IB-API unterstützt Combo-Orders bereits. |
 | 8 | HINWEIS | Nur ein BFH-Beschluss ist belegt (AdV, summarisch). |
 | 9 | HINWEIS | Emittenten-Hedging hinterlässt eine schwache, nicht zurechenbare Börsenspur, keine „Nullspur“. |
-| 10 | HINWEIS | „Hexensabbat“ heißt fachlich Quartalsverfall. Eurex hat mit OEXP und ODAP bereits Optionen mit Tagesverfall. |
+| 10 | HINWEIS | „Hexensabbat“ heißt fachlich Quartalsverfall. Eurex hat mit OEXP und ODAP bereits End-of-Day-Optionen; Verfälle an zehn Handelstagen sind für OEXP belegt. |
 | 11 | HINWEIS | Die Options Chain Suite (EOD) deckt bereits ES, NQ, CL und GC ab. Die Multi-Asset-Forderung betrifft nur die Intraday-Analytik von X-Ray. |
 
 ---
@@ -529,8 +526,8 @@ Cboe-Daten vergleichsweise gut, anderswo deutlich schwächer fundiert ist. Optio
 schwache und nicht zurechenbare Hedgespur, aber nicht gar keine.
 
 **Entfallen** muss die steuerliche Rahmenerzählung. Die 20.000-€-Grenze für Termingeschäfte ist seit dem
-JStG 2024 für alle offenen Fälle aufgehoben. Ein Verfahren vor dem BVerfG zu dieser Frage ist nicht zu
-erwarten. Kapitalgesellschaften sind über § 15 Abs. 4 Satz 3 EStG nicht frei von einer Verlustbeschränkung
+JStG 2024 für alle offenen Fälle aufgehoben. Ob die Aufhebung verfassungsrechtliche Fragen zu Altjahren
+erledigt, ist hier nicht bewertet. Kapitalgesellschaften sind über § 15 Abs. 4 Satz 3 EStG nicht frei von einer Verlustbeschränkung
 für Termingeschäfte.
 
 Die strategische These für den DACH-Markt muss deshalb neu begründet werden. Der Wert einer Eurex-Erweiterung
@@ -635,7 +632,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.5.0,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.6.0,
 46 Fakten, 53 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -701,45 +698,43 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- „In allen offenen Fällen“ in Hero, KPI, S04 und S10 an den abgetrennten Fakt binden und kennzeichnen (L46)
+- Bindung „offene Fälle“ an den abgetrennten Fakt v1.6.0 (L46) durch unabhängige Zweitprüfung bestätigen
 - Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
 - Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
 - Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
-- Analyse: BFH-Modalität („ernstliche Zweifel“), weitere unbelegte Angaben (FG-Aktenzeichen, Geschäftszeichen, Kontraktgrößen, Versionen) und BVerfG-Prognose belegen oder entfernen (L47, L43)
-- Analyse: Konfidenzangaben und QA-Scorecard aus DBOM/Seite ableiten; K10 an ODAP-Befund angleichen (L48, L49)
+- Analyse-Korrekturen v1.6.0 (BFH-Modalität, unbelegte Angaben, BVerfG-Prognose; L43, L47) durch unabhängige Zweitprüfung bestätigen
+- Konfidenzen und Scorecard der Analyse per Sync, K10 angeglichen (v1.6.0, L48, L49) durch unabhängige Zweitprüfung bestätigen
 
 ---
 
 ## 8 · QA-Scorecard
 
-> **Hinweis 2026-10-07:** Diese Scorecard gibt den Stand der Erstfassung wieder. Die aktuelle, gemessene Bewertung steht in
-> `m300.html` (QA-Sektion) und im Prüfbericht `analysen/m300-qa-report-2026-10-07.md`.
+> **Automatisch erzeugt** aus den Gate-Zellen von `m300.html` (`qa/sync_module.py`, L49). Nicht von Hand ändern.
 
 | Gate | Status | Begründung |
 |---|---|---|
-| C1 Disclaimer | ✓ | Kurzfassung am Anfang, Vollfassung am Ende |
-| C2 Keine Anlageempfehlung | ✓ | Setups generisch, ohne Instrument-, Ziel- und Timingangaben; Compliance-Hinweis in Modul 4 |
-| C3 Steuer/Recht mit Stichtag und Primärquelle | ◐ | Stichtag und Normen genannt; Primärquellen nur per Snippet eingesehen (Abbruchregel 9 greift) |
-| C4 Neutralität / Interessenkonflikte | ✓ | Einheitliche Maßstäbe; Matrix ohne Rangfolge; Interessenkonflikte: keine bekannt (vom Herausgeber zu bestätigen) |
-| C5 Marken | ✓ | Rein beschreibend, Marken-Hinweis am Ende |
-| C6 UWG | ✓ | Wertende Begriffe ersetzt; keine Emittentenbewertung |
-| C7 Risikodarstellung | ✓ | Modell-, Latenz- und Positionsannahmenrisiken in Modul 1, 2, 4 |
-| C8 Regulatorische Bezüge | ◐ | Korrekt benannt; PRIIPs/Art. 24 MiFID II/§ 6 UWG nicht neu am Original verifiziert |
-| C9 Datenschutz | ✓ | Keine personenbezogenen Daten |
-| Q1 Phase A vollständig | ✓ | Claim-Tabelle, K1–K12, Korrekturliste |
-| Q2 Aktualität | ✓ | Stichtag je Aussage; a. F. gekennzeichnet |
-| Q3 Mathematische Konsistenz | ✓ | Formeln mit Konvention; Zahlenbeispiel mit Probe |
-| Q4 Provenienz | ✓ | Tags und Konfidenz in Claim-Tabelle und M-DBOM |
-| Q5 Quellenqualität | ◐ | Primärquellen identifiziert, aber nicht im Volltext gelesen |
-| Q6 Vollständigkeit | ✓ | Alle acht Module; Matrix mit [N. V.] |
-| Q7 Widerspruchsfreiheit | ✓ | Fazit folgt Phase A (K1, K3, K4) |
-| Q8 Glossar | ✓ | 23 Begriffe |
-| Q9 Keine Halluzinationen | ◐ | Unsichere Fundstellen markiert und in Abschnitt 7 gelistet |
-| Q10 Formatvorgaben | ✓ | Fließtext, Tabellen für Quantitatives, LaTeX |
+| C1 Disclaimer Anfang/Ende | ✓ | Sechste Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test |
+| C2 Keine Anlageempfehlung (MAR) | ✓ | – |
+| C3 Steuer/Recht mit Primärquelle | ◐ | Primärquellen nur per Snippet eingesehen |
+| C4 Neutralität / Interessenkonflikte | ◐ | Interessenkonflikte vom Herausgeber noch nicht bestätigt (L10b) |
+| C5 Marken beschreibend | ✓ | – |
+| C6 UWG-konforme Begriffe | ✓ | – |
+| C7 Ausgewogene Risikodarstellung | ✓ | – |
+| C8 Regulatorische Bezüge belegt | ◐ | § 80 WpHG über Suchtreffer auf den Gesetzestext belegt; PRIIPs/UWG und § 63 Abs. 10 WpHG UNVERIFIED |
+| C9 Datenschutz | ◐ | Modul: 0 Drittanbieter-Abrufe, kein Speicher (L20); verlinkte Datenschutzerklärung offen (L38) |
+| Q1 Faktencheck K1–K12 vollständig | ✓ | – |
+| Q2 Aktualität / a. F. markiert | ◐ | BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b) |
+| Q3 Mathematische Konsistenz | ✓ | – |
+| Q4 Provenienz je Fakt | ◐ | v1.6.0: „offene Fälle“ an FACT_P52_ABS28 gebunden (L46); ✓ erst nach Zweitprüfung (L10) |
+| Q5 Quellenqualität | ◐ | Primärquellen identifiziert, nicht im Volltext gelesen |
+| Q6 Vollständigkeit | ✓ | – |
+| Q7 Widerspruchsfreiheit | ◐ | v1.6.0: Analyse-Konfidenzen und Scorecard per Sync (L48, L49), K10 angeglichen; ✓ erst nach Zweitprüfung (L10) |
+| Q8 Glossar | ✓ | Pflichtbegriffe von der vierten Zweitprüfung bestätigt |
+| Q9 Keine Überzeichnung / Halluzination | ◐ | v1.6.0: BFH-Modalität (L47) und unbelegte Analyse-Angaben (L43) korrigiert; ✓ erst nach Zweitprüfung (L10) |
+| Q10 Formatvorgaben | ✓ | Sechste Zweitprüfung: Erklärungen sachlich korrekt, Version einheitlich; L41/L41b/L44-Tests |
 
-**Gesamtscore:** 15 × ✓ + 4 × ◐ = 15 + 2 = 17 von 19 Punkten = **89,5 %**.
-**Freigabeempfehlung: ÜBERARBEITUNG.** Kein Compliance-Gate steht auf ✗, aber C3 und C8 stehen auf ◐, und
-der Score liegt unter 90 %. Nach Abarbeitung der Punkte in Abschnitt 7 ist eine Freigabe erreichbar.
+**Gesamtscore:** 10 × ✓ + 9 × ◐ = 14,5 von 19 Punkten = **76,3 %**.
+**Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
 

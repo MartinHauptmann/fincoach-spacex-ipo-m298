@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L45 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L50 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -94,6 +94,13 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L43:** Daten, Paragraphen und Aktenzeichen der Analyse stehen in einem DBOM-Fakt; unbelegte Angaben entfernen.
 - **L44:** Die Version steht nur in der DBOM; `sync_module.py` überträgt sie.
 - **L45:** Das Live-Audit-Banner zeigt keine Warnung (Browser-Audit liest es aus).
+- **L46:** Wird eine Teilaussage als eigener Fakt abgetrennt, bekommt er Leitphrasen (`markers`). Jedes Element mit
+  Leitphrase bindet diesen Fakt (und zeigt sein Badge).
+- **L47 / Q9:** Starke Rechtsbewertungen („voraussichtlich nicht vereinbar“, „verfassungswidrig“ …) nur, wenn der Claim sie
+  wörtlich trägt. Manuell: Modalität jedes Rechtssatzes (Zweifel / Vorlage / Entscheidung) gegen den Claim lesen.
+- **L48:** Konfidenzen in der Analyse nur als „(`FACT_…`, …, Konfidenz x,y)“; der Wert kommt per Sync aus der DBOM.
+- **L49:** Die QA-Scorecard der Analyse (Abschnitt 8) erzeugt `sync_module.py` aus den Gate-Zellen.
+- **L50:** Jeder neue Test wird vor dem Commit mit mindestens einer Umgehung (Verneinung, Markup, anderer Ort) gegengeprüft.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

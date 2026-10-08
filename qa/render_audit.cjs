@@ -82,18 +82,25 @@ async function audit(browser, url, vp) {
     // L41/L41b · Fachbegriffe: erstes SICHTBARES Vorkommen in <dfn>/<abbr title> oder Glossar-Eintrag; jede Großbuchstaben-Abkürzung ist eingeordnet
     const termsUndef = [], abbrUnknown = new Set();
     const gl = [...document.querySelectorAll('#glossar .font-head')].map(e => e.textContent.trim().toLowerCase());
-    const vis = () => document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest('script,style,#s-qa,#sources,title,desc,svg,canvas,.katex,footer') || !n.parentElement.checkVisibility() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    const vis = () => document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest('script,style,#s-qa,#sources,title,desc,svg,canvas,.katex') || !n.parentElement.checkVisibility() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
     const T = window.__TERMS || { terms: [], known: [] };
     for (const term of T.terms) {
-      if (gl.some(g => g === term.toLowerCase() || g.startsWith(term.toLowerCase() + ' ') || g.includes('(' + term.toLowerCase() + ')'))) continue;
+      if (gl.some(g => g.split(/[\s\/()-]+/).includes(term.toLowerCase()))) continue;  // Glossar-Eintrag nennt den Begriff als eigenes Wort
       const re = new RegExp('(^|[^A-Za-zÄÖÜäöü])' + term.replace(/\./g, '\\.') + (/[a-z]/.test(term) ? '(?!r\\b)' : '(?![A-Za-zäöü])'));  // Wort: Komposita ja, „Quantor“ nein
       const w = vis(); let n; while ((n = w.nextNode())) if (re.test(n.textContent)) break;
-      if (n && !n.parentElement.closest('dfn,abbr[title]')) termsUndef.push(`${term} (${(n.parentElement.closest('section') || {}).id || 'top'})`);
+      // L50: <abbr> braucht einen Titel (≥ 3 Zeichen), <dfn> einen Titel oder eine Erklärung direkt danach („(“, „=“, „:“, „,“)
+      const host = n && n.parentElement.closest('dfn,abbr');
+      const explained = host && (host.tagName === 'ABBR' ? (host.title || '').trim().length >= 3
+        : (host.title || '').trim().length >= 3 || /^[\w-]*\s*[(=:,]/.test((host.nextSibling && host.nextSibling.textContent) || '') || /[(=]\s*$/.test((host.previousSibling && host.previousSibling.textContent) || '') && /^\s*[=,]/.test((host.nextSibling && host.nextSibling.textContent) || ''));
+      if (n && !explained) termsUndef.push(`${term} (${(n.parentElement.closest('section') || {}).id || 'top'})`);
     }
-    { const w = vis(); let n; while ((n = w.nextNode())) for (const m of n.textContent.matchAll(/(?<![A-Za-zÄÖÜäöü0-9_])[A-ZÄÖÜ][A-ZÄÖÜ0-9]+(?![A-Za-zÄÖÜäöü0-9_])/g))
+    { const w = vis(); let n; while ((n = w.nextNode())) for (const m of n.textContent.matchAll(/(?<![A-Za-zÄÖÜäöü0-9_])\d?[A-ZÄÖÜ][A-ZÄÖÜ0-9]+(?![A-Za-zÄÖÜäöü0-9_])/g))
         if (!/^[SK]\d+$/.test(m[0]) && !T.known.includes(m[0]) && !T.terms.includes(m[0])) abbrUnknown.add(m[0]); }
     // L45 · Live-Audit-Banner darf keine Warnung zeigen
-    const liveWarn = [...document.querySelectorAll('body *')].filter(e => e.tagName !== 'SCRIPT' && e.tagName !== 'STYLE' && (!e.children.length || e.tagName === 'SPAN')).map(e => e.textContent).find(t => /⚠\s*ungebunden/.test(t)) || '';
+    // L50: Statuszeile muss mit ✓ beginnen (kein ✗ ungültige Referenz, kein ⚠ offline/ungebunden)
+    const st = document.getElementById('live-audit-status'), meta = document.getElementById('live-audit-meta');
+    const stTxt = st ? st.textContent.trim() : '', metaTxt = meta ? meta.textContent : '';
+    const liveWarn = !st ? '' : (!/^✓/.test(stTxt) ? stTxt : (/[⚠✗]/.test(metaTxt) ? metaTxt.slice(metaTxt.search(/[⚠✗]/)) : ''));
     return { liveWarn: liveWarn.slice(0, 160), abbrUnknown: [...abbrUnknown], termsUndef, svgSmall, svgOverlap, katex: document.querySelectorAll('.katex').length, katexErr: document.querySelectorAll('.katex-error').length, charts: window.Chart ? Object.keys(Chart.instances || {}).length : 0, out, bodyFont: getComputedStyle(document.body).fontFamily, bodyColor: getComputedStyle(document.body).color, chartColor: window.Chart ? Chart.defaults.color : null, overflow: document.documentElement.scrollWidth - innerWidth };
   });
   let modalOk = null;
