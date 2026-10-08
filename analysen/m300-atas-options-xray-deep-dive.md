@@ -701,13 +701,12 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Ergänzte Disclaimer v1.5.0 (Eignung nur für erfahrene Anleger, L42) durch unabhängige Zweitprüfung bestätigen
-- Faktbindungen v1.5.0 (§ 52 Abs. 28 als eigener Fakt, Normteile, Definitionen) durch unabhängige Zweitprüfung bestätigen
+- „In allen offenen Fällen“ in Hero, KPI, S04 und S10 an den abgetrennten Fakt binden und kennzeichnen (L46)
 - Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
 - Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
 - Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
-- Analyse-Korrekturen v1.5.0 (unbelegte Daten entfernt, BVerfG gekennzeichnet, L43) durch unabhängige Zweitprüfung bestätigen
-- Fachbegriffe und Abkürzungen v1.5.0 (erstes sichtbares Auftreten, L41b) und einheitliche Version (L44) durch unabhängige Zweitprüfung bestätigen
+- Analyse: BFH-Modalität („ernstliche Zweifel“), weitere unbelegte Angaben (FG-Aktenzeichen, Geschäftszeichen, Kontraktgrößen, Versionen) und BVerfG-Prognose belegen oder entfernen (L47, L43)
+- Analyse: Konfidenzangaben und QA-Scorecard aus DBOM/Seite ableiten; K10 an ODAP-Befund angleichen (L48, L49)
 
 ---
 

@@ -200,7 +200,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen zwölf Kernaussagen des Ausgangstexts (K1–K12) gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">25</span> belegte Fakten, <span data-dbom-count="media">7</span> Medienangaben, <span data-dbom-count="unverified">11</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>73,7</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">25</span> belegte Fakten, <span data-dbom-count="media">7</span> Medienangaben, <span data-dbom-count="unverified">11</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>76,3</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -592,15 +592,15 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>73,7</span> % · <span data-qa-points>14</span> / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>76,3</span> % · <span data-qa-points>14,5</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
-    <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Prüfbericht 2026-10-07: vor Korrektur 81,6 %; nach M2–M6 und vier unabhängigen Zweitprüfungen neu bewertet.</span>
+    <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Prüfbericht 2026-10-07: vor Korrektur 81,6 %; nach M2–M6 und sechs unabhängigen Zweitprüfungen neu bewertet.</span>
   </div>
   <div class="grid md:grid-cols-3 gap-4">
     <div class="dep-box">
       <h3 class="font-head font-bold text-tngb-magenta mb-3">① Compliance (C1–C9)</h3>
       <table><tbody>
-        <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-part" data-gate="C1" title="v1.5.0: alle C1-Pflichtbestandteile in vier Disclaimern (L42-Test); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-pass" title="Sechste Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test">✓</td></tr>
         <tr><td>C2 Keine Anlageempfehlung (MAR)</td><td class="check-pass">✓</td></tr>
         <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-part" data-gate="C3" title="Primärquellen nur per Snippet eingesehen">◐</td></tr>
         <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-part" data-gate="C4" title="Interessenkonflikte vom Herausgeber noch nicht bestätigt (L10b)">◐</td></tr>
@@ -620,10 +620,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="v1.5.0: § 52 Abs. 28 eigener Fakt, Normteile und Definitionen gebunden (L26b, L36b); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-part" data-gate="Q5" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-pass" title="Fünfte Zweitprüfung: Fazit ohne Widerspruch zu K1/K3, S09 Seite = Analyse, Zählungen per L07/L18/L21 getestet">✓</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="Sechste Zweitprüfung: Konfidenzen und Scorecard der Analyse weichen ab, K10 vs. S10 (L48, L49)">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="26 Begriffe; Pflichtbegriffe von der vierten Zweitprüfung bestätigt">✓</td></tr>
         <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="v1.5.0: unbelegte Angaben der Analyse entfernt oder gekennzeichnet (L43); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
-        <tr><td>Q10 Formatvorgaben</td><td class="check-part" data-gate="Q10" title="v1.5.0: erstes sichtbares Auftreten erklärt (L41b), Version einheitlich (L44); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q10 Formatvorgaben</td><td class="check-pass" title="Sechste Zweitprüfung: Erklärungen sachlich korrekt, Version einheitlich; L41/L41b/L44-Tests">✓</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
       </tbody></table>
@@ -651,13 +651,12 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <li data-gate="C4" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>
         <li data-gate="C8" data-source="FACT_PRIIPS_UWG FACT_ANGEMESSENHEIT" data-open>PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>
         <li data-gate="C9" data-open>Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis</li>
-                <li data-gate="C1" data-open>Ergänzte Disclaimer v1.5.0 (Eignung nur für erfahrene Anleger, L42) durch unabhängige Zweitprüfung bestätigen</li>
-        <li data-gate="Q4" data-source="FACT_P52_ABS28" data-open>Faktbindungen v1.5.0 (§ 52 Abs. 28 als eigener Fakt, Normteile, Definitionen) durch unabhängige Zweitprüfung bestätigen</li>
+        <li data-gate="Q4" data-source="FACT_P52_ABS28" data-open>„In allen offenen Fällen“ in Hero, KPI, S04 und S10 an den abgetrennten Fakt binden und kennzeichnen (L46)</li>
         <li data-gate="Q2" data-source="FACT_KO_SATZ6" data-open>Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen</li>
         <li data-gate="Q5" data-source="FACT_PRODUCT_STRUCTURE" data-open>Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen</li>
         <li data-gate="Q2" data-source="FACT_EUREX_DAILY_ADV FACT_BAFIN_STUDY" data-open>Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen</li>
-                <li data-gate="Q9" data-open>Analyse-Korrekturen v1.5.0 (unbelegte Daten entfernt, BVerfG gekennzeichnet, L43) durch unabhängige Zweitprüfung bestätigen</li>
-        <li data-gate="Q10" data-open>Fachbegriffe und Abkürzungen v1.5.0 (erstes sichtbares Auftreten, L41b) und einheitliche Version (L44) durch unabhängige Zweitprüfung bestätigen</li>
+                <li data-gate="Q9" data-open>Analyse: BFH-Modalität („ernstliche Zweifel“), weitere unbelegte Angaben (FG-Aktenzeichen, Geschäftszeichen, Kontraktgrößen, Versionen) und BVerfG-Prognose belegen oder entfernen (L47, L43)</li>
+        <li data-gate="Q7" data-open>Analyse: Konfidenzangaben und QA-Scorecard aus DBOM/Seite ableiten; K10 an ODAP-Befund angleichen (L48, L49)</li>
       </ul>
     </div>
   </div>

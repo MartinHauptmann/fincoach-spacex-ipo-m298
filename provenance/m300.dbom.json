@@ -983,6 +983,12 @@
       "event": "v1.5.0: Befunde der fünften Zweitprüfung umgesetzt – § 52 Abs. 28 EStG als FACT_P52_ABS28 (UNVERIFIED) abgetrennt; Claims FACT_JSTG2024_REPEAL (BGBl.), FACT_BFH_ADV (§ 69 Abs. 3 FGO), FACT_P15_KSTG (§ 8b Abs. 2 KStG), FACT_PRIIPS_UWG (§ 4 Nr. 1 UWG) präzisiert; Disclaimer um Eignungshinweis ergänzt; Tests L26b, L36b, L41b, L42, L43, L44",
       "qa_score_pct": null,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-08",
+      "event": "Sechste Zweitprüfung v1.5.0: C1 und Q10 ✓, Q7 ◐ (Analyse-Konfidenzen und Scorecard); neue offene Fehlerklassen L46–L50; L45 (Live-Audit-Selektor) in v1.5.0 behoben",
+      "qa_score_pct": 76.3,
+      "release": "ÜBERARBEITUNG"
     }
   ]
 }
