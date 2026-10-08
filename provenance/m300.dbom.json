@@ -1019,6 +1019,12 @@
       "event": "v1.7.0: Analyse auf faktgebundene Kurzfassung umgestellt (Herausgeber-Entscheidung) – Phase A, Module 1–8 und Glossar per Sync aus Seite und DBOM (analysis_modules), Handtext nur mit Fakt-ID (L53); A-Tabelle und Analyse-Matrix entfallen (L48b, L05d); FACT_BMF_2025 ohne Teilaussage „offene Fälle“; Tests L51, L53, L48b, L05d, L52, L42b",
       "qa_score_pct": null,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-08",
+      "event": "Achte Zweitprüfung v1.7.0: Q1 ◐ (Claim-Tabelle fehlt); Modul-8-Note ohne Beleggrad-Überclaim; K2 an FACT_P52_ABS28 gebunden; neue offene Fehlerklassen L54–L59 und Verschärfungen L42c, L44b, L47b, L48c, L49b, L52b, L53b",
+      "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -1106,7 +1112,7 @@
     {
       "title": "Modul 8 · Fazit [Einschätzung]",
       "facts": [],
-      "note": "Belegt sind Produktumfang (Modul 1–3) und Rechtsstand (Modul 6); die GEX-Profile beruhen auf einer Modellannahme (`FACT_DEALER_CONVENTION`). Die strategische These zur Eurex-Erweiterung ist ein Szenario (`FACT_ROADMAP`) und keine Prognose."
+      "note": "Der Beleggrad steht je Fakt in den Modulen 1–7; mehrere Rechtsfakten in Modul 6 sind ungeprüft oder Medienangaben. Die GEX-Profile beruhen auf einer Modellannahme (`FACT_DEALER_CONVENTION`). Die strategische These zur Eurex-Erweiterung ist ein Szenario (`FACT_ROADMAP`) und keine Prognose."
     }
   ]
 }

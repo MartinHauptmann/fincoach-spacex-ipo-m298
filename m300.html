@@ -200,7 +200,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen zwölf Kernaussagen des Ausgangstexts (K1–K12) gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">25</span> belegte Fakten, <span data-dbom-count="media">7</span> Medienangaben, <span data-dbom-count="unverified">11</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>76,3</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">25</span> belegte Fakten, <span data-dbom-count="media">7</span> Medienangaben, <span data-dbom-count="unverified">11</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>73,7</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -592,7 +592,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>76,3</span> % · <span data-qa-points>14,5</span> / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>73,7</span> % · <span data-qa-points>14</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
     <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Prüfbericht 2026-10-07: vor Korrektur 81,6 %; nach M2–M6 und sechs unabhängigen Zweitprüfungen neu bewertet.</span>
   </div>
@@ -614,7 +614,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <div class="dep-box">
       <h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität (Q1–Q10)</h3>
       <table><tbody>
-        <tr><td>Q1 Faktencheck K1–K12 vollständig</td><td class="check-pass">✓</td></tr>
+        <tr><td>Q1 Faktencheck K1–K12 vollständig</td><td class="check-part" data-gate="Q1" title="Achte Zweitprüfung: Claim-Tabelle A01–A21 fehlt in der gestrafften Analyse, Prompt verlangt sie (L59)">◐</td></tr>
         <tr><td>Q2 Aktualität / a. F. markiert</td><td class="check-part" data-gate="Q2" title="BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b)">◐</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass">✓</td></tr>
         <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="v1.7.0: Analyse faktgebunden, Kennzeichnung je Fakt-ID (L51, L53); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
@@ -651,12 +651,13 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <li data-gate="C4" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>
         <li data-gate="C8" data-source="FACT_PRIIPS_UWG FACT_ANGEMESSENHEIT" data-open>PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>
         <li data-gate="C9" data-open>Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis</li>
-        <li data-gate="Q4" data-source="FACT_P52_ABS28 FACT_BVERFG_PENDING FACT_PRODUCT_STRUCTURE" data-open>Faktgebundene Analyse v1.7.0 (Kennzeichnung je Fakt-ID, L51, L53) durch unabhängige Zweitprüfung bestätigen</li>
+        <li data-gate="Q4" data-source="FACT_P52_ABS28 FACT_BVERFG_PENDING FACT_PRODUCT_STRUCTURE" data-open>Analyse: Sync-Blöcke byte-genau prüfen, Fakt-IDs gegen DBOM, Token im genannten Fakt, Normalisierung der Leitphrasen (L53b, L56, L52b)</li>
         <li data-gate="Q2" data-source="FACT_KO_SATZ6" data-open>Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen</li>
         <li data-gate="Q5" data-source="FACT_PRODUCT_STRUCTURE" data-open>Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen</li>
         <li data-gate="Q2" data-source="FACT_EUREX_DAILY_ADV FACT_BAFIN_STUDY" data-open>Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen</li>
-                <li data-gate="Q9" data-open>Gestraffte Analyse v1.7.0 (unbelegte Angaben entfallen, L43, L53) durch unabhängige Zweitprüfung bestätigen</li>
-        <li data-gate="Q7" data-open>Analyse v1.7.0 ohne Hand-Konfidenzen und Provenienzkürzel, BMF-Fakt ohne Teilaussage „offene Fälle“ (L48b, L05d) durch unabhängige Zweitprüfung bestätigen</li>
+                <li data-gate="Q9" data-open>Folgeaussagen ungeprüfter Fakten binden (L55); Glossar-Tatsachen und Kontraktmultiplikatoren mit Fakt belegen (B10)</li>
+        <li data-gate="Q7" data-open>Modul 8 aus FZ der Seite erzeugen, Beleggrad nur aus Verdicts (L54); „S10“ in der Analyse als Modulseite kennzeichnen (L58); „belegt“ nur für bestätigte Fakten (L57)</li>
+        <li data-gate="Q1" data-open>Claim-Tabelle A01–A21 als Sync-Block zurückholen oder Prompt-Ausgabestruktur per Herausgeber-Entscheidung ändern (L59)</li>
       </ul>
     </div>
   </div>
@@ -791,7 +792,7 @@ document.addEventListener('keydown',e=>{
 /* ====== FAKTENCHECK K1–K12 ====== */
 const KS=[
   ["K1","Rechtsstand § 20 Abs. 6 S. 5/6 EStG","20.000-€-Grenze gilt „seit 2021“ fort","no","crit","Das JStG 2024 (BGBl. 2024 I Nr. 387) hat die Sätze 5 und 6 aufgehoben, anwendbar in allen offenen Fällen (§ 52 Abs. 28 EStG, Satznummern ungeprüft); Umsetzung durch BMF-Schreiben vom 14.05.2025. Das Normzitat im Ausgangstext ist zudem falsch: Gemeint ist Satz 5, nicht Satz 6.","FACT_JSTG2024_REPEAL FACT_P52_ABS28 FACT_BMF_2025 FACT_TERMIN_2019"],
-  ["K2","BFH VIII B 113/23","„mehrere Beschlüsse“; Unsicherheit bis zum BVerfG","no","crit","Belegt ist ein Beschluss über die <dfn>AdV</dfn> (Aussetzung der Vollziehung) vom 07.06.2024 (summarische Prüfung, Streitjahr 2021). Durch die Aufhebung ist die Frage für Termingeschäfte erledigt. Anhängig bleibt laut Sekundärquelle (ungeprüft) 2 BvL 3/21 zu Aktienverlusten, ein anderer Sachverhalt.","FACT_BFH_ADV FACT_STOCK_LOSS_S4 FACT_BVERFG_PENDING"],
+  ["K2","BFH VIII B 113/23","„mehrere Beschlüsse“; Unsicherheit bis zum BVerfG","no","crit","Belegt ist ein Beschluss über die <dfn>AdV</dfn> (Aussetzung der Vollziehung) vom 07.06.2024 (summarische Prüfung, Streitjahr 2021). Durch die Aufhebung ist die Frage für Termingeschäfte erledigt, soweit sie nach § 52 Abs. 28 EStG in allen offenen Fällen gilt (ungeprüft). Anhängig bleibt laut Sekundärquelle (ungeprüft) 2 BvL 3/21 zu Aktienverlusten, ein anderer Sachverhalt.","FACT_BFH_ADV FACT_STOCK_LOSS_S4 FACT_BVERFG_PENDING FACT_P52_ABS28"],
   ["K3","Abgrenzung Termingeschäft","Optionsscheine/Knock-outs steuerlich bevorzugt, Anleger „gedrängt“","part","major","Die Einordnung als Nicht-Termingeschäft ist korrekt (BMF seit 03.06.2021). Der Knock-out-Totalverlust fiel nach Auffassung der Finanzverwaltung aber unter Satz 6 a. F. (Sekundärbeleg, ungeprüft). Die Verdrängungsthese trägt heute nicht mehr.","FACT_OS_KO_NOT_TERMIN FACT_KO_SATZ6 FACT_JSTG2024_REPEAL"],
   ["K4","Kapitalgesellschaft","„keine Verlustverrechnungsbeschränkung“","no","crit","Über § 8 Abs. 1 KStG gilt § 15 Abs. 4 Satz 3 EStG: eigener Verlustkreis für Termingeschäfte (BFH I R 25/14). Ausnahmen bestehen nur für Institute und Sicherungsgeschäfte.","FACT_P15_KSTG"],
   ["K5","Hedging-Pflicht Market Maker","Market Maker „gesetzlich gezwungen“, über das Orderbuch zu hedgen","no","major","Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition in Abs. 5) regeln Quotierungs- und Vertragspflichten. Delta-Hedging ist Risikomanagement und kann über viele Kanäle erfolgen.","FACT_MM_NO_HEDGE_DUTY"],

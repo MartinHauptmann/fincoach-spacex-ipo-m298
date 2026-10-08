@@ -51,7 +51,7 @@ Kernergebnisse; jede Aussage mit Fakt-ID:
 - **Wettbewerb:** Intraday-fähige Eurex-GEX bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern;
   für MenthorQ ist das n. v. (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6).
 - **Einschätzung [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge damit in dieser Analyselücke, nicht in einem
-  Steuervorteil (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0). Das ist keine Prognose.
+  Steuervorteil (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0,0). Das ist keine Prognose.
 
 ---
 
@@ -62,7 +62,7 @@ Kernergebnisse; jede Aussage mit Fakt-ID:
 <!-- sync:K -->
 **K1 · Rechtsstand § 20 Abs. 6 S. 5/6 EStG.** Quelltext: 20.000-€-Grenze gilt „seit 2021“ fort. Das JStG 2024 (BGBl. 2024 I Nr. 387) hat die Sätze 5 und 6 aufgehoben, anwendbar in allen offenen Fällen (§ 52 Abs. 28 EStG, Satznummern ungeprüft); Umsetzung durch BMF-Schreiben vom 14.05.2025. Das Normzitat im Ausgangstext ist zudem falsch: Gemeint ist Satz 5, nicht Satz 6. Belege: (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9), (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6), (`FACT_BMF_2025`, belegt, Konfidenz 0,85), (`FACT_TERMIN_2019`, belegt, Konfidenz 0,85). **Ergebnis: ✗** (KRITISCH)
 
-**K2 · BFH VIII B 113/23.** Quelltext: „mehrere Beschlüsse“; Unsicherheit bis zum BVerfG. Belegt ist ein Beschluss über die AdV (Aussetzung der Vollziehung) vom 07.06.2024 (summarische Prüfung, Streitjahr 2021). Durch die Aufhebung ist die Frage für Termingeschäfte erledigt. Anhängig bleibt laut Sekundärquelle (ungeprüft) 2 BvL 3/21 zu Aktienverlusten, ein anderer Sachverhalt. Belege: (`FACT_BFH_ADV`, belegt, Konfidenz 0,85), (`FACT_STOCK_LOSS_S4`, belegt, Konfidenz 0,7), (`FACT_BVERFG_PENDING`, ungeprüft, Konfidenz 0,6). **Ergebnis: ✗** (KRITISCH)
+**K2 · BFH VIII B 113/23.** Quelltext: „mehrere Beschlüsse“; Unsicherheit bis zum BVerfG. Belegt ist ein Beschluss über die AdV (Aussetzung der Vollziehung) vom 07.06.2024 (summarische Prüfung, Streitjahr 2021). Durch die Aufhebung ist die Frage für Termingeschäfte erledigt, soweit sie nach § 52 Abs. 28 EStG in allen offenen Fällen gilt (ungeprüft). Anhängig bleibt laut Sekundärquelle (ungeprüft) 2 BvL 3/21 zu Aktienverlusten, ein anderer Sachverhalt. Belege: (`FACT_BFH_ADV`, belegt, Konfidenz 0,85), (`FACT_STOCK_LOSS_S4`, belegt, Konfidenz 0,7), (`FACT_BVERFG_PENDING`, ungeprüft, Konfidenz 0,6), (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6). **Ergebnis: ✗** (KRITISCH)
 
 **K3 · Abgrenzung Termingeschäft.** Quelltext: Optionsscheine/Knock-outs steuerlich bevorzugt, Anleger „gedrängt“. Die Einordnung als Nicht-Termingeschäft ist korrekt (BMF seit 03.06.2021). Der Knock-out-Totalverlust fiel nach Auffassung der Finanzverwaltung aber unter Satz 6 a. F. (Sekundärbeleg, ungeprüft). Die Verdrängungsthese trägt heute nicht mehr. Belege: (`FACT_OS_KO_NOT_TERMIN`, belegt, Konfidenz 0,85), (`FACT_KO_SATZ6`, ungeprüft, Konfidenz 0,6), (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9). **Ergebnis: ◐** (WESENTLICH)
 
@@ -182,7 +182,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 und
 #### Modul 8 · Fazit [Einschätzung]
 
 
-Belegt sind Produktumfang (Modul 1–3) und Rechtsstand (Modul 6); die GEX-Profile beruhen auf einer Modellannahme (`FACT_DEALER_CONVENTION`). Die strategische These zur Eurex-Erweiterung ist ein Szenario (`FACT_ROADMAP`) und keine Prognose.
+Der Beleggrad steht je Fakt in den Modulen 1–7; mehrere Rechtsfakten in Modul 6 sind ungeprüft oder Medienangaben. Die GEX-Profile beruhen auf einer Modellannahme (`FACT_DEALER_CONVENTION`). Die strategische These zur Eurex-Erweiterung ist ein Szenario (`FACT_ROADMAP`) und keine Prognose.
 
 <!-- /sync:MOD -->
 
@@ -435,12 +435,13 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Faktgebundene Analyse v1.7.0 (Kennzeichnung je Fakt-ID, L51, L53) durch unabhängige Zweitprüfung bestätigen
+- Analyse: Sync-Blöcke byte-genau prüfen, Fakt-IDs gegen DBOM, Token im genannten Fakt, Normalisierung der Leitphrasen (L53b, L56, L52b)
 - Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
 - Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
 - Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
-- Gestraffte Analyse v1.7.0 (unbelegte Angaben entfallen, L43, L53) durch unabhängige Zweitprüfung bestätigen
-- Analyse v1.7.0 ohne Hand-Konfidenzen und Provenienzkürzel, BMF-Fakt ohne Teilaussage „offene Fälle“ (L48b, L05d) durch unabhängige Zweitprüfung bestätigen
+- Folgeaussagen ungeprüfter Fakten binden (L55); Glossar-Tatsachen und Kontraktmultiplikatoren mit Fakt belegen (B10)
+- Modul 8 aus FZ der Seite erzeugen, Beleggrad nur aus Verdicts (L54); „S10“ in der Analyse als Modulseite kennzeichnen (L58); „belegt“ nur für bestätigte Fakten (L57)
+- Claim-Tabelle A01–A21 als Sync-Block zurückholen oder Prompt-Ausgabestruktur per Herausgeber-Entscheidung ändern (L59)
 
 ---
 
@@ -459,7 +460,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C7 Ausgewogene Risikodarstellung | ✓ | – |
 | C8 Regulatorische Bezüge belegt | ◐ | § 80 WpHG über Suchtreffer auf den Gesetzestext belegt; PRIIPs/UWG und § 63 Abs. 10 WpHG UNVERIFIED |
 | C9 Datenschutz | ◐ | Modul: 0 Drittanbieter-Abrufe, kein Speicher (L20); verlinkte Datenschutzerklärung offen (L38) |
-| Q1 Faktencheck K1–K12 vollständig | ✓ | – |
+| Q1 Faktencheck K1–K12 vollständig | ◐ | Achte Zweitprüfung: Claim-Tabelle A01–A21 fehlt in der gestrafften Analyse, Prompt verlangt sie (L59) |
 | Q2 Aktualität / a. F. markiert | ◐ | BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b) |
 | Q3 Mathematische Konsistenz | ✓ | – |
 | Q4 Provenienz je Fakt | ◐ | v1.7.0: Analyse faktgebunden, Kennzeichnung je Fakt-ID (L51, L53); ✓ erst nach Zweitprüfung (L10) |
@@ -470,7 +471,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q9 Keine Überzeichnung / Halluzination | ◐ | v1.7.0: Analyse auf DBOM-Fakten gestrafft (L43, L53); ✓ erst nach Zweitprüfung (L10) |
 | Q10 Formatvorgaben | ✓ | Sechste Zweitprüfung: Erklärungen sachlich korrekt, Version einheitlich; L41/L41b/L44-Tests |
 
-**Gesamtscore:** 10 × ✓ + 9 × ◐ = 14,5 von 19 Punkten = **76,3 %**.
+**Gesamtscore:** 9 × ✓ + 10 × ◐ = 14 von 19 Punkten = **73,7 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
