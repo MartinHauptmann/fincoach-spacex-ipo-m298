@@ -29,7 +29,7 @@ RANK = {"CONFIRMED": 3, "MEDIA_REPORT": 2, "UNVERIFIED": 1, "SCENARIO_PROJECTION
 
 def plain(x):
     """Seitentext → Markdown: Markup weg, Entities auflösen, KaTeX → $, Sektionsnummern als Modulseite (L58)."""
-    x = re.sub(r'<span class="dbom-class-badge">[^<]*</span>', "", x)  # Badges: Kennzeichnung trägt das Fakt-Label
+    x = re.sub(r'\s*<span class="dbom-class-badge">[^<]*</span>', "", x)  # Badges: Kennzeichnung trägt das Fakt-Label
     x = html.unescape(re.sub(r"<[^>]+>", "", x)).replace("\\(", "$").replace("\\)", "$")
     return re.sub(r"\b(S\d{2}|S-FZ)\b", r"Modulseite \1", x)
 

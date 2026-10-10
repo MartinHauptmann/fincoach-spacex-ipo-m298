@@ -1044,6 +1044,12 @@
       "event": "v1.8.0: Modul eigenständig (Herausgeber: Vormodul nicht veröffentlicht) – Modul-Matrix und Verweise auf M298/M299 sowie Versionsvergleiche entfernt; Claim-Tabelle A01–A21 als Sync-Block (source_claims, L59); Modul 8 aus FZ der Seite (L54); FACT_CONTRACT_SPECS (UNVERIFIED) für Kontraktdaten; Tests L53b–L59 und Verschärfungen",
       "qa_score_pct": null,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-10",
+      "event": "Neunte Zweitprüfung v1.8.0: Eigenständigkeit und C1 bestätigt; Gates unverändert; neue offene Fehlerklassen L60–L63, L27b, L06b, L53c",
+      "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [

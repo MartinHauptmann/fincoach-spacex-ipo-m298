@@ -217,21 +217,21 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - X-Ray überführt SPX-Optionsdaten in ES-Hedge-Äquivalente. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
 - Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85) (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7)
 - Für Optionen fehlt eine native Ausführung. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
-- Positionierung plus MBO/Footprint in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal . (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65)
+- Positionierung plus MBO/Footprint in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal. (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65)
 
 **◐ Relativiert**
 
 - Market Maker hedgen aus Kalkül, nicht aus gesetzlichem Zwang. (`FACT_MM_NO_HEDGE_DUTY`, belegt, Konfidenz 0,85)
-- GEX beruht auf einer Positionsannahme ; beim SPX durch markierte Cboe-Daten besser, anderswo schwächer fundiert . (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, Konfidenz 0,5) (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6)
-- Optionsscheine hinterlassen eine schwache, nicht zurechenbare Hedge-Spur, aber keine Nullspur . (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6)
+- GEX beruht auf einer Positionsannahme; beim SPX durch markierte Cboe-Daten besser, anderswo schwächer fundiert. (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, Konfidenz 0,5) (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6)
+- Optionsscheine hinterlassen eine schwache, nicht zurechenbare Hedge-Spur, aber keine Nullspur. (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6)
 
 **✗ Entfällt**
 
 - Die 20.000-€-Grenze als aktuelle Barriere (JStG 2024). (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9)
-- „Rechtsunsicherheit bis zum BVerfG“ für Termingeschäfte, soweit die Aufhebung in allen offenen Fällen gilt . (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6)
+- „Rechtsunsicherheit bis zum BVerfG“ für Termingeschäfte, soweit die Aufhebung in allen offenen Fällen gilt. (`FACT_P52_ABS28`, ungeprüft, Konfidenz 0,6)
 - „Keine Verlustbeschränkung“ für Kapitalgesellschaften. (`FACT_P15_KSTG`, belegt, Konfidenz 0,85)
 
-**Strategische These [SZENARIO]:** Der Wert einer Eurex-Erweiterung liegt nicht im Umgehen einer Steuerbarriere, sondern in einer Analyselücke. Für ODAX und OESX bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern eine Dealer-Positionierung innerhalb des Tages (MenthorQ: n. v.) . Ob ATAS diese Lücke füllen kann, hängt von Datenlizenzen, Validierung und der offenen Kommunikation der schwächeren Positionsannahme ab. (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6) (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0,0)
+**Strategische These [SZENARIO]:** Der Wert einer Eurex-Erweiterung liegt nicht im Umgehen einer Steuerbarriere, sondern in einer Analyselücke. Für ODAX und OESX bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern eine Dealer-Positionierung innerhalb des Tages (MenthorQ: n. v.). Ob ATAS diese Lücke füllen kann, hängt von Datenlizenzen, Validierung und der offenen Kommunikation der schwächeren Positionsannahme ab. (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6) (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0,0)
 
 <!-- /sync:MOD -->
 
@@ -486,13 +486,13 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Bindungen v1.8.0 (Fazit, Kontraktdaten, Leitphrasen; L53b, L55, L56) durch unabhängige Zweitprüfung bestätigen
+- Kontraktdaten in Konvention, Formel und Rechner binden und prüfen (L63); Glossar-Einträge mit Verdict-Badge (L27b); Fazitwertungen als Einschätzung kennzeichnen, SCENARIO-These im Konjunktiv (L62)
 - Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen
 - Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen
 - Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen
-- Folgeaussagen und Glossar-Tatsachen v1.8.0 (L55, FACT_CONTRACT_SPECS) durch unabhängige Zweitprüfung bestätigen
-- Modul 8 aus dem Fazit, Seitenverweise und „belegt“ v1.8.0 (L54, L57, L58) durch unabhängige Zweitprüfung bestätigen
-- Claim-Tabelle A01–A21 als erzeugter Block v1.8.0 (L59) durch unabhängige Zweitprüfung bestätigen
+- „hoch (Alleinstellung)“ in S11 als Allaussage mit n. v.-Fall fassen (L06b); A04-Ergebnis an ungeprüfte Belege anpassen (L61)
+- Claim A17 an K11 angleichen (◐); Roadmap „Eurex-X-Ray FDAX/FESX“ an K10 angleichen (ODAX/OESX)
+- Claim-Tabelle: Ergebnis ✓/✗ nur mit tragenden CONFIRMED-Belegen (L61); A13-Beleg prüfen; A18 (NDX/NQ-0DTE) belegen oder als [N. V.] mit Prüfauftrag führen
 
 ---
 
@@ -511,15 +511,15 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C7 Ausgewogene Risikodarstellung | ✓ | – |
 | C8 Regulatorische Bezüge belegt | ◐ | § 80 WpHG über Suchtreffer auf den Gesetzestext belegt; PRIIPs/UWG und § 63 Abs. 10 WpHG UNVERIFIED |
 | C9 Datenschutz | ◐ | Modul: 0 Drittanbieter-Abrufe, kein Speicher (L20); verlinkte Datenschutzerklärung offen (L38) |
-| Q1 Faktencheck K1–K12 vollständig | ◐ | Claim-Tabelle A01–A21 als erzeugter Block (L59); ✓ erst nach Zweitprüfung (L10) |
+| Q1 Faktencheck K1–K12 vollständig | ◐ | Zweitprüfung: Claim-Tabelle vorhanden; A04, A13, A17, A18 offen (L61) |
 | Q2 Aktualität / a. F. markiert | ◐ | BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b) |
 | Q3 Mathematische Konsistenz | ✓ | – |
-| Q4 Provenienz je Fakt | ◐ | Fazit, Kontraktdaten und Leitphrasen gebunden (L53b, L55, L56); ✓ erst nach Zweitprüfung (L10) |
+| Q4 Provenienz je Fakt | ◐ | Zweitprüfung: Kontraktdaten in S05/S06 ungebunden, Glossar ohne Badge, Fazitwertungen (L27b, L62, L63) |
 | Q5 Quellenqualität | ◐ | Primärquellen identifiziert, nicht im Volltext gelesen |
 | Q6 Vollständigkeit | ✓ | – |
-| Q7 Widerspruchsfreiheit | ◐ | Modul 8 aus dem Fazit, Seitenverweise eindeutig, „belegt“ nur bei CONFIRMED (L54, L57, L58); ✓ erst nach Zweitprüfung (L10) |
+| Q7 Widerspruchsfreiheit | ◐ | Zweitprüfung: A17 vs. K11, Roadmap FDAX/FESX vs. K10 |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
-| Q9 Keine Überzeichnung / Halluzination | ◐ | Folgeaussagen und Glossar-Tatsachen gebunden (L55, FACT_CONTRACT_SPECS); ✓ erst nach Zweitprüfung (L10) |
+| Q9 Keine Überzeichnung / Halluzination | ◐ | Zweitprüfung: „Alleinstellung“ (L06b), A04 (L61); Folgeaussagen L55 bestätigt |
 | Q10 Formatvorgaben | ✓ | Zweitprüfung: Erklärungen sachlich korrekt, Version einheitlich; L41/L41b/L44-Tests |
 
 **Gesamtscore:** 9 × ✓ + 10 × ◐ = 14 von 19 Punkten = **73,7 %**.

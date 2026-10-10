@@ -612,15 +612,15 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <div class="dep-box">
       <h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität (Q1–Q10)</h3>
       <table><tbody>
-        <tr><td>Q1 Faktencheck K1–K12 vollständig</td><td class="check-part" data-gate="Q1" title="Claim-Tabelle A01–A21 als erzeugter Block (L59); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q1 Faktencheck K1–K12 vollständig</td><td class="check-part" data-gate="Q1" title="Zweitprüfung: Claim-Tabelle vorhanden; A04, A13, A17, A18 offen (L61)">◐</td></tr>
         <tr><td>Q2 Aktualität / a. F. markiert</td><td class="check-part" data-gate="Q2" title="BVerfG-Stand, ATAS-Start, Preise und Eurex-Daten offen (L10b)">◐</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="Fazit, Kontraktdaten und Leitphrasen gebunden (L53b, L55, L56); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="Zweitprüfung: Kontraktdaten in S05/S06 ungebunden, Glossar ohne Badge, Fazitwertungen (L27b, L62, L63)">◐</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-part" data-gate="Q5" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="Modul 8 aus dem Fazit, Seitenverweise eindeutig, „belegt“ nur bei CONFIRMED (L54, L57, L58); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="Zweitprüfung: A17 vs. K11, Roadmap FDAX/FESX vs. K10">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="Zweitprüfung: alle 15 Pflichtbegriffe vorhanden">✓</td></tr>
-        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="Folgeaussagen und Glossar-Tatsachen gebunden (L55, FACT_CONTRACT_SPECS); ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
+        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="Zweitprüfung: „Alleinstellung“ (L06b), A04 (L61); Folgeaussagen L55 bestätigt">◐</td></tr>
         <tr><td>Q10 Formatvorgaben</td><td class="check-pass" title="Zweitprüfung: Erklärungen sachlich korrekt, Version einheitlich; L41/L41b/L44-Tests">✓</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
@@ -650,19 +650,18 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <li data-gate="C4" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>
         <li data-gate="C8" data-source="FACT_PRIIPS_UWG FACT_ANGEMESSENHEIT" data-open>PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>
         <li data-gate="C9" data-open>Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis</li>
-        <li data-gate="Q4" data-source="FACT_P52_ABS28 FACT_BVERFG_PENDING FACT_PRODUCT_STRUCTURE" data-open>Bindungen v1.8.0 (Fazit, Kontraktdaten, Leitphrasen; L53b, L55, L56) durch unabhängige Zweitprüfung bestätigen</li>
+        <li data-gate="Q4" data-source="FACT_P52_ABS28 FACT_BVERFG_PENDING FACT_PRODUCT_STRUCTURE FACT_CONTRACT_SPECS" data-open>Kontraktdaten in Konvention, Formel und Rechner binden und prüfen (L63); Glossar-Einträge mit Verdict-Badge (L27b); Fazitwertungen als Einschätzung kennzeichnen, SCENARIO-These im Konjunktiv (L62)</li>
         <li data-gate="Q2" data-source="FACT_KO_SATZ6" data-open>Knock-out-Totalverlust unter § 20 Abs. 6 Satz 6 a. F. im BMF-Schreiben 2021 (Randziffer) prüfen</li>
         <li data-gate="Q5" data-source="FACT_PRODUCT_STRUCTURE" data-open>Strukturvergleich Eurex vs. Optionsscheine mit Primärquellen (Eurex Clearing, Emittentenbedingungen) belegen</li>
         <li data-gate="Q2" data-source="FACT_EUREX_DAILY_ADV FACT_BAFIN_STUDY" data-open>Bezugszeitraum der OEXP/ODAP-ADV und Volltext der BaFin-Turbo-Studie prüfen</li>
-                <li data-gate="Q9" data-open>Folgeaussagen und Glossar-Tatsachen v1.8.0 (L55, FACT_CONTRACT_SPECS) durch unabhängige Zweitprüfung bestätigen</li>
-        <li data-gate="Q7" data-open>Modul 8 aus dem Fazit, Seitenverweise und „belegt“ v1.8.0 (L54, L57, L58) durch unabhängige Zweitprüfung bestätigen</li>
-        <li data-gate="Q1" data-open>Claim-Tabelle A01–A21 als erzeugter Block v1.8.0 (L59) durch unabhängige Zweitprüfung bestätigen</li>
+                <li data-gate="Q9" data-open>„hoch (Alleinstellung)“ in S11 als Allaussage mit n. v.-Fall fassen (L06b); A04-Ergebnis an ungeprüfte Belege anpassen (L61)</li>
+        <li data-gate="Q7" data-open>Claim A17 an K11 angleichen (◐); Roadmap „Eurex-X-Ray FDAX/FESX“ an K10 angleichen (ODAX/OESX)</li>
+        <li data-gate="Q1" data-open>Claim-Tabelle: Ergebnis ✓/✗ nur mit tragenden CONFIRMED-Belegen (L61); A13-Beleg prüfen; A18 (NDX/NQ-0DTE) belegen oder als [N. V.] mit Prüfauftrag führen</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ===== S-MTX MODUL-MATRIX ===== -->
 
 <!-- ===== S12 QUELLEN, GLOSSAR & DISCLAIMER ===== -->
 <section id="s12" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
