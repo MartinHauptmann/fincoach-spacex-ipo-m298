@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,14 +13,14 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 46,
+    "total": 47,
     "confirmed_primary": 25,
     "media_report": 7,
-    "unverified": 11,
+    "unverified": 12,
     "scenario_projection": 3,
     "vendor_claim": 10,
     "by_class": {
-      "MARKET_DATA": 9,
+      "MARKET_DATA": 10,
       "MEDIA_REPORT": 6,
       "MODEL_ASSUMPTION": 1,
       "REGULATORY_FRAMEWORK": 18,
@@ -60,7 +60,10 @@
       ],
       "markers": [
         "offenen Fälle",
-        "offene Fälle"
+        "offene Fälle",
+        "erledigt",
+        "Altjahre",
+        "Rechtsunsicherheit"
       ]
     },
     {
@@ -564,6 +567,16 @@
       "source_id": "SRC_USER_TEXT",
       "caveat": "Keine Prognose.",
       "period": "–"
+    },
+    {
+      "id": "FACT_CONTRACT_SPECS",
+      "verdict": "UNVERIFIED",
+      "class": "MARKET_DATA",
+      "confidence": 0.6,
+      "claim": "Kontraktdaten: Multiplikator SPX 100 USD, ES 50 USD, MES 5 USD je Indexpunkt; SPX-Optionen mit Verfällen an jedem Wochentag (0DTE); Quartalsverfall am dritten Freitag im März, Juni, September und Dezember; Open Interest wird nach Handelsschluss veröffentlicht (T+1).",
+      "source_id": "SRC_FACHWISSEN",
+      "caveat": "Fachliche Standardangaben ohne Einzelbeleg; vor Freigabe an Cboe-, CME- und Eurex-Kontraktspezifikationen prüfen.",
+      "period": "Stand 2026-10-05"
     }
   ],
   "sources": [
@@ -1025,6 +1038,12 @@
       "event": "Achte Zweitprüfung v1.7.0: Q1 ◐ (Claim-Tabelle fehlt); Modul-8-Note ohne Beleggrad-Überclaim; K2 an FACT_P52_ABS28 gebunden; neue offene Fehlerklassen L54–L59 und Verschärfungen L42c, L44b, L47b, L48c, L49b, L52b, L53b",
       "qa_score_pct": 73.7,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-10",
+      "event": "v1.8.0: Modul eigenständig (Herausgeber: Vormodul nicht veröffentlicht) – Modul-Matrix und Verweise auf M298/M299 sowie Versionsvergleiche entfernt; Claim-Tabelle A01–A21 als Sync-Block (source_claims, L59); Modul 8 aus FZ der Seite (L54); FACT_CONTRACT_SPECS (UNVERIFIED) für Kontraktdaten; Tests L53b–L59 und Verschärfungen",
+      "qa_score_pct": null,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -1068,7 +1087,7 @@
       ]
     },
     {
-      "title": "Modul 5 · Globaler Wettbewerbsvergleich (Matrix auf der Modulseite, S09)",
+      "title": "Modul 5 · Globaler Wettbewerbsvergleich (Matrix auf der Modulseite S09)",
       "facts": [
         "FACT_COMPETITOR_MATRIX",
         "FACT_VENDOR_PRICES",
@@ -1110,9 +1129,210 @@
       ]
     },
     {
-      "title": "Modul 8 · Fazit [Einschätzung]",
+      "title": "Modul 8 · Fazit und Synthese [Einschätzung, aus dem Fazit der Modulseite]",
       "facts": [],
-      "note": "Der Beleggrad steht je Fakt in den Modulen 1–7; mehrere Rechtsfakten in Modul 6 sind ungeprüft oder Medienangaben. Die GEX-Profile beruhen auf einer Modellannahme (`FACT_DEALER_CONVENTION`). Die strategische These zur Eurex-Erweiterung ist ein Szenario (`FACT_ROADMAP`) und keine Prognose."
+      "source": "s-fz"
+    }
+  ],
+  "source_claims": [
+    {
+      "id": "A01",
+      "claim": "Verluste aus Termingeschäften seit 2021 nur bis 20.000 € je Jahr verrechenbar (§ 20 Abs. 6 Satz 6 EStG)",
+      "category": "Steuer/Recht",
+      "result": "no",
+      "facts": [
+        "FACT_JSTG2024_REPEAL",
+        "FACT_P52_ABS28",
+        "FACT_TERMIN_2019",
+        "FACT_TERMIN_2020_RAISE"
+      ]
+    },
+    {
+      "id": "A02",
+      "claim": "Besteuerung „fiktiver Gewinne“ bei Spreads trotz Nettoverlust",
+      "category": "Steuer/Recht",
+      "result": "part",
+      "facts": [
+        "FACT_TERMIN_2019",
+        "FACT_JSTG2024_REPEAL"
+      ]
+    },
+    {
+      "id": "A03",
+      "claim": "BFH äußerte in „mehreren Beschlüssen“ Zweifel (VIII B 113/23)",
+      "category": "Steuer/Recht",
+      "result": "part",
+      "facts": [
+        "FACT_BFH_ADV"
+      ]
+    },
+    {
+      "id": "A04",
+      "claim": "Rechtsunsicherheit bleibt bis zur BVerfG-Entscheidung",
+      "category": "Steuer/Recht",
+      "result": "no",
+      "facts": [
+        "FACT_JSTG2024_REPEAL",
+        "FACT_P52_ABS28",
+        "FACT_BVERFG_PENDING"
+      ]
+    },
+    {
+      "id": "A05",
+      "claim": "Optionsscheine und Knock-outs sind laut Finanzverwaltung keine Termingeschäfte",
+      "category": "Steuer/Recht",
+      "result": "ok",
+      "facts": [
+        "FACT_OS_KO_NOT_TERMIN"
+      ]
+    },
+    {
+      "id": "A06",
+      "claim": "Optionsschein-Verluste uneingeschränkt mit Aktien- und Zinsgewinnen verrechenbar",
+      "category": "Steuer/Recht",
+      "result": "part",
+      "facts": [
+        "FACT_STOCK_LOSS_S4",
+        "FACT_KO_SATZ6"
+      ]
+    },
+    {
+      "id": "A07",
+      "claim": "Privatanleger werden in bankemittierte Produkte gedrängt",
+      "category": "Markt",
+      "result": "no",
+      "facts": [
+        "FACT_JSTG2024_REPEAL",
+        "FACT_BAFIN_TURBO"
+      ]
+    },
+    {
+      "id": "A08",
+      "claim": "Market Maker sind gesetzlich gezwungen, über das zentrale Orderbuch zu hedgen",
+      "category": "Mikrostruktur",
+      "result": "no",
+      "facts": [
+        "FACT_MM_NO_HEDGE_DUTY"
+      ]
+    },
+    {
+      "id": "A09",
+      "claim": "Emittenten netten intern und hedgen über OTC-Swaps; keine Orderbuchspuren im FDAX",
+      "category": "Mikrostruktur",
+      "result": "part",
+      "facts": [
+        "FACT_ISSUER_HEDGING"
+      ]
+    },
+    {
+      "id": "A10",
+      "claim": "Für vermögensverwaltende Kapitalgesellschaften gilt keine Verlustverrechnungsbeschränkung",
+      "category": "Steuer/Recht",
+      "result": "no",
+      "facts": [
+        "FACT_P15_KSTG"
+      ]
+    },
+    {
+      "id": "A11",
+      "claim": "Options X-Ray besteht aus zehn Indikatoren",
+      "category": "Produkt",
+      "result": "ok",
+      "facts": [
+        "FACT_XRAY_10_IND"
+      ]
+    },
+    {
+      "id": "A12",
+      "claim": "Datenbasis CBOE/OptionsDepth, 60-Sekunden-Snapshots",
+      "category": "Produkt",
+      "result": "ok",
+      "facts": [
+        "FACT_XRAY_1MIN_SPX"
+      ]
+    },
+    {
+      "id": "A13",
+      "claim": "Beschränkung auf den SPX-Komplex",
+      "category": "Produkt",
+      "result": "ok",
+      "facts": [
+        "FACT_XRAY_1MIN_SPX",
+        "FACT_CHAIN_SUITE"
+      ]
+    },
+    {
+      "id": "A14",
+      "claim": "Broker-Konnektivität Rithmic, IB, CQG",
+      "category": "Produkt",
+      "result": "part",
+      "facts": [
+        "FACT_XRAY_CONNECTIVITY",
+        "FACT_ATAS_CONNECTIONS"
+      ]
+    },
+    {
+      "id": "A15",
+      "claim": "ES/MES-Cross-Trading vorhanden",
+      "category": "Produkt",
+      "result": "ok",
+      "facts": [
+        "FACT_CROSS_TRADING"
+      ]
+    },
+    {
+      "id": "A16",
+      "claim": "Options Board und Strategy Analyzer in Entwicklung",
+      "category": "Produkt",
+      "result": "part",
+      "facts": [
+        "FACT_ATAS_NO_OPT_TRADING"
+      ]
+    },
+    {
+      "id": "A17",
+      "claim": "Fehlende native Multi-Leg-Spread-Routing-Engine",
+      "category": "Produkt",
+      "result": "ok",
+      "facts": [
+        "FACT_IB_BAG",
+        "FACT_ATAS_NO_OPT_TRADING"
+      ]
+    },
+    {
+      "id": "A18",
+      "claim": "NDX/NQ zeigt überproportionale 0DTE-Dynamik",
+      "category": "Markt",
+      "result": "nv",
+      "facts": []
+    },
+    {
+      "id": "A19",
+      "claim": "Wettbewerbsfelder (SpotGamma, MenthorQ, Volland, Bookmap, TWS)",
+      "category": "Wettbewerb",
+      "result": "part",
+      "facts": [
+        "FACT_COMPETITOR_MATRIX"
+      ]
+    },
+    {
+      "id": "A20",
+      "claim": "Vier Roadmap-Erweiterungen",
+      "category": "Vorschlag",
+      "result": "scen",
+      "facts": [
+        "FACT_ROADMAP"
+      ]
+    },
+    {
+      "id": "A21",
+      "claim": "Warrant-Fair-Value-Tool zeigt „verdeckte Marge“",
+      "category": "Vorschlag",
+      "result": "part",
+      "facts": [
+        "FACT_ROADMAP",
+        "FACT_PRIIPS_UWG"
+      ]
     }
   ]
 }

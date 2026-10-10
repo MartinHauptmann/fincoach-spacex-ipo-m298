@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L53 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L59 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -108,6 +108,16 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L53:** Die Analyse ist eine faktgebundene Kurzfassung. Phase A, Module 1–8 und Glossar stehen in
   `<!-- sync:… -->`-Blöcken und werden nur von `sync_module.py` geschrieben (Modulzuordnung: `analysis_modules` in der
   DBOM). Handtext (Kurzfazit, Modellrechnung, Disclaimer) nennt bei jeder Angabe eine Fakt-ID.
+- **L53b:** Erzeugte Blöcke nie von Hand ändern; der Check erzeugt sie mit `sync_module.build_blocks()` neu und vergleicht
+  byte-genau. Jede `FACT_…` in der Analyse existiert in der DBOM.
+- **L54:** Keine Beleggrad-Aussagen in Handtext (auch nicht in `analysis_modules[].note`); Modul 8 kommt aus dem Fazit der Seite.
+- **L55:** Folgeaussagen eines ungeprüften Fakts („erledigt“, „Altjahre“) binden diesen Fakt (Leitphrasen in `markers`).
+- **L56:** Angaben in der Analyse müssen im Fakt desselben Absatzes bzw. derselben Tabellenzeile stehen.
+- **L57:** „belegt/bestätigt“ nur, wenn ein CONFIRMED-Fakt gebunden ist.
+- **L58:** Seitensektionen heißen in der Analyse „Modulseite Sxx“; `Sxx` allein ist dort eine Quelle.
+- **L59:** Die Analyse enthält alle Abschnitte 0–9 der Ausgabestruktur des Prompts, die Claim-Tabelle aus `source_claims`.
+- **Eigenständigkeit:** Ein Modul verweist nicht auf unveröffentlichte Module und vergleicht sich nicht mit eigenen früheren
+  Fassungen; der Verlauf steht nur im `audit_trail` der DBOM und in `qa/LESSONS.md`.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

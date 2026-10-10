@@ -21,6 +21,63 @@ def de(x, nd=None):
     s = f"{x:.{nd}f}" if nd is not None else str(x)
     return s.replace(".", ",")
 
+VLAB = {"CONFIRMED": "belegt", "MEDIA_REPORT": "Medienangabe", "UNVERIFIED": "ungeprüft", "SCENARIO_PROJECTION": "SCENARIO_PROJECTION"}
+RES = {"ok": "✓", "part": "◐", "no": "✗", "nv": "[N. V.]", "scen": "Szenario"}
+SEV = {"crit": "KRITISCH", "major": "WESENTLICH", "hint": "HINWEIS"}
+RANK = {"CONFIRMED": 3, "MEDIA_REPORT": 2, "UNVERIFIED": 1, "SCENARIO_PROJECTION": 0}
+
+
+def plain(x):
+    """Seitentext → Markdown: Markup weg, Entities auflösen, KaTeX → $, Sektionsnummern als Modulseite (L58)."""
+    x = re.sub(r'<span class="dbom-class-badge">[^<]*</span>', "", x)  # Badges: Kennzeichnung trägt das Fakt-Label
+    x = html.unescape(re.sub(r"<[^>]+>", "", x)).replace("\\(", "$").replace("\\)", "$")
+    return re.sub(r"\b(S\d{2}|S-FZ)\b", r"Modulseite \1", x)
+
+
+def build_blocks(page_html, d):
+    """L53/L53b/L54/L59: Inhalt der <!-- sync:… -->-Blöcke der Analyse aus Seite und DBOM."""
+    facts = {f["id"]: f for f in d["facts"]}
+
+    def flab(fid):
+        f = facts[fid]
+        return f"(`{fid}`, {VLAB[f['verdict']]}, Konfidenz {de(f['confidence'])})"
+    out = {}
+    # Claim-Tabelle (L59): Aussagen des Quelltexts, Belege und schwächster Beleg (L19) aus der DBOM
+    rows = []
+    for c in d.get("source_claims", []):
+        fl = [i for i in c["facts"] if i in facts]
+        weakest = VLAB[min((facts[i]["verdict"] for i in fl), key=RANK.get)] if fl else "–"
+        rows.append(f"| {c['id']} | Quelltext: {c['claim']} | {c['category']} | {RES[c['result']]} | {', '.join(flab(i) for i in fl) or '[N. V.]'} | {weakest} |")
+    out["CLAIMS"] = ("Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch/überholt · [N. V.] nicht verifizierbar. Die Aussagen in Spalte 2 "
+                     "zitieren den Quelltext (USER_PROVIDED) und sind keine Tatsachenbehauptungen dieser Analyse.\n\n"
+                     "| ID | Aussage | Kategorie | Ergebnis | Belege | Schwächster Beleg |\n|---|---|---|---|---|---|\n" + "\n".join(rows) + "\n\n")
+    ks_js = re.search(r"const KS=\[(.*?)\n\];", page_html, re.S)
+    ks = [json.loads(r) for r in re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', ks_js.group(1), re.M)] if ks_js else []
+    out["K"] = "".join(f"**{k[0]} · {plain(k[1])}.** Quelltext: {plain(k[2])}. {plain(k[5])} Belege: {', '.join(flab(i) for i in k[6].split())}. **Ergebnis: {RES[k[3]]}** ({SEV.get(k[4], k[4])})\n\n" for k in ks)
+    out["KORR"] = "| Nr. | Schwere | Prüfpunkt | Ergebnis |\n|---|---|---|---|\n" + "".join(f"| {k[0]} | {SEV.get(k[4], k[4])} | {plain(k[1])}: {plain(k[2])} | {RES[k[3]]} |\n" for k in ks if k[3] != "ok") + "\n"
+    # Module 1–7 aus analysis_modules; Modul 8 aus dem Fazit (S-FZ) der Seite (L54)
+    mods = ""
+    for m in d.get("analysis_modules", []):
+        mods += f"#### {m['title']}\n\n"
+        if m.get("source") == "s-fz":
+            fz = re.search(r'<section id="s-fz".*?</section>', page_html, re.S)
+            for box in re.findall(r'<h3[^>]*>(.*?)</h3><ul[^>]*>(.*?)</ul>', fz.group(0) if fz else "", re.S):
+                mods += f"**{plain(box[0])}**\n\n" + "".join(
+                    f"- {plain(t).strip()} " + " ".join(flab(i) for i in ids.split() if i in facts) + "\n"
+                    for ids, t in re.findall(r'<li data-source="([^"]+)">(.*?)</li>', box[1], re.S)) + "\n"
+            th = re.search(r'<div class="info-box[^"]*">(.*?)</div>', fz.group(0) if fz else "", re.S)
+            if th:
+                ids = sorted(set(re.findall(r"FACT_[A-Z0-9_]+", th.group(1))) | {"FACT_ROADMAP"})
+                mods += f"**Strategische These [SZENARIO]:** {plain(re.sub(r'<strong.*?</strong>', '', th.group(1))).strip()} " + " ".join(flab(i) for i in ids if i in facts) + "\n\n"
+        else:
+            mods += "".join(f"- {plain(facts[i]['claim'])} {flab(i)}\n" for i in m["facts"]) + "\n"
+    out["MOD"] = mods
+    gl_js = re.search(r"const GLOSSAR=\[(.*?)\n\];", page_html, re.S)
+    gl = [json.loads(r) for r in re.findall(r'^\s*(\[".*\])\s*,?\s*$', gl_js.group(1), re.M)] if gl_js else []
+    out["GLOSSAR"] = "| Begriff | Definition (Fortgeschritten) | Einordnung (Experte) |\n|---|---|---|\n" + "".join(
+        f"| {plain(g[0])} | {plain(g[2])} | {plain(g[3])}{' ' + ' '.join(flab(i) for i in g[4].split() if i in facts) if len(g) > 4 else ''} |\n" for g in gl) + "\n"
+    return out
+
 
 def main():
     page = Path(sys.argv[1])
@@ -69,35 +126,11 @@ def main():
         md = re.sub(r"^\| Version \| [\d.]+", f"| Version | {d['module']['version']}", md, count=1, flags=re.M)  # L44
         md = re.sub(r"Stand: Modul v[\d.]+,\n\d+ Fakten, \d+ Quellen\.", f"Stand: Modul v{d['module']['version']},\n{len(F)} Fakten, {len(d['sources'])} Quellen.", md)
         md = re.sub(r"(## 7 · Offene Prüfpunkte vor Veröffentlichung\n\n)(?:- .*\n)+", lambda m: m.group(1) + "".join(f"- {t}\n" for t in open_items), md)
-        # L53: Phase A, Module und Glossar der Analyse aus Seite (KS, GLOSSAR) und DBOM erzeugen
-        VLAB = {"CONFIRMED": "belegt", "MEDIA_REPORT": "Medienangabe", "UNVERIFIED": "ungeprüft", "SCENARIO_PROJECTION": "SCENARIO_PROJECTION"}
-
-        def flab(fid):
-            f = facts[fid]
-            return f"(`{fid}`, {VLAB[f['verdict']]}, Konfidenz {de(f['confidence'])})"
-
-        def plain(x):
-            return html.unescape(re.sub(r"<[^>]+>", "", x)).replace("\\(", "$").replace("\\)", "$")
-
-        def block(md, name, content):
-            return re.sub(r"(<!-- sync:%s -->\n).*?(<!-- /sync:%s -->)" % (name, name), lambda m: m.group(1) + content + m.group(2), md, count=1, flags=re.S)
-        ks_js = re.search(r"const KS=\[(.*?)\n\];", s, re.S)
-        ks = [json.loads(r) for r in re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', ks_js.group(1), re.M)] if ks_js else []
-        RES = {"ok": "✓", "part": "◐", "no": "✗"}
-        SEV = {"crit": "KRITISCH", "major": "WESENTLICH", "hint": "HINWEIS"}
-        kblk = "".join(f"**{k[0]} · {plain(k[1])}.** Quelltext: {plain(k[2])}. {plain(k[5])} Belege: {', '.join(flab(i) for i in k[6].split())}. **Ergebnis: {RES[k[3]]}** ({SEV.get(k[4], k[4])})\n\n" for k in ks)
-        md = block(md, "K", kblk)
-        korr = "| Nr. | Schwere | Prüfpunkt | Ergebnis |\n|---|---|---|---|\n" + "".join(f"| {k[0]} | {SEV.get(k[4], k[4])} | {plain(k[1])}: {plain(k[2])} | {RES[k[3]]} |\n" for k in ks if k[3] != "ok")
-        md = block(md, "KORR", korr + "\n")
-        mods = "".join(f"#### {m['title']}\n\n" + "".join(f"- {plain(facts[i]['claim'])} {flab(i)}\n" for i in m["facts"]) + (f"\n{m['note']}\n" if m.get("note") else "") + "\n" for m in d.get("analysis_modules", []))
-        md = block(md, "MOD", mods)
-        gl_js = re.search(r"const GLOSSAR=\[(.*?)\n\];", s, re.S)
-        gl = [json.loads(r) for r in re.findall(r'^\s*(\[".*\])\s*,?\s*$', gl_js.group(1), re.M)] if gl_js else []
-        glt = "| Begriff | Definition (Fortgeschritten) | Einordnung (Experte) |\n|---|---|---|\n" + "".join(
-            f"| {plain(g[0])} | {plain(g[2])} | {plain(g[3])}{' (' + ', '.join('`' + i + '`' for i in g[4].split()) + ')' if len(g) > 4 else ''} |\n" for g in gl)
-        md = block(md, "GLOSSAR", glt + "\n")
+        # L53/L53b: erzeugte Blöcke (Claim-Tabelle, Phase A, Module, Glossar) – dieselbe Funktion nutzt check_module
+        for name, content in build_blocks(s, d).items():
+            md = re.sub(r"(<!-- sync:%s -->\n).*?(<!-- /sync:%s -->)" % (name, name), lambda m: m.group(1) + content + m.group(2), md, count=1, flags=re.S)
         # L48: Konfidenzen im Fließtext stehen mit Fakt-ID und kommen aus der DBOM
-        md = re.sub(r"(`(FACT_[A-Z0-9_]+)`[^)`]*?Konfidenz )(\d,\d+)", lambda m: m.group(1) + de(facts[m.group(2)]["confidence"]) if m.group(2) in facts else m.group(0), md)
+        md = re.sub(r"(`(FACT_[A-Z0-9_]+)`[^)`]*?Konf(?:\.|idenz) )(\d+(?:[.,]\d+)?)", lambda m: m.group(1) + de(facts[m.group(2)]["confidence"]) if m.group(2) in facts else m.group(0), md)
         # L49: QA-Scorecard der Analyse aus den Gate-Zellen der Seite
         rows_qa = [(lab, c, (re.search(r'title="([^"]*)"', rest) or [None, ""])[1])
                    for lab, c, rest in re.findall(r'<tr><td>([CQ]\d+ [^<]*)</td><td class="(check-\w+)"([^>]*)>', qa)]
