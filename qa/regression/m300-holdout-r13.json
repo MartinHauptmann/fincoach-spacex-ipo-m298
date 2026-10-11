@@ -1,0 +1,414 @@
+{
+ "page": "m300.html",
+ "source": "Holdout r13, unabhängig geschrieben, 2026-10-11",
+ "cases": [
+  {
+   "name": "H13-01 L82: FACT_JSTG2024_REPEAL ohne Feld evidence",
+   "expect": "L82",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"SRC_CMS\"\n      ],\n      \"evidence\": \"snippet\"",
+     "\"SRC_CMS\"\n      ]"
+    ]
+   ]
+  },
+  {
+   "name": "H13-02 L82: unzulässige Belegstufe „volltext“ bei FACT_P15_KSTG",
+   "expect": "L82",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"SRC_BFH_IR2514\"\n      ],\n      \"evidence\": \"snippet\"",
+     "\"SRC_BFH_IR2514\"\n      ],\n      \"evidence\": \"volltext\""
+    ]
+   ]
+  },
+  {
+   "name": "H13-03 L82: SCENARIO-Fakt FACT_ROADMAP mit evidence fulltext",
+   "expect": "L82",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"caveat\": \"Keine Prognose.\",\n      \"period\": \"–\",\n      \"evidence\": \"model\"",
+     "\"caveat\": \"Keine Prognose.\",\n      \"period\": \"–\",\n      \"evidence\": \"fulltext\""
+    ]
+   ]
+  },
+  {
+   "name": "H13-04 L27: UNGEPRÜFT-Badge der Zeile Kostenausweis per hidden-Attribut versteckt",
+   "expect": "L27",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>Kostenausweis <span class=\"dbom-class-badge\">UNGEPRÜFT</span></td>",
+     "<td>Kostenausweis <span class=\"dbom-class-badge\" hidden>UNGEPRÜFT</span></td>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-05 L27: SCENARIO-Badge beim Kill-Switch-Vorschlag mit display:none",
+   "expect": "L27",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Kill-Switch in Betracht <span class=\"dbom-class-badge\">SCENARIO</span>",
+     "Kill-Switch in Betracht <span class=\"dbom-class-badge\" style=\"display: none\">SCENARIO</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-06 L27: MEDIEN-Badge der KPI „0 von 5“ in sr-only-Hülle",
+   "expect": "L27",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<div class=\"dbom-pill mt-1.5\"><span class=\"dbom-class-badge\">MEDIEN</span><span class=\"dbom-conf\">",
+     "<div class=\"dbom-pill mt-1.5\"><span class=\"sr-only\"><span class=\"dbom-class-badge\">MEDIEN</span></span><span class=\"dbom-conf\">"
+    ]
+   ]
+  },
+  {
+   "name": "H13-07 L79: VENDOR-Kennzeichen X-Ray-Voraussetzung mit visibility:hidden",
+   "expect": "L79",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Rithmic oder IB; CQG in Entwicklung <span class=\"badge b-v\">VENDOR</span>",
+     "Rithmic oder IB; CQG in Entwicklung <span class=\"badge b-v\" style=\"visibility:hidden;\">VENDOR</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-08 L79: VENDOR-Kennzeichen Cross-Trading mit Klasse hidden",
+   "expect": "L79",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "seit 8.0.12 (17.02.2026) <span class=\"badge b-v\">VENDOR</span>",
+     "seit 8.0.12 (17.02.2026) <span class=\"badge b-v hidden\">VENDOR</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-09 L12: ungebundene Dauer „20 Sekunden“ in der Fehlerliste S07",
+   "expect": "L12",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<li>Kurze Durchbrüche durch ein Level und zurück verschwinden zwischen zwei Snapshots (Aliasing).</li>",
+     "<li>Kurze Durchbrüche durch ein Level, die oft nur 20 Sekunden dauern, verschwinden zwischen zwei Snapshots (Aliasing).</li>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-10 L12: Charm-Flow „in den letzten 90 Min.“ ohne Bindung (S08)",
+   "expect": "L12",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "oft in der letzten Handelsstunde. <span class=\"dbom-class-badge\">MODELL</span>",
+     "oft in den letzten 90 Min. vor Handelsschluss. <span class=\"dbom-class-badge\">MODELL</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-11 L12: Ausführungsdauer „unter 5 s“ ohne Fakt (S07)",
+   "expect": "L12",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Der Future wird in Echtzeit über Rithmic oder IB ausgeführt.",
+     "Der Future wird in unter 5 s über Rithmic oder IB ausgeführt."
+    ]
+   ]
+  },
+  {
+   "name": "H13-12 L26d: CONFIRMED FACT_MM_NO_HEDGE_DUTY, caveat zweifelt an der Fassung",
+   "expect": "L26d",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"source_id\": \"SRC_WPHG_80\",\n      \"caveat\": \"\",",
+     "\"source_id\": \"SRC_WPHG_80\",\n      \"caveat\": \"Ob der eingesehene Normtext der Fassung am Stichtag entspricht, ist nicht abschließend geklärt.\","
+    ]
+   ]
+  },
+  {
+   "name": "H13-13 L26d: CONFIRMED FACT_SPX_0DTE_59, caveat mit ausstehender Bestätigung",
+   "expect": "L26d",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"source_id\": \"SRC_CBOE_FY2025\",\n      \"caveat\": \"\",",
+     "\"source_id\": \"SRC_CBOE_FY2025\",\n      \"caveat\": \"Wert aus einer Pressemitteilung; ob der Jahresbericht der Cboe dieselbe Zahl ausweist, wissen wir noch nicht.\","
+    ]
+   ]
+  },
+  {
+   "name": "H13-14 L26d: CONFIRMED FACT_BAFIN_TURBO, keep_reason mit ausstehender Verifikation",
+   "expect": "L26d",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"source_id\": \"SRC_BAFIN_TURBO\",\n      \"caveat\": \"\",",
+     "\"source_id\": \"SRC_BAFIN_TURBO\",\n      \"caveat\": \"\",\n      \"keep_reason\": \"Datum des Inkrafttretens unsicher; Verifikation an der Veröffentlichung der BaFin steht aus.\","
+    ]
+   ]
+  },
+  {
+   "name": "H13-15 L76: SpotGamma-Kernfokus um „Ausbildung“ (nur im MenthorQ-Abschnitt)",
+   "expect": "L76",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<td>Gamma-Levels, Research</td>",
+     "<td>Gamma-Levels, Research, Ausbildung</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-16 L76: Volland-Frequenz „alle 1 Min.“ statt 5 Min.",
+   "expect": "L76",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<td>EOD bis alle 5 Min.</td>",
+     "<td>EOD bis alle 1 Min.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-17 L76: IBKR-TWS-Orderflow „Level-2-Orderbuch (Abo)“ statt n. v.",
+   "expect": "L76",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<td>Heatmap, MBO via Rithmic</td><td>n. v.</td>",
+     "<td>Heatmap, MBO via Rithmic</td><td>Level-2-Orderbuch (Abo)</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-18 L27d: Glossar CCP mit Margin-Quote „mindestens 10 %“",
+   "expect": "L27d",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Teilnehmer hinterlegen Sicherheiten (Margin).\",\"FACT_CCP_ISSUER\"]",
+     "Teilnehmer hinterlegen Sicherheiten (Margin), mindestens 10 % des Kontraktwerts.\",\"FACT_CCP_ISSUER\"]"
+    ]
+   ]
+  },
+  {
+   "name": "H13-19 L27d: Glossar Knock-out mit abweichendem Datum „seit 01.01.2026“",
+   "expect": "L27d",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).",
+     "Für Turbos gilt seit 01.01.2026 eine BaFin-Allgemeinverfügung (Details in S10)."
+    ]
+   ]
+  },
+  {
+   "name": "H13-20 L27d: Glossar Termingeschäft mit Rechtsfolge „Verlustvortrag“",
+   "expect": "L27d",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Im Privatvermögen keine gesonderte Verlustverrechnungsbeschränkung (JStG 2024).",
+     "Im Privatvermögen keine gesonderte Verlustverrechnungsbeschränkung (JStG 2024); Verluste sind unbeschränkt mit allen Kapitalerträgen verrechenbar und in Folgejahre vortragbar."
+    ]
+   ]
+  },
+  {
+   "name": "H13-21 L26e: Offen-Punkt C4 nennt S12 ohne data-source",
+   "expect": "L26e",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<li data-gate=\"C4\" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>",
+     "<li data-gate=\"C4\" data-open>Interessenkonflikte durch Herausgeber bestätigen und Hinweis in S12 ergänzen</li>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-22 L26e: Offen-Punkt Q5 nennt S04 und S07 ohne data-source",
+   "expect": "L26e",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<li data-gate=\"Q5\" data-open>Primärquellen im Volltext lesen (BGBl., Eurex, Cboe, CME, ATAS)</li>",
+     "<li data-gate=\"Q5\" data-open>Primärquellen zu S04 und S07 im Volltext lesen (BGBl., Eurex, Cboe, CME, ATAS)</li>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-23 L06b: „das einzige Werkzeug“ in S05 ohne Vergleichsbasis",
+   "expect": "L06b",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<p class=\"text-sm text-slate-300\">Long- oder Short-Gamma-Umfeld und die von der impliziten Volatilität eingepreiste Bandbreite.</p>",
+     "<p class=\"text-sm text-slate-300\">Long- oder Short-Gamma-Umfeld und die von der impliziten Volatilität eingepreiste Bandbreite. X-Ray ist damit das einzige Werkzeug, das Charm direkt im Futures-Chart zeigt.</p>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-24 L06b: „Alleinstellungsmerkmal von ATAS“ in S08 ohne Basis",
+   "expect": "L06b",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "die Dealer-Annahme kann falsch sein und Makroereignisse überlagern die Mikrostruktur.",
+     "die Dealer-Annahme kann falsch sein und Makroereignisse überlagern die Mikrostruktur. Profil und MBO in einem Chart sind ein Alleinstellungsmerkmal von ATAS."
+    ]
+   ]
+  },
+  {
+   "name": "H13-N01 NONE: gebundene Zeitangabe „1 Min.“ im FACT_XRAY_1MIN_SPX-Span (S08)",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Das Profil kann bis zu eine Minute alt sein",
+     "Das Profil kann bis zu 1 Min. alt sein"
+    ]
+   ]
+  },
+  {
+   "name": "H13-N02 NONE: caveat ohne Zweifel bei CONFIRMED FACT_ODAX_SPECS",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"source_id\": \"SRC_EUREX_SPECS\",\n      \"caveat\": \"\",",
+     "\"source_id\": \"SRC_EUREX_SPECS\",\n      \"caveat\": \"Kontraktgröße laut Produktseite der Eurex.\","
+    ]
+   ]
+  },
+  {
+   "name": "H13-N03 NONE: SpotGamma-Ausführung wörtlich aus dem Claim („keine eigene Ausführung“)",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Futures ja, Optionen nein <span class=\"badge b-v\">VENDOR</span></td><td>nein</td>",
+     "Futures ja, Optionen nein <span class=\"badge b-v\">VENDOR</span></td><td>keine eigene Ausführung</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-N04 NONE: MenthorQ-Frequenz wörtlich aus dem Claim",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<td>EOD + alle 5 Min.</td>",
+     "<td>Optionsdaten EOD und alle 5 Min.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-N05 NONE: Glossar Quartalsverfall mit Monaten aus dem Claim",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "\"Dritter Freitag der Quartalsmonate.\"",
+     "\"Dritter Freitag der Quartalsmonate März, Juni, September und Dezember.\""
+    ]
+   ]
+  },
+  {
+   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>",
+     "PRIIPs-/UWG-Bezüge (S10, S11) und § 63 Abs. 10 WpHG am Original prüfen</li>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-N07 NONE: Alleinstellung durch FACT_CBOE_OPENCLOSE belegt („nur an der Cboe“)",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Für SPX ist die Datenlage vergleichsweise gut, weil die Cboe nach Teilnehmertyp markierte Open-Close-Daten bereitstellt",
+     "Für SPX ist die Datenlage vergleichsweise gut: SPX-Optionen werden nur an der Cboe gehandelt, und die Cboe stellt nach Teilnehmertyp markierte Open-Close-Daten bereit"
+    ]
+   ]
+  },
+  {
+   "name": "H13-N08 NONE: „einziger Anbieter“ mit Basis „im Vergleichsfeld“ umformuliert",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Volland ist im Vergleichsfeld der einzige Anbieter mit ausgewiesener Abdeckung von Gamma, Vanna und Charm.",
+     "Im Vergleichsfeld weist als einziger Anbieter Volland Gamma, Vanna und Charm aus."
+    ]
+   ]
+  },
+  {
+   "name": "H13-N09 NONE: sichtbares VENDOR-Kennzeichen mit Zusatzklasse",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Rithmic, CQG, Interactive Brokers (TWS) <span class=\"badge b-v\">VENDOR</span>",
+     "Rithmic, CQG, Interactive Brokers (TWS) <span class=\"badge b-v font-semibold\">VENDOR</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H13-N10 NONE: sichtbares MEDIEN-Kennzeichen mit Zusatzklasse und Abstand-Style",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Bonität des Emittenten <span class=\"dbom-class-badge\">MEDIEN</span>",
+     "Bonität des Emittenten <span class=\"dbom-class-badge mono\" style=\"margin-left:4px\">MEDIEN</span>"
+    ]
+   ]
+  }
+ ]
+}
