@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.11.0 (Entwurf) |
+| Version | 1.11.1 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -383,7 +383,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.11.0,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.11.1,
 36 Fakten, 45 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -429,12 +429,10 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
-- Datenschutzerklärung an die Messung angleichen: sessionStorage-Angabe und Stand-Datum (L38); Textänderung nur mit Zustimmung des Herausgebers
 - Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)
 - K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
 - Markenhinweis gegen alle genannten Marken (Seite, Tooltips, Quellenliste) unabhängig abgleichen
-- Wettbewerberangaben (Matrix S09, Eurex-GEX) an den Anbieterseiten im Volltext belegen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
 
@@ -451,10 +449,10 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
 | C4 Neutralität / Interessenkonflikte | ✓ | Keine Interessenkonflikte (Erklärung des Herausgebers vom 2026-10-11) |
 | C5 Marken beschreibend | ◐ | Markenliste umfasst auch SPDR, SPY, CME, E-mini, dxFeed und IQFeed; Vollständigkeit unabhängig bestätigen |
-| C6 UWG-konforme Begriffe | ◐ | Begriffe neutral; Tatsachenangaben über Wettbewerber stützen sich nur auf Snippet-Medienangaben (Konfidenz 0,6–0,65) und sind nach § 6 UWG noch nicht voll nachprüfbar |
+| C6 UWG-konforme Begriffe | ✓ | Begriffe neutral; Wettbewerberangaben vom Herausgeber am 2026-10-11 am Original geprüft |
 | C7 Ausgewogene Risikodarstellung | ✓ | – |
 | C8 Regulatorische Bezüge belegt | ✓ | § 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft |
-| C9 Datenschutz | ◐ | Freigabe des Herausgebers liegt vor (2026-10-11); die Messung (L38) widerspricht noch zwei Angaben der Datenschutzerklärung: sessionStorage und Stand-Datum |
+| C9 Datenschutz | ✓ | Datenschutzerklärung und Impressum vom Herausgeber freigegeben (2026-10-11); Speicherangaben = Messung an allen Modulseiten (L38); Modul ohne Drittanbieter-Abrufe und ohne Speicher (L20) |
 | Q1 Faktencheck K1–K9 vollständig | ◐ | Claim-Tabelle A01–A15; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61 |
 | Q2 Aktualität / Stichtag | ✓ | Aktualität am Stichtag vom Herausgeber am 2026-10-11 am Original geprüft |
 | Q3 Mathematische Konsistenz | ✓ | – |
@@ -466,7 +464,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q9 Keine Überzeichnung / Halluzination | ◐ | Allaussage S11 mit n. v.-Fall (L06b), Fazit-Wertungen gekennzeichnet (L62); ✓ erst nach Zweitprüfung (L10) |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 11 × ✓ + 8 × ◐ = 15 von 19 Punkten = **78,9 %**.
+**Gesamtscore:** 13 × ✓ + 6 × ◐ = 16 von 19 Punkten = **84,2 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---

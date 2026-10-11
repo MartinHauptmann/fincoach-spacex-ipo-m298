@@ -75,7 +75,7 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L37:** DBOM-Freitexte (`honest_disclosure` usw.) enthalten keine Überbehauptungen und keinen Score, der von der
   Seite abweicht; am besten gar keinen Score.
 - **L38:** Speicher- und Cookie-Angaben im Datenschutztext entsprechen der Messung an allen Modulseiten; „Stand“ ist
-  nicht älter als die letzte Änderung der Datei (Audit der Datenschutzseite, derzeit WARN).
+  nicht älter als die letzte Änderung der Datei (Audit der Datenschutzseite, BLOCKER seit 2026-10-11).
 - **L39:** Quellen mit `tier=internal` tragen nur UNVERIFIED (Konfidenz ≤ 0,6) oder SCENARIO_PROJECTION; die interne
   Quelle muss zum Claim passen (Modell ≠ Fachableitung ≠ Nutzertext).
 - **L40:** Jedes ◐/✗-Gate und jeder UNVERIFIED-Fakt hat einen Offen-Punkt mit `data-gate` (und `data-source`) als

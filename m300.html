@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.11.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.11.1 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -99,7 +99,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.11.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.11.1", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 36, "confirmed_primary": 27, "media_report": 6, "unverified": 0, "scenario_projection": 3, "vendor_claim": 11 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
@@ -148,7 +148,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.11.0</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.11.1</span>
     <span class="text-slate-300"><span data-dbom-count="total">36</span> Fakten · <span data-dbom-count="confirmed">27</span> belegt (davon <span data-dbom-count="fulltext">27</span> am Original geprüft, <span data-dbom-count="vendor">11</span> Herstellerangaben) · <span data-dbom-count="media">6</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -198,7 +198,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen neun Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">27</span> belegte Fakten, <span data-dbom-count="media">6</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">27</span> belegte Fakten, <span data-dbom-count="media">6</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>84,2</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -571,7 +571,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>78,9</span> % · <span data-qa-points>15</span> / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>84,2</span> % · <span data-qa-points>16</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
     <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Bewertung nach unabhängiger Zweitprüfung; ✓ nur mit Messung oder dokumentierter Einzelprüfung.</span>
   </div>
@@ -584,10 +584,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-pass" data-gate="C3" title="Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext)">✓</td></tr>
         <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-pass" data-gate="C4" title="Keine Interessenkonflikte (Erklärung des Herausgebers vom 2026-10-11)">✓</td></tr>
         <tr><td>C5 Marken beschreibend</td><td class="check-part" data-gate="C5" title="Markenliste umfasst auch SPDR, SPY, CME, E-mini, dxFeed und IQFeed; Vollständigkeit unabhängig bestätigen">◐</td></tr>
-        <tr><td>C6 UWG-konforme Begriffe</td><td class="check-part" data-gate="C6" title="Begriffe neutral; Tatsachenangaben über Wettbewerber stützen sich nur auf Snippet-Medienangaben (Konfidenz 0,6–0,65) und sind nach § 6 UWG noch nicht voll nachprüfbar">◐</td></tr>
+        <tr><td>C6 UWG-konforme Begriffe</td><td class="check-pass" data-gate="C6" title="Begriffe neutral; Wettbewerberangaben vom Herausgeber am 2026-10-11 am Original geprüft">✓</td></tr>
         <tr><td>C7 Ausgewogene Risikodarstellung</td><td class="check-pass">✓</td></tr>
         <tr><td>C8 Regulatorische Bezüge belegt</td><td class="check-pass" data-gate="C8" title="§ 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft">✓</td></tr>
-        <tr><td>C9 Datenschutz</td><td class="check-part" data-gate="C9" title="Freigabe des Herausgebers liegt vor (2026-10-11); die Messung (L38) widerspricht noch zwei Angaben der Datenschutzerklärung: sessionStorage und Stand-Datum">◐</td></tr>
+        <tr><td>C9 Datenschutz</td><td class="check-pass" data-gate="C9" title="Datenschutzerklärung und Impressum vom Herausgeber freigegeben (2026-10-11); Speicherangaben = Messung an allen Modulseiten (L38); Modul ohne Drittanbieter-Abrufe und ohne Speicher (L20)">✓</td></tr>
       </tbody></table>
     </div>
     <div class="dep-box">
@@ -620,12 +620,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       </tbody></table>
       <h4 class="font-head font-bold text-white mt-5 mb-2 text-sm">Offen vor Freigabe</h4>
       <ul class="tick text-xs" id="open-list">
-        <li data-gate="C9" data-open>Datenschutzerklärung an die Messung angleichen: sessionStorage-Angabe und Stand-Datum (L38); Textänderung nur mit Zustimmung des Herausgebers</li>
                 <li data-gate="Q9" data-open data-source="FACT_NO_EUREX_GEX FACT_ROADMAP">Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)</li>
         <li data-gate="Q7" data-open>K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen</li>
         <li data-gate="Q1" data-open>Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen</li>
         <li data-gate="C5" data-open>Markenhinweis gegen alle genannten Marken (Seite, Tooltips, Quellenliste) unabhängig abgleichen</li>
-        <li data-gate="C6" data-open data-source="FACT_COMPETITOR_MATRIX FACT_NO_EUREX_GEX">Wettbewerberangaben (Matrix S09, Eurex-GEX) an den Anbieterseiten im Volltext belegen</li>
         <li data-gate="Q6" data-open>Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen</li>
         <li data-gate="Q10" data-open>Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)</li>
       </ul>
@@ -678,7 +676,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.11.0 · 2026-10-11<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.11.1 · 2026-10-11<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>

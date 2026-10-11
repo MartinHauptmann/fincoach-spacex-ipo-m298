@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.11.0",
+    "version": "1.11.1",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -1135,6 +1135,12 @@
       "date": "2026-10-11",
       "event": "Freigaben des Herausgebers: Abgleich aller Snippet-Belege am Original (C3, C8, Q2, Q4, Q5; evidence → fulltext; FACT_PRIIPS_UWG und FACT_ANGEMESSENHEIT → CONFIRMED), Interessenkonflikte bestätigt (C4: keine), Datenschutz/Impressum freigegeben (C9 bleibt ◐: L38-Messung widerspricht sessionStorage-Angabe und Stand-Datum)",
       "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Datenschutzerklärung mit Zustimmung des Herausgebers an die Messung angeglichen (kein Browser-Speicher, Stand 2026-10-11); L38 jetzt BLOCKER; C9 ✓. C6 ✓ nach Bestätigung des Herausgebers (Wettbewerberangaben am Original geprüft)",
+      "qa_score_pct": 84.2,
       "release": "ÜBERARBEITUNG"
     }
   ],

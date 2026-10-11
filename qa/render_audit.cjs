@@ -169,7 +169,7 @@ async function audit(browser, url, vp) {
     if (r.chartColor !== null) line(r.chartColor === '#94A3B8', 'BLOCKER', `L02 Chart-Farbe (${n})`, r.chartColor);
   }
   // WARN bis zur Freigabe der Textänderung durch den Herausgeber (Punkt 3), danach BLOCKER
-  if (l38) line(!l38.wrong.length, 'WARN', 'L38 Datenschutz = Messung', l38.wrong.length ? l38.wrong.join('; ') : `Speicherangaben = Messung an ${l38.mods} Modulseiten`);
+  if (l38) line(!l38.wrong.length, 'BLOCKER', 'L38 Datenschutz = Messung', l38.wrong.length ? l38.wrong.join('; ') : `Speicherangaben = Messung an ${l38.mods} Modulseiten`);
   const fails = o => o.out.filter(x => x.ratio < x.need).length;
   line(fails(plain) === fails(viewer), 'BLOCKER', 'L01 viewer = plain', `plain ${fails(plain)} · viewer ${fails(viewer)} Elemente unter AA`);
   line(mobile.overflow <= 0, 'BLOCKER', 'Layout 390 px', mobile.overflow > 0 ? `${mobile.overflow}px horizontaler Überlauf` : 'kein horizontales Scrollen');
