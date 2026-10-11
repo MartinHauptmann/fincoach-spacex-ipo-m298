@@ -2443,13 +2443,13 @@
    ]
   },
   {
-   "name": "R18 N2 Negativkontrolle: Volland-Zelle mit Zusatz n. v.",
+   "name": "R18 N2 Negativkontrolle: TWS-Zelle wörtlicher am Claim (ersetzt Fassung mit Zusatz „Partnerseite ohne Angabe“, die L76 zu Recht meldet)",
    "expect": "NONE",
    "edits": [
     [
      "m300.html",
-     "<td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">",
-     "<td>n. v.</td><td>n. v.</td><td>n. v. (Partnerseite ohne Angabe)</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">"
+     "nein (Eurex nur Rohdaten) <span class=\"badge b-v\">VENDOR</span>",
+     "nein (Eurex-Optionen nur als Rohdaten) <span class=\"badge b-v\">VENDOR</span>"
     ]
    ]
   }

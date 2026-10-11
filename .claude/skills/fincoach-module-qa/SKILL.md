@@ -191,13 +191,22 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   tragen; sonst je Fakt („Volland: Medienangabe“).
 - **L86:** Szenarien tragen keine Konfidenz (`confidence: null`) und erscheinen in keiner Konfidenzanzeige.
 - **L85b:** Gleiche Maßstäbe über alle Bindungen einer Vergleichstabelle (Quantor-Fakten mit `basis` ausgenommen).
-- **L27g:** Kein pauschales MEDIEN/UNGEPRÜFT über Fakten verschiedener Verdicts; jedes Kennzeichen steht hinter dem
-  Gegenstand, den es betrifft („Volland (…) MEDIEN“).
+- **L27g:** Kein pauschales MEDIEN/UNGEPRÜFT über Fakten verschiedener Verdicts: Jedes Kennzeichen und jedes
+  Verdict-Wort steht in der Teilaussage seines Gegenstands und nennt keinen Anbieter anderen Verdicts; jede Teilaussage
+  über einen Medien-Fakt trägt ihr Kennzeichen.
 - **L27h:** Die Kennzeichen-Legende nennt jedes verwendete Kennzeichen; reine Modellannahmen tragen MODELL, nie SCENARIO.
-- **L87:** Nicht ausgewertete Gegenstände stehen in der DBOM unter `not_evaluated`; jede Glossar-Stufe und jede
-  Vergleichszelle dazu nennt „n. v.“ oder bindet einen Fakt, der den Gegenstand trägt.
-- **L82d:** Ausnahmen im Prüfumfang (`verified.scope` ohne Original) stehen in jedem Satz „alle Belege am Original“.
-- **L03d:** „Entwurf“ im Footer genau dann, wenn der Status nicht FREIGABE ist.
+- **L87:** Nicht ausgewertete Gegenstände stehen in der DBOM unter `not_evaluated`; jede Aussage dazu (Glossar,
+  Tabellen, Modale, Fließtext, Analyse) nennt „n. v.“ direkt beim Gegenstand oder bindet einen Fakt, der ihn trägt.
+- **L82d:** Ausnahmen im Prüfumfang stehen in jedem Satz, der Vollständigkeit am Original oder auf Stufe Volltext
+  behauptet (auch „sämtliche“, „jeder Beleg“, Tooltips), mit Namen und Ausnahmewort.
+- **L03d:** „Entwurf“ steht sichtbar im Footer (nicht als Kommentar oder versteckt), solange der Status nicht FREIGABE ist.
+- **L18b:** Ein Quantor zählt einen Anbieter nur als bestimmbar, wenn dessen eigener Fakt den Gegenstand nennt
+  (`basis.determinable_from`, `basis.subject`). Sonst gilt n. v. – auch in Matrix, KPI, Fazit und Analyse.
+- **L82e:** Belegstufe `fulltext` nur bei Prüfung am Original; nur Medienbericht oder Studie nicht eingesehen ⇒ `secondary`.
+- **L12c:** Jede Datenzelle einer Vergleichstabelle bindet einen Fakt oder ist vollständig „n. v.“.
+- **L50c (Testhärte):** Neue Tests prüfen Teilaussagen, alle Fundorte und sichtbaren Text, nicht nur die gemeldete
+  Stelle. Vor jeder Teständerung schreibt ein eigener Agent einen Holdout, der zuerst committet wird; die
+  Erstmessung nach der Härtung wird berichtet, auch wenn später nachgeschärft wird.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

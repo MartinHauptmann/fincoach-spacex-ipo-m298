@@ -633,7 +633,7 @@
           "Volland",
           "Bookmap"
         ],
-        "subject": "Eurex|\\bnur\\b",
+        "subject": "Eurex|\\bnur SPX",
         "determinable_from": {
           "ATAS": "FACT_XRAY_1MIN_SPX",
           "IBKR TWS": "FACT_TWS_SPEC"
@@ -1288,6 +1288,12 @@
       "date": "2026-10-11",
       "event": "v1.13.0: Inhalte nach der 18. Zweitprüfung korrigiert: Eurex-GEX-Quantor aus den Anbieterfakten abgeleitet (2 von 6 bestimmbar, 4 n. v.), Matrixzeile je Zelle gebunden; BaFin-Studie evidence secondary, Volltext-Sätze mit Ausnahme; S10 Größe n. v., Kosten Knock-outs n. v.; Kennzeichen in Info-Box und Fazit ergänzt. Q4/Q7 bleiben ◐ bis zur gehärteten Messung",
       "qa_score_pct": 86.8,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Tests gehärtet (L27g, L87, L82d, L27h, L03d) und neu (L18b, L82e, L12c); Holdout r18 vor Teständerung: 13/37, Erstmessung nach Härtung 28/37, nach Nachschärfung 37/37; Fälle der 18. Prüfung 29/29. Q4 und Q7 auf ✓",
+      "qa_score_pct": 92.1,
       "release": "ÜBERARBEITUNG"
     }
   ],
