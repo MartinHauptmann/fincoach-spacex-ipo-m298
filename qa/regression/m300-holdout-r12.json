@@ -1,0 +1,486 @@
+{
+ "page": "m300.html",
+ "source": "Holdout r12, unabhängig geschrieben, 2026-10-11",
+ "cases": [
+  {
+   "name": "Glossar-JS verweist auf anderes Modul per ID",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Im MBO über wiederholte Ausführungen derselben Order-ID erkennbar.",
+     "Im MBO über wiederholte Ausführungen derselben Order-ID erkennbar; ausführlich im Orderflow-Modul M297."
+    ]
+   ]
+  },
+  {
+   "name": "Footer-Link auf anderes Modul ohne Modul-ID im Linktext",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "M300 · Volltext-Analyse</a>",
+     "M300 · Volltext-Analyse</a>\n        <a href=\"./modul.html#s05\" class=\"hover:text-tngb-cyan transition block mb-1\">Weiterlesen: Börsengang-Analyse</a>"
+    ]
+   ]
+  },
+  {
+   "name": "DBOM honest_disclosure beschreibt Versionsverlauf",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "Der aktuelle QA-Score steht in der QA-Sektion der Seite",
+     "Seit Release 1.9 steht der aktuelle QA-Score in der QA-Sektion der Seite"
+    ]
+   ]
+  },
+  {
+   "name": "S04: 'nicht mehr' impliziert frühere Rechtslage",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Börsengehandelte Optionen und Optionsscheine werden insoweit nicht unterschiedlich behandelt.",
+     "Seit dem JStG 2024 werden börsengehandelte Optionen und Optionsscheine insoweit nicht mehr unterschiedlich behandelt."
+    ]
+   ]
+  },
+  {
+   "name": "Modal-JS: frühere Verrechnungsgrenze gestrichen",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "BGBl. 2024 I Nr. 387). Keine Steuerberatung.",
+     "BGBl. 2024 I Nr. 387). Die zuvor geltende Verrechnungsgrenze für Termingeschäfte hat der Gesetzgeber gestrichen. Keine Steuerberatung."
+    ]
+   ]
+  },
+  {
+   "name": "Prompt K1 verweist auf Norm a. F.",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "für Kreditinstitute und Sicherungsgeschäfte) und § 8b KStG.",
+     "für Kreditinstitute und Sicherungsgeschäfte) und § 8b KStG; zum Vergleich § 20 Abs. 6 Satz 5 EStG a. F. heranziehen."
+    ]
+   ]
+  },
+  {
+   "name": "QA-Tooltip mit falschem A-Bereich",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "title=\"Claim-Tabelle A01–A15; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61\"",
+     "title=\"Claim-Tabelle A01–A18; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61\""
+    ]
+   ]
+  },
+  {
+   "name": "Analyse-Handtext verweist auf K10",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "Ihr Nutzen hängt allerdings vollständig von der Richtigkeit der Positionsannahme $s_i$ ab (K3).",
+     "Ihr Nutzen hängt allerdings vollständig von der Richtigkeit der Positionsannahme $s_i$ ab (vgl. K10)."
+    ]
+   ]
+  },
+  {
+   "name": "Prompt-Gate Q1 mit Bereich 'K1 bis K11'",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "Q1  Phase A vollständig: Claim-Tabelle, K1–K9 einzeln beantwortet",
+     "Q1  Phase A vollständig: Claim-Tabelle, K1 bis K11 einzeln beantwortet"
+    ]
+   ]
+  },
+  {
+   "name": "S05: 'sonst niemand' ohne Vergleichsbasis",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "wie sich die Positionierung innerhalb des Tages verschiebt.</p>",
+     "wie sich die Positionierung innerhalb des Tages verschiebt. Diese Verbindung bietet am Markt sonst niemand.</p>"
+    ]
+   ]
+  },
+  {
+   "name": "S02 Einsteiger: 'das einzige Werkzeug'",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Werkzeuge wie ATAS Options X-Ray versuchen zu schätzen,",
+     "ATAS Options X-Ray ist das einzige Werkzeug, das zu schätzen versucht,"
+    ]
+   ]
+  },
+  {
+   "name": "K-Tabelle JS: 'als Einzige' ohne Basis",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Bestätigt durch Hilfe- und Lernseiten des Herstellers.",
+     "Bestätigt durch Hilfe- und Lernseiten des Herstellers; als Einzige bringt die Suite Dealer-Greeks direkt in den Futures-Chart."
+    ]
+   ]
+  },
+  {
+   "name": "Fazit-Faktpunkt mit Wertung 'leider … Schwachpunkt'",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "Für Optionen fehlt leider eine native Ausführung, ein spürbarer Schwachpunkt <span class=\"badge b-v\">VENDOR</span>."
+    ]
+   ]
+  },
+  {
+   "name": "Fazit-Punkt ohne EINSCHÄTZUNG-Badge",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "nicht aus gesetzlichem Zwang <span class=\"dbom-class-badge\">EINSCHÄTZUNG</span>.</li>",
+     "nicht aus gesetzlichem Zwang.</li>"
+    ]
+   ]
+  },
+  {
+   "name": "Fazit-Infobox mit Handlungsanweisung 'sollte'",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "der offenen Kommunikation der schwächeren Positionsannahme ab <span class=\"dbom-class-badge\">EINSCHÄTZUNG</span>.</div>",
+     "der offenen Kommunikation der schwächeren Positionsannahme ab <span class=\"dbom-class-badge\">EINSCHÄTZUNG</span>. Wer DAX-Optionen handelt, sollte bis dahin die ODAX-Daten selbst auswerten.</div>"
+    ]
+   ]
+  },
+  {
+   "name": "Formel: MES-Multiplikator 2 in LaTeX",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "M_{ES}=50,\\ M_{MES}=5 \\]",
+     "M_{ES}=50,\\ M_{MES}=2 \\]"
+    ]
+   ]
+  },
+  {
+   "name": "Glossar-JS: MES 10",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "SPX-Multiplikator 100 / ES 50 / MES 5;",
+     "SPX-Multiplikator 100 / ES 50 / MES 10;"
+    ]
+   ]
+  },
+  {
+   "name": "Analyse: SPX-Multiplikator 250 in Klammerform",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "$M$ der Kontraktmultiplikator (SPX: 100; `FACT_CONTRACT_SPECS`)",
+     "$M$ der Kontraktmultiplikator (SPX: 250; `FACT_CONTRACT_SPECS`)"
+    ]
+   ]
+  },
+  {
+   "name": "S04 KapGes: Rechtsfolge Verlustrücktrag nicht im Claim",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Ausnahmen bestehen für Institute und Sicherungsgeschäfte (Satz 4), mit Rückausnahme für Aktien-Hedges (Satz 5).",
+     "Ausnahmen bestehen für Institute und Sicherungsgeschäfte (Satz 4), mit Rückausnahme für Aktien-Hedges (Satz 5). Ein Verlustrücktrag ist ausgeschlossen."
+    ]
+   ]
+  },
+  {
+   "name": "KPI 0DTE: Vorjahreszahl nicht im Claim",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gesamtjahr 2025 (Cboe)",
+     "Gesamtjahr 2025 (Cboe), nach 52 % im Vorjahr"
+    ]
+   ]
+  },
+  {
+   "name": "S02 Experte: Bußgeldrahmen nicht im Claim",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Risiko- und Kapitalkalkül.",
+     "Market Maker hedgen aus Risiko- und Kapitalkalkül; Verstöße gegen Quotierungspflichten können mit Geldbußen bis 5 Mio. Euro geahndet werden."
+    ]
+   ]
+  },
+  {
+   "name": "DBOM honest_disclosure nennt nicht existierenden Fakt",
+   "expect": "L77",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "Quelltext des Nutzers (FACT_ROADMAP)",
+     "Quelltext des Nutzers (FACT_ROADMAP, FACT_USER_SOURCE_TEXT)"
+    ]
+   ]
+  },
+  {
+   "name": "DBOM caveat verweist auf erfundene Fakt-ID",
+   "expect": "L77",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"caveat\": \"Keine Primärquelle zum Hedging über FDAX/ODAX gefunden.\"",
+     "\"caveat\": \"Keine Primärquelle zum Hedging über FDAX/ODAX gefunden; vgl. FACT_FDAX_ORDERBOOK.\""
+    ]
+   ]
+  },
+  {
+   "name": "Period Cboe-Volumen nach Stichtag",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"period\": \"Gesamtjahr 2025\"",
+     "\"period\": \"Stand 2026-10-09\""
+    ]
+   ]
+  },
+  {
+   "name": "Period Eurex-Circulars bis 2027",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"period\": \"Eurex-Circulars 2023–2026\"",
+     "\"period\": \"Eurex-Circulars 2023–2027\""
+    ]
+   ]
+  },
+  {
+   "name": "Chain-Suite-Box ohne VENDOR-Kennzeichen",
+   "expect": "L79",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "blind für Intraday-0DTE <span class=\"badge b-v\">VENDOR</span>",
+     "blind für Intraday-0DTE"
+    ]
+   ]
+  },
+  {
+   "name": "Roadmap: neue Vendor-Bindung ohne Kennzeichen",
+   "expect": "L79",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>IB-API (BAG) vorhanden</td>",
+     "<td><span data-source=\"FACT_IB_BAG\">IB-API (BAG, bis 6 Legs) vorhanden</span></td>"
+    ]
+   ]
+  },
+  {
+   "name": "KPI-Pill: VENDOR umbenannt in HERSTELLER",
+   "expect": "L79",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<span class=\"dbom-class-badge dc-vendor\">VENDOR</span><span class=\"dbom-conf\">",
+     "<span class=\"dbom-class-badge dc-primary\">HERSTELLER</span><span class=\"dbom-conf\">"
+    ]
+   ]
+  },
+  {
+   "name": "keep_reason nur 'bleibt'",
+   "expect": "L75",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\"",
+     "\"keep_reason\": \"bleibt\""
+    ]
+   ]
+  },
+  {
+   "name": "keep_reason ohne Bezug 'Wird weiterhin benötigt.'",
+   "expect": "L75",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"keep_reason\": \"Begründet die Risikodarstellung zu Turbo-Zertifikaten (C7); nur Medienberichte zugänglich.\"",
+     "\"keep_reason\": \"Wird weiterhin benötigt.\""
+    ]
+   ]
+  },
+  {
+   "name": "NONE: Fazit-Punkt umformuliert, Badge bleibt",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Minuten-Snapshots lösen das Skalierungsproblem, kosten aber",
+     "Minuten-Snapshots entschärfen das Skalierungsproblem, kosten aber"
+    ]
+   ]
+  },
+  {
+   "name": "NONE: Glossar ES-Multiplikator mit Einheit, korrekt gebunden",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Hedge-Delta geteilt durch den ES-Multiplikator (50).",
+     "Hedge-Delta geteilt durch den ES-Multiplikator von 50 USD je Indexpunkt."
+    ]
+   ]
+  },
+  {
+   "name": "NONE: S03 Hinweis mit korrektem K-Bereich",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Zeile anklicken für Begründung und Fundstelle.",
+     "Zeile anklicken (K1 bis K9) für Begründung und Fundstelle."
+    ]
+   ]
+  },
+  {
+   "name": "NONE: S04 Hinweis 'geltendes Recht'",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung.",
+     "Allgemeine Information mit Rechtsstand 05.10.2026 (geltendes Recht), keine Steuerberatung."
+    ]
+   ]
+  },
+  {
+   "name": "NONE: keep_reason ausführlicher mit Bezug",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"keep_reason\": \"Tragend für die Einordnung der GEX-Prämisse (K3).\"",
+     "\"keep_reason\": \"Tragend für die Einordnung der GEX-Prämisse (K3): erklärt die bessere Datenlage beim SPX; Primärbeleg der Cboe offen (Q5).\""
+    ]
+   ]
+  },
+  {
+   "name": "NONE: period mit Abrufdatum nach Stichtag",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"period\": \"Herstellerangabe Stand 2026-10-05\"",
+     "\"period\": \"Herstellerangabe Stand 2026-10-05 (abgerufen 2026-10-11)\""
+    ]
+   ]
+  },
+  {
+   "name": "NONE: Vendor-Span näher am Claim, Badge bleibt",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "OptionsDepth deckt nur SPX/VIX ab <span class=\"badge b-v\">VENDOR</span>",
+     "OptionsDepth deckt derzeit nur SPX und VIX ab <span class=\"badge b-v\">VENDOR</span>"
+    ]
+   ]
+  },
+  {
+   "name": "NONE: Glossar Knock-out mit Datum aus dem Claim",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).",
+     "Für Turbos gilt seit 16.06.2026 eine BaFin-Allgemeinverfügung (Details in S10)."
+    ]
+   ]
+  },
+  {
+   "name": "NONE: DBOM-caveat ergänzt ohne Fakt-ID",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"caveat\": \"Keine Rechtsformempfehlung.\"",
+     "\"caveat\": \"Keine Rechtsformempfehlung; Einzelfallprüfung durch Steuerberater.\""
+    ]
+   ]
+  },
+  {
+   "name": "NONE: Analyse-Summary mit Normzitat aus dem Claim",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "**Market Maker:** Eine gesetzliche Pflicht zum Orderbuch-Hedging besteht nicht (`FACT_MM_NO_HEDGE_DUTY`).",
+     "**Market Maker:** Eine gesetzliche Pflicht zum Orderbuch-Hedging besteht nicht; Quotierungs- und Vertragspflichten regelt § 80 Abs. 4 WpHG (`FACT_MM_NO_HEDGE_DUTY`)."
+    ]
+   ]
+  }
+ ]
+}
