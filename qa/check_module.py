@@ -481,7 +481,7 @@ def main():
             report("L58 Seitenverweise eindeutig", BLOCKER, not l58, "ohne „Modulseite“: " + ", ".join(sorted(set(l58))) if l58 else "Seitenverweise als „Modulseite Sxx“")
             # L59 · Pflichtabschnitte der Ausgabestruktur (Prompt Abschnitt 7) und Executive Summary ≤ 250 Wörter
             REQ = {"0 Titelblock": r"^\| Version \|", "0 Kurz-Disclaimer": r"\*\*Disclaimer \(Kurzfassung\):\*\*", "1 Executive Summary": r"^## 1 · Executive Summary",
-                   "2 Claim-Tabelle": r"Claim-Tabelle\n\n<!-- sync:CLAIMS -->", "2 K1–K12": r"Prüfprotokoll K1–K12", "2 Korrekturliste": r"Korrekturliste",
+                   "2 Claim-Tabelle": r"Claim-Tabelle\n\n<!-- sync:CLAIMS -->", "2 K-Prüfprotokoll": r"Prüfprotokoll K1–K\d+", "2 Korrekturliste": r"Korrekturliste",
                    "3 Module 1–7": r"#### Modul 1 ·[\s\S]*#### Modul 7 ·", "4 Modul 8": r"#### Modul 8 ·", "5 Glossar": r"^## 4 · Glossar",
                    "6 Quellen": r"^## 5 · Quellenverzeichnis", "7 M-DBOM": r"^## 6 · M-DBOM", "8 Scorecard": r"^## 8 · QA-Scorecard", "9 Disclaimer": r"^## 9 · Disclaimer"}
             l59 = [k for k, rx in REQ.items() if not re.search(rx, md, re.M)]

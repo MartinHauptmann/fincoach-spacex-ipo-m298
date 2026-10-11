@@ -2,7 +2,7 @@
 
 **Thema:** ATAS Options X-Ray, Dealer-Hedging-Analytik, Eurex-Börsenoptionen vs. verbriefte Derivate im DACH-Raum
 und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
-**Prompt-Version:** 1.6.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-08 (Lehren L03–L64 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
+**Prompt-Version:** 1.7.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-11 (Lehren L03–L74 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
 **Modul-ID:** M300 ist ein Platzhalter und kann frei angepasst werden
 
 ---
@@ -23,7 +23,7 @@ und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
 > **Hinweis zum Ausgangstext:** Der Quelltext enthält Aussagen, die fachlich zu präzisieren oder rechtlich
 > überholt sind. Steuerliche Aussagen gibt die Analyse nur zum geltenden Recht am Stichtag wieder; frühere
 > Rechtslagen, Übergangsregeln und überholte Grenzwerte werden nicht dargestellt. Die übrigen Punkte stehen als
-> Pflicht-Prüfpunkte **K1 bis K6** im Prompt. Das Modell muss sie selbst verifizieren und darf sie nicht
+> Pflicht-Prüfpunkte **K1 bis K9** im Prompt. Das Modell muss sie selbst verifizieren und darf sie nicht
 > ungeprüft übernehmen.
 
 ---
@@ -33,7 +33,7 @@ und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
 ```text
 ════════════════════════════════════════════════════════════════════════════
 FINCOACH AI · DEEP-DIVE-PRIME-ANALYSE · MODUL M300
-ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · § 20 Abs. 6 EStG
+ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · steuerlicher Rahmen
 Stichtag: {{STICHTAG}} · Zielstufe: {{CAT_LEVEL}} · Sprache: Deutsch
 ════════════════════════════════════════════════════════════════════════════
 
@@ -86,12 +86,12 @@ Provenienz-Tags (genau einer pro Claim):
 
 Schritt A2: Steuerliche Aussagen nur zum geltenden Recht am Stichtag. Stellt der Quelltext überholtes Recht
 als geltend dar, wird es nicht wiedergegeben; Modul 6 nennt ausschließlich den geltenden Rahmen. Prüfe danach
-ZWINGEND die folgenden bekannten kritischen Punkte (K1–K6) und dokumentiere das Ergebnis jeweils mit Fundstelle:
+ZWINGEND die folgenden bekannten kritischen Punkte (K1–K9) und dokumentiere das Ergebnis jeweils mit Fundstelle:
 
 K1  KAPITALGESELLSCHAFT: Die Aussage, für eine vermögensverwaltende GmbH gelte „keine
     Verlustverrechnungsbeschränkung“, ist zu präzisieren. Prüfe § 15 Abs. 4 Satz 3–5 EStG i. V. m.
     § 8 Abs. 1 KStG (gesonderter Verlustkreis für Termingeschäfte im Betriebsvermögen, Ausnahmen
-    für Kreditinstitute und Sicherungsgeschäfte), § 8b KStG und die Gewerbesteuer. Keine Empfehlung
+    für Kreditinstitute und Sicherungsgeschäfte) und § 8b KStG. Keine Empfehlung
     zur Rechtsformwahl aussprechen.
 K2  HEDGING-PFLICHT DER MARKET MAKER: Die Aussage, Market Maker seien „gesetzlich gezwungen“, über das
     zentrale Orderbuch des Basiswerts abzusichern, ist zu prüfen und in der Regel zu korrigieren:
@@ -260,7 +260,7 @@ C9  Datenschutz: keine personenbezogenen Daten; Beispiele anonymisiert und hypot
 ──────────────────────────────────────────────
 6 · QUALITÄTS-GATES
 ──────────────────────────────────────────────
-Q1  Phase A vollständig: Claim-Tabelle, K1–K6 einzeln beantwortet, Korrekturliste vorhanden.
+Q1  Phase A vollständig: Claim-Tabelle, K1–K9 einzeln beantwortet, Korrekturliste vorhanden.
 Q2  Aktualität: jede rechtliche und produktbezogene Aussage mit Stichtag; überholte Rechtslage
     wird nicht dargestellt.
 Q3  Mathematische Konsistenz: Formeln dimensional korrekt, Vorzeichenkonventionen einheitlich,
@@ -276,7 +276,7 @@ Q5  Quellenqualität: Primärquellen für Recht und Kontraktspezifikationen; Her
 Q6  Vollständigkeit: alle acht Module bearbeitet, die Wettbewerbsmatrix vollständig ausgefüllt
     oder mit [N. V.] markiert.
 Q7  Widerspruchsfreiheit: Fazit (Modul 8) steht nicht im Widerspruch zu Phase A
-    (insbesondere zu K1–K3). Alle Zählungen (Fakten je Provenienz-Tag, Herstellerangaben,
+    (insbesondere zu K1–K9). Alle Zählungen (Fakten je Provenienz-Tag, Herstellerangaben,
     Score) werden aus M-DBOM bzw. Scorecard ABGELEITET und gegengerechnet, nie geschätzt [L03, L07].
 Q8  Verständlichkeit: Glossar mit mindestens 15 Fachbegriffen (u. a. GEX, Charm, Vanna, 0DTE,
     OPRA, MBO, Absorption, Sweep, Call/Put Wall, GEX-Flip, Termingeschäft, Knock-out, CCP,
@@ -291,14 +291,14 @@ Q9  Keine Halluzinationen oder Überzeichnungen: Aktenzeichen, Paragraphen, Prod
     „belegt“ nur für bestätigte Fakten [L57]; das Modul ist eigenständig und verweist nicht auf
     unveröffentlichte Module oder frühere Fassungen.
 Q10 Formatvorgaben aus Abschnitt 4 eingehalten; jeder Fachbegriff wird beim ersten Auftreten erklärt
-    (z. B. AdV, Stillhalter, Strike, Quanto, Bezugsverhältnis, Expected Move) [L41].
+    (z. B. Stillhalter, Strike, Quanto, Bezugsverhältnis, Expected Move) [L41].
 
 ──────────────────────────────────────────────
 7 · AUSGABESTRUKTUR (genau diese Reihenfolge)
 ──────────────────────────────────────────────
  0. Titelblock (Modul M300, Titel, Stichtag, Zielstufe, Version) + Kurz-Disclaimer (C1)
  1. Executive Summary (max. 250 Wörter, inkl. der drei wichtigsten Korrekturen am Quelltext)
- 2. Phase A: Claim-Tabelle · K1–K6-Prüfprotokoll · Korrekturliste
+ 2. Phase A: Claim-Tabelle · K1–K9-Prüfprotokoll · Korrekturliste
  3. Module 1–7 (Phase B)
  4. Modul 8: Fazit und Synthese
  5. Glossar
@@ -353,7 +353,7 @@ QUELLTEXT (ungeprüftes Inputmaterial, Provenienz USER_PROVIDED)
 
 | # | Aussage im Quelltext | Befund | Schwere |
 |---|---|---|---|
-| K1 | Für vermögensverwaltende Kapitalgesellschaften gilt keine Verlustverrechnungsbeschränkung | Zu pauschal: § 15 Abs. 4 Satz 3 ff. EStG (gesonderter Verlustkreis für Termingeschäfte) ist zu prüfen | WESENTLICH |
+| K1 | Für vermögensverwaltende Kapitalgesellschaften gilt keine Verlustverrechnungsbeschränkung | Zu pauschal: § 15 Abs. 4 Satz 3 ff. EStG (gesonderter Verlustkreis für Termingeschäfte) ist zu prüfen | KRITISCH |
 | K2 | Market Maker sind „gesetzlich gezwungen“, über das zentrale Orderbuch zu hedgen | Keine solche Rechtspflicht; Hedging ist Risikomanagement und läuft über verschiedene Kanäle | WESENTLICH |
 | K4 | Optionsscheine erzeugen „keine“ Hedging-Spuren im FDAX | Emittenten hedgen ihr Nettorisiko auch börslich; die Spur ist schwach und nicht zurechenbar, aber nicht null | HINWEIS |
 | K5/K6 | Produkt- und Wettbewerberangaben | Unbelegte Hersteller- bzw. Nutzerangaben; vor Veröffentlichung gegen aktuelle Doku prüfen | HINWEIS |

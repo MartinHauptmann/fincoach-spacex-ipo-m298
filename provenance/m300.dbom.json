@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.9.0",
+    "version": "1.10.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,19 +13,19 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 38,
-    "confirmed_primary": 20,
-    "media_report": 6,
-    "unverified": 9,
+    "total": 33,
+    "confirmed_primary": 23,
+    "media_report": 5,
+    "unverified": 2,
     "scenario_projection": 3,
-    "vendor_claim": 10,
+    "vendor_claim": 9,
     "by_class": {
-      "MARKET_DATA": 10,
-      "MEDIA_REPORT": 6,
+      "MARKET_DATA": 7,
+      "MEDIA_REPORT": 5,
       "MODEL_ASSUMPTION": 1,
       "REGULATORY_FRAMEWORK": 9,
       "SCENARIO_PROJECTION": 2,
-      "VENDOR_CLAIM": 10
+      "VENDOR_CLAIM": 9
     }
   },
   "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 bis 2026-10-08 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat. Die meisten Fakten stützen sich auf Suchtreffer-Snippets, die auf Primär- oder Herstellerquellen verweisen; einzelne Fakten beruhen auf Fachwissen (FACT_PRODUCT_STRUCTURE), auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
@@ -36,7 +36,7 @@
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.9,
-      "claim": "Verluste aus Termingeschäften im Privatvermögen unterliegen seit dem JStG 2024 (BGBl. 2024 I Nr. 387) keiner gesonderten Verlustverrechnungsbeschränkung mehr; es gelten die allgemeinen Regeln für Einkünfte aus Kapitalvermögen (§ 20 Abs. 6 EStG).",
+      "claim": "Verluste aus Termingeschäften im Privatvermögen unterliegen keiner gesonderten Verlustverrechnungsbeschränkung; es gelten die allgemeinen Regeln für Einkünfte aus Kapitalvermögen (§ 20 Abs. 6 EStG in der Fassung des JStG 2024, BGBl. 2024 I Nr. 387).",
       "source_id": "SRC_BGBL_JSTG2024",
       "caveat": "",
       "period": "Rechtsstand 2026-10-05",
@@ -129,16 +129,13 @@
     },
     {
       "id": "FACT_BAFIN_STUDY",
-      "verdict": "UNVERIFIED",
-      "class": "MARKET_DATA",
-      "confidence": 0.7,
+      "verdict": "MEDIA_REPORT",
+      "class": "MEDIA_REPORT",
+      "confidence": 0.65,
       "claim": "BaFin-Studie: Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste; Untersuchungszeitraum 2019–2023.",
-      "source_id": "SRC_BAFIN_STUDY",
-      "caveat": "Studie nicht im Volltext gelesen; Zeitraum nur sekundär belegt.",
-      "period": "Untersuchungszeitraum 2019–2023",
-      "supporting_sources": [
-        "SRC_TESTDE"
-      ]
+      "source_id": "SRC_TESTDE_TURBO",
+      "caveat": "Studie selbst nicht im Volltext eingesehen; Zahl übereinstimmend in mehreren Medienberichten.",
+      "period": "Untersuchungszeitraum 2019–2023"
     },
     {
       "id": "FACT_XRAY_10_IND",
@@ -181,16 +178,6 @@
       "claim": "Options X-Ray setzt eine Verbindung über Rithmic oder Interactive Brokers voraus; CQG ist in Entwicklung.",
       "source_id": "SRC_ATAS_CHANGELOG",
       "caveat": "Nur über Changelog-Snippet belegt.",
-      "period": "Changelog Stand 2026-10-05"
-    },
-    {
-      "id": "FACT_XRAY_LAUNCH",
-      "verdict": "UNVERIFIED",
-      "class": "VENDOR_CLAIM",
-      "confidence": 0.6,
-      "claim": "Start der Options X-Ray Suite am 04.09.2026.",
-      "source_id": "SRC_ATAS_CHANGELOG",
-      "caveat": "Nur Snippet; am Changelog prüfen.",
       "period": "Changelog Stand 2026-10-05"
     },
     {
@@ -277,16 +264,6 @@
       "period": "Projektion Sept. 2025"
     },
     {
-      "id": "FACT_OPRA_BURSTS",
-      "verdict": "MEDIA_REPORT",
-      "class": "MEDIA_REPORT",
-      "confidence": 0.6,
-      "claim": "Gemessene OPRA-Bursts über 180 Mio. Nachrichten/s (1-ms-Fenster).",
-      "source_id": "SRC_DATABENTO",
-      "caveat": "Sekundärquelle (Datenanbieter).",
-      "period": "April 2025"
-    },
-    {
       "id": "FACT_ODAX_SPECS",
       "verdict": "CONFIRMED",
       "class": "MARKET_DATA",
@@ -307,24 +284,14 @@
       "period": "Stand 2026-10-05"
     },
     {
-      "id": "FACT_PRODUCT_STRUCTURE",
-      "verdict": "UNVERIFIED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.5,
-      "claim": "Strukturvergleich Eurex-Optionen vs. Optionsscheine/Knock-outs: Rechtsnatur, Kontrahentenrisiko (CCP vs. Emittent), Preisbildung, Volatilität im Preis, Stillhalterfähigkeit.",
-      "source_id": "SRC_FACHWISSEN",
-      "caveat": "Fachliche Ableitung ohne Einzelbeleg; vor Freigabe mit Eurex-Clearing- und Emittentenunterlagen belegen.",
-      "period": "Stand 2026-10-05"
-    },
-    {
       "id": "FACT_OESX_MULT",
-      "verdict": "UNVERIFIED",
+      "verdict": "CONFIRMED",
       "class": "MARKET_DATA",
-      "confidence": 0.7,
-      "claim": "OESX: 10 € je Indexpunkt; Optionen auf DAX- bzw. EURO-STOXX-50-Futures wurden nicht gefunden.",
-      "source_id": "SRC_EUREX_SPECS",
-      "caveat": "Standardangabe, nicht am Original bestätigt.",
-      "period": "Stand 2026-10-05"
+      "confidence": 0.85,
+      "claim": "OESX (EURO-STOXX-50-Indexoptionen): 10 € je Indexpunkt, europäisch, Barausgleich.",
+      "source_id": "SRC_EUREX_OESX_SPEC",
+      "caveat": "",
+      "period": "Kontraktspezifikation Stand 2026-10-11"
     },
     {
       "id": "FACT_EUREX_DAILY_LAUNCH",
@@ -338,26 +305,6 @@
       "supporting_sources": [
         "SRC_EUREX_DAILY"
       ]
-    },
-    {
-      "id": "FACT_EUREX_DAILY_ADV",
-      "verdict": "UNVERIFIED",
-      "class": "MARKET_DATA",
-      "confidence": 0.6,
-      "claim": "ADV seit Produktstart: OEXP ca. 30.900 Kontrakte, ODAP ca. 2.300 Kontrakte.",
-      "source_id": "SRC_EUREX_WHITEPAPER",
-      "caveat": "Stand der Präsentation n. v.",
-      "period": "seit Produktstart, Stand n. v."
-    },
-    {
-      "id": "FACT_BSW_SHARES",
-      "verdict": "UNVERIFIED",
-      "class": "MARKET_DATA",
-      "confidence": 0.6,
-      "claim": "Anteile am Börsenumsatz verbriefter Derivate (jeweils am Gesamtumsatz): Hebelprodukte ca. 84 %, darunter Knock-outs ca. 59 % und Optionsscheine ca. 19 %.",
-      "source_id": "SRC_BSW",
-      "caveat": "Bezugszeitraum n. v. (veröffentlicht 07.07.2026, Stand 30.06.2026).",
-      "period": "n. v."
     },
     {
       "id": "FACT_ISSUER_HEDGING",
@@ -384,16 +331,6 @@
         "SRC_BOOKMAP",
         "SRC_IBKR"
       ]
-    },
-    {
-      "id": "FACT_VENDOR_PRICES",
-      "verdict": "MEDIA_REPORT",
-      "class": "MEDIA_REPORT",
-      "confidence": 0.55,
-      "claim": "Monatspreise der Anbieter: ATAS Ultra ca. 50–90 €, SpotGamma ca. 67–224 $, MenthorQ 129/349 $, Volland 150–1.000 $, Bookmap 39–99 $.",
-      "source_id": "SRC_PRICES",
-      "caveat": "Richtwerte aus Snippets/Drittquellen; beim Anbieter prüfen.",
-      "period": "Stand 2026-10-05"
     },
     {
       "id": "FACT_NO_EUREX_GEX",
@@ -452,18 +389,36 @@
     },
     {
       "id": "FACT_CONTRACT_SPECS",
-      "verdict": "UNVERIFIED",
+      "verdict": "CONFIRMED",
       "class": "MARKET_DATA",
-      "confidence": 0.6,
-      "claim": "Kontraktdaten: Multiplikator SPX 100 USD, ES 50 USD, MES 5 USD je Indexpunkt; SPX-Optionen mit Verfällen an jedem Wochentag (0DTE); Quartalsverfall am dritten Freitag im März, Juni, September und Dezember; Open Interest wird nach Handelsschluss veröffentlicht (T+1).",
-      "source_id": "SRC_FACHWISSEN",
-      "caveat": "Fachliche Standardangaben ohne Einzelbeleg; vor Freigabe an Cboe-, CME- und Eurex-Kontraktspezifikationen prüfen.",
-      "period": "Stand 2026-10-05",
+      "confidence": 0.8,
+      "claim": "Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Indexoptionen: letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember).",
+      "source_id": "SRC_CBOE_SPX",
+      "caveat": "Spezifikationsseiten ohne Versionsdatum; vor Veröffentlichung am aktuellen Regelwerk gegenlesen.",
+      "period": "Kontraktspezifikationen Stand 2026-10-11",
       "values": {
         "SPX": "100",
         "ES": "50",
         "MES": "5"
-      }
+      },
+      "supporting_sources": [
+        "SRC_CME_MICRO",
+        "SRC_EUREX_ODAX_SPEC"
+      ]
+    },
+    {
+      "id": "FACT_CCP_ISSUER",
+      "verdict": "CONFIRMED",
+      "class": "REGULATORY_FRAMEWORK",
+      "confidence": 0.8,
+      "claim": "Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). Optionsscheine und Knock-outs sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab.",
+      "source_id": "SRC_BAFIN_EUREX_CLEARING",
+      "caveat": "",
+      "period": "Stand 2026-10-11",
+      "supporting_sources": [
+        "SRC_DB_CLEARING",
+        "SRC_DDV_OS_MUSTER"
+      ]
     }
   ],
   "sources": [
@@ -636,13 +591,6 @@
       "url": "https://www.eurex.com/ex-en/find/circulars/circular-4844340"
     },
     {
-      "id": "SRC_EUREX_WHITEPAPER",
-      "ref": "S31",
-      "tier": "primary",
-      "title": "Eurex · Whitepaper EURO STOXX 50 Options / Präsentation Daily Options",
-      "url": "https://www.eurex.com/resource/blob/3617154/068c57ac37e964429b57ff10fcd78f53/data/presentation-daily-options.pdf"
-    },
-    {
       "id": "SRC_CBOE_FY2025",
       "ref": "S32",
       "tier": "primary",
@@ -655,13 +603,6 @@
       "tier": "primary",
       "title": "OPRA · Capacity Projections Update (Sept. 2025)",
       "url": "https://cdn.opraplan.com/documents/notices/OPRA_Capacity_Projections_Update_0925.pdf"
-    },
-    {
-      "id": "SRC_BSW",
-      "ref": "S34",
-      "tier": "primary",
-      "title": "BSW · Börsenumsätze verbriefter Derivate",
-      "url": "https://www.derbsw.de/de/boersenumsaetze/"
     },
     {
       "id": "SRC_DELVO_958",
@@ -678,27 +619,6 @@
       "url": "https://cms.law/de/deu/legal-updates/Ade-Verlustabzugsbeschraenkung-fuer-Termingeschaefte-Gesetzgeber-bereinigt-Verfassungswidrigkeit"
     },
     {
-      "id": "SRC_DATABENTO",
-      "ref": "S37",
-      "tier": "secondary",
-      "title": "Databento · Processing OPRA in real time (Sekundärquelle)",
-      "url": "https://databento.com/blog/beyond-40-gbps-processing-opra-in-real-time"
-    },
-    {
-      "id": "SRC_PRICES",
-      "ref": "S39",
-      "tier": "secondary",
-      "title": "Preisseiten ATAS, SpotGamma, MenthorQ, ORATS/Volland, Bookmap (Snippets/Drittquellen; Sekundärquelle)",
-      "url": "https://atas.net/pricing/"
-    },
-    {
-      "id": "SRC_BAFIN_STUDY",
-      "ref": "S41",
-      "tier": "primary",
-      "title": "BaFin · Studie Turbo-Zertifikate (2025)",
-      "url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2025/Studie_250521_Turbo_Zertifikate.html"
-    },
-    {
       "id": "SRC_MENTHORQ_GUIDE",
       "ref": "S42",
       "tier": "secondary",
@@ -711,13 +631,6 @@
       "tier": "primary",
       "title": "VO (EU) Nr. 1286/2014 (PRIIPs)",
       "url": "https://eur-lex.europa.eu/eli/reg/2014/1286/oj"
-    },
-    {
-      "id": "SRC_TESTDE",
-      "ref": "S45",
-      "tier": "secondary",
-      "title": "test.de · Studie zu Turbo-Zertifikaten (Sekundärquelle)",
-      "url": "https://www.test.de/Studie-zu-Turbo-Zertifikaten-Die-meisten-Anleger-machen-mit-Turbo-Zertifikaten-Verluste-6227752-0/"
     },
     {
       "id": "SRC_EUREX_DAILY",
@@ -769,11 +682,60 @@
       "url": "https://www.eurex.com/ex-en/data/statistics"
     },
     {
-      "id": "SRC_FACHWISSEN",
-      "ref": "–",
-      "tier": "internal",
-      "title": "FinCoach-Fachableitung (nicht einzeln belegt)",
-      "url": ""
+      "id": "SRC_CBOE_SPX",
+      "ref": "S51",
+      "tier": "primary",
+      "title": "Cboe · S&P 500 Index Options (SPX/SPXW) Product Specifications",
+      "url": "https://www.cboe.com/tradable-products/sp-500/spx-options/spx-specifications"
+    },
+    {
+      "id": "SRC_CME_MICRO",
+      "ref": "S52",
+      "tier": "primary",
+      "title": "CME Group · Micro E-mini Equity Index Futures – Products Overview",
+      "url": "https://www.cmegroup.com/education/courses/understanding-micro-futures-contracts-at-cme-group/micro-e-mini-futures/micro-e-mini-equity-index-futures-products-overview.html"
+    },
+    {
+      "id": "SRC_EUREX_ODAX_SPEC",
+      "ref": "S53",
+      "tier": "primary",
+      "title": "Eurex · DAX Options Contract Specifications (Final Settlement Day)",
+      "url": "https://www.eurex.com/ex-en/markets/idx/dax/DAX-Options-139884"
+    },
+    {
+      "id": "SRC_EUREX_OESX_SPEC",
+      "ref": "S54",
+      "tier": "primary",
+      "title": "Eurex · EURO STOXX 50 Index Options Contract Specifications",
+      "url": "https://www.eurex.com/ex-en/markets/idx/stx/euro-stoxx-50-derivatives/products/EURO-STOXX-50-Index-Options-46548"
+    },
+    {
+      "id": "SRC_BAFIN_EUREX_CLEARING",
+      "ref": "S55",
+      "tier": "primary",
+      "title": "BaFin · Zulassung der Eurex Clearing AG als zentrale Gegenpartei nach EMIR (10.04.2014)",
+      "url": "https://bafin.de/SharedDocs/Veroeffentlichungen/EN/Meldung/2014/meldung_140410_emir_erlaubnis_eurex_en.html"
+    },
+    {
+      "id": "SRC_DB_CLEARING",
+      "ref": "S56",
+      "tier": "vendor",
+      "title": "Deutsche Börse · Clearing: zentrale Gegenpartei und Sicherheiten (Margin)",
+      "url": "https://www.deutsche-boerse-cash-market.com/resource/blob/244872/f8a90e944e2f40c38cabcf6420dde59c/data/db-aktuell-clearing-may2018_de.pdf.pdf"
+    },
+    {
+      "id": "SRC_DDV_OS_MUSTER",
+      "ref": "S57",
+      "tier": "vendor",
+      "title": "Deutscher Derivate Verband · Muster-Produktinformation Call-Optionsschein",
+      "url": "https://www.derivateverband.de/DE/MediaLibrary/Document/Muster/Call%20Optionsschein-d.pdf"
+    },
+    {
+      "id": "SRC_TESTDE_TURBO",
+      "ref": "S58",
+      "tier": "secondary",
+      "title": "Stiftung Warentest · Studie zu Turbo-Zertifikaten: Die meisten Anleger machen Verluste",
+      "url": "https://www.test.de/Studie-zu-Turbo-Zertifikaten-Die-meisten-Anleger-machen-mit-Turbo-Zertifikaten-Verluste-6227752-0/"
     }
   ],
   "audit_trail": [
@@ -880,6 +842,18 @@
       "event": "v1.9.0: Herausgeber-Entscheidung – überholte Rechtslage entfernt (Verlustgrenze für Termingeschäfte vor JStG 2024, Satz 5/6 a. F., Rückwirkung, BFH-AdV-Beschluss, BVerfG-Vorlage, Knock-out-Verluste a. F., Verdrängungsthese, Altjahre). Neun Fakten und zugehörige Quellen entfernt; FACT_JSTG2024_REPEAL auf den geltenden Rahmen umformuliert; K1–K3 entfallen, K neu nummeriert (K1–K9); Claim-Tabelle A01–A14",
       "qa_score_pct": null,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "v1.10.0: Review der nicht bestätigten Angaben (Herausgeber-Auftrag). Belegt und hochgestuft: FACT_CONTRACT_SPECS (Cboe, CME, Eurex), FACT_OESX_MULT (Eurex); neu FACT_CCP_ISSUER (BaFin, Deutsche Börse, DDV). Als Medienangabe eingestuft: FACT_BAFIN_STUDY. Entfernt, weil nicht belegbar und entbehrlich: FACT_XRAY_LAUNCH, FACT_OPRA_BURSTS, FACT_VENDOR_PRICES, FACT_BSW_SHARES, FACT_EUREX_DAILY_ADV (samt Diagramm), FACT_PRODUCT_STRUCTURE.",
+      "qa_score_pct": null,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Zehnte Zweitprüfung (v1.9.0) eingearbeitet: K-Verweise, Texte zu Entferntem, Fazit-Wertungen, Szenario-Boxen, S09/S10-Aussagen über den Beleg hinaus, Glossar-Bindungen, Datumsangaben; Claim A15 ergänzt; offene Fehlerklassen L65–L75",
+      "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -891,16 +865,15 @@
         "FACT_OPTIONSDEPTH_SCOPE",
         "FACT_CBOE_OPENCLOSE",
         "FACT_DEALER_CONVENTION",
-        "FACT_GEX_EXAMPLE"
+        "FACT_GEX_EXAMPLE",
+        "FACT_CONTRACT_SPECS"
       ]
     },
     {
       "title": "Modul 2 · Datenfeed-Architektur, Latenzprofil und Validierung",
       "facts": [
         "FACT_XRAY_CONNECTIVITY",
-        "FACT_XRAY_LAUNCH",
         "FACT_OPRA_CAPACITY",
-        "FACT_OPRA_BURSTS",
         "FACT_CHAIN_SUITE"
       ]
     },
@@ -926,7 +899,6 @@
       "title": "Modul 5 · Globaler Wettbewerbsvergleich (Matrix auf der Modulseite S09)",
       "facts": [
         "FACT_COMPETITOR_MATRIX",
-        "FACT_VENDOR_PRICES",
         "FACT_NO_EUREX_GEX"
       ]
     },
@@ -935,14 +907,12 @@
       "facts": [
         "FACT_JSTG2024_REPEAL",
         "FACT_P15_KSTG",
+        "FACT_CCP_ISSUER",
         "FACT_ODAX_SPECS",
         "FACT_OESX_MULT",
         "FACT_EUREX_OI",
         "FACT_EUREX_DAILY_LAUNCH",
-        "FACT_EUREX_DAILY_ADV",
-        "FACT_BSW_SHARES",
         "FACT_ISSUER_HEDGING",
-        "FACT_PRODUCT_STRUCTURE",
         "FACT_BAFIN_TURBO",
         "FACT_BAFIN_STUDY",
         "FACT_PRIIPS_UWG",
@@ -999,7 +969,8 @@
       "result": "ok",
       "facts": [
         "FACT_XRAY_10_IND"
-      ]
+      ],
+      "k": "K5"
     },
     {
       "id": "A05",
@@ -1008,7 +979,8 @@
       "result": "ok",
       "facts": [
         "FACT_XRAY_1MIN_SPX"
-      ]
+      ],
+      "k": "K5"
     },
     {
       "id": "A06",
@@ -1017,7 +989,8 @@
       "result": "ok",
       "facts": [
         "FACT_XRAY_1MIN_SPX"
-      ]
+      ],
+      "k": "K5"
     },
     {
       "id": "A07",
@@ -1036,7 +1009,8 @@
       "result": "ok",
       "facts": [
         "FACT_CROSS_TRADING"
-      ]
+      ],
+      "k": "K5"
     },
     {
       "id": "A09",
@@ -1094,6 +1068,15 @@
         "FACT_PRIIPS_UWG"
       ],
       "k": "K9"
+    },
+    {
+      "id": "A15",
+      "claim": "Börsengehandelte Optionen sind gegenüber Optionsscheinen steuerlich benachteiligt",
+      "category": "Steuer/Recht",
+      "result": "no",
+      "facts": [
+        "FACT_JSTG2024_REPEAL"
+      ]
     }
   ]
 }
