@@ -3,25 +3,25 @@
  "source": "Holdout r13, unabhängig geschrieben, 2026-10-11",
  "cases": [
   {
-   "name": "H13-01 L82: FACT_JSTG2024_REPEAL ohne Feld evidence",
+   "name": "H13-01 L82: FACT_JSTG2024_REPEAL ohne Feld evidence (Anker v1.11.1, Erwartung unverändert)",
    "expect": "L82",
    "sync": false,
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"SRC_CMS\"\n      ],\n      \"evidence\": \"snippet\"",
-     "\"SRC_CMS\"\n      ]"
+     "\"SRC_CMS\"\n      ],\n      \"evidence\": \"fulltext\",\n",
+     "\"SRC_CMS\"\n      ],\n"
     ]
    ]
   },
   {
-   "name": "H13-02 L82: unzulässige Belegstufe „volltext“ bei FACT_P15_KSTG",
+   "name": "H13-02 L82: unzulässige Belegstufe „volltext“ bei FACT_P15_KSTG (Anker v1.11.1, Erwartung unverändert)",
    "expect": "L82",
    "sync": false,
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"SRC_BFH_IR2514\"\n      ],\n      \"evidence\": \"snippet\"",
+     "\"SRC_BFH_IR2514\"\n      ],\n      \"evidence\": \"fulltext\"",
      "\"SRC_BFH_IR2514\"\n      ],\n      \"evidence\": \"volltext\""
     ]
    ]
@@ -39,14 +39,14 @@
    ]
   },
   {
-   "name": "H13-04 L27: UNGEPRÜFT-Badge der Zeile Kostenausweis per hidden-Attribut versteckt",
+   "name": "H13-04 L27: UNGEPRÜFT-Badge der Zeile Kostenausweis per hidden-Attribut versteckt (Anker v1.11.1, Erwartung unverändert)",
    "expect": "L27",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "<td>Kostenausweis <span class=\"dbom-class-badge\">UNGEPRÜFT</span></td>",
-     "<td>Kostenausweis <span class=\"dbom-class-badge\" hidden>UNGEPRÜFT</span></td>"
+     "Bonität des Emittenten <span class=\"dbom-class-badge\">MEDIEN</span>",
+     "Bonität des Emittenten <span class=\"dbom-class-badge\" hidden>MEDIEN</span>"
     ]
    ]
   },
@@ -243,26 +243,26 @@
    ]
   },
   {
-   "name": "H13-21 L26e: Offen-Punkt C4 nennt S12 ohne data-source",
+   "name": "H13-21 L26e: Offen-Punkt C4 nennt S12 ohne data-source (Anker v1.11.1, Erwartung unverändert)",
    "expect": "L26e",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"C4\" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>",
-     "<li data-gate=\"C4\" data-open>Interessenkonflikte durch Herausgeber bestätigen und Hinweis in S12 ergänzen</li>"
+     "<li data-gate=\"Q7\" data-open>K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen</li>",
+     "<li data-gate=\"Q7\" data-open>K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen und Hinweis in S12 ergänzen</li>"
     ]
    ]
   },
   {
-   "name": "H13-22 L26e: Offen-Punkt Q5 nennt S04 und S07 ohne data-source",
+   "name": "H13-22 L26e: Offen-Punkt Q5 nennt S04 und S07 ohne data-source (Anker v1.11.1, Erwartung unverändert)",
    "expect": "L26e",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"Q5\" data-open>Primärquellen im Volltext lesen (BGBl., Eurex, Cboe, CME, ATAS)</li>",
-     "<li data-gate=\"Q5\" data-open>Primärquellen zu S04 und S07 im Volltext lesen (BGBl., Eurex, Cboe, CME, ATAS)</li>"
+     "<li data-gate=\"Q1\" data-open>Claim A11",
+     "<li data-gate=\"Q1\" data-open>Zu S04 und S07: Claim A11"
     ]
    ]
   },
@@ -351,14 +351,14 @@
    ]
   },
   {
-   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source",
+   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source (Anker v1.11.1, Erwartung unverändert)",
    "expect": "NONE",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>",
-     "PRIIPs-/UWG-Bezüge (S10, S11) und § 63 Abs. 10 WpHG am Original prüfen</li>"
+     "Allaussagen (S11)",
+     "Allaussagen (S10, S11)"
     ]
    ]
   },

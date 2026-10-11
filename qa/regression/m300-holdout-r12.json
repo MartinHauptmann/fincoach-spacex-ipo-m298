@@ -243,14 +243,14 @@
    ]
   },
   {
-   "name": "S02 Experte: Bußgeldrahmen nicht im Claim",
+   "name": "S02 Experte: Bußgeldrahmen nicht im Claim (Anker v1.11.1, Erwartung unverändert)",
    "expect": "L76",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Market Maker hedgen aus Risiko- und Kapitalkalkül.",
-     "Market Maker hedgen aus Risiko- und Kapitalkalkül; Verstöße gegen Quotierungspflichten können mit Geldbußen bis 5 Mio. Euro geahndet werden."
+     "besteht nicht (<a href",
+     "besteht nicht; Verstöße gegen Quotierungspflichten können mit Geldbußen bis 5 Mio. Euro geahndet werden (<a href"
     ]
    ]
   },
