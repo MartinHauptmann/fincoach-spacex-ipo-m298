@@ -198,7 +198,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen neun Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">27</span> belegte Fakten, <span data-dbom-count="media">6</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>92,1</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">27</span> belegte Fakten, <span data-dbom-count="media">6</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>81,6</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -571,7 +571,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>92,1</span> % · <span data-qa-points>17,5</span> / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>81,6</span> % · <span data-qa-points>15,5</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
     <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Bewertung nach unabhängiger Zweitprüfung; ✓ nur mit Messung oder dokumentierter Einzelprüfung.</span>
   </div>
@@ -582,7 +582,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-pass" title="Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test">✓</td></tr>
         <tr><td>C2 Keine Anlageempfehlung (MAR)</td><td class="check-pass">✓</td></tr>
         <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-pass" data-gate="C3" title="Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext)">✓</td></tr>
-        <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-pass" data-gate="C4" title="Keine Interessenkonflikte (Erklärung des Herausgebers vom 2026-10-11)">✓</td></tr>
+        <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-part" data-gate="C4" title="Interessenkonflikte: keine (Erklärung des Herausgebers vom 2026-10-11); Neutralität nicht belegt: ATAS-Herstellerangaben als belegt, Herstellerangaben der Wettbewerber als Medienangabe (15. Zweitprüfung)">◐</td></tr>
         <tr><td>C5 Marken beschreibend</td><td class="check-pass" data-gate="C5" title="Markenhinweis gegen Marken-Inventar geprüft (L84) und in der Zweitprüfung vom 2026-10-11 vollständig abgeglichen">✓</td></tr>
         <tr><td>C6 UWG-konforme Begriffe</td><td class="check-pass" data-gate="C6" title="Begriffe neutral; Wettbewerberangaben vom Herausgeber am 2026-10-11 am Original geprüft">✓</td></tr>
         <tr><td>C7 Ausgewogene Risikodarstellung</td><td class="check-pass">✓</td></tr>
@@ -597,11 +597,11 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>Q2 Aktualität / Stichtag</td><td class="check-pass" data-gate="Q2" title="Aktualität am Stichtag vom Herausgeber am 2026-10-11 am Original geprüft">✓</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass">✓</td></tr>
         <tr><td>Q4 Provenienz je Fakt</td><td class="check-pass" data-gate="Q4" title="Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82)">✓</td></tr>
-        <tr><td>Q5 Quellenqualität</td><td class="check-pass" data-gate="Q5" title="Primärquellen vom Herausgeber am 2026-10-11 am Original geprüft (Volltext)">✓</td></tr>
+        <tr><td>Q5 Quellenqualität</td><td class="check-part" data-gate="Q5" title="Abgleich am Original erfolgt; tragende Aussagen (Rechtsnatur Optionsschein, Cboe-Open-Close, Emittenten-Hedging, BaFin-Studie) stützen sich nur auf Sekundärquellen">◐</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-part" data-gate="Q6" title="Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen">◐</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-pass" data-gate="Q7" title="Widersprüche der 14. Zweitprüfung behoben; Freigabeumfang und caveat je Fakt im Einklang (L82c, L82b)">✓</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="Widersprüche: Freigabestatus Analyse-Kopf vs. Abschnitt 8; Disclaimer „Emittentenrisiko verbriefter Derivate“ vs. Knock-outs n. v. (15. Zweitprüfung)">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="Zweitprüfung: alle 15 Pflichtbegriffe vorhanden">✓</td></tr>
-        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-pass" data-gate="Q9" title="Überzeichnungen der 14. Zweitprüfung behoben; Einschränkungen sichtbar (L76d), Freigabeumfang BaFin-Studie präzisiert (L82c)">✓</td></tr>
+        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="Einschränkung „Beta“ fehlt in der Hero-KPI zu Gamma Cockpit; Kostenausweis Eurex „PRIIPs-KID n. v.“ einseitig (15. Zweitprüfung)">◐</td></tr>
         <tr><td>Q10 Formatvorgaben</td><td class="check-part" data-gate="Q10" title="Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär)">◐</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
@@ -620,6 +620,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       </tbody></table>
       <h4 class="font-head font-bold text-white mt-5 mb-2 text-sm">Offen vor Freigabe</h4>
       <ul class="tick text-xs" id="open-list">
+        <li data-gate="C4" data-open>Gleiche Belegklasse für gleiche Quellenart: Wettbewerbsmatrix je Anbieter als Herstellerfakten führen und die Ableitung „nur für ATAS beides belegt“ neu prüfen</li>
+        <li data-gate="Q5" data-open>Für FACT_OS_ISSUER, FACT_CBOE_OPENCLOSE und FACT_ISSUER_HEDGING Primärquellen ergänzen oder Verdict anpassen</li>
+        <li data-gate="Q7" data-open>Freigabestatus an allen Stellen angleichen (Test L03b exakt); Disclaimer an den n. v.-Stand der Knock-outs angleichen</li>
+        <li data-gate="Q9" data-open>Qualifier für FACT_NO_EUREX_GEX setzen und Hero-KPI ergänzen; Kostenausweis neutral fassen oder belegen</li>
         <li data-gate="Q1" data-open>Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen</li>
         <li data-gate="Q6" data-open>Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen</li>
         <li data-gate="Q10" data-open>Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)</li>

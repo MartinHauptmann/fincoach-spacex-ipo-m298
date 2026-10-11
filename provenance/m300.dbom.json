@@ -1172,6 +1172,12 @@
       "event": "FACT_BAFIN_STUDY: Freigabeumfang auf „Abgleich am Medienbericht (Studie selbst nicht eingesehen)“ gesetzt (L82c, vorsichtige Variante); Datenschutzerklärung und Impressum mit Zustimmung des Herausgebers von Entwurfsvermerken bereinigt, Daten aktualisiert, Bibliotheks- und CDN-Angaben an die Messung angeglichen (L38b); Q7 und Q9 ✓",
       "qa_score_pct": 92.1,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Fünfzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): Empfehlung keine Freigabe; C4, Q5, Q7 und Q9 auf ◐ übernommen (Neutralität der Belegklassen, Sekundärquellen, Statuswiderspruch und Disclaimer, fehlende Beta-Einschränkung, Kostenausweis)",
+      "qa_score_pct": 81.6,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [

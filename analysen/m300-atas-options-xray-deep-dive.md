@@ -428,6 +428,10 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
+- Gleiche Belegklasse für gleiche Quellenart: Wettbewerbsmatrix je Anbieter als Herstellerfakten führen und die Ableitung „nur für ATAS beides belegt“ neu prüfen
+- Für FACT_OS_ISSUER, FACT_CBOE_OPENCLOSE und FACT_ISSUER_HEDGING Primärquellen ergänzen oder Verdict anpassen
+- Freigabestatus an allen Stellen angleichen (Test L03b exakt); Disclaimer an den n. v.-Stand der Knock-outs angleichen
+- Qualifier für FACT_NO_EUREX_GEX setzen und Hero-KPI ergänzen; Kostenausweis neutral fassen oder belegen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
@@ -443,7 +447,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C1 Disclaimer Anfang/Ende | ✓ | Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test |
 | C2 Keine Anlageempfehlung (MAR) | ✓ | – |
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
-| C4 Neutralität / Interessenkonflikte | ✓ | Keine Interessenkonflikte (Erklärung des Herausgebers vom 2026-10-11) |
+| C4 Neutralität / Interessenkonflikte | ◐ | Interessenkonflikte: keine (Erklärung des Herausgebers vom 2026-10-11); Neutralität nicht belegt: ATAS-Herstellerangaben als belegt, Herstellerangaben der Wettbewerber als Medienangabe (15. Zweitprüfung) |
 | C5 Marken beschreibend | ✓ | Markenhinweis gegen Marken-Inventar geprüft (L84) und in der Zweitprüfung vom 2026-10-11 vollständig abgeglichen |
 | C6 UWG-konforme Begriffe | ✓ | Begriffe neutral; Wettbewerberangaben vom Herausgeber am 2026-10-11 am Original geprüft |
 | C7 Ausgewogene Risikodarstellung | ✓ | – |
@@ -453,15 +457,15 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q2 Aktualität / Stichtag | ✓ | Aktualität am Stichtag vom Herausgeber am 2026-10-11 am Original geprüft |
 | Q3 Mathematische Konsistenz | ✓ | – |
 | Q4 Provenienz je Fakt | ✓ | Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82) |
-| Q5 Quellenqualität | ✓ | Primärquellen vom Herausgeber am 2026-10-11 am Original geprüft (Volltext) |
+| Q5 Quellenqualität | ◐ | Abgleich am Original erfolgt; tragende Aussagen (Rechtsnatur Optionsschein, Cboe-Open-Close, Emittenten-Hedging, BaFin-Studie) stützen sich nur auf Sekundärquellen |
 | Q6 Vollständigkeit | ◐ | Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen |
-| Q7 Widerspruchsfreiheit | ✓ | Widersprüche der 14. Zweitprüfung behoben; Freigabeumfang und caveat je Fakt im Einklang (L82c, L82b) |
+| Q7 Widerspruchsfreiheit | ◐ | Widersprüche: Freigabestatus Analyse-Kopf vs. Abschnitt 8; Disclaimer „Emittentenrisiko verbriefter Derivate“ vs. Knock-outs n. v. (15. Zweitprüfung) |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
-| Q9 Keine Überzeichnung / Halluzination | ✓ | Überzeichnungen der 14. Zweitprüfung behoben; Einschränkungen sichtbar (L76d), Freigabeumfang BaFin-Studie präzisiert (L82c) |
+| Q9 Keine Überzeichnung / Halluzination | ◐ | Einschränkung „Beta“ fehlt in der Hero-KPI zu Gamma Cockpit; Kostenausweis Eurex „PRIIPs-KID n. v.“ einseitig (15. Zweitprüfung) |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 16 × ✓ + 3 × ◐ = 17,5 von 19 Punkten = **92,1 %**.
-**Freigabeempfehlung: FREIGABE.**
+**Gesamtscore:** 12 × ✓ + 7 × ◐ = 15,5 von 19 Punkten = **81,6 %**.
+**Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
 
