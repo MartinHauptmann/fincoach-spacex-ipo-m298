@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.12.2 (Entwurf) |
+| Version | 1.13.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -23,8 +23,9 @@
 > **Methodischer Vorbehalt:** Die Recherche lief über eine Netzwerkumgebung, die den direkten Abruf der
 > meisten Primärquellen gesperrt hat, darunter gesetze-im-internet.de, recht.bund.de, eurex.com, atas.net und die Anbieterseiten.
 > Recherchiert wurde deshalb über Suchtreffer, die auf diese Primärquellen verweisen; die URLs stehen im
-> Quellenverzeichnis. Der Herausgeber hat am 2026-10-11 alle Belege am Original abgeglichen (BaFin-Turbo-Studie: am Medienbericht); seither tragen alle
-> nicht szenariobasierten Fakten die Belegstufe „Volltext“ (DBOM-Feld `evidence: fulltext`).
+> Quellenverzeichnis. Der Herausgeber hat am 2026-10-11 alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am
+> Medienbericht; seither tragen alle nicht szenariobasierten Fakten die Belegstufe „Volltext“ (DBOM-Feld
+> `evidence: fulltext`), ausgenommen die BaFin-Turbo-Studie (`evidence: secondary`).
 
 > **Aufbau:** Diese Analyse ist eine faktgebundene Kurzfassung. Jede Angabe nennt die Fakt-ID ihres Belegs aus
 > `provenance/m300.dbom.json` mit Verdict und Konfidenz; Zitate des Quelltexts sind als solche gekennzeichnet.
@@ -45,10 +46,10 @@ Kernergebnisse; jede Aussage mit Fakt-ID:
   (`FACT_XRAY_10_IND`, `FACT_XRAY_1MIN_SPX`). Optionen sind in ATAS derzeit nicht handelbar (`FACT_ATAS_NO_OPT_TRADING`).
 - **Modell:** Das GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (`FACT_DEALER_CONVENTION`,
   SCENARIO_PROJECTION, keine Prognose-Konfidenz).
-- **Wettbewerb:** Intraday-fähige Eurex-GEX bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern;
-  für MenthorQ ist das n. v. (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6).
-- **Einschätzung [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge damit in dieser Analyselücke, nicht in einem
-  Steuervorteil (`FACT_ROADMAP`, SCENARIO_PROJECTION, keine Prognose-Konfidenz). Das ist keine Prognose.
+- **Wettbewerb:** Intraday-fähige Eurex-GEX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern
+  (ATAS, IBKR TWS); für SpotGamma, MenthorQ, Volland und Bookmap ist das n. v. (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6).
+- **Einschätzung [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge in einer möglichen Analyselücke (bisher nur
+  für zwei Anbieter bestimmbar), nicht in einem Steuervorteil (`FACT_ROADMAP`, SCENARIO_PROJECTION, keine Prognose-Konfidenz). Das ist keine Prognose.
 
 ---
 
@@ -164,7 +165,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.. (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65)
 - Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung. (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75)
 - IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75)
-- Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6)
+- Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6)
 
 #### Modul 6 · DACH-Marktspezifika und steuerlicher Rahmen
 
@@ -193,7 +194,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - X-Ray zeigt aus SPX-Optionsdaten abgeleitete Kennzahlen auf ES, MES und SPY an. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
 - Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events. (Einschätzung, gestützt auf (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7))
 - Für Optionen fehlt eine native Ausführung. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
-- Positionierung plus MBO (derzeit zur Erprobung) in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal (MBO-Werkzeug von SpotGamma, MenthorQ, Volland und TWS: n. v.). (Einschätzung, gestützt auf (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
+- Positionierung plus MBO (derzeit zur Erprobung, ATAS-Herstellerangabe) in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal (MBO-Werkzeug von SpotGamma, MenthorQ, Volland und TWS: n. v.). (Einschätzung, gestützt auf (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
 
 **◐ Relativiert**
 
@@ -206,7 +207,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - Ein steuerlicher Nachteil börsengehandelter Optionen gegenüber Optionsscheinen im Privatvermögen. (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9)
 - „Keine Verlustbeschränkung“ für Kapitalgesellschaften. (`FACT_P15_KSTG`, belegt, Konfidenz 0,85)
 
-**Strategische These [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer Analyselücke. Für ODAX und OESX bietet keiner der fünf bestimmbaren von sechs verglichenen Anbietern intraday-fähige Eurex-GEX (MenthorQ: n. v.). Ob ATAS diese Lücke füllen kann, hängt von Datenlizenzen, Validierung und der offenen Kommunikation der schwächeren Positionsannahme ab. (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6) (`FACT_ROADMAP`, SCENARIO_PROJECTION, keine Prognose-Konfidenz)
+**Strategische These [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer Analyselücke. Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland, Bookmap: n. v.). Ob die Lücke über diese zwei hinaus besteht, ist damit offen; ob ATAS sie füllen kann, hängt von Datenlizenzen, Validierung und der offenen Kommunikation der schwächeren Positionsannahme ab. (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6) (`FACT_ROADMAP`, SCENARIO_PROJECTION, keine Prognose-Konfidenz)
 
 <!-- /sync:MOD -->
 
@@ -386,7 +387,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.12.2,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.13.0,
 40 Fakten, 45 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -424,7 +425,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_VOLLAND_SPEC` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Stand 2026-10-05 | Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.. |
 | `FACT_BOOKMAP_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung. |
 | `FACT_TWS_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. |
-| `FACT_NO_EUREX_GEX` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). |
+| `FACT_NO_EUREX_GEX` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). |
 | `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | – | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
 | `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
 | `FACT_ROADMAP` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. |

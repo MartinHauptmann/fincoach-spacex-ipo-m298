@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.12.2",
+    "version": "1.13.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -28,7 +28,7 @@
       "VENDOR_CLAIM": 15
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber alle Belege am Original abgeglichen (BaFin-Turbo-Studie: am Medienbericht); seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“. Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
+  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht; seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“, ausgenommen FACT_BAFIN_STUDY („secondary“). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = nur ein Bericht über das Original geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -185,7 +185,7 @@
       "caveat": "Studie selbst nicht im Volltext eingesehen; Zahl laut Medienbericht (Stiftung Warentest).",
       "period": "Untersuchungszeitraum 2019–2023",
       "keep_reason": "Begründet die Risikodarstellung zu Turbo-Zertifikaten (C7); nur Medienberichte zugänglich.",
-      "evidence": "fulltext",
+      "evidence": "secondary",
       "verified": {
         "by": "Herausgeber",
         "date": "2026-10-11",
@@ -615,24 +615,29 @@
       "verdict": "MEDIA_REPORT",
       "class": "MEDIA_REPORT",
       "confidence": 0.6,
-      "claim": "Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta).",
+      "claim": "Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta).",
       "source_id": "SRC_GAMMACOCKPIT",
-      "caveat": "Medienangabe auf Basis der Anbieterseiten.",
+      "caveat": "Quantor aus den Anbieterfakten abgeleitet (FACT_XRAY_1MIN_SPX, FACT_TWS_SPEC); die übrigen Anbieterfakten enthalten keine Eurex-Aussage. Gamma Cockpit laut Herstellerseite.",
       "period": "Stand 2026-10-05",
       "supporting_sources": [
-        "SRC_SPOTGAMMA",
-        "SRC_MENTHORQ",
-        "SRC_VOLLAND",
-        "SRC_BOOKMAP",
+        "SRC_ATAS_LEARN",
         "SRC_IBKR"
       ],
       "basis": {
         "compared": 6,
-        "determinable": 5,
+        "determinable": 2,
         "positive": 0,
         "not_verifiable": [
-          "MenthorQ"
-        ]
+          "SpotGamma",
+          "MenthorQ",
+          "Volland",
+          "Bookmap"
+        ],
+        "subject": "Eurex|\\bnur\\b",
+        "determinable_from": {
+          "ATAS": "FACT_XRAY_1MIN_SPX",
+          "IBKR TWS": "FACT_TWS_SPEC"
+        }
       },
       "keep_reason": "Tragend für die strategische Einordnung (Fazit, Quantor mit Basis).",
       "evidence": "fulltext",
@@ -1276,6 +1281,12 @@
     {
       "date": "2026-10-11",
       "event": "Achtzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): keine Freigabe; Q4 (BaFin-Studie evidence fulltext, ungebundene Optionsschein-Zelle) und Q7 (Eurex-GEX-Zeile Volland „nein“ trotz n. v.; Volltext-Satz vs. Ausnahme) auf ◐; 21 Umgehungen der neuen Tests",
+      "qa_score_pct": 86.8,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "v1.13.0: Inhalte nach der 18. Zweitprüfung korrigiert: Eurex-GEX-Quantor aus den Anbieterfakten abgeleitet (2 von 6 bestimmbar, 4 n. v.), Matrixzeile je Zelle gebunden; BaFin-Studie evidence secondary, Volltext-Sätze mit Ausnahme; S10 Größe n. v., Kosten Knock-outs n. v.; Kennzeichen in Info-Box und Fazit ergänzt. Q4/Q7 bleiben ◐ bis zur gehärteten Messung",
       "qa_score_pct": 86.8,
       "release": "ÜBERARBEITUNG"
     }

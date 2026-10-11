@@ -715,8 +715,8 @@ def main():
         # L26d · ein Fakt, dessen caveat oder keep_reason einen offenen Abgleich nennt, ist nicht CONFIRMED
         l26d = [f["id"] for f in F if f["verdict"] == "CONFIRMED" and re.search(r"\boffen\b|gegenlesen|offen-punkt|zu prüfen|ungeprüft|nicht geprüft|noch prüfen|steht aus|ausstehend|unsicher|unklar|zweifel|vorläufig|zu verifizieren|noch nicht|pending|to be (?:verified|checked)|unverified|tbd\b", f.get("caveat", "") + " " + f.get("keep_reason", ""), re.I)]
         report("L26d CONFIRMED ohne offenen Abgleich", BLOCKER, not l26d, "CONFIRMED trotz offenem Abgleich im caveat: " + ", ".join(l26d) if l26d else "kein CONFIRMED-Fakt nennt einen offenen Abgleich")
-        # L82 · Belegstufe je Fakt: evidence ∈ {snippet, fulltext, model}; SCENARIO ⇔ model; Snippet-Belege halten C3/Q2/Q4/Q5 auf ◐
-        l82 = [f"{f['id']}: evidence „{f.get('evidence')}“" for f in F if f.get("evidence") not in ("snippet", "fulltext", "model")]
+        # L82 · Belegstufe je Fakt: evidence ∈ {snippet, fulltext, secondary, model}; SCENARIO ⇔ model; Snippet-Belege halten C3/Q2/Q4/Q5 auf ◐
+        l82 = [f"{f['id']}: evidence „{f.get('evidence')}“" for f in F if f.get("evidence") not in ("snippet", "fulltext", "secondary", "model")]
         l82 += [f"{f['id']}: SCENARIO ⇔ model verletzt" for f in F if (f["verdict"] == "SCENARIO_PROJECTION") != (f.get("evidence") == "model")]
         if any(f["verdict"] == "CONFIRMED" and f.get("evidence") == "snippet" for f in F):
             gates = {g: c for c, g in re.findall(r'<td class="check-(\w+)"[^>]*data-gate="(\w+)"', html)}
