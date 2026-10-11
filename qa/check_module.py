@@ -573,7 +573,7 @@ def main():
         AUTH = ["BMF", "BFH", "BVerfG", "BaFin", "Eurex", "Cboe", "CME", "OPRA", "BGBl", "ESMA", "BSW", "DDV", "Deutsche Börse"]
         l66 = [a for a in AUTH if dh and re.search(r"\b" + re.escape(a) + r"\b", dh.group(1)) and norm_txt(a) not in srcs_txt]
         GENERIC = {"gesetzestexte", "herstellerdokumentation", "suchtreffer", "primärquelle", "primärquellen", "volltextabruf", "gesperrt", "medien", "medien-",
-                   "sekundärquellen", "medienangabe", "gekennzeichnet", "sowie", "überwiegend", "herausgeber", "original", "recherchiert", "die", "der", "das", "und", "sind", "als", "auf", "über"}
+                   "sekundärquellen", "medienangabe", "gekennzeichnet", "sowie", "überwiegend", "herausgeber", "original", "recherchiert", "bafin-turbo-studie", "medienbericht", "die", "der", "das", "und", "sind", "als", "auf", "über"}
         if dh:  # L80: jedes groß geschriebene Wort ist generisch oder kommt in den Quellen vor
             l66 += [w for w in re.findall(r"\b[A-ZÄÖÜ][\wäöüß-]+", dh.group(1)) if w.casefold() not in GENERIC and w.casefold().rstrip("-") not in srcs_txt and w not in l66]
         report("L66 Datenherkunft = Quellen", BLOCKER, bool(dh) and not l66, "nicht in den Quellen: " + ", ".join(l66) if l66 else ("Datenherkunft durch Quellen gedeckt" if dh else "keine Datenherkunft"))
@@ -841,6 +841,69 @@ def main():
                     byt.setdefault(stier.get(facts[i]["source_id"]), {}).setdefault(facts[i]["verdict"], []).append(i)
             l85b += [f"Stufe {t_}: " + "; ".join(f"{v}: {', '.join(sorted(x))[:50]}" for v, x in vs.items()) for t_, vs in byt.items() if len(vs) > 1]
         report("L85b Vergleich über alle Bindungen", BLOCKER, not l85b, "; ".join(l85b[:2]) if l85b else "alle Bindungen der Vergleichstabellen mit gleichen Maßstäben")
+        # L27g · in Elementen mit Fakten unterschiedlichen Verdicts kein pauschales MEDIEN/UNGEPRÜFT: jedes Kennzeichen steht hinter dem Namen eines passenden Fakts
+        l27g = []
+        VB = {"MEDIEN": "MEDIA_REPORT", "UNGEPRÜFT": "UNVERIFIED"}
+        def _names(claim):
+            toks = {t.strip("–,:;.()") for t in claim.split()}
+            parts = {p_ for t in toks for p_ in [t] + t.split("-")}
+            return {claim.split()[0].strip("–,:")} | {p_ for p_ in parts if len(re.findall(r"[A-ZÄÖÜ]", p_)) >= 2}
+        for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
+            ids = [i for i in m.group(2).split() if i in facts]
+            if len({facts[i]["verdict"] for i in ids}) < 2:
+                continue
+            inner = element_inner(html, m)
+            nested = [(n.start(), n.end() + len(element_inner(inner, n))) for n in re.finditer(r'<(\w+)\b[^>]*data-source="[^"]+"[^>]*>', inner)]
+            prev = 0
+            for b in re.finditer(r'<span class="(?:dbom-class-badge|badge b-\w+)">([A-ZÄÖÜ]+)</span>', inner):
+                seg = re.sub(r"<[^>]+>", " ", inner[prev:b.start()])
+                prev = b.end()
+                if b.group(1) not in VB or any(a <= b.start() < e for a, e in nested):
+                    continue
+                other = set().union(*[_names(facts[i]["claim"]) for i in ids if facts[i]["verdict"] != VB[b.group(1)]])
+                names = set().union(*[_names(facts[i]["claim"]) for i in ids if facts[i]["verdict"] == VB[b.group(1)]]) - other
+                if not any(n and n in seg for n in names):
+                    l27g.append(f"{' '.join(ids)[:40]}: {b.group(1)} ohne Bezug")
+        report("L27g Kennzeichen je Gegenstand", BLOCKER, not l27g, "; ".join(l27g[:3]) if l27g else "keine pauschalen Kennzeichen über gemischten Verdicts")
+        # L27h · Kennzeichen-Legende vollständig; Modellannahmen tragen MODELL, nicht SCENARIO
+        leg = re.search(r"Daten-Transparenz:</strong>(.*?)</div>", html, re.S)
+        used = set(re.findall(r'class="dbom-class-badge(?: dc-\w+)?">([A-ZÄÖÜ]+)</span>', html)) | ({"VENDOR"} if 'class="badge b-v">VENDOR' in html else set())
+        l27h = [f"Legende ohne {u}" for u in sorted(used - {"RAHMEN", "MARKT"}) if leg and u not in leg.group(1)]
+        for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
+            ids = [i for i in m.group(2).split() if i in facts]
+            if ids and all(facts[i]["class"] == "MODEL_ASSUMPTION" for i in ids) and re.search(r'dbom-class-badge">SCENARIO<', element_inner(html, m)):
+                l27h.append(f"{ids[0]}: SCENARIO statt MODELL")
+        report("L27h Legende und Klassen-Kennzeichen", BLOCKER, bool(leg) and not l27h, "; ".join(l27h[:3]) if l27h else "Legende vollständig, Modellannahmen einheitlich MODELL")
+        # L87 · n. v.-Gegenstände (DBOM not_evaluated): Glossar-Stufen und Vergleichsspalten nennen n. v. oder binden einen Fakt, der den Gegenstand trägt
+        l87 = []
+        for ne in dbom.get("not_evaluated", []):
+            subj = ne["subject"]
+            for r in (re.findall(r'^\s*(\[".*\])\s*,?\s*$', js_gl.group(1), re.M) if js_gl else []):
+                g = json.loads(r)
+                ids = [i for i in (g[4].split() if len(g) > 4 else []) if i in facts]
+                for k, stage in enumerate(g[1:4], 1):
+                    if re.search(subj, g[0] + " " + stage) and "n. v." not in stage and not any(re.search(subj, facts[i]["claim"]) and any(n in stage for n in _names(facts[i]["claim"]) - {facts[i]["claim"].split()[0].strip("–,:")}) for i in ids):
+                        l87.append(f"Glossar {g[0]} Stufe {k}")
+            for tb in re.finditer(r"<table\b[^>]*>(.*?)</table>", html, re.S):
+                hdr = [re.sub(r"<[^>]+>", "", h) for h in re.findall(r"<th\b[^>]*>(.*?)</th>", tb.group(1), re.S)]
+                cols = [k for k, h in enumerate(hdr) if re.search(subj, h)]
+                for row in re.findall(r"<tr\b[^>]*>(.*?)</tr>", tb.group(1), re.S):
+                    cells = re.findall(r"<td\b([^>]*)>(.*?)</td>", row, re.S)
+                    for k in cols:
+                        if k < len(cells):
+                            ids = (re.search(r'data-source="([^"]+)"', cells[k][0]) or [None, ""])[1].split()
+                            if "n. v." not in cells[k][1] and not any(i in facts and re.search(subj + "|verbrieft", facts[i]["claim"]) for i in ids):
+                                l87.append(f"Tabelle {hdr[k][:25]}: {re.sub(r'<[^>]+>', '', cells[0][1])[:20]}")
+        report("L87 n. v.-Gegenstände durchgängig", BLOCKER, not l87, "; ".join(l87[:4]) if l87 else "n. v.-Gegenstände in Glossar-Stufen und Vergleichsspalten durchgängig")
+        # L82d · Ausnahmen im Freigabeumfang werden überall genannt, wo „alle Belege am Original“ steht
+        exc = [f for f in F if f.get("verified") and "Original" not in f["verified"].get("scope", "Original")]
+        l82d = []
+        if exc:
+            for name, txt in (("Seite", re.sub(r"<[^>]+>", " ", html)), ("Analyse", md), ("honest_disclosure", dbom.get("honest_disclosure", ""))):
+                for sent in re.split(r"(?<=[.;])\s", txt):
+                    if re.search(r"alle Belege am Original|am Original abgeglichen", sent) and not re.search(r"BaFin|Medienbericht", sent):
+                        l82d.append(f"{name}: „{sent.strip()[:40]}“")
+        report("L82d Ausnahmen im Freigabeumfang genannt", BLOCKER, not l82d, "; ".join(l82d[:3]) if l82d else "Ausnahmen des Freigabeumfangs überall genannt")
         report("L26c Offen-Punkt bindet Fakten", BLOCKER, not l26c, "; ".join(l26c[:3]) if l26c else "Offen-Punkte zu Kontraktdaten gebunden (L26 greift)")
         # L64/L67 · nur geltendes Recht: normalisiert, inkl. JS-Inhalte, Attribute und Prompt
         OLD_LAW = (r"\ba\.\s?f\.|alte[nr]? fassung|\baufgehoben\b|aufhebung|altjahre|altf[aä]ll|offene[nr]? fälle|§\s?52 abs\.\s?28|bis zur abschaffung"
@@ -1081,13 +1144,18 @@ def main():
         report("L03 QA-Score", BLOCKER, bool(shown) and all(float(s.replace(",", ".")) == pct for s in shown), f"Zellen {pts}/{n} = {pct} %; Text: {', '.join(shown) or 'nicht gebunden'}")
         fails = [lab for lab, cls in t.qa_rows if "check-pass" not in cls]
         badge = "FREIGABE" if not [l for l in fails if l.startswith("C")] and pct >= 90 else "ÜBERARBEITUNG"
-        # L03b/L03c · Freigabestatus exakt: DBOM-Status ist die Quelle; jede Statusangabe auf Seite und in der Analyse stimmt überein,
+        # L03b/L03c/L03d · Freigabestatus exakt: DBOM-Status ist die Quelle; jede Statusangabe auf Seite und in der Analyse stimmt überein,
         # FREIGABE nur, wenn die Regel (alle C ✓, Score ≥ 90 %) erfüllt ist
         st_db = {"UEBERARBEITUNG": "ÜBERARBEITUNG"}.get(dbom["module"].get("release_status", ""), dbom["module"].get("release_status", "")) if dbom else ""
         found = [("Seite", x.upper()) for x in re.findall(r"Freigabe(?:status)?:\s*(Überarbeitung|Freigabe)\b", html, re.I)]
         found += [("JSON-LD", {"UEBERARBEITUNG": "ÜBERARBEITUNG"}.get(x, x)) for x in re.findall(r'"release_status": "(\w+)"', html)]
         found += [("Analyse", x or y) for x, y in re.findall(r"\*\*Freigabeempfehlung:\s*(ÜBERARBEITUNG|FREIGABE)|Freigabeempfehlung \|\s*\*\*(ÜBERARBEITUNG|FREIGABE)", md)] if md else []
         l03 = [f"{w}: {x} ≠ {st_db}" for w, x in found if x != st_db]
+        entw = re.findall(r"\bEntwurf\b", html) + (re.findall(r"\(Entwurf\)", md) if md else [])
+        if st_db == "FREIGABE" and entw:
+            l03.append("Status FREIGABE, aber „Entwurf“ steht noch")
+        if st_db != "FREIGABE" and not re.search(r"<footer\b(?:(?!</footer>).)*\bEntwurf\b", html, re.S):  # L03d
+            l03.append("Footer ohne „Entwurf“ trotz Status " + st_db)
         if st_db == "FREIGABE" and badge != "FREIGABE":
             l03.append("Status FREIGABE, Regel ergibt ÜBERARBEITUNG")
         report("L03b Freigabestatus", BLOCKER, bool(st_db) and len(found) >= 3 and not l03, "; ".join(l03[:4]) if l03 else f"Status {st_db} an {len(found)} Stellen einheitlich; Regel ergibt {badge}")

@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L86 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L87 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -191,6 +191,13 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   tragen; sonst je Fakt („Volland: Medienangabe“).
 - **L86:** Szenarien tragen keine Konfidenz (`confidence: null`) und erscheinen in keiner Konfidenzanzeige.
 - **L85b:** Gleiche Maßstäbe über alle Bindungen einer Vergleichstabelle (Quantor-Fakten mit `basis` ausgenommen).
+- **L27g:** Kein pauschales MEDIEN/UNGEPRÜFT über Fakten verschiedener Verdicts; jedes Kennzeichen steht hinter dem
+  Gegenstand, den es betrifft („Volland (…) MEDIEN“).
+- **L27h:** Die Kennzeichen-Legende nennt jedes verwendete Kennzeichen; reine Modellannahmen tragen MODELL, nie SCENARIO.
+- **L87:** Nicht ausgewertete Gegenstände stehen in der DBOM unter `not_evaluated`; jede Glossar-Stufe und jede
+  Vergleichszelle dazu nennt „n. v.“ oder bindet einen Fakt, der den Gegenstand trägt.
+- **L82d:** Ausnahmen im Prüfumfang (`verified.scope` ohne Original) stehen in jedem Satz „alle Belege am Original“.
+- **L03d:** „Entwurf“ im Footer genau dann, wenn der Status nicht FREIGABE ist.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

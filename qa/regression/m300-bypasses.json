@@ -2003,6 +2003,116 @@
      "\"id\": \"FACT_ATAS_FOOTPRINT\",\n      \"verdict\": \"MEDIA_REPORT\""
     ]
    ]
+  },
+  {
+   "name": "L27g pauschales MEDIEN vor der Matrix-Ableitung",
+   "expect": "L27g",
+   "edits": [
+    [
+     "m300.html",
+     "Ableitung aus der Matrix: Im",
+     "Ableitung aus der Matrix <span class=\"dbom-class-badge\">MEDIEN</span>: Im"
+    ]
+   ]
+  },
+  {
+   "name": "L27g MEDIEN hinter Herstellerangabe statt VENDOR",
+   "expect": "L27g",
+   "edits": [
+    [
+     "m300.html",
+     "MenthorQ (EOD und alle 5 Min.) <span class=\"badge b-v\">VENDOR</span>",
+     "MenthorQ (EOD und alle 5 Min.) <span class=\"dbom-class-badge\">MEDIEN</span>"
+    ]
+   ]
+  },
+  {
+   "name": "L27g Negativkontrolle: MEDIEN hinter Volland mit Zusatz",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "Volland (EOD bis alle 5 Min.) <span class=\"dbom-class-badge\">MEDIEN</span>",
+     "Volland (Partnerseite; EOD bis alle 5 Min.) <span class=\"dbom-class-badge\">MEDIEN</span>"
+    ]
+   ]
+  },
+  {
+   "name": "L27h Modellannahme mit SCENARIO gekennzeichnet",
+   "expect": "L27h",
+   "edits": [
+    [
+     "m300.html",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\">MODELL</span>",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\">SCENARIO</span>"
+    ]
+   ]
+  },
+  {
+   "name": "L27h Legende ohne MODELL",
+   "expect": "L27h",
+   "edits": [
+    [
+     "m300.html",
+     "Modellannahmen <span class=\"dbom-class-badge\">MODELL</span>, ",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "L87 Glossarstufe 1 beschreibt Knock-out ohne n. v.",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "\"Hebelprodukt mit Knock-out-Schwelle; Ausgestaltung hier n. v.\"",
+     "\"Hebelprodukt mit Knock-out-Schwelle; Emittentenrisiko\""
+    ]
+   ]
+  },
+  {
+   "name": "L87 Größe-Zeile ohne Knock-out-Angabe",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "(wie viele Scheine sich auf eine Einheit des Basiswerts beziehen); Knock-outs: n. v.</td>",
+     "(wie viele Scheine sich auf eine Einheit des Basiswerts beziehen)</td>"
+    ]
+   ]
+  },
+  {
+   "name": "L87 Steuerzeile ohne Knock-out-Angabe",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "Optionsscheine: keine gesonderte Beschränkung; Knock-outs: n. v.</td>",
+     "Optionsscheine und Knock-outs: keine gesonderte Beschränkung</td>"
+    ]
+   ]
+  },
+  {
+   "name": "L82d Freigabeumfang ohne BaFin-Ausnahme",
+   "expect": "L82d",
+   "edits": [
+    [
+     "m300.html",
+     "alle Belege am Original abgeglichen (BaFin-Turbo-Studie: am Medienbericht).",
+     "alle Belege am Original abgeglichen."
+    ]
+   ]
+  },
+  {
+   "name": "L03b Entwurfskennzeichen im Footer fehlt",
+   "expect": "L03b",
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure</div>"
+    ]
+   ]
   }
  ]
 }

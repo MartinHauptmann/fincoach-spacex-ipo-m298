@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.12.1",
+    "version": "1.12.2",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -28,7 +28,7 @@
       "VENDOR_CLAIM": 15
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber alle Belege am Original abgeglichen; seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“. Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
+  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber alle Belege am Original abgeglichen (BaFin-Turbo-Studie: am Medienbericht); seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“. Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -1266,6 +1266,12 @@
       "event": "Siebzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): keine Freigabe; C4 (pauschales MEDIEN-Kennzeichen in der Matrix-Info-Box) und Q7 (Glossar-Stufe und S10 „Größe“ zu Knock-outs trotz n. v.) auf ◐",
       "qa_score_pct": 86.8,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Befunde der 17. Zweitprüfung umgesetzt: Kennzeichen je Anbieter (L27g), Legende und MODELL (L27h), Knock-outs n. v. in Glossar und S10 (L87, not_evaluated), BaFin-Ausnahme im Freigabeumfang (L82d), Entwurf an Status gebunden; C4 und Q7 auf ✓",
+      "qa_score_pct": 92.1,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -1502,6 +1508,12 @@
       "facts": [
         "FACT_JSTG2024_REPEAL"
       ]
+    }
+  ],
+  "not_evaluated": [
+    {
+      "subject": "Knock-out|Turbo",
+      "note": "Ausgestaltung (Rechtsnatur, Größe, Kontrahentenrisiko) von Knock-out-Zertifikaten in diesem Modul nicht ausgewertet"
     }
   ]
 }
