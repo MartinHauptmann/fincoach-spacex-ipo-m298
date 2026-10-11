@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.10.4 (Entwurf) |
+| Version | 1.10.5 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -22,9 +22,10 @@
 
 > **Methodischer Vorbehalt:** Die Recherche lief über eine Netzwerkumgebung, die den direkten Abruf der
 > meisten Primärquellen gesperrt hat, darunter gesetze-im-internet.de, recht.bund.de, eurex.com, atas.net und die Anbieterseiten. Die Befunde beruhen auf Suchtreffern, die
-> auf diese Primärquellen verweisen. Die URLs sind im Quellenverzeichnis aufgeführt. Fundstellen, deren
-> Wortlaut nicht vollständig einsehbar war, tragen ein schwächeres Verdict oder **[N. V.]**.
-> Vor einer Veröffentlichung sind sie am Original zu prüfen.
+> auf diese Primärquellen verweisen. Die URLs sind im Quellenverzeichnis aufgeführt. Das Verdict CONFIRMED
+> steht hier für einen Snippet-Beleg: Ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage (DBOM-Feld
+> `evidence: snippet`). Trägt kein Suchtreffer die Aussage, gilt ein schwächeres Verdict oder **[N. V.]**.
+> Der Abgleich aller Snippet-Belege am Volltext steht vor einer Veröffentlichung aus.
 
 > **Aufbau:** Diese Analyse ist eine faktgebundene Kurzfassung. Jede Angabe nennt die Fakt-ID ihres Belegs aus
 > `provenance/m300.dbom.json` mit Verdict und Konfidenz; Zitate des Quelltexts sind als solche gekennzeichnet.
@@ -94,9 +95,9 @@ Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifi
 
 **K6 · Wettbewerber.** Quelltext: Vergleich SpotGamma, MenthorQ, Volland, Bookmap, TWS. Medienangaben aus Hersteller- und Drittquellen; einzelne Felder n. v. (Medienangaben) Belege: (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65). **Ergebnis: ◐** (HINWEIS)
 
-**K7 · Eurex-Spezifikationen.** Quelltext: FDAX/FESX-Optionsketten, „Hexensabbat“. Für den Ausgangstext maßgeblich sind die Indexoptionen ODAX (5 €/Pkt.) und OESX (10 €/Pkt.). Fachbegriff: Quartalsverfall, letzter Handelstag ist der dritte Freitag. End-of-Day-Optionen: OEXP und ODAP; Verfälle an zehn Handelstagen sind für OEXP belegt. Belege: (`FACT_ODAX_SPECS`, belegt, Konfidenz 0,85), (`FACT_OESX_MULT`, belegt, Konfidenz 0,85), (`FACT_EUREX_DAILY_LAUNCH`, belegt, Konfidenz 0,85), (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8). **Ergebnis: ◐** (HINWEIS)
+**K7 · Eurex-Spezifikationen.** Quelltext: FDAX/FESX-Optionsketten, „Hexensabbat“. Für den Ausgangstext maßgeblich sind die Indexoptionen ODAX (5 €/Pkt.) und OESX (10 €/Pkt.). Fachbegriff: Quartalsverfall; bei den Standard-Monats- und Quartalsoptionen ist der letzte Handelstag der dritte Freitag. Daneben gibt es End-of-Day-Optionen (OEXP, ODAP); für OEXP sind seit 05.01.2026 Verfälle an zehn Handelstagen gelistet. Belege: (`FACT_ODAX_SPECS`, belegt, Konfidenz 0,85), (`FACT_OESX_MULT`, belegt, Konfidenz 0,85), (`FACT_EUREX_DAILY_LAUNCH`, belegt, Konfidenz 0,85), (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8). **Ergebnis: ◐** (HINWEIS)
 
-**K8 · IBKR-Combo-Orders.** Quelltext: native Spread-Engine fehlt. Für ATAS zutreffend, aber zu präzisieren. Die IB-API unterstützt BAG-Combo-Orders (bis 6 Legs, Netto-Limit) bereits. Die Lücke liegt in UI, Risikoprüfung und Positionsführung. Belege: (`FACT_IB_BAG`, belegt, Konfidenz 0,85). **Ergebnis: ◐** (WESENTLICH)
+**K8 · IBKR-Combo-Orders.** Quelltext: native Spread-Engine fehlt. Für ATAS zutreffend, aber zu präzisieren. Die IB-API unterstützt BAG-Combo-Orders (bis 6 Legs, Netto-Limit) bereits. Offen ist die Einbindung in ATAS (Oberfläche, Risikoprüfung, Positionsführung). (Einschätzung) Belege: (`FACT_IB_BAG`, belegt, Konfidenz 0,85), (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8). **Ergebnis: ◐** (WESENTLICH)
 
 **K9 · Warrant-Fair-Value-Tool.** Quelltext: „verdeckte Marge“, „künstliche Spread-Ausweitung“. Wertende Begriffe mit UWG-Risiko. Neutral: Fair-Value-Differenz, Emittentenaufschlag. Abgleich mit PRIIPs-KID; Emittentenbonität ist ein realer Wert, keine Marge. (Rechtsgrundlagen PRIIPs/UWG: ungeprüft) Belege: (`FACT_PRIIPS_UWG`, ungeprüft, Konfidenz 0,75). **Ergebnis: ◐** (WESENTLICH)
 
@@ -133,7 +134,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - SPX-Optionen werden nur an der Cboe gehandelt; Cboe stellt nach Teilnehmertyp markierte Open-Close-Daten bereit, auf die sich OptionsDepth stützt. (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6)
 - GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, Konfidenz 0,5)
 - Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. (`FACT_GEX_EXAMPLE`, SCENARIO_PROJECTION, Konfidenz 1,0)
-- Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Indexoptionen: letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember). (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8)
+- Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Standardoptionen auf Indizes (Monats- und Quartalsverfälle): letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember). (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8)
 
 #### Modul 2 · Datenfeed-Architektur, Latenzprofil und Validierung
 
@@ -144,11 +145,13 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 #### Modul 3 · Handels- und Ausführungsmöglichkeiten
 
 - ATAS bindet als Handelsverbindungen Rithmic, CQG und Interactive Brokers (über TWS) an, als Datenfeeds dxFeed und IQFeed. (`FACT_ATAS_CONNECTIONS`, belegt, Konfidenz 0,85)
-- Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan). Laut Changelog sind ein MBO-Bundle und eine Optionsanalyse verfügbar. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
+- Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan). (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
 - ES/MES-Cross-Trading seit ATAS 8.0.12 (17.02.2026). (`FACT_CROSS_TRADING`, belegt, Konfidenz 0,85)
 - IB TWS API unterstützt Combo-Orders (secType BAG) mit bis zu 6 Legs und Netto-Limit. (`FACT_IB_BAG`, belegt, Konfidenz 0,85)
 - § 80 Abs. 2 WpHG verpflichtet Wertpapierdienstleistungsunternehmen, die algorithmischen Handel betreiben, zu Risikokontrollen, Notfallvorkehrungen und Dokumentation (Umsetzung Art. 17 MiFID II). (`FACT_ALGO_TRADING`, belegt, Konfidenz 0,85)
 - Keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging; Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition Abs. 5) regeln Quotierungs- und Vertragspflichten. (`FACT_MM_NO_HEDGE_DUTY`, belegt, Konfidenz 0,85)
+- Laut ATAS-Changelog vom 04.08.2026 ist ein MBO-Bundle (Iceberg-, Stop-Runs- und Sweeps-Tracker) für Ultra-Nutzer zur Erprobung verfügbar; MBO-Daten erfordern eine Rithmic-Anbindung. (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8)
+- ATAS bietet Footprint-Charts (Cluster-Charts) auf Basis von Tick-Daten der Börse mit Darstellungen wie Volumen, Bid × Ask und Delta. (`FACT_ATAS_FOOTPRINT`, belegt, Konfidenz 0,8)
 
 #### Modul 4 · Mikro-Makro-Synergien im praktischen Trading
 
@@ -157,14 +160,15 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 
 #### Modul 5 · Globaler Wettbewerbsvergleich (Matrix auf der Modulseite S09)
 
-- Anbieterangaben (Stand 2026-10-05): SpotGamma – Gamma-Levels und Research, HIRO/TRACE intraday, Levels vor Eröffnung, GEX ja, Vanna als Modell, Charm n. v., keine eigene Ausführung; MenthorQ – Gamma-Levels, Modelle, Ausbildung, Optionsdaten EOD und alle 5 Min., GEX ja, Vanna und Charm n. v., Ausführung über Partnerplattformen, Eurex-GEX n. v.; Volland – Notional-Greeks des Dealer-Buchs, Optionsdaten EOD bis alle 5 Min., Gamma, Vanna und Charm, Ausführung n. v.; Bookmap – Orderbuch-Heatmap, keine nativen Optionsdaten, Greeks nur über Add-ons, Heatmap und MBO via Rithmic, eigene Ausführung; IBKR TWS – Broker und Portfoliorisiko, Echtzeit-Optionsdaten (Abo), Greeks nur für eigene Positionen, Abdeckung global inkl. ODAX/OESX, eigene Ausführung. (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65)
+- Anbieterangaben (Stand 2026-10-05): SpotGamma – Gamma-Levels, Research · HIRO/TRACE intraday, Levels vor Eröffnung · GEX ja, Vanna als Modell, Charm n. v. · Abdeckung SPX, NDX, ETFs, Einzelaktien · Orderflow/MBO n. v. · keine eigene Ausführung; MenthorQ – Gamma-Levels, Modelle, Ausbildung · Optionsdaten EOD und alle 5 Min. · GEX ja, Vanna und Charm n. v. · Abdeckung inkl. Futures-Optionen (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung über Partnerplattformen · Eurex-GEX n. v.; Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.; Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung; IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · Greeks nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65)
 - Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6)
 
 #### Modul 6 · DACH-Marktspezifika und steuerlicher Rahmen
 
 - Verluste aus Termingeschäften im Privatvermögen unterliegen keiner gesonderten Verlustverrechnungsbeschränkung; es gelten die allgemeinen Regeln für Einkünfte aus Kapitalvermögen (§ 20 Abs. 6 EStG in der Fassung des JStG 2024, BGBl. 2024 I Nr. 387). Daraus folgt: Börsengehandelte Optionen und Optionsscheine werden insoweit nicht unterschiedlich behandelt. (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9)
 - § 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) gilt über § 8 Abs. 1 KStG auch für Kapitalgesellschaften; Satz 4: Ausnahmen für Institute und Absicherungsgeschäfte; Satz 5: Rückausnahme für Aktien-Hedges (§ 3 Nr. 40 EStG, § 8b Abs. 2 KStG). Rechtsprechung: BFH I R 25/14 vom 06.07.2016. (`FACT_P15_KSTG`, belegt, Konfidenz 0,85)
-- Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). Optionsscheine sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab. (`FACT_CCP_ISSUER`, belegt, Konfidenz 0,8)
+- Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). (`FACT_CCP_ISSUER`, belegt, Konfidenz 0,8)
+- Optionsscheine sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab (Emittentenrisiko). (`FACT_OS_ISSUER`, Medienangabe, Konfidenz 0,7)
 - ODAX: 5 € je Indexpunkt, europäisch, Barausgleich, Basiswert DAX-Index; Micro-DAX-Optionen (ODXS) sind gelistet. (`FACT_ODAX_SPECS`, belegt, Konfidenz 0,85)
 - OESX (EURO-STOXX-50-Indexoptionen): 10 € je Indexpunkt, europäisch, Barausgleich. (`FACT_OESX_MULT`, belegt, Konfidenz 0,85)
 - Eurex veröffentlicht das Open Interest je Serie täglich über die Statistiken und den Extended Market Data Service, nicht über EOBI. (`FACT_EUREX_OI`, belegt, Konfidenz 0,85)
@@ -186,7 +190,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - X-Ray zeigt aus SPX-Optionsdaten abgeleitete Kennzahlen auf ES, MES und SPY an. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
 - Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events. (Einschätzung, gestützt auf (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7))
 - Für Optionen fehlt eine native Ausführung. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
-- Positionierung plus MBO in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal. (Einschätzung, gestützt auf (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8))
+- Positionierung plus MBO in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal. (Einschätzung, gestützt auf (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
 
 **◐ Relativiert**
 
@@ -298,7 +302,7 @@ Footprint-Daten (Modul 4).
 | Delta-Divergenz | Abweichung zwischen Preisverlauf und kumuliertem Delta. | Schwächeres Umkehrsignal im Short-Gamma-Regime. |
 | BAG / Combo-Order | IB-Ordertyp für Spreads mit Netto-Limit. | Schützt vor Legging-Risiko; in ATAS derzeit nicht integriert. (`FACT_IB_BAG`, belegt, Konfidenz 0,85) (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8) |
 | Angemessenheitsprüfung | Abfrage von Kenntnissen und Erfahrungen vor dem Handel. | Für komplexe Produkte vorgeschrieben (Fundstelle ungeprüft). (`FACT_ANGEMESSENHEIT`, ungeprüft, Konfidenz 0,7) |
-| Optionsschein | Verbriefte Option, rechtlich eine Inhaberschuldverschreibung. | Emittentenrisiko: Der Wert hängt von der Bonität des Emittenten ab. (`FACT_CCP_ISSUER`, belegt, Konfidenz 0,8) |
+| Optionsschein | Verbriefte Option, rechtlich eine Inhaberschuldverschreibung. | Emittentenrisiko: Der Wert hängt von der Bonität des Emittenten ab. (`FACT_OS_ISSUER`, Medienangabe, Konfidenz 0,7) |
 | 0DTE | Zero Days to Expiration; beim SPX an jedem Wochentag. | Großer Teil des SPX-Volumens (Kennzahl in Modulseite S01); erzeugt Intraday-Positionen ohne OI-Spur. (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8) (`FACT_SPX_0DTE_59`, belegt, Konfidenz 0,85) |
 | GEX | Gamma Exposure: aggregiertes Dollar-Gamma der Dealer-Positionen. | $\sum s_i\Gamma_i OI_i M S^2\cdot 0{,}01$; Vorzeichen hängt an der Positionsannahme. |
 | GEX-Flip | Preis, an dem das Netto-Gamma das Vorzeichen wechselt. | Grenze zwischen dämpfendem und verstärkendem Hedging-Regime. |
@@ -313,7 +317,7 @@ Footprint-Daten (Modul 4).
 | Sweep | Aggressive Order über mehrere Levels in einem Zug. | Widerlegungssignal für Wall-Thesen; oft Short-Gamma-Beschleunigung. |
 | Iceberg | Order mit verdecktem Volumen, die nachgefüllt wird. | Im MBO über wiederholte Ausführungen derselben Order-ID erkennbar. |
 | Termingeschäft (steuerlich) | Options-, Futures- oder Swapgeschäft mit Differenzausgleich oder Lieferung; Einkünfte nach § 20 EStG. | Im Privatvermögen keine gesonderte Verlustverrechnungsbeschränkung (JStG 2024). (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9) |
-| Knock-out-Zertifikat | Verbriefte Schuldverschreibung mit Knock-out-Barriere. | Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in Modulseite S10). (`FACT_BAFIN_TURBO`, belegt, Konfidenz 0,85) |
+| Knock-out-Zertifikat | Hebelprodukt mit Knock-out-Barriere; Rechtsnatur hier n. v. | Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in Modulseite S10). (`FACT_BAFIN_TURBO`, belegt, Konfidenz 0,85) |
 | CCP | Central Counterparty, hier Eurex Clearing. | Ersetzt bilaterales Kontrahentenrisiko; Teilnehmer hinterlegen Sicherheiten (Margin). (`FACT_CCP_ISSUER`, belegt, Konfidenz 0,8) |
 | PRIIPs-KID | EU-Basisinformationsblatt (VO (EU) 1286/2014, Fundstelle ungeprüft). | Referenz für Kostenvergleiche verbriefter Derivate. (`FACT_PRIIPS_UWG`, ungeprüft, Konfidenz 0,75) |
 | Quartalsverfall | Dritter Freitag der Quartalsmonate. | Umgangssprachlich „Hexensabbat“; OI-Verschiebungen davor relevant. (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8) |
@@ -372,14 +376,15 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 | S56 | Deutsche Börse · Clearing: zentrale Gegenpartei und Sicherheiten (Margin) | Sekundärquelle | `SRC_DB_CLEARING` | https://www.deutsche-boerse-cash-market.com/resource/blob/244872/f8a90e944e2f40c38cabcf6420dde59c/data/db-aktuell-clearing-may2018_de.pdf.pdf |
 | S57 | Deutscher Derivate Verband · Muster-Produktinformation Call-Optionsschein | Sekundärquelle | `SRC_DDV_OS_MUSTER` | https://www.derivateverband.de/DE/MediaLibrary/Document/Muster/Call%20Optionsschein-d.pdf |
 | S58 | Stiftung Warentest · Studie zu Turbo-Zertifikaten: Die meisten Anleger machen Verluste | Sekundärquelle | `SRC_TESTDE_TURBO` | https://www.test.de/Studie-zu-Turbo-Zertifikaten-Die-meisten-Anleger-machen-mit-Turbo-Zertifikaten-Verluste-6227752-0/ |
+| S59 | ATAS · Footprint-Charts (Volumenanalyse) | Herstellerquelle | `SRC_ATAS_FOOTPRINT` | https://atas.net/volume-analysis/footprint-charts/ |
 
 ---
 
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.10.4,
-33 Fakten, 44 Quellen.
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.10.5,
+36 Fakten, 45 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
 |---|---|---|---|---|---|
@@ -398,7 +403,9 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_XRAY_CONNECTIVITY` | CONFIRMED | VENDOR_CLAIM | 0,7 | Changelog Stand 2026-10-05 | Options X-Ray setzt eine Verbindung über Rithmic oder Interactive Brokers voraus; CQG ist in Entwicklung. |
 | `FACT_ATAS_CONNECTIONS` | CONFIRMED | VENDOR_CLAIM | 0,85 | Herstellerdoku Stand 2026-10-05 | ATAS bindet als Handelsverbindungen Rithmic, CQG und Interactive Brokers (über TWS) an, als Datenfeeds dxFeed und IQFeed. |
 | `FACT_CHAIN_SUITE` | CONFIRMED | VENDOR_CLAIM | 0,85 | Herstellerdoku Stand 2026-10-05 | Die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD) und deckt ES, NQ, CL und GC ab. |
-| `FACT_ATAS_NO_OPT_TRADING` | CONFIRMED | VENDOR_CLAIM | 0,8 | Herstellerdoku Stand 2026-10-05 | Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan). Laut Changelog sind ein MBO-Bundle und eine Optionsanalyse verfügbar. |
+| `FACT_ATAS_NO_OPT_TRADING` | CONFIRMED | VENDOR_CLAIM | 0,8 | Herstellerdoku Stand 2026-10-05 | Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan). |
+| `FACT_ATAS_MBO` | CONFIRMED | VENDOR_CLAIM | 0,8 | Changelog-Eintrag 2026-08-04 | Laut ATAS-Changelog vom 04.08.2026 ist ein MBO-Bundle (Iceberg-, Stop-Runs- und Sweeps-Tracker) für Ultra-Nutzer zur Erprobung verfügbar; MBO-Daten erfordern eine Rithmic-Anbindung. |
+| `FACT_ATAS_FOOTPRINT` | CONFIRMED | VENDOR_CLAIM | 0,8 | Herstellerseite, Stand am Stichtag 2026-10-05 | ATAS bietet Footprint-Charts (Cluster-Charts) auf Basis von Tick-Daten der Börse mit Darstellungen wie Volumen, Bid × Ask und Delta. |
 | `FACT_CROSS_TRADING` | CONFIRMED | VENDOR_CLAIM | 0,85 | ATAS 8.0.12 (17.02.2026) | ES/MES-Cross-Trading seit ATAS 8.0.12 (17.02.2026). |
 | `FACT_IB_BAG` | CONFIRMED | VENDOR_CLAIM | 0,85 | API-Doku Stand 2026-10-05 | IB TWS API unterstützt Combo-Orders (secType BAG) mit bis zu 6 Legs und Netto-Limit. |
 | `FACT_CBOE_OPENCLOSE` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | SPX-Optionen werden nur an der Cboe gehandelt; Cboe stellt nach Teilnehmertyp markierte Open-Close-Daten bereit, auf die sich OptionsDepth stützt. |
@@ -409,19 +416,20 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_OESX_MULT` | CONFIRMED | MARKET_DATA | 0,85 | Stichtag 2026-10-05 (Kontraktspezifikation abgerufen 2026-10-11) | OESX (EURO-STOXX-50-Indexoptionen): 10 € je Indexpunkt, europäisch, Barausgleich. |
 | `FACT_EUREX_DAILY_LAUNCH` | CONFIRMED | MARKET_DATA | 0,85 | Eurex-Circulars 2023–2026 | Eurex: OEXP (EURO STOXX 50 End-of-Day Options) seit 28.08.2023, ODAP (DAX End-of-Day Options) seit 13.11.2023; OEXP seit 05.01.2026 mit Verfällen an zehn Handelstagen. |
 | `FACT_ISSUER_HEDGING` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Emittenten sichern ihr Nettorisiko laufend dynamisch ab, über den Basiswert oder passende Gegengeschäfte. |
-| `FACT_COMPETITOR_MATRIX` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Stand 2026-10-05 | Anbieterangaben (Stand 2026-10-05): SpotGamma – Gamma-Levels und Research, HIRO/TRACE intraday, Levels vor Eröffnung, GEX ja, Vanna als Modell, Charm n. v., keine eigene Ausführung; MenthorQ – Gamma-Levels, Modelle, Ausbildung, Optionsdaten EOD und alle 5 Min., GEX ja, Vanna und Charm n. v., Ausführung über Partnerplattformen, Eurex-GEX n. v.; Volland – Notional-Greeks des Dealer-Buchs, Optionsdaten EOD bis alle 5 Min., Gamma, Vanna und Charm, Ausführung n. v.; Bookmap – Orderbuch-Heatmap, keine nativen Optionsdaten, Greeks nur über Add-ons, Heatmap und MBO via Rithmic, eigene Ausführung; IBKR TWS – Broker und Portfoliorisiko, Echtzeit-Optionsdaten (Abo), Greeks nur für eigene Positionen, Abdeckung global inkl. ODAX/OESX, eigene Ausführung. |
+| `FACT_COMPETITOR_MATRIX` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Stand 2026-10-05 | Anbieterangaben (Stand 2026-10-05): SpotGamma – Gamma-Levels, Research · HIRO/TRACE intraday, Levels vor Eröffnung · GEX ja, Vanna als Modell, Charm n. v. · Abdeckung SPX, NDX, ETFs, Einzelaktien · Orderflow/MBO n. v. · keine eigene Ausführung; MenthorQ – Gamma-Levels, Modelle, Ausbildung · Optionsdaten EOD und alle 5 Min. · GEX ja, Vanna und Charm n. v. · Abdeckung inkl. Futures-Optionen (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung über Partnerplattformen · Eurex-GEX n. v.; Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.; Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung; IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · Greeks nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. |
 | `FACT_NO_EUREX_GEX` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). |
 | `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | 0,5 | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
 | `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | 1,0 | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
 | `FACT_ROADMAP` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | 0,0 | – | Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. |
-| `FACT_CONTRACT_SPECS` | CONFIRMED | MARKET_DATA | 0,8 | Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11) | Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Indexoptionen: letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember). |
-| `FACT_CCP_ISSUER` | CONFIRMED | REGULATORY_FRAMEWORK | 0,8 | Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11) | Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). Optionsscheine sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab. |
+| `FACT_CONTRACT_SPECS` | CONFIRMED | MARKET_DATA | 0,8 | Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11) | Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Standardoptionen auf Indizes (Monats- und Quartalsverfälle): letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember). |
+| `FACT_CCP_ISSUER` | CONFIRMED | REGULATORY_FRAMEWORK | 0,8 | Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11) | Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). |
+| `FACT_OS_ISSUER` | MEDIA_REPORT | MEDIA_REPORT | 0,7 | Stand am Stichtag 2026-10-05 | Optionsscheine sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab (Emittentenrisiko). |
 
 ---
 
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
-- Steuerlichen Rahmen (S04) am Volltext der Gesetzesquellen gegenlesen lassen
+- Steuerliche und regulatorische Aussagen von einer fachkundigen Person am Volltext der Gesetzesquellen prüfen lassen (Rechtsprüfung)
 - Primärquellen im Volltext lesen (BGBl., Eurex, Cboe, CME, ATAS)
 - Aktualität der Angaben am Stichtag durch Abgleich mit den Originalquellen bestätigen
 - Interessenkonflikte durch Herausgeber bestätigen
@@ -431,7 +439,8 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)
 - K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
-- Wettbewerberangaben (Matrix S09, Eurex-GEX) an den Anbieterseiten im Volltext belegen; ATAS-Footprint am Herstellerdokument belegen
+- Markenhinweis gegen alle genannten Marken (Seite, Tooltips, Quellenliste) unabhängig abgleichen
+- Wettbewerberangaben (Matrix S09, Eurex-GEX) an den Anbieterseiten im Volltext belegen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
 
@@ -447,7 +456,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C2 Keine Anlageempfehlung (MAR) | ✓ | – |
 | C3 Steuer/Recht mit Primärquelle | ◐ | Primärquellen nur per Snippet eingesehen |
 | C4 Neutralität / Interessenkonflikte | ◐ | Interessenkonflikte vom Herausgeber noch nicht bestätigt (L10b) |
-| C5 Marken beschreibend | ✓ | – |
+| C5 Marken beschreibend | ◐ | Markenliste umfasst auch SPDR, SPY, CME, E-mini, dxFeed und IQFeed; Vollständigkeit unabhängig bestätigen |
 | C6 UWG-konforme Begriffe | ◐ | Begriffe neutral; Tatsachenangaben über Wettbewerber stützen sich nur auf Snippet-Medienangaben (Konfidenz 0,6–0,65) und sind nach § 6 UWG noch nicht voll nachprüfbar |
 | C7 Ausgewogene Risikodarstellung | ✓ | – |
 | C8 Regulatorische Bezüge belegt | ◐ | § 80 WpHG über Suchtreffer auf den Gesetzestext belegt; PRIIPs/UWG und § 63 Abs. 10 WpHG UNVERIFIED |
@@ -463,7 +472,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q9 Keine Überzeichnung / Halluzination | ◐ | Allaussage S11 mit n. v.-Fall (L06b), Fazit-Wertungen gekennzeichnet (L62); ✓ erst nach Zweitprüfung (L10) |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 6 × ✓ + 13 × ◐ = 12,5 von 19 Punkten = **65,8 %**.
+**Gesamtscore:** 5 × ✓ + 14 × ◐ = 12 von 19 Punkten = **63,2 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
@@ -485,7 +494,7 @@ Alle Angaben ohne Gewähr.
 
 **Marken-Hinweis.** ATAS, Options X-Ray, OptionsDepth, SpotGamma, HIRO, MenthorQ, Volland, Bookmap,
 Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, dxFeed, IQFeed, DAX, EURO STOXX 50, S&P 500, Nasdaq-100,
-Gamma Cockpit, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer jeweiligen Inhaber. Sie werden hier rein
+Gamma Cockpit, CME, E-mini, SPDR, SPY, dxFeed, IQFeed, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer jeweiligen Inhaber. Sie werden hier rein
 beschreibend genannt. Es besteht keine Verbindung zu den Inhabern und keine Billigung durch sie.
 
 **Interessenkonflikte.** Dem Verfasser sind keine Interessenkonflikte bekannt, insbesondere keine Affiliate-,

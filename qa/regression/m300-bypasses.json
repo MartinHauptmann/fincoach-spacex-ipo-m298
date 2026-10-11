@@ -267,14 +267,14 @@
    ]
   },
   {
-   "name": "L72 'Nur ATAS verbindet' (Satzanfang, ohne Basis)",
+   "name": "L72 'Nur ATAS verbindet' (Satzanfang, ohne Basis) (Anker an v1.10.5 angepasst)",
    "expect": "L06b",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Ableitung aus der Matrix: ATAS verbindet als einziger Anbieter im Vergleichsfeld native",
-     "Ableitung aus der Matrix: Nur ATAS verbindet native"
+     "Im Vergleichsfeld ist nur für ATAS beides belegt, native Optionsdaten im Minutentakt und ein MBO-Bundle; für SpotGamma, MenthorQ, Volland und die TWS ist ein MBO-Werkzeug n. v.;",
+     "Nur ATAS verbindet native Optionsdaten im Minutentakt mit einem MBO-Bundle."
     ]
    ]
   },
@@ -567,13 +567,13 @@
    ]
   },
   {
-   "name": "L27c eigene: Optionsschein ohne Fakt",
+   "name": "L27c eigene: Optionsschein ohne Fakt (Anker an v1.10.5 angepasst)",
    "expect": "L27c",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "von der Bonität des Emittenten ab.\",\"FACT_CCP_ISSUER\"]",
+     "von der Bonität des Emittenten ab.\",\"FACT_OS_ISSUER\",\"MEDIEN\"]",
      "von der Bonität des Emittenten ab.\"]"
     ]
    ]
@@ -1619,38 +1619,38 @@
    ]
   },
   {
-   "name": "r12 F1 'früher' als Komparativ",
+   "name": "r12 F1 'früher' als Komparativ (Anker an v1.10.5 angepasst)",
    "expect": "NONE",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Gemeinsame Grenzen: Das Profil",
-     "Der Orderflow zeigt eine Wende oft früher als das Profil. Gemeinsame Grenzen: Das Profil"
+     "Gemeinsame Grenzen: ",
+     "Der Orderflow zeigt eine Wende oft früher als das Profil. Gemeinsame Grenzen: "
     ]
    ]
   },
   {
-   "name": "r12 F2 'ADV' (Average Daily Volume)",
+   "name": "r12 F2 'ADV' (Average Daily Volume) (Anker an v1.10.5 angepasst)",
    "expect": "NONE",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Gemeinsame Grenzen: Das Profil",
-     "Das ADV der ODAX ist hier nicht ausgewertet. Gemeinsame Grenzen: Das Profil"
+     "Gemeinsame Grenzen: ",
+     "Das ADV der ODAX ist hier nicht ausgewertet. Gemeinsame Grenzen: "
     ]
    ]
   },
   {
-   "name": "r12 F3 'Zeitachse' in Charm-Text",
+   "name": "r12 F3 'Zeitachse' in Charm-Text (Anker an v1.10.5 angepasst)",
    "expect": "NONE",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Gemeinsame Grenzen: Das Profil",
-     "Die Charm Heatmap zeigt den Hedge-Bedarf auf Preis- und Zeitachse. Gemeinsame Grenzen: Das Profil"
+     "Gemeinsame Grenzen: ",
+     "Die Charm Heatmap zeigt den Hedge-Bedarf auf Preis- und Zeitachse. Gemeinsame Grenzen: "
     ]
    ]
   },
@@ -1667,8 +1667,8 @@
    ]
   },
   {
-   "name": "r12 F5 'einzige Börse' (belegte Tatsache) (umgestuft: Alleinstellung ohne Claim-Beleg, kein Fehlalarm)",
-   "expect": "L06b",
+   "name": "r12 F5 'einzige Börse' (belegt durch FACT_CBOE_OPENCLOSE; Umstufung zurückgenommen)",
+   "expect": "NONE",
    "sync": false,
    "edits": [
     [
@@ -1679,26 +1679,26 @@
    ]
   },
   {
-   "name": "r12 F6 'Strike K 50' im Modelltext",
+   "name": "r12 F6 'Strike K 50' im Modelltext (Anker an v1.10.5 angepasst)",
    "expect": "NONE",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Gemeinsame Grenzen: Das Profil",
-     "Beispiel: ein Call mit Strike K 50 Punkte über S. Gemeinsame Grenzen: Das Profil"
+     "Gemeinsame Grenzen: ",
+     "Beispiel: ein Call mit Strike K 50 Punkte über S. Gemeinsame Grenzen: "
     ]
    ]
   },
   {
-   "name": "r12 F7 'letzten Stand' der Herstellerdoku",
+   "name": "r12 F7 'letzten Stand' der Herstellerdoku (Anker an v1.10.5 angepasst)",
    "expect": "NONE",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Gemeinsame Grenzen: Das Profil",
-     "Grundlage ist der letzte Stand der Herstellerdoku. Gemeinsame Grenzen: Das Profil"
+     "Gemeinsame Grenzen: ",
+     "Grundlage ist der letzte Stand der Herstellerdoku. Gemeinsame Grenzen: "
     ]
    ]
   },
@@ -1751,14 +1751,14 @@
    ]
   },
   {
-   "name": "r12-holdout S02 Experte: Bußgeldrahmen nicht im Claim",
+   "name": "r12-holdout S02 Experte: Bußgeldrahmen nicht im Claim (Anker an v1.10.5 angepasst)",
    "expect": "L76",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Market Maker hedgen aus Risiko- und Kapitalkalkül.",
-     "Market Maker hedgen aus Risiko- und Kapitalkalkül; Verstöße gegen Quotierungspflichten können mit Geldbußen bis 5 Mio. Euro geahndet werden."
+     "besteht nicht (<a href",
+     "besteht nicht; Verstöße gegen Quotierungspflichten können mit Geldbußen bis 5 Mio. Euro geahndet werden (<a href"
     ]
    ]
   },
@@ -1811,14 +1811,14 @@
    ]
   },
   {
-   "name": "L19b DDV-Quelle wieder als vendor",
+   "name": "L19b Clearing-Quelle als vendor (stützt Rechtsrahmen FACT_CCP_ISSUER)",
    "expect": "L19b",
    "sync": false,
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"id\": \"SRC_DDV_OS_MUSTER\",\n      \"ref\": \"S57\",\n      \"tier\": \"secondary\"",
-     "\"id\": \"SRC_DDV_OS_MUSTER\",\n      \"ref\": \"S57\",\n      \"tier\": \"vendor\""
+     "\"id\": \"SRC_DB_CLEARING\",\n      \"ref\": \"S56\",\n      \"tier\": \"secondary\"",
+     "\"id\": \"SRC_DB_CLEARING\",\n      \"ref\": \"S56\",\n      \"tier\": \"vendor\""
     ]
    ]
   }

@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.10.4",
+    "version": "1.10.5",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,22 +13,22 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 33,
-    "confirmed_primary": 23,
-    "media_report": 5,
+    "total": 36,
+    "confirmed_primary": 25,
+    "media_report": 6,
     "unverified": 2,
     "scenario_projection": 3,
-    "vendor_claim": 9,
+    "vendor_claim": 11,
     "by_class": {
       "MARKET_DATA": 7,
-      "MEDIA_REPORT": 5,
+      "MEDIA_REPORT": 6,
       "MODEL_ASSUMPTION": 1,
       "REGULATORY_FRAMEWORK": 9,
       "SCENARIO_PROJECTION": 2,
-      "VENDOR_CLAIM": 9
+      "VENDOR_CLAIM": 11
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat. Die meisten Fakten stützen sich auf Suchtreffer-Snippets, die auf Primär- oder Herstellerquellen verweisen; einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
+  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat. Die meisten Fakten stützen sich auf Suchtreffer-Snippets, die auf Primär- oder Herstellerquellen verweisen; einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage, der Volltextabgleich steht aus; „fulltext“ = am Volltext geprüft; „model“ = Modell oder Szenario. CONFIRMED heißt in diesem Modul „belegt (Snippet)“. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -43,7 +43,8 @@
       "supporting_sources": [
         "SRC_BT_DRS",
         "SRC_CMS"
-      ]
+      ],
+      "evidence": "snippet"
     },
     {
       "id": "FACT_P15_KSTG",
@@ -56,7 +57,8 @@
       "period": "Rechtsstand 2026-10-05",
       "supporting_sources": [
         "SRC_BFH_IR2514"
-      ]
+      ],
+      "evidence": "snippet"
     },
     {
       "id": "FACT_MM_NO_HEDGE_DUTY",
@@ -69,7 +71,8 @@
       "period": "Rechtsstand 2026-10-05",
       "supporting_sources": [
         "SRC_BAFIN_HFT"
-      ]
+      ],
+      "evidence": "snippet"
     },
     {
       "id": "FACT_ALGO_TRADING",
@@ -82,7 +85,8 @@
       "period": "Rechtsstand 2026-10-05",
       "supporting_sources": [
         "SRC_BAFIN_HFT"
-      ]
+      ],
+      "evidence": "snippet"
     },
     {
       "id": "FACT_MAR_RECO",
@@ -92,7 +96,8 @@
       "claim": "Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten.",
       "source_id": "SRC_DELVO_958",
       "caveat": "",
-      "period": "Rechtsstand 2026-10-05"
+      "period": "Rechtsstand 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_PRIIPS_UWG",
@@ -103,7 +108,8 @@
       "source_id": "SRC_PRIIPS",
       "caveat": "Nicht am Original neu geprüft.",
       "period": "Rechtsstand 2026-10-05",
-      "keep_reason": "Tragend für Modul 6/7 (Kostenausweis, UWG-konforme Begriffe); Originalabgleich offen (C8)."
+      "keep_reason": "Tragend für Modul 6/7 (Kostenausweis, UWG-konforme Begriffe); Originalabgleich offen (C8).",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_ANGEMESSENHEIT",
@@ -117,7 +123,8 @@
       "supporting_sources": [
         "SRC_SUTOR"
       ],
-      "keep_reason": "Tragend für den Zugang von Privatanlegern (Modul 6); Originalabgleich offen (C8)."
+      "keep_reason": "Tragend für den Zugang von Privatanlegern (Modul 6); Originalabgleich offen (C8).",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_BAFIN_TURBO",
@@ -127,7 +134,8 @@
       "claim": "BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten vom 15.10.2025 (Art. 42 MiFIR, § 15 WpHG), in Kraft seit 16.06.2026: standardisierter Risikohinweis, Wissenstest, Verbot von Kaufanreizen.",
       "source_id": "SRC_BAFIN_TURBO",
       "caveat": "",
-      "period": "Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026"
+      "period": "Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_BAFIN_STUDY",
@@ -138,7 +146,8 @@
       "source_id": "SRC_TESTDE_TURBO",
       "caveat": "Studie selbst nicht im Volltext eingesehen; Zahl übereinstimmend in mehreren Medienberichten.",
       "period": "Untersuchungszeitraum 2019–2023",
-      "keep_reason": "Begründet die Risikodarstellung zu Turbo-Zertifikaten (C7); nur Medienberichte zugänglich."
+      "keep_reason": "Begründet die Risikodarstellung zu Turbo-Zertifikaten (C7); nur Medienberichte zugänglich.",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_XRAY_10_IND",
@@ -148,7 +157,8 @@
       "claim": "Options X-Ray Suite umfasst zehn Indikatoren (Market State, Expected Move, GEX/Charm/Strike Heatmap, Big Trades, Flow, Flow Delta, Strike Profile, Surface Profile).",
       "source_id": "SRC_ATAS_HELP",
       "caveat": "Herstellerangabe.",
-      "period": "Herstellerdoku Stand 2026-10-05"
+      "period": "Herstellerdoku Stand 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_XRAY_1MIN_SPX",
@@ -161,7 +171,8 @@
       "period": "Herstellerdoku Stand 2026-10-05",
       "supporting_sources": [
         "SRC_ATAS_HELP"
-      ]
+      ],
+      "evidence": "snippet"
     },
     {
       "id": "FACT_OPTIONSDEPTH_SCOPE",
@@ -171,7 +182,8 @@
       "claim": "OptionsDepth deckt derzeit nur SPX und VIX ab.",
       "source_id": "SRC_OPTIONSDEPTH",
       "caveat": "Herstellerangabe per Snippet.",
-      "period": "Herstellerangabe Stand 2026-10-05"
+      "period": "Herstellerangabe Stand 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_XRAY_CONNECTIVITY",
@@ -181,7 +193,8 @@
       "claim": "Options X-Ray setzt eine Verbindung über Rithmic oder Interactive Brokers voraus; CQG ist in Entwicklung.",
       "source_id": "SRC_ATAS_CHANGELOG",
       "caveat": "Nur über Changelog-Snippet belegt.",
-      "period": "Changelog Stand 2026-10-05"
+      "period": "Changelog Stand 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_ATAS_CONNECTIONS",
@@ -191,7 +204,8 @@
       "claim": "ATAS bindet als Handelsverbindungen Rithmic, CQG und Interactive Brokers (über TWS) an, als Datenfeeds dxFeed und IQFeed.",
       "source_id": "SRC_ATAS_CONNECTIONS",
       "caveat": "",
-      "period": "Herstellerdoku Stand 2026-10-05"
+      "period": "Herstellerdoku Stand 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_CHAIN_SUITE",
@@ -201,20 +215,42 @@
       "claim": "Die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD) und deckt ES, NQ, CL und GC ab.",
       "source_id": "SRC_ATAS_CHAIN",
       "caveat": "",
-      "period": "Herstellerdoku Stand 2026-10-05"
+      "period": "Herstellerdoku Stand 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_ATAS_NO_OPT_TRADING",
       "verdict": "CONFIRMED",
       "class": "VENDOR_CLAIM",
       "confidence": 0.8,
-      "claim": "Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan). Laut Changelog sind ein MBO-Bundle und eine Optionsanalyse verfügbar.",
+      "claim": "Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan).",
       "source_id": "SRC_ATAS_LEARN",
       "caveat": "",
       "period": "Herstellerdoku Stand 2026-10-05",
-      "supporting_sources": [
-        "SRC_ATAS_MBO"
-      ]
+      "supporting_sources": [],
+      "evidence": "snippet"
+    },
+    {
+      "id": "FACT_ATAS_MBO",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.8,
+      "claim": "Laut ATAS-Changelog vom 04.08.2026 ist ein MBO-Bundle (Iceberg-, Stop-Runs- und Sweeps-Tracker) für Ultra-Nutzer zur Erprobung verfügbar; MBO-Daten erfordern eine Rithmic-Anbindung.",
+      "source_id": "SRC_ATAS_MBO",
+      "caveat": "Herstellerangabe.",
+      "period": "Changelog-Eintrag 2026-08-04",
+      "evidence": "snippet"
+    },
+    {
+      "id": "FACT_ATAS_FOOTPRINT",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.8,
+      "claim": "ATAS bietet Footprint-Charts (Cluster-Charts) auf Basis von Tick-Daten der Börse mit Darstellungen wie Volumen, Bid × Ask und Delta.",
+      "source_id": "SRC_ATAS_FOOTPRINT",
+      "caveat": "Herstellerangabe.",
+      "period": "Herstellerseite, Stand am Stichtag 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_CROSS_TRADING",
@@ -224,7 +260,8 @@
       "claim": "ES/MES-Cross-Trading seit ATAS 8.0.12 (17.02.2026).",
       "source_id": "SRC_ATAS_8012",
       "caveat": "",
-      "period": "ATAS 8.0.12 (17.02.2026)"
+      "period": "ATAS 8.0.12 (17.02.2026)",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_IB_BAG",
@@ -234,7 +271,8 @@
       "claim": "IB TWS API unterstützt Combo-Orders (secType BAG) mit bis zu 6 Legs und Netto-Limit.",
       "source_id": "SRC_IB_API",
       "caveat": "",
-      "period": "API-Doku Stand 2026-10-05"
+      "period": "API-Doku Stand 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_CBOE_OPENCLOSE",
@@ -245,7 +283,8 @@
       "source_id": "SRC_MENTHORQ_GUIDE",
       "caveat": "Sekundärquelle.",
       "period": "Stand 2026-10-05",
-      "keep_reason": "Tragend für die Einordnung der GEX-Prämisse (K3)."
+      "keep_reason": "Tragend für die Einordnung der GEX-Prämisse (K3).",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_SPX_0DTE_59",
@@ -255,7 +294,8 @@
       "claim": "Anteil 0DTE am SPX-Optionsvolumen 2025 rund 59 %.",
       "source_id": "SRC_CBOE_FY2025",
       "caveat": "",
-      "period": "Gesamtjahr 2025"
+      "period": "Gesamtjahr 2025",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_OPRA_CAPACITY",
@@ -265,7 +305,8 @@
       "claim": "OPRA-Kapazitätsprojektion: Spitzenlast je Stream 37,3 Gbps im 1-ms-Fenster.",
       "source_id": "SRC_OPRA",
       "caveat": "Projektion, keine Messung.",
-      "period": "Projektion Sept. 2025"
+      "period": "Projektion Sept. 2025",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_ODAX_SPECS",
@@ -278,7 +319,8 @@
       "period": "Produktseite Stand 2026-10-05",
       "values": {
         "ODAX": "5"
-      }
+      },
+      "evidence": "snippet"
     },
     {
       "id": "FACT_EUREX_OI",
@@ -288,7 +330,8 @@
       "claim": "Eurex veröffentlicht das Open Interest je Serie täglich über die Statistiken und den Extended Market Data Service, nicht über EOBI.",
       "source_id": "SRC_EUREX_STATS",
       "caveat": "",
-      "period": "Stand 2026-10-05"
+      "period": "Stand 2026-10-05",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_OESX_MULT",
@@ -301,7 +344,8 @@
       "period": "Stichtag 2026-10-05 (Kontraktspezifikation abgerufen 2026-10-11)",
       "values": {
         "OESX": "10"
-      }
+      },
+      "evidence": "snippet"
     },
     {
       "id": "FACT_EUREX_DAILY_LAUNCH",
@@ -314,7 +358,8 @@
       "period": "Eurex-Circulars 2023–2026",
       "supporting_sources": [
         "SRC_EUREX_DAILY"
-      ]
+      ],
+      "evidence": "snippet"
     },
     {
       "id": "FACT_ISSUER_HEDGING",
@@ -325,14 +370,15 @@
       "source_id": "SRC_ISSUER_HEDGE",
       "caveat": "Keine Primärquelle zum Hedging über FDAX/ODAX gefunden.",
       "period": "Stand 2026-10-05",
-      "keep_reason": "Tragend für K4 (Hedging-Spur von Optionsscheinen)."
+      "keep_reason": "Tragend für K4 (Hedging-Spur von Optionsscheinen).",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_COMPETITOR_MATRIX",
       "verdict": "MEDIA_REPORT",
       "class": "MEDIA_REPORT",
       "confidence": 0.65,
-      "claim": "Anbieterangaben (Stand 2026-10-05): SpotGamma – Gamma-Levels und Research, HIRO/TRACE intraday, Levels vor Eröffnung, GEX ja, Vanna als Modell, Charm n. v., keine eigene Ausführung; MenthorQ – Gamma-Levels, Modelle, Ausbildung, Optionsdaten EOD und alle 5 Min., GEX ja, Vanna und Charm n. v., Ausführung über Partnerplattformen, Eurex-GEX n. v.; Volland – Notional-Greeks des Dealer-Buchs, Optionsdaten EOD bis alle 5 Min., Gamma, Vanna und Charm, Ausführung n. v.; Bookmap – Orderbuch-Heatmap, keine nativen Optionsdaten, Greeks nur über Add-ons, Heatmap und MBO via Rithmic, eigene Ausführung; IBKR TWS – Broker und Portfoliorisiko, Echtzeit-Optionsdaten (Abo), Greeks nur für eigene Positionen, Abdeckung global inkl. ODAX/OESX, eigene Ausführung.",
+      "claim": "Anbieterangaben (Stand 2026-10-05): SpotGamma – Gamma-Levels, Research · HIRO/TRACE intraday, Levels vor Eröffnung · GEX ja, Vanna als Modell, Charm n. v. · Abdeckung SPX, NDX, ETFs, Einzelaktien · Orderflow/MBO n. v. · keine eigene Ausführung; MenthorQ – Gamma-Levels, Modelle, Ausbildung · Optionsdaten EOD und alle 5 Min. · GEX ja, Vanna und Charm n. v. · Abdeckung inkl. Futures-Optionen (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung über Partnerplattformen · Eurex-GEX n. v.; Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.; Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung; IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · Greeks nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung.",
       "source_id": "SRC_SPOTGAMMA",
       "caveat": "Snippets von Anbieter- und Drittseiten; Felder ohne Beleg als n. v.",
       "period": "Stand 2026-10-05",
@@ -342,7 +388,8 @@
         "SRC_BOOKMAP",
         "SRC_IBKR"
       ],
-      "keep_reason": "Tragend für den Wettbewerbsvergleich (Modul 5, K6); n. v.-Felder offen ausgewiesen."
+      "keep_reason": "Tragend für den Wettbewerbsvergleich (Modul 5, K6); n. v.-Felder offen ausgewiesen.",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_NO_EUREX_GEX",
@@ -368,7 +415,8 @@
           "MenthorQ"
         ]
       },
-      "keep_reason": "Tragend für die strategische Einordnung (Fazit, Quantor mit Basis)."
+      "keep_reason": "Tragend für die strategische Einordnung (Fazit, Quantor mit Basis).",
+      "evidence": "snippet"
     },
     {
       "id": "FACT_DEALER_CONVENTION",
@@ -378,7 +426,8 @@
       "claim": "GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls).",
       "source_id": "SRC_MODEL",
       "caveat": "Modellannahme, kein Fakt.",
-      "period": "–"
+      "period": "–",
+      "evidence": "model"
     },
     {
       "id": "FACT_GEX_EXAMPLE",
@@ -388,7 +437,8 @@
       "claim": "Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES.",
       "source_id": "SRC_MODEL",
       "caveat": "Hypothetische Werte.",
-      "period": "–"
+      "period": "–",
+      "evidence": "model"
     },
     {
       "id": "FACT_ROADMAP",
@@ -398,14 +448,15 @@
       "claim": "Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge.",
       "source_id": "SRC_USER_TEXT",
       "caveat": "Keine Prognose.",
-      "period": "–"
+      "period": "–",
+      "evidence": "model"
     },
     {
       "id": "FACT_CONTRACT_SPECS",
       "verdict": "CONFIRMED",
       "class": "MARKET_DATA",
       "confidence": 0.8,
-      "claim": "Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Indexoptionen: letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember).",
+      "claim": "Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Standardoptionen auf Indizes (Monats- und Quartalsverfälle): letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember).",
       "source_id": "SRC_CBOE_SPX",
       "caveat": "Spezifikationsseiten ohne Versionsdatum; über Suchtreffer auf die Primärquellen belegt.",
       "period": "Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11)",
@@ -417,21 +468,34 @@
       "supporting_sources": [
         "SRC_CME_MICRO",
         "SRC_EUREX_SPECS"
-      ]
+      ],
+      "evidence": "snippet"
     },
     {
       "id": "FACT_CCP_ISSUER",
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.8,
-      "claim": "Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). Optionsscheine sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab.",
+      "claim": "Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin).",
       "source_id": "SRC_BAFIN_EUREX_CLEARING",
-      "caveat": "Über Suchtreffer auf die Primärquellen belegt (Volltextabruf gesperrt); der Optionsschein-Teil stützt sich auf die DDV-Muster-Produktinformation.",
+      "caveat": "Über Suchtreffer auf die Primärquellen belegt (Volltextabruf gesperrt).",
       "period": "Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11)",
       "supporting_sources": [
-        "SRC_DB_CLEARING",
-        "SRC_DDV_OS_MUSTER"
-      ]
+        "SRC_DB_CLEARING"
+      ],
+      "evidence": "snippet"
+    },
+    {
+      "id": "FACT_OS_ISSUER",
+      "verdict": "MEDIA_REPORT",
+      "class": "MEDIA_REPORT",
+      "confidence": 0.7,
+      "claim": "Optionsscheine sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab (Emittentenrisiko).",
+      "source_id": "SRC_DDV_OS_MUSTER",
+      "caveat": "Nur Muster-Produktinformation des Branchenverbands (Sekundärquelle); Emissionsbedingungen einzelner Emittenten nicht eingesehen.",
+      "period": "Stand am Stichtag 2026-10-05",
+      "keep_reason": "Tragend für den Strukturvergleich in Modul 6 (Rechtsnatur und Emittentenrisiko von Optionsscheinen).",
+      "evidence": "snippet"
     }
   ],
   "sources": [
@@ -539,6 +603,13 @@
       "tier": "vendor",
       "title": "ATAS Changelog · MBO-Bundle und Optionsanalyse",
       "url": "https://feedback.atas.net/changelog/new-mbo-bundle-and-options-analysis-are-now-in-atas"
+    },
+    {
+      "id": "SRC_ATAS_FOOTPRINT",
+      "ref": "S59",
+      "tier": "vendor",
+      "title": "ATAS · Footprint-Charts (Volumenanalyse)",
+      "url": "https://atas.net/volume-analysis/footprint-charts/"
     },
     {
       "id": "SRC_IB_API",
@@ -884,6 +955,12 @@
       "event": "Zwölfte Zweitprüfung (v1.10.3) eingearbeitet: caveats ohne fakt-spezifischen offenen Abgleich (L26d), Matrix-Claim je Anbieter ohne Selbstverweis, ATAS-Zellen an Herstellerfakten, X-Ray-Fazitpunkt auf den Claim gekürzt, FACT_CCP_ISSUER ohne Knock-out-Teil, DDV/Deutsche Börse als secondary, JStG-Claim um Gleichbehandlung (Schlussfolgerung) ergänzt, Gamma-Regime-Text im Konjunktiv, Überschriften neutral, OPRA-Glossar gebunden, Markenhinweis ergänzt; C6 auf ◐. Tests: Umgehungen der Zweitprüfung und Negativkontrollen aufgenommen (150/150); unabhängiger Holdout r12 einmalig 31/40, nach Korrektur 37/40. Korrektur zum vorigen Eintrag: „Härtung nachgewiesen“ traf nicht zu",
       "qa_score_pct": 65.8,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Dreizehnte Zweitprüfung (v1.10.4), Inhalt: Belegstufe evidence (snippet/fulltext/model) je Fakt und auf der Seite „belegt (Snippet)“; FACT_CCP_ISSUER getrennt (neu FACT_OS_ISSUER, Medienangabe); neue Herstellerfakten FACT_ATAS_MBO (Changelog 2026-08-04) und FACT_ATAS_FOOTPRINT; Matrix-Claim je Anbieter vollständig, „–“ durch n. v. ersetzt, Alleinstellung neu abgeleitet; ungebundene Zeitangaben gebunden bzw. gestrichen; Glossar Knock-out ohne Rechtsnatur; Vanna-Satz korrigiert; Standardverfälle präzisiert; Kostenausweis beidseitig; Offen-Punkt C3 als Rechtsprüfung; Marken ergänzt; C5 auf ◐; F5 wieder Negativkontrolle",
+      "qa_score_pct": 63.2,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -915,7 +992,9 @@
         "FACT_CROSS_TRADING",
         "FACT_IB_BAG",
         "FACT_ALGO_TRADING",
-        "FACT_MM_NO_HEDGE_DUTY"
+        "FACT_MM_NO_HEDGE_DUTY",
+        "FACT_ATAS_MBO",
+        "FACT_ATAS_FOOTPRINT"
       ]
     },
     {
@@ -938,6 +1017,7 @@
         "FACT_JSTG2024_REPEAL",
         "FACT_P15_KSTG",
         "FACT_CCP_ISSUER",
+        "FACT_OS_ISSUER",
         "FACT_ODAX_SPECS",
         "FACT_OESX_MULT",
         "FACT_EUREX_OI",
