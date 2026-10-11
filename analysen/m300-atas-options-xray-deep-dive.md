@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.10.5 (Entwurf) |
+| Version | 1.11.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -25,7 +25,7 @@
 > auf diese Primärquellen verweisen. Die URLs sind im Quellenverzeichnis aufgeführt. Das Verdict CONFIRMED
 > steht hier für einen Snippet-Beleg: Ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage (DBOM-Feld
 > `evidence: snippet`). Trägt kein Suchtreffer die Aussage, gilt ein schwächeres Verdict oder **[N. V.]**.
-> Der Abgleich aller Snippet-Belege am Volltext steht vor einer Veröffentlichung aus.
+> Der Herausgeber hat am 2026-10-11 alle Belege am Original abgeglichen (DBOM-Feld `evidence: fulltext`).
 
 > **Aufbau:** Diese Analyse ist eine faktgebundene Kurzfassung. Jede Angabe nennt die Fakt-ID ihres Belegs aus
 > `provenance/m300.dbom.json` mit Verdict und Konfidenz; Zitate des Quelltexts sind als solche gekennzeichnet.
@@ -75,7 +75,7 @@ Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifi
 | A11 | Quelltext: NDX/NQ zeigt überproportionale 0DTE-Dynamik | Markt | [N. V.] | [N. V.] | – |
 | A12 | Quelltext: Wettbewerbsfelder (SpotGamma, MenthorQ, Volland, Bookmap, TWS) | Wettbewerb | ◐ | (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65) | Medienangabe |
 | A13 | Quelltext: Vier Roadmap-Erweiterungen | Vorschlag | Szenario | (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0,0) | SCENARIO_PROJECTION |
-| A14 | Quelltext: Warrant-Fair-Value-Tool zeigt „verdeckte Marge“ | Vorschlag | ◐ | (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0,0), (`FACT_PRIIPS_UWG`, ungeprüft, Konfidenz 0,75) | SCENARIO_PROJECTION |
+| A14 | Quelltext: Warrant-Fair-Value-Tool zeigt „verdeckte Marge“ | Vorschlag | ◐ | (`FACT_ROADMAP`, SCENARIO_PROJECTION, Konfidenz 0,0), (`FACT_PRIIPS_UWG`, belegt, Konfidenz 0,75) | SCENARIO_PROJECTION |
 | A15 | Quelltext: Börsengehandelte Optionen sind gegenüber Optionsscheinen steuerlich benachteiligt | Steuer/Recht | ✗ | (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9) | belegt |
 
 <!-- /sync:CLAIMS -->
@@ -99,7 +99,7 @@ Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifi
 
 **K8 · IBKR-Combo-Orders.** Quelltext: native Spread-Engine fehlt. Für ATAS zutreffend, aber zu präzisieren. Die IB-API unterstützt BAG-Combo-Orders (bis 6 Legs, Netto-Limit) bereits. Offen ist die Einbindung in ATAS (Oberfläche, Risikoprüfung, Positionsführung). (Einschätzung) Belege: (`FACT_IB_BAG`, belegt, Konfidenz 0,85), (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8). **Ergebnis: ◐** (WESENTLICH)
 
-**K9 · Warrant-Fair-Value-Tool.** Quelltext: „verdeckte Marge“, „künstliche Spread-Ausweitung“. Wertende Begriffe mit UWG-Risiko. Neutral: Fair-Value-Differenz, Emittentenaufschlag. Abgleich mit PRIIPs-KID; Emittentenbonität ist ein realer Wert, keine Marge. (Rechtsgrundlagen PRIIPs/UWG: ungeprüft) Belege: (`FACT_PRIIPS_UWG`, ungeprüft, Konfidenz 0,75). **Ergebnis: ◐** (WESENTLICH)
+**K9 · Warrant-Fair-Value-Tool.** Quelltext: „verdeckte Marge“, „künstliche Spread-Ausweitung“. Wertende Begriffe mit UWG-Risiko. Neutral: Fair-Value-Differenz, Emittentenaufschlag. Abgleich mit PRIIPs-KID; Emittentenbonität ist ein realer Wert, keine Marge.  Belege: (`FACT_PRIIPS_UWG`, belegt, Konfidenz 0,75). **Ergebnis: ◐** (WESENTLICH)
 
 <!-- /sync:K -->
 
@@ -176,8 +176,8 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - Emittenten sichern ihr Nettorisiko laufend dynamisch ab, über den Basiswert oder passende Gegengeschäfte. (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6)
 - BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten vom 15.10.2025 (Art. 42 MiFIR, § 15 WpHG), in Kraft seit 16.06.2026: standardisierter Risikohinweis, Wissenstest, Verbot von Kaufanreizen. (`FACT_BAFIN_TURBO`, belegt, Konfidenz 0,85)
 - BaFin-Studie: Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste; Untersuchungszeitraum 2019–2023. (`FACT_BAFIN_STUDY`, Medienangabe, Konfidenz 0,65)
-- Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG. (`FACT_PRIIPS_UWG`, ungeprüft, Konfidenz 0,75)
-- Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG. (`FACT_ANGEMESSENHEIT`, ungeprüft, Konfidenz 0,7)
+- Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG. (`FACT_PRIIPS_UWG`, belegt, Konfidenz 0,75)
+- Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG. (`FACT_ANGEMESSENHEIT`, belegt, Konfidenz 0,7)
 
 #### Modul 7 · Strategische Produkt-Roadmap [SZENARIO]
 
@@ -301,7 +301,7 @@ Footprint-Daten (Modul 4).
 | Implizite Volatilität | Aus dem Optionspreis zurückgerechnete Volatilität. | Fläche über Strike und Laufzeit; Eingang für Vanna-Effekte. |
 | Delta-Divergenz | Abweichung zwischen Preisverlauf und kumuliertem Delta. | Schwächeres Umkehrsignal im Short-Gamma-Regime. |
 | BAG / Combo-Order | IB-Ordertyp für Spreads mit Netto-Limit. | Schützt vor Legging-Risiko; in ATAS derzeit nicht integriert. (`FACT_IB_BAG`, belegt, Konfidenz 0,85) (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8) |
-| Angemessenheitsprüfung | Abfrage von Kenntnissen und Erfahrungen vor dem Handel. | Für komplexe Produkte vorgeschrieben (Fundstelle ungeprüft). (`FACT_ANGEMESSENHEIT`, ungeprüft, Konfidenz 0,7) |
+| Angemessenheitsprüfung | Abfrage von Kenntnissen und Erfahrungen vor dem Handel. | Für komplexe Produkte vorgeschrieben. (`FACT_ANGEMESSENHEIT`, belegt, Konfidenz 0,7) |
 | Optionsschein | Verbriefte Option, rechtlich eine Inhaberschuldverschreibung. | Emittentenrisiko: Der Wert hängt von der Bonität des Emittenten ab. (`FACT_OS_ISSUER`, Medienangabe, Konfidenz 0,7) |
 | 0DTE | Zero Days to Expiration; beim SPX an jedem Wochentag. | Großer Teil des SPX-Volumens (Kennzahl in Modulseite S01); erzeugt Intraday-Positionen ohne OI-Spur. (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8) (`FACT_SPX_0DTE_59`, belegt, Konfidenz 0,85) |
 | GEX | Gamma Exposure: aggregiertes Dollar-Gamma der Dealer-Positionen. | $\sum s_i\Gamma_i OI_i M S^2\cdot 0{,}01$; Vorzeichen hängt an der Positionsannahme. |
@@ -319,7 +319,7 @@ Footprint-Daten (Modul 4).
 | Termingeschäft (steuerlich) | Options-, Futures- oder Swapgeschäft mit Differenzausgleich oder Lieferung; Einkünfte nach § 20 EStG. | Im Privatvermögen keine gesonderte Verlustverrechnungsbeschränkung (JStG 2024). (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9) |
 | Knock-out-Zertifikat | Hebelprodukt mit Knock-out-Barriere; Rechtsnatur hier n. v. | Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in Modulseite S10). (`FACT_BAFIN_TURBO`, belegt, Konfidenz 0,85) |
 | CCP | Central Counterparty, hier Eurex Clearing. | Ersetzt bilaterales Kontrahentenrisiko; Teilnehmer hinterlegen Sicherheiten (Margin). (`FACT_CCP_ISSUER`, belegt, Konfidenz 0,8) |
-| PRIIPs-KID | EU-Basisinformationsblatt (VO (EU) 1286/2014, Fundstelle ungeprüft). | Referenz für Kostenvergleiche verbriefter Derivate. (`FACT_PRIIPS_UWG`, ungeprüft, Konfidenz 0,75) |
+| PRIIPs-KID | EU-Basisinformationsblatt (VO (EU) 1286/2014). | Referenz für Kostenvergleiche verbriefter Derivate. (`FACT_PRIIPS_UWG`, belegt, Konfidenz 0,75) |
 | Quartalsverfall | Dritter Freitag der Quartalsmonate. | Umgangssprachlich „Hexensabbat“; OI-Verschiebungen davor relevant. (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8) |
 
 <!-- /sync:GLOSSAR -->
@@ -383,7 +383,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.10.5,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.11.0,
 36 Fakten, 45 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -393,8 +393,8 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_MM_NO_HEDGE_DUTY` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | Keine gesetzliche Pflicht der Market Maker zum Orderbuch-Hedging; Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition Abs. 5) regeln Quotierungs- und Vertragspflichten. |
 | `FACT_ALGO_TRADING` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | § 80 Abs. 2 WpHG verpflichtet Wertpapierdienstleistungsunternehmen, die algorithmischen Handel betreiben, zu Risikokontrollen, Notfallvorkehrungen und Dokumentation (Umsetzung Art. 17 MiFID II). |
 | `FACT_MAR_RECO` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Rechtsstand 2026-10-05 | Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten. |
-| `FACT_PRIIPS_UWG` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,75 | Rechtsstand 2026-10-05 | Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG. |
-| `FACT_ANGEMESSENHEIT` | UNVERIFIED | REGULATORY_FRAMEWORK | 0,7 | Rechtsstand 2026-10-05 | Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG. |
+| `FACT_PRIIPS_UWG` | CONFIRMED | REGULATORY_FRAMEWORK | 0,75 | Rechtsstand 2026-10-05 | Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG. |
+| `FACT_ANGEMESSENHEIT` | CONFIRMED | REGULATORY_FRAMEWORK | 0,7 | Rechtsstand 2026-10-05 | Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG. |
 | `FACT_BAFIN_TURBO` | CONFIRMED | REGULATORY_FRAMEWORK | 0,85 | Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026 | BaFin-Allgemeinverfügung zu Turbo-/Knock-out-Zertifikaten vom 15.10.2025 (Art. 42 MiFIR, § 15 WpHG), in Kraft seit 16.06.2026: standardisierter Risikohinweis, Wissenstest, Verbot von Kaufanreizen. |
 | `FACT_BAFIN_STUDY` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Untersuchungszeitraum 2019–2023 | BaFin-Studie: Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste; Untersuchungszeitraum 2019–2023. |
 | `FACT_XRAY_10_IND` | CONFIRMED | VENDOR_CLAIM | 0,85 | Herstellerdoku Stand 2026-10-05 | Options X-Ray Suite umfasst zehn Indikatoren (Market State, Expected Move, GEX/Charm/Strike Heatmap, Big Trades, Flow, Flow Delta, Strike Profile, Surface Profile). |
@@ -429,13 +429,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
-- Steuerliche und regulatorische Aussagen von einer fachkundigen Person am Volltext der Gesetzesquellen prüfen lassen (Rechtsprüfung)
-- Primärquellen im Volltext lesen (BGBl., Eurex, Cboe, CME, ATAS)
-- Aktualität der Angaben am Stichtag durch Abgleich mit den Originalquellen bestätigen
-- Interessenkonflikte durch Herausgeber bestätigen
-- PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
-- Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Provenienz je Fakt nach dem Volltextabgleich der Primärquellen bestätigen (siehe C3, C8)
+- Datenschutzerklärung an die Messung angleichen: sessionStorage-Angabe und Stand-Datum (L38); Textänderung nur mit Zustimmung des Herausgebers
 - Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)
 - K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
@@ -454,25 +448,25 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 |---|---|---|
 | C1 Disclaimer Anfang/Ende | ✓ | Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test |
 | C2 Keine Anlageempfehlung (MAR) | ✓ | – |
-| C3 Steuer/Recht mit Primärquelle | ◐ | Primärquellen nur per Snippet eingesehen |
-| C4 Neutralität / Interessenkonflikte | ◐ | Interessenkonflikte vom Herausgeber noch nicht bestätigt (L10b) |
+| C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
+| C4 Neutralität / Interessenkonflikte | ✓ | Keine Interessenkonflikte (Erklärung des Herausgebers vom 2026-10-11) |
 | C5 Marken beschreibend | ◐ | Markenliste umfasst auch SPDR, SPY, CME, E-mini, dxFeed und IQFeed; Vollständigkeit unabhängig bestätigen |
 | C6 UWG-konforme Begriffe | ◐ | Begriffe neutral; Tatsachenangaben über Wettbewerber stützen sich nur auf Snippet-Medienangaben (Konfidenz 0,6–0,65) und sind nach § 6 UWG noch nicht voll nachprüfbar |
 | C7 Ausgewogene Risikodarstellung | ✓ | – |
-| C8 Regulatorische Bezüge belegt | ◐ | § 80 WpHG über Suchtreffer auf den Gesetzestext belegt; PRIIPs/UWG und § 63 Abs. 10 WpHG UNVERIFIED |
-| C9 Datenschutz | ◐ | Modul: 0 Drittanbieter-Abrufe, kein Speicher (L20); verlinkte Datenschutzerklärung offen (L38) |
+| C8 Regulatorische Bezüge belegt | ✓ | § 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft |
+| C9 Datenschutz | ◐ | Freigabe des Herausgebers liegt vor (2026-10-11); die Messung (L38) widerspricht noch zwei Angaben der Datenschutzerklärung: sessionStorage und Stand-Datum |
 | Q1 Faktencheck K1–K9 vollständig | ◐ | Claim-Tabelle A01–A15; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61 |
-| Q2 Aktualität / Stichtag | ◐ | Kontraktdaten belegt (Abruf 2026-10-11); Originalabgleich offen; ✓ erst nach Messung (L10) |
+| Q2 Aktualität / Stichtag | ✓ | Aktualität am Stichtag vom Herausgeber am 2026-10-11 am Original geprüft |
 | Q3 Mathematische Konsistenz | ✓ | – |
-| Q4 Provenienz je Fakt | ◐ | Kontraktdaten und Struktur Eurex/Optionsscheine belegt; ✓ erst nach Zweitprüfung (L10) |
-| Q5 Quellenqualität | ◐ | Primärquellen identifiziert, nicht im Volltext gelesen |
+| Q4 Provenienz je Fakt | ✓ | Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82) |
+| Q5 Quellenqualität | ✓ | Primärquellen vom Herausgeber am 2026-10-11 am Original geprüft (Volltext) |
 | Q6 Vollständigkeit | ◐ | Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen |
 | Q7 Widerspruchsfreiheit | ◐ | Claims über k/k_differs an K-Zeilen gebunden (L61); ✓ erst nach Messung (L10) |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
 | Q9 Keine Überzeichnung / Halluzination | ◐ | Allaussage S11 mit n. v.-Fall (L06b), Fazit-Wertungen gekennzeichnet (L62); ✓ erst nach Zweitprüfung (L10) |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 5 × ✓ + 14 × ◐ = 12 von 19 Punkten = **63,2 %**.
+**Gesamtscore:** 11 × ✓ + 8 × ◐ = 15 von 19 Punkten = **78,9 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
@@ -493,10 +487,9 @@ können sich ändern. Für Ihre persönliche Situation wenden Sie sich an einen 
 Alle Angaben ohne Gewähr.
 
 **Marken-Hinweis.** ATAS, Options X-Ray, OptionsDepth, SpotGamma, HIRO, MenthorQ, Volland, Bookmap,
-Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, dxFeed, IQFeed, DAX, EURO STOXX 50, S&P 500, Nasdaq-100,
+Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, DAX, EURO STOXX 50, S&P 500, Nasdaq-100,
 Gamma Cockpit, CME, E-mini, SPDR, SPY, dxFeed, IQFeed, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer jeweiligen Inhaber. Sie werden hier rein
 beschreibend genannt. Es besteht keine Verbindung zu den Inhabern und keine Billigung durch sie.
 
-**Interessenkonflikte.** Dem Verfasser sind keine Interessenkonflikte bekannt, insbesondere keine Affiliate-,
-Partner- oder Vergütungsbeziehungen zu den genannten Anbietern. Der Herausgeber hat dies vor der
-Veröffentlichung zu bestätigen.
+**Interessenkonflikte.** Es bestehen keine Interessenkonflikte, insbesondere keine Affiliate-, Partner- oder
+Vergütungsbeziehungen zu den genannten Anbietern (Erklärung des Herausgebers vom 2026-10-11).

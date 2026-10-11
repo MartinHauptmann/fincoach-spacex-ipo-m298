@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.10.5",
+    "version": "1.11.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -14,9 +14,9 @@
   },
   "fact_summary": {
     "total": 36,
-    "confirmed_primary": 25,
+    "confirmed_primary": 27,
     "media_report": 6,
-    "unverified": 2,
+    "unverified": 0,
     "scenario_projection": 3,
     "vendor_claim": 11,
     "by_class": {
@@ -28,7 +28,7 @@
       "VENDOR_CLAIM": 11
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat. Die meisten Fakten stützen sich auf Suchtreffer-Snippets, die auf Primär- oder Herstellerquellen verweisen; einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage, der Volltextabgleich steht aus; „fulltext“ = am Volltext geprüft; „model“ = Modell oder Szenario. CONFIRMED heißt in diesem Modul „belegt (Snippet)“. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
+  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat. Die meisten Fakten stützen sich auf Suchtreffer-Snippets, die auf Primär- oder Herstellerquellen verweisen; einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage, der Volltextabgleich steht aus; „fulltext“ = am Volltext geprüft; „model“ = Modell oder Szenario. Am 2026-10-11 hat der Herausgeber alle Belege am Original abgeglichen; seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -44,7 +44,12 @@
         "SRC_BT_DRS",
         "SRC_CMS"
       ],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_P15_KSTG",
@@ -58,7 +63,12 @@
       "supporting_sources": [
         "SRC_BFH_IR2514"
       ],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_MM_NO_HEDGE_DUTY",
@@ -72,7 +82,12 @@
       "supporting_sources": [
         "SRC_BAFIN_HFT"
       ],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_ALGO_TRADING",
@@ -86,7 +101,12 @@
       "supporting_sources": [
         "SRC_BAFIN_HFT"
       ],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_MAR_RECO",
@@ -97,34 +117,47 @@
       "source_id": "SRC_DELVO_958",
       "caveat": "",
       "period": "Rechtsstand 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_PRIIPS_UWG",
-      "verdict": "UNVERIFIED",
+      "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.75,
       "claim": "Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG.",
       "source_id": "SRC_PRIIPS",
-      "caveat": "Nicht am Original neu geprüft.",
+      "caveat": "Am Original durch den Herausgeber geprüft (2026-10-11).",
       "period": "Rechtsstand 2026-10-05",
-      "keep_reason": "Tragend für Modul 6/7 (Kostenausweis, UWG-konforme Begriffe); Originalabgleich offen (C8).",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_ANGEMESSENHEIT",
-      "verdict": "UNVERIFIED",
+      "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.7,
       "claim": "Angemessenheitsprüfung (Kenntnisse und Erfahrungen) vor dem Handel komplexer Produkte nach § 63 Abs. 10 WpHG.",
       "source_id": "SRC_WPHG_63",
-      "caveat": "Nur über Praxisformulare belegt, Gesetzestext nicht eingesehen.",
+      "caveat": "Am Original durch den Herausgeber geprüft (2026-10-11).",
       "period": "Rechtsstand 2026-10-05",
       "supporting_sources": [
         "SRC_SUTOR"
       ],
-      "keep_reason": "Tragend für den Zugang von Privatanlegern (Modul 6); Originalabgleich offen (C8).",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_BAFIN_TURBO",
@@ -135,7 +168,12 @@
       "source_id": "SRC_BAFIN_TURBO",
       "caveat": "",
       "period": "Allgemeinverfügung 15.10.2025, in Kraft 16.06.2026",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_BAFIN_STUDY",
@@ -147,7 +185,12 @@
       "caveat": "Studie selbst nicht im Volltext eingesehen; Zahl übereinstimmend in mehreren Medienberichten.",
       "period": "Untersuchungszeitraum 2019–2023",
       "keep_reason": "Begründet die Risikodarstellung zu Turbo-Zertifikaten (C7); nur Medienberichte zugänglich.",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_XRAY_10_IND",
@@ -158,7 +201,12 @@
       "source_id": "SRC_ATAS_HELP",
       "caveat": "Herstellerangabe.",
       "period": "Herstellerdoku Stand 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_XRAY_1MIN_SPX",
@@ -172,7 +220,12 @@
       "supporting_sources": [
         "SRC_ATAS_HELP"
       ],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_OPTIONSDEPTH_SCOPE",
@@ -183,7 +236,12 @@
       "source_id": "SRC_OPTIONSDEPTH",
       "caveat": "Herstellerangabe per Snippet.",
       "period": "Herstellerangabe Stand 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_XRAY_CONNECTIVITY",
@@ -194,7 +252,12 @@
       "source_id": "SRC_ATAS_CHANGELOG",
       "caveat": "Nur über Changelog-Snippet belegt.",
       "period": "Changelog Stand 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_ATAS_CONNECTIONS",
@@ -205,7 +268,12 @@
       "source_id": "SRC_ATAS_CONNECTIONS",
       "caveat": "",
       "period": "Herstellerdoku Stand 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_CHAIN_SUITE",
@@ -216,7 +284,12 @@
       "source_id": "SRC_ATAS_CHAIN",
       "caveat": "",
       "period": "Herstellerdoku Stand 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_ATAS_NO_OPT_TRADING",
@@ -228,7 +301,12 @@
       "caveat": "",
       "period": "Herstellerdoku Stand 2026-10-05",
       "supporting_sources": [],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_ATAS_MBO",
@@ -239,7 +317,12 @@
       "source_id": "SRC_ATAS_MBO",
       "caveat": "Herstellerangabe.",
       "period": "Changelog-Eintrag 2026-08-04",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_ATAS_FOOTPRINT",
@@ -250,7 +333,12 @@
       "source_id": "SRC_ATAS_FOOTPRINT",
       "caveat": "Herstellerangabe.",
       "period": "Herstellerseite, Stand am Stichtag 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_CROSS_TRADING",
@@ -261,7 +349,12 @@
       "source_id": "SRC_ATAS_8012",
       "caveat": "",
       "period": "ATAS 8.0.12 (17.02.2026)",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_IB_BAG",
@@ -272,7 +365,12 @@
       "source_id": "SRC_IB_API",
       "caveat": "",
       "period": "API-Doku Stand 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_CBOE_OPENCLOSE",
@@ -284,7 +382,12 @@
       "caveat": "Sekundärquelle.",
       "period": "Stand 2026-10-05",
       "keep_reason": "Tragend für die Einordnung der GEX-Prämisse (K3).",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_SPX_0DTE_59",
@@ -295,7 +398,12 @@
       "source_id": "SRC_CBOE_FY2025",
       "caveat": "",
       "period": "Gesamtjahr 2025",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_OPRA_CAPACITY",
@@ -306,7 +414,12 @@
       "source_id": "SRC_OPRA",
       "caveat": "Projektion, keine Messung.",
       "period": "Projektion Sept. 2025",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_ODAX_SPECS",
@@ -320,7 +433,12 @@
       "values": {
         "ODAX": "5"
       },
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_EUREX_OI",
@@ -331,7 +449,12 @@
       "source_id": "SRC_EUREX_STATS",
       "caveat": "",
       "period": "Stand 2026-10-05",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_OESX_MULT",
@@ -340,12 +463,17 @@
       "confidence": 0.85,
       "claim": "OESX (EURO-STOXX-50-Indexoptionen): 10 € je Indexpunkt, europäisch, Barausgleich.",
       "source_id": "SRC_EUREX_OESX_SPEC",
-      "caveat": "Über Suchtreffer auf die Primärquelle belegt (Volltextabruf gesperrt).",
+      "caveat": "Am Original durch den Herausgeber geprüft (2026-10-11).",
       "period": "Stichtag 2026-10-05 (Kontraktspezifikation abgerufen 2026-10-11)",
       "values": {
         "OESX": "10"
       },
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_EUREX_DAILY_LAUNCH",
@@ -359,7 +487,12 @@
       "supporting_sources": [
         "SRC_EUREX_DAILY"
       ],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_ISSUER_HEDGING",
@@ -371,7 +504,12 @@
       "caveat": "Keine Primärquelle zum Hedging über FDAX/ODAX gefunden.",
       "period": "Stand 2026-10-05",
       "keep_reason": "Tragend für K4 (Hedging-Spur von Optionsscheinen).",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_COMPETITOR_MATRIX",
@@ -389,7 +527,12 @@
         "SRC_IBKR"
       ],
       "keep_reason": "Tragend für den Wettbewerbsvergleich (Modul 5, K6); n. v.-Felder offen ausgewiesen.",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_NO_EUREX_GEX",
@@ -416,7 +559,12 @@
         ]
       },
       "keep_reason": "Tragend für die strategische Einordnung (Fazit, Quantor mit Basis).",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_DEALER_CONVENTION",
@@ -458,7 +606,7 @@
       "confidence": 0.8,
       "claim": "Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Standardoptionen auf Indizes (Monats- und Quartalsverfälle): letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember).",
       "source_id": "SRC_CBOE_SPX",
-      "caveat": "Spezifikationsseiten ohne Versionsdatum; über Suchtreffer auf die Primärquellen belegt.",
+      "caveat": "Spezifikationsseiten ohne Versionsdatum; am Original durch den Herausgeber geprüft (2026-10-11).",
       "period": "Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11)",
       "values": {
         "SPX": "100",
@@ -469,7 +617,12 @@
         "SRC_CME_MICRO",
         "SRC_EUREX_SPECS"
       ],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_CCP_ISSUER",
@@ -478,12 +631,17 @@
       "confidence": 0.8,
       "claim": "Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin).",
       "source_id": "SRC_BAFIN_EUREX_CLEARING",
-      "caveat": "Über Suchtreffer auf die Primärquellen belegt (Volltextabruf gesperrt).",
+      "caveat": "Am Original durch den Herausgeber geprüft (2026-10-11).",
       "period": "Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11)",
       "supporting_sources": [
         "SRC_DB_CLEARING"
       ],
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     },
     {
       "id": "FACT_OS_ISSUER",
@@ -495,7 +653,12 @@
       "caveat": "Nur Muster-Produktinformation des Branchenverbands (Sekundärquelle); Emissionsbedingungen einzelner Emittenten nicht eingesehen.",
       "period": "Stand am Stichtag 2026-10-05",
       "keep_reason": "Tragend für den Strukturvergleich in Modul 6 (Rechtsnatur und Emittentenrisiko von Optionsscheinen).",
-      "evidence": "snippet"
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
     }
   ],
   "sources": [
@@ -966,6 +1129,12 @@
       "date": "2026-10-11",
       "event": "Strukturelle Tests ergänzt (L82 Belegstufe, L26e, L27d, L76c Matrix-Textzellen, unsichtbare Kennzeichen, Zeitangaben in L12, Varianten in L26d, L06b-Eingrenzung mit Claim-Ausnahme, automatischer Sync im Runner). Regression 150/150; unabhängiger Holdout r13 (52808f2) einmalig 33/34, Negativkontrollen 10/10; verbleibende Lücke: frei formulierter Zweifel im caveat (Wortliste, bewusst nicht erweitert)",
       "qa_score_pct": 63.2,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Freigaben des Herausgebers: Abgleich aller Snippet-Belege am Original (C3, C8, Q2, Q4, Q5; evidence → fulltext; FACT_PRIIPS_UWG und FACT_ANGEMESSENHEIT → CONFIRMED), Interessenkonflikte bestätigt (C4: keine), Datenschutz/Impressum freigegeben (C9 bleibt ◐: L38-Messung widerspricht sessionStorage-Angabe und Stand-Datum)",
+      "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }
   ],

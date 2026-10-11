@@ -104,7 +104,8 @@ def main():
     dbom_p.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
     cnt = {"total": fs["total"], "confirmed": fs["confirmed_primary"], "media": fs["media_report"], "unverified": fs["unverified"],
            "scenario": fs["scenario_projection"], "vendor": fs["vendor_claim"], "sources": len(d["sources"]),
-           "snippet": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "snippet" for f in F)}  # L82
+           "snippet": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "snippet" for f in F),
+           "fulltext": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "fulltext" for f in F)}  # L82
     facts = {f["id"]: f for f in F}
 
     s = page.read_text(encoding="utf-8")

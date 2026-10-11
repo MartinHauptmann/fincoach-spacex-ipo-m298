@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.10.5 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.11.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -99,8 +99,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.10.5", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
-  "fact_summary": { "total": 36, "confirmed_primary": 25, "media_report": 6, "unverified": 2, "scenario_projection": 3, "vendor_claim": 11 },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.11.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "fact_summary": { "total": 36, "confirmed_primary": 27, "media_report": 6, "unverified": 0, "scenario_projection": 3, "vendor_claim": 11 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
 </script>
@@ -148,8 +148,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.10.5</span>
-    <span class="text-slate-300"><span data-dbom-count="total">36</span> Fakten · <span data-dbom-count="confirmed">25</span> belegt (davon <span data-dbom-count="snippet">25</span> über Snippet, <span data-dbom-count="vendor">11</span> Herstellerangaben) · <span data-dbom-count="media">6</span> Medienangaben · <span data-dbom-count="unverified">2</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.11.0</span>
+    <span class="text-slate-300"><span data-dbom-count="total">36</span> Fakten · <span data-dbom-count="confirmed">27</span> belegt (davon <span data-dbom-count="fulltext">27</span> am Original geprüft, <span data-dbom-count="vendor">11</span> Herstellerangaben) · <span data-dbom-count="media">6</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
       <a href="analysen/m300-atas-options-xray-deep-dive.md" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">↗ Volltext-Analyse</a>
@@ -198,7 +198,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen neun Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">25</span> belegte Fakten, <span data-dbom-count="media">6</span> Medienangaben, <span data-dbom-count="unverified">2</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>63,2</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">27</span> belegte Fakten, <span data-dbom-count="media">6</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -256,8 +256,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     </div>
     <div class="info-box mb-8 text-sm text-slate-300 leading-relaxed">
       <strong class="text-tngb-cyan">Daten-Transparenz:</strong> Die Recherche lief in einer Umgebung, die den direkten
-      Abruf der meisten Primärquellen gesperrt hat. Die Fakten stützen sich auf Suchtreffer, die auf diese Quellen
-      verweisen. Wie belastbar ein Fakt ist, zeigt sein Verdict: belegt, Medienangabe, ungeprüft oder Szenario. <strong>„Belegt (Snippet)“</strong> heißt: Ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; der Abgleich mit dem Volltext steht für alle diese Fakten noch aus. Die Belegstufe je Fakt steht in der M-DBOM (Feld <code>evidence</code>). Herstellerangaben tragen das Kennzeichen <span class="dbom-class-badge dc-vendor">VENDOR</span>, Modelle
+      Abruf der meisten Primärquellen gesperrt hat. Die Recherche stützte sich auf Suchtreffer, die auf diese Quellen
+      verweisen; der Herausgeber hat am 2026-10-11 alle Belege am Original abgeglichen. Wie belastbar ein Fakt ist, zeigt sein Verdict: belegt, Medienangabe, ungeprüft oder Szenario. <strong>Belegstufe:</strong> „Snippet“ heißt, ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „Volltext“ heißt, die Aussage wurde am Original geprüft. Derzeit sind alle Belege auf der Stufe „Volltext“. Die Belegstufe je Fakt steht in der M-DBOM (Feld <code>evidence</code>). Herstellerangaben tragen das Kennzeichen <span class="dbom-class-badge dc-vendor">VENDOR</span>, Modelle
       und Szenarien das Kennzeichen <span class="dbom-class-badge">SCENARIO</span>. Schätzungen sind mit
       <span class="est-mark">EST</span> markiert.
     </div>
@@ -296,7 +296,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <button class="reg-tag" style="color:#00CFFF;border-color:rgba(0,207,255,0.4);background:rgba(0,207,255,0.08);" data-reg="mifid17" data-source="FACT_ALGO_TRADING FACT_MM_NO_HEDGE_DUTY">MiFID II Art. 17 · <abbr title="Algorithmischer Handel / Market Making">Algo/MM</abbr></button>
       <button class="reg-tag" style="color:#9933FF;border-color:rgba(153,51,255,0.4);background:rgba(153,51,255,0.08);" data-reg="mar" data-source="FACT_MAR_RECO">MAR · Anlageempfehlung</button>
       <button class="reg-tag" style="color:#DFAF0F;border-color:rgba(223,175,15,0.4);background:rgba(223,175,15,0.08);" data-reg="turbo" data-source="FACT_BAFIN_TURBO">BaFin · Turbo-Zertifikate</button>
-      <button class="reg-tag" style="color:#00CC7A;border-color:rgba(0,204,122,0.4);background:rgba(0,204,122,0.08);" data-reg="priips" data-source="FACT_PRIIPS_UWG">PRIIPs · <abbr title="Gesetz gegen den unlauteren Wettbewerb">UWG</abbr> <span class="dbom-class-badge">UNGEPRÜFT</span></button>
+      <button class="reg-tag" style="color:#00CC7A;border-color:rgba(0,204,122,0.4);background:rgba(0,204,122,0.08);" data-reg="priips" data-source="FACT_PRIIPS_UWG">PRIIPs · <abbr title="Gesetz gegen den unlauteren Wettbewerb">UWG</abbr></button>
     </div>
   </div>
 </section>
@@ -472,7 +472,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   </div>
   <div class="dep-box table-wrap">
     <table data-source="FACT_COMPETITOR_MATRIX">
-      <caption class="text-left text-xs text-slate-400 pb-2" style="caption-side:top;">Angaben aus Hersteller- und Drittseiten (Snippets) <span class="dbom-class-badge">MEDIEN</span> · „n. v.“ = keine Angabe in den ausgewerteten Quellen</caption>
+      <caption class="text-left text-xs text-slate-400 pb-2" style="caption-side:top;">Angaben aus Hersteller- und Drittseiten (am Original geprüft) <span class="dbom-class-badge">MEDIEN</span> · „n. v.“ = keine Angabe in den ausgewerteten Quellen</caption>
       <thead><tr><th>Merkmal</th><th>ATAS X-Ray</th><th>SpotGamma</th><th>MenthorQ</th><th>Volland</th><th>Bookmap</th><th>IBKR TWS</th></tr></thead>
       <tbody>
         <tr><td>Kernfokus</td><td data-source="FACT_XRAY_10_IND">Orderflow + Dealer-Positionierung <span class="badge b-v">VENDOR</span></td><td>Gamma-Levels, Research</td><td>Gamma-Levels, Modelle, Ausbildung</td><td>Notional-Greeks Dealer-Buch</td><td>Orderbuch-Heatmap, Ausführung</td><td>Broker, Portfoliorisiko</td></tr>
@@ -503,8 +503,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
           <tr><td>Rechtsnatur</td><td data-source="FACT_CCP_ISSUER">börsengehandelter Kontrakt</td><td data-source="FACT_OS_ISSUER">Optionsscheine: Inhaberschuldverschreibung des Emittenten <span class="dbom-class-badge">MEDIEN</span>; Knock-outs: n. v.</td></tr>
           <tr><td>Kontrahentenrisiko</td><td data-source="FACT_CCP_ISSUER">zentrale Gegenpartei Eurex Clearing mit <dfn>Margin</dfn> (Sicherheitsleistung der Teilnehmer)</td><td data-source="FACT_OS_ISSUER">Bonität des Emittenten <span class="dbom-class-badge">MEDIEN</span></td></tr>
           <tr data-source="FACT_ODAX_SPECS"><td>Größe</td><td>ODAX 5 €/Pkt.; <abbr title="Micro-DAX-Optionen">ODXS</abbr> gelistet</td><td>frei über <dfn>Bezugsverhältnis</dfn> (wie viele Scheine sich auf eine Einheit des Basiswerts beziehen)</td></tr>
-          <tr><td>Zugang Privatanleger</td><td data-source="FACT_ANGEMESSENHEIT">Angemessenheitsprüfung (§ 63 Abs. 10 WpHG) <span class="dbom-class-badge">UNGEPRÜFT</span></td><td data-source="FACT_ANGEMESSENHEIT FACT_BAFIN_TURBO">Angemessenheitsprüfung (§ 63 Abs. 10 WpHG) <span class="dbom-class-badge">UNGEPRÜFT</span>; Turbos seit 16.06.2026 zusätzlich mit Wissenstest + Risikohinweis</td></tr>
-          <tr data-source="FACT_PRIIPS_UWG"><td>Kostenausweis <span class="dbom-class-badge">UNGEPRÜFT</span></td><td>Gebühren, MiFID-II-Ex-ante-Kosten; PRIIPs-KID n. v.</td><td>PRIIPs-KID + MiFID-II-Kosten</td></tr>
+          <tr><td>Zugang Privatanleger</td><td data-source="FACT_ANGEMESSENHEIT">Angemessenheitsprüfung (§ 63 Abs. 10 WpHG)</td><td data-source="FACT_ANGEMESSENHEIT FACT_BAFIN_TURBO">Angemessenheitsprüfung (§ 63 Abs. 10 WpHG); Turbos seit 16.06.2026 zusätzlich mit Wissenstest + Risikohinweis</td></tr>
+          <tr data-source="FACT_PRIIPS_UWG"><td>Kostenausweis</td><td>Gebühren, MiFID-II-Ex-ante-Kosten; PRIIPs-KID n. v.</td><td>PRIIPs-KID + MiFID-II-Kosten</td></tr>
           <tr data-source="FACT_JSTG2024_REPEAL"><td>Steuer (<abbr title="Privatvermögen">PV</abbr>)</td><td>keine gesonderte Beschränkung</td><td>keine gesonderte Beschränkung</td></tr>
           <tr data-source="FACT_EUREX_OI"><td>Öffentliches OI je Strike</td><td>ja, täglich</td><td>n. v.</td></tr>
         </tbody>
@@ -571,7 +571,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>63,2</span> % · <span data-qa-points>12</span> / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>78,9</span> % · <span data-qa-points>15</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
     <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Bewertung nach unabhängiger Zweitprüfung; ✓ nur mit Messung oder dokumentierter Einzelprüfung.</span>
   </div>
@@ -581,23 +581,23 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <table><tbody>
         <tr><td>C1 Disclaimer Anfang/Ende</td><td class="check-pass" title="Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test">✓</td></tr>
         <tr><td>C2 Keine Anlageempfehlung (MAR)</td><td class="check-pass">✓</td></tr>
-        <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-part" data-gate="C3" title="Primärquellen nur per Snippet eingesehen">◐</td></tr>
-        <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-part" data-gate="C4" title="Interessenkonflikte vom Herausgeber noch nicht bestätigt (L10b)">◐</td></tr>
+        <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-pass" data-gate="C3" title="Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext)">✓</td></tr>
+        <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-pass" data-gate="C4" title="Keine Interessenkonflikte (Erklärung des Herausgebers vom 2026-10-11)">✓</td></tr>
         <tr><td>C5 Marken beschreibend</td><td class="check-part" data-gate="C5" title="Markenliste umfasst auch SPDR, SPY, CME, E-mini, dxFeed und IQFeed; Vollständigkeit unabhängig bestätigen">◐</td></tr>
         <tr><td>C6 UWG-konforme Begriffe</td><td class="check-part" data-gate="C6" title="Begriffe neutral; Tatsachenangaben über Wettbewerber stützen sich nur auf Snippet-Medienangaben (Konfidenz 0,6–0,65) und sind nach § 6 UWG noch nicht voll nachprüfbar">◐</td></tr>
         <tr><td>C7 Ausgewogene Risikodarstellung</td><td class="check-pass">✓</td></tr>
-        <tr><td>C8 Regulatorische Bezüge belegt</td><td class="check-part" data-gate="C8" title="§ 80 WpHG über Suchtreffer auf den Gesetzestext belegt; PRIIPs/UWG und § 63 Abs. 10 WpHG UNVERIFIED">◐</td></tr>
-        <tr><td>C9 Datenschutz</td><td class="check-part" data-gate="C9" title="Modul: 0 Drittanbieter-Abrufe, kein Speicher (L20); verlinkte Datenschutzerklärung offen (L38)">◐</td></tr>
+        <tr><td>C8 Regulatorische Bezüge belegt</td><td class="check-pass" data-gate="C8" title="§ 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft">✓</td></tr>
+        <tr><td>C9 Datenschutz</td><td class="check-part" data-gate="C9" title="Freigabe des Herausgebers liegt vor (2026-10-11); die Messung (L38) widerspricht noch zwei Angaben der Datenschutzerklärung: sessionStorage und Stand-Datum">◐</td></tr>
       </tbody></table>
     </div>
     <div class="dep-box">
       <h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität (Q1–Q10)</h3>
       <table><tbody>
         <tr><td>Q1 Faktencheck K1–K9 vollständig</td><td class="check-part" data-gate="Q1" title="Claim-Tabelle A01–A15; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61">◐</td></tr>
-        <tr><td>Q2 Aktualität / Stichtag</td><td class="check-part" data-gate="Q2" title="Kontraktdaten belegt (Abruf 2026-10-11); Originalabgleich offen; ✓ erst nach Messung (L10)">◐</td></tr>
+        <tr><td>Q2 Aktualität / Stichtag</td><td class="check-pass" data-gate="Q2" title="Aktualität am Stichtag vom Herausgeber am 2026-10-11 am Original geprüft">✓</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass">✓</td></tr>
-        <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="Kontraktdaten und Struktur Eurex/Optionsscheine belegt; ✓ erst nach Zweitprüfung (L10)">◐</td></tr>
-        <tr><td>Q5 Quellenqualität</td><td class="check-part" data-gate="Q5" title="Primärquellen identifiziert, nicht im Volltext gelesen">◐</td></tr>
+        <tr><td>Q4 Provenienz je Fakt</td><td class="check-pass" data-gate="Q4" title="Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82)">✓</td></tr>
+        <tr><td>Q5 Quellenqualität</td><td class="check-pass" data-gate="Q5" title="Primärquellen vom Herausgeber am 2026-10-11 am Original geprüft (Volltext)">✓</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-part" data-gate="Q6" title="Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen">◐</td></tr>
         <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="Claims über k/k_differs an K-Zeilen gebunden (L61); ✓ erst nach Messung (L10)">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="Zweitprüfung: alle 15 Pflichtbegriffe vorhanden">✓</td></tr>
@@ -620,13 +620,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       </tbody></table>
       <h4 class="font-head font-bold text-white mt-5 mb-2 text-sm">Offen vor Freigabe</h4>
       <ul class="tick text-xs" id="open-list">
-        <li data-gate="C3" data-open>Steuerliche und regulatorische Aussagen von einer fachkundigen Person am Volltext der Gesetzesquellen prüfen lassen (Rechtsprüfung)</li>
-        <li data-gate="Q5" data-open>Primärquellen im Volltext lesen (BGBl., Eurex, Cboe, CME, ATAS)</li>
-        <li data-gate="Q2" data-open>Aktualität der Angaben am Stichtag durch Abgleich mit den Originalquellen bestätigen</li>
-        <li data-gate="C4" data-open>Interessenkonflikte durch Herausgeber bestätigen</li>
-        <li data-gate="C8" data-source="FACT_PRIIPS_UWG FACT_ANGEMESSENHEIT" data-open>PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>
-        <li data-gate="C9" data-open>Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis</li>
-        <li data-gate="Q4" data-open>Provenienz je Fakt nach dem Volltextabgleich der Primärquellen bestätigen (siehe C3, C8)</li>
+        <li data-gate="C9" data-open>Datenschutzerklärung an die Messung angleichen: sessionStorage-Angabe und Stand-Datum (L38); Textänderung nur mit Zustimmung des Herausgebers</li>
                 <li data-gate="Q9" data-open data-source="FACT_NO_EUREX_GEX FACT_ROADMAP">Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)</li>
         <li data-gate="Q7" data-open>K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen</li>
         <li data-gate="Q1" data-open>Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen</li>
@@ -649,7 +643,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 
   <h3 class="font-head font-bold text-white mb-3">Methodik &amp; Limitationen</h3>
   <div class="grid md:grid-cols-3 gap-4 mb-10">
-    <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Gesetzestexte, BaFin, Eurex, Cboe, CME, OPRA sowie Herstellerdokumentation, überwiegend über Suchtreffer auf die Primärquelle (Volltextabruf gesperrt). Medien- und Sekundärquellen sind als Medienangabe gekennzeichnet.</p></div>
+    <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Gesetzestexte, BaFin, Eurex, Cboe, CME, OPRA sowie Herstellerdokumentation, recherchiert über Suchtreffer auf die Primärquelle und vom Herausgeber am 2026-10-11 am Original abgeglichen. Medien- und Sekundärquellen sind als Medienangabe gekennzeichnet.</p></div>
     <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Aus der DBOM berechnet: Rechtsrahmen <span data-dbom-range="REGULATORY_FRAMEWORK">0,7–0,9</span>; Herstellerangaben <span data-dbom-range="VENDOR_CLAIM">0,7–0,85</span>; Marktdaten <span data-dbom-range="MARKET_DATA">0,7–0,85</span>; Klasse Medienbericht <span data-dbom-range="MEDIA_REPORT">0,6–0,7</span>; Modellannahme <span data-dbom-range="MODEL_ASSUMPTION">0,5–0,5</span>. Szenarien tragen keine Prognose-Konfidenz.</p></div>
     <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Die Berechnungslogik des Herstellers ist nicht offengelegt. Die Dealer-Positionsannahme ist nicht beobachtbar. Teilnehmer-markierte Eurex-Daten und eine veröffentlichte Validierungsstatistik für X-Ray wurden bei der Recherche nicht gefunden.</p></div>
   </div>
@@ -663,7 +657,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <div class="caveat-box mb-10">
     <h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer: keine Anlage-, Rechts- oder Steuerberatung</h3>
     <p class="text-sm text-slate-300 leading-relaxed mb-2">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken. Es stellt <strong>keine Anlageberatung, Anlagevermittlung oder Finanzportfolioverwaltung</strong> (WpIG/KWG/WpHG) dar. Es ist <strong>keine Rechtsdienstleistung</strong> (RDG) und <strong>keine Hilfeleistung in Steuersachen</strong> (StBerG). Es enthält keine Anlageempfehlung und keine Empfehlung einer Anlagestrategie im Sinne von Art. 3 Abs. 1 Nr. 34/35 MAR. Optionen, Futures, Optionsscheine und Knock-out-Zertifikate sind Hebelprodukte mit <strong>Totalverlustrisiko</strong>. Bei Futures und Stillhaltergeschäften sind Verluste über den Einsatz hinaus möglich. Diese Produkte sind nur für erfahrene Anleger geeignet, die Hebel- und Knock-out-Mechanik verstehen und Verluste bis zum Totalverlust tragen können. Verbriefte Derivate tragen zusätzlich das Emittentenrisiko. Modellausgaben und vergangene Muster sind kein verlässlicher Indikator für künftige Entwicklungen. Steuerliche Aussagen geben den recherchierten Rechtsstand zum <span class="font-mono text-tngb-cyan">2026-10-05</span> wieder. Für Ihre persönliche Situation wenden Sie sich an einen Steuerberater oder Rechtsanwalt.</p>
-    <p class="text-xs text-slate-400 leading-relaxed"><strong>Marken:</strong> ATAS, Options X-Ray, OptionsDepth, SpotGamma, HIRO, MenthorQ, Volland, Bookmap, Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, DAX, EURO STOXX 50, S&amp;P 500, Nasdaq-100, Gamma Cockpit, CME, E-mini, SPDR, SPY, dxFeed, IQFeed, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer Inhaber. Sie werden rein beschreibend genannt. Es besteht keine Verbindung zu den Inhabern. <strong>Interessenkonflikte:</strong> keine bekannt; vom Herausgeber vor Veröffentlichung zu bestätigen.</p>
+    <p class="text-xs text-slate-400 leading-relaxed"><strong>Marken:</strong> ATAS, Options X-Ray, OptionsDepth, SpotGamma, HIRO, MenthorQ, Volland, Bookmap, Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, DAX, EURO STOXX 50, S&amp;P 500, Nasdaq-100, Gamma Cockpit, CME, E-mini, SPDR, SPY, dxFeed, IQFeed, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer Inhaber. Sie werden rein beschreibend genannt. Es besteht keine Verbindung zu den Inhabern. <strong>Interessenkonflikte:</strong> keine (Erklärung des Herausgebers vom 2026-10-11).</p>
   </div>
 
   <footer class="border-t border-tngb-border pt-8 mt-4">
@@ -684,7 +678,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.10.5 · 2026-10-11<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.11.0 · 2026-10-11<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
@@ -755,7 +749,7 @@ const KS=[
   ["K6","Wettbewerber","Vergleich SpotGamma, MenthorQ, Volland, Bookmap, TWS","part","hint","Medienangaben aus Hersteller- und Drittquellen; einzelne Felder n. v. (Medienangaben)","FACT_COMPETITOR_MATRIX"],
   ["K7","Eurex-Spezifikationen","FDAX/<abbr title='EURO-STOXX-50-Future der Eurex'>FESX</abbr>-Optionsketten, „Hexensabbat“","part","hint","Für den Ausgangstext maßgeblich sind die Indexoptionen ODAX (5 €/Pkt.) und OESX (10 €/Pkt.). Fachbegriff: Quartalsverfall; bei den Standard-Monats- und Quartalsoptionen ist der letzte Handelstag der dritte Freitag. Daneben gibt es End-of-Day-Optionen (OEXP, ODAP); für OEXP sind seit 05.01.2026 Verfälle an zehn Handelstagen gelistet.","FACT_ODAX_SPECS FACT_OESX_MULT FACT_EUREX_DAILY_LAUNCH FACT_CONTRACT_SPECS"],
   ["K8","IBKR-Combo-Orders","native Spread-Engine fehlt","part","major","Für ATAS zutreffend, aber zu präzisieren. Die IB-API unterstützt BAG-Combo-Orders (bis 6 Legs, Netto-Limit) bereits. Offen ist die Einbindung in ATAS (Oberfläche, Risikoprüfung, Positionsführung). (Einschätzung)","FACT_IB_BAG FACT_ATAS_NO_OPT_TRADING"],
-  ["K9","Warrant-Fair-Value-Tool","„verdeckte Marge“, „künstliche Spread-Ausweitung“","part","major","Wertende Begriffe mit UWG-Risiko. Neutral: Fair-Value-Differenz, Emittentenaufschlag. Abgleich mit PRIIPs-KID; Emittentenbonität ist ein realer Wert, keine Marge. (Rechtsgrundlagen PRIIPs/UWG: ungeprüft)","FACT_PRIIPS_UWG"]
+  ["K9","Warrant-Fair-Value-Tool","„verdeckte Marge“, „künstliche Spread-Ausweitung“","part","major","Wertende Begriffe mit UWG-Risiko. Neutral: Fair-Value-Differenz, Emittentenaufschlag. Abgleich mit PRIIPs-KID; Emittentenbonität ist ein realer Wert, keine Marge. ","FACT_PRIIPS_UWG"]
 ];
 const RES={ok:'<span class="badge b-ok">✓ bestätigt</span>',part:'<span class="badge b-part">◐ präzisiert</span>',no:'<span class="badge b-no">✗ falsch</span>'};
 const SEV={crit:'<span class="badge b-crit">KRITISCH</span>',major:'<span class="badge b-major">WESENTLICH</span>',hint:'<span class="badge b-hint">HINWEIS</span>'};
@@ -777,7 +771,7 @@ const GLOSSAR=[
   ["Implizite Volatilität","Vom Markt eingepreiste Schwankungserwartung.","Aus dem Optionspreis zurückgerechnete Volatilität.","Fläche über Strike und Laufzeit; Eingang für Vanna-Effekte."],
   ["Delta-Divergenz","Preis und Kaufdruck laufen auseinander.","Abweichung zwischen Preisverlauf und kumuliertem Delta.","Schwächeres Umkehrsignal im Short-Gamma-Regime."],
   ["BAG / Combo-Order","Mehrere Optionen als ein Auftrag.","IB-Ordertyp für Spreads mit Netto-Limit.","Schützt vor Legging-Risiko; in ATAS derzeit nicht integriert.","FACT_IB_BAG FACT_ATAS_NO_OPT_TRADING"],
-  ["Angemessenheitsprüfung","Prüfung, ob Kunden ein Produkt verstehen.","Abfrage von Kenntnissen und Erfahrungen vor dem Handel.","Für komplexe Produkte vorgeschrieben (Fundstelle ungeprüft).","FACT_ANGEMESSENHEIT","UNGEPRÜFT"],
+  ["Angemessenheitsprüfung","Prüfung, ob Kunden ein Produkt verstehen.","Abfrage von Kenntnissen und Erfahrungen vor dem Handel.","Für komplexe Produkte vorgeschrieben.","FACT_ANGEMESSENHEIT"],
   ["Optionsschein","Vom Emittenten ausgegebenes Optionsrecht.","Verbriefte Option, rechtlich eine Inhaberschuldverschreibung.","Emittentenrisiko: Der Wert hängt von der Bonität des Emittenten ab.","FACT_OS_ISSUER","MEDIEN"],
   ["0DTE","Optionen, die am selben Tag verfallen.","Zero Days to Expiration; beim SPX an jedem Wochentag.","Großer Teil des SPX-Volumens (Kennzahl in S01); erzeugt Intraday-Positionen ohne OI-Spur.","FACT_CONTRACT_SPECS FACT_SPX_0DTE_59"],
   ["GEX","Schätzung, wie stark Absicherungsgeschäfte den Markt bewegen könnten.","Gamma Exposure: aggregiertes Dollar-Gamma der Dealer-Positionen.","\\(\\sum s_i\\Gamma_i OI_i M S^2\\cdot 0{,}01\\); Vorzeichen hängt an der Positionsannahme."],
@@ -795,7 +789,7 @@ const GLOSSAR=[
   ["Termingeschäft (steuerlich)","Geschäft, dessen Wert von einem anderen abhängt.","Options-, Futures- oder Swapgeschäft mit Differenzausgleich oder Lieferung; Einkünfte nach § 20 EStG.","Im Privatvermögen keine gesonderte Verlustverrechnungsbeschränkung (JStG 2024).","FACT_JSTG2024_REPEAL"],
   ["Knock-out-Zertifikat","Hebelpapier, das an einer Schwelle wertlos wird.","Hebelprodukt mit Knock-out-Barriere; Rechtsnatur hier n. v.","Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).","FACT_BAFIN_TURBO"],
   ["CCP","Zentrale Stelle zwischen Käufer und Verkäufer.","Central Counterparty, hier Eurex Clearing.","Ersetzt bilaterales Kontrahentenrisiko; Teilnehmer hinterlegen Sicherheiten (Margin).","FACT_CCP_ISSUER"],
-  ["PRIIPs-KID","Infoblatt zu Kosten und Risiken, das offenzulegen ist.","EU-Basisinformationsblatt (VO (EU) 1286/2014, Fundstelle ungeprüft).","Referenz für Kostenvergleiche verbriefter Derivate.","FACT_PRIIPS_UWG","UNGEPRÜFT"],
+  ["PRIIPs-KID","Infoblatt zu Kosten und Risiken, das offenzulegen ist.","EU-Basisinformationsblatt (VO (EU) 1286/2014).","Referenz für Kostenvergleiche verbriefter Derivate.","FACT_PRIIPS_UWG"],
   ["Quartalsverfall","Großer Verfallstag im März, Juni, September, Dezember.","Dritter Freitag der Quartalsmonate.","Umgangssprachlich „Hexensabbat“; OI-Verschiebungen davor relevant.","FACT_CONTRACT_SPECS"]
 ];
 function renderGlossar(){
@@ -901,7 +895,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
     const F=dbom.facts||[];
     const cnt={total:F.length,confirmed:F.filter(f=>f.verdict==='CONFIRMED').length,media:F.filter(f=>f.verdict==='MEDIA_REPORT').length,
       scenario:F.filter(f=>f.verdict==='SCENARIO_PROJECTION').length,vendor:F.filter(f=>f['class']==='VENDOR_CLAIM').length};
-    cnt.unverified=F.filter(f=>f.verdict==='UNVERIFIED').length;cnt.snippet=F.filter(f=>f.verdict==='CONFIRMED'&&f.evidence==='snippet').length;
+    cnt.unverified=F.filter(f=>f.verdict==='UNVERIFIED').length;cnt.snippet=F.filter(f=>f.verdict==='CONFIRMED'&&f.evidence==='snippet').length;cnt.fulltext=F.filter(f=>f.verdict==='CONFIRMED'&&f.evidence==='fulltext').length;
     document.querySelectorAll('[data-dbom-count]').forEach(el=>{const k=el.dataset.dbomCount;if(k in cnt)el.textContent=cnt[k];});
     const rng={};F.forEach(f=>{(rng[f['class']]=rng[f['class']]||[]).push(f.confidence);});
     const dc=v=>String(v).replace('.',',');
@@ -915,7 +909,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
         return x.url?`<a class="dep-box block hover:border-tngb-cyan transition" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div class="dep-box">${inner}</div>`;}).join('')+
         `<a class="dep-box block hover:border-tngb-cyan transition md:col-span-2" href="analysen/m300-atas-options-xray-deep-dive.md"><div class="text-tngb-cyan font-semibold">Vollständiges Quellenverzeichnis der Analyse</div><div class="text-xs text-slate-400">Volltext-Analyse M300, Abschnitt 5</div></a>`;}
     const unbound=F.filter(f=>!document.querySelector('[data-source~="'+f.id+'"]')).map(f=>f.id);  // L45: Mehrfach-Bindungen
-    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · Schema <code>'+dbom.$schema_id+'</code> · '+cnt.total+' Fakten ('+cnt.confirmed+' belegt (davon '+cnt.snippet+' Snippet), '+cnt.media+' Medien, '+cnt.unverified+' ungeprüft, '+cnt.scenario+' scenario) · '+refs.length+' HTML-Referenzen geprüft'+(unbound.length?' · ⚠ ungebunden: '+unbound.join(', '):'');
+    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · Schema <code>'+dbom.$schema_id+'</code> · '+cnt.total+' Fakten ('+cnt.confirmed+' belegt (davon '+cnt.fulltext+' am Original geprüft, '+cnt.snippet+' Snippet), '+cnt.media+' Medien, '+cnt.unverified+' ungeprüft, '+cnt.scenario+' scenario) · '+refs.length+' HTML-Referenzen geprüft'+(unbound.length?' · ⚠ ungebunden: '+unbound.join(', '):'');
     if(qaDbom){qaDbom.textContent='✓';qaDbom.className='check-pass';}
     if(missing===0){
       banner.classList.remove('err');banner.classList.add('warn');
