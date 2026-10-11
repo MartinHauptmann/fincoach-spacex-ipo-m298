@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.11.3",
+    "version": "1.12.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,19 +13,19 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 36,
-    "confirmed_primary": 27,
+    "total": 40,
+    "confirmed_primary": 31,
     "media_report": 6,
     "unverified": 0,
     "scenario_projection": 3,
-    "vendor_claim": 11,
+    "vendor_claim": 15,
     "by_class": {
       "MARKET_DATA": 7,
       "MEDIA_REPORT": 6,
       "MODEL_ASSUMPTION": 1,
       "REGULATORY_FRAMEWORK": 9,
       "SCENARIO_PROJECTION": 2,
-      "VENDOR_CLAIM": 11
+      "VENDOR_CLAIM": 15
     }
   },
   "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber alle Belege am Original abgeglichen; seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“. Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
@@ -530,21 +530,79 @@
       }
     },
     {
-      "id": "FACT_COMPETITOR_MATRIX",
+      "id": "FACT_SPOTGAMMA_SPEC",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.75,
+      "claim": "SpotGamma – Gamma-Levels, Research · HIRO/TRACE intraday, Levels vor Eröffnung · GEX ja, Vanna als Modell, Charm n. v. · Abdeckung SPX, NDX, ETFs, Einzelaktien · Orderflow/MBO n. v. · keine eigene Ausführung.",
+      "source_id": "SRC_SPOTGAMMA",
+      "caveat": "Herstellerangabe; Felder ohne Angabe in den ausgewerteten Quellen als n. v.",
+      "period": "Stand 2026-10-05",
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
+    },
+    {
+      "id": "FACT_MENTHORQ_SPEC",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.75,
+      "claim": "MenthorQ – Gamma-Levels, Modelle, Ausbildung · Optionsdaten EOD und alle 5 Min. · GEX ja, Vanna und Charm n. v. · Abdeckung inkl. Futures-Optionen (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung über Partnerplattformen · Eurex-GEX n. v..",
+      "source_id": "SRC_MENTHORQ",
+      "caveat": "Herstellerangabe; Felder ohne Angabe in den ausgewerteten Quellen als n. v.",
+      "period": "Stand 2026-10-05",
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
+    },
+    {
+      "id": "FACT_VOLLAND_SPEC",
       "verdict": "MEDIA_REPORT",
       "class": "MEDIA_REPORT",
       "confidence": 0.65,
-      "claim": "Anbieterangaben (Stand 2026-10-05): SpotGamma – Gamma-Levels, Research · HIRO/TRACE intraday, Levels vor Eröffnung · GEX ja, Vanna als Modell, Charm n. v. · Abdeckung SPX, NDX, ETFs, Einzelaktien · Orderflow/MBO n. v. · keine eigene Ausführung; MenthorQ – Gamma-Levels, Modelle, Ausbildung · Optionsdaten EOD und alle 5 Min. · GEX ja, Vanna und Charm n. v. · Abdeckung inkl. Futures-Optionen (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung über Partnerplattformen · Eurex-GEX n. v.; Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.; Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung; IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · Greeks nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung.",
-      "source_id": "SRC_SPOTGAMMA",
-      "caveat": "Anbieter- und Drittseiten; Felder ohne Angabe in den ausgewerteten Quellen als n. v.",
+      "claim": "Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v..",
+      "source_id": "SRC_VOLLAND",
+      "caveat": "Partnerseite (ORATS), keine Herstellerseite von Volland; Felder ohne Angabe als n. v.",
       "period": "Stand 2026-10-05",
-      "supporting_sources": [
-        "SRC_MENTHORQ",
-        "SRC_VOLLAND",
-        "SRC_BOOKMAP",
-        "SRC_IBKR"
-      ],
-      "keep_reason": "Tragend für den Wettbewerbsvergleich (Modul 5, K6); n. v.-Felder offen ausgewiesen.",
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      },
+      "keep_reason": "Tragend für den Wettbewerbsvergleich (Modul 5, K6); nur über die Partnerseite zugänglich."
+    },
+    {
+      "id": "FACT_BOOKMAP_SPEC",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.75,
+      "claim": "Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung.",
+      "source_id": "SRC_BOOKMAP",
+      "caveat": "Herstellerangabe; Felder ohne Angabe in den ausgewerteten Quellen als n. v.",
+      "period": "Stand 2026-10-05",
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-11",
+        "scope": "Abgleich am Original"
+      }
+    },
+    {
+      "id": "FACT_TWS_SPEC",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.75,
+      "claim": "IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · Greeks nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung.",
+      "source_id": "SRC_IBKR",
+      "caveat": "Herstellerangabe; Felder ohne Angabe in den ausgewerteten Quellen als n. v.",
+      "period": "Stand 2026-10-05",
       "evidence": "fulltext",
       "verified": {
         "by": "Herausgeber",
@@ -582,6 +640,12 @@
         "by": "Herausgeber",
         "date": "2026-10-11",
         "scope": "Abgleich am Original"
+      },
+      "qualifier": {
+        "subject": "Gamma Cockpit",
+        "terms": [
+          "Beta"
+        ]
       }
     },
     {
@@ -666,9 +730,9 @@
       "verdict": "MEDIA_REPORT",
       "class": "MEDIA_REPORT",
       "confidence": 0.7,
-      "claim": "Optionsscheine sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab (Emittentenrisiko).",
+      "claim": "Optionsscheine sind vom Emittenten ausgegebene Wertpapiere; ihr Wert hängt von dessen Bonität ab (Emittentenrisiko).",
       "source_id": "SRC_DDV_OS_MUSTER",
-      "caveat": "Nur Muster-Produktinformation des Branchenverbands (Sekundärquelle); Emissionsbedingungen einzelner Emittenten nicht eingesehen.",
+      "caveat": "Muster-Produktinformation des Branchenverbands (Sekundärquelle); keine rechtliche Einordnung übernommen.",
       "period": "Stand am Stichtag 2026-10-05",
       "keep_reason": "Tragend für den Strukturvergleich in Modul 6 (Rechtsnatur und Emittentenrisiko von Optionsscheinen).",
       "evidence": "fulltext",
@@ -1178,6 +1242,12 @@
       "event": "Fünfzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): Empfehlung keine Freigabe; C4, Q5, Q7 und Q9 auf ◐ übernommen (Neutralität der Belegklassen, Sekundärquellen, Statuswiderspruch und Disclaimer, fehlende Beta-Einschränkung, Kostenausweis)",
       "qa_score_pct": 81.6,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Fünfzehnte Zweitprüfung eingearbeitet: Wettbewerbsmatrix je Anbieter (FACT_SPOTGAMMA_SPEC, FACT_MENTHORQ_SPEC, FACT_VOLLAND_SPEC, FACT_BOOKMAP_SPEC, FACT_TWS_SPEC; L85), Disclaimer „Optionsscheine tragen Emittentenrisiko“, Beta-qualifier (L76e), Kostenausweis neutral, Optionsschein ohne Rechtsnatur-Einordnung (L19c), Freigabestatus exakt (L03b/L03c), Szenarien ohne Prognose-Konfidenz; Impressum ohne OS-Plattform, Datenschutz mit Speicherdauer (Angabe von Netlify) und neutralem DPA-Hinweis; H13-12 als anerkannte Grenze; C4, Q5, Q7, Q9 ✓",
+      "qa_score_pct": 92.1,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -1224,7 +1294,11 @@
     {
       "title": "Modul 5 · Globaler Wettbewerbsvergleich (Matrix auf der Modulseite S09)",
       "facts": [
-        "FACT_COMPETITOR_MATRIX",
+        "FACT_SPOTGAMMA_SPEC",
+        "FACT_MENTHORQ_SPEC",
+        "FACT_VOLLAND_SPEC",
+        "FACT_BOOKMAP_SPEC",
+        "FACT_TWS_SPEC",
         "FACT_NO_EUREX_GEX"
       ]
     },
@@ -1374,7 +1448,11 @@
       "category": "Wettbewerb",
       "result": "part",
       "facts": [
-        "FACT_COMPETITOR_MATRIX"
+        "FACT_SPOTGAMMA_SPEC",
+        "FACT_MENTHORQ_SPEC",
+        "FACT_VOLLAND_SPEC",
+        "FACT_BOOKMAP_SPEC",
+        "FACT_TWS_SPEC"
       ],
       "k": "K6"
     },

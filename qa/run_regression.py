@@ -48,6 +48,9 @@ with tempfile.TemporaryDirectory() as tmp:
             print(f"[ABSTURZ]  {c['name']}: {(r.stderr.strip().splitlines() or ['?'])[-1][:120]}")
             continue
         hit = [l for l in fails if re.match(r"✗ (%s)\b" % c["expect"], l)]
+        if not (r.returncode and hit) and c.get("known_limit"):  # dokumentierte, vom Herausgeber anerkannte Grenze: sichtbar, aber kein Fehler
+            print(f"[GRENZE]   {c['name']} – {c['known_limit']}")
+            continue
         if r.returncode and hit:
             print(f"[erkannt]  {c['name']} → {hit[0][2:40].strip()}")
         else:

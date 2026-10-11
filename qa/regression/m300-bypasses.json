@@ -1918,6 +1918,55 @@
      "Laut übereinstimmenden Medienberichten zur"
     ]
    ]
+  },
+  {
+   "name": "L03c Analyse §8 zeigt FREIGABE bei Status ÜBERARBEITUNG",
+   "expect": "L03b",
+   "sync": false,
+   "nosync": true,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "**Freigabeempfehlung: ÜBERARBEITUNG.**",
+     "**Freigabeempfehlung: FREIGABE.**"
+    ]
+   ]
+  },
+  {
+   "name": "L76e Beta-Claim ohne qualifier",
+   "expect": "L76e",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"qualifier\": {\n        \"subject\": \"Gamma Cockpit\",\n        \"terms\": [\n          \"Beta\"\n        ]\n      }",
+     "\"note\": \"-\""
+    ]
+   ]
+  },
+  {
+   "name": "L85 SpotGamma als Medienangabe, übrige Hersteller belegt",
+   "expect": "L85",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"id\": \"FACT_SPOTGAMMA_SPEC\",\n      \"verdict\": \"CONFIRMED\"",
+     "\"id\": \"FACT_SPOTGAMMA_SPEC\",\n      \"verdict\": \"MEDIA_REPORT\""
+    ]
+   ]
+  },
+  {
+   "name": "L19c Rechtsrahmen nur mit Sekundärquelle",
+   "expect": "L19c",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"source_id\": \"SRC_WPHG_63\"",
+     "\"source_id\": \"SRC_SUTOR\""
+    ]
+   ]
   }
  ]
 }

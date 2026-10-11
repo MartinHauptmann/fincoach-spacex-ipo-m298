@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L84 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L85 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -180,6 +180,13 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   mindestens zwei Quellen.
 - **L38b:** Impressum und Datenschutz ohne Entwurfsvermerke; jedes Datum ≥ letzte Änderung; CDN-Angaben = genutzte
   CDN-Hosts aller Seiten.
+- **L03c:** Der Freigabestatus kommt aus `module.release_status`; Seite, JSON-LD, Analyse-Kopf und §8 stimmen exakt
+  überein. FREIGABE erst nach Pflicht-Zweitprüfung und Zustimmung des Herausgebers.
+- **L85:** Vergleichsfakten je Anbieter; gleiche Quellenstufe ⇒ gleiches Verdict.
+- **L76e:** Ein Claim mit Beta, Erprobung oder „in Entwicklung“ trägt ein `qualifier`-Feld.
+- **L19c:** Rechtsrahmen-Fakten stützen sich auf eine Primärquelle.
+- **Bekannte Grenzen:** Regressionsfälle mit `known_limit` (vom Herausgeber anerkannt) erscheinen als [GRENZE] und
+  zählen nicht als Fehler; sie werden nie still entfernt.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

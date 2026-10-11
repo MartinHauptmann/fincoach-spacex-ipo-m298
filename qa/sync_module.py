@@ -42,6 +42,8 @@ def build_blocks(page_html, d):
         if fid not in facts:  # L53c: unbekannte Fakt-ID bricht ab statt still zu verschwinden
             raise ValueError(f"unbekannte Fakt-ID {fid}")
         f = facts[fid]
+        if f["verdict"] == "SCENARIO_PROJECTION":  # Szenarien tragen keine Prognose-Konfidenz (S12)
+            return f"(`{fid}`, {VLAB[f['verdict']]}, keine Prognose-Konfidenz)"
         return f"(`{fid}`, {VLAB[f['verdict']]}, Konfidenz {de(f['confidence'])})"
     out = {}
     # Claim-Tabelle (L59): Aussagen des Quelltexts, Belege und schwächster Beleg (L19) aus der DBOM
@@ -157,7 +159,8 @@ def main():
         sym = {"check-pass": "✓", "check-part": "◐", "check-fail": "✗"}
         tbl8 = "\n".join(f"| {lab} | {sym[c]} | {html.unescape(t) or '–'} |" for lab, c, t in rows_qa)
         c_ok = all(c == "check-pass" for lab, c, _ in rows_qa if lab.startswith("C"))
-        rel = "FREIGABE" if c_ok and pct >= 90 else "ÜBERARBEITUNG"
+        rule_ok = c_ok and pct >= 90  # L03c: „FREIGABE“ nur, wenn Regel erfüllt UND der Status in der DBOM FREIGABE ist
+        rel = "FREIGABE" if rule_ok and d["module"].get("release_status") == "FREIGABE" else "ÜBERARBEITUNG"
         n_ok = sum(c == "check-pass" for _, c, _ in rows_qa); n_part = sum(c == "check-part" for _, c, _ in rows_qa)
         sec8 = ("> **Automatisch erzeugt** aus den Gate-Zellen von `m%s.html` (`qa/sync_module.py`, L49). Nicht von Hand ändern.\n\n"
                 "| Gate | Status | Begründung |\n|---|---|---|\n%s\n\n"

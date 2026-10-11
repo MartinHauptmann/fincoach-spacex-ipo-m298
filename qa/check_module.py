@@ -794,6 +794,22 @@ def main():
             if nmin < 2 and re.search(r"übereinstimmend|mehreren (?:Medien)?bericht", m.group(2), re.I):
                 l82c.append(f"Modal {ids[0] if ids else '?'}: Mehrzahl ohne zweite Quelle")
         report("L82c Freigabeumfang = caveat", BLOCKER, not l82c, "; ".join(l82c[:4]) if l82c else "Freigabeumfang und Quellenzahl stimmen mit den caveats überein")
+        # L76e · ein Claim mit Beta/Erprobung/in Entwicklung trägt einen qualifier
+        l76e = [f["id"] for f in F if re.search(r"\bBeta\b|Erprobung|in Entwicklung", f["claim"]) and not f.get("qualifier")]
+        report("L76e Einschränkung als qualifier", BLOCKER, not l76e, "ohne qualifier: " + ", ".join(l76e) if l76e else "alle Einschränkungen als qualifier geführt")
+        # L85 · Vergleichstabelle: gleiche Quellenstufe ⇒ gleiches Verdict (Neutralität, C4)
+        stier = {x["id"]: x.get("tier") for x in dbom["sources"]}
+        l85 = []
+        for tb in re.finditer(r'<table\b[^>]*data-source="([^"]+)"', html):
+            ids = [i for i in tb.group(1).split() if i in facts]
+            byt = {}
+            for i in ids:
+                byt.setdefault(stier.get(facts[i]["source_id"]), set()).add(facts[i]["verdict"])
+            l85 += [f"Stufe {t_}: {', '.join(sorted(v))}" for t_, v in byt.items() if len(v) > 1]
+        report("L85 Vergleich mit gleichen Maßstäben", BLOCKER, not l85, "; ".join(l85[:3]) if l85 else "gleiche Quellenstufe, gleiches Verdict in Vergleichstabellen")
+        # L19c · Rechtsrahmen-Fakten stützen sich auf eine Primärquelle (Sekundärquellen nur ergänzend)
+        l19c = [f["id"] for f in F if f["class"] == "REGULATORY_FRAMEWORK" and stier.get(f["source_id"]) != "primary"]
+        report("L19c Recht mit Primärquelle", BLOCKER, not l19c, "Hauptquelle nicht primär: " + ", ".join(l19c) if l19c else "Rechtsrahmen-Fakten mit Primärquelle")
         report("L26c Offen-Punkt bindet Fakten", BLOCKER, not l26c, "; ".join(l26c[:3]) if l26c else "Offen-Punkte zu Kontraktdaten gebunden (L26 greift)")
         # L64/L67 · nur geltendes Recht: normalisiert, inkl. JS-Inhalte, Attribute und Prompt
         OLD_LAW = (r"\ba\.\s?f\.|alte[nr]? fassung|\baufgehoben\b|aufhebung|altjahre|altf[aä]ll|offene[nr]? fälle|§\s?52 abs\.\s?28|bis zur abschaffung"
@@ -1034,7 +1050,16 @@ def main():
         report("L03 QA-Score", BLOCKER, bool(shown) and all(float(s.replace(",", ".")) == pct for s in shown), f"Zellen {pts}/{n} = {pct} %; Text: {', '.join(shown) or 'nicht gebunden'}")
         fails = [lab for lab, cls in t.qa_rows if "check-pass" not in cls]
         badge = "FREIGABE" if not [l for l in fails if l.startswith("C")] and pct >= 90 else "ÜBERARBEITUNG"
-        report("L03b Freigabestatus", BLOCKER, badge in html.upper(), f"Regel ergibt {badge}")
+        # L03b/L03c · Freigabestatus exakt: DBOM-Status ist die Quelle; jede Statusangabe auf Seite und in der Analyse stimmt überein,
+        # FREIGABE nur, wenn die Regel (alle C ✓, Score ≥ 90 %) erfüllt ist
+        st_db = {"UEBERARBEITUNG": "ÜBERARBEITUNG"}.get(dbom["module"].get("release_status", ""), dbom["module"].get("release_status", "")) if dbom else ""
+        found = [("Seite", x.upper()) for x in re.findall(r"Freigabe(?:status)?:\s*(Überarbeitung|Freigabe)\b", html, re.I)]
+        found += [("JSON-LD", {"UEBERARBEITUNG": "ÜBERARBEITUNG"}.get(x, x)) for x in re.findall(r'"release_status": "(\w+)"', html)]
+        found += [("Analyse", x or y) for x, y in re.findall(r"\*\*Freigabeempfehlung:\s*(ÜBERARBEITUNG|FREIGABE)|Freigabeempfehlung \|\s*\*\*(ÜBERARBEITUNG|FREIGABE)", md)] if md else []
+        l03 = [f"{w}: {x} ≠ {st_db}" for w, x in found if x != st_db]
+        if st_db == "FREIGABE" and badge != "FREIGABE":
+            l03.append("Status FREIGABE, Regel ergibt ÜBERARBEITUNG")
+        report("L03b Freigabestatus", BLOCKER, bool(st_db) and len(found) >= 3 and not l03, "; ".join(l03[:4]) if l03 else f"Status {st_db} an {len(found)} Stellen einheitlich; Regel ergibt {badge}")
     open_gates = set(re.findall(r'<li[^>]*data-gate="([CQ]\d+)"', html))
     passed = {lab.split()[0] for lab, cls in t.qa_rows if "check-pass" in cls}
     clash = sorted(open_gates & passed)

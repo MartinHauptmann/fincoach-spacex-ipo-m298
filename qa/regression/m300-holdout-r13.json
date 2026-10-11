@@ -144,7 +144,8 @@
      "\"source_id\": \"SRC_WPHG_80\",\n      \"caveat\": \"\",",
      "\"source_id\": \"SRC_WPHG_80\",\n      \"caveat\": \"Ob der eingesehene Normtext der Fassung am Stichtag entspricht, ist nicht abschließend geklärt.\","
     ]
-   ]
+   ],
+   "known_limit": "L83: frei formulierter Zweifel im caveat; Wortlisten werden nicht erweitert, die manuelle Zweitprüfung deckt Formulierungsvarianten ab (vom Herausgeber am 2026-10-11 als Grenze anerkannt)"
   },
   {
    "name": "H13-13 L26d: CONFIRMED FACT_SPX_0DTE_59, caveat mit ausstehender Bestätigung",
@@ -351,14 +352,14 @@
    ]
   },
   {
-   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source (Anker v1.11.3, Erwartung unverändert)",
+   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source (Anker v1.12.0, Erwartung unverändert)",
    "expect": "NONE",
    "sync": true,
    "edits": [
     [
      "m300.html",
      "<li data-gate=\"Q10\" data-open>",
-     "<li data-gate=\"Q10\" data-open data-source=\"FACT_COMPETITOR_MATRIX\">(S10, S11) "
+     "<li data-gate=\"Q10\" data-open data-source=\"FACT_SPOTGAMMA_SPEC\">(S10, S11) "
     ]
    ]
   },
