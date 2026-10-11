@@ -1260,6 +1260,12 @@
       "event": "Sechzehnte Zweitprüfung eingearbeitet: K6 je Verdict (L27f), keep_reason FACT_OS_ISSUER, Szenarien ohne Konfidenz (confidence null, L86), L85b über alle Tabellenbindungen, Kernfokus-Zeile aus Claims, Handelsanbindungen statt Broker, Kostenzeile Eurex n. v., Fazit-Hinweis MBO n. v.; Herausgeber-Entscheidungen: TWS „aggregiertes Greek-Exposure nur für eigene Positionen“, Disclaimer Knock-outs n. v., Datenschutz nur Art. 6 Abs. 1 lit. f; C4 und Q7 ✓",
       "qa_score_pct": 92.1,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Siebzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): keine Freigabe; C4 (pauschales MEDIEN-Kennzeichen in der Matrix-Info-Box) und Q7 (Glossar-Stufe und S10 „Größe“ zu Knock-outs trotz n. v.) auf ◐",
+      "qa_score_pct": 86.8,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
