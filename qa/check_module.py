@@ -740,6 +740,44 @@ def main():
             l27d += [f"{g[0]}: {n}" for n in re.findall(r"(?<![\w.,/])(?<!\d-)\d+(?:[.,]\d+)*(?:-\d{2}-\d{2})?(?![\w])", gt) if n not in hn]
             l27d += [f"{g[0]}: „{w}“" for w in re.findall(r"\w*(?:schuldverschreibung|grenze|beschränk|rücktrag|vortrag|ausgeschlossen|bußgeld|pflicht)\w*", gt, re.I) if w.lower() not in hay.lower()]
         report("L27d Glossar-Fakten im Claim", BLOCKER, not l27d, "nicht im Claim: " + "; ".join(l27d[:4]) if l27d else "Glossar-Angaben mit Fakt stehen im Claim")
+        # L27e · kein Verdict-Kennzeichen schwächer als das schwächste Verdict der Fakten im innersten gebundenen Element
+        WEAK = {"UNGEPRÜFT": "UNVERIFIED", "MEDIEN": "MEDIA_REPORT", "SCENARIO": "SCENARIO_PROJECTION"}
+        l27e = []
+        for b in re.finditer(r'<span class="dbom-class-badge">(UNGEPRÜFT|MEDIEN|SCENARIO)</span>', html):
+            opened = [o for o in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html[:b.start()]) if b.start() < o.end() + len(element_inner(html, o))]
+            if opened:
+                ids = [i for i in opened[-1].group(2).split() if i in facts]
+                if ids and not any(facts[i]["verdict"] == WEAK[b.group(1)] for i in ids):
+                    l27e.append(f"{b.group(1)} an {' '.join(ids)}")
+        report("L27e Kennzeichen = Verdict", BLOCKER, not l27e, "zu schwaches Kennzeichen: " + "; ".join(l27e[:4]) if l27e else "Kennzeichen entsprechen den Verdicts")
+        # L82b · Volltext-Belege ohne Snippet-Reste; ohne Snippet-Belege kein Snippet-Status im Präsens
+        l82b = [f"{f['id']}: caveat/keep_reason nennt Snippet" for f in F if f.get("evidence") == "fulltext" and re.search(r"snippet|suchtreffer", f.get("caveat", "") + " " + f.get("keep_reason", ""), re.I)]
+        if not any(f.get("evidence") == "snippet" for f in F):
+            for name, txt in (("honest_disclosure", dbom.get("honest_disclosure", "")), ("Analyse", md), ("Seite", re.sub(r"<[^>]+>", " ", html))):
+                l82b += [f"{name}: „{x[:40]}“" for x in re.findall(r"[^.]*\b(?:stützen|beruhen|stützt|beruht) sich (?:\S+ ){0,4}auf (?:Suchtreffer|Snippet)[^.]*", txt)]
+                l82b += [f"{name}: „{x}“" for x in re.findall(r"(?:steht|stehen) (?:\S+ ){0,4}(?:Snippet|Volltextabgleich)\S*(?: \S+){0,3} aus|Volltextabgleich steht aus", txt)]
+        report("L82b Belegstufe ohne Reste", BLOCKER, not l82b, "; ".join(l82b[:4]) if l82b else "keine Snippet-Reste bei Volltext-Belegen")
+        # L76d · Einschränkungen (qualifier) des Fakts erscheinen in jedem gebundenen Element, das den Gegenstand nennt
+        l76d = []
+        for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
+            txt = re.sub(r"<[^>]+>", " ", element_inner(html, m))
+            for i in m.group(2).split():
+                q = facts.get(i, {}).get("qualifier")
+                if q and re.search(q["subject"], txt) and not any(re.search(t_, txt, re.I) for t_ in q["terms"]):
+                    l76d.append(f"{i}: „{q['subject']}“ ohne {'/'.join(q['terms'])}")
+        for r in (re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', js_ks.group(1), re.M) if js_ks else []):
+            row = json.loads(r)
+            for i in row[6].split():
+                q = facts.get(i, {}).get("qualifier")
+                if q and re.search(q["subject"], row[5]) and not any(re.search(t_, row[5], re.I) for t_ in q["terms"]):
+                    l76d.append(f"{row[0]}/{i}: ohne {'/'.join(q['terms'])}")
+        report("L76d Einschränkungen sichtbar", BLOCKER, not l76d, "; ".join(sorted(set(l76d))[:4]) if l76d else "Einschränkungen (Beta, Erprobung …) überall genannt")
+        # L84 · jede Marke aus dem Inventar, die auf Seite, in Tooltips oder Quelltiteln vorkommt, steht im Markenhinweis
+        marks = json.loads((Path(__file__).parent / "fachbegriffe.json").read_text(encoding="utf-8")).get("marks", [])
+        notice = re.search(r"<strong>Marken:</strong>(.*?)</p>", html, re.S)
+        corpus = html + " " + json.dumps(dbom, ensure_ascii=False)
+        l84 = [mk for mk in marks if re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), corpus.replace(notice.group(0), "") if notice else corpus) and not (notice and re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), notice.group(1)))]
+        report("L84 Markenhinweis vollständig", BLOCKER, bool(notice) and bool(marks) and not l84, "fehlt im Markenhinweis: " + ", ".join(l84[:6]) if l84 else (f"{len(marks)} Inventar-Marken geprüft" if notice else "kein Markenhinweis"))
         report("L26c Offen-Punkt bindet Fakten", BLOCKER, not l26c, "; ".join(l26c[:3]) if l26c else "Offen-Punkte zu Kontraktdaten gebunden (L26 greift)")
         # L64/L67 · nur geltendes Recht: normalisiert, inkl. JS-Inhalte, Attribute und Prompt
         OLD_LAW = (r"\ba\.\s?f\.|alte[nr]? fassung|\baufgehoben\b|aufhebung|altjahre|altf[aä]ll|offene[nr]? fälle|§\s?52 abs\.\s?28|bis zur abschaffung"

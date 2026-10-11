@@ -5,6 +5,9 @@ import json, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 
 root = Path(__file__).resolve().parent.parent
+if len(sys.argv) > 2:  # L80b: mehrere Dateien nacheinander, Exit ≠ 0, wenn eine Datei Abweichungen hat
+    rc = [subprocess.run([sys.executable, __file__, f]).returncode for f in sys.argv[1:]]
+    sys.exit(1 if any(rc) else 0)
 cases = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
 page = cases["page"]
 ignore = shutil.ignore_patterns(".git", "node_modules", "__pycache__")

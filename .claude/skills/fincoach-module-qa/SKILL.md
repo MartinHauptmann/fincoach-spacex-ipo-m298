@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L83 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L84 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -168,6 +168,14 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L83:** Kennzeichen zählen nur sichtbar; Zeitangaben brauchen eine Bindung; Matrix-Textzellen stehen im
   Claim-Abschnitt ihres Anbieters. Wortlisten werden nicht weiter ausgebaut; Formulierungsvarianten deckt die
   manuelle Zweitprüfung ab.
+- **L27e:** Kein Verdict-Kennzeichen ist schwächer als das Verdict der gebundenen Fakten (nach Hochstufung entfernen).
+- **L82b:** Bei Belegstufe `fulltext` keine Snippet-Reste in caveat, keep_reason, honest_disclosure oder Analyse.
+- **L76d:** Einschränkungen eines Fakts (`qualifier`: Beta, Erprobung, in Entwicklung) erscheinen überall, wo sein
+  Gegenstand genannt wird.
+- **L84:** Marken-Inventar `marks` in `qa/fachbegriffe.json` pflegen; jede vorkommende Inventar-Marke steht im
+  Markenhinweis.
+- **L80b:** Nach jeder Änderung alle Regressionsdateien laufen lassen
+  (`python3 qa/run_regression.py qa/regression/*.json`); ANKER FEHLT ist ein Fehler.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

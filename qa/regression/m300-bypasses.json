@@ -1822,6 +1822,78 @@
      "\"id\": \"SRC_DB_CLEARING\",\n      \"ref\": \"S56\",\n      \"tier\": \"vendor\""
     ]
    ]
+  },
+  {
+   "name": "L27e UNGEPRÜFT an belegtem Fakt",
+   "expect": "L27e",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>Kostenausweis</td>",
+     "<td>Kostenausweis <span class=\"dbom-class-badge\">UNGEPRÜFT</span></td>"
+    ]
+   ]
+  },
+  {
+   "name": "L82b caveat nennt Snippet bei Volltext-Beleg",
+   "expect": "L82b",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"caveat\": \"Herstellerangabe (Changelog).\"",
+     "\"caveat\": \"Nur über Changelog-Snippet belegt.\""
+    ]
+   ]
+  },
+  {
+   "name": "L82b Präsens-Snippet-Status in honest_disclosure",
+   "expect": "L82b",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "Einzelne Fakten beruhen auf dem Quelltext",
+     "Die meisten Fakten stützen sich auf Suchtreffer-Snippets. Einzelne Fakten beruhen auf dem Quelltext"
+    ]
+   ]
+  },
+  {
+   "name": "L76d MBO ohne Erprobung",
+   "expect": "L76d",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Footprint, MBO-Bundle (Erprobung für Ultra, Rithmic)",
+     "Footprint, MBO-Bundle (Rithmic)"
+    ]
+   ]
+  },
+  {
+   "name": "L84 Marke fehlt im Markenhinweis",
+   "expect": "L84",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "TRACE, IBKR,",
+     "IBKR,"
+    ]
+   ]
+  },
+  {
+   "name": "NONE Markenhinweis mit zusätzlicher Marke",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "TRACE, IBKR,",
+     "TRACE, IBKR, Xetra,"
+    ]
+   ]
   }
  ]
 }

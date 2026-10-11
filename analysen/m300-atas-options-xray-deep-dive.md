@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.11.1 (Entwurf) |
+| Version | 1.11.2 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -21,11 +21,10 @@
 > keine individuelle Prüfung durch Steuerberater oder Rechtsanwalt.
 
 > **Methodischer Vorbehalt:** Die Recherche lief über eine Netzwerkumgebung, die den direkten Abruf der
-> meisten Primärquellen gesperrt hat, darunter gesetze-im-internet.de, recht.bund.de, eurex.com, atas.net und die Anbieterseiten. Die Befunde beruhen auf Suchtreffern, die
-> auf diese Primärquellen verweisen. Die URLs sind im Quellenverzeichnis aufgeführt. Das Verdict CONFIRMED
-> steht hier für einen Snippet-Beleg: Ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage (DBOM-Feld
-> `evidence: snippet`). Trägt kein Suchtreffer die Aussage, gilt ein schwächeres Verdict oder **[N. V.]**.
-> Der Herausgeber hat am 2026-10-11 alle Belege am Original abgeglichen (DBOM-Feld `evidence: fulltext`).
+> meisten Primärquellen gesperrt hat, darunter gesetze-im-internet.de, recht.bund.de, eurex.com, atas.net und die Anbieterseiten.
+> Recherchiert wurde deshalb über Suchtreffer, die auf diese Primärquellen verweisen; die URLs stehen im
+> Quellenverzeichnis. Der Herausgeber hat am 2026-10-11 alle Belege am Original abgeglichen; seither tragen alle
+> nicht szenariobasierten Fakten die Belegstufe „Volltext“ (DBOM-Feld `evidence: fulltext`).
 
 > **Aufbau:** Diese Analyse ist eine faktgebundene Kurzfassung. Jede Angabe nennt die Fakt-ID ihres Belegs aus
 > `provenance/m300.dbom.json` mit Verdict und Konfidenz; Zitate des Quelltexts sind als solche gekennzeichnet.
@@ -190,7 +189,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - X-Ray zeigt aus SPX-Optionsdaten abgeleitete Kennzahlen auf ES, MES und SPY an. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
 - Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events. (Einschätzung, gestützt auf (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7))
 - Für Optionen fehlt eine native Ausführung. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
-- Positionierung plus MBO in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal. (Einschätzung, gestützt auf (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
+- Positionierung plus MBO (derzeit zur Erprobung) in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal. (Einschätzung, gestützt auf (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
 
 **◐ Relativiert**
 
@@ -328,7 +327,7 @@ Footprint-Daten (Modul 4).
 
 ## 5 · Quellenverzeichnis
 
-Abgerufen 2026-10-05 bis 2026-10-11, überwiegend über Suchtreffer-Snippets (siehe Methodischer Vorbehalt). Das
+Abgerufen 2026-10-05 bis 2026-10-11, recherchiert über Suchtreffer und vom Herausgeber am 2026-10-11 am Original abgeglichen (siehe Methodischer Vorbehalt). Das
 Verzeichnis ist ein Auszug aus `provenance/m300.dbom.json` (Lehre L13/L14) und wird von dort erzeugt, nicht von
 Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 
@@ -383,7 +382,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.11.1,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.11.2,
 36 Fakten, 45 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -429,10 +428,9 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
-- Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)
-- K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen
+- BaFin-Turbo-Studie: Freigabeumfang klären (Original der Studie eingesehen oder nur Medienbericht?)
+- Freigabevermerk und caveat von FACT_BAFIN_STUDY in Einklang bringen (L82c)
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
-- Markenhinweis gegen alle genannten Marken (Seite, Tooltips, Quellenliste) unabhängig abgleichen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
 
@@ -448,7 +446,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C2 Keine Anlageempfehlung (MAR) | ✓ | – |
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
 | C4 Neutralität / Interessenkonflikte | ✓ | Keine Interessenkonflikte (Erklärung des Herausgebers vom 2026-10-11) |
-| C5 Marken beschreibend | ◐ | Markenliste umfasst auch SPDR, SPY, CME, E-mini, dxFeed und IQFeed; Vollständigkeit unabhängig bestätigen |
+| C5 Marken beschreibend | ✓ | Markenhinweis gegen Marken-Inventar geprüft (L84) und in der Zweitprüfung vom 2026-10-11 vollständig abgeglichen |
 | C6 UWG-konforme Begriffe | ✓ | Begriffe neutral; Wettbewerberangaben vom Herausgeber am 2026-10-11 am Original geprüft |
 | C7 Ausgewogene Risikodarstellung | ✓ | – |
 | C8 Regulatorische Bezüge belegt | ✓ | § 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft |
@@ -459,12 +457,12 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q4 Provenienz je Fakt | ✓ | Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82) |
 | Q5 Quellenqualität | ✓ | Primärquellen vom Herausgeber am 2026-10-11 am Original geprüft (Volltext) |
 | Q6 Vollständigkeit | ◐ | Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen |
-| Q7 Widerspruchsfreiheit | ◐ | Claims über k/k_differs an K-Zeilen gebunden (L61); ✓ erst nach Messung (L10) |
+| Q7 Widerspruchsfreiheit | ◐ | Widersprüche der 14. Zweitprüfung behoben; offen: FACT_BAFIN_STUDY Freigabeumfang vs. caveat (L82c, Klärung durch Herausgeber) |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
-| Q9 Keine Überzeichnung / Halluzination | ◐ | Allaussage S11 mit n. v.-Fall (L06b), Fazit-Wertungen gekennzeichnet (L62); ✓ erst nach Zweitprüfung (L10) |
+| Q9 Keine Überzeichnung / Halluzination | ◐ | Überzeichnungen der 14. Zweitprüfung behoben; offen: Freigabeumfang FACT_BAFIN_STUDY (L82c) |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 13 × ✓ + 6 × ◐ = 16 von 19 Punkten = **84,2 %**.
+**Gesamtscore:** 14 × ✓ + 5 × ◐ = 16,5 von 19 Punkten = **86,8 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
@@ -486,7 +484,7 @@ Alle Angaben ohne Gewähr.
 
 **Marken-Hinweis.** ATAS, Options X-Ray, OptionsDepth, SpotGamma, HIRO, MenthorQ, Volland, Bookmap,
 Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, DAX, EURO STOXX 50, S&P 500, Nasdaq-100,
-Gamma Cockpit, CME, E-mini, SPDR, SPY, dxFeed, IQFeed, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer jeweiligen Inhaber. Sie werden hier rein
+Gamma Cockpit, CME, E-mini, SPDR, SPY, SPXW, dxFeed, IQFeed, TRACE, IBKR, OptionTrader, Options Chain Suite, Options Board, Strategy Analyzer, MBO-Bundle, Ultra, EOBI, Extended Market Data Service, CMS, ideas, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer jeweiligen Inhaber. Sie werden hier rein
 beschreibend genannt. Es besteht keine Verbindung zu den Inhabern und keine Billigung durch sie.
 
 **Interessenkonflikte.** Es bestehen keine Interessenkonflikte, insbesondere keine Affiliate-, Partner- oder

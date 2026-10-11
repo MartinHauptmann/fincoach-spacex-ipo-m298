@@ -2,7 +2,7 @@
 
 **Thema:** ATAS Options X-Ray, Dealer-Hedging-Analytik, Eurex-Börsenoptionen vs. verbriefte Derivate im DACH-Raum
 und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
-**Prompt-Version:** 1.7.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-11 (Lehren L03–L83 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
+**Prompt-Version:** 1.7.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-11 (Lehren L03–L84 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
 **Modul-ID:** M300 ist ein Platzhalter und kann frei angepasst werden
 
 ---
@@ -104,8 +104,9 @@ K3  GEX-PRÄMISSE: Die Vorzeichenkonvention „Dealer long Calls / short Puts“
     beobachtbar, Open Interest nur T+1, Spread- und Kombi-Trades, Overwriting-Programme,
     Dispersion, 0DTE-Volumen ohne OI-Spur.
 K4  EMITTENTEN-HEDGING BEI OPTIONSSCHEINEN: Die These „keine Hedging-Spuren im FDAX-Orderbuch“ ist
-    zu präzisieren. Emittenten hedgen ihr Nettorisiko nach dem Netting AUCH börslich (FDAX, ODAX,
-    Kassamarkt). Der Effekt ist also nicht null, sondern im Verhältnis zum Gesamtmarkt klein,
+    zu präzisieren. Emittenten sichern ihr Nettorisiko nach dem Netting laut Medienangaben dynamisch ab,
+    auch über den Basiswert; eine Primärquelle zum Hedging über FDAX/ODAX liegt nicht vor. Der Effekt ist
+    also vermutlich nicht null, sondern im Verhältnis zum Gesamtmarkt klein,
     zeitlich verschmiert und aus öffentlichen Daten nicht zurechenbar. Die Formulierung „versagt
     systembedingt“ ist entsprechend abzuschwächen oder zu quantifizieren.
 K5  ATAS-PRODUKTANGABEN: Anzahl und Namen der Indikatoren der Options X-Ray Suite, Datenquelle
