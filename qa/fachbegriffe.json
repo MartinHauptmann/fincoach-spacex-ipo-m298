@@ -42,7 +42,8 @@
     "ODXS",
     "SPX",
     "NDX",
-    "0DTE"
+    "0DTE",
+    "SPY"
   ],
   "known": [
     "AI",
@@ -113,6 +114,8 @@
     "VENDOR",
     "VIII",
     "VIX",
-    "WESENTLICH"
+    "WESENTLICH",
+    "ORATS",
+    "DDV"
   ]
 }

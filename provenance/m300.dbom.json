@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.10.3",
+    "version": "1.10.4",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -36,9 +36,9 @@
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.9,
-      "claim": "Verluste aus Termingeschäften im Privatvermögen unterliegen keiner gesonderten Verlustverrechnungsbeschränkung; es gelten die allgemeinen Regeln für Einkünfte aus Kapitalvermögen (§ 20 Abs. 6 EStG in der Fassung des JStG 2024, BGBl. 2024 I Nr. 387).",
+      "claim": "Verluste aus Termingeschäften im Privatvermögen unterliegen keiner gesonderten Verlustverrechnungsbeschränkung; es gelten die allgemeinen Regeln für Einkünfte aus Kapitalvermögen (§ 20 Abs. 6 EStG in der Fassung des JStG 2024, BGBl. 2024 I Nr. 387). Daraus folgt: Börsengehandelte Optionen und Optionsscheine werden insoweit nicht unterschiedlich behandelt.",
       "source_id": "SRC_BGBL_JSTG2024",
-      "caveat": "",
+      "caveat": "Die Gleichbehandlung von Optionen und Optionsscheinen ist eine Schlussfolgerung: Ohne Sonderregel gelten für beide die allgemeinen Regeln.",
       "period": "Rechtsstand 2026-10-05",
       "supporting_sources": [
         "SRC_BT_DRS",
@@ -208,7 +208,7 @@
       "verdict": "CONFIRMED",
       "class": "VENDOR_CLAIM",
       "confidence": 0.8,
-      "claim": "Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan).",
+      "claim": "Optionen sind in ATAS derzeit nicht handelbar; Options Board und Strategy Analyzer als Beta (Ultra-Plan). Laut Changelog sind ein MBO-Bundle und eine Optionsanalyse verfügbar.",
       "source_id": "SRC_ATAS_LEARN",
       "caveat": "",
       "period": "Herstellerdoku Stand 2026-10-05",
@@ -275,7 +275,10 @@
       "claim": "ODAX: 5 € je Indexpunkt, europäisch, Barausgleich, Basiswert DAX-Index; Micro-DAX-Optionen (ODXS) sind gelistet.",
       "source_id": "SRC_EUREX_SPECS",
       "caveat": "",
-      "period": "Produktseite Stand 2026-10-05"
+      "period": "Produktseite Stand 2026-10-05",
+      "values": {
+        "ODAX": "5"
+      }
     },
     {
       "id": "FACT_EUREX_OI",
@@ -294,8 +297,11 @@
       "confidence": 0.85,
       "claim": "OESX (EURO-STOXX-50-Indexoptionen): 10 € je Indexpunkt, europäisch, Barausgleich.",
       "source_id": "SRC_EUREX_OESX_SPEC",
-      "caveat": "Über Suchtreffer auf die Primärquelle belegt; Abgleich am Original offen (Offen-Punkt Q4).",
-      "period": "Stichtag 2026-10-05 (Kontraktspezifikation abgerufen 2026-10-11)"
+      "caveat": "Über Suchtreffer auf die Primärquelle belegt (Volltextabruf gesperrt).",
+      "period": "Stichtag 2026-10-05 (Kontraktspezifikation abgerufen 2026-10-11)",
+      "values": {
+        "OESX": "10"
+      }
     },
     {
       "id": "FACT_EUREX_DAILY_LAUNCH",
@@ -326,7 +332,7 @@
       "verdict": "MEDIA_REPORT",
       "class": "MEDIA_REPORT",
       "confidence": 0.65,
-      "claim": "Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz (X-Ray 1 Min.; MenthorQ EOD und alle 5 Min.; Volland EOD bis alle 5 Min.), Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS.",
+      "claim": "Anbieterangaben (Stand 2026-10-05): SpotGamma – Gamma-Levels und Research, HIRO/TRACE intraday, Levels vor Eröffnung, GEX ja, Vanna als Modell, Charm n. v., keine eigene Ausführung; MenthorQ – Gamma-Levels, Modelle, Ausbildung, Optionsdaten EOD und alle 5 Min., GEX ja, Vanna und Charm n. v., Ausführung über Partnerplattformen, Eurex-GEX n. v.; Volland – Notional-Greeks des Dealer-Buchs, Optionsdaten EOD bis alle 5 Min., Gamma, Vanna und Charm, Ausführung n. v.; Bookmap – Orderbuch-Heatmap, keine nativen Optionsdaten, Greeks nur über Add-ons, Heatmap und MBO via Rithmic, eigene Ausführung; IBKR TWS – Broker und Portfoliorisiko, Echtzeit-Optionsdaten (Abo), Greeks nur für eigene Positionen, Abdeckung global inkl. ODAX/OESX, eigene Ausführung.",
       "source_id": "SRC_SPOTGAMMA",
       "caveat": "Snippets von Anbieter- und Drittseiten; Felder ohne Beleg als n. v.",
       "period": "Stand 2026-10-05",
@@ -401,7 +407,7 @@
       "confidence": 0.8,
       "claim": "Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Indexoptionen: letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember).",
       "source_id": "SRC_CBOE_SPX",
-      "caveat": "Spezifikationsseiten ohne Versionsdatum; vor Veröffentlichung am aktuellen Regelwerk gegenlesen.",
+      "caveat": "Spezifikationsseiten ohne Versionsdatum; über Suchtreffer auf die Primärquellen belegt.",
       "period": "Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11)",
       "values": {
         "SPX": "100",
@@ -418,9 +424,9 @@
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.8,
-      "claim": "Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). Optionsscheine und Knock-outs sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab.",
+      "claim": "Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). Optionsscheine sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab.",
       "source_id": "SRC_BAFIN_EUREX_CLEARING",
-      "caveat": "Über Suchtreffer auf die Primärquelle belegt; Abgleich am Original offen (Offen-Punkt Q4).",
+      "caveat": "Über Suchtreffer auf die Primärquellen belegt (Volltextabruf gesperrt); der Optionsschein-Teil stützt sich auf die DDV-Muster-Produktinformation.",
       "period": "Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11)",
       "supporting_sources": [
         "SRC_DB_CLEARING",
@@ -622,7 +628,7 @@
       "id": "SRC_CMS",
       "ref": "S36",
       "tier": "secondary",
-      "title": "CMS · Aufhebung der Verlustabzugsbeschränkung (Sekundärquelle)",
+      "title": "CMS · Verlustverrechnung bei Termingeschäften nach dem JStG 2024 (Sekundärquelle)",
       "url": "https://cms.law/de/deu/legal-updates/Ade-Verlustabzugsbeschraenkung-fuer-Termingeschaefte-Gesetzgeber-bereinigt-Verfassungswidrigkeit"
     },
     {
@@ -719,14 +725,14 @@
     {
       "id": "SRC_DB_CLEARING",
       "ref": "S56",
-      "tier": "vendor",
+      "tier": "secondary",
       "title": "Deutsche Börse · Clearing: zentrale Gegenpartei und Sicherheiten (Margin)",
       "url": "https://www.deutsche-boerse-cash-market.com/resource/blob/244872/f8a90e944e2f40c38cabcf6420dde59c/data/db-aktuell-clearing-may2018_de.pdf.pdf"
     },
     {
       "id": "SRC_DDV_OS_MUSTER",
       "ref": "S57",
-      "tier": "vendor",
+      "tier": "secondary",
       "title": "Deutscher Derivate Verband · Muster-Produktinformation Call-Optionsschein",
       "url": "https://www.derivateverband.de/DE/MediaLibrary/Document/Muster/Call%20Optionsschein-d.pdf"
     },
@@ -871,6 +877,12 @@
       "date": "2026-10-11",
       "event": "Tests L76–L79, L26c ergänzt und L60/L64/L65/L06b/L27c/L61/L62/L63/L66/L74/L75 gegen die Umgehungen der elften Zweitprüfung gehärtet; Regressionslauf qa/run_regression.py: 60/60 Fälle, Holdout 10/10. Inhalt: Matrix-Zahlen ohne Beleg gestrichen, Datenfrequenz in den Claim der Matrix aufgenommen, „Sondergrenze“ → „gesonderte Beschränkung“, KPI 1 Min., Offen-Punkt Q4 allgemein gefasst, caveats OESX/CCP",
       "qa_score_pct": 68.4,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Zwölfte Zweitprüfung (v1.10.3) eingearbeitet: caveats ohne fakt-spezifischen offenen Abgleich (L26d), Matrix-Claim je Anbieter ohne Selbstverweis, ATAS-Zellen an Herstellerfakten, X-Ray-Fazitpunkt auf den Claim gekürzt, FACT_CCP_ISSUER ohne Knock-out-Teil, DDV/Deutsche Börse als secondary, JStG-Claim um Gleichbehandlung (Schlussfolgerung) ergänzt, Gamma-Regime-Text im Konjunktiv, Überschriften neutral, OPRA-Glossar gebunden, Markenhinweis ergänzt; C6 auf ◐. Tests: Umgehungen der Zweitprüfung und Negativkontrollen aufgenommen (150/150); unabhängiger Holdout r12 einmalig 31/40, nach Korrektur 37/40. Korrektur zum vorigen Eintrag: „Härtung nachgewiesen“ traf nicht zu",
+      "qa_score_pct": 65.8,
       "release": "ÜBERARBEITUNG"
     }
   ],

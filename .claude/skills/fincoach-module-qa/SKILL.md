@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L80 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L81 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -154,6 +154,13 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   greift L26 und die Fakten sind nicht CONFIRMED. Allgemeine Volltext-Abgleiche stehen als allgemeiner Offen-Punkt.
 - **L80:** Testhärtung wird gegen die Umgehungen der Zweitprüfung und gegen ungesehene Holdout-Fälle nachgewiesen, nie
   nur gegen selbst gewählte Injektionen. Begründungsfelder (`keep_reason`, `k_differs`) brauchen Inhalt und Bezug.
+- **L26d:** Ein CONFIRMED-Fakt nennt in caveat oder keep_reason keinen offenen Abgleich. Fakt-spezifische Zweifel
+  senken das Verdict; der allgemeine Volltextabgleich aller Snippet-Belege steht als allgemeiner Offen-Punkt.
+- **L76b:** Claims verweisen nie auf die Seite („Matrix“, „Tabelle“). Ein Vergleichs-Claim nennt die Werte je
+  Anbieter; Zahlen einer Matrixzelle stehen im Claim-Abschnitt ihres Anbieters.
+- **L19b:** Quellenstufe `vendor` nur für den Hersteller des beschriebenen Produkts; Rechtsrahmen nie mit vendor-Quelle.
+- **L81:** EINSCHÄTZUNG kennzeichnet Wertungen, nicht unbelegte Tatsachen. SCENARIO-Fließtext steht Satz für Satz im
+  Konjunktiv.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 
@@ -175,7 +182,9 @@ Q7 Widerspruchsfreiheit · Q8 Glossar · Q9 keine Überzeichnung/Halluzination �
 2b. **Regressionslauf (L80):** `python3 qa/run_regression.py qa/regression/mXXX-bypasses.json` und
    `… mXXX-holdout.json` → Exit 0. Jeder Fall muss vom *zuständigen* Test erkannt werden, nicht zufällig von einem
    anderen. Umgehungen aus jeder Zweitprüfung werden als Fälle in `mXXX-bypasses.json` übernommen; neue Holdout-Fälle
-   werden geschrieben, **bevor** die Tests angepasst werden, und danach nicht mehr verändert.
+   werden von einem separaten Agenten **ohne Einsicht in die Testskripte** geschrieben, in einem eigenen Commit **vor**
+   der Teständerung abgelegt, genau einmal gemessen und mit diesem Ergebnis berichtet. Negativkontrollen
+   (`expect: NONE`) gehören in jeden Satz. Fälle, die Text der Analyse-Spiegel ändern, laufen mit `sync: true`.
 3. **Manuelle Pflichtpunkte**, die kein Skript prüfen kann. Jeden einzeln abhaken und im Bericht nennen:
    - [ ] Jede Allaussage gegen die Quelltabelle gelesen (L06)
    - [ ] Formeln nachgerechnet und Zahlenbeispiel mit Probe (Q3)

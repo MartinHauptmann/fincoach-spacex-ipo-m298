@@ -1,6 +1,6 @@
 {
  "page": "m300.html",
- "source": "Elfte Zweitprüfung 2026-10-11 (fincoach-qa-reviewer)",
+ "source": "Umgehungen der Zweitprüfungen 11 und 12, eigene Fälle, ehemaliger Holdout r11; Negativkontrollen mit expect NONE",
  "cases": [
   {
    "name": "L65 Gedankenstrich em-dash K1—K12 (Hero)",
@@ -719,6 +719,1106 @@
      "m300.html",
      "K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen",
      "Nach dem Review angeglichene K-Verweise manuell gegenprüfen"
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H1 K-Verweis 'K-Punkt 11'",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "Siehe K11: Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H2 'Version 1.9.0' im Fließtext",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "Seit Version 1.9.0 gilt: Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H3 'vgl. Modul 301'",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "(vgl. Modul 301) Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H4 'Einzigartig ist' (Satzanfang)",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "Einzigartig ist die Integration. Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>."
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H5 keep_reason 'Tragend.'",
+   "expect": "L75",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\"",
+     "\"keep_reason\": \"Tragend.\""
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H6 'bis 2023 galt' im Fließtext",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "Bis 2023 galt eine andere Regel. Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H7 MES 10 im Glossar",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "SPX-Multiplikator 100 / ES 50 / MES 5",
+     "SPX-Multiplikator 100 / ES 50 / MES 10"
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H8 Zahl im gebundenen KPI geändert",
+   "expect": "L76|L17",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     ">0 von 5<",
+     ">0 von 7<"
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H9 Wertung 'erfreulich' im Fazit-Punkt",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>, was bedauerlich ist."
+    ]
+   ]
+  },
+  {
+   "name": "r11-holdout H10 FACT-ID-Tippfehler in Analyse",
+   "expect": "L77|L08|L05",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "`FACT_JSTG2024_REPEAL`",
+     "`FACT_JSTG2024_REPEALL`"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R01 'Schwestermodul'",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "Wie im Schwestermodul zur SpaceX-IPO gezeigt: Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R02 'M-299' mit Bindestrich",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "(siehe M-299) Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R03 'Erstfassung dieses Moduls'",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung.",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung. In der Erstfassung dieses Moduls stand hier ein Steuervorteil."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R04 'gegenüber dem Release 1.9'",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung.",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung. Gegenüber dem Release 1.9 neu gefasst."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R05 Link auf anderes Modul spacex-update.html",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<a href=\"impressum.html\"",
+     "<a href=\"spacex-update.html\" class=\"block mb-1\">SpaceX-Update</a>\n        <a href=\"impressum.html\""
+    ]
+   ]
+  },
+  {
+   "name": "r12 R06 QA-Verlauf 'neu gefasst und ergänzt'",
+   "expect": "L60",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "title=\"Kontraktdaten und Struktur Eurex/Optionsscheine belegt;",
+     "title=\"Kontraktdaten nach der Zweitprüfung neu gefasst und ergänzt; Struktur Eurex/Optionsscheine belegt;"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R07 '20 000 €' mit Leerzeichen, 'bis 2023', 'waren'",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung.",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung. Bis 2023 waren Verluste auf 20 000 € je Jahr begrenzt."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R08 Altrecht im Analyse-Disclaimer (Abschnitt 9)",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "Alle Angaben ohne Gewähr.",
+     "Alle Angaben ohne Gewähr. Die bis 2024 geltende Verlustgrenze von 20.000 € a. F. ist rückwirkend aufgehoben."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R09 Prompt 'rückwirkend aufgehoben'",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "Schritt A2: Steuerliche Aussagen",
+     "Schritt A2: Erwähne, dass die Verlustbeschränkung rückwirkend aufgehoben wurde (BVerfG-Vorlage). Steuerliche Aussagen"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R10 'gestrichen' + 'Jahressteuergesetz'",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung.",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung. Mit dem Jahressteuergesetz 2024 wurde die Verlustverrechnungsbeschränkung gestrichen."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R11 'EUR 20.000 … entfällt' (Währung vorn)",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung.",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung. Die Grenze von EUR 20.000 entfällt."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R12 DBOM-caveat 'Bis VZ 2023 … beschränkt'",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"caveat\": \"Keine Rechtsformempfehlung.\"",
+     "\"caveat\": \"Keine Rechtsformempfehlung. Bis VZ 2023 war die Verrechnung im Privatvermögen beschränkt.\""
+    ]
+   ]
+  },
+  {
+   "name": "r12 R13 '10 Kernaussagen' (Ziffer)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "prüfen neun Kernaussagen des Ausgangstexts",
+     "prüfen 10 Kernaussagen des Ausgangstexts"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R14 'K1–10'",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Faktencheck K1–K9:",
+     "Faktencheck K1–10:"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R15 'K-10'",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "(vgl. K-10) Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R16 'A1–A20'",
+   "expect": "L65",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Claim-Tabelle A01–A15;",
+     "Claim-Tabelle A1–A20;"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R17 Einzelverweis 'A17'",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "(Claim A17) Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R18 'Einzig ATAS'",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Snapshot je Minute, CBOE-Daten",
+     "Einzig ATAS zeigt SPX-Gamma im Futures-Chart. Snapshot je Minute, CBOE-Daten"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R19 'exklusiv bei ATAS'",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Snapshot je Minute, CBOE-Daten",
+     "Diese Kombination gibt es exklusiv bei ATAS. Snapshot je Minute, CBOE-Daten"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R20 'laut Matrix' als Freibrief (inhaltlich falsch: TWS Echtzeit)",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Eigene Ausführung bieten ATAS",
+     "ATAS ist laut Matrix der einzige Anbieter mit Echtzeit-Optionsdaten. Eigene Ausführung bieten ATAS"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R21 'Kein Wettbewerber'",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Snapshot je Minute, CBOE-Daten",
+     "Kein Wettbewerber bietet das. Snapshot je Minute, CBOE-Daten"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R22 'unverzichtbar' in Fakt-Punkt",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>; für Futures-Trader ist X-Ray unverzichtbar."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R23 'erfreulich' (Name von H9)",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>, erfreulich ist aber der Futures-Teil."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R24 'Unsere Empfehlung' (Substantiv)",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<div class=\"dep-box text-xs text-slate-400\"><span data-source=\"FACT_BAFIN_STUDY\">",
+     "<div class=\"dep-box text-xs text-slate-400\">Unsere Empfehlung für Privatanleger: Eurex-Optionen statt Turbos. <span data-source=\"FACT_BAFIN_STUDY\">"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R25 Wertung außerhalb des Fazits ('bessere Wahl')",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<div class=\"dep-box text-xs text-slate-400\"><span data-source=\"FACT_BAFIN_STUDY\">",
+     "<div class=\"dep-box text-xs text-slate-400\">Für Privatanleger sind Eurex-Optionen die klar bessere Wahl. <span data-source=\"FACT_BAFIN_STUDY\">"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R26 SCENARIO im Indikativ mit anderem Verb",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer Analyselücke",
+     "Eine Eurex-Erweiterung schließt die Analyselücke und verdrängt Optionsscheine"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R27 Roadmap als Tatsache ('ATAS führt … ein')",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Als Gestaltung käme ein halbautomatischer Vorschlag mit Bestätigung, Pre-Trade-Limits und Kill-Switch in Betracht",
+     "ATAS führt einen halbautomatischen Vorschlag mit Bestätigung, Pre-Trade-Limits und Kill-Switch ein"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R28 'ES-Kontrakt entspricht 20 USD'",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Die Basis SPX↔ES (Zinsen",
+     "Ein ES-Kontrakt entspricht 20 USD je Indexpunkt. Die Basis SPX↔ES (Zinsen"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R29 JS-Fallback ||20",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "MF=num('gF')||50",
+     "MF=num('gF')||20"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R30 KaTeX M_{\\text{ES}}=20",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "für Puts gilt",
+     "mit \\(M_{\\text{ES}}=20\\) für Puts gilt"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R31 OESX 5 €/Pkt. in K7",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "OESX (10 €/Pkt.)",
+     "OESX (5 €/Pkt.)"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R32 Zahlwort 'zwölf' im KPI",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     ">10 · 1 Min.<",
+     ">zwölf · 1 Min.<"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R33 '§ 15b EStG' (Buchstabe hinter Zahl)",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "(eigener Verlustkreis). Ausnahmen",
+     "(eigener Verlustkreis nach § 15b EStG). Ausnahmen"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R34 Präfix-Trick 'Verlusthöchstbetrag'",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "bilden einen eigenen Verlustkreis.",
+     "bilden einen eigenen Verlustkreis mit Verlusthöchstbetrag."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R35 Bindungswäsche: Zahl an fremden Fakt gebunden",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "(eigener Verlustkreis). Ausnahmen",
+     "(eigener Verlustkreis); Verluste sind <span data-source=\"FACT_ODAX_SPECS\">5</span> Jahre vortragsfähig. Ausnahmen"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R36 Datum im JS-Modal verschoben (16.07.)",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "und seit 16.06.2026 in Kraft",
+     "und seit 16.07.2026 in Kraft"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R37 Matrix 'alle 1 Min.' (Zahl aus anderem Claim-Teil)",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>EOD + alle 5 Min.</td>",
+     "<td>EOD + alle 1 Min.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R38 gestrichene Fakt-ID im Seitentext",
+   "expect": "L77",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Die Berechnungslogik des Herstellers ist nicht offengelegt.",
+     "Die Berechnungslogik des Herstellers ist nicht offengelegt (vgl. FACT_PRODUCT_STRUCTURE)."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R39 gestrichene Fakt-ID im Prompt",
+   "expect": "L77",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "Schritt A2: Steuerliche Aussagen",
+     "Schritt A2: Preise aus FACT_VENDOR_PRICES übernehmen. Steuerliche Aussagen"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R40 period 'abrufbarer Stand' nach Stichtag",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"period\": \"Produktseite Stand 2026-10-05\"",
+     "\"period\": \"Produktseite, abrufbarer Stand 2026-10-11\""
+    ]
+   ]
+  },
+  {
+   "name": "r12 R41 Claim-Datum nach Stichtag ('in Kraft seit 16.11.2026')",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "in Kraft seit 16.06.2026:",
+     "in Kraft seit 16.11.2026:"
+    ],
+    [
+     "m300.html",
+     "Turbos seit 16.06.2026",
+     "Turbos seit 16.11.2026"
+    ],
+    [
+     "m300.html",
+     "und seit 16.06.2026 in Kraft",
+     "und seit 16.11.2026 in Kraft"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R42 Abrufzeitraum mit Gedankenstrich",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11",
+     "Recherchezeitraum 2026-10-05–2026-10-08"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R43 VENDOR nur als HTML-Kommentar",
+   "expect": "L79",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "CQG in Entwicklung <span class=\"badge b-v\">VENDOR</span>",
+     "CQG in Entwicklung <!-- VENDOR -->"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R44 UNGEPRÜFT nur als HTML-Kommentar",
+   "expect": "L27",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>Kostenausweis <span class=\"dbom-class-badge\">UNGEPRÜFT</span></td>",
+     "<td>Kostenausweis <!-- UNGEPRÜFT --></td>"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R45 Offen-Punkt 'Kontraktgrößen ODAX/OESX' ohne data-source",
+   "expect": "L26c",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<li data-gate=\"Q2\" data-open>",
+     "<li data-gate=\"Q2\" data-open>Kontraktgrößen und Verfallstermine von ODAX und OESX am Original prüfen</li>\n        <li data-gate=\"Q2\" data-open>"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R46 Offen-Punkt 'Produktspezifikationen'",
+   "expect": "L26c",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<li data-gate=\"Q2\" data-open>",
+     "<li data-gate=\"Q2\" data-open>Produktspezifikationen von Cboe, CME und Eurex am Original gegenlesen</li>\n        <li data-gate=\"Q2\" data-open>"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R47 CONFIRMED mit caveat 'Abgleich offen (Offen-Punkt)' (Anker angepasst: Feldreihenfolge nach values)",
+   "expect": "L26d",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"source_id\": \"SRC_EUREX_SPECS\",\n      \"caveat\": \"\",\n      \"period\": \"Produktseite Stand 2026-10-05\"",
+     "\"source_id\": \"SRC_EUREX_SPECS\",\n      \"caveat\": \"Abgleich am Original offen (Offen-Punkt Q2).\",\n      \"period\": \"Produktseite Stand 2026-10-05\""
+    ]
+   ]
+  },
+  {
+   "name": "r12 R48 keep_reason mit erfundenem Bezug K99",
+   "expect": "L75",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\"",
+     "\"keep_reason\": \"Wird für K99 noch gebraucht, bleibt drin.\""
+    ]
+   ]
+  },
+  {
+   "name": "r12 R49 k_differs ohne Sachgrund",
+   "expect": "L61",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"k_differs\": \"Teilaspekt Broker-Anbindung; K5 bewertet den Indikatorumfang.\"",
+     "\"k_differs\": \"K5 passt nicht ganz, daher abweichend.\""
+    ]
+   ]
+  },
+  {
+   "name": "r12 R50 USD-Betrag ungebunden",
+   "expect": "L12",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Europäisches Zusatzangebot:",
+     "SpotGamma kostet ab 99 USD im Monat. Europäisches Zusatzangebot:"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R02b 'M-299' ungebunden",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung.",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung. Details zur IPO-Besteuerung in M-299."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R15b 'K-10' ungebunden",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung.",
+     "Allgemeine Information mit Rechtsstand 05.10.2026, keine Steuerberatung. Siehe auch Prüfpunkt K-10."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R47 CONFIRMED mit caveat 'Abgleich offen (Offen-Punkt Q2)'",
+   "expect": "L26d",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"source_id\": \"SRC_EUREX_SPECS\",\n      \"caveat\": \"\",\n      \"period\": \"Produktseite Stand 2026-10-05\"",
+     "\"source_id\": \"SRC_EUREX_SPECS\",\n      \"caveat\": \"Abgleich am Original offen (Offen-Punkt Q2).\",\n      \"period\": \"Produktseite Stand 2026-10-05\""
+    ]
+   ]
+  },
+  {
+   "name": "r12 R48b keep_reason mit sachfremdem Bezug K3",
+   "expect": "L75",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\"",
+     "\"keep_reason\": \"Wird für K3 noch gebraucht, bleibt drin.\""
+    ]
+   ]
+  },
+  {
+   "name": "r12 R01 'Schwestermodul' [sync]",
+   "expect": "L60",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "Wie im Schwestermodul zur SpaceX-IPO gezeigt: Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R02 'M-299' mit Bindestrich [sync]",
+   "expect": "L60",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "(siehe M-299) Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R15 'K-10' [sync]",
+   "expect": "L65",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "(vgl. K-10) Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R17 Einzelverweis 'A17' [sync]",
+   "expect": "L65",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "(Claim A17) Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R22 'unverzichtbar' in Fakt-Punkt [sync]",
+   "expect": "L62",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>; für Futures-Trader ist X-Ray unverzichtbar."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R23 'erfreulich' (Name von H9) [sync]",
+   "expect": "L62",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>, erfreulich ist aber der Futures-Teil."
+    ]
+   ]
+  },
+  {
+   "name": "r12 R26 SCENARIO im Indikativ mit anderem Verb [sync]",
+   "expect": "L62",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer Analyselücke",
+     "Eine Eurex-Erweiterung schließt die Analyselücke und verdrängt Optionsscheine"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R31 OESX 5 €/Pkt. in K7 [sync]",
+   "expect": "L63",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "OESX (10 €/Pkt.)",
+     "OESX (5 €/Pkt.)"
+    ]
+   ]
+  },
+  {
+   "name": "r12 R41 Claim-Datum nach Stichtag ('in Kraft seit 16.11.2026') [sync]",
+   "expect": "L78",
+   "sync": true,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "in Kraft seit 16.06.2026:",
+     "in Kraft seit 16.11.2026:"
+    ],
+    [
+     "m300.html",
+     "Turbos seit 16.06.2026",
+     "Turbos seit 16.11.2026"
+    ],
+    [
+     "m300.html",
+     "und seit 16.06.2026 in Kraft",
+     "und seit 16.11.2026 in Kraft"
+    ]
+   ]
+  },
+  {
+   "name": "r12 F1 'früher' als Komparativ",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gemeinsame Grenzen: Das Profil",
+     "Der Orderflow zeigt eine Wende oft früher als das Profil. Gemeinsame Grenzen: Das Profil"
+    ]
+   ]
+  },
+  {
+   "name": "r12 F2 'ADV' (Average Daily Volume)",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gemeinsame Grenzen: Das Profil",
+     "Das ADV der ODAX ist hier nicht ausgewertet. Gemeinsame Grenzen: Das Profil"
+    ]
+   ]
+  },
+  {
+   "name": "r12 F3 'Zeitachse' in Charm-Text",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gemeinsame Grenzen: Das Profil",
+     "Die Charm Heatmap zeigt den Hedge-Bedarf auf Preis- und Zeitachse. Gemeinsame Grenzen: Das Profil"
+    ]
+   ]
+  },
+  {
+   "name": "r12 F4 Herstellerversion 'seit Version 8.0.12'",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "ES-Chart → MES-Ausführung, seit 8.0.12",
+     "ES-Chart → MES-Ausführung, seit Version 8.0.12"
+    ]
+   ]
+  },
+  {
+   "name": "r12 F5 'einzige Börse' (belegte Tatsache) (umgestuft: Alleinstellung ohne Claim-Beleg, kein Fehlalarm)",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "bereitstellt <span class=\"dbom-class-badge\">MEDIEN</span>.</p>",
+     "bereitstellt; SPX-Optionen werden nur an der Cboe gehandelt, sie ist die einzige Börse dafür <span class=\"dbom-class-badge\">MEDIEN</span>.</p>"
+    ]
+   ]
+  },
+  {
+   "name": "r12 F6 'Strike K 50' im Modelltext",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gemeinsame Grenzen: Das Profil",
+     "Beispiel: ein Call mit Strike K 50 Punkte über S. Gemeinsame Grenzen: Das Profil"
+    ]
+   ]
+  },
+  {
+   "name": "r12 F7 'letzten Stand' der Herstellerdoku",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gemeinsame Grenzen: Das Profil",
+     "Grundlage ist der letzte Stand der Herstellerdoku. Gemeinsame Grenzen: Das Profil"
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout Modal-JS: frühere Verrechnungsgrenze gestrichen",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "BGBl. 2024 I Nr. 387). Keine Steuerberatung.",
+     "BGBl. 2024 I Nr. 387). Die zuvor geltende Verrechnungsgrenze für Termingeschäfte hat der Gesetzgeber gestrichen. Keine Steuerberatung."
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout S05: 'sonst niemand' ohne Vergleichsbasis",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "wie sich die Positionierung innerhalb des Tages verschiebt.</p>",
+     "wie sich die Positionierung innerhalb des Tages verschiebt. Diese Verbindung bietet am Markt sonst niemand.</p>"
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout Fazit-Infobox mit Handlungsanweisung 'sollte' [sync]",
+   "expect": "L62",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "der offenen Kommunikation der schwächeren Positionsannahme ab <span class=\"dbom-class-badge\">EINSCHÄTZUNG</span>.</div>",
+     "der offenen Kommunikation der schwächeren Positionsannahme ab <span class=\"dbom-class-badge\">EINSCHÄTZUNG</span>. Wer DAX-Optionen handelt, sollte bis dahin die ODAX-Daten selbst auswerten.</div>"
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout S04 KapGes: Rechtsfolge Verlustrücktrag nicht im Claim",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Ausnahmen bestehen für Institute und Sicherungsgeschäfte (Satz 4), mit Rückausnahme für Aktien-Hedges (Satz 5).",
+     "Ausnahmen bestehen für Institute und Sicherungsgeschäfte (Satz 4), mit Rückausnahme für Aktien-Hedges (Satz 5). Ein Verlustrücktrag ist ausgeschlossen."
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout S02 Experte: Bußgeldrahmen nicht im Claim",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Risiko- und Kapitalkalkül.",
+     "Market Maker hedgen aus Risiko- und Kapitalkalkül; Verstöße gegen Quotierungspflichten können mit Geldbußen bis 5 Mio. Euro geahndet werden."
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout Period Eurex-Circulars bis 2027",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"period\": \"Eurex-Circulars 2023–2026\"",
+     "\"period\": \"Eurex-Circulars 2023–2027\""
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout NONE: Fazit-Punkt umformuliert, Badge bleibt [sync]",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Minuten-Snapshots lösen das Skalierungsproblem, kosten aber",
+     "Minuten-Snapshots entschärfen das Skalierungsproblem, kosten aber"
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout NONE: Glossar ES-Multiplikator mit Einheit, korrekt gebunden [sync]",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Hedge-Delta geteilt durch den ES-Multiplikator (50).",
+     "Hedge-Delta geteilt durch den ES-Multiplikator von 50 USD je Indexpunkt."
+    ]
+   ]
+  },
+  {
+   "name": "r12-holdout NONE: Glossar Knock-out mit Datum aus dem Claim [sync]",
+   "expect": "NONE",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).",
+     "Für Turbos gilt seit 16.06.2026 eine BaFin-Allgemeinverfügung (Details in S10)."
+    ]
+   ]
+  },
+  {
+   "name": "L19b DDV-Quelle wieder als vendor",
+   "expect": "L19b",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"id\": \"SRC_DDV_OS_MUSTER\",\n      \"ref\": \"S57\",\n      \"tier\": \"secondary\"",
+     "\"id\": \"SRC_DDV_OS_MUSTER\",\n      \"ref\": \"S57\",\n      \"tier\": \"vendor\""
     ]
    ]
   }
