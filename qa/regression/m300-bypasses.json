@@ -267,13 +267,13 @@
    ]
   },
   {
-   "name": "L72 'Nur ATAS verbindet' (Satzanfang, ohne Basis) (Anker an v1.10.5 angepasst)",
+   "name": "L72 'Nur ATAS verbindet' (Satzanfang, ohne Basis) (Anker v1.11.2, Erwartung unverändert)",
    "expect": "L06b",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Im Vergleichsfeld ist nur für ATAS beides belegt, native Optionsdaten im Minutentakt und ein MBO-Bundle; für SpotGamma, MenthorQ, Volland und die TWS ist ein MBO-Werkzeug n. v.;",
+     "Im Vergleichsfeld ist nur für ATAS beides belegt, native Optionsdaten im Minutentakt und ein MBO-Bundle (derzeit zur Erprobung); für SpotGamma, MenthorQ, Volland und die TWS ist ein MBO-Werkzeug n. v.;",
      "Nur ATAS verbindet native Optionsdaten im Minutentakt mit einem MBO-Bundle."
     ]
    ]
@@ -399,14 +399,14 @@
    ]
   },
   {
-   "name": "L26c Offen-Punkt nennt CONFIRMED-Fakt thematisch ohne data-source (Anker an v1.11.1 angepasst)",
+   "name": "L26c Offen-Punkt nennt CONFIRMED-Fakt thematisch ohne data-source (Anker v1.11.2, Erwartung unverändert)",
    "expect": "L26c",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"Q7\" data-open>",
-     "<li data-gate=\"Q4\" data-open>OESX-Multiplikator und ODAX-Kontraktwert am Original prüfen</li>\n        <li data-gate=\"Q7\" data-open>"
+     "<li data-gate=\"Q1\" data-open>",
+     "<li data-gate=\"Q4\" data-open>OESX-Multiplikator und ODAX-Kontraktwert am Original prüfen</li>\n        <li data-gate=\"Q1\" data-open>"
     ]
    ]
   },
@@ -712,14 +712,14 @@
    ]
   },
   {
-   "name": "L68b Bearbeitungsverlauf im Offen-Punkt",
+   "name": "L68b Bearbeitungsverlauf im Offen-Punkt (Anker v1.11.2, Erwartung unverändert)",
    "expect": "L60",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen",
-     "Nach dem Review angeglichene K-Verweise manuell gegenprüfen"
+     "Freigabevermerk und caveat von FACT_BAFIN_STUDY in Einklang bringen",
+     "Nach dem Review angeglichenen Freigabevermerk von FACT_BAFIN_STUDY gegenprüfen"
     ]
    ]
   },
@@ -1382,26 +1382,26 @@
    ]
   },
   {
-   "name": "r12 R45 Offen-Punkt 'Kontraktgrößen ODAX/OESX' ohne data-source (Anker an v1.11.1 angepasst)",
+   "name": "r12 R45 Offen-Punkt 'Kontraktgrößen ODAX/OESX' ohne data-source (Anker v1.11.2, Erwartung unverändert)",
    "expect": "L26c",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"Q7\" data-open>",
-     "<li data-gate=\"Q7\" data-open>Kontraktgrößen und Verfallstermine von ODAX und OESX am Original prüfen</li>\n        <li data-gate=\"Q7\" data-open>"
+     "<li data-gate=\"Q1\" data-open>",
+     "<li data-gate=\"Q1\" data-open>Kontraktgrößen und Verfallstermine von ODAX und OESX am Original prüfen</li>\n        <li data-gate=\"Q1\" data-open>"
     ]
    ]
   },
   {
-   "name": "r12 R46 Offen-Punkt 'Produktspezifikationen' (Anker an v1.11.1 angepasst)",
+   "name": "r12 R46 Offen-Punkt 'Produktspezifikationen' (Anker v1.11.2, Erwartung unverändert)",
    "expect": "L26c",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"Q7\" data-open>",
-     "<li data-gate=\"Q7\" data-open>Produktspezifikationen von Cboe, CME und Eurex am Original gegenlesen</li>\n        <li data-gate=\"Q7\" data-open>"
+     "<li data-gate=\"Q1\" data-open>",
+     "<li data-gate=\"Q1\" data-open>Produktspezifikationen von Cboe, CME und Eurex am Original gegenlesen</li>\n        <li data-gate=\"Q1\" data-open>"
     ]
    ]
   },

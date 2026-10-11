@@ -243,14 +243,14 @@
    ]
   },
   {
-   "name": "H13-21 L26e: Offen-Punkt C4 nennt S12 ohne data-source (Anker v1.11.1, Erwartung unverändert)",
+   "name": "H13-21 L26e: Offen-Punkt C4 nennt S12 ohne data-source (Anker v1.11.2, Erwartung unverändert)",
    "expect": "L26e",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"Q7\" data-open>K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen</li>",
-     "<li data-gate=\"Q7\" data-open>K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen und Hinweis in S12 ergänzen</li>"
+     "<li data-gate=\"Q1\" data-open>Claim A11",
+     "<li data-gate=\"Q1\" data-open>Hinweis in S12 ergänzen; Claim A11"
     ]
    ]
   },
@@ -351,14 +351,14 @@
    ]
   },
   {
-   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source (Anker v1.11.1, Erwartung unverändert)",
+   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source (Anker v1.11.2, Erwartung unverändert)",
    "expect": "NONE",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "Allaussagen (S11)",
-     "Allaussagen (S10, S11)"
+     "BaFin-Turbo-Studie: Freigabeumfang klären",
+     "BaFin-Turbo-Studie (S10, S11): Freigabeumfang klären"
     ]
    ]
   },
