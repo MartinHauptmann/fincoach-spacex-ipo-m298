@@ -145,6 +145,23 @@ async function audit(browser, url, vp) {
     if (stand && changed && stand < changed) wrong.push(`Stand ${stand} älter als letzte Änderung ${changed}`);
     l38 = { wrong, mods: mods.length };
   }
+  // L38b · Pflichtseiten: keine Entwurfsvermerke, jede Datumsangabe ≥ letzte Änderung, CDN-Angaben = genutzte CDN-Hosts
+  let l38b = null;
+  if (/^(impressum|datenschutz)\.html$/i.test(file)) {
+    const txt = fs.readFileSync(path.join(root, file), 'utf8').replace(/<[^>]+>/g, ' ');
+    const bad = [];
+    for (const m of txt.matchAll(/Empfehlung:|Vorlage|bei Bedarf ergänzen|TODO|Platzhalter|noch (?:zu )?ergänzen|\bTBD\b/gi)) bad.push(`Entwurfsvermerk „${m[0]}“`);
+    let changed = null; try { changed = require('child_process').execSync(`git log -1 --format=%cs -- ${file}`, { cwd: root }).toString().trim(); } catch {}
+    for (const m of txt.matchAll(/(?:Rechts)?[Ss]tand:?\s*(\d{4}-\d{2}-\d{2})|\((\d{4}-\d{2}-\d{2})\)/g)) { const d = m[1] || m[2]; if (changed && d < changed) bad.push(`Datum ${d} älter als letzte Änderung ${changed}`); }
+    if (/datenschutz/i.test(file)) {
+      const pages = fs.readdirSync(root).filter(f => f.endsWith('.html'));
+      const used = new Set(pages.flatMap(f => [...fs.readFileSync(path.join(root, f), 'utf8').matchAll(/(?:src|href)="https?:\/\/([^/"]+)/g)].map(m => m[1])).filter(h => /cdn/.test(h)));
+      const named = new Set([...txt.matchAll(/\b(cdn\.[a-z.]+\.[a-z]+)/g)].map(m => m[1].replace(/\.$/, '')));
+      for (const h of used) if (!named.has(h)) bad.push(`CDN ${h} genutzt, nicht erklärt`);
+      for (const h of named) if (!used.has(h)) bad.push(`CDN ${h} erklärt, nicht genutzt`);
+    }
+    l38b = bad;
+  }
   await b.close(); srv.close();
   let blockers = 0; const line = (ok, lvl, rule, msg) => { if (!ok && lvl === 'BLOCKER') blockers++; console.log(`${ok ? '✓' : lvl === 'BLOCKER' ? '✗' : '!'} ${rule.padEnd(26)} [${lvl}] ${msg}`); };
   for (const [n, r] of [['plain', plain], ['viewer', viewer], ['viewer-390px', mobile]]) {
@@ -169,6 +186,7 @@ async function audit(browser, url, vp) {
     if (r.chartColor !== null) line(r.chartColor === '#94A3B8', 'BLOCKER', `L02 Chart-Farbe (${n})`, r.chartColor);
   }
   // L38 · BLOCKER seit 2026-10-11 (Datenschutzerklärung an die Messung angeglichen)
+  if (l38b) line(!l38b.length, 'BLOCKER', 'L38b Pflichtseite ohne Entwurf', l38b.length ? l38b.slice(0, 4).join('; ') : 'keine Entwurfsvermerke, Daten aktuell, CDN-Angaben = Nutzung');
   if (l38) line(!l38.wrong.length, 'BLOCKER', 'L38 Datenschutz = Messung', l38.wrong.length ? l38.wrong.join('; ') : `Speicherangaben = Messung an ${l38.mods} Modulseiten`);
   const fails = o => o.out.filter(x => x.ratio < x.need).length;
   line(fails(plain) === fails(viewer), 'BLOCKER', 'L01 viewer = plain', `plain ${fails(plain)} · viewer ${fails(viewer)} Elemente unter AA`);

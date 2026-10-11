@@ -176,6 +176,10 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   Markenhinweis.
 - **L80b:** Nach jeder Änderung alle Regressionsdateien laufen lassen
   (`python3 qa/run_regression.py qa/regression/*.json`); ANKER FEHLT ist ein Fehler.
+- **L82c:** Der Freigabeumfang (`verified.scope`) passt zum caveat; „mehrere/übereinstimmende Berichte“ nur mit
+  mindestens zwei Quellen.
+- **L38b:** Impressum und Datenschutz ohne Entwurfsvermerke; jedes Datum ≥ letzte Änderung; CDN-Angaben = genutzte
+  CDN-Hosts aller Seiten.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

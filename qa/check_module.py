@@ -778,6 +778,21 @@ def main():
         corpus = html + " " + json.dumps(dbom, ensure_ascii=False)
         l84 = [mk for mk in marks if re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), corpus.replace(notice.group(0), "") if notice else corpus) and not (notice and re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), notice.group(1)))]
         report("L84 Markenhinweis vollständig", BLOCKER, bool(notice) and bool(marks) and not l84, "fehlt im Markenhinweis: " + ", ".join(l84[:6]) if l84 else (f"{len(marks)} Inventar-Marken geprüft" if notice else "kein Markenhinweis"))
+        # L82c · Freigabeumfang passt zum caveat; Mehrzahl von Berichten nur mit ≥ 2 Quellen
+        l82c = []
+        for f in F:
+            sc = f.get("verified", {}).get("scope", "")
+            if re.search(r"\boriginal\b", sc, re.I) and re.search(r"selbst nicht (?:\S+ ){0,3}eingesehen|quelle (?:\S+ ){0,3}nicht eingesehen|nicht im volltext", f.get("caveat", ""), re.I):  # andere Dokumente (z. B. Emissionsbedingungen) zählen nicht
+                l82c.append(f"{f['id']}: Umfang „{sc}“ ≠ caveat")
+            nsrc = len({f["source_id"], *f.get("supporting_sources", []), *f.get("additional_sources", [])})
+            if nsrc < 2 and re.search(r"mehrere[nr]? |übereinstimmend", f.get("caveat", "") + " " + f.get("claim", ""), re.I):
+                l82c.append(f"{f['id']}: Mehrzahl mit {nsrc} Quelle")
+        for m in re.finditer(r'\{f:\[([^\]]*)\],t:"(?:[^"\\]|\\.)*",b:"((?:[^"\\]|\\.)*)"', html):
+            ids = [i for i in re.findall(r"FACT_[A-Z0-9_]+", m.group(1)) if i in facts]
+            srcs = {s_ for i in ids for s_ in [facts[i]["source_id"], *facts[i].get("supporting_sources", [])]}
+            if len(srcs) < 2 and re.search(r"übereinstimmend|mehreren (?:Medien)?bericht", m.group(2), re.I):
+                l82c.append(f"Modal {ids[0] if ids else '?'}: Mehrzahl ohne zweite Quelle")
+        report("L82c Freigabeumfang = caveat", BLOCKER, not l82c, "; ".join(l82c[:4]) if l82c else "Freigabeumfang und Quellenzahl stimmen mit den caveats überein")
         report("L26c Offen-Punkt bindet Fakten", BLOCKER, not l26c, "; ".join(l26c[:3]) if l26c else "Offen-Punkte zu Kontraktdaten gebunden (L26 greift)")
         # L64/L67 · nur geltendes Recht: normalisiert, inkl. JS-Inhalte, Attribute und Prompt
         OLD_LAW = (r"\ba\.\s?f\.|alte[nr]? fassung|\baufgehoben\b|aufhebung|altjahre|altf[aä]ll|offene[nr]? fälle|§\s?52 abs\.\s?28|bis zur abschaffung"

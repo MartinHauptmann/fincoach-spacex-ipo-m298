@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.11.2",
+    "version": "1.11.3",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -189,7 +189,7 @@
       "verified": {
         "by": "Herausgeber",
         "date": "2026-10-11",
-        "scope": "Abgleich am Original"
+        "scope": "Abgleich am Medienbericht (Studie selbst nicht eingesehen)"
       }
     },
     {
@@ -1165,6 +1165,12 @@
       "date": "2026-10-11",
       "event": "Vierzehnte Zweitprüfung (v1.11.1) eingearbeitet: veraltetes UNGEPRÜFT entfernt (L27e), Snippet-Reste in caveats/honest_disclosure/Analyse (L82b), MBO-Einschränkung sichtbar (L76d, Feld qualifier), Markenhinweis vollständig mit Inventar (L84), n. v. einheitlich, Gamma Cockpit gebunden, Knock-out-Bonität n. v., ATAS-Spalte, Prompt K4 präzisiert, Holdout-Anker erneuert (L80b). Offen beim Herausgeber: FACT_BAFIN_STUDY verified.scope (L82c), Entwurfsvermerke in Datenschutz/Impressum (L38b)",
       "qa_score_pct": 86.8,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "FACT_BAFIN_STUDY: Freigabeumfang auf „Abgleich am Medienbericht (Studie selbst nicht eingesehen)“ gesetzt (L82c, vorsichtige Variante); Datenschutzerklärung und Impressum mit Zustimmung des Herausgebers von Entwurfsvermerken bereinigt, Daten aktualisiert, Bibliotheks- und CDN-Angaben an die Messung angeglichen (L38b); Q7 und Q9 ✓",
+      "qa_score_pct": 92.1,
       "release": "ÜBERARBEITUNG"
     }
   ],

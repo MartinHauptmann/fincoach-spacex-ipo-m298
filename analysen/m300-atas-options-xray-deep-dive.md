@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.11.2 (Entwurf) |
+| Version | 1.11.3 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -382,7 +382,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.11.2,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.11.3,
 36 Fakten, 45 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -428,8 +428,6 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
-- BaFin-Turbo-Studie: Freigabeumfang klären (Original der Studie eingesehen oder nur Medienbericht?)
-- Freigabevermerk und caveat von FACT_BAFIN_STUDY in Einklang bringen (L82c)
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
@@ -457,13 +455,13 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q4 Provenienz je Fakt | ✓ | Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82) |
 | Q5 Quellenqualität | ✓ | Primärquellen vom Herausgeber am 2026-10-11 am Original geprüft (Volltext) |
 | Q6 Vollständigkeit | ◐ | Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen |
-| Q7 Widerspruchsfreiheit | ◐ | Widersprüche der 14. Zweitprüfung behoben; offen: FACT_BAFIN_STUDY Freigabeumfang vs. caveat (L82c, Klärung durch Herausgeber) |
+| Q7 Widerspruchsfreiheit | ✓ | Widersprüche der 14. Zweitprüfung behoben; Freigabeumfang und caveat je Fakt im Einklang (L82c, L82b) |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
-| Q9 Keine Überzeichnung / Halluzination | ◐ | Überzeichnungen der 14. Zweitprüfung behoben; offen: Freigabeumfang FACT_BAFIN_STUDY (L82c) |
+| Q9 Keine Überzeichnung / Halluzination | ✓ | Überzeichnungen der 14. Zweitprüfung behoben; Einschränkungen sichtbar (L76d), Freigabeumfang BaFin-Studie präzisiert (L82c) |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 14 × ✓ + 5 × ◐ = 16,5 von 19 Punkten = **86,8 %**.
-**Freigabeempfehlung: ÜBERARBEITUNG.**
+**Gesamtscore:** 16 × ✓ + 3 × ◐ = 17,5 von 19 Punkten = **92,1 %**.
+**Freigabeempfehlung: FREIGABE.**
 
 ---
 

@@ -1894,6 +1894,30 @@
      "TRACE, IBKR, Xetra,"
     ]
    ]
+  },
+  {
+   "name": "L82c Freigabe „Original“ trotz „Studie selbst nicht eingesehen“",
+   "expect": "L82c",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"scope\": \"Abgleich am Medienbericht (Studie selbst nicht eingesehen)\"",
+     "\"scope\": \"Abgleich am Original\""
+    ]
+   ]
+  },
+  {
+   "name": "L82c Mehrzahl „übereinstimmende Medienberichte“ bei einer Quelle (Modal)",
+   "expect": "L82c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Laut einem Medienbericht (Stiftung Warentest) zur",
+     "Laut übereinstimmenden Medienberichten zur"
+    ]
+   ]
   }
  ]
 }

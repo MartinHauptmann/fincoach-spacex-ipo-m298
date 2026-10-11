@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.11.2 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.11.3 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -99,7 +99,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.11.2", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.11.3", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 36, "confirmed_primary": 27, "media_report": 6, "unverified": 0, "scenario_projection": 3, "vendor_claim": 11 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
@@ -148,7 +148,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.11.2</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.11.3</span>
     <span class="text-slate-300"><span data-dbom-count="total">36</span> Fakten · <span data-dbom-count="confirmed">27</span> belegt (davon <span data-dbom-count="fulltext">27</span> am Original geprüft, <span data-dbom-count="vendor">11</span> Herstellerangaben) · <span data-dbom-count="media">6</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -198,7 +198,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen neun Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">27</span> belegte Fakten, <span data-dbom-count="media">6</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>86,8</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">27</span> belegte Fakten, <span data-dbom-count="media">6</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>92,1</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -571,7 +571,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>86,8</span> % · <span data-qa-points>16,5</span> / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>92,1</span> % · <span data-qa-points>17,5</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
     <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Bewertung nach unabhängiger Zweitprüfung; ✓ nur mit Messung oder dokumentierter Einzelprüfung.</span>
   </div>
@@ -599,9 +599,9 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>Q4 Provenienz je Fakt</td><td class="check-pass" data-gate="Q4" title="Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82)">✓</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-pass" data-gate="Q5" title="Primärquellen vom Herausgeber am 2026-10-11 am Original geprüft (Volltext)">✓</td></tr>
         <tr><td>Q6 Vollständigkeit</td><td class="check-part" data-gate="Q6" title="Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen">◐</td></tr>
-        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="Widersprüche der 14. Zweitprüfung behoben; offen: FACT_BAFIN_STUDY Freigabeumfang vs. caveat (L82c, Klärung durch Herausgeber)">◐</td></tr>
+        <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-pass" data-gate="Q7" title="Widersprüche der 14. Zweitprüfung behoben; Freigabeumfang und caveat je Fakt im Einklang (L82c, L82b)">✓</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="Zweitprüfung: alle 15 Pflichtbegriffe vorhanden">✓</td></tr>
-        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="Überzeichnungen der 14. Zweitprüfung behoben; offen: Freigabeumfang FACT_BAFIN_STUDY (L82c)">◐</td></tr>
+        <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-pass" data-gate="Q9" title="Überzeichnungen der 14. Zweitprüfung behoben; Einschränkungen sichtbar (L76d), Freigabeumfang BaFin-Studie präzisiert (L82c)">✓</td></tr>
         <tr><td>Q10 Formatvorgaben</td><td class="check-part" data-gate="Q10" title="Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär)">◐</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
@@ -620,8 +620,6 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       </tbody></table>
       <h4 class="font-head font-bold text-white mt-5 mb-2 text-sm">Offen vor Freigabe</h4>
       <ul class="tick text-xs" id="open-list">
-        <li data-gate="Q9" data-open data-source="FACT_BAFIN_STUDY">BaFin-Turbo-Studie: Freigabeumfang klären (Original der Studie eingesehen oder nur Medienbericht?)</li>
-        <li data-gate="Q7" data-open data-source="FACT_BAFIN_STUDY">Freigabevermerk und caveat von FACT_BAFIN_STUDY in Einklang bringen (L82c)</li>
         <li data-gate="Q1" data-open>Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen</li>
         <li data-gate="Q6" data-open>Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen</li>
         <li data-gate="Q10" data-open>Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)</li>
@@ -675,7 +673,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.11.2 · 2026-10-11<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.11.3 · 2026-10-11<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
