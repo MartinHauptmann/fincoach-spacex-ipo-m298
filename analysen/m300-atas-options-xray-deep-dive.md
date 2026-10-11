@@ -437,7 +437,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
 - Info-Box zur Matrix (S09) und Fazit: Kennzeichen je Anbieter oder keines
-- Knock-out-Angaben in allen Glossar-Stufen und in S10 („Größe“) an den n. v.-Stand angleichen
+- Knock-out-Angaben in allen Glossar-Stufen und in der Strukturtabelle („Größe“) an den n. v.-Stand angleichen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
