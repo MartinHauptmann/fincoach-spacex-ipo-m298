@@ -712,14 +712,14 @@
    ]
   },
   {
-   "name": "L68b Bearbeitungsverlauf im Offen-Punkt (Anker v1.11.2, Erwartung unverändert)",
+   "name": "L68b Bearbeitungsverlauf im Offen-Punkt (Anker v1.11.3, Erwartung unverändert)",
    "expect": "L60",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Freigabevermerk und caveat von FACT_BAFIN_STUDY in Einklang bringen",
-     "Nach dem Review angeglichenen Freigabevermerk von FACT_BAFIN_STUDY gegenprüfen"
+     "Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen",
+     "Nach dem Review angeglichenen Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen"
     ]
    ]
   },

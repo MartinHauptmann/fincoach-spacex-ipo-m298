@@ -351,14 +351,14 @@
    ]
   },
   {
-   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source (Anker v1.11.2, Erwartung unverändert)",
+   "name": "H13-N06 NONE: Offen-Punkt C8 nennt S10 und S11 mit data-source (Anker v1.11.3, Erwartung unverändert)",
    "expect": "NONE",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "BaFin-Turbo-Studie: Freigabeumfang klären",
-     "BaFin-Turbo-Studie (S10, S11): Freigabeumfang klären"
+     "<li data-gate=\"Q10\" data-open>",
+     "<li data-gate=\"Q10\" data-open data-source=\"FACT_COMPETITOR_MATRIX\">(S10, S11) "
     ]
    ]
   },
