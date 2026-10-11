@@ -1824,14 +1824,14 @@
    ]
   },
   {
-   "name": "L27e UNGEPRÜFT an belegtem Fakt",
+   "name": "L27e UNGEPRÜFT an belegtem Fakt (Anker v1.12.1, Erwartung unverändert)",
    "expect": "L27e",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "<td>Kostenausweis</td>",
-     "<td>Kostenausweis <span class=\"dbom-class-badge\">UNGEPRÜFT</span></td>"
+     "<td data-source=\"FACT_PRIIPS_UWG\">PRIIPs-KID + MiFID-II-Kosten</td>",
+     "<td data-source=\"FACT_PRIIPS_UWG\">PRIIPs-KID + MiFID-II-Kosten <span class=\"dbom-class-badge\">UNGEPRÜFT</span></td>"
     ]
    ]
   },
