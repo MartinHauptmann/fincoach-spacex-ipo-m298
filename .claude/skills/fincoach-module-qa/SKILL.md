@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L59 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L64 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -118,6 +118,15 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L59:** Die Analyse enthält alle Abschnitte 0–9 der Ausgabestruktur des Prompts, die Claim-Tabelle aus `source_claims`.
 - **Eigenständigkeit:** Ein Modul verweist nicht auf unveröffentlichte Module und vergleicht sich nicht mit eigenen früheren
   Fassungen; der Verlauf steht nur im `audit_trail` der DBOM und in `qa/LESSONS.md`.
+- **L60:** Eigenständigkeit wird geprüft: keine fremden Modul-IDs, Links, „Vormodul“, „frühere Fassung“.
+- **L61:** Claim-Ergebnis ✓/✗ nur mit CONFIRMED-Beleg; gleiche Aussage = gleiches Ergebnis wie die K-Zeile (`k`).
+- **L62:** Jeder Fazit-Punkt ist als EINSCHÄTZUNG (Badge) oder als Faktwiedergabe (`data-assessment="fact"`) eingeordnet;
+  Szenarien stehen im Konjunktiv.
+- **L63:** Konstanten eines Fakts (`values`) sind überall gleich und gebunden, auch in Formeln, Labels und Glossar.
+- **L27b:** Glossar-Einträge mit nicht bestätigtem Fakt tragen das Badge des schwächsten Verdicts (6. Feld).
+- **L06b:** „Alleinstellung“/„einzige(r)“ nur mit Vergleichsbasis und n. v.-Hinweis.
+- **L64:** Nur geltendes Recht am Stichtag; frühere Rechtslagen, Übergangsregeln und überholte Grenzbeträge werden nicht
+  dargestellt.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

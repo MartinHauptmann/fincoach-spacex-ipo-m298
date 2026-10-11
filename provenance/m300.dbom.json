@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,17 +13,17 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 47,
-    "confirmed_primary": 25,
-    "media_report": 7,
-    "unverified": 12,
+    "total": 38,
+    "confirmed_primary": 20,
+    "media_report": 6,
+    "unverified": 9,
     "scenario_projection": 3,
     "vendor_claim": 10,
     "by_class": {
       "MARKET_DATA": 10,
       "MEDIA_REPORT": 6,
       "MODEL_ASSUMPTION": 1,
-      "REGULATORY_FRAMEWORK": 18,
+      "REGULATORY_FRAMEWORK": 9,
       "SCENARIO_PROJECTION": 2,
       "VENDOR_CLAIM": 10
     }
@@ -36,131 +36,13 @@
       "verdict": "CONFIRMED",
       "class": "REGULATORY_FRAMEWORK",
       "confidence": 0.9,
-      "claim": "§ 20 Abs. 6 Satz 5 EStG a. F. (Termingeschäfte) und Satz 6 a. F. (Forderungsausfall, wertlose Wirtschaftsgüter), jeweils mit 20.000-€-Grenze, durch das JStG 2024 (BGBl. 2024 I Nr. 387) aufgehoben.",
+      "claim": "Verluste aus Termingeschäften im Privatvermögen unterliegen seit dem JStG 2024 (BGBl. 2024 I Nr. 387) keiner gesonderten Verlustverrechnungsbeschränkung mehr; es gelten die allgemeinen Regeln für Einkünfte aus Kapitalvermögen (§ 20 Abs. 6 EStG).",
       "source_id": "SRC_BGBL_JSTG2024",
       "caveat": "",
-      "period": "Rechtsstand 2026-10-05 (JStG 2024 vom 02.12.2024)",
-      "supporting_sources": [
-        "SRC_BT_DRS",
-        "SRC_CMS"
-      ]
-    },
-    {
-      "id": "FACT_P52_ABS28",
-      "verdict": "UNVERIFIED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.6,
-      "claim": "Die Aufhebung von § 20 Abs. 6 Satz 5 und 6 EStG a. F. ist nach § 52 Abs. 28 EStG in allen offenen Fällen anzuwenden.",
-      "source_id": "SRC_BGBL_JSTG2024",
-      "caveat": "Satznummern in § 52 Abs. 28 EStG nur per Snippet belegt; Wortlaut am Original prüfen.",
       "period": "Rechtsstand 2026-10-05",
       "supporting_sources": [
         "SRC_BT_DRS",
         "SRC_CMS"
-      ],
-      "markers": [
-        "offenen Fälle",
-        "offene Fälle",
-        "erledigt",
-        "Altjahre",
-        "Rechtsunsicherheit"
-      ]
-    },
-    {
-      "id": "FACT_BMF_2025",
-      "verdict": "CONFIRMED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.85,
-      "claim": "BMF-Schreiben vom 14.05.2025 setzt die Aufhebung um; bestehende Verlustvorträge aus Termingeschäften sind danach unbeschränkt verrechenbar.",
-      "source_id": "SRC_BMF_2025",
-      "caveat": "Randziffern nicht verifiziert. Für welche Veranlagungsjahre das gilt, folgt aus § 52 Abs. 28 EStG (FACT_P52_ABS28, ungeprüft).",
-      "period": "BMF-Schreiben 14.05.2025"
-    },
-    {
-      "id": "FACT_TERMIN_2019",
-      "verdict": "CONFIRMED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.85,
-      "claim": "Einführung der Verlustverrechnungsbeschränkung für Termingeschäfte durch Gesetz vom 21.12.2019 (BGBl. I S. 2875): 10.000 € je Jahr, für Termingeschäfte ab 01.01.2021.",
-      "source_id": "SRC_BZST_2019",
-      "caveat": "",
-      "period": "Gesetz vom 21.12.2019, Anwendung ab 01.01.2021"
-    },
-    {
-      "id": "FACT_TERMIN_2020_RAISE",
-      "verdict": "MEDIA_REPORT",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.65,
-      "claim": "JStG 2020 vom 21.12.2020 (BGBl. I S. 3096) erhöht die Grenze auf 20.000 €.",
-      "source_id": "SRC_HB_JSTG2020",
-      "caveat": "Nur sekundär belegt; BGBl. am Original prüfen.",
-      "period": "JStG 2020 vom 21.12.2020"
-    },
-    {
-      "id": "FACT_BFH_ADV",
-      "verdict": "CONFIRMED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.85,
-      "claim": "BFH VIII B 113/23 vom 07.06.2024: Beschluss über die Aussetzung der Vollziehung (§ 69 Abs. 3 FGO; Streitjahr 2021), summarische Zweifel an der Verfassungsmäßigkeit (Art. 3 Abs. 1 GG).",
-      "source_id": "SRC_BFH_VIIIB11323",
-      "caveat": "Kein Hauptsacheurteil.",
-      "period": "Beschluss 07.06.2024",
-      "supporting_sources": [
-        "SRC_FG_RLP"
-      ]
-    },
-    {
-      "id": "FACT_STOCK_LOSS_S4",
-      "verdict": "CONFIRMED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.7,
-      "claim": "§ 20 Abs. 6 Satz 4 EStG (Aktienverluste nur mit Aktiengewinnen) gilt fort.",
-      "source_id": "SRC_ESTG_20",
-      "caveat": "",
-      "period": "Rechtsstand 2026-10-05"
-    },
-    {
-      "id": "FACT_BVERFG_PENDING",
-      "verdict": "UNVERIFIED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.6,
-      "claim": "Zu § 20 Abs. 6 Satz 4 EStG ist beim BVerfG die Vorlage 2 BvL 3/21 anhängig; eine Entscheidung wurde bis 05.10.2026 nicht gefunden.",
-      "source_id": "SRC_STEUERTIPPS",
-      "caveat": "Verfahrensstand nur sekundär; auf bundesverfassungsgericht.de prüfen.",
-      "period": "Stand 05.10.2026",
-      "markers": [
-        "2 BvL 3/21"
-      ]
-    },
-    {
-      "id": "FACT_OS_KO_NOT_TERMIN",
-      "verdict": "CONFIRMED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.85,
-      "claim": "Optionsscheine und Knock-out-Zertifikate sind nach Auffassung der Finanzverwaltung keine Termingeschäfte im Sinne von § 20 Abs. 6 Satz 5 EStG a. F.",
-      "source_id": "SRC_BMF_2021",
-      "caveat": "Randziffern nicht verifiziert.",
-      "period": "BMF 03.06.2021, fortgeführt 14.05.2025",
-      "supporting_sources": [
-        "SRC_BMF_2025"
-      ]
-    },
-    {
-      "id": "FACT_KO_SATZ6",
-      "verdict": "UNVERIFIED",
-      "class": "REGULATORY_FRAMEWORK",
-      "confidence": 0.6,
-      "claim": "Nach Auffassung der Finanzverwaltung (BMF 03.06.2021) fiel der Totalverlust eines Knock-out-Zertifikats als Verlust aus wertlosen Wirtschaftsgütern unter § 20 Abs. 6 Satz 6 EStG a. F.",
-      "source_id": "SRC_DZB_2021",
-      "caveat": "Nur Sekundärbeleg (Bankinformation, Suchtreffer-Snippet); Randziffer im BMF-Schreiben nicht geprüft. BFH VIII R 37/15 wertet den Knock-out ohne Restzahlung als Einlösung zu null.",
-      "period": "BMF 03.06.2021 bis Aufhebung durch JStG 2024",
-      "supporting_sources": [
-        "SRC_BMF_2021"
-      ],
-      "markers": [
-        "Knock-out-Totalverlust",
-        "Totalverlust beim Knock-out",
-        "Totalverlust laut Finanzverwaltung"
       ]
     },
     {
@@ -576,7 +458,12 @@
       "claim": "Kontraktdaten: Multiplikator SPX 100 USD, ES 50 USD, MES 5 USD je Indexpunkt; SPX-Optionen mit Verfällen an jedem Wochentag (0DTE); Quartalsverfall am dritten Freitag im März, Juni, September und Dezember; Open Interest wird nach Handelsschluss veröffentlicht (T+1).",
       "source_id": "SRC_FACHWISSEN",
       "caveat": "Fachliche Standardangaben ohne Einzelbeleg; vor Freigabe an Cboe-, CME- und Eurex-Kontraktspezifikationen prüfen.",
-      "period": "Stand 2026-10-05"
+      "period": "Stand 2026-10-05",
+      "values": {
+        "SPX": "100",
+        "ES": "50",
+        "MES": "5"
+      }
     }
   ],
   "sources": [
@@ -593,48 +480,6 @@
       "tier": "primary",
       "title": "BT-Drs. 20/13419, 20/13420, 20/12780 (JStG 2024)",
       "url": "https://dserver.bundestag.de/btd/20/134/2013420.pdf"
-    },
-    {
-      "id": "SRC_BZST_2019",
-      "ref": "S3",
-      "tier": "primary",
-      "title": "Gesetz zur Einführung einer Pflicht zur Mitteilung grenzüberschreitender Steuergestaltungen (BGBl. I 2019 S. 2875)",
-      "url": "https://www.bzst.de/SharedDocs/Downloads/DE/DAC6/dac6_gesetz_grenzueberschreitender_steuergestaltungen.pdf"
-    },
-    {
-      "id": "SRC_BMF_2025",
-      "ref": "S4",
-      "tier": "primary",
-      "title": "BMF-Schreiben Einzelfragen zur Abgeltungsteuer, 14.05.2025",
-      "url": "https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Abgeltungsteuer/2025-05-14-einzelfragen-zur-abgeltungsteuer.pdf"
-    },
-    {
-      "id": "SRC_BFH_VIIIB11323",
-      "ref": "S5",
-      "tier": "primary",
-      "title": "BFH, Beschluss v. 07.06.2024, VIII B 113/23",
-      "url": "https://www.bundesfinanzhof.de/en/entscheidungen/entscheidungen-online/decision-detail/STRE202410113/"
-    },
-    {
-      "id": "SRC_FG_RLP",
-      "ref": "S6",
-      "tier": "secondary",
-      "title": "FG Rheinland-Pfalz 1 V 1674/23 (tax-news, Sekundärquelle)",
-      "url": "https://www.tax-news.de/news/fg-rheinland-pfalz-haelt-verfassungsmaessigkeit-der-verlustverrechnungsbeschraenkung-bei-termingeschaeften-fuer-zweifelhaft/"
-    },
-    {
-      "id": "SRC_BMF_2021",
-      "ref": "S7",
-      "tier": "primary",
-      "title": "BMF-Schreiben vom 03.06.2021 (Anhang 19 EStH)",
-      "url": "https://ao.bundesfinanzministerium.de/esth/2024/C-Anhaenge/Anhang-19/II/anhang-19-II.html"
-    },
-    {
-      "id": "SRC_ESTG_20",
-      "ref": "S8",
-      "tier": "primary",
-      "title": "§ 20 EStG (EStH 2025)",
-      "url": "https://esth.bundesfinanzministerium.de/esth/2025/A-Einkommensteuergesetz/II-Einkommen-2-24b/8-Die-einzelnen-Einkunftsarten-13-24b/e-Kapitalvermoegen-20/Paragraf-20/paragraf-20.html"
     },
     {
       "id": "SRC_BAFIN_TURBO",
@@ -840,25 +685,11 @@
       "url": "https://databento.com/blog/beyond-40-gbps-processing-opra-in-real-time"
     },
     {
-      "id": "SRC_STEUERTIPPS",
-      "ref": "S38",
-      "tier": "secondary",
-      "title": "steuertipps.de · Stand 2 BvL 3/21 (Sekundärquelle)",
-      "url": "https://www.steuertipps.de/altersvorsorge-rente-finanzen/aktienverluste-nur-mit-aktiengewinnen-verrechenbar-verfassungswidrig"
-    },
-    {
       "id": "SRC_PRICES",
       "ref": "S39",
       "tier": "secondary",
       "title": "Preisseiten ATAS, SpotGamma, MenthorQ, ORATS/Volland, Bookmap (Snippets/Drittquellen; Sekundärquelle)",
       "url": "https://atas.net/pricing/"
-    },
-    {
-      "id": "SRC_HB_JSTG2020",
-      "ref": "S40",
-      "tier": "secondary",
-      "title": "Handelsblatt · Erhöhung auf 20.000 € durch JStG 2020 (Sekundärquelle)",
-      "url": "https://www.handelsblatt.com/finanzen/steuern-recht/steuern/umstrittene-regelung-groko-bessert-bei-steuerlicher-verlustverrechnung-von-termingeschaeften-nach/26697238.html"
     },
     {
       "id": "SRC_BAFIN_STUDY",
@@ -943,13 +774,6 @@
       "tier": "internal",
       "title": "FinCoach-Fachableitung (nicht einzeln belegt)",
       "url": ""
-    },
-    {
-      "id": "SRC_DZB_2021",
-      "ref": "S51",
-      "tier": "secondary",
-      "title": "DZ BANK Steuerinformation Ausgabe 2/2021 (Knock-out-Verluste und § 20 Abs. 6 Satz 6 EStG)",
-      "url": "https://www.pax-bank.de/content/dam/f0395-0/externeinhalte/pdf/verbund/DZB%20Steuerinformation%20Ausgabe%202%202021.pdf"
     }
   ],
   "audit_trail": [
@@ -1050,6 +874,12 @@
       "event": "Neunte Zweitprüfung v1.8.0: Eigenständigkeit und C1 bestätigt; Gates unverändert; neue offene Fehlerklassen L60–L63, L27b, L06b, L53c",
       "qa_score_pct": 73.7,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "v1.9.0: Herausgeber-Entscheidung – überholte Rechtslage entfernt (Verlustgrenze für Termingeschäfte vor JStG 2024, Satz 5/6 a. F., Rückwirkung, BFH-AdV-Beschluss, BVerfG-Vorlage, Knock-out-Verluste a. F., Verdrängungsthese, Altjahre). Neun Fakten und zugehörige Quellen entfernt; FACT_JSTG2024_REPEAL auf den geltenden Rahmen umformuliert; K1–K3 entfallen, K neu nummeriert (K1–K9); Claim-Tabelle A01–A14",
+      "qa_score_pct": null,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -1101,18 +931,9 @@
       ]
     },
     {
-      "title": "Modul 6 · DACH-Marktspezifika und Rechtsstand",
+      "title": "Modul 6 · DACH-Marktspezifika und steuerlicher Rahmen",
       "facts": [
         "FACT_JSTG2024_REPEAL",
-        "FACT_P52_ABS28",
-        "FACT_BMF_2025",
-        "FACT_TERMIN_2019",
-        "FACT_TERMIN_2020_RAISE",
-        "FACT_BFH_ADV",
-        "FACT_STOCK_LOSS_S4",
-        "FACT_BVERFG_PENDING",
-        "FACT_OS_KO_NOT_TERMIN",
-        "FACT_KO_SATZ6",
         "FACT_P15_KSTG",
         "FACT_ODAX_SPECS",
         "FACT_OESX_MULT",
@@ -1143,104 +964,36 @@
   "source_claims": [
     {
       "id": "A01",
-      "claim": "Verluste aus Termingeschäften seit 2021 nur bis 20.000 € je Jahr verrechenbar (§ 20 Abs. 6 Satz 6 EStG)",
-      "category": "Steuer/Recht",
-      "result": "no",
-      "facts": [
-        "FACT_JSTG2024_REPEAL",
-        "FACT_P52_ABS28",
-        "FACT_TERMIN_2019",
-        "FACT_TERMIN_2020_RAISE"
-      ]
-    },
-    {
-      "id": "A02",
-      "claim": "Besteuerung „fiktiver Gewinne“ bei Spreads trotz Nettoverlust",
-      "category": "Steuer/Recht",
-      "result": "part",
-      "facts": [
-        "FACT_TERMIN_2019",
-        "FACT_JSTG2024_REPEAL"
-      ]
-    },
-    {
-      "id": "A03",
-      "claim": "BFH äußerte in „mehreren Beschlüssen“ Zweifel (VIII B 113/23)",
-      "category": "Steuer/Recht",
-      "result": "part",
-      "facts": [
-        "FACT_BFH_ADV"
-      ]
-    },
-    {
-      "id": "A04",
-      "claim": "Rechtsunsicherheit bleibt bis zur BVerfG-Entscheidung",
-      "category": "Steuer/Recht",
-      "result": "no",
-      "facts": [
-        "FACT_JSTG2024_REPEAL",
-        "FACT_P52_ABS28",
-        "FACT_BVERFG_PENDING"
-      ]
-    },
-    {
-      "id": "A05",
-      "claim": "Optionsscheine und Knock-outs sind laut Finanzverwaltung keine Termingeschäfte",
-      "category": "Steuer/Recht",
-      "result": "ok",
-      "facts": [
-        "FACT_OS_KO_NOT_TERMIN"
-      ]
-    },
-    {
-      "id": "A06",
-      "claim": "Optionsschein-Verluste uneingeschränkt mit Aktien- und Zinsgewinnen verrechenbar",
-      "category": "Steuer/Recht",
-      "result": "part",
-      "facts": [
-        "FACT_STOCK_LOSS_S4",
-        "FACT_KO_SATZ6"
-      ]
-    },
-    {
-      "id": "A07",
-      "claim": "Privatanleger werden in bankemittierte Produkte gedrängt",
-      "category": "Markt",
-      "result": "no",
-      "facts": [
-        "FACT_JSTG2024_REPEAL",
-        "FACT_BAFIN_TURBO"
-      ]
-    },
-    {
-      "id": "A08",
       "claim": "Market Maker sind gesetzlich gezwungen, über das zentrale Orderbuch zu hedgen",
       "category": "Mikrostruktur",
       "result": "no",
       "facts": [
         "FACT_MM_NO_HEDGE_DUTY"
-      ]
+      ],
+      "k": "K2"
     },
     {
-      "id": "A09",
+      "id": "A02",
       "claim": "Emittenten netten intern und hedgen über OTC-Swaps; keine Orderbuchspuren im FDAX",
       "category": "Mikrostruktur",
       "result": "part",
       "facts": [
         "FACT_ISSUER_HEDGING"
-      ]
+      ],
+      "k": "K4"
     },
     {
-      "id": "A10",
+      "id": "A03",
       "claim": "Für vermögensverwaltende Kapitalgesellschaften gilt keine Verlustverrechnungsbeschränkung",
       "category": "Steuer/Recht",
       "result": "no",
       "facts": [
         "FACT_P15_KSTG"
-      ]
+      ],
+      "k": "K1"
     },
     {
-      "id": "A11",
+      "id": "A04",
       "claim": "Options X-Ray besteht aus zehn Indikatoren",
       "category": "Produkt",
       "result": "ok",
@@ -1249,7 +1002,7 @@
       ]
     },
     {
-      "id": "A12",
+      "id": "A05",
       "claim": "Datenbasis CBOE/OptionsDepth, 60-Sekunden-Snapshots",
       "category": "Produkt",
       "result": "ok",
@@ -1258,17 +1011,16 @@
       ]
     },
     {
-      "id": "A13",
+      "id": "A06",
       "claim": "Beschränkung auf den SPX-Komplex",
       "category": "Produkt",
       "result": "ok",
       "facts": [
-        "FACT_XRAY_1MIN_SPX",
-        "FACT_CHAIN_SUITE"
+        "FACT_XRAY_1MIN_SPX"
       ]
     },
     {
-      "id": "A14",
+      "id": "A07",
       "claim": "Broker-Konnektivität Rithmic, IB, CQG",
       "category": "Produkt",
       "result": "part",
@@ -1278,7 +1030,7 @@
       ]
     },
     {
-      "id": "A15",
+      "id": "A08",
       "claim": "ES/MES-Cross-Trading vorhanden",
       "category": "Produkt",
       "result": "ok",
@@ -1287,7 +1039,7 @@
       ]
     },
     {
-      "id": "A16",
+      "id": "A09",
       "claim": "Options Board und Strategy Analyzer in Entwicklung",
       "category": "Produkt",
       "result": "part",
@@ -1296,33 +1048,35 @@
       ]
     },
     {
-      "id": "A17",
+      "id": "A10",
       "claim": "Fehlende native Multi-Leg-Spread-Routing-Engine",
       "category": "Produkt",
-      "result": "ok",
+      "result": "part",
       "facts": [
         "FACT_IB_BAG",
         "FACT_ATAS_NO_OPT_TRADING"
-      ]
+      ],
+      "k": "K8"
     },
     {
-      "id": "A18",
+      "id": "A11",
       "claim": "NDX/NQ zeigt überproportionale 0DTE-Dynamik",
       "category": "Markt",
       "result": "nv",
       "facts": []
     },
     {
-      "id": "A19",
+      "id": "A12",
       "claim": "Wettbewerbsfelder (SpotGamma, MenthorQ, Volland, Bookmap, TWS)",
       "category": "Wettbewerb",
       "result": "part",
       "facts": [
         "FACT_COMPETITOR_MATRIX"
-      ]
+      ],
+      "k": "K6"
     },
     {
-      "id": "A20",
+      "id": "A13",
       "claim": "Vier Roadmap-Erweiterungen",
       "category": "Vorschlag",
       "result": "scen",
@@ -1331,14 +1085,15 @@
       ]
     },
     {
-      "id": "A21",
+      "id": "A14",
       "claim": "Warrant-Fair-Value-Tool zeigt „verdeckte Marge“",
       "category": "Vorschlag",
       "result": "part",
       "facts": [
         "FACT_ROADMAP",
         "FACT_PRIIPS_UWG"
-      ]
+      ],
+      "k": "K9"
     }
   ]
 }

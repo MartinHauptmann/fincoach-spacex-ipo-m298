@@ -2,7 +2,7 @@
 
 **Thema:** ATAS Options X-Ray, Dealer-Hedging-Analytik, Eurex-Börsenoptionen vs. verbriefte Derivate im DACH-Raum
 und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
-**Prompt-Version:** 1.5.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-08 (Lehren L03–L59 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
+**Prompt-Version:** 1.6.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-08 (Lehren L03–L64 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
 **Modul-ID:** M300 ist ein Platzhalter und kann frei angepasst werden
 
 ---
@@ -20,12 +20,10 @@ und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
    `.claude/skills/fincoach-module-qa/SKILL.md`. Dazu gehören `python3 qa/check_module.py` und
    `node qa/render_audit.cjs`, beide mit Exit 0.
 
-> **Hinweis zum Ausgangstext:** Bei der Erstellung dieses Prompts sind im Quelltext mehrere Aussagen
-> aufgefallen, die rechtlich oder fachlich überholt sind oder geprüft werden müssen. Der wichtigste Punkt:
-> Die 20.000-€-Verlustverrechnungsgrenze für Termingeschäfte (§ 20 Abs. 6 Satz 5 und 6 EStG a. F.) wurde nach
-> unserem Kenntnisstand durch das **Jahressteuergesetz 2024** gestrichen, und zwar für alle offenen Fälle.
-> Der Quelltext stellt sie als geltendes Recht dar. Diese und weitere Punkte stehen als
-> Pflicht-Prüfpunkte **K1 bis K12** im Prompt. Das Modell muss sie selbst verifizieren und darf sie nicht
+> **Hinweis zum Ausgangstext:** Der Quelltext enthält Aussagen, die fachlich zu präzisieren oder rechtlich
+> überholt sind. Steuerliche Aussagen gibt die Analyse nur zum geltenden Recht am Stichtag wieder; frühere
+> Rechtslagen, Übergangsregeln und überholte Grenzwerte werden nicht dargestellt. Die übrigen Punkte stehen als
+> Pflicht-Prüfpunkte **K1 bis K6** im Prompt. Das Modell muss sie selbst verifizieren und darf sie nicht
 > ungeprüft übernehmen.
 
 ---
@@ -86,65 +84,47 @@ Provenienz-Tags (genau einer pro Claim):
   MODEL_ASSUMPTION     – Modellannahme (z. B. Dealer-Positionierung)
   SCENARIO_PROJECTION  – Vorschlag, Roadmap oder Prognose; nie als Tatsache formulieren
 
-Schritt A2: Prüfe ZWINGEND die folgenden bekannten kritischen Punkte (K1–K12) und dokumentiere
-das Ergebnis jeweils mit Fundstelle:
+Schritt A2: Steuerliche Aussagen nur zum geltenden Recht am Stichtag. Stellt der Quelltext überholtes Recht
+als geltend dar, wird es nicht wiedergegeben; Modul 6 nennt ausschließlich den geltenden Rahmen. Prüfe danach
+ZWINGEND die folgenden bekannten kritischen Punkte (K1–K6) und dokumentiere das Ergebnis jeweils mit Fundstelle:
 
-K1  RECHTSSTAND § 20 Abs. 6 Satz 5/6 EStG: Ist die Verlustverrechnungsbeschränkung für
-    Termingeschäfte (20.000 €/Jahr) zum Stichtag noch geltendes Recht? Prüfe insbesondere das
-    Jahressteuergesetz 2024 (Streichung der Sätze 5 und 6, Anwendung auf alle offenen Fälle) und die
-    zugehörige Anwendungsregel in § 52 EStG. Stelle die Zeitachse dar: Einführung (JStG 2019,
-    Termingeschäfte ab VZ 2021), Erhöhung von 10.000 € auf 20.000 €, BFH-Zweifel, Abschaffung.
-    Ist die Regelung abgeschafft, darf der Text sie NICHT als aktuelle Barriere darstellen. Sie ist
-    dann nur noch historisch bzw. für verfahrensrechtlich bestandskräftige Altfälle relevant.
-K2  BFH VIII B 113/23: Art (AdV-Beschluss im summarischen Verfahren, kein Urteil), Datum, Inhalt
-    (ernstliche Zweifel an der Verfassungsmäßigkeit) korrekt wiedergeben. Prüfe, ob ein Verfahren
-    beim BVerfG anhängig war und ob es sich durch die Gesetzesänderung erledigt hat. Behauptungen über
-    „mehrere Beschlüsse“ belegen oder streichen.
-K3  ABGRENZUNG TERMINGESCHÄFT: Einordnung von Optionsscheinen und Knock-out-Zertifikaten nach dem
-    BMF-Schreiben zu Einzelfragen der Abgeltungsteuer (Fassung zum Stichtag, Rz. zu § 20 Abs. 2
-    Satz 1 Nr. 3 bzw. Nr. 7 EStG) prüfen. Weiterhin geltende Aktienverlust-Beschränkung (§ 20 Abs. 6
-    Satz 4 EStG) korrekt abgrenzen: Verluste aus Optionsscheinen sind mit Aktiengewinnen
-    verrechenbar, Aktienverluste aber nur mit Aktiengewinnen. Hat sich der steuerliche Nachteil
-    börsengehandelter Optionen gegenüber verbrieften Produkten durch K1 erledigt, muss die
-    „Verdrängungs“-These des Quelltexts entsprechend relativiert werden (Altfallwirkung,
-    Verhaltensträgheit, Vertriebsstrukturen statt Steuerrecht).
-K4  KAPITALGESELLSCHAFT: Die Aussage, für eine vermögensverwaltende GmbH gelte „keine
+K1  KAPITALGESELLSCHAFT: Die Aussage, für eine vermögensverwaltende GmbH gelte „keine
     Verlustverrechnungsbeschränkung“, ist zu präzisieren. Prüfe § 15 Abs. 4 Satz 3–5 EStG i. V. m.
     § 8 Abs. 1 KStG (gesonderter Verlustkreis für Termingeschäfte im Betriebsvermögen, Ausnahmen
     für Kreditinstitute und Sicherungsgeschäfte), § 8b KStG und die Gewerbesteuer. Keine Empfehlung
     zur Rechtsformwahl aussprechen.
-K5  HEDGING-PFLICHT DER MARKET MAKER: Die Aussage, Market Maker seien „gesetzlich gezwungen“, über das
+K2  HEDGING-PFLICHT DER MARKET MAKER: Die Aussage, Market Maker seien „gesetzlich gezwungen“, über das
     zentrale Orderbuch des Basiswerts abzusichern, ist zu prüfen und in der Regel zu korrigieren:
     Delta-Hedging folgt aus Risikomanagement und Kapitalanforderungen, nicht aus einer
     Rechtspflicht zum Orderbuch-Hedging. Hedging erfolgt auch über Futures, ETFs, OTC-Swaps,
     Cross-Asset-Positionen und internes Netting. Market-Maker-Pflichten (Quotierungspflichten nach
     MiFID II Art. 17 Abs. 3 / Eurex-Market-Making-Programme) sind etwas anderes als Hedging-Pflichten.
-K6  GEX-PRÄMISSE: Die Vorzeichenkonvention „Dealer long Calls / short Puts“ bzw. die Klassifikation
+K3  GEX-PRÄMISSE: Die Vorzeichenkonvention „Dealer long Calls / short Puts“ bzw. die Klassifikation
     von Kundenflüssen ist eine MODEL_ASSUMPTION. Benenne die Fehlerquellen: Richtung nicht
     beobachtbar, Open Interest nur T+1, Spread- und Kombi-Trades, Overwriting-Programme,
     Dispersion, 0DTE-Volumen ohne OI-Spur.
-K7  EMITTENTEN-HEDGING BEI OPTIONSSCHEINEN: Die These „keine Hedging-Spuren im FDAX-Orderbuch“ ist
+K4  EMITTENTEN-HEDGING BEI OPTIONSSCHEINEN: Die These „keine Hedging-Spuren im FDAX-Orderbuch“ ist
     zu präzisieren. Emittenten hedgen ihr Nettorisiko nach dem Netting AUCH börslich (FDAX, ODAX,
     Kassamarkt). Der Effekt ist also nicht null, sondern im Verhältnis zum Gesamtmarkt klein,
     zeitlich verschmiert und aus öffentlichen Daten nicht zurechenbar. Die Formulierung „versagt
     systembedingt“ ist entsprechend abzuschwächen oder zu quantifizieren.
-K8  ATAS-PRODUKTANGABEN: Anzahl und Namen der Indikatoren der Options X-Ray Suite, Datenquelle
+K5  ATAS-PRODUKTANGABEN: Anzahl und Namen der Indikatoren der Options X-Ray Suite, Datenquelle
     (CBOE / OptionsDepth), 60-Sekunden-Snapshot-Intervall, unterstützte Basiswerte (nur SPX-Komplex?),
     Broker-Anbindungen (Rithmic, IB, CQG), Stand von Options Board und Strategy Analyzer, ES/MES-
     Cross-Trading. Jede Angabe gegen die aktuelle Herstellerdokumentation prüfen. Ohne Beleg gilt
     VENDOR_CLAIM bzw. USER_PROVIDED mit Stichtag.
-K9  WETTBEWERBER: Funktionsumfang, Datenfrequenz und Abdeckung von SpotGamma (HIRO), MenthorQ,
+K6  WETTBEWERBER: Funktionsumfang, Datenfrequenz und Abdeckung von SpotGamma (HIRO), MenthorQ,
     Volland, Bookmap und IBKR TWS zum Stichtag prüfen. Nicht verifizierbare Felder in der Matrix
     mit „n. v.“ markieren statt sie zu schätzen.
-K10 EUREX-SPEZIFIKATIONEN: Kontraktgrößen und Produktcodes prüfen und mit Quelle angeben, z. B.
+K7 EUREX-SPEZIFIKATIONEN: Kontraktgrößen und Produktcodes prüfen und mit Quelle angeben, z. B.
     FDAX (25 €/Pkt.), FDXM (5 €/Pkt.), FDXS (1 €/Pkt.), ODAX (5 €/Pkt., Option auf den Index,
     nicht auf den Future), FESX/OESX (10 €/Pkt.). Ebenso Verfallstage (dritter Freitag; Quartals-
     verfall statt umgangssprachlich „Hexensabbat“), Verfügbarkeit von Weekly-/Daily-Expiries und
     Datenzugang (EOBI/EMDI, Lizenzkosten).
-K11 IBKR-COMBO-ORDERS: Prüfe, welche Multi-Leg-Kombinationen die IB-API bereits nativ unterstützt
+K8 IBKR-COMBO-ORDERS: Prüfe, welche Multi-Leg-Kombinationen die IB-API bereits nativ unterstützt
     (BAG/Combo-Orders) und was ATAS daher tatsächlich implementieren müsste: UI, Risiko-Checks,
     Preisfindung, Legging-Schutz.
-K12 WARRANT-FAIR-VALUE-TOOL: Die Begriffe „verdeckte Marge“ und „künstliche Spread-Ausweitung“
+K9 WARRANT-FAIR-VALUE-TOOL: Die Begriffe „verdeckte Marge“ und „künstliche Spread-Ausweitung“
     durch neutrale Fachbegriffe ersetzen (Emittentenaufschlag / Fair-Value-Differenz, Spread,
     IV-Differenz). Methodische Grenzen benennen: unterschiedliche Basiswerte und Laufzeiten,
     Dividenden- und Zinsannahmen, Emittentenbonität (Kontrahentenrisiko ist realer Wert, keine
@@ -164,7 +144,7 @@ Die Analyse in Phase B baut ausschließlich auf dem geprüften Stand aus Phase A
 Modul 1 · Technologische Dekonstruktion der Options X-Ray Suite
   Analysiere die Indikatoren (laut Quelltext: Market State, Expected Move, GEX Heatmap, Charm
   Heatmap, Big Trades, Flow, Flow Delta, Strike Heatmap, Strike Profile, Surface Profile; Liste
-  gemäß K8 verifizieren). Pro Indikator: Zweck, vermutete Berechnungslogik (als MODEL_ASSUMPTION
+  gemäß K5 verifizieren). Pro Indikator: Zweck, vermutete Berechnungslogik (als MODEL_ASSUMPTION
   kennzeichnen, solange die Methodik nicht offengelegt ist), Eingangsdaten und Interpretations-
   grenzen.
   Mathematischer Kern (LaTeX, mit Einheiten und Vorzeichenkonvention):
@@ -194,7 +174,7 @@ Modul 2 · Datenfeed-Architektur, Latenzprofil und Validierung
 Modul 3 · Handels- und Ausführungsmöglichkeiten
   Broker-Konnektivität (Rithmic, IB, CQG), Trennung von Analyse und Ausführung, ES/MES-Cross-
   Trading, Stand von Options Board und Strategy Analyzer. Fehlende native Multi-Leg-Engine unter
-  Berücksichtigung von K11 bewerten.
+  Berücksichtigung von K8 bewerten.
 
 Modul 4 · Mikro-Makro-Synergien im praktischen Trading
   Wie interagieren Expected-Move-Korridor, Call-/Put-Walls und GEX-Flip mit Footprint-Mustern
@@ -215,18 +195,18 @@ Modul 6 · DACH-Marktspezifika: Börsenoptionen vs. verbriefte Derivate
   (CCP-Clearing durch Eurex Clearing vs. Emittentenbonität), Spreads, Pricing (Market-Maker-
   Quotes vs. Emittenten-Quote-Making), Liquiditätsmodell, Kosten (PRIIPs-KID), Zugang für
   Privatanleger (Angemessenheitsprüfung nach § 63 Abs. 10 WpHG, Mindestgrößen). Die steuerliche
-  Einordnung erfolgt AUSSCHLIESSLICH auf Basis des in K1–K4 geprüften Rechtsstands, mit Zeitachse
-  und klarer Trennung zwischen Rechtslage bis zur Abschaffung und aktueller Rechtslage. Warum
-  GEX-/Charm-Modelle bei Optionsscheinen nur eingeschränkt übertragbar sind: siehe K7.
+  Einordnung erfolgt AUSSCHLIESSLICH auf Basis des geltenden Rechts am Stichtag (siehe Schritt A2 und K1);
+  frühere Rechtslagen werden nicht dargestellt. Warum
+  GEX-/Charm-Modelle bei Optionsscheinen nur eingeschränkt übertragbar sind: siehe K4.
 
 Modul 7 · Strategische Produkt-Roadmap (alles SCENARIO_PROJECTION)
-  Bewerte die vier Vorschläge (Multi-Asset: NDX/NQ, CL, GC, Single Stocks; Eurex-Modul FDAX/FESX;
+  Bewerte die vier Vorschläge (Multi-Asset: NDX/NQ, CL, GC, Single Stocks; Eurex-Modul ODAX/OESX;
   Multi-Leg-Ausführung inkl. automatisiertem Delta-Hedging; Warrant-Fair-Value-Tool) jeweils nach:
   Nutzen, Datenverfügbarkeit und -kosten, technischer Komplexität, regulatorischen Implikationen
   und Risiken. Bei automatisierter Orderauslösung sind zu nennen: Algo-Trading-Pflichten (MiFID II
   Art. 17, § 80 WpHG), Pre-Trade-Risikokontrollen, mögliche Erlaubnispflicht nach KWG/WpIG, falls
   die Software Entscheidungen für Kunden trifft, Haftung und Kill-Switch. Beim Fair-Value-Tool gilt
-  K12. Bewertung als Tabelle (Aufwand/Wirkung/Risiko) plus Fließtextbegründung.
+  K9. Bewertung als Tabelle (Aufwand/Wirkung/Risiko) plus Fließtextbegründung.
 
 Modul 8 · Fazit und Synthese
   Eigenständige Synthese auf geprüfter Basis, nicht die Übernahme des Quelltext-Fazits. Benenne
@@ -280,9 +260,9 @@ C9  Datenschutz: keine personenbezogenen Daten; Beispiele anonymisiert und hypot
 ──────────────────────────────────────────────
 6 · QUALITÄTS-GATES
 ──────────────────────────────────────────────
-Q1  Phase A vollständig: Claim-Tabelle, K1–K12 einzeln beantwortet, Korrekturliste vorhanden.
+Q1  Phase A vollständig: Claim-Tabelle, K1–K6 einzeln beantwortet, Korrekturliste vorhanden.
 Q2  Aktualität: jede rechtliche und produktbezogene Aussage mit Stichtag; überholte Rechtslage
-    als „a. F.“ gekennzeichnet.
+    wird nicht dargestellt.
 Q3  Mathematische Konsistenz: Formeln dimensional korrekt, Vorzeichenkonventionen einheitlich,
     Multiplikatoren korrekt, Zahlenbeispiel rechnerisch nachvollziehbar (Rechenweg angeben).
 Q4  Provenienz: jeder Fakt mit genau einem Provenienz-Tag und einer Konfidenz;
@@ -296,7 +276,7 @@ Q5  Quellenqualität: Primärquellen für Recht und Kontraktspezifikationen; Her
 Q6  Vollständigkeit: alle acht Module bearbeitet, die Wettbewerbsmatrix vollständig ausgefüllt
     oder mit [N. V.] markiert.
 Q7  Widerspruchsfreiheit: Fazit (Modul 8) steht nicht im Widerspruch zu Phase A
-    (insbesondere zu K1 und K3). Alle Zählungen (Fakten je Provenienz-Tag, Herstellerangaben,
+    (insbesondere zu K1–K3). Alle Zählungen (Fakten je Provenienz-Tag, Herstellerangaben,
     Score) werden aus M-DBOM bzw. Scorecard ABGELEITET und gegengerechnet, nie geschätzt [L03, L07].
 Q8  Verständlichkeit: Glossar mit mindestens 15 Fachbegriffen (u. a. GEX, Charm, Vanna, 0DTE,
     OPRA, MBO, Absorption, Sweep, Call/Put Wall, GEX-Flip, Termingeschäft, Knock-out, CCP,
@@ -318,7 +298,7 @@ Q10 Formatvorgaben aus Abschnitt 4 eingehalten; jeder Fachbegriff wird beim erst
 ──────────────────────────────────────────────
  0. Titelblock (Modul M300, Titel, Stichtag, Zielstufe, Version) + Kurz-Disclaimer (C1)
  1. Executive Summary (max. 250 Wörter, inkl. der drei wichtigsten Korrekturen am Quelltext)
- 2. Phase A: Claim-Tabelle · K1–K12-Prüfprotokoll · Korrekturliste
+ 2. Phase A: Claim-Tabelle · K1–K6-Prüfprotokoll · Korrekturliste
  3. Module 1–7 (Phase B)
  4. Modul 8: Fazit und Synthese
  5. Glossar
@@ -337,8 +317,8 @@ Q10 Formatvorgaben aus Abschnitt 4 eingehalten; jeder Fachbegriff wird beim erst
 8 · SELBSTPRÜFUNG VOR DER AUSGABE
 ──────────────────────────────────────────────
 Prüfe deinen Entwurf vor der finalen Ausgabe noch einmal als Compliance-Prüfer (Rolle c):
-(1) Stellt irgendein Satz die 20.000-€-Grenze als geltendes Recht dar, obwohl K1 das Gegenteil
-    ergeben hat? → korrigieren.
+(1) Beschreibt irgendein Satz eine frühere Rechtslage oder stellt überholtes Recht als geltend dar?
+    → streichen.
 (2) Klingt irgendein Satz wie eine Kauf- oder Handelsempfehlung? → generisch umformulieren.
 (3) Gibt es eine Zahl ohne Quelle, ohne [EST] und ohne Rechenweg? → belegen, markieren oder
     streichen.
@@ -352,7 +332,7 @@ Gib erst danach das Ergebnis aus. Die Selbstprüfung selbst erscheint nur als QA
 ──────────────────────────────────────────────
 9 · ABBRUCH- UND EINSCHRÄNKUNGSREGELN
 ──────────────────────────────────────────────
-• Kannst du den Rechtsstand zu K1–K4 nicht mit Primärquelle verifizieren (z. B. ohne Webzugriff),
+• Kannst du den Rechtsstand zu K1 nicht mit Primärquelle verifizieren (z. B. ohne Webzugriff),
   kennzeichne Modul 6 deutlich als „Rechtsstand nicht verifiziert – vor Veröffentlichung prüfen“
   und setze C3 auf ◐. Die Freigabeempfehlung lautet dann ÜBERARBEITUNG.
 • Ist die Herstellerdokumentation zu ATAS nicht zugänglich, führe Modul 1–3 als methodische
@@ -373,14 +353,11 @@ QUELLTEXT (ungeprüftes Inputmaterial, Provenienz USER_PROVIDED)
 
 | # | Aussage im Quelltext | Befund | Schwere |
 |---|---|---|---|
-| K1 | 20.000-€-Grenze für Termingeschäftsverluste gilt „seit 2021“ und weiterhin | Nach unserem Kenntnisstand durch das JStG 2024 (Dezember 2024) gestrichen, Anwendung in allen offenen Fällen; heute nur noch historisch bzw. für bestandskräftige Altfälle relevant | KRITISCH |
-| K2 | Rechtsunsicherheit „bis zu einer Entscheidung des BVerfG“ | Durch die Abschaffung weitgehend überholt; VIII B 113/23 ist ein AdV-Beschluss (summarisches Verfahren), kein Hauptsacheurteil | KRITISCH |
-| K3 | Anleger werden steuerlich in Optionsscheine „gedrängt“ | Als aktuelle Kausalität nicht mehr haltbar; höchstens historischer Effekt (2021–2024) | WESENTLICH |
-| K4 | Für vermögensverwaltende Kapitalgesellschaften gilt keine Verlustverrechnungsbeschränkung | Zu pauschal: § 15 Abs. 4 Satz 3 ff. EStG (gesonderter Verlustkreis für Termingeschäfte) ist zu prüfen | WESENTLICH |
-| K5 | Market Maker sind „gesetzlich gezwungen“, über das zentrale Orderbuch zu hedgen | Keine solche Rechtspflicht; Hedging ist Risikomanagement und läuft über verschiedene Kanäle | WESENTLICH |
-| K7 | Optionsscheine erzeugen „keine“ Hedging-Spuren im FDAX | Emittenten hedgen ihr Nettorisiko auch börslich; die Spur ist schwach und nicht zurechenbar, aber nicht null | HINWEIS |
-| K8/K9 | Produkt- und Wettbewerberangaben | Unbelegte Hersteller- bzw. Nutzerangaben; vor Veröffentlichung gegen aktuelle Doku prüfen | HINWEIS |
-| K12 | „Verdeckte Marge“, „künstliche Spread-Ausweitung“ | Wertende Begriffe mit UWG-Risiko; neutral formulieren und Methodik offenlegen | WESENTLICH |
+| K1 | Für vermögensverwaltende Kapitalgesellschaften gilt keine Verlustverrechnungsbeschränkung | Zu pauschal: § 15 Abs. 4 Satz 3 ff. EStG (gesonderter Verlustkreis für Termingeschäfte) ist zu prüfen | WESENTLICH |
+| K2 | Market Maker sind „gesetzlich gezwungen“, über das zentrale Orderbuch zu hedgen | Keine solche Rechtspflicht; Hedging ist Risikomanagement und läuft über verschiedene Kanäle | WESENTLICH |
+| K4 | Optionsscheine erzeugen „keine“ Hedging-Spuren im FDAX | Emittenten hedgen ihr Nettorisiko auch börslich; die Spur ist schwach und nicht zurechenbar, aber nicht null | HINWEIS |
+| K5/K6 | Produkt- und Wettbewerberangaben | Unbelegte Hersteller- bzw. Nutzerangaben; vor Veröffentlichung gegen aktuelle Doku prüfen | HINWEIS |
+| K9 | „Verdeckte Marge“, „künstliche Spread-Ausweitung“ | Wertende Begriffe mit UWG-Risiko; neutral formulieren und Methodik offenlegen | WESENTLICH |
 
 > Dieser Vorab-Befund ersetzt keine steuerliche oder rechtliche Prüfung. Er soll sicherstellen, dass das
 > Modell die Punkte aktiv verifiziert, statt sie aus dem Quelltext zu übernehmen.

@@ -48,7 +48,7 @@ MD_TOK = (r"\b\d{2}\.\d{2}\.\d{4}\b|§\s?\d+[a-z]?(?:\s?Abs\.\s?\d+)?|\b(?:[IVX]
           r"|\b(?:Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b|\bFG [A-ZÄÖÜ][\wäöü-]+")  # L52
 # L47: starke rechtliche Bewertungen müssen wörtlich im Claim stehen
 STRONG = (r"voraussichtlich (?:nicht )?(?:mit [^.]{0,40}?)?vereinbar|nicht mit [^.]{0,40}?vereinbar|unvereinbar|verfassungswidrig\w*|\bnichtig\w*"
-          r"|rechtswidrig\w*|gleichheitswidrig\w*|verst(?:ieß|ößt|oßen|oße) gegen")  # L52/L47b  # L52: normalisiert, Synonyme
+          r"|rechtswidrig\w*|gleichheits\w*widrig\w*|grundgesetzwidrig\w*|verst(?:ieß|ößt|oßen|oße) gegen")  # L52/L47b  # L52: normalisiert, Synonyme
 SCOPE = re.compile(r"^(s0[1-9]|s1[01]|s-fz)$")  # Inhaltssektionen
 
 
@@ -169,8 +169,8 @@ def main():
            "Beratungsausschluss und Totalverlusthinweis im Hero")
     # L42 · C1-Pflichtbestandteile in jedem Disclaimer (Hero, Schluss, Analyse Anfang/Ende)
     C1_PARTS = {"Beratungsausschluss": r"keine (?:Anlage-?,? ?(?:Rechts|Steuer)|Anlageberatung)", "allgemeine Information": r"Information|Bildung", "Totalverlust": r"Totalverlust",
-                "Hebel": r"Hebel", "Knock-out": r"Knock-out", "nur erfahrene Anleger": r"nur\s+für\s+erfahrene\s+Anleger"}
-    NEG = re.compile(r"\b(ohne|kein\w*|nicht|ausgeschlossen|nie)\b|(?<![a-zäöü])un(?=erfahren)", re.I)  # L42b: Verneinung im ganzen Teilsatz
+                "Hebel": r"Hebel(?!frei|los)", "Knock-out": r"Knock-out", "nur erfahrene Anleger": r"nur\s+für\s+erfahrene\s+Anleger"}
+    NEG = re.compile(r"\b(ohne|kein\w*|nicht|ausgeschlossen|nie|unmöglich|niemals)\b|(?<![a-zäöü])un(?=erfahren)", re.I)  # L42b: Verneinung im ganzen Teilsatz
 
     def c1_has(rx, txt):
         txt = re.sub(r"\s+", " ", txt)
@@ -298,7 +298,7 @@ def main():
                         md_miss.append(f"Z. {body[:pos + m.start()].count(chr(10)) + 1}: {m.group(0)}")
                 pos += len(para)
             report("L43 Analyse-Angaben ∈ DBOM", BLOCKER, not md_miss, "ohne Fakt: " + ", ".join(md_miss[:8]) + (f" (+{len(md_miss) - 8})" if len(md_miss) > 8 else "") if md_miss else "alle Daten und Fundstellen der Analyse in der DBOM")
-        # L46/L52b · Leitphrasen abgetrennter Fakten: kleinstes Element mit der Leitphrase (normalisiert) bindet den Fakt allein
+        # L46/L52b · Leitphrasen abgetrennter Fakten (keine abgetrennten Fakten = keine Leitphrasen; L33: leere Basis, kein leerer Test): kleinstes Element mit der Leitphrase (normalisiert) bindet den Fakt allein
         l46 = []
         scan = re.sub(r'<section id="s-qa".*?</section>|<(script|style)\b.*?</\1>', "", html, flags=re.S)
         elems = [(m, norm_txt(element_inner(scan, m))) for m in re.finditer(r"<(p|li|td|th|div|span|h\d|strong|em|a|abbr|dfn)\b[^>]*>", scan)]
@@ -315,7 +315,7 @@ def main():
                 for blob in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else []) + ([b for _, b in re.findall(r"\n\s*(\w+):\{(.*?)\}(?:,|$)", js_reg.group(1))] if js_reg else []):
                     if mk in norm_txt(blob) and (f["id"] not in blob or (f["verdict"] != "CONFIRMED" and not re.search(r"ungeprüft|medienangabe|modell", norm_txt(blob)))):
                         l46.append(f"JS „{mk}“ ohne {f['id']}")
-        report("L46 Leitphrasen gebunden", BLOCKER, not l46 and any(f.get("markers") for f in F), "; ".join(sorted(set(l46))[:4]) if l46 else ("alle Leitphrasen an ihren Fakt gebunden" if any(f.get("markers") for f in F) else "keine markers in der DBOM"))
+        report("L46 Leitphrasen gebunden", BLOCKER, not l46, "; ".join(sorted(set(l46))[:4]) if l46 else ("alle Leitphrasen an ihren Fakt gebunden" if any(f.get("markers") for f in F) else "keine abgetrennten Fakten mit Leitphrasen in der DBOM"))
         # L51 · Leitphrasen in der Analyse: Absatz/Zeile nennt den Fakt (normalisiert, L52b)
         l51 = []
         if md:
@@ -330,6 +330,9 @@ def main():
         for x in t.texts:
             if x["src"] and not x.get("code") and re.search(r"\b(belegt|bestätigt)\w*", x["text"]) and not any(facts.get(i, {}).get("verdict") == "CONFIRMED" for i in x["src"].split()):
                 l57.append(f"{x['sec']}: {x['text'].strip()[:40]}…")
+        for x in t.texts:  # L53c: auch ungebundene Texte (außer Zählzeile, Legende, QA-Sektion)
+            if not x["src"] and not x.get("code") and x["sec"] not in (None, "s-qa", "s01", "s03") and re.search(r"\b(belegt|bestätigt)\w*", x["text"]):
+                l57.append(f"{x['sec']} (ungebunden): {x['text'].strip()[:40]}…")
         for row in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else []):
             if re.search(r"\b(belegt|bestätigt)\b", re.sub(r'"(?:ok|part|no)"', "", row)) and not any(facts.get(i, {}).get("verdict") == "CONFIRMED" for i in re.findall(r"FACT_[A-Z0-9_]+", row)):
                 l57.append(row[2:6].strip('",'))
@@ -339,6 +342,92 @@ def main():
                 if re.search(r"\b(belegt|bestätigt)\b", txt) and not any(facts.get(i, {}).get("verdict") == "CONFIRMED" for i in re.findall(r"FACT_[A-Z0-9_]+", para)):
                     l57.append("Analyse: " + re.sub(r"\s+", " ", txt)[:40] + "…")
         report("L57 „belegt“ nur mit CONFIRMED", BLOCKER, not l57, "; ".join(l57[:4]) if l57 else "„belegt/bestätigt“ nur bei gebundenem CONFIRMED-Fakt")
+        # L61 · Claim-Ergebnis passt zu den Belegen: ✓/✗ nur mit CONFIRMED-Beleg; = Ergebnis der zugeordneten K-Zeile; [N. V.] mit Offen-Punkt
+        kres = {k[0]: k[3] for k in (json.loads(r) for r in (re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', js_ks.group(1), re.M) if js_ks else []))}
+        open_txt = " ".join(re.sub(r"<[^>]+>", "", x) for x in re.findall(r"<li[^>]*data-open[^>]*>(.*?)</li>", html, re.S))
+        l61 = []
+        for c in dbom.get("source_claims", []):
+            if c["result"] in ("ok", "no") and not any(facts.get(i, {}).get("verdict") == "CONFIRMED" for i in c["facts"]):
+                l61.append(f"{c['id']}: {c['result']} ohne CONFIRMED-Beleg")
+            if c.get("k") and kres.get(c["k"]) != c["result"]:
+                l61.append(f"{c['id']} ≠ {c['k']}")
+            if c["result"] == "nv" and c["id"] not in open_txt:
+                l61.append(f"{c['id']}: [N. V.] ohne Offen-Punkt")
+            l61 += [f"{c['id']}: unbekannte ID {i}" for i in c["facts"] if i not in facts]
+        report("L61 Claim-Ergebnis = Belege", BLOCKER, bool(dbom.get("source_claims")) and not l61, "; ".join(l61[:4]) if l61 else f"{len(dbom.get('source_claims', []))} Claims konsistent")
+        # L62 · Fazit: jeder Punkt als Einschätzung (Badge) oder ausdrücklich als Faktwiedergabe (data-assessment="fact"); SCENARIO im Konjunktiv
+        fzs = re.search(r'<section id="s-fz".*?</section>', html, re.S)
+        l62 = []
+        for li in re.findall(r"<li\b[^>]*>.*?</li>", fzs.group(0) if fzs else "", re.S):
+            if "EINSCHÄTZUNG" not in li and 'data-assessment="fact"' not in li:
+                l62.append("Fazit-Punkt ohne Einordnung: " + re.sub(r"<[^>]+>", "", li)[:40])
+        scen = {f["id"] for f in F if f["verdict"] == "SCENARIO_PROJECTION"}
+        for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
+            ids = m.group(2).split()
+            if ids and set(ids) <= scen and m.group(1) in ("span", "p", "div", "li"):
+                txt = norm_txt(element_inner(html, m))
+                if re.search(r"\b(liegt|ist|sind|bietet|wird)\b", txt) and not re.search(r"\b(läge|wäre|wären|könnte|würde|szenario|vorschl|modell|illustrativ|hypothetisch|angenommen)", txt):
+                    l62.append("SCENARIO im Indikativ: " + txt[:40])
+        report("L62 Fazit eingeordnet, SCENARIO im Konjunktiv", BLOCKER, bool(fzs) and not l62, "; ".join(l62[:3]) if l62 else "alle Fazit-Punkte eingeordnet; Szenarien im Konjunktiv")
+        js_gl = re.search(r"const GLOSSAR=\[(.*?)\n\];", html, re.S)
+        # L63 · Konstanten eines Fakts (values) stimmen überall und sind gebunden (auch Formeln, Labels, data-def, Glossar)
+        l63 = []
+        for f in F:
+            for sym, val in f.get("values", {}).items():
+                rx = re.compile(r"(?:M_\{%s\}\s*=\s*|\b%s\s*(?:=|:)?\s*)(\d+)\b" % (sym, sym))
+                for m in rx.finditer(scan):
+                    if m.group(1) != val:
+                        l63.append(f"{sym} = {m.group(1)} ≠ {val}")
+                    else:
+                        before = scan[:m.start()]
+                        opened = [o for o in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', before) if f["id"] in o.group(2).split()]
+                        if not any(m.start() < o.end() + len(element_inner(scan, o)) for o in opened):
+                            l63.append(f"{sym} {val} nicht an {f['id']} gebunden")
+                for row in (re.findall(r'^\s*\[".*\]', js_gl.group(1), re.M) if js_gl else []):
+                    for m in rx.finditer(row):
+                        if m.group(1) != val or f["id"] not in row:
+                            l63.append(f"Glossar {sym} {m.group(1)}")
+                if md:
+                    l63 += [f"Analyse {sym} = {m.group(1)}" for m in rx.finditer(md) if m.group(1) != val]
+        report("L63 Faktkonstanten gebunden", BLOCKER, not l63, "; ".join(sorted(set(l63))[:4]) if l63 else "alle Faktkonstanten stimmen und sind gebunden")
+        # L27b · Glossar: Einträge mit nicht bestätigtem Fakt tragen das Badge des schwächsten Verdicts
+        BADGE1 = {"MEDIA_REPORT": "MEDIEN", "UNVERIFIED": "UNGEPRÜFT", "SCENARIO_PROJECTION": "SCENARIO"}
+        RANK = {"CONFIRMED": 3, "MEDIA_REPORT": 2, "UNVERIFIED": 1, "SCENARIO_PROJECTION": 0}
+        l27b = []
+        for r in (re.findall(r'^\s*(\[".*\])\s*,?\s*$', js_gl.group(1), re.M) if js_gl else []):
+            g = json.loads(r)
+            ids = g[4].split() if len(g) > 4 else []
+            weak = min((facts[i]["verdict"] for i in ids if i in facts), key=RANK.get, default="CONFIRMED")
+            want = BADGE1.get(weak, "")
+            if (g[5] if len(g) > 5 else "") != want:
+                l27b.append(f"{g[0]}: Badge „{g[5] if len(g) > 5 else ''}“ ≠ „{want}“")
+        rend27 = "g[5]" in html and "dbom-class-badge" in html[html.find("function renderGlossar"):html.find("function renderGlossar") + 600]
+        report("L27b Glossar-Badges", BLOCKER, not l27b and rend27, "; ".join(l27b[:4]) if l27b else ("Renderer ohne Badge" if not rend27 else "Glossar-Badges = schwächstes Verdict"))
+        # L06b · Alleinstellungs-Aussagen nur mit Vergleichsbasis und n. v.-Hinweis bzw. Matrixbezug
+        l06b = []
+        for x in t.texts:
+            if not x.get("code") and x["sec"] not in ("s-qa",) and re.search(r"Alleinstellung|als einzige[rs]?\b|der einzige\b|die einzige\b", x["text"]):
+                ctx = x["text"]
+                if not (x["src"] and re.search(r"Vergleichsfeld|laut Matrix|bestimmbar|n\. v\.", ctx)):
+                    l06b.append(f"{x['sec']}: {ctx.strip()[:40]}…")
+        report("L06b Alleinstellung mit Basis", BLOCKER, not l06b, "; ".join(l06b[:3]) if l06b else "Alleinstellungsaussagen mit Vergleichsbasis")
+        # L60 · Eigenständigkeit: keine Verweise auf andere Module oder frühere Fassungen
+        own = f"M{mod.group(1)}"
+        dtxt = json.dumps({k: v for k, v in dbom.items() if k != "audit_trail"}, ensure_ascii=False)
+        l60 = []
+        for name, txt in (("Seite", re.sub(r"<(script|style)\b.*?</\1>", "", html, flags=re.S)), ("Analyse", md), ("DBOM", dtxt)):
+            l60 += [f"{name}: {x}" for x in sorted(set(re.findall(r"\bM\d{3}\b", txt)) - {own})]
+            l60 += [f"{name}: Link {x}" for x in sorted(set(re.findall(r'href="((?:m\d{3}|modul)\.html)"', txt)) - {f"m{mod.group(1)}.html"})]
+            l60 += [f"{name}: „{x}“" for x in re.findall(r"Vormodul\w*|frühere[nr]? Fassung\w*|gegenüber (?:Version|v)\s?\d[\d.]*|vorherige[nr]? (?:Version|Modul)", txt, re.I)]
+        report("L60 Eigenständigkeit", BLOCKER, not l60, "; ".join(l60[:4]) if l60 else "keine Verweise auf andere Module oder frühere Fassungen")
+        # L64 · nur geltendes Recht: keine Darstellung früherer Rechtslagen (Herausgeber-Entscheidung 2026-10-11)
+        OLD_LAW = r"\ba\. F\.|alte[nr]? Fassung|\baufgehoben\b|Aufhebung|Altjahre|Altf[aä]ll|offene[nr]? Fälle|§ 52 Abs\. 28|bis zur Abschaffung|vor dem JStG|20\.000[- ]?€|10\.000 € je Jahr"
+        l64 = []
+        for name, txt in (("Seite", re.sub(r"<(script|style)\b.*?</\1>", "", html, flags=re.S) + " ".join(re.findall(r'"[^"\n]*"', js_ks.group(1) if js_ks else ""))),
+                          ("Analyse", re.split(r"\n## 5 · ", md)[0] if md else ""),
+                          ("DBOM", json.dumps({k: v for k, v in dbom.items() if k not in ("audit_trail", "sources")}, ensure_ascii=False))):  # Quellentitel zitieren
+            l64 += [f"{name}: „{x}“" for x in sorted(set(re.findall(OLD_LAW, txt)))]
+        report("L64 nur geltendes Recht", BLOCKER, not l64, "; ".join(l64[:5]) if l64 else "keine Darstellung früherer Rechtslagen")
         # L47 · starke rechtliche Bewertung nur, wenn ein Claim sie wörtlich trägt
         claims_nz = nz(" ".join(f["claim"] for f in F))
         page_txt = re.sub(r"<[^>]+>", " ", re.sub(r"<style\b.*?</style>", "", html, flags=re.S))
@@ -355,7 +444,7 @@ def main():
                     l48.append(f"{m.group(1)}: Label {m.group(2)} ≠ {facts[m.group(1)]['verdict']}")
             if re.search(r"\((?:V|M|P|S)\)", body):
                 l48.append("Provenienzkürzel (V)/(M)/(P)/(S) statt Fakt-ID")
-            for m in re.finditer(r"Konf(?:\.|idenz)\s*(\d+(?:[.,]\d+)?)", body):  # L48b/L48c: auch „Konf.“, ganze Zahlen, Dezimalpunkt
+            for m in re.finditer(r"Konf(?:\.|idenz)(?:\s*:|\s+von|\s+bei)?\s*(\d+(?:[.,]\d+)?)", body):  # L48b/L48c: auch „Konf.“, ganze Zahlen, Dezimalpunkt
                 par = body[body.rfind("(", 0, m.start()):m.start()]
                 ids = re.findall(r"`(FACT_[A-Z0-9_]+)`", par)
                 if not ids:
@@ -375,8 +464,11 @@ def main():
                 if re.search(MD_TOK, para) and "FACT_" not in para and not para.lstrip().startswith(("#", ">", "|")):
                     l53.append("ohne Fakt-ID: " + re.sub(r"\s+", " ", para)[:60] + "…")
             # L53b · Blöcke byte-genau = Neuerzeugung; jede Fakt-ID der Analyse existiert in der DBOM
-            want = build_blocks(html, dbom)
-            l53b = [f"Block {b} weicht von der Erzeugung ab" for b, m in blocks.items() if m and m.group(1) != want.get(b)]
+            try:
+                want = build_blocks(html, dbom)
+                l53b = [f"Block {b} weicht von der Erzeugung ab" for b, m in blocks.items() if m and m.group(1) != want.get(b)]
+            except (ValueError, KeyError) as e:  # L53c: Erzeugung bricht bei inkonsistenten Daten ab
+                l53b = [f"Erzeugung nicht möglich: {e}"]
             l53b += [f"unbekannte Fakt-ID {i}" for i in sorted(set(re.findall(r"FACT_[A-Z0-9_]+", md)) - set(facts))]
             report("L53b Sync-Blöcke = Erzeugung", BLOCKER, not l53b, "; ".join(l53b[:4]) if l53b else f"{len(blocks)} Blöcke byte-gleich, alle Fakt-IDs in der DBOM")
             # L54 · keine Beleggrad-Aussagen in Handtext der DBOM; Modul 8 aus dem Fazit der Seite
@@ -511,7 +603,7 @@ def main():
     if dbom:
         v = dbom["module"]["version"]
         visible = re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)\b.*?</\1>", "", html, flags=re.S))  # L50: ganze Seite, nur sichtbarer Text
-        seen = re.findall(r"(?i)\b(?:v|(?:modul)?version\s?)(\d+\.\d+\.\d+)\b", visible) + re.findall(r'"version": "(\d+\.\d+\.\d+)", "stichtag"', html)  # L52/L44b
+        seen = re.findall(r"(?i)\b(?:v|(?:modul)?version\s?:?\s?|fassung:?\s?)(\d+\.\d+\.\d+)\b", visible) + re.findall(r'"version": "(\d+\.\d+\.\d+)", "stichtag"', html)  # L52/L44b
         tb = md.split("\n---", 1)[0] if md else ""  # L44b: jede Versionsangabe im Titelblock außer der Prompt-Grundlage
         mv = (re.findall(r"\b(\d+\.\d+\.\d+)\b", "\n".join(ln for ln in tb.splitlines() if not ln.startswith("| Grundlage"))) + re.findall(r"\bModul v(\d+\.\d+\.\d+)", md)) if md else []  # „Version x.y.z“ in der Analyse = Herstellerversionen (z. B. ATAS 8.0.12), daher nur Kopfzeile/„Modul v“
         bad_v = sorted(set(x for x in seen + mv if x != v))

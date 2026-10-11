@@ -39,16 +39,20 @@ def build_blocks(page_html, d):
     facts = {f["id"]: f for f in d["facts"]}
 
     def flab(fid):
+        if fid not in facts:  # L53c: unbekannte Fakt-ID bricht ab statt still zu verschwinden
+            raise ValueError(f"unbekannte Fakt-ID {fid}")
         f = facts[fid]
         return f"(`{fid}`, {VLAB[f['verdict']]}, Konfidenz {de(f['confidence'])})"
     out = {}
     # Claim-Tabelle (L59): Aussagen des Quelltexts, Belege und schwächster Beleg (L19) aus der DBOM
     rows = []
     for c in d.get("source_claims", []):
-        fl = [i for i in c["facts"] if i in facts]
+        fl = list(c["facts"])
         weakest = VLAB[min((facts[i]["verdict"] for i in fl), key=RANK.get)] if fl else "–"
         rows.append(f"| {c['id']} | Quelltext: {c['claim']} | {c['category']} | {RES[c['result']]} | {', '.join(flab(i) for i in fl) or '[N. V.]'} | {weakest} |")
-    out["CLAIMS"] = ("Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch/überholt · [N. V.] nicht verifizierbar. Die Aussagen in Spalte 2 "
+    if not rows:
+        raise ValueError("Claim-Tabelle leer (L53c/L33)")
+    out["CLAIMS"] = ("Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifizierbar. Die Aussagen in Spalte 2 "
                      "zitieren den Quelltext (USER_PROVIDED) und sind keine Tatsachenbehauptungen dieser Analyse.\n\n"
                      "| ID | Aussage | Kategorie | Ergebnis | Belege | Schwächster Beleg |\n|---|---|---|---|---|---|\n" + "\n".join(rows) + "\n\n")
     ks_js = re.search(r"const KS=\[(.*?)\n\];", page_html, re.S)
@@ -61,21 +65,29 @@ def build_blocks(page_html, d):
         mods += f"#### {m['title']}\n\n"
         if m.get("source") == "s-fz":
             fz = re.search(r'<section id="s-fz".*?</section>', page_html, re.S)
+            if not fz:
+                raise ValueError("Fazit-Sektion s-fz fehlt (L53c)")
+            if re.search(r"<li(?![^>]*data-source)[^>]*>", fz.group(0)):
+                raise ValueError("Fazit-Punkt ohne data-source (L53c)")
             for box in re.findall(r'<h3[^>]*>(.*?)</h3><ul[^>]*>(.*?)</ul>', fz.group(0) if fz else "", re.S):
+                items = re.findall(r'<li data-source="([^"]+)"[^>]*>(.*?)</li>', box[1], re.S)
                 mods += f"**{plain(box[0])}**\n\n" + "".join(
-                    f"- {plain(t).strip()} " + " ".join(flab(i) for i in ids.split() if i in facts) + "\n"
-                    for ids, t in re.findall(r'<li data-source="([^"]+)">(.*?)</li>', box[1], re.S)) + "\n"
+                    f"- {plain(t).strip()} " + ("(Einschätzung, gestützt auf " + ", ".join(flab(i) for i in ids.split()) + ")" if "EINSCHÄTZUNG" in t
+                                                  else " ".join(flab(i) for i in ids.split())) + "\n"
+                    for ids, t in items) + "\n"
             th = re.search(r'<div class="info-box[^"]*">(.*?)</div>', fz.group(0) if fz else "", re.S)
             if th:
-                ids = sorted(set(re.findall(r"FACT_[A-Z0-9_]+", th.group(1))) | {"FACT_ROADMAP"})
-                mods += f"**Strategische These [SZENARIO]:** {plain(re.sub(r'<strong.*?</strong>', '', th.group(1))).strip()} " + " ".join(flab(i) for i in ids if i in facts) + "\n\n"
+                ids = sorted(set(re.findall(r"FACT_[A-Z0-9_]+", th.group(1))))
+                mods += f"**Strategische These [SZENARIO]:** {plain(re.sub(r'<strong.*?</strong>', '', th.group(1))).strip()} " + " ".join(flab(i) for i in ids) + "\n\n"
         else:
-            mods += "".join(f"- {plain(facts[i]['claim'])} {flab(i)}\n" for i in m["facts"]) + "\n"
+            if not m["facts"]:
+                raise ValueError(f"Modul ohne Fakten: {m['title']} (L53c)")
+            mods += "".join(f"- {plain(facts[i]['claim'])} {flab(i) if i in facts else flab(i)}\n" for i in m["facts"]) + "\n"
     out["MOD"] = mods
     gl_js = re.search(r"const GLOSSAR=\[(.*?)\n\];", page_html, re.S)
     gl = [json.loads(r) for r in re.findall(r'^\s*(\[".*\])\s*,?\s*$', gl_js.group(1), re.M)] if gl_js else []
     out["GLOSSAR"] = "| Begriff | Definition (Fortgeschritten) | Einordnung (Experte) |\n|---|---|---|\n" + "".join(
-        f"| {plain(g[0])} | {plain(g[2])} | {plain(g[3])}{' ' + ' '.join(flab(i) for i in g[4].split() if i in facts) if len(g) > 4 else ''} |\n" for g in gl) + "\n"
+        f"| {plain(g[0])} | {plain(g[2])} | {plain(g[3])}{' ' + ' '.join(flab(i) for i in g[4].split()) if len(g) > 4 else ''} |\n" for g in gl) + "\n"
     return out
 
 
