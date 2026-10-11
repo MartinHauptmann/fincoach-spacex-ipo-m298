@@ -1,0 +1,419 @@
+{
+ "page": "m300.html",
+ "source": "Zweitprüfung r19 (unabhängig, ohne Repo-Änderung), 2026-10-11",
+ "cases": [
+  {
+   "name": "R19-01 L18b: MenthorQ als bestimmbar gezählt, Quelle FACT_MENTHORQ_SPEC sagt „Eurex-GEX n. v.“ (Regex trifft „Eurex“); Zahlen überall auf 3 nachgezogen",
+   "expect": "L18b",
+   "sync": true,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"determinable\": 2,",
+     "\"determinable\": 3,"
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"SpotGamma\",\n          \"MenthorQ\",",
+     "\"SpotGamma\","
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"IBKR TWS\": \"FACT_TWS_SPEC\"",
+     "\"IBKR TWS\": \"FACT_TWS_SPEC\",\n          \"MenthorQ\": \"FACT_MENTHORQ_SPEC\""
+    ],
+    [
+     "m300.html",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td data-source=\"FACT_MENTHORQ_SPEC\">nein <span class=\"badge b-v\">VENDOR</span></td>"
+    ],
+    [
+     "m300.html",
+     ">0 von 2<",
+     ">0 von 3<"
+    ],
+    [
+     "m300.html",
+     "keiner der zwei bestimmbaren Anbieter (ATAS, TWS) bietet intraday-fähige Eurex-GEX; übrige vier n. v.",
+     "keiner der drei bestimmbaren Anbieter (ATAS, MenthorQ, TWS) bietet intraday-fähige Eurex-GEX; übrige drei n. v."
+    ],
+    [
+     "m300.html",
+     "Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland, Bookmap: n. v.)",
+     "Für ODAX und OESX bietet keiner der drei bestimmbaren von sechs verglichenen Anbietern (ATAS, MenthorQ, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, Volland, Bookmap: n. v.)"
+    ],
+    [
+     "m300.html",
+     "Ob die Lücke über diese zwei hinaus",
+     "Ob die Lücke über diese drei hinaus"
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
+     "ist für drei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; MenthorQ: Eurex-GEX n. v.; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen drei (SpotGamma, Volland, Bookmap) n. v."
+    ],
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "Intraday-fähige Eurex-GEX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern\n  (ATAS, IBKR TWS); für SpotGamma, MenthorQ, Volland und Bookmap ist das n. v.",
+     "Intraday-fähige Eurex-GEX bietet keiner der drei bestimmbaren von sechs verglichenen Anbietern\n  (ATAS, MenthorQ, IBKR TWS); für SpotGamma, Volland und Bookmap ist das n. v."
+    ],
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "(bisher nur\n  für zwei Anbieter bestimmbar)",
+     "(bisher nur\n  für drei Anbieter bestimmbar)"
+    ]
+   ]
+  },
+  {
+   "name": "R19-02 L18b: Zeilenbeschriftung ohne „Eurex“ („GEX für ODAX/OESX intraday“), SpotGamma-Zelle „nein“ an FACT_SPOTGAMMA_SPEC (ohne Eurex-Aussage)",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
+     "<tr><td>GEX für ODAX/OESX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td data-source=\"FACT_SPOTGAMMA_SPEC\">nein <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-03 L18b: These nennt SpotGamma als bestimmbar in Gedankenstrichen statt Klammern",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland, Bookmap: n. v.)",
+     "Für ODAX und OESX bietet keiner der bestimmbaren Anbieter – ATAS, IBKR TWS und SpotGamma – intraday-fähige Eurex-GEX (MenthorQ, Volland, Bookmap: n. v.)"
+    ]
+   ]
+  },
+  {
+   "name": "R19-04 L18b: Analyse-Kurzfazit zählt Bookmap als bestimmbar („bestimmbar sind ATAS, Bookmap und IBKR TWS“)",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "Intraday-fähige Eurex-GEX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern\n  (ATAS, IBKR TWS); für SpotGamma, MenthorQ, Volland und Bookmap ist das n. v.",
+     "Intraday-fähige Eurex-GEX bietet keiner der Anbieter; bestimmbar sind ATAS, Bookmap und IBKR TWS;\n  für SpotGamma, MenthorQ und Volland ist das n. v."
+    ]
+   ]
+  },
+  {
+   "name": "R19-05 L12c: Kopfzelle „Kriterium“ statt „Merkmal“ (legitime Umbenennung), SpotGamma-Eurex-Zelle „nein“ ungebunden",
+   "expect": "L12c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<thead><tr><th>Merkmal</th><th>ATAS</th>",
+     "<thead><tr><th>Kriterium</th><th>ATAS</th>"
+    ],
+    [
+     "m300.html",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>nein</td><td>n. v.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-06 L12c: Zelle beginnt mit „n. v.“, enthält danach eine ungebundene Tatsachenangabe",
+   "expect": "L12c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>über Partnerplattformen</td><td>n. v.</td><td>ja</td>",
+     "<td>über Partnerplattformen</td><td>n. v. (laut ORATS Ausführung über Partnerbroker)</td><td>ja</td>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-07 L76: SpotGamma-Eurex-Zelle „nein“ an fremden Fakt FACT_ODAX_SPECS gebunden (L12c besteht formal)",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td data-source=\"FACT_ODAX_SPECS\">nein</td><td>n. v.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-08 L27g: pauschales MEDIEN als <em class=dbom-class-badge> statt span am Ende der Intraday-Aufzählung",
+   "expect": "L27g",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "SpotGamma (HIRO/TRACE) <span class=\"badge b-v\">VENDOR</span>, MenthorQ (EOD und alle 5 Min.) <span class=\"badge b-v\">VENDOR</span>, Volland (EOD bis alle 5 Min.) <span class=\"dbom-class-badge\">MEDIEN</span> sowie die IBKR TWS (Echtzeit, Abo) <span class=\"badge b-v\">VENDOR</span>.",
+     "SpotGamma (HIRO/TRACE), MenthorQ (EOD und alle 5 Min.), Volland (EOD bis alle 5 Min.) sowie die IBKR TWS (Echtzeit, Abo) <em class=\"dbom-class-badge\">MEDIEN</em>."
+    ]
+   ]
+  },
+  {
+   "name": "R19-09 L27g: pauschales MEDIEN mit innerem <b> im span",
+   "expect": "L27g",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "SpotGamma (HIRO/TRACE) <span class=\"badge b-v\">VENDOR</span>, MenthorQ (EOD und alle 5 Min.) <span class=\"badge b-v\">VENDOR</span>, Volland (EOD bis alle 5 Min.) <span class=\"dbom-class-badge\">MEDIEN</span> sowie die IBKR TWS (Echtzeit, Abo) <span class=\"badge b-v\">VENDOR</span>.",
+     "SpotGamma (HIRO/TRACE), MenthorQ (EOD und alle 5 Min.), Volland (EOD bis alle 5 Min.) sowie die IBKR TWS (Echtzeit, Abo) <span class=\"dbom-class-badge\"><b>MEDIEN</b></span>."
+    ]
+   ]
+  },
+  {
+   "name": "R19-10 L27g: Verdict-Synonym „unbestätigte Presseangaben“ über Herstellerangaben (SpotGamma, Bookmap)",
+   "expect": "L27g",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Europäisches Zusatzangebot:",
+     "Die Angaben zu SpotGamma und Bookmap sind unbestätigte Presseangaben. Europäisches Zusatzangebot:"
+    ]
+   ]
+  },
+  {
+   "name": "R19-11 L87: „Knockout-Zertifikate“ ohne Bindestrich mit Rechtsnatur in S10-Fließtext",
+   "expect": "L87",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<p class=\"text-sm text-slate-300 leading-relaxed\">Emittenten sichern ihr Nettorisiko",
+     "<p class=\"text-sm text-slate-300 leading-relaxed\">Knockout-Zertifikate sind Inhaberschuldverschreibungen mit fester Barriere. Emittenten sichern ihr Nettorisiko"
+    ]
+   ]
+  },
+  {
+   "name": "R19-12 L87: n. v. im ersten Teilsatz, Ausgestaltung im Pronomen-Teilsatz nach Semikolon",
+   "expect": "L87",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<p class=\"text-sm text-slate-300 leading-relaxed\">Emittenten sichern ihr Nettorisiko",
+     "<p class=\"text-sm text-slate-300 leading-relaxed\">Knock-out-Zertifikate: n. v.; sie verfallen bei Erreichen der Barriere wertlos und sind Inhaberschuldverschreibungen. Emittenten sichern ihr Nettorisiko"
+    ]
+   ]
+  },
+  {
+   "name": "R19-13 L87: Synonym „Mini-Futures“ (gleiche Produktklasse) mit Ausgestaltung",
+   "expect": "L87",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<p class=\"text-sm text-slate-300 leading-relaxed\">Emittenten sichern ihr Nettorisiko",
+     "<p class=\"text-sm text-slate-300 leading-relaxed\">Mini-Futures sind Inhaberschuldverschreibungen mit Stop-Loss-Barriere. Emittenten sichern ihr Nettorisiko"
+    ]
+   ]
+  },
+  {
+   "name": "R19-14 L82d: Ausnahmewort verneint („BaFin-Studie: keine Ausnahme“)",
+   "expect": "L82d",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Am Original abgeglichen sind alle Belege (BaFin-Studie: keine Ausnahme)."
+    ]
+   ]
+  },
+  {
+   "name": "R19-15 L82d: Vollständigkeit mit „Nachweise“ statt „Belege“",
+   "expect": "L82d",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Sämtliche Nachweise lagen dem Herausgeber im Original vor."
+    ]
+   ]
+  },
+  {
+   "name": "R19-16 L82d: implizite Allaussage ohne Quantor („Der Herausgeber hat die Belege am Original abgeglichen.“)",
+   "expect": "L82d",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Der Herausgeber hat die Belege am Original abgeglichen."
+    ]
+   ]
+  },
+  {
+   "name": "R19-17 L82e: FACT_BAFIN_STUDY evidence fulltext, Prüfumfang „am Original des Berichts“, caveat ohne Signalwort",
+   "expect": "L82e",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"caveat\": \"Studie selbst nicht im Volltext eingesehen; Zahl laut Medienbericht (Stiftung Warentest).\",",
+     "\"caveat\": \"Zahl laut Stiftung Warentest.\","
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"evidence\": \"secondary\",",
+     "\"evidence\": \"fulltext\","
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"scope\": \"Abgleich am Medienbericht (Studie selbst nicht eingesehen)\"",
+     "\"scope\": \"Abgleich am Original des Berichts\""
+    ]
+   ]
+  },
+  {
+   "name": "R19-18 L82e: FACT_CBOE_OPENCLOSE (Sekundärquelle über Cboe-Daten) mit evidence fulltext – Ist-Zustand, nur caveat präzisiert",
+   "expect": "L82e",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"caveat\": \"Sekundärquelle.\",",
+     "\"caveat\": \"Sekundärquelle (MenthorQ erläutert die Cboe-Daten).\","
+    ]
+   ]
+  },
+  {
+   "name": "R19-19 L27h: Modellannahme mit sichtbarem SCENARIO-Kennzeichen, durch &nbsp; im span maskiert",
+   "expect": "L27h",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\">MODELL</span>",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\">SCENARIO&nbsp;</span>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-20 L27h: neues Kennzeichen PROGNOSE mit Soft-Hyphen, nicht in der Legende",
+   "expect": "L27h",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Bewertung von Vorschlägen, keine Prognose.</p>",
+     "Bewertung von Vorschlägen, keine Prognose. <span class=\"dbom-class-badge\">PRO&shy;GNOSE</span></p>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-21 L03d: „Entwurf“ im Footer mit opacity:0 unsichtbar",
+   "expect": "L03b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure · <span style=\"opacity:0\">Entwurf</span></div>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-22 L03d: Footer „kein Entwurf“ bei Status ÜBERARBEITUNG",
+   "expect": "L03b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure · kein Entwurf</div>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-23 L03d: „Entwurf“ mit font-size:0",
+   "expect": "L03b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure · <span style=\"font-size:0\">Entwurf</span></div>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-N1 Negativkontrolle L03d: Footer „Entwurfsfassung“ statt „Entwurf“",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure · Entwurfsfassung</div>"
+    ]
+   ]
+  },
+  {
+   "name": "R19-N2 Negativkontrolle L18b: „(ATAS und IBKR TWS)“ statt Komma",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland, Bookmap: n. v.)",
+     "Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS und IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland, Bookmap: n. v.)"
+    ]
+   ]
+  },
+  {
+   "name": "R19-N3 Negativkontrolle L82d: Ausnahme als „Studie zu Turbo-Zertifikaten“ ohne Wort BaFin",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die Studie zu Turbo-Zertifikaten (Stufe „Sekundär“)."
+    ]
+   ]
+  },
+  {
+   "name": "R19-N4 Negativkontrolle L87: „Knock-out-Zertifikate sind in diesem Modul nicht ausgewertet.“",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<p class=\"text-sm text-slate-300 leading-relaxed\">Emittenten sichern ihr Nettorisiko",
+     "<p class=\"text-sm text-slate-300 leading-relaxed\">Knock-out-Zertifikate sind in diesem Modul nicht ausgewertet. Emittenten sichern ihr Nettorisiko"
+    ]
+   ]
+  },
+  {
+   "name": "R19-N5 Negativkontrolle L27g: Volland-Kennzeichen als Wort „(Medienangabe)“ statt Badge",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Volland (EOD bis alle 5 Min.) <span class=\"dbom-class-badge\">MEDIEN</span> sowie",
+     "Volland (EOD bis alle 5 Min.; Medienangabe) <span class=\"dbom-class-badge\">MEDIEN</span> sowie"
+    ]
+   ]
+  },
+  {
+   "name": "R19-N6 Negativkontrolle L12c: Zelle „n. v.“ als <abbr>",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>über Partnerplattformen</td><td>n. v.</td><td>ja</td>",
+     "<td>über Partnerplattformen</td><td><abbr title=\"nicht verfügbar\">n. v.</abbr></td><td>ja</td>"
+    ]
+   ]
+  }
+ ]
+}
