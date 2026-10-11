@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L85 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L86 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -187,6 +187,10 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L19c:** Rechtsrahmen-Fakten stützen sich auf eine Primärquelle.
 - **Bekannte Grenzen:** Regressionsfälle mit `known_limit` (vom Herausgeber anerkannt) erscheinen als [GRENZE] und
   zählen nicht als Fehler; sie werden nie still entfernt.
+- **L27f:** Pauschale Verdict-Wörter („Medienangaben“, „ungeprüft“) nur, wenn alle gebundenen Fakten dieses Verdict
+  tragen; sonst je Fakt („Volland: Medienangabe“).
+- **L86:** Szenarien tragen keine Konfidenz (`confidence: null`) und erscheinen in keiner Konfidenzanzeige.
+- **L85b:** Gleiche Maßstäbe über alle Bindungen einer Vergleichstabelle (Quantor-Fakten mit `basis` ausgenommen).
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

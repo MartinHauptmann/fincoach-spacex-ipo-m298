@@ -1967,6 +1967,42 @@
      "\"source_id\": \"SRC_SUTOR\""
     ]
    ]
+  },
+  {
+   "name": "L27f K6 pauschal „Medienangaben“ bei belegten Herstellerfakten",
+   "expect": "L27f",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Herstellerangaben von SpotGamma, MenthorQ, Bookmap und TWS (belegt); Volland über die Partnerseite ORATS (Volland: Medienangabe); einzelne Felder n. v.",
+     "Medienangaben aus Hersteller- und Drittquellen; einzelne Felder n. v. (Medienangaben)"
+    ]
+   ]
+  },
+  {
+   "name": "L86 Szenario-Fakt mit numerischer Konfidenz",
+   "expect": "L86",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"id\": \"FACT_ROADMAP\",\n      \"verdict\": \"SCENARIO_PROJECTION\",\n      \"class\": \"SCENARIO_PROJECTION\",\n      \"confidence\": null",
+     "\"id\": \"FACT_ROADMAP\",\n      \"verdict\": \"SCENARIO_PROJECTION\",\n      \"class\": \"SCENARIO_PROJECTION\",\n      \"confidence\": 0.0"
+    ]
+   ]
+  },
+  {
+   "name": "L85b Matrixzelle an Herstellerfakt mit abweichendem Verdict",
+   "expect": "L85b|L85",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"id\": \"FACT_ATAS_FOOTPRINT\",\n      \"verdict\": \"CONFIRMED\"",
+     "\"id\": \"FACT_ATAS_FOOTPRINT\",\n      \"verdict\": \"MEDIA_REPORT\""
+    ]
+   ]
   }
  ]
 }

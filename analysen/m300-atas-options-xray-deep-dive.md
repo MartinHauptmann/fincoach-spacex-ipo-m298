@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.12.0 (Entwurf) |
+| Version | 1.12.1 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -92,7 +92,7 @@ Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifi
 
 **K5 · ATAS-Produktangaben.** Quelltext: 10 Indikatoren, CBOE/OptionsDepth, 60 s, nur SPX. Bestätigt durch Hilfe- und Lernseiten des Herstellers. Ergänzung: Optionen in ATAS derzeit nicht handelbar; Options Board/Strategy Analyzer als Beta. Belege: (`FACT_XRAY_10_IND`, belegt, Konfidenz 0,85), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8). **Ergebnis: ✓** (HINWEIS)
 
-**K6 · Wettbewerber.** Quelltext: Vergleich SpotGamma, MenthorQ, Volland, Bookmap, TWS. Medienangaben aus Hersteller- und Drittquellen; einzelne Felder n. v. (Medienangaben) Belege: (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75). **Ergebnis: ◐** (HINWEIS)
+**K6 · Wettbewerber.** Quelltext: Vergleich SpotGamma, MenthorQ, Volland, Bookmap, TWS. Herstellerangaben von SpotGamma, MenthorQ, Bookmap und TWS (belegt); Volland über die Partnerseite ORATS (Volland: Medienangabe); einzelne Felder n. v. Belege: (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75). **Ergebnis: ◐** (HINWEIS)
 
 **K7 · Eurex-Spezifikationen.** Quelltext: FDAX/FESX-Optionsketten, „Hexensabbat“. Für den Ausgangstext maßgeblich sind die Indexoptionen ODAX (5 €/Pkt.) und OESX (10 €/Pkt.). Fachbegriff: Quartalsverfall; bei den Standard-Monats- und Quartalsoptionen ist der letzte Handelstag der dritte Freitag. Daneben gibt es End-of-Day-Optionen (OEXP, ODAP); für OEXP sind seit 05.01.2026 Verfälle an zehn Handelstagen gelistet. Belege: (`FACT_ODAX_SPECS`, belegt, Konfidenz 0,85), (`FACT_OESX_MULT`, belegt, Konfidenz 0,85), (`FACT_EUREX_DAILY_LAUNCH`, belegt, Konfidenz 0,85), (`FACT_CONTRACT_SPECS`, belegt, Konfidenz 0,8). **Ergebnis: ◐** (HINWEIS)
 
@@ -163,7 +163,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - MenthorQ – Gamma-Levels, Modelle, Ausbildung · Optionsdaten EOD und alle 5 Min. · GEX ja, Vanna und Charm n. v. · Abdeckung inkl. Futures-Optionen (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung über Partnerplattformen · Eurex-GEX n. v.. (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75)
 - Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.. (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65)
 - Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung. (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75)
-- IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · Greeks nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75)
+- IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75)
 - Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6)
 
 #### Modul 6 · DACH-Marktspezifika und steuerlicher Rahmen
@@ -193,7 +193,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - X-Ray zeigt aus SPX-Optionsdaten abgeleitete Kennzahlen auf ES, MES und SPY an. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
 - Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events. (Einschätzung, gestützt auf (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7))
 - Für Optionen fehlt eine native Ausführung. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
-- Positionierung plus MBO (derzeit zur Erprobung) in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal. (Einschätzung, gestützt auf (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
+- Positionierung plus MBO (derzeit zur Erprobung) in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal (MBO-Werkzeug von SpotGamma, MenthorQ, Volland und TWS: n. v.). (Einschätzung, gestützt auf (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
 
 **◐ Relativiert**
 
@@ -386,7 +386,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.12.0,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.12.1,
 40 Fakten, 45 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -423,11 +423,11 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_MENTHORQ_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | MenthorQ – Gamma-Levels, Modelle, Ausbildung · Optionsdaten EOD und alle 5 Min. · GEX ja, Vanna und Charm n. v. · Abdeckung inkl. Futures-Optionen (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung über Partnerplattformen · Eurex-GEX n. v.. |
 | `FACT_VOLLAND_SPEC` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Stand 2026-10-05 | Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.. |
 | `FACT_BOOKMAP_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung. |
-| `FACT_TWS_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · Greeks nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. |
+| `FACT_TWS_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. |
 | `FACT_NO_EUREX_GEX` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). |
-| `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | 0,5 | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
-| `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | 1,0 | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
-| `FACT_ROADMAP` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | 0,0 | – | Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. |
+| `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | – | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
+| `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
+| `FACT_ROADMAP` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. |
 | `FACT_CONTRACT_SPECS` | CONFIRMED | MARKET_DATA | 0,8 | Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11) | Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Standardoptionen auf Indizes (Monats- und Quartalsverfälle): letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember). |
 | `FACT_CCP_ISSUER` | CONFIRMED | REGULATORY_FRAMEWORK | 0,8 | Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11) | Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). |
 | `FACT_OS_ISSUER` | MEDIA_REPORT | MEDIA_REPORT | 0,7 | Stand am Stichtag 2026-10-05 | Optionsscheine sind vom Emittenten ausgegebene Wertpapiere; ihr Wert hängt von dessen Bonität ab (Emittentenrisiko). |
@@ -436,8 +436,6 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
-- K6-Text an die Verdicts der Anbieterfakten angleichen; Kernfokus-Zeile einheitlich einordnen
-- K6, keep_reason FACT_OS_ISSUER und Szenario-Konfidenzen widerspruchsfrei machen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
@@ -453,7 +451,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C1 Disclaimer Anfang/Ende | ✓ | Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test |
 | C2 Keine Anlageempfehlung (MAR) | ✓ | Keine Kursziele, Einstiege oder Empfehlungen (Zweitprüfung 2026-10-11 gelesen); Empfehlungsformen geprüft (L62) |
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
-| C4 Neutralität / Interessenkonflikte | ◐ | Interessenkonflikte: keine (Erklärung des Herausgebers); Vergleichstabelle nach L85 einheitlich, aber K6 nennt die Herstellerangaben der Wettbewerber pauschal „Medienangaben“ (16. Zweitprüfung) |
+| C4 Neutralität / Interessenkonflikte | ✓ | Interessenkonflikte: keine (Erklärung des Herausgebers vom 2026-10-11); Vergleich mit gleichen Maßstäben über alle Bindungen (L85, L85b) und im Text (L27f) |
 | C5 Marken beschreibend | ✓ | Markenhinweis gegen Marken-Inventar geprüft (L84) und in der Zweitprüfung vom 2026-10-11 vollständig abgeglichen |
 | C6 UWG-konforme Begriffe | ✓ | Begriffe neutral; Wettbewerberangaben vom Herausgeber am 2026-10-11 am Original geprüft |
 | C7 Ausgewogene Risikodarstellung | ✓ | Modellgrenzen, Latenz, Fehlsignale, Totalverlust und BaFin-Quote dargestellt (Zweitprüfung 2026-10-11) |
@@ -465,12 +463,12 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q4 Provenienz je Fakt | ✓ | Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82) |
 | Q5 Quellenqualität | ✓ | Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen nur bei Medienangaben; Abgleich am Original durch den Herausgeber |
 | Q6 Vollständigkeit | ◐ | Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen |
-| Q7 Widerspruchsfreiheit | ◐ | Widersprüche (16. Zweitprüfung): K6 „Medienangaben“ vs. belegte Herstellerfakten; keep_reason FACT_OS_ISSUER „Rechtsnatur“; Szenario-Konfidenzen im Live-Audit und in S12 trotz „keine Prognose-Konfidenz“ |
+| Q7 Widerspruchsfreiheit | ✓ | Freigabestatus einheitlich (L03b); Verdict-Wörter = Verdicts (L27f); Szenarien ohne Konfidenz in DBOM und Anzeige (L86); Knock-outs in Disclaimer und Tabelle n. v. |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
 | Q9 Keine Überzeichnung / Halluzination | ✓ | Einschränkungen als qualifier und überall sichtbar (L76d/L76e); Kostenausweis neutral; keine Prognose-Konfidenz bei Szenarien |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 14 × ✓ + 5 × ◐ = 16,5 von 19 Punkten = **86,8 %**.
+**Gesamtscore:** 16 × ✓ + 3 × ◐ = 17,5 von 19 Punkten = **92,1 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
@@ -485,7 +483,8 @@ Abs. 1 Nr. 34 und 35 MAR. Derivate wie Optionen, Futures, Optionsscheine und Kno
 komplexe Produkte mit Hebelwirkung. Sie können zum Totalverlust führen. Bei Futures und Stillhaltergeschäften
 sind Verluste über den Kapitaleinsatz hinaus möglich. Diese Produkte sind nur für erfahrene Anleger geeignet,
 die Hebel- und Knock-out-Mechanik verstehen und Verluste bis zum Totalverlust tragen können. Optionsscheine tragen zusätzlich das
-Emittentenrisiko. Vergangene Marktmuster und Modellausgaben sind kein verlässlicher Indikator für künftige
+Emittentenrisiko; für Knock-out-Zertifikate ist die Ausgestaltung hier nicht ausgewertet (n. v.), maßgeblich
+sind die Emissionsbedingungen. Vergangene Marktmuster und Modellausgaben sind kein verlässlicher Indikator für künftige
 Entwicklungen. Steuerliche Ausführungen geben den recherchierten Rechtsstand zum 05.10.2026 wieder und
 können sich ändern. Für Ihre persönliche Situation wenden Sie sich an einen Steuerberater oder Rechtsanwalt.
 Alle Angaben ohne Gewähr.

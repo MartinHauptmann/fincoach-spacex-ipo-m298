@@ -115,9 +115,10 @@ def main():
     s = re.sub(r'"fact_summary": \{[^}]*\}', '"fact_summary": { ' + ", ".join(f'"{k}": {v}' for k, v in fs.items()) + " }", s, count=1)
     rng = {}
     for f in F:
-        rng.setdefault(f["class"], []).append(f["confidence"])
-    s = re.sub(r'(<span data-dbom-range="(\w+)">)[^<]*(</span>)', lambda m: m.group(1) + f"{de(min(rng[m.group(2)]))}–{de(max(rng[m.group(2)]))}" + m.group(3), s)
-    s = re.sub(r'(<span data-dbom-conf="(\w+)">)[^<]*(</span>)', lambda m: m.group(1) + de(facts[m.group(2)]["confidence"], 2) + m.group(3), s)
+        if f["confidence"] is not None:  # Szenarien ohne Prognose-Konfidenz (L86)
+            rng.setdefault(f["class"], []).append(f["confidence"])
+    s = re.sub(r'(<span data-dbom-range="(\w+)">)[^<]*(</span>)', lambda m: m.group(1) + (f"{de(min(rng[m.group(2)]))}–{de(max(rng[m.group(2)]))}" if m.group(2) in rng else "–") + m.group(3), s)
+    s = re.sub(r'(<span data-dbom-conf="(\w+)">)[^<]*(</span>)', lambda m: m.group(0) if m.group(2) in facts and facts[m.group(2)]["confidence"] is None else m.group(1) + de(facts[m.group(2)]["confidence"], 2) + m.group(3), s)
     last = max(e["date"] for e in d.get("audit_trail", [])) if d.get("audit_trail") else None  # L74: Footer-Datum = letzte Änderung
     if last:
         s = re.sub(r"(M%s · v[\d.]+ · )\d{4}-\d{2}-\d{2}" % mod, lambda m: m.group(1) + last, s)
@@ -143,7 +144,7 @@ def main():
         rows = sorted((x for x in d["sources"] if x.get("ref", "–") != "–"), key=lambda x: int(x["ref"][1:]))
         tbl = "\n".join(f"| {x['ref']} | {x['title']} | {TIER.get(x['tier'], x['tier'])} | `{x['id']}` | {x['url']} |" for x in rows)
         md = re.sub(r"(\| Nr\. \| Quelle \| Stufe \| DBOM-ID \| URL \|\n\|---\|---\|---\|---\|---\|\n)(?:\|.*\|\n)+", lambda m: m.group(1) + tbl + "\n", md)
-        frows = "\n".join(f"| `{f['id']}` | {f['verdict']} | {f['class']} | {de(f['confidence'])} | {f.get('period', '–')} | {f['claim']} |" for f in F)
+        frows = "\n".join(f"| `{f['id']}` | {f['verdict']} | {f['class']} | {de(f['confidence']) if f['confidence'] is not None else '–'} | {f.get('period', '–')} | {f['claim']} |" for f in F)
         md = re.sub(r"(\| ID \| Verdict \| Klasse \| Konf\. \| Bezugszeitraum \| Claim \|\n\|---\|---\|---\|---\|---\|---\|\n)(?:\|.*\|\n)+", lambda m: m.group(1) + frows + "\n", md)
         md = re.sub(r"^\| Version \| [\d.]+", f"| Version | {d['module']['version']}", md, count=1, flags=re.M)  # L44
         md = re.sub(r"Stand: Modul v[\d.]+,\n\d+ Fakten, \d+ Quellen\.", f"Stand: Modul v{d['module']['version']},\n{len(F)} Fakten, {len(d['sources'])} Quellen.", md)
@@ -152,7 +153,7 @@ def main():
         for name, content in build_blocks(s, d).items():
             md = re.sub(r"(<!-- sync:%s -->\n).*?(<!-- /sync:%s -->)" % (name, name), lambda m: m.group(1) + content + m.group(2), md, count=1, flags=re.S)
         # L48: Konfidenzen im Fließtext stehen mit Fakt-ID und kommen aus der DBOM
-        md = re.sub(r"(`(FACT_[A-Z0-9_]+)`[^)`]*?Konf(?:\.|idenz) )(\d+(?:[.,]\d+)?)", lambda m: m.group(1) + de(facts[m.group(2)]["confidence"]) if m.group(2) in facts else m.group(0), md)
+        md = re.sub(r"(`(FACT_[A-Z0-9_]+)`[^)`]*?Konf(?:\.|idenz) )(\d+(?:[.,]\d+)?)", lambda m: m.group(0) if m.group(2) in facts and facts[m.group(2)]["confidence"] is None else m.group(1) + de(facts[m.group(2)]["confidence"]) if m.group(2) in facts else m.group(0), md)
         # L49: QA-Scorecard der Analyse aus den Gate-Zellen der Seite
         rows_qa = [(lab, c, (re.search(r'title="([^"]*)"', rest) or [None, ""])[1])
                    for lab, c, rest in re.findall(r'<tr><td>([CQ]\d+ [^<]*)</td><td class="(check-\w+)"([^>]*)>', qa)]

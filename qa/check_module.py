@@ -250,7 +250,8 @@ def main():
         # L21 · Konfidenz-Spannen aus der DBOM
         rng = {}
         for f in F:
-            rng.setdefault(f["class"], []).append(f["confidence"])
+            if f["confidence"] is not None:
+                rng.setdefault(f["class"], []).append(f["confidence"])
         rd = []
         for k, lo, hi in re.findall(r'data-dbom-range="(\w+)">([\d,]+)–([\d,]+)<', html):
             if k in rng and (float(lo.replace(",", ".")), float(hi.replace(",", "."))) != (min(rng[k]), max(rng[k])):
@@ -279,7 +280,7 @@ def main():
 
         # L21b · Konfidenz-Pills aus der DBOM
         conf_bad = [f"{fid}: {v}" for fid, v in re.findall(r'data-dbom-conf="(\w+)">([\d,]+)<', html)
-                    if fid in facts and abs(float(v.replace(",", ".")) - facts[fid]["confidence"]) > 1e-9]
+                    if fid in facts and (facts[fid]["confidence"] is None or abs(float(v.replace(",", ".")) - facts[fid]["confidence"]) > 1e-9)]
         hand_conf = re.findall(r'class="dbom-conf">Konf\. [\d.,]+<', html)
         report("L21b Konfidenz-Pills", BLOCKER, not conf_bad and not hand_conf, "; ".join(conf_bad + hand_conf) or "alle Pills an DBOM gebunden")
         # L26 · Fakt mit offenem Pflichtpunkt ist nicht CONFIRMED
@@ -810,6 +811,36 @@ def main():
         # L19c · Rechtsrahmen-Fakten stützen sich auf eine Primärquelle (Sekundärquellen nur ergänzend)
         l19c = [f["id"] for f in F if f["class"] == "REGULATORY_FRAMEWORK" and stier.get(f["source_id"]) != "primary"]
         report("L19c Recht mit Primärquelle", BLOCKER, not l19c, "Hauptquelle nicht primär: " + ", ".join(l19c) if l19c else "Rechtsrahmen-Fakten mit Primärquelle")
+        # L27f · pauschales Verdict-Wort im Text nur, wenn alle gebundenen Fakten dieses Verdict tragen (sonst je Fakt nennen)
+        VW = {"Medienangaben": "MEDIA_REPORT", "ungeprüft": "UNVERIFIED"}
+        l27f = []
+        rows27 = [(r[0], r[5], r[6]) for r in (json.loads(x) for x in (re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', js_ks.group(1), re.M) if js_ks else []))]
+        rows27 += [(g[0], " ".join(g[1:4]), g[4] if len(g) > 4 else "") for g in (json.loads(x) for x in (re.findall(r'^\s*(\[".*\])\s*,?\s*$', js_gl.group(1), re.M) if js_gl else []))]
+        for name, txt, ids_ in rows27:
+            ids = [i for i in ids_.split() if i in facts]
+            for w, vd in VW.items():
+                for m in re.finditer(r"(?<!: )\b%s\b" % w, txt):
+                    if ids and any(facts[i]["verdict"] != vd for i in ids):
+                        l27f.append(f"{name}: „{w}“, aber {', '.join(i for i in ids if facts[i]['verdict'] != vd)[:60]} nicht {vd}")
+        report("L27f Verdict-Wörter = Verdicts", BLOCKER, not l27f, "; ".join(l27f[:3]) if l27f else "pauschale Verdict-Wörter nur bei einheitlichem Verdict")
+        # L86 · Szenarien ohne Prognose-Konfidenz: confidence null, keine Spanne, kein Pill, Live-Audit ohne Wert
+        l86 = [f"{f['id']}: confidence {f['confidence']}" for f in F if f["verdict"] == "SCENARIO_PROJECTION" and f.get("confidence") is not None]
+        scen_only = {f["class"] for f in F} - {f["class"] for f in F if f["verdict"] != "SCENARIO_PROJECTION"}
+        l86 += [f"Spanne {c}" for c in re.findall(r'data-dbom-range="(\w+)"', html) if c in scen_only]
+        l86 += [f"Pill {i}" for i in re.findall(r'data-dbom-conf="(\w+)"', html) if i in facts and facts[i]["verdict"] == "SCENARIO_PROJECTION"]
+        if "info.confidence!=null" not in html.replace(" ", ""):
+            l86.append("Live-Audit zeigt Konfidenz ohne Prüfung auf null")
+        report("L86 Szenarien ohne Konfidenz", BLOCKER, not l86, "; ".join(l86[:4]) if l86 else "Szenarien ohne Prognose-Konfidenz in DBOM und Anzeige")
+        # L85b · L85 über alle Bindungen einer Vergleichstabelle (Tabelle, Zeilen, Zellen); Quantor-Fakten mit Basis ausgenommen
+        l85b = []
+        for tb in re.finditer(r'<table\b[^>]*data-source="([^"]+)"[^>]*>(.*?)</table>', html, re.S):
+            ids = set(tb.group(1).split()) | {i for grp in re.findall(r'data-source="([^"]+)"', tb.group(2)) for i in grp.split()}
+            byt = {}
+            for i in ids:
+                if i in facts and not facts[i].get("basis"):
+                    byt.setdefault(stier.get(facts[i]["source_id"]), {}).setdefault(facts[i]["verdict"], []).append(i)
+            l85b += [f"Stufe {t_}: " + "; ".join(f"{v}: {', '.join(sorted(x))[:50]}" for v, x in vs.items()) for t_, vs in byt.items() if len(vs) > 1]
+        report("L85b Vergleich über alle Bindungen", BLOCKER, not l85b, "; ".join(l85b[:2]) if l85b else "alle Bindungen der Vergleichstabellen mit gleichen Maßstäben")
         report("L26c Offen-Punkt bindet Fakten", BLOCKER, not l26c, "; ".join(l26c[:3]) if l26c else "Offen-Punkte zu Kontraktdaten gebunden (L26 greift)")
         # L64/L67 · nur geltendes Recht: normalisiert, inkl. JS-Inhalte, Attribute und Prompt
         OLD_LAW = (r"\ba\.\s?f\.|alte[nr]? fassung|\baufgehoben\b|aufhebung|altjahre|altf[aä]ll|offene[nr]? fälle|§\s?52 abs\.\s?28|bis zur abschaffung"
@@ -852,7 +883,7 @@ def main():
                 ids = re.findall(r"`(FACT_[A-Z0-9_]+)`", par)
                 if not ids:
                     l48.append(f"Z. {body[:m.start()].count(chr(10)) + 1}: ohne Fakt-ID")
-                elif ids[-1] in facts and abs(float(m.group(1).replace(",", ".")) - facts[ids[-1]]["confidence"]) > 1e-9:
+                elif ids[-1] in facts and (facts[ids[-1]]["confidence"] is None or abs(float(m.group(1).replace(",", ".")) - facts[ids[-1]]["confidence"]) > 1e-9):
                     l48.append(f"{ids[-1]}: {m.group(1)} ≠ DBOM")
             report("L48 Analyse-Konfidenzen", BLOCKER, not l48, "; ".join(l48[:5]) if l48 else "alle Konfidenzen mit Fakt-ID und = DBOM")
             # L53 · Analyse = faktgebundene Kurzfassung: Sync-Blöcke vorhanden; Handtext mit Angaben nennt eine Fakt-ID
