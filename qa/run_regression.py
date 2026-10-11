@@ -12,6 +12,7 @@ cases = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
 page = cases["page"]
 ignore = shutil.ignore_patterns(".git", "node_modules", "__pycache__")
 miss = 0
+limits = 0
 with tempfile.TemporaryDirectory() as tmp:
     base = Path(tmp) / "base"
     shutil.copytree(root, base, ignore=ignore)
@@ -50,11 +51,12 @@ with tempfile.TemporaryDirectory() as tmp:
         hit = [l for l in fails if re.match(r"✗ (%s)\b" % c["expect"], l)]
         if not (r.returncode and hit) and c.get("known_limit"):  # dokumentierte, vom Herausgeber anerkannte Grenze: sichtbar, aber kein Fehler
             print(f"[GRENZE]   {c['name']} – {c['known_limit']}")
+            limits += 1
             continue
         if r.returncode and hit:
             print(f"[erkannt]  {c['name']} → {hit[0][2:40].strip()}")
         else:
             miss += 1
             print(f"[UMGANGEN] {c['name']} (erwartet {c['expect']}; exit {r.returncode}; {[l[2:30] for l in fails][:3]})")
-print(f"\n{len(cases['cases']) - miss}/{len(cases['cases'])} Fälle korrekt (Verstöße vom zuständigen Test erkannt, Negativkontrollen ohne Blocker)")
+print(f"\n{len(cases['cases']) - miss - limits}/{len(cases['cases'])} Fälle korrekt" + (f" + {limits} anerkannte Grenze(n)" if limits else "") + " (Verstöße vom zuständigen Test erkannt, Negativkontrollen ohne Blocker)")
 sys.exit(1 if miss else 0)

@@ -436,6 +436,8 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 ## 7 · Offene Prüfpunkte vor Veröffentlichung
 
+- K6-Text an die Verdicts der Anbieterfakten angleichen; Kernfokus-Zeile einheitlich einordnen
+- K6, keep_reason FACT_OS_ISSUER und Szenario-Konfidenzen widerspruchsfrei machen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
@@ -451,7 +453,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C1 Disclaimer Anfang/Ende | ✓ | Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test |
 | C2 Keine Anlageempfehlung (MAR) | ✓ | Keine Kursziele, Einstiege oder Empfehlungen (Zweitprüfung 2026-10-11 gelesen); Empfehlungsformen geprüft (L62) |
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
-| C4 Neutralität / Interessenkonflikte | ✓ | Interessenkonflikte: keine (Erklärung des Herausgebers vom 2026-10-11); Vergleich mit gleichen Maßstäben: Herstellerangaben aller Anbieter gleich eingestuft (L85) |
+| C4 Neutralität / Interessenkonflikte | ◐ | Interessenkonflikte: keine (Erklärung des Herausgebers); Vergleichstabelle nach L85 einheitlich, aber K6 nennt die Herstellerangaben der Wettbewerber pauschal „Medienangaben“ (16. Zweitprüfung) |
 | C5 Marken beschreibend | ✓ | Markenhinweis gegen Marken-Inventar geprüft (L84) und in der Zweitprüfung vom 2026-10-11 vollständig abgeglichen |
 | C6 UWG-konforme Begriffe | ✓ | Begriffe neutral; Wettbewerberangaben vom Herausgeber am 2026-10-11 am Original geprüft |
 | C7 Ausgewogene Risikodarstellung | ✓ | Modellgrenzen, Latenz, Fehlsignale, Totalverlust und BaFin-Quote dargestellt (Zweitprüfung 2026-10-11) |
@@ -463,12 +465,12 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q4 Provenienz je Fakt | ✓ | Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82) |
 | Q5 Quellenqualität | ✓ | Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen nur bei Medienangaben; Abgleich am Original durch den Herausgeber |
 | Q6 Vollständigkeit | ◐ | Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen |
-| Q7 Widerspruchsfreiheit | ✓ | Freigabestatus an allen Stellen einheitlich (L03b exakt); Disclaimer und Tabelle zu Knock-outs widerspruchsfrei; Belegstufe ohne Reste (L82b/L82c) |
+| Q7 Widerspruchsfreiheit | ◐ | Widersprüche (16. Zweitprüfung): K6 „Medienangaben“ vs. belegte Herstellerfakten; keep_reason FACT_OS_ISSUER „Rechtsnatur“; Szenario-Konfidenzen im Live-Audit und in S12 trotz „keine Prognose-Konfidenz“ |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
 | Q9 Keine Überzeichnung / Halluzination | ✓ | Einschränkungen als qualifier und überall sichtbar (L76d/L76e); Kostenausweis neutral; keine Prognose-Konfidenz bei Szenarien |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 16 × ✓ + 3 × ◐ = 17,5 von 19 Punkten = **92,1 %**.
+**Gesamtscore:** 14 × ✓ + 5 × ◐ = 16,5 von 19 Punkten = **86,8 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---

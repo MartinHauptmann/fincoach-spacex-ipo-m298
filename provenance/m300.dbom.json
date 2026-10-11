@@ -1248,6 +1248,12 @@
       "event": "Fünfzehnte Zweitprüfung eingearbeitet: Wettbewerbsmatrix je Anbieter (FACT_SPOTGAMMA_SPEC, FACT_MENTHORQ_SPEC, FACT_VOLLAND_SPEC, FACT_BOOKMAP_SPEC, FACT_TWS_SPEC; L85), Disclaimer „Optionsscheine tragen Emittentenrisiko“, Beta-qualifier (L76e), Kostenausweis neutral, Optionsschein ohne Rechtsnatur-Einordnung (L19c), Freigabestatus exakt (L03b/L03c), Szenarien ohne Prognose-Konfidenz; Impressum ohne OS-Plattform, Datenschutz mit Speicherdauer (Angabe von Netlify) und neutralem DPA-Hinweis; H13-12 als anerkannte Grenze; C4, Q5, Q7, Q9 ✓",
       "qa_score_pct": 92.1,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Sechzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): keine Freigabe; C4 und Q7 auf ◐ (K6 „Medienangaben“ trotz belegter Herstellerfakten, keep_reason FACT_OS_ISSUER, Szenario-Konfidenzen). Hinweis zur Nachvollziehbarkeit: Der verified-Block der fünf Anbieterfakten wurde aus FACT_COMPETITOR_MATRIX übernommen (Herausgeber-Abgleich vom 2026-10-11, C6)",
+      "qa_score_pct": 86.8,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
