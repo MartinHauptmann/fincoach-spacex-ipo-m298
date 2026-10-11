@@ -163,6 +163,17 @@ def main():
                     mod, tbl8, n_ok, n_part, de(pts, 1) if pts % 1 else str(int(pts)), len(cells), de(pct, 1), rel)
         md = re.sub(r"(## 8 · QA-Scorecard\n\n).*?(?=\n---\n)", lambda m: m.group(1) + sec8, md, count=1, flags=re.S)
         mds[0].write_text(md, encoding="utf-8")
+    # L74/L80: Änderungsdatum und Lehren-Bereich des Prompts aus audit_trail und LESSONS
+    prm = sorted((page.parent / "prompts").glob(f"m{mod}-*.md"))
+    les = page.parent / "qa" / "LESSONS.md"
+    if prm and d.get("audit_trail"):
+        pt = prm[0].read_text(encoding="utf-8")
+        last = max(e["date"] for e in d["audit_trail"])
+        pt = re.sub(r"(\*\*Geändert:\*\* )\d{4}-\d{2}-\d{2}", lambda m: m.group(1) + last, pt, count=1)
+        if les.exists():
+            lmax = max(int(x) for x in re.findall(r"^\| L(\d+)\b", les.read_text(encoding="utf-8"), re.M))
+            pt = re.sub(r"(\(Lehren L\d+–L)\d+", lambda m: m.group(1) + str(lmax), pt, count=1)
+        prm[0].write_text(pt, encoding="utf-8")
     print(f"synchronisiert: {cnt} · QA {de(pct, 1)} % ({pts}/{len(cells)}) · Offen-Liste {len(open_items)} Punkte")
 
 

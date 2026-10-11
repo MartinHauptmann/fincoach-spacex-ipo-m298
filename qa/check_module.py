@@ -356,6 +356,9 @@ def main():
             kshare = [k for k, row in ((json.loads(r)[0], json.loads(r)) for r in (re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', js_ks.group(1), re.M) if js_ks else [])) if set(row[6].split()) & set(c["facts"])]
             if kshare and not c.get("k") and not c.get("k_differs"):
                 l61.append(f"{c['id']}: teilt Belege mit {kshare[0]}, aber ohne k/k_differs")  # L69
+            kd = c.get("k_differs", "")
+            if kd and (len(kd.strip()) < 25 or not (set(re.findall(r"\bK\d+\b", kd)) & (set(kshare) or set(kres)))):
+                l61.append(f"{c['id']}: k_differs ohne Begründung mit Bezug auf {'/'.join(kshare) or 'eine K-Zeile mit gemeinsamen Belegen'}")  # L80
             if c["result"] == "nv" and c["id"] not in open_txt:
                 l61.append(f"{c['id']}: [N. V.] ohne Offen-Punkt")
             l61 += [f"{c['id']}: unbekannte ID {i}" for i in c["facts"] if i not in facts]
@@ -363,10 +366,15 @@ def main():
         # L62 · Fazit: jeder Punkt als Einschätzung (Badge) oder ausdrücklich als Faktwiedergabe (data-assessment="fact"); SCENARIO im Konjunktiv
         fzs = re.search(r'<section id="s-fz".*?</section>', html, re.S)
         l62 = []
-        for li in re.findall(r"<li\b[^>]*>.*?</li>", re.sub(r"<!--.*?-->", "", fzs.group(0), flags=re.S) if fzs else "", re.S):
+        WERT = (r"besser|schwächer|merkmal|differenzier|lösen|mehrwert|empf(?:ohl|ehl|iehl)|sinnvoll|überleg|ideal|wertvoll|leider|beste|optimal|attraktiv"
+                r"|überzeug|deutlich|vorteil|nachteil|stärke|schwäche|\bschwach|\bstark|\bklar(?:er|e|es)?\b|\bgut\b|schlecht|hervorragend|enttäusch|bedauer")  # L70/L80
+        no_claims = {c["id"] for c in dbom.get("source_claims", []) if c["result"] == "no"} | {k for k, v in kres.items() if v == "no"}
+        fz_html = re.sub(r"<!--.*?-->", "", fzs.group(0), flags=re.S) if fzs else ""
+        for li in re.findall(r"<li\b[^>]*>.*?</li>", fz_html, re.S):
             badge = 'dbom-class-badge">EINSCHÄTZUNG<' in li
-            if not badge and re.search(r"besser|schwächer|merkmal|differenzier|lösen|mehrwert|empfohl|sinnvoll|überlegen|ideal|wertvoll|leider|beste|optimal|attraktiv", norm_txt(li)) or (not badge and "data-claim=" not in li and re.search(r"vorteil|nachteil|stärke|schwäche|\bschwach|\bstark|\bklar(?:er|e|es)?\b|gut\b|schlecht", norm_txt(li))):  # L70: Vergleichswörter nur mit Claim-Bindung
-                l62.append("Wertung ohne EINSCHÄTZUNG: " + re.sub(r"<[^>]+>", "", li)[:40])  # L70
+            refuted = (re.search(r'data-claim="([AK]\d+)"', li) or [None, None])[1] in no_claims  # gibt einen widerlegten Claim wieder
+            if not badge and not refuted and re.search(WERT, norm_txt(li)):
+                l62.append("Wertung ohne EINSCHÄTZUNG: " + re.sub(r"<[^>]+>", "", li)[:40])  # L70/L80: data-claim ersetzt das Badge nicht
             if not badge and 'data-assessment="fact"' not in li:
                 l62.append("Fazit-Punkt ohne Einordnung: " + re.sub(r"<[^>]+>", "", li)[:40])
         scen = {f["id"] for f in F if f["verdict"] == "SCENARIO_PROJECTION"}
@@ -376,10 +384,17 @@ def main():
                 txt = norm_txt(element_inner(html, m))
                 if re.search(r"\b(liegt|ist|sind|bietet|wird)\b", txt) and not re.search(r"\b(läge|wäre|wären|könnte|würde|szenario|vorschl|modell|illustrativ|hypothetisch|angenommen)", txt):
                     l62.append("SCENARIO im Indikativ: " + txt[:40])
-        for m in re.finditer(r"empfohl\w*", re.sub(r"<(script|style)\b.*?</\1>", "", html, flags=re.S)):  # L70: Empfehlungen nur als Szenario/Einschätzung
-            seg = html[max(0, html.rfind("<div", 0, m.start())):m.end() + 300]
-            if not re.search(r'dbom-class-badge">(SCENARIO|EINSCHÄTZUNG)<', seg):
-                l62.append("Empfehlung ohne SCENARIO/EINSCHÄTZUNG")
+        # L80: Text außerhalb der <li> (Info-Boxen) satzweise; Empfehlungen seitenweit satzweise
+        def sentences(h):
+            h = re.sub(r'<span class="dbom-class-badge">(\w+)</span>', r" §\1§ ", h)
+            return [x.strip() for x in re.split(r"(?<=[.!?])\s+", norm_txt(h)) if x.strip()]
+        for sent in sentences(re.sub(r"<li\b.*?</li>|<h[1-6]\b.*?</h[1-6]>", " ", fz_html, flags=re.S)):
+            if re.search(WERT, sent) and not re.search(r"§(einschätzung|scenario)§", sent):
+                l62.append("Wertung ohne EINSCHÄTZUNG: " + sent[:40])
+        body_wo = re.sub(r"<(script|style)\b.*?</\1>|<!--.*?-->", "", html, flags=re.S)
+        for sent in sentences(body_wo):
+            if re.search(r"empf(?:ohl|ehle|ehlen|iehlt)\w*", sent) and not re.search(r"§(einschätzung|scenario)§|keine? (?:\w+ )?empf", sent):
+                l62.append("Empfehlung ohne SCENARIO/EINSCHÄTZUNG: " + sent[:40])
         # L66 · Fazit-Punkte unter „Relativiert/Entfällt“ verweisen auf einen Claim oder K-Punkt
         for box in re.findall(r"<h3[^>]*>[^<]*(?:Relativiert|Entfällt)[^<]*</h3><ul[^>]*>(.*?)</ul>", fzs.group(0) if fzs else "", re.S):
             for li in re.findall(r"<li\b[^>]*>", box):
@@ -387,15 +402,22 @@ def main():
                 ok_ids = {c["id"] for c in dbom.get("source_claims", [])} | set(kres)
                 if not cl or cl.group(1) not in ok_ids:
                     l62.append("Fazit-Punkt ohne gültigen data-claim (L66)")
+                    continue
+                lis = set((re.search(r'data-source="([^"]*)"', li) or [None, ""])[1].split())
+                cf = set(next((c["facts"] for c in dbom.get("source_claims", []) if c["id"] == cl.group(1)), []))
+                cf |= set(next((json.loads(r)[6].split() for r in (re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', js_ks.group(1), re.M) if js_ks else []) if json.loads(r)[0] == cl.group(1)), []))
+                if not lis & cf:
+                    l62.append(f"Fazit-Punkt: data-claim {cl.group(1)} teilt keinen Beleg mit dem Punkt (L66/L80)")
         report("L62 Fazit eingeordnet, SCENARIO im Konjunktiv", BLOCKER, bool(fzs) and not l62, "; ".join(l62[:3]) if l62 else "alle Fazit-Punkte eingeordnet; Szenarien im Konjunktiv")
         js_gl = re.search(r"const GLOSSAR=\[(.*?)\n\];", html, re.S)
         # L63 · Konstanten eines Fakts (values) stimmen überall und sind gebunden (auch Formeln, Labels, data-def, Glossar)
         l63 = []
         for f in F:
             for sym, val in f.get("values", {}).items():
-                rx = re.compile(r"(?:M_\{%s\}\s*=\s*|\b%s(?:-Multiplikator)?\s*(?:\(|=|:)?\s*)(\d+)\b|Multiplikator\s*\(?(\d+)\)?\s*\(%s\)" % (sym, sym, sym))  # L71
+                rx = re.compile(r"(?:M_\{%s\}\s*=\s*|\b%s(?:-\w*[Mm]ultiplikator)?\)?\s*(?:\(|=|:)?\s*)(\d+)\b(?!\s?%%|[.,]\d)|Multiplikator\s*\(?(\d+)\)?\s*\(%s\)"
+                                r"|\(%s\)[^\d<>.;]{0,12}?(\d+)\s?(?:USD|US-?\$|\$|€)" % (sym, sym, sym, sym))  # L71/L80
                 for m in rx.finditer(scan):
-                    num = m.group(1) or m.group(2)
+                    num = m.group(1) or m.group(2) or m.group(3)
                     if num != val:
                         l63.append(f"{sym} = {num} ≠ {val}")
                     else:
@@ -405,10 +427,17 @@ def main():
                             l63.append(f"{sym} {val} nicht an {f['id']} gebunden")
                 for row in (re.findall(r'^\s*\[".*\]', js_gl.group(1), re.M) if js_gl else []):
                     for m in rx.finditer(row):
-                        if (m.group(1) or m.group(2)) != val or f["id"] not in row:
-                            l63.append(f"Glossar {sym} {m.group(1) or m.group(2)}")
+                        if (m.group(1) or m.group(2) or m.group(3)) != val or f["id"] not in row:
+                            l63.append(f"Glossar {sym} {m.group(1) or m.group(2) or m.group(3)}")
                 if md:
-                    l63 += [f"Analyse {sym} = {m.group(1) or m.group(2)}" for m in rx.finditer(md) if (m.group(1) or m.group(2)) != val]
+                    l63 += [f"Analyse {sym} = {m.group(1) or m.group(2) or m.group(3)}" for m in rx.finditer(md) if (m.group(1) or m.group(2) or m.group(3)) != val]
+            # L80: Rechner-Vorgaben in an den Fakt gebundenen Labels
+            for lab in re.finditer(r'<label\b[^>]*data-source="([^"]*)"[^>]*>(.*?)</label>', html, re.S):
+                if f["id"] in lab.group(1).split():
+                    syms = [y for y in f.get("values", {}) if re.search(r"\b%s\b" % y, re.sub(r"<input\b[^>]*>", "", lab.group(2)))]
+                    inp = re.search(r'<input\b[^>]*\bvalue="([^"]*)"', lab.group(2))
+                    if len(syms) == 1 and inp and inp.group(1) != f["values"][syms[0]]:
+                        l63.append(f"Rechner {syms[0]} value={inp.group(1)} ≠ {f['values'][syms[0]]}")
         report("L63 Faktkonstanten gebunden", BLOCKER, not l63, "; ".join(sorted(set(l63))[:4]) if l63 else "alle Faktkonstanten stimmen und sind gebunden")
         # L27b · Glossar: Einträge mit nicht bestätigtem Fakt tragen das Badge des schwächsten Verdicts
         BADGE1 = {"MEDIA_REPORT": "MEDIEN", "UNVERIFIED": "UNGEPRÜFT", "SCENARIO_PROJECTION": "SCENARIO"}
@@ -426,7 +455,8 @@ def main():
         for r in (re.findall(r'^\s*(\[".*\])\s*,?\s*$', js_gl.group(1), re.M) if js_gl else []):
             g = json.loads(r)
             if not (len(g) > 4 and g[4].strip()):
-                hit = re.search(r"§|\b(eurex|cboe|cme|bafin|esma|emittent\w*|rechtlich|gesetz\w*|vorgeschrieben|pflicht\w*|veröffentlich\w*|bonität|kontrahent\w*|schuldverschreibung|ccp|atas|ib)\b", norm_txt(" ".join(g[1:4])))
+                hit = re.search(r"§|\b(eurex|cboe|cme|bafin|esma|wphg|estg|kstg|kwg|mar|mifid\w*|priips|emir|nasdaq|xetra|nyse|ice|börse\w*|emittent\w*|rechtlich\w*|gesetz\w*"
+                                r"|vorgeschrieben|\w*pflicht\w*|veröffentlich\w*|bonität|kontrahent\w*|schuldverschreibung|ccp|atas|ib|tws|anbiete\w*|bieten|lizen\w*|\d{4})\b", norm_txt(" ".join(g[1:4])))  # L80
                 if hit:
                     l27c.append(f"{g[0]}: „{hit.group(0)}“ ohne Fakt")
         report("L27c Glossar-Tatsachen gebunden", BLOCKER, bool(js_gl) and not l27c, "; ".join(l27c[:4]) if l27c else "ungebundene Glossar-Einträge ohne Tatsachenmerkmale")
@@ -434,29 +464,54 @@ def main():
         report("L27b Glossar-Badges", BLOCKER, not l27b and rend27, "; ".join(l27b[:4]) if l27b else ("Renderer ohne Badge" if not rend27 else "Glossar-Badges = schwächstes Verdict"))
         # L06b/L72 · Alleinstellungs-Aussagen nur mit Vergleichsbasis im selben Satz (auch K-Tabelle)
         l06b = []
+        ALLEIN = r"Alleinstellung|einzigartig|\beinzige[rnsm]?\b|\bals einzige\w*|\bnur (?:ATAS|wir|ein\w* (?:Anbieter|Werkzeug|Tool|Plattform))\b|\bkein anderer\b|\bniemand sonst\b"  # L72/L80
+        js_strs = [m.group(1) for sc in re.findall(r"<script\b[^>]*>(.*?)</script>", html, re.S) for m in re.finditer(r'"((?:[^"\\]|\\.){12,})"|`([^`]{12,})`|\'((?:[^\'\\]|\\.){12,})\'', sc) if m.group(1)]
+        js_strs += [m.group(2) or m.group(3) for sc in re.findall(r"<script\b[^>]*>(.*?)</script>", html, re.S) for m in re.finditer(r'"((?:[^"\\]|\\.){12,})"|`([^`]{12,})`|\'((?:[^\'\\]|\\.){12,})\'', sc) if not m.group(1)]
+        for js in js_strs:  # L80: Glossar, Modale und andere JS-Texte ohne Bindung
+            for sent in re.split(r"(?<=[.;!?])\s", norm_txt(js)):
+                if re.search(ALLEIN, sent, re.I):  # in JS-Texten gibt es keine Bindung an einen Fakt → nie zulässig
+                    l06b.append(f"JS: {sent.strip()[:40]}…")
         texts06 = [(x["sec"], x["text"], x["src"]) for x in t.texts if not x.get("code") and x["sec"] != "s-qa"]
         texts06 += [("KS", r, "FACT") for r in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else [])]
         for sec, txt, src in texts06:
             for sent in re.split(r"(?<=[.;!?])\s", txt):
-                if re.search(r"Alleinstellung|einzigartig|\beinzige[rns]?\b|\bnur (?:ATAS|ein Anbieter)\b", sent) and not (src and re.search(r"Vergleichsfeld|laut Matrix|bestimmbar|n\. v\.", sent)):
+                if re.search(ALLEIN, sent, re.I) and not (src and re.search(r"Vergleichsfeld|laut Matrix|bestimmbar|n\. v\.", sent)):
                     l06b.append(f"{sec}: {sent.strip()[:40]}…")
         report("L06b Alleinstellung mit Basis", BLOCKER, not l06b, "; ".join(l06b[:3]) if l06b else "Alleinstellungsaussagen mit Vergleichsbasis im selben Satz")
         # L60 · Eigenständigkeit: keine Verweise auf andere Module oder frühere Fassungen
         own = f"M{mod.group(1)}"
         dtxt = json.dumps({k: v for k, v in dbom.items() if k != "audit_trail"}, ensure_ascii=False)
         l60 = []
-        for name, txt in (("Seite", re.sub(r"<(style)\b.*?</\1>", "", html, flags=re.S)), ("Analyse", md), ("DBOM", dtxt)):  # L68: JS eingeschlossen
-            l60 += [f"{name}: {x}" for x in sorted(set(re.findall(r"\bM\d{3}\b", txt)) - {own})]
-            l60 += [f"{name}: Link {x}" for x in sorted(set(re.findall(r'href=["\']((?:m\d{3}|modul)\.html)', txt)) - {f"m{mod.group(1)}.html"})]
-            l60 += [f"{name}: „{x}“" for x in re.findall(r"Vormodul\w*|Vorversion\w*|Vorgänger\w*|frühere[nr]? (?:Fassung|Version)\w*|gegenüber (?:Version|v)\s?\d[\d.]*|vorherige[nr]? (?:Version|Modul|Fassung)", txt, re.I)]
-        report("L60 Eigenständigkeit", BLOCKER, not l60, "; ".join(l60[:4]) if l60 else "keine Verweise auf andere Module oder frühere Fassungen")
         prm = sorted((page.parent / "prompts").glob(f"m{mod.group(1)}-*.md")) if (page.parent / "prompts").exists() else []
+        ptxt = prm[0].read_text(encoding="utf-8") if prm else ""
+        ver = dbom["module"]["version"]
+        HIST = (r"Vormodul\w*|Vorversion\w*|Vorgänger\w*|(?:frühere|vorige|vorherige|letzte|bisherige|alte|ältere)[nrs]? (?:Fassung|Version|Modul|Stand)\w*"
+                r"|(?:gegenüber|im Vergleich zu[rm]?|seit) (?:der )?(?:Version |v)\s?\d[\d.]*|Fortsetzung von|Nachfolger\w*")
+        for name, txt in (("Seite", re.sub(r"<(style)\b.*?</\1>", "", html, flags=re.S)), ("Analyse", md), ("DBOM", dtxt), ("Prompt", ptxt)):  # L68: JS eingeschlossen
+            l60 += [f"{name}: {x}" for x in sorted(set(re.findall(r"\bM\s?\d{3}\b", txt)) - {own})]
+            l60 += [f"{name}: {x}" for x in sorted(set(re.findall(r"\bModul\s\d{3}\b|\bm\d{3}\b", txt)) - {f"Modul {mod.group(1)}", f"m{mod.group(1)}"})]  # L80
+            l60 += [f"{name}: Link {x}" for x in sorted(set(re.findall(r'href=["\'][^"\']*?\b((?:m\d{3}|modul)\.html)', txt)) - {f"m{mod.group(1)}.html"})]  # L80: auch ./ und Pfade
+            if name != "Prompt":  # der Prompt formuliert die Regel selbst („keine früheren Fassungen“)
+                l60 += [f"{name}: „{x}“" for x in re.findall(HIST, txt, re.I)]
+                pver = set(re.findall(r"Prompt-Version:\*\* (\d+\.\d+\.\d+)", ptxt))
+                l60 += [f"{name}: Version {x}" for x in sorted(set(re.findall(r"\b(?:v|Version )(\d+\.\d+\.\d+)\b", txt)) - {ver} - pver)]  # L80: fremde Versionsnummern
+        # L68b · Gate-Tooltips und Offen-Liste beschreiben den Zielzustand, nicht den Bearbeitungsverlauf
+        qa_sec = re.search(r'<section id="s-qa".*?</section>', html, re.S)
+        qa_txt = " ".join(re.findall(r'title="([^"]*)"', qa_sec.group(0)) + re.findall(r"<li[^>]*data-open[^>]*>(.*?)</li>", qa_sec.group(0), re.S)) if qa_sec else ""
+        l60 += [f"QA: „{x}“" for x in re.findall(r"\b(?:entfernt|angeglichen|überarbeitete?[nm]?|korrigiert|bereinigt|gestrichen|nach dem Review|in der Zweitprüfung geändert)\b", qa_txt, re.I)]
+        report("L60 Eigenständigkeit", BLOCKER, not l60, "; ".join(l60[:4]) if l60 else "keine Verweise auf andere Module oder frühere Fassungen")
         # L65 · K-Bereiche und K-Verweise passen zur Zahl der K-Zeilen (Seite, Analyse, Prompt)
         nk = len(kres)
         l65 = []
-        for name, txt in (("Seite", re.sub(r"<(style)\b.*?</\1>", "", html, flags=re.S)), ("Analyse", md), ("Prompt", prm[0].read_text(encoding="utf-8") if prm else "")):
-            l65 += [f"{name}: K1–K{n}" for n in re.findall(r"K1\s?[–-]\s?K(\d+)|K1 bis K(\d+)", txt) for n in [n[0] or n[1]] if int(n) != nk]
-            l65 += [f"{name}: K{n}" for n in set(re.findall(r"\bK(\d{1,2})\b", txt)) if int(n) > nk]
+        ncl = len(dbom.get("source_claims", []))
+        ZW = {w: i for i, w in enumerate("null eins zwei drei vier fünf sechs sieben acht neun zehn elf zwölf dreizehn vierzehn fünfzehn sechzehn siebzehn achtzehn neunzehn zwanzig".split())}
+        ZW.update({"ein": 1, "eine": 1})
+        for name, txt in (("Seite", re.sub(r"<(style)\b.*?</\1>", "", html, flags=re.S)), ("Analyse", md), ("Prompt", ptxt), ("DBOM", dtxt)):  # L80: auch DBOM-Freitext
+            tn = re.sub(r"\bK(?:\s|&nbsp;|&#160;)(?=\d)", "K", __import__("html").unescape(txt).replace("—", "–").replace("‑", "-")).upper()  # Attribute bleiben erhalten  # L80: „K 10“, Geviertstrich
+            l65 += [f"{name}: K1–K{n}" for n in re.findall(r"\bK1\s?[–-]\s?K(\d+)|\bK1 BIS K(\d+)", tn) for n in [n[0] or n[1]] if int(n) != nk]
+            l65 += [f"{name}: K{n}" for n in set(re.findall(r"\bK(\d{1,2})\b", tn)) if int(n) > nk]
+            l65 += [f"{name}: A01–A{n}" for n in re.findall(r"\bA01\s?[–-]\s?A(\d+)", tn) if int(n) != ncl]  # L65b
+            l65 += [f"{name}: „{w} {x}“" for w, x in re.findall(r"\b([a-zäöüß]+) (kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if w in ZW and ZW[w] != nk]  # L80: Zahlwörter
         if prm:
             pdefs = re.findall(r"^K(\d+)\s{1,2}[A-ZÄÖÜ]", prm[0].read_text(encoding="utf-8"), re.M)
             if len(pdefs) != nk:
@@ -467,6 +522,10 @@ def main():
         srcs_txt = norm_txt(" ".join(x["title"] + " " + x.get("url", "") for x in dbom["sources"]))
         AUTH = ["BMF", "BFH", "BVerfG", "BaFin", "Eurex", "Cboe", "CME", "OPRA", "BGBl", "ESMA", "BSW", "DDV", "Deutsche Börse"]
         l66 = [a for a in AUTH if dh and re.search(r"\b" + re.escape(a) + r"\b", dh.group(1)) and norm_txt(a) not in srcs_txt]
+        GENERIC = {"gesetzestexte", "herstellerdokumentation", "suchtreffer", "primärquelle", "primärquellen", "volltextabruf", "gesperrt", "medien", "medien-",
+                   "sekundärquellen", "medienangabe", "gekennzeichnet", "sowie", "überwiegend", "die", "der", "das", "und", "sind", "als", "auf", "über"}
+        if dh:  # L80: jedes groß geschriebene Wort ist generisch oder kommt in den Quellen vor
+            l66 += [w for w in re.findall(r"\b[A-ZÄÖÜ][\wäöüß-]+", dh.group(1)) if w.casefold() not in GENERIC and w.casefold().rstrip("-") not in srcs_txt and w not in l66]
         report("L66 Datenherkunft = Quellen", BLOCKER, bool(dh) and not l66, "nicht in den Quellen: " + ", ".join(l66) if l66 else ("Datenherkunft durch Quellen gedeckt" if dh else "keine Datenherkunft"))
         # L74 · Footer-Datum = letzte Änderung im audit_trail; Schweregrade im Prompt = K-Tabelle
         last = max((e["date"] for e in dbom.get("audit_trail", [])), default="")
@@ -475,19 +534,91 @@ def main():
         if prm:
             SEVM = {"crit": "KRITISCH", "major": "WESENTLICH", "hint": "HINWEIS"}
             ksev = {json.loads(r)[0]: SEVM.get(json.loads(r)[4]) for r in (re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', js_ks.group(1), re.M) if js_ks else [])}
-            for ks_, sev in re.findall(r"^\| (K\d+)(?:/K\d+)? \|.*\| (KRITISCH|WESENTLICH|HINWEIS) \|\s*$", prm[0].read_text(encoding="utf-8"), re.M):
-                if ksev.get(ks_) and ksev[ks_] != sev:
-                    l74.append(f"Prompt {ks_} {sev} ≠ Seite {ksev[ks_]}")
+            for kk, sev in re.findall(r"^\|\s*\**(K\d+(?:\s?/\s?K\d+)*)\**\s*\|.*\|\s*[*_]*(KRITISCH|WESENTLICH|HINWEIS)[*_]*\s*\|\s*$", ptxt, re.M):  # L80: Markup, alle K
+                for ks_ in re.findall(r"K\d+", kk):
+                    if ksev.get(ks_) and ksev[ks_] != sev:
+                        l74.append(f"Prompt {ks_} {sev} ≠ Seite {ksev[ks_]}")
+            pg = re.search(r"\*\*Geändert:\*\* (\d{4}-\d{2}-\d{2})", ptxt)
+            if pg and pg.group(1) != last:
+                l74.append(f"Prompt geändert {pg.group(1)} ≠ {last}")  # L80
         report("L74 Datum und Schweregrade synchron", BLOCKER, bool(fd) and not l74, "; ".join(l74[:3]) if l74 else f"Footer {last}, Schweregrade = K-Tabelle")
         # L75 · jede nicht bestätigte Angabe (außer Szenario) ist bewusst behalten: keep_reason
-        l75 = [f["id"] for f in F if f["verdict"] in ("UNVERIFIED", "MEDIA_REPORT") and not f.get("keep_reason")]
-        report("L75 nicht bestätigte Angaben begründet", BLOCKER, not l75, "ohne keep_reason: " + ", ".join(l75) if l75 else f"{sum(f['verdict'] in ('UNVERIFIED', 'MEDIA_REPORT') for f in F)} nicht bestätigte Fakten mit Begründung")
+        l75 = [f["id"] for f in F if f["verdict"] in ("UNVERIFIED", "MEDIA_REPORT")
+               and not (len(f.get("keep_reason", "").strip()) >= 25 and re.search(r"\b(?:K\d+|Modul \d|[CQ]\d+|S\d{2}|Fazit)\b", f.get("keep_reason", "")))]  # L80: Begründung mit Bezug
+        report("L75 nicht bestätigte Angaben begründet", BLOCKER, not l75, "ohne tragfähiges keep_reason (≥ 25 Zeichen, Bezug K/Modul/Gate/Fazit): " + ", ".join(l75) if l75 else f"{sum(f['verdict'] in ('UNVERIFIED', 'MEDIA_REPORT') for f in F)} nicht bestätigte Fakten mit Begründung")
+        # L76 · Zahlen, Daten und Rechtsfolge-Wörter in gebundenen Elementen stehen im Claim der gebundenen Fakten
+        def iso(x):
+            return re.sub(r"\b(\d{2})\.(\d{2})\.(\d{4})\b", r"\3-\2-\1", x)
+        l76 = []
+        for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
+            ids = m.group(2).split()
+            if not ids or not set(ids) <= set(facts):
+                continue  # JS-Vorlagen (${…}) prüft L27/L27b
+            inner = element_inner(html, m)
+            inner = re.sub(r'<span\b[^>]*data-dbom-conf[^>]*>.*?</span>|<(script|style)\b.*?</\1>', " ", inner, flags=re.S)
+            for n in list(re.finditer(r'<(\w+)\b[^>]*data-source="[^"]+"[^>]*>', inner))[::-1]:  # verschachtelt gebundene Elemente prüft ihr eigener Durchlauf
+                inner = inner[:n.start()] + " " + inner[n.end() + len(element_inner(inner, n)):]
+            txt = iso(__import__("html").unescape(re.sub(r"<[^>]+>", " ", inner)))
+            txt = re.sub(r"\\\(.*?\\\)", " ", txt)  # Formeln (KaTeX) prüft L63
+            hay = iso(" ".join(str(facts[i].get(k, "")) for i in ids for k in ("claim", "period", "caveat", "values", "basis")))
+            for w, n in ZW.items():  # Zahlwörter im Claim („zehn Indikatoren“) zählen als Ziffer
+                if n > 1 and re.search(r"\b%s\b" % w, hay, re.I):
+                    hay += f" {n} "
+            NUM = r"(?<![\w.,/])(?<!\d-)\d+(?:[.,]\d+)*(?:-\d{2}-\d{2})?(?![\w])"
+            hay_n = set(re.findall(NUM, hay))
+            for num in re.findall(NUM, re.sub(r"S&P 500|Nasdaq-100|EURO STOXX 50|DAX 40|E-mini-S&P-500", " ", txt)):
+                if num not in hay_n:
+                    l76.append(f"{ids[0]}: {num}")
+            for w in re.findall(r"\w*(?:grenze|betrag|begrenz|beschränk|höchst|unbegrenzt|unbeschränkt)\w*", txt, re.I):
+                if not re.search(re.escape(w.casefold()[:7]), hay.casefold()):
+                    l76.append(f"{ids[0]}: „{w}“")
+        report("L76 gebundene Angaben ∈ Claim", BLOCKER, not l76, "nicht im Claim: " + "; ".join(sorted(set(l76))[:40]) if l76 else "Zahlen, Daten und Rechtsfolgen gebundener Elemente stehen im Claim")
+        # L77 · Fakt-IDs in DBOM-Freitexten und Analyse existieren
+        l77 = sorted({x for x in re.findall(r"\bFACT_[A-Z0-9_]+\b", json.dumps({k: v for k, v in dbom.items() if k != "audit_trail"}, ensure_ascii=False) + " " + md) if x not in facts})  # audit_trail ist Verlauf
+        report("L77 Fakt-IDs existieren", BLOCKER, not l77, "unbekannt: " + ", ".join(l77[:6]) if l77 else "alle genannten Fakt-IDs existieren")
+        # L78 · Bezugszeitraum ≤ Stichtag; späterer Abruf ausdrücklich; Abrufzeitraum umfasst den spätesten Abruf
+        st = dbom["module"].get("stichtag", "")
+        l78, abruf = [], []
+        for f in F:
+            for m in re.finditer(r"\d{4}-\d{2}-\d{2}", iso(f.get("period", ""))):
+                if re.search(r"abgerufen|abruf", f["period"][max(0, m.start() - 25):m.start()], re.I):
+                    abruf.append(m.group(0))
+                elif st and m.group(0) > st:
+                    l78.append(f"{f['id']}: Bezugszeitraum {m.group(0)} nach Stichtag {st}")
+        late = max(abruf, default=st)
+        for name, txt in (("DBOM", dbom.get("honest_disclosure", "")), ("Analyse", md)):
+            for m in re.finditer(r"(?:abgerufen|recherche)\D{0,40}?\d{4}-\d{2}-\d{2} bis (\d{4}-\d{2}-\d{2})", iso(txt), re.I):
+                if m.group(1) < late:
+                    l78.append(f"{name}: Abruf bis {m.group(1)} < {late}")
+        report("L78 Stichtag und Abruf", BLOCKER, not l78, "; ".join(l78[:4]) if l78 else f"Bezugszeiträume ≤ {st}; Abruf bis {late} ausgewiesen")
+        # L79 · nur an Herstellerangaben gebundene Elemente tragen das VENDOR-Kennzeichen
+        vend = {f["id"] for f in F if f["class"] == "VENDOR_CLAIM"}
+        l79 = []
+        for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
+            ids = set(m.group(2).split())
+            if ids and ids <= vend and "VENDOR" not in element_inner(html, m):
+                l79.append(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", element_inner(html, m))).strip()[:30])
+        report("L79 VENDOR-Kennzeichen", BLOCKER, not l79, "ohne VENDOR: " + "; ".join(l79[:4]) if l79 else "alle Herstellerangaben gekennzeichnet")
+        # L26c · Offen-Punkte zu Kontraktdaten binden die betroffenen Fakten; diese nennen den offenen Abgleich im caveat
+        l26c = []
+        syms = {y for f in F for y in f.get("values", {})}
+        for li in re.findall(r"<li\b[^>]*data-open[^>]*>.*?</li>", html, re.S):
+            t26 = re.sub(r"<[^>]+>", " ", li)
+            if re.search(r"multiplikator|kontraktdaten|kontraktwert|kontraktspezifikation|\b(?:%s)\b" % "|".join(map(re.escape, syms or {"§§"})), t26, re.I):
+                ids = (re.search(r'data-source="([^"]*)"', li) or [None, ""])[1].split()
+                if not ids:  # gebunden greift L26: ein Fakt mit eigenem Offen-Punkt ist nicht CONFIRMED
+                    l26c.append("Offen-Punkt nennt Kontraktdaten ohne data-source: " + t26.strip()[:40])
+        report("L26c Offen-Punkt bindet Fakten", BLOCKER, not l26c, "; ".join(l26c[:3]) if l26c else "Offen-Punkte zu Kontraktdaten gebunden (L26 greift)")
         # L64/L67 · nur geltendes Recht: normalisiert, inkl. JS-Inhalte, Attribute und Prompt
         OLD_LAW = (r"\ba\.\s?f\.|alte[nr]? fassung|\baufgehoben\b|aufhebung|altjahre|altf[aä]ll|offene[nr]? fälle|§\s?52 abs\.\s?28|bis zur abschaffung"
-                   r"|(?:vor|seit) dem jstg|bis 2024|frühere[nr]? (?:verlustgrenze|grenze)|\bbverfg\b|\badv\b|rückwirk|zeitachse|20\.?000[- ]?(?:€|euro)|10\.?000 ?(?:€|euro)")
+                   r"|(?:vor|seit) dem jstg|bis 2024|\bbverfg\b|\badv\b|rückwirk|zeitachse"
+                   r"|\b(?:frühere|vormalige|ehemalige|bisherige|alte)\w* \S*(?:grenze|beschränkung|begrenzung|regel\w*|rechtslage|fassung)"  # L80
+                   r"|\b(?:früher|vormals|ehemals|einst)\b|abgeschafft|entfiel\b|weggefallen|\bgalt\b"  # L80
+                   r"|\b\d{1,3}\.?000\s?-?(?:€|euro|eur)\b|\b\d{1,3}\.?000-euro|\b\d+\s?t€")  # L80: Beträge mit Bindestrich, „20 T€“
         attrs = " ".join(re.findall(r'(?:title|aria-label|alt)="([^"]*)"', html))
         page_all = re.sub(r"<(style)\b.*?</\1>", "", html, flags=re.S) + " " + attrs
-        PROMPT_OLD = r"\ba\.\s?f\.|altjahre|§\s?52 abs\.\s?28|\badv\b|20\.?000[- ]?(?:€|euro)|10\.?000 ?(?:€|euro)|satz [56] a\."
+        PROMPT_OLD = (r"\ba\.\s?f\.|altjahre|§\s?52 abs\.\s?28|\badv\b|\b\d{1,3}\.?000\s?-?(?:€|euro|eur)\b|\b\d+\s?t€|satz [56] a\."
+                      r"|§\s?20 abs\.\s?6 satz [56]\b|\b(?:früher|vormals|ehemals)\b|abgeschafft|entfiel\b")  # L80
         l64 = []
         for name, txt, rx in (("Seite", page_all, OLD_LAW), ("Analyse", re.split(r"\n## 5 · ", md)[0] if md else "", OLD_LAW),
                               ("DBOM", json.dumps({k: v for k, v in dbom.items() if k not in ("audit_trail", "sources")}, ensure_ascii=False), OLD_LAW),

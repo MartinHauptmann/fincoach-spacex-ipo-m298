@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L79 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L80 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -150,6 +150,10 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L79:** Elemente, die nur an Herstellerangaben (VENDOR_CLAIM) gebunden sind, tragen das VENDOR-Kennzeichen.
 - **L65b/L68b:** Bereichsangaben „A01–Ann“ passen zur Claim-Tabelle; Tooltips und Offen-Liste beschreiben den
   Zielzustand, nicht den Bearbeitungsverlauf („entfernt“, „angeglichen“, „überarbeitet“, „nach dem Review“).
+- **L26c:** Ein Offen-Punkt, der Kontraktdaten oder Fakt-Konstanten nennt, bindet die Fakten (`data-source`); dann
+  greift L26 und die Fakten sind nicht CONFIRMED. Allgemeine Volltext-Abgleiche stehen als allgemeiner Offen-Punkt.
+- **L80:** Testhärtung wird gegen die Umgehungen der Zweitprüfung und gegen ungesehene Holdout-Fälle nachgewiesen, nie
+  nur gegen selbst gewählte Injektionen. Begründungsfelder (`keep_reason`, `k_differs`) brauchen Inhalt und Bezug.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 
@@ -168,6 +172,10 @@ Q7 Widerspruchsfreiheit · Q8 Glossar · Q9 keine Überzeichnung/Halluzination �
    Plain, Viewer und 390 px.
    Für selbst gehostete Seiten (L20) ohne weitere Optionen; `--vendor DIR` nur noch für Altseiten mit CDN-Einbindung.
    Der Audit prüft zusätzlich Laufzeit-Abrufe an Dritte, lokale Dateien, Formeln, Diagramme und SVG-Überlappungen.
+2b. **Regressionslauf (L80):** `python3 qa/run_regression.py qa/regression/mXXX-bypasses.json` und
+   `… mXXX-holdout.json` → Exit 0. Jeder Fall muss vom *zuständigen* Test erkannt werden, nicht zufällig von einem
+   anderen. Umgehungen aus jeder Zweitprüfung werden als Fälle in `mXXX-bypasses.json` übernommen; neue Holdout-Fälle
+   werden geschrieben, **bevor** die Tests angepasst werden, und danach nicht mehr verändert.
 3. **Manuelle Pflichtpunkte**, die kein Skript prüfen kann. Jeden einzeln abhaken und im Bericht nennen:
    - [ ] Jede Allaussage gegen die Quelltabelle gelesen (L06)
    - [ ] Formeln nachgerechnet und Zahlenbeispiel mit Probe (Q3)

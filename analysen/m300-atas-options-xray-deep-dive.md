@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.10.2 (Entwurf) |
+| Version | 1.10.3 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -157,7 +157,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 
 #### Modul 5 · Globaler Wettbewerbsvergleich (Matrix auf der Modulseite S09)
 
-- Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz, Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS. (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65)
+- Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz (X-Ray 1 Min.; MenthorQ EOD und alle 5 Min.; Volland EOD bis alle 5 Min.), Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS. (`FACT_COMPETITOR_MATRIX`, Medienangabe, Konfidenz 0,65)
 - Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). (`FACT_NO_EUREX_GEX`, Medienangabe, Konfidenz 0,6)
 
 #### Modul 6 · DACH-Marktspezifika und steuerlicher Rahmen
@@ -378,7 +378,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.10.2,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.10.3,
 33 Fakten, 44 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -409,7 +409,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_OESX_MULT` | CONFIRMED | MARKET_DATA | 0,85 | Stichtag 2026-10-05 (Kontraktspezifikation abgerufen 2026-10-11) | OESX (EURO-STOXX-50-Indexoptionen): 10 € je Indexpunkt, europäisch, Barausgleich. |
 | `FACT_EUREX_DAILY_LAUNCH` | CONFIRMED | MARKET_DATA | 0,85 | Eurex-Circulars 2023–2026 | Eurex: OEXP (EURO STOXX 50 End-of-Day Options) seit 28.08.2023, ODAP (DAX End-of-Day Options) seit 13.11.2023; OEXP seit 05.01.2026 mit Verfällen an zehn Handelstagen. |
 | `FACT_ISSUER_HEDGING` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Emittenten sichern ihr Nettorisiko laufend dynamisch ab, über den Basiswert oder passende Gegengeschäfte. |
-| `FACT_COMPETITOR_MATRIX` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Stand 2026-10-05 | Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz, Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS. |
+| `FACT_COMPETITOR_MATRIX` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Stand 2026-10-05 | Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz (X-Ray 1 Min.; MenthorQ EOD und alle 5 Min.; Volland EOD bis alle 5 Min.), Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS. |
 | `FACT_NO_EUREX_GEX` | MEDIA_REPORT | MEDIA_REPORT | 0,6 | Stand 2026-10-05 | Von sechs verglichenen Anbietern ist für fünf bestimmbar, dass keiner intraday-fähige Eurex-GEX anbietet; für MenthorQ n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). |
 | `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | 0,5 | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
 | `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | 1,0 | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
@@ -427,7 +427,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Interessenkonflikte durch Herausgeber bestätigen
 - PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen
 - Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis
-- Belege zu Kontraktdaten und zur Struktur Eurex vs. Optionsscheine am Original gegenlesen
+- Provenienz je Fakt nach dem Volltextabgleich der Primärquellen bestätigen (siehe C3, C8)
 - Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)
 - K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen

@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.10.2",
+    "version": "1.10.3",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -294,7 +294,7 @@
       "confidence": 0.85,
       "claim": "OESX (EURO-STOXX-50-Indexoptionen): 10 € je Indexpunkt, europäisch, Barausgleich.",
       "source_id": "SRC_EUREX_OESX_SPEC",
-      "caveat": "",
+      "caveat": "Über Suchtreffer auf die Primärquelle belegt; Abgleich am Original offen (Offen-Punkt Q4).",
       "period": "Stichtag 2026-10-05 (Kontraktspezifikation abgerufen 2026-10-11)"
     },
     {
@@ -326,7 +326,7 @@
       "verdict": "MEDIA_REPORT",
       "class": "MEDIA_REPORT",
       "confidence": 0.65,
-      "claim": "Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz, Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS.",
+      "claim": "Angaben der Wettbewerbsmatrix zu Fokus, Datenfrequenz (X-Ray 1 Min.; MenthorQ EOD und alle 5 Min.; Volland EOD bis alle 5 Min.), Greeks, Abdeckung, Orderflow und Ausführung von SpotGamma, MenthorQ, Volland, Bookmap und IBKR TWS.",
       "source_id": "SRC_SPOTGAMMA",
       "caveat": "Snippets von Anbieter- und Drittseiten; Felder ohne Beleg als n. v.",
       "period": "Stand 2026-10-05",
@@ -420,7 +420,7 @@
       "confidence": 0.8,
       "claim": "Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). Optionsscheine und Knock-outs sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab.",
       "source_id": "SRC_BAFIN_EUREX_CLEARING",
-      "caveat": "",
+      "caveat": "Über Suchtreffer auf die Primärquelle belegt; Abgleich am Original offen (Offen-Punkt Q4).",
       "period": "Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11)",
       "supporting_sources": [
         "SRC_DB_CLEARING",
@@ -864,6 +864,12 @@
     {
       "date": "2026-10-11",
       "event": "Elfte Zweitprüfung (v1.10.1) eingearbeitet: W1 Verlustkreis ohne „Betragsgrenze“, W2 S10 Zugang/Kostenausweis angeglichen, W3 Preis-Reste, W4 Bezugszeiträume und honest_disclosure, W5 Versionsverlauf in Tooltips/Offen-Liste, W6 A01–A15, W7 Fazit-Einschätzungen, W8 VENDOR-Kennzeichen; doppelte Eurex-Quelle zusammengeführt; Q6 und Q10 auf ◐. Korrektur zum vorigen Eintrag: „13/13“ galt nur für die selbst gewählten Injektionen; 41 von 46 Umgehungen der Zweitprüfung bestehen noch (L80)",
+      "qa_score_pct": 68.4,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Tests L76–L79, L26c ergänzt und L60/L64/L65/L06b/L27c/L61/L62/L63/L66/L74/L75 gegen die Umgehungen der elften Zweitprüfung gehärtet; Regressionslauf qa/run_regression.py: 60/60 Fälle, Holdout 10/10. Inhalt: Matrix-Zahlen ohne Beleg gestrichen, Datenfrequenz in den Claim der Matrix aufgenommen, „Sondergrenze“ → „gesonderte Beschränkung“, KPI 1 Min., Offen-Punkt Q4 allgemein gefasst, caveats OESX/CCP",
       "qa_score_pct": 68.4,
       "release": "ÜBERARBEITUNG"
     }

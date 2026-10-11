@@ -1,0 +1,726 @@
+{
+ "page": "m300.html",
+ "source": "Elfte Zweitprüfung 2026-10-11 (fincoach-qa-reviewer)",
+ "cases": [
+  {
+   "name": "L65 Gedankenstrich em-dash K1—K12 (Hero)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "(K1–K9) gegen",
+     "(K1—K12) gegen"
+    ]
+   ]
+  },
+  {
+   "name": "L65 Leerzeichen K 1–K 12 (Hero)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "(K1–K9) gegen",
+     "(K 1–K 12) gegen"
+    ]
+   ]
+  },
+  {
+   "name": "L65 Zahlwort 'zwölf Kernaussagen' bei 9 K-Zeilen",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "prüfen neun Kernaussagen",
+     "prüfen zwölf Kernaussagen"
+    ]
+   ]
+  },
+  {
+   "name": "L65 Einzelverweis 'K 10' (S02)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "hover:underline\">K2</a>",
+     "hover:underline\">K 10</a>"
+    ]
+   ]
+  },
+  {
+   "name": "L64 'frühere Verlustverrechnungsbeschränkung ... abgeschafft' (S04, gebunden)",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "nicht unterschiedlich behandelt.</p>",
+     "nicht unterschiedlich behandelt. Die frühere Verlustverrechnungsbeschränkung für Termingeschäfte wurde mit dem JStG 2024 abgeschafft.</p>"
+    ]
+   ]
+  },
+  {
+   "name": "L64 '10.000-Euro-Grenze' im title-Attribut",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "title=\"Steuerlicher Rahmen\"",
+     "title=\"Steuerlicher Rahmen (früher 10.000-Euro-Grenze)\""
+    ]
+   ]
+  },
+  {
+   "name": "L64 Prompt: '§ 20 Abs. 6 Satz 5 EStG' ohne a. F.",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "Grenzwerte werden nicht dargestellt.",
+     "Grenzwerte (früher § 20 Abs. 6 Satz 5 EStG) werden nicht dargestellt."
+    ]
+   ]
+  },
+  {
+   "name": "L64 'Mit dem JStG 2024 entfiel die Begrenzung' (Analyse-Handtext)",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "gesonderten Verlustverrechnungsbeschränkung (`FACT_JSTG2024_REPEAL`).",
+     "gesonderten Verlustverrechnungsbeschränkung mehr; mit dem JStG 2024 entfiel die Begrenzung (`FACT_JSTG2024_REPEAL`)."
+    ]
+   ]
+  },
+  {
+   "name": "L60/L68 Link './m299.html'",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<a href=\"impressum.html\"",
+     "<a href=\"./m299.html\" class=\"block\">Weiter</a><a href=\"impressum.html\""
+    ]
+   ]
+  },
+  {
+   "name": "L60/L68 'vorigen Fassung' im Tooltip",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td class=\"check-pass\">✓</td></tr>\n        <tr><td>Q4",
+     "<td class=\"check-pass\" title=\"in der vorigen Fassung noch ◐\">✓</td></tr>\n        <tr><td>Q4"
+    ]
+   ]
+  },
+  {
+   "name": "L60 'Modul 299' / 'm299'",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Vollständiger Disclaimer in",
+     "Hintergrund in Modul 299 (m299). Vollständiger Disclaimer in"
+    ]
+   ]
+  },
+  {
+   "name": "L60 'im Vergleich zu v1.9.0'",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Freigabe nur, wenn alle C = ✓",
+     "Im Vergleich zu v1.9.0 verbessert. Freigabe nur, wenn alle C = ✓"
+    ]
+   ]
+  },
+  {
+   "name": "L60/L68 'vorigen Fassung' im Tooltip (mit Sync)",
+   "expect": "L60",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<td class=\"check-pass\">✓</td></tr>\n        <tr><td>Q4",
+     "<td class=\"check-pass\" title=\"in der vorigen Fassung noch ◐\">✓</td></tr>\n        <tr><td>Q4"
+    ]
+   ]
+  },
+  {
+   "name": "L60 'im Vergleich zur letzten Fassung'",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Freigabe nur, wenn alle C = ✓",
+     "Im Vergleich zur letzten Fassung verbessert. Freigabe nur, wenn alle C = ✓"
+    ]
+   ]
+  },
+  {
+   "name": "L69 A04 Ergebnis ✗ trotz K5 ✓, mit Alibi-k_differs",
+   "expect": "L61",
+   "sync": true,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"result\": \"ok\",\n      \"facts\": [\n        \"FACT_XRAY_10_IND\"\n      ],\n      \"k\": \"K5\"",
+     "\"result\": \"no\",\n      \"facts\": [\n        \"FACT_XRAY_10_IND\"\n      ],\n      \"k_differs\": \"-\""
+    ]
+   ]
+  },
+  {
+   "name": "L70 'klarer Nachteil' im Fazit-Punkt mit data-claim, ohne EINSCHÄTZUNG",
+   "expect": "L62",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<li data-source=\"FACT_ATAS_NO_OPT_TRADING\" data-assessment=\"fact\">Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.</li>",
+     "<li data-source=\"FACT_ATAS_NO_OPT_TRADING\" data-assessment=\"fact\" data-claim=\"K8\">Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>, ein klarer Nachteil gegenüber der TWS.</li>"
+    ]
+   ]
+  },
+  {
+   "name": "L70 Wertung in Fazit-Info-Box (kein li)",
+   "expect": "L62",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Ob ATAS diese Lücke füllen kann,",
+     "Leider bleibt ATAS damit deutlich schwächer als die TWS. Ob ATAS diese Lücke füllen kann,"
+    ]
+   ]
+  },
+  {
+   "name": "L70 'Wir empfehlen' (S08)",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "nicht Gamma-Levels.</p>",
+     "nicht Gamma-Levels. Wir empfehlen, Gamma-Levels stets mit dem Footprint zu bestätigen.</p>"
+    ]
+   ]
+  },
+  {
+   "name": "L70 'überzeugend' im Fazit-Punkt (fact)",
+   "expect": "L62",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.</li>",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>; die Futures-Ausführung ist überzeugend.</li>"
+    ]
+   ]
+  },
+  {
+   "name": "L71 'E-mini (ES) 20 USD' im Rechner-Label",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Futures-Multiplikator (ES = 50)",
+     "Futures-Multiplikator, E-mini (ES) 20 USD"
+    ]
+   ]
+  },
+  {
+   "name": "L71 Rechner-Vorgabe value=20 für ES",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "id=\"gF\" value=\"50\"",
+     "id=\"gF\" value=\"20\""
+    ]
+   ]
+  },
+  {
+   "name": "L71 'SPX-Kontraktmultiplikator 1000'",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Die Basis SPX↔ES (Zinsen minus Dividenden)",
+     "Der SPX-Kontraktmultiplikator 1000 ist zu beachten. Die Basis SPX↔ES (Zinsen minus Dividenden)"
+    ]
+   ]
+  },
+  {
+   "name": "L72 'Nur ATAS verbindet' (Satzanfang, ohne Basis)",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Ableitung aus der Matrix: ATAS verbindet als einziger Anbieter im Vergleichsfeld native",
+     "Ableitung aus der Matrix: Nur ATAS verbindet native"
+    ]
+   ]
+  },
+  {
+   "name": "L72 'als Einziger' (S07)",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Analyse-Latenz ist nicht Slippage</h3>",
+     "Analyse-Latenz ist nicht Slippage</h3><p class=\"text-sm\">ATAS kann das als Einziger.</p>"
+    ]
+   ]
+  },
+  {
+   "name": "L72 'einzige Anbieter' im JS-Glossar",
+   "expect": "L06b",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Grundlage für Absorption und Delta-Divergenz.",
+     "ATAS ist der einzige Anbieter mit nativem Footprint."
+    ]
+   ]
+  },
+  {
+   "name": "L27c 'verpflichtend' im ungebundenen Glossar",
+   "expect": "L27c",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Grundlage jeder Hedge-Menge.",
+     "Grundlage jeder Hedge-Menge; nach WpHG verpflichtend offenzulegen."
+    ]
+   ]
+  },
+  {
+   "name": "L27c 'Nasdaq und Xetra bieten MBO-Feeds an' (ungebunden)",
+   "expect": "L27c",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Erlaubt Queue-Position, Iceberg- und Sweep-Erkennung.",
+     "Nasdaq und Xetra bieten MBO-Feeds kostenpflichtig an."
+    ]
+   ]
+  },
+  {
+   "name": "L74 Prompt 'Geändert' veraltet",
+   "expect": "L74",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "**Geändert:** 2026-10-11",
+     "**Geändert:** 2026-10-01"
+    ]
+   ]
+  },
+  {
+   "name": "L74 Prompt-Schweregrad fett '**WESENTLICH**' für K4",
+   "expect": "L74",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "aber nicht null | HINWEIS |",
+     "aber nicht null | **WESENTLICH** |"
+    ]
+   ]
+  },
+  {
+   "name": "L74 Prompt-Schweregrad 'K5/K6' -> K6 falsch",
+   "expect": "L74",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "| K5/K6 | Produkt- und Wettbewerberangaben | Unbelegte Hersteller- bzw. Nutzerangaben; vor Veröffentlichung gegen aktuelle Doku prüfen | HINWEIS |",
+     "| K6/K5 | Produkt- und Wettbewerberangaben | Unbelegte Hersteller- bzw. Nutzerangaben; vor Veröffentlichung gegen aktuelle Doku prüfen | KRITISCH |"
+    ]
+   ]
+  },
+  {
+   "name": "L75 keep_reason '-'",
+   "expect": "L75",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\"",
+     "\"keep_reason\": \"-\""
+    ]
+   ]
+  },
+  {
+   "name": "L66 Datenherkunft 'Bundesministerium der Finanzen' (keine Quelle)",
+   "expect": "L66",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gesetzestexte, BaFin, Eurex",
+     "Gesetzestexte, Bundesministerium der Finanzen, Finanzgerichte, BaFin, Eurex"
+    ]
+   ]
+  },
+  {
+   "name": "L66 Fazit 'Entfällt' an falschen Claim (A01 statt A15)",
+   "expect": "L62|L66",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "data-claim=\"A15\"",
+     "data-claim=\"A01\""
+    ]
+   ]
+  },
+  {
+   "name": "L26c Offen-Punkt nennt CONFIRMED-Fakt thematisch ohne data-source",
+   "expect": "L26c",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "<li data-gate=\"C4\" data-open>",
+     "<li data-gate=\"Q4\" data-open>OESX-Multiplikator und ODAX-Kontraktwert am Original prüfen</li>\n        <li data-gate=\"C4\" data-open>"
+    ]
+   ]
+  },
+  {
+   "name": "L72 'Einziges Werkzeug' im JS-Glossar (ohne ATAS)",
+   "expect": "L06b",
+   "sync": true,
+   "edits": [
+    [
+     "m300.html",
+     "Grundlage für Absorption und Delta-Divergenz.",
+     "Einziges Werkzeug im Vergleichsfeld mit Footprint und GEX zugleich."
+    ]
+   ]
+  },
+  {
+   "name": "L72 'Einziger Anbieter' im REG-Modal",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Dieses Modul beschreibt Mechanik nur generisch",
+     "Einziger Anbieter mit MAR-konformer Darstellung ist ATAS. Dieses Modul beschreibt Mechanik nur generisch"
+    ]
+   ]
+  },
+  {
+   "name": "L65 'K1–K12' in DBOM-Freitext (honest_disclosure)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "Die Belastbarkeit jedes Fakts zeigt sein Verdict.",
+     "Die Belastbarkeit jedes Fakts zeigt sein Verdict (K1–K12)."
+    ]
+   ]
+  },
+  {
+   "name": "L60 Prompt verweist auf M299",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "prompts/m300-atas-options-xray-deep-dive-prompt.md",
+     "**Modul-ID:** M300 ist ein Platzhalter",
+     "**Modul-ID:** M300 (Fortsetzung von M299) ist ein Platzhalter"
+    ]
+   ]
+  },
+  {
+   "name": "L64 'vormals 20 T€' in DBOM-caveat",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"caveat\": \"Keine Rechtsformempfehlung.\"",
+     "\"caveat\": \"Keine Rechtsformempfehlung; im Privatvermögen galt vormals eine Grenze von 20 T€.\""
+    ]
+   ]
+  },
+  {
+   "name": "L77 DBOM-Freitext nennt nicht existierenden Fakt (FACT_FOO_BAR)",
+   "expect": "L77",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "Die Belastbarkeit jedes Fakts",
+     "Einzelne Angaben stützen sich auf FACT_FOO_BAR. Die Belastbarkeit jedes Fakts"
+    ]
+   ]
+  },
+  {
+   "name": "L71 eigene: SPX-Multiplikator 1000",
+   "expect": "L63",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Kontrakt-Multiplikator \\(M\\), SPX 100",
+     "Kontrakt-Multiplikator \\(M\\), SPX-Multiplikator 1000"
+    ]
+   ]
+  },
+  {
+   "name": "L68 eigene: Vorversion",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "Wie in der Vorversion: Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "L68 eigene: JS-Link m299.html#s04",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "</body>",
+     "<script>const x='<a href=\"m299.html#s04\">x</a>';</script></body>"
+    ]
+   ]
+  },
+  {
+   "name": "L67 eigene: a.F.",
+   "expect": "L64",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Market Maker hedgen aus Kalkül",
+     "Nach § 20 Abs. 6 a.F. galt anderes. Market Maker hedgen aus Kalkül"
+    ]
+   ]
+  },
+  {
+   "name": "L65 eigene: K1–K12 im title",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "title=\"Faktencheck K1–K9\"",
+     "title=\"Faktencheck K1–K12\""
+    ]
+   ]
+  },
+  {
+   "name": "L66 eigene: Fazit ohne data-claim",
+   "expect": "L62|L66",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     " data-claim=\"A15\"",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "L70 eigene: leider/Nachteil",
+   "expect": "L62",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "Für Optionen fehlt leider eine native Ausführung <span class=\"badge b-v\">VENDOR</span>, ein klarer Nachteil."
+    ]
+   ]
+  },
+  {
+   "name": "L27c eigene: Optionsschein ohne Fakt",
+   "expect": "L27c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "von der Bonität des Emittenten ab.\",\"FACT_CCP_ISSUER\"]",
+     "von der Bonität des Emittenten ab.\"]"
+    ]
+   ]
+  },
+  {
+   "name": "L72 eigene: einzigartig",
+   "expect": "L06b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>.",
+     "ATAS ist einzigartig. Für Optionen fehlt eine native Ausführung <span class=\"badge b-v\">VENDOR</span>."
+    ]
+   ]
+  },
+  {
+   "name": "L66 eigene: Datenherkunft BMF, BFH",
+   "expect": "L66",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gesetzestexte, BaFin, Eurex",
+     "Gesetzestexte, BMF, BFH, BaFin, Eurex"
+    ]
+   ]
+  },
+  {
+   "name": "L74 eigene: Footer-Datum",
+   "expect": "L74",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "· 2026-10-11<br/>",
+     "· 2026-10-01<br/>"
+    ]
+   ]
+  },
+  {
+   "name": "L76 ohne Betragsgrenze (gebunden, nicht im Claim)",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "(eigener Verlustkreis)",
+     "(eigener Verlustkreis, ohne Betragsgrenze)"
+    ]
+   ]
+  },
+  {
+   "name": "L76 Zahl nicht im Claim (Turbos 2025)",
+   "expect": "L76|L17",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Turbos seit 16.06.2026 zusätzlich",
+     "Turbos seit 16.06.2025 zusätzlich"
+    ]
+   ]
+  },
+  {
+   "name": "L76 Betrag im gebundenen Satz",
+   "expect": "L76",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "nur mit Gewinnen aus Termingeschäften verrechenbar",
+     "nur mit Gewinnen aus Termingeschäften bis 20.000 Euro verrechenbar"
+    ]
+   ]
+  },
+  {
+   "name": "L78 period nach Stichtag",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"period\": \"Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11)\"",
+     "\"period\": \"Stand 2026-10-11\""
+    ]
+   ]
+  },
+  {
+   "name": "L78 Abrufzeitraum veraltet",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "vom 2026-10-05 bis 2026-10-11",
+     "vom 2026-10-05 bis 2026-10-08"
+    ]
+   ]
+  },
+  {
+   "name": "L79 VENDOR-Kennzeichen fehlt",
+   "expect": "L79",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>Rithmic, CQG, Interactive Brokers (TWS) <span class=\"badge b-v\">VENDOR</span></td>",
+     "<td>Rithmic, CQG, Interactive Brokers (TWS)</td>"
+    ]
+   ]
+  },
+  {
+   "name": "L75 eigene: keep_reason fehlt",
+   "expect": "L75",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     ",\n      \"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\"",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "L65b A01–A14",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Claim-Tabelle A01–A15",
+     "Claim-Tabelle A01–A14"
+    ]
+   ]
+  },
+  {
+   "name": "L68b Bearbeitungsverlauf im Offen-Punkt",
+   "expect": "L60",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen",
+     "Nach dem Review angeglichene K-Verweise manuell gegenprüfen"
+    ]
+   ]
+  }
+ ]
+}
