@@ -351,6 +351,11 @@ def main():
                 l61.append(f"{c['id']}: {c['result']} ohne CONFIRMED-Beleg")
             if c.get("k") and kres.get(c["k"]) != c["result"]:
                 l61.append(f"{c['id']} ≠ {c['k']}")
+            if c["result"] in ("part", "scen") and not c["facts"]:
+                l61.append(f"{c['id']}: {c['result']} ohne Belege")
+            kshare = [k for k, row in ((json.loads(r)[0], json.loads(r)) for r in (re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', js_ks.group(1), re.M) if js_ks else [])) if set(row[6].split()) & set(c["facts"])]
+            if kshare and not c.get("k") and not c.get("k_differs"):
+                l61.append(f"{c['id']}: teilt Belege mit {kshare[0]}, aber ohne k/k_differs")  # L69
             if c["result"] == "nv" and c["id"] not in open_txt:
                 l61.append(f"{c['id']}: [N. V.] ohne Offen-Punkt")
             l61 += [f"{c['id']}: unbekannte ID {i}" for i in c["facts"] if i not in facts]
@@ -358,8 +363,11 @@ def main():
         # L62 · Fazit: jeder Punkt als Einschätzung (Badge) oder ausdrücklich als Faktwiedergabe (data-assessment="fact"); SCENARIO im Konjunktiv
         fzs = re.search(r'<section id="s-fz".*?</section>', html, re.S)
         l62 = []
-        for li in re.findall(r"<li\b[^>]*>.*?</li>", fzs.group(0) if fzs else "", re.S):
-            if "EINSCHÄTZUNG" not in li and 'data-assessment="fact"' not in li:
+        for li in re.findall(r"<li\b[^>]*>.*?</li>", re.sub(r"<!--.*?-->", "", fzs.group(0), flags=re.S) if fzs else "", re.S):
+            badge = 'dbom-class-badge">EINSCHÄTZUNG<' in li
+            if not badge and re.search(r"besser|schwächer|merkmal|differenzier|lösen|mehrwert|empfohl|sinnvoll|überlegen|ideal|wertvoll|leider|beste|optimal|attraktiv", norm_txt(li)) or (not badge and "data-claim=" not in li and re.search(r"vorteil|nachteil|stärke|schwäche|\bschwach|\bstark|\bklar(?:er|e|es)?\b|gut\b|schlecht", norm_txt(li))):  # L70: Vergleichswörter nur mit Claim-Bindung
+                l62.append("Wertung ohne EINSCHÄTZUNG: " + re.sub(r"<[^>]+>", "", li)[:40])  # L70
+            if not badge and 'data-assessment="fact"' not in li:
                 l62.append("Fazit-Punkt ohne Einordnung: " + re.sub(r"<[^>]+>", "", li)[:40])
         scen = {f["id"] for f in F if f["verdict"] == "SCENARIO_PROJECTION"}
         for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
@@ -368,16 +376,28 @@ def main():
                 txt = norm_txt(element_inner(html, m))
                 if re.search(r"\b(liegt|ist|sind|bietet|wird)\b", txt) and not re.search(r"\b(läge|wäre|wären|könnte|würde|szenario|vorschl|modell|illustrativ|hypothetisch|angenommen)", txt):
                     l62.append("SCENARIO im Indikativ: " + txt[:40])
+        for m in re.finditer(r"empfohl\w*", re.sub(r"<(script|style)\b.*?</\1>", "", html, flags=re.S)):  # L70: Empfehlungen nur als Szenario/Einschätzung
+            seg = html[max(0, html.rfind("<div", 0, m.start())):m.end() + 300]
+            if not re.search(r'dbom-class-badge">(SCENARIO|EINSCHÄTZUNG)<', seg):
+                l62.append("Empfehlung ohne SCENARIO/EINSCHÄTZUNG")
+        # L66 · Fazit-Punkte unter „Relativiert/Entfällt“ verweisen auf einen Claim oder K-Punkt
+        for box in re.findall(r"<h3[^>]*>[^<]*(?:Relativiert|Entfällt)[^<]*</h3><ul[^>]*>(.*?)</ul>", fzs.group(0) if fzs else "", re.S):
+            for li in re.findall(r"<li\b[^>]*>", box):
+                cl = re.search(r'data-claim="([AK]\d+)"', li)
+                ok_ids = {c["id"] for c in dbom.get("source_claims", [])} | set(kres)
+                if not cl or cl.group(1) not in ok_ids:
+                    l62.append("Fazit-Punkt ohne gültigen data-claim (L66)")
         report("L62 Fazit eingeordnet, SCENARIO im Konjunktiv", BLOCKER, bool(fzs) and not l62, "; ".join(l62[:3]) if l62 else "alle Fazit-Punkte eingeordnet; Szenarien im Konjunktiv")
         js_gl = re.search(r"const GLOSSAR=\[(.*?)\n\];", html, re.S)
         # L63 · Konstanten eines Fakts (values) stimmen überall und sind gebunden (auch Formeln, Labels, data-def, Glossar)
         l63 = []
         for f in F:
             for sym, val in f.get("values", {}).items():
-                rx = re.compile(r"(?:M_\{%s\}\s*=\s*|\b%s\s*(?:=|:)?\s*)(\d+)\b" % (sym, sym))
+                rx = re.compile(r"(?:M_\{%s\}\s*=\s*|\b%s(?:-Multiplikator)?\s*(?:\(|=|:)?\s*)(\d+)\b|Multiplikator\s*\(?(\d+)\)?\s*\(%s\)" % (sym, sym, sym))  # L71
                 for m in rx.finditer(scan):
-                    if m.group(1) != val:
-                        l63.append(f"{sym} = {m.group(1)} ≠ {val}")
+                    num = m.group(1) or m.group(2)
+                    if num != val:
+                        l63.append(f"{sym} = {num} ≠ {val}")
                     else:
                         before = scan[:m.start()]
                         opened = [o for o in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', before) if f["id"] in o.group(2).split()]
@@ -385,10 +405,10 @@ def main():
                             l63.append(f"{sym} {val} nicht an {f['id']} gebunden")
                 for row in (re.findall(r'^\s*\[".*\]', js_gl.group(1), re.M) if js_gl else []):
                     for m in rx.finditer(row):
-                        if m.group(1) != val or f["id"] not in row:
-                            l63.append(f"Glossar {sym} {m.group(1)}")
+                        if (m.group(1) or m.group(2)) != val or f["id"] not in row:
+                            l63.append(f"Glossar {sym} {m.group(1) or m.group(2)}")
                 if md:
-                    l63 += [f"Analyse {sym} = {m.group(1)}" for m in rx.finditer(md) if m.group(1) != val]
+                    l63 += [f"Analyse {sym} = {m.group(1) or m.group(2)}" for m in rx.finditer(md) if (m.group(1) or m.group(2)) != val]
         report("L63 Faktkonstanten gebunden", BLOCKER, not l63, "; ".join(sorted(set(l63))[:4]) if l63 else "alle Faktkonstanten stimmen und sind gebunden")
         # L27b · Glossar: Einträge mit nicht bestätigtem Fakt tragen das Badge des schwächsten Verdicts
         BADGE1 = {"MEDIA_REPORT": "MEDIEN", "UNVERIFIED": "UNGEPRÜFT", "SCENARIO_PROJECTION": "SCENARIO"}
@@ -401,33 +421,79 @@ def main():
             want = BADGE1.get(weak, "")
             if (g[5] if len(g) > 5 else "") != want:
                 l27b.append(f"{g[0]}: Badge „{g[5] if len(g) > 5 else ''}“ ≠ „{want}“")
+        # L27c · ungebundene Glossar-Einträge enthalten keine Tatsachenmerkmale (Institution, Norm, Rechtsnatur, Risikoaussage)
+        l27c = []
+        for r in (re.findall(r'^\s*(\[".*\])\s*,?\s*$', js_gl.group(1), re.M) if js_gl else []):
+            g = json.loads(r)
+            if not (len(g) > 4 and g[4].strip()):
+                hit = re.search(r"§|\b(eurex|cboe|cme|bafin|esma|emittent\w*|rechtlich|gesetz\w*|vorgeschrieben|pflicht\w*|veröffentlich\w*|bonität|kontrahent\w*|schuldverschreibung|ccp|atas|ib)\b", norm_txt(" ".join(g[1:4])))
+                if hit:
+                    l27c.append(f"{g[0]}: „{hit.group(0)}“ ohne Fakt")
+        report("L27c Glossar-Tatsachen gebunden", BLOCKER, bool(js_gl) and not l27c, "; ".join(l27c[:4]) if l27c else "ungebundene Glossar-Einträge ohne Tatsachenmerkmale")
         rend27 = "g[5]" in html and "dbom-class-badge" in html[html.find("function renderGlossar"):html.find("function renderGlossar") + 600]
         report("L27b Glossar-Badges", BLOCKER, not l27b and rend27, "; ".join(l27b[:4]) if l27b else ("Renderer ohne Badge" if not rend27 else "Glossar-Badges = schwächstes Verdict"))
-        # L06b · Alleinstellungs-Aussagen nur mit Vergleichsbasis und n. v.-Hinweis bzw. Matrixbezug
+        # L06b/L72 · Alleinstellungs-Aussagen nur mit Vergleichsbasis im selben Satz (auch K-Tabelle)
         l06b = []
-        for x in t.texts:
-            if not x.get("code") and x["sec"] not in ("s-qa",) and re.search(r"Alleinstellung|als einzige[rs]?\b|der einzige\b|die einzige\b", x["text"]):
-                ctx = x["text"]
-                if not (x["src"] and re.search(r"Vergleichsfeld|laut Matrix|bestimmbar|n\. v\.", ctx)):
-                    l06b.append(f"{x['sec']}: {ctx.strip()[:40]}…")
-        report("L06b Alleinstellung mit Basis", BLOCKER, not l06b, "; ".join(l06b[:3]) if l06b else "Alleinstellungsaussagen mit Vergleichsbasis")
+        texts06 = [(x["sec"], x["text"], x["src"]) for x in t.texts if not x.get("code") and x["sec"] != "s-qa"]
+        texts06 += [("KS", r, "FACT") for r in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else [])]
+        for sec, txt, src in texts06:
+            for sent in re.split(r"(?<=[.;!?])\s", txt):
+                if re.search(r"Alleinstellung|einzigartig|\beinzige[rns]?\b|\bnur (?:ATAS|ein Anbieter)\b", sent) and not (src and re.search(r"Vergleichsfeld|laut Matrix|bestimmbar|n\. v\.", sent)):
+                    l06b.append(f"{sec}: {sent.strip()[:40]}…")
+        report("L06b Alleinstellung mit Basis", BLOCKER, not l06b, "; ".join(l06b[:3]) if l06b else "Alleinstellungsaussagen mit Vergleichsbasis im selben Satz")
         # L60 · Eigenständigkeit: keine Verweise auf andere Module oder frühere Fassungen
         own = f"M{mod.group(1)}"
         dtxt = json.dumps({k: v for k, v in dbom.items() if k != "audit_trail"}, ensure_ascii=False)
         l60 = []
-        for name, txt in (("Seite", re.sub(r"<(script|style)\b.*?</\1>", "", html, flags=re.S)), ("Analyse", md), ("DBOM", dtxt)):
+        for name, txt in (("Seite", re.sub(r"<(style)\b.*?</\1>", "", html, flags=re.S)), ("Analyse", md), ("DBOM", dtxt)):  # L68: JS eingeschlossen
             l60 += [f"{name}: {x}" for x in sorted(set(re.findall(r"\bM\d{3}\b", txt)) - {own})]
-            l60 += [f"{name}: Link {x}" for x in sorted(set(re.findall(r'href="((?:m\d{3}|modul)\.html)"', txt)) - {f"m{mod.group(1)}.html"})]
-            l60 += [f"{name}: „{x}“" for x in re.findall(r"Vormodul\w*|frühere[nr]? Fassung\w*|gegenüber (?:Version|v)\s?\d[\d.]*|vorherige[nr]? (?:Version|Modul)", txt, re.I)]
+            l60 += [f"{name}: Link {x}" for x in sorted(set(re.findall(r'href=["\']((?:m\d{3}|modul)\.html)', txt)) - {f"m{mod.group(1)}.html"})]
+            l60 += [f"{name}: „{x}“" for x in re.findall(r"Vormodul\w*|Vorversion\w*|Vorgänger\w*|frühere[nr]? (?:Fassung|Version)\w*|gegenüber (?:Version|v)\s?\d[\d.]*|vorherige[nr]? (?:Version|Modul|Fassung)", txt, re.I)]
         report("L60 Eigenständigkeit", BLOCKER, not l60, "; ".join(l60[:4]) if l60 else "keine Verweise auf andere Module oder frühere Fassungen")
-        # L64 · nur geltendes Recht: keine Darstellung früherer Rechtslagen (Herausgeber-Entscheidung 2026-10-11)
-        OLD_LAW = r"\ba\. F\.|alte[nr]? Fassung|\baufgehoben\b|Aufhebung|Altjahre|Altf[aä]ll|offene[nr]? Fälle|§ 52 Abs\. 28|bis zur Abschaffung|vor dem JStG|20\.000[- ]?€|10\.000 € je Jahr"
+        prm = sorted((page.parent / "prompts").glob(f"m{mod.group(1)}-*.md")) if (page.parent / "prompts").exists() else []
+        # L65 · K-Bereiche und K-Verweise passen zur Zahl der K-Zeilen (Seite, Analyse, Prompt)
+        nk = len(kres)
+        l65 = []
+        for name, txt in (("Seite", re.sub(r"<(style)\b.*?</\1>", "", html, flags=re.S)), ("Analyse", md), ("Prompt", prm[0].read_text(encoding="utf-8") if prm else "")):
+            l65 += [f"{name}: K1–K{n}" for n in re.findall(r"K1\s?[–-]\s?K(\d+)|K1 bis K(\d+)", txt) for n in [n[0] or n[1]] if int(n) != nk]
+            l65 += [f"{name}: K{n}" for n in set(re.findall(r"\bK(\d{1,2})\b", txt)) if int(n) > nk]
+        if prm:
+            pdefs = re.findall(r"^K(\d+)\s{1,2}[A-ZÄÖÜ]", prm[0].read_text(encoding="utf-8"), re.M)
+            if len(pdefs) != nk:
+                l65.append(f"Prompt definiert {len(pdefs)} K-Punkte, Seite {nk}")
+        report("L65 K-Verweise konsistent", BLOCKER, nk > 0 and not l65, "; ".join(sorted(set(l65))[:4]) if l65 else f"K1–K{nk} überall konsistent")
+        # L66 · Datenherkunft nennt nur Stellen, die in den Quellen vorkommen
+        dh = re.search(r'Datenherkunft</div><p[^>]*>([^<]*)</p>', html)
+        srcs_txt = norm_txt(" ".join(x["title"] + " " + x.get("url", "") for x in dbom["sources"]))
+        AUTH = ["BMF", "BFH", "BVerfG", "BaFin", "Eurex", "Cboe", "CME", "OPRA", "BGBl", "ESMA", "BSW", "DDV", "Deutsche Börse"]
+        l66 = [a for a in AUTH if dh and re.search(r"\b" + re.escape(a) + r"\b", dh.group(1)) and norm_txt(a) not in srcs_txt]
+        report("L66 Datenherkunft = Quellen", BLOCKER, bool(dh) and not l66, "nicht in den Quellen: " + ", ".join(l66) if l66 else ("Datenherkunft durch Quellen gedeckt" if dh else "keine Datenherkunft"))
+        # L74 · Footer-Datum = letzte Änderung im audit_trail; Schweregrade im Prompt = K-Tabelle
+        last = max((e["date"] for e in dbom.get("audit_trail", [])), default="")
+        fd = re.findall(r"M%s · v[\d.]+ · (\d{4}-\d{2}-\d{2})" % mod.group(1), html)
+        l74 = [f"Footer {x} ≠ {last}" for x in fd if x != last]
+        if prm:
+            SEVM = {"crit": "KRITISCH", "major": "WESENTLICH", "hint": "HINWEIS"}
+            ksev = {json.loads(r)[0]: SEVM.get(json.loads(r)[4]) for r in (re.findall(r'^\s*(\["K\d+",.*\])\s*,?\s*$', js_ks.group(1), re.M) if js_ks else [])}
+            for ks_, sev in re.findall(r"^\| (K\d+)(?:/K\d+)? \|.*\| (KRITISCH|WESENTLICH|HINWEIS) \|\s*$", prm[0].read_text(encoding="utf-8"), re.M):
+                if ksev.get(ks_) and ksev[ks_] != sev:
+                    l74.append(f"Prompt {ks_} {sev} ≠ Seite {ksev[ks_]}")
+        report("L74 Datum und Schweregrade synchron", BLOCKER, bool(fd) and not l74, "; ".join(l74[:3]) if l74 else f"Footer {last}, Schweregrade = K-Tabelle")
+        # L75 · jede nicht bestätigte Angabe (außer Szenario) ist bewusst behalten: keep_reason
+        l75 = [f["id"] for f in F if f["verdict"] in ("UNVERIFIED", "MEDIA_REPORT") and not f.get("keep_reason")]
+        report("L75 nicht bestätigte Angaben begründet", BLOCKER, not l75, "ohne keep_reason: " + ", ".join(l75) if l75 else f"{sum(f['verdict'] in ('UNVERIFIED', 'MEDIA_REPORT') for f in F)} nicht bestätigte Fakten mit Begründung")
+        # L64/L67 · nur geltendes Recht: normalisiert, inkl. JS-Inhalte, Attribute und Prompt
+        OLD_LAW = (r"\ba\.\s?f\.|alte[nr]? fassung|\baufgehoben\b|aufhebung|altjahre|altf[aä]ll|offene[nr]? fälle|§\s?52 abs\.\s?28|bis zur abschaffung"
+                   r"|(?:vor|seit) dem jstg|bis 2024|frühere[nr]? (?:verlustgrenze|grenze)|\bbverfg\b|\badv\b|rückwirk|zeitachse|20\.?000[- ]?(?:€|euro)|10\.?000 ?(?:€|euro)")
+        attrs = " ".join(re.findall(r'(?:title|aria-label|alt)="([^"]*)"', html))
+        page_all = re.sub(r"<(style)\b.*?</\1>", "", html, flags=re.S) + " " + attrs
+        PROMPT_OLD = r"\ba\.\s?f\.|altjahre|§\s?52 abs\.\s?28|\badv\b|20\.?000[- ]?(?:€|euro)|10\.?000 ?(?:€|euro)|satz [56] a\."
         l64 = []
-        for name, txt in (("Seite", re.sub(r"<(script|style)\b.*?</\1>", "", html, flags=re.S) + " ".join(re.findall(r'"[^"\n]*"', js_ks.group(1) if js_ks else ""))),
-                          ("Analyse", re.split(r"\n## 5 · ", md)[0] if md else ""),
-                          ("DBOM", json.dumps({k: v for k, v in dbom.items() if k not in ("audit_trail", "sources")}, ensure_ascii=False))):  # Quellentitel zitieren
-            l64 += [f"{name}: „{x}“" for x in sorted(set(re.findall(OLD_LAW, txt)))]
-        report("L64 nur geltendes Recht", BLOCKER, not l64, "; ".join(l64[:5]) if l64 else "keine Darstellung früherer Rechtslagen")
+        for name, txt, rx in (("Seite", page_all, OLD_LAW), ("Analyse", re.split(r"\n## 5 · ", md)[0] if md else "", OLD_LAW),
+                              ("DBOM", json.dumps({k: v for k, v in dbom.items() if k not in ("audit_trail", "sources")}, ensure_ascii=False), OLD_LAW),
+                              ("Prompt", prm[0].read_text(encoding="utf-8") if prm else "", PROMPT_OLD)):
+            l64 += [f"{name}: „{x}“" for x in sorted(set(re.findall(rx, norm_txt(txt))))]
+        report("L64 nur geltendes Recht", BLOCKER, not l64, "; ".join(l64[:5]) if l64 else "keine Darstellung früherer Rechtslagen (normalisiert, inkl. JS, Attribute, Prompt)")
         # L47 · starke rechtliche Bewertung nur, wenn ein Claim sie wörtlich trägt
         claims_nz = nz(" ".join(f["claim"] for f in F))
         page_txt = re.sub(r"<[^>]+>", " ", re.sub(r"<style\b.*?</style>", "", html, flags=re.S))

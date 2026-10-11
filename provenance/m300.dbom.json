@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.10.0",
+    "version": "1.10.1",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -102,7 +102,8 @@
       "claim": "Kosten verbriefter Derivate sind im PRIIPs-Basisinformationsblatt (VO (EU) 1286/2014) und in der Ex-ante-Kosteninformation nach Art. 24 Abs. 4 MiFID II offenzulegen; vergleichende Werbung unterliegt § 6 UWG, die Herabsetzung von Mitbewerbern § 4 Nr. 1 UWG.",
       "source_id": "SRC_PRIIPS",
       "caveat": "Nicht am Original neu geprüft.",
-      "period": "Rechtsstand 2026-10-05"
+      "period": "Rechtsstand 2026-10-05",
+      "keep_reason": "Tragend für Modul 6/7 (Kostenausweis, UWG-konforme Begriffe); Originalabgleich offen (C8)."
     },
     {
       "id": "FACT_ANGEMESSENHEIT",
@@ -115,7 +116,8 @@
       "period": "Rechtsstand 2026-10-05",
       "supporting_sources": [
         "SRC_SUTOR"
-      ]
+      ],
+      "keep_reason": "Tragend für den Zugang von Privatanlegern (Modul 6); Originalabgleich offen (C8)."
     },
     {
       "id": "FACT_BAFIN_TURBO",
@@ -135,7 +137,8 @@
       "claim": "BaFin-Studie: Rund 74,2 % der Kleinanleger erlitten mit Turbo-Zertifikaten Verluste; Untersuchungszeitraum 2019–2023.",
       "source_id": "SRC_TESTDE_TURBO",
       "caveat": "Studie selbst nicht im Volltext eingesehen; Zahl übereinstimmend in mehreren Medienberichten.",
-      "period": "Untersuchungszeitraum 2019–2023"
+      "period": "Untersuchungszeitraum 2019–2023",
+      "keep_reason": "Begründet die Risikodarstellung zu Turbo-Zertifikaten (C7); nur Medienberichte zugänglich."
     },
     {
       "id": "FACT_XRAY_10_IND",
@@ -241,7 +244,8 @@
       "claim": "SPX-Optionen werden nur an der Cboe gehandelt; Cboe stellt nach Teilnehmertyp markierte Open-Close-Daten bereit, auf die sich OptionsDepth stützt.",
       "source_id": "SRC_MENTHORQ_GUIDE",
       "caveat": "Sekundärquelle.",
-      "period": "Stand 2026-10-05"
+      "period": "Stand 2026-10-05",
+      "keep_reason": "Tragend für die Einordnung der GEX-Prämisse (K3)."
     },
     {
       "id": "FACT_SPX_0DTE_59",
@@ -314,7 +318,8 @@
       "claim": "Emittenten sichern ihr Nettorisiko laufend dynamisch ab, über den Basiswert oder passende Gegengeschäfte.",
       "source_id": "SRC_ISSUER_HEDGE",
       "caveat": "Keine Primärquelle zum Hedging über FDAX/ODAX gefunden.",
-      "period": "Stand 2026-10-05"
+      "period": "Stand 2026-10-05",
+      "keep_reason": "Tragend für K4 (Hedging-Spur von Optionsscheinen)."
     },
     {
       "id": "FACT_COMPETITOR_MATRIX",
@@ -330,7 +335,8 @@
         "SRC_VOLLAND",
         "SRC_BOOKMAP",
         "SRC_IBKR"
-      ]
+      ],
+      "keep_reason": "Tragend für den Wettbewerbsvergleich (Modul 5, K6); n. v.-Felder offen ausgewiesen."
     },
     {
       "id": "FACT_NO_EUREX_GEX",
@@ -355,7 +361,8 @@
         "not_verifiable": [
           "MenthorQ"
         ]
-      }
+      },
+      "keep_reason": "Tragend für die strategische Einordnung (Fazit, Quantor mit Basis)."
     },
     {
       "id": "FACT_DEALER_CONVENTION",
@@ -854,6 +861,12 @@
       "event": "Zehnte Zweitprüfung (v1.9.0) eingearbeitet: K-Verweise, Texte zu Entferntem, Fazit-Wertungen, Szenario-Boxen, S09/S10-Aussagen über den Beleg hinaus, Glossar-Bindungen, Datumsangaben; Claim A15 ergänzt; offene Fehlerklassen L65–L75",
       "qa_score_pct": 73.7,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Tests L65–L75, L27c ergänzt (K-Verweise, Datenherkunft, data-claim, Altrecht normalisiert, Eigenständigkeit inkl. JS, k_differs, Fazit-Wertungen, Konstantenmuster, Alleinstellung, Glossar-Bindung, Footer-Sync, keep_reason); Regression 13/13 Injektionen erkannt",
+      "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -1000,7 +1013,8 @@
       "facts": [
         "FACT_XRAY_CONNECTIVITY",
         "FACT_ATAS_CONNECTIONS"
-      ]
+      ],
+      "k_differs": "Teilaspekt Broker-Anbindung; K5 bewertet den Indikatorumfang."
     },
     {
       "id": "A08",
@@ -1019,7 +1033,8 @@
       "result": "part",
       "facts": [
         "FACT_ATAS_NO_OPT_TRADING"
-      ]
+      ],
+      "k_differs": "Teilaspekt Beta-Status von Options Board/Strategy Analyzer; K5 bewertet den Indikatorumfang."
     },
     {
       "id": "A10",

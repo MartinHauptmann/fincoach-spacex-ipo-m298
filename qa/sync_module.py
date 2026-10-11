@@ -114,6 +114,12 @@ def main():
         rng.setdefault(f["class"], []).append(f["confidence"])
     s = re.sub(r'(<span data-dbom-range="(\w+)">)[^<]*(</span>)', lambda m: m.group(1) + f"{de(min(rng[m.group(2)]))}–{de(max(rng[m.group(2)]))}" + m.group(3), s)
     s = re.sub(r'(<span data-dbom-conf="(\w+)">)[^<]*(</span>)', lambda m: m.group(1) + de(facts[m.group(2)]["confidence"], 2) + m.group(3), s)
+    last = max(e["date"] for e in d.get("audit_trail", [])) if d.get("audit_trail") else None  # L74: Footer-Datum = letzte Änderung
+    if last:
+        s = re.sub(r"(M%s · v[\d.]+ · )\d{4}-\d{2}-\d{2}" % mod, lambda m: m.group(1) + last, s)
+    s = re.sub(r"(M%s · v)[\d.]+( · )" % mod, lambda m: m.group(1) + d["module"]["version"] + m.group(2), s)
+    s = re.sub(r"(<title>M%s v)[\d.]+( ·)" % mod, lambda m: m.group(1) + d["module"]["version"] + m.group(2), s)  # L74
+    s = re.sub(r"(M-DBOM v\d+ · Modul v)[\d.]+", lambda m: m.group(1) + d["module"]["version"], s)  # L74
     s = re.sub(r'"version": "[\d.]+", "stichtag"', f'"version": "{d["module"]["version"]}", "stichtag"', s, count=1)
     # QA-Score aus den Gate-Zellen
     qa = re.search(r'<section id="s-qa".*?</section>', s, re.S).group(0)

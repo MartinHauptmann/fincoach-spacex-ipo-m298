@@ -126,7 +126,22 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L27b:** Glossar-Einträge mit nicht bestätigtem Fakt tragen das Badge des schwächsten Verdicts (6. Feld).
 - **L06b:** „Alleinstellung“/„einzige(r)“ nur mit Vergleichsbasis und n. v.-Hinweis.
 - **L64:** Nur geltendes Recht am Stichtag; frühere Rechtslagen, Übergangsregeln und überholte Grenzbeträge werden nicht
-  dargestellt.
+  dargestellt. Geprüft wird normalisiert (inkl. „a.F.“, Markup), in Seite samt JS und Attributen, Analyse, DBOM und
+  Prompt (L67).
+- **L65:** K-Bereiche „K1–Kn“ und jeder Verweis „Kn“ passen zur Zahl der K-Zeilen, in Seite, Analyse und Prompt.
+- **L66:** Nach jeder Entfernung Folgetexte suchen: Titel, Attribute, Datenherkunft (nur Stellen aus den Quellen) und
+  Fazit; jeder Fazit-Punkt unter „Relativiert“/„Entfällt“ nennt seinen Claim (`data-claim`).
+- **L68:** Eigenständigkeit gilt auch für JS-Strings und Links mit Anker (`m299.html#…`) und Wörter wie „Vorversion“.
+- **L69:** Ein Claim, der Belege mit einer K-Zeile teilt, braucht `k` oder eine Begründung `k_differs`; ◐/Szenario
+  nur mit Belegen.
+- **L70:** Wertende Wörter im Fazit (besser, Merkmal, empfohlen, leider …) verlangen EINSCHÄTZUNG; Vergleichswörter
+  (Vorteil, Nachteil, stark, schwach) zusätzlich eine Claim-Bindung. Vorschläge stehen im Konjunktiv an FACT_ROADMAP.
+- **L71:** Faktkonstanten werden auch in Formen wie „SPX-Multiplikator 1000“ und „Multiplikator (ES) 50“ geprüft.
+- **L72:** Alleinstellungs-Aussagen (einzigartig, einziger, nur X) brauchen die Vergleichsbasis im selben Satz, auch in
+  der JS-K-Tabelle.
+- **L27c:** Glossar-Einträge ohne Fakt enthalten keine Tatsachenmerkmale (Institution, Norm, Rechtsnatur, Pflicht).
+- **L74:** Footer-Datum und Version kommen per Sync aus der DBOM (`audit_trail`); Prompt-Schweregrade = K-Tabelle.
+- **L75:** Jede nicht bestätigte Angabe wird belegt oder gestrichen; was bleibt, trägt in der DBOM ein `keep_reason`.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 
