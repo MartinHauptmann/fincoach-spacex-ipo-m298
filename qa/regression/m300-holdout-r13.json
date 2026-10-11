@@ -382,8 +382,8 @@
    "edits": [
     [
      "m300.html",
-     "Volland ist im Vergleichsfeld der einzige Anbieter mit ausgewiesener Abdeckung von Gamma, Vanna und Charm.",
-     "Im Vergleichsfeld weist als einziger Anbieter Volland Gamma, Vanna und Charm aus."
+     "Volland ist im Vergleichsfeld der einzige Anbieter mit ausgewiesener Abdeckung von Gamma, Vanna und Charm <span class=\"dbom-class-badge\">MEDIEN</span>.",
+     "Im Vergleichsfeld weist als einziger Anbieter Volland Gamma, Vanna und Charm aus <span class=\"dbom-class-badge\">MEDIEN</span>."
     ]
    ]
   },
