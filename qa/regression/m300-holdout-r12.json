@@ -303,14 +303,14 @@
    ]
   },
   {
-   "name": "Chain-Suite-Box ohne VENDOR-Kennzeichen",
+   "name": "Chain-Suite-Box ohne VENDOR-Kennzeichen (Anker v1.12.0, Erwartung unverändert)",
    "expect": "L79",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "blind für Intraday-0DTE <span class=\"badge b-v\">VENDOR</span>",
-     "blind für Intraday-0DTE"
+     "blind für Intraday-0DTE <span class=\"dbom-class-badge\">EINSCHÄTZUNG</span> <span class=\"badge b-v\">VENDOR</span>",
+     "blind für Intraday-0DTE <span class=\"dbom-class-badge\">EINSCHÄTZUNG</span>"
     ]
    ]
   },

@@ -123,14 +123,14 @@
    ]
   },
   {
-   "name": "H13-11 L12: Ausführungsdauer „unter 5 s“ ohne Fakt (S07)",
+   "name": "H13-11 L12: Ausführungsdauer „unter 5 s“ ohne Fakt (S07) (Anker v1.12.0, Erwartung unverändert)",
    "expect": "L12",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Der Future wird in Echtzeit über Rithmic oder IB ausgeführt.",
-     "Der Future wird in unter 5 s über Rithmic oder IB ausgeführt."
+     "bestimmt nur, wie aktuell die Landkarte ist.",
+     "bestimmt nur, wie aktuell die Landkarte ist. Die Order erreicht die Börse in unter 5 s."
     ]
    ]
   },
@@ -359,7 +359,7 @@
     [
      "m300.html",
      "<li data-gate=\"Q10\" data-open>",
-     "<li data-gate=\"Q10\" data-open data-source=\"FACT_SPOTGAMMA_SPEC\">(S10, S11) "
+     "<li data-gate=\"Q10\" data-open data-source=\"FACT_VOLLAND_SPEC\">(S10, S11) "
     ]
    ]
   },

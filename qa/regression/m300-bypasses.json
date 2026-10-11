@@ -111,14 +111,14 @@
    ]
   },
   {
-   "name": "L60/L68 'vorigen Fassung' im Tooltip",
+   "name": "L60/L68 'vorigen Fassung' im Tooltip (Anker v1.12.0, Erwartung unverändert)",
    "expect": "L60",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "<td class=\"check-pass\">✓</td></tr>\n        <tr><td>Q4",
-     "<td class=\"check-pass\" title=\"in der vorigen Fassung noch ◐\">✓</td></tr>\n        <tr><td>Q4"
+     "<td class=\"check-pass\" data-gate=\"Q3\" title=\"",
+     "<td class=\"check-pass\" data-gate=\"Q3\" title=\"in der vorigen Fassung noch ◐; "
     ]
    ]
   },
@@ -147,14 +147,14 @@
    ]
   },
   {
-   "name": "L60/L68 'vorigen Fassung' im Tooltip (mit Sync)",
+   "name": "L60/L68 'vorigen Fassung' im Tooltip (mit Sync) (Anker v1.12.0, Erwartung unverändert)",
    "expect": "L60",
    "sync": true,
    "edits": [
     [
      "m300.html",
-     "<td class=\"check-pass\">✓</td></tr>\n        <tr><td>Q4",
-     "<td class=\"check-pass\" title=\"in der vorigen Fassung noch ◐\">✓</td></tr>\n        <tr><td>Q4"
+     "<td class=\"check-pass\" data-gate=\"Q3\" title=\"",
+     "<td class=\"check-pass\" data-gate=\"Q3\" title=\"in der vorigen Fassung noch ◐; "
     ]
    ]
   },
@@ -1370,14 +1370,14 @@
    ]
   },
   {
-   "name": "r12 R44 Kennzeichen nur als HTML-Kommentar (MEDIEN statt UNGEPRÜFT) (Anker an v1.11.0 angepasst)",
+   "name": "r12 R44 Kennzeichen nur als HTML-Kommentar (MEDIEN statt UNGEPRÜFT) (Anker v1.12.0, Erwartung unverändert)",
    "expect": "L27",
    "sync": false,
    "edits": [
     [
      "m300.html",
-     "Inhaberschuldverschreibung des Emittenten <span class=\"dbom-class-badge\">MEDIEN</span>",
-     "Inhaberschuldverschreibung des Emittenten <!-- MEDIEN -->"
+     "vom Emittenten ausgegebenes Wertpapier <span class=\"dbom-class-badge\">MEDIEN</span>",
+     "vom Emittenten ausgegebenes Wertpapier <!-- MEDIEN -->"
     ]
    ]
   },
