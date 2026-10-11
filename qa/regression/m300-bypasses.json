@@ -201,8 +201,8 @@
    "edits": [
     [
      "m300.html",
-     "Ob ATAS diese Lücke füllen kann,",
-     "Leider bleibt ATAS damit deutlich schwächer als die TWS. Ob ATAS diese Lücke füllen kann,"
+     "Ob die Lücke über diese zwei hinaus besteht",
+     "Leider bleibt ATAS damit deutlich schwächer als die TWS. Ob die Lücke über diese zwei hinaus besteht"
     ]
    ]
   },
@@ -273,7 +273,7 @@
    "edits": [
     [
      "m300.html",
-     "Im Vergleichsfeld ist nur für ATAS beides belegt, native Optionsdaten im Minutentakt und ein MBO-Bundle (derzeit zur Erprobung); für SpotGamma, MenthorQ, Volland und die TWS ist ein MBO-Werkzeug n. v.;",
+     "Im Vergleichsfeld ist nur für ATAS beides belegt, native Optionsdaten im Minutentakt und ein MBO-Bundle (derzeit zur Erprobung) <span class=\"badge b-v\">VENDOR</span>; für SpotGamma, MenthorQ, Volland und die TWS ist ein MBO-Werkzeug n. v.",
      "Nur ATAS verbindet native Optionsdaten im Minutentakt mit einem MBO-Bundle."
     ]
    ]
@@ -814,7 +814,7 @@
    "edits": [
     [
      "m300.html",
-     ">0 von 5<",
+     ">0 von 2<",
      ">0 von 7<"
     ]
    ]
@@ -1830,8 +1830,8 @@
    "edits": [
     [
      "m300.html",
-     "<td data-source=\"FACT_PRIIPS_UWG\">PRIIPs-KID + MiFID-II-Kosten</td>",
-     "<td data-source=\"FACT_PRIIPS_UWG\">PRIIPs-KID + MiFID-II-Kosten <span class=\"dbom-class-badge\">UNGEPRÜFT</span></td>"
+     "<td data-source=\"FACT_PRIIPS_UWG\">Optionsscheine: PRIIPs-KID + MiFID-II-Kosten; Knock-outs: n. v.</td>",
+     "<td data-source=\"FACT_PRIIPS_UWG\">Optionsscheine: PRIIPs-KID + MiFID-II-Kosten <span class=\"dbom-class-badge\">UNGEPRÜFT</span>; Knock-outs: n. v.</td>"
     ]
    ]
   },
@@ -2076,8 +2076,8 @@
    "edits": [
     [
      "m300.html",
-     "(wie viele Scheine sich auf eine Einheit des Basiswerts beziehen); Knock-outs: n. v.</td>",
-     "(wie viele Scheine sich auf eine Einheit des Basiswerts beziehen)</td>"
+     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
+     "<td>Optionsscheine: frei über Bezugsverhältnis</td>"
     ]
    ]
   },
@@ -2098,7 +2098,7 @@
    "edits": [
     [
      "m300.html",
-     "alle Belege am Original abgeglichen (BaFin-Turbo-Studie: am Medienbericht).",
+     "alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht.",
      "alle Belege am Original abgeglichen."
     ]
    ]
