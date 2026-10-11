@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.10.1",
+    "version": "1.10.2",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -28,7 +28,7 @@
       "VENDOR_CLAIM": 9
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte am 2026-10-05 bis 2026-10-08 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat. Die meisten Fakten stützen sich auf Suchtreffer-Snippets, die auf Primär- oder Herstellerquellen verweisen; einzelne Fakten beruhen auf Fachwissen (FACT_PRODUCT_STRUCTURE), auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
+  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat. Die meisten Fakten stützen sich auf Suchtreffer-Snippets, die auf Primär- oder Herstellerquellen verweisen; einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -295,7 +295,7 @@
       "claim": "OESX (EURO-STOXX-50-Indexoptionen): 10 € je Indexpunkt, europäisch, Barausgleich.",
       "source_id": "SRC_EUREX_OESX_SPEC",
       "caveat": "",
-      "period": "Kontraktspezifikation Stand 2026-10-11"
+      "period": "Stichtag 2026-10-05 (Kontraktspezifikation abgerufen 2026-10-11)"
     },
     {
       "id": "FACT_EUREX_DAILY_LAUNCH",
@@ -402,7 +402,7 @@
       "claim": "Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Indexoptionen: letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember).",
       "source_id": "SRC_CBOE_SPX",
       "caveat": "Spezifikationsseiten ohne Versionsdatum; vor Veröffentlichung am aktuellen Regelwerk gegenlesen.",
-      "period": "Kontraktspezifikationen Stand 2026-10-11",
+      "period": "Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11)",
       "values": {
         "SPX": "100",
         "ES": "50",
@@ -410,7 +410,7 @@
       },
       "supporting_sources": [
         "SRC_CME_MICRO",
-        "SRC_EUREX_ODAX_SPEC"
+        "SRC_EUREX_SPECS"
       ]
     },
     {
@@ -421,7 +421,7 @@
       "claim": "Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). Optionsscheine und Knock-outs sind Inhaberschuldverschreibungen des Emittenten; ihr Wert hängt von dessen Bonität ab.",
       "source_id": "SRC_BAFIN_EUREX_CLEARING",
       "caveat": "",
-      "period": "Stand 2026-10-11",
+      "period": "Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11)",
       "supporting_sources": [
         "SRC_DB_CLEARING",
         "SRC_DDV_OS_MUSTER"
@@ -545,14 +545,14 @@
       "id": "SRC_SPOTGAMMA",
       "ref": "S23",
       "tier": "vendor",
-      "title": "SpotGamma (Preise, HIRO)",
+      "title": "SpotGamma (HIRO)",
       "url": "https://spotgamma.com/hiro-indicator/"
     },
     {
       "id": "SRC_MENTHORQ",
       "ref": "S24",
       "tier": "vendor",
-      "title": "MenthorQ (Preise, Abdeckung)",
+      "title": "MenthorQ (Abdeckung)",
       "url": "https://menthorq.com/guide/menthorq-asset-coverage/"
     },
     {
@@ -566,7 +566,7 @@
       "id": "SRC_BOOKMAP",
       "ref": "S26",
       "tier": "vendor",
-      "title": "Bookmap (Pakete, Konnektivität)",
+      "title": "Bookmap (Konnektivität)",
       "url": "https://bookmap.com/en/packages-comparison"
     },
     {
@@ -587,7 +587,7 @@
       "id": "SRC_EUREX_SPECS",
       "ref": "S29",
       "tier": "primary",
-      "title": "Eurex · Produktseiten DAX-Optionen (ODAX), Micro-DAX-Optionen (ODXS), EURO STOXX 50 Options",
+      "title": "Eurex · Produktseiten und Kontraktspezifikationen DAX-Optionen (ODAX), Micro-DAX-Optionen (ODXS), EURO STOXX 50 Options",
       "url": "https://www.eurex.com/ex-en/markets/idx/dax/DAX-Options-139884"
     },
     {
@@ -701,13 +701,6 @@
       "tier": "primary",
       "title": "CME Group · Micro E-mini Equity Index Futures – Products Overview",
       "url": "https://www.cmegroup.com/education/courses/understanding-micro-futures-contracts-at-cme-group/micro-e-mini-futures/micro-e-mini-equity-index-futures-products-overview.html"
-    },
-    {
-      "id": "SRC_EUREX_ODAX_SPEC",
-      "ref": "S53",
-      "tier": "primary",
-      "title": "Eurex · DAX Options Contract Specifications (Final Settlement Day)",
-      "url": "https://www.eurex.com/ex-en/markets/idx/dax/DAX-Options-139884"
     },
     {
       "id": "SRC_EUREX_OESX_SPEC",
@@ -866,6 +859,12 @@
       "date": "2026-10-11",
       "event": "Tests L65–L75, L27c ergänzt (K-Verweise, Datenherkunft, data-claim, Altrecht normalisiert, Eigenständigkeit inkl. JS, k_differs, Fazit-Wertungen, Konstantenmuster, Alleinstellung, Glossar-Bindung, Footer-Sync, keep_reason); Regression 13/13 Injektionen erkannt",
       "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Elfte Zweitprüfung (v1.10.1) eingearbeitet: W1 Verlustkreis ohne „Betragsgrenze“, W2 S10 Zugang/Kostenausweis angeglichen, W3 Preis-Reste, W4 Bezugszeiträume und honest_disclosure, W5 Versionsverlauf in Tooltips/Offen-Liste, W6 A01–A15, W7 Fazit-Einschätzungen, W8 VENDOR-Kennzeichen; doppelte Eurex-Quelle zusammengeführt; Q6 und Q10 auf ◐. Korrektur zum vorigen Eintrag: „13/13“ galt nur für die selbst gewählten Injektionen; 41 von 46 Umgehungen der Zweitprüfung bestehen noch (L80)",
+      "qa_score_pct": 68.4,
       "release": "ÜBERARBEITUNG"
     }
   ],

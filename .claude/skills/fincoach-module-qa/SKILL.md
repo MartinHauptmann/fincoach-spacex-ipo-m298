@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L64 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L79 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -142,6 +142,14 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L27c:** Glossar-Einträge ohne Fakt enthalten keine Tatsachenmerkmale (Institution, Norm, Rechtsnatur, Pflicht).
 - **L74:** Footer-Datum und Version kommen per Sync aus der DBOM (`audit_trail`); Prompt-Schweregrade = K-Tabelle.
 - **L75:** Jede nicht bestätigte Angabe wird belegt oder gestrichen; was bleibt, trägt in der DBOM ein `keep_reason`.
+- **L76:** Jede Zahl und jede Rechtsfolge in einem gebundenen Element steht im Claim des Fakts (z. B. keine
+  „Betragsgrenze“, wenn der Fakt sie nicht nennt); Gegensätze zur früheren Rechtslage sind L64-Reste.
+- **L77:** Fakt-IDs in DBOM-Freitexten (honest_disclosure, caveat, keep_reason) existieren.
+- **L78:** Bezugszeiträume (`period`) liegen am oder vor dem Stichtag; ein späterer Abruf wird als „abgerufen …“
+  genannt. Der Abrufzeitraum in Freitexten umfasst den spätesten Abruf.
+- **L79:** Elemente, die nur an Herstellerangaben (VENDOR_CLAIM) gebunden sind, tragen das VENDOR-Kennzeichen.
+- **L65b/L68b:** Bereichsangaben „A01–Ann“ passen zur Claim-Tabelle; Tooltips und Offen-Liste beschreiben den
+  Zielzustand, nicht den Bearbeitungsverlauf („entfernt“, „angeglichen“, „überarbeitet“, „nach dem Review“).
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 
