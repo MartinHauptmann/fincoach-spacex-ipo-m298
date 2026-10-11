@@ -1295,6 +1295,12 @@
       "event": "Tests gehärtet (L27g, L87, L82d, L27h, L03d) und neu (L18b, L82e, L12c); Holdout r18 vor Teständerung: 13/37, Erstmessung nach Härtung 28/37, nach Nachschärfung 37/37; Fälle der 18. Prüfung 29/29. Q4 und Q7 auf ✓",
       "qa_score_pct": 92.1,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Neunzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): keine Freigabe; C4, Q4, Q7, Q9 auf ◐ (Verdict des Quantor-Fakts, Belegstufen bei Sekundärquellen, Modalität der These, Bewertung S11); 23 neue Umgehungen, 0 vom zuständigen Test erkannt, 4 Fehlalarme",
+      "qa_score_pct": 81.6,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [

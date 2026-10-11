@@ -439,6 +439,10 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
+- Gamma Cockpit (Beta) als eigenen Herstellerfakt abtrennen; Verdict des Quantor-Fakts aus den Basisfakten ableiten
+- Belegstufe für Fakten mit Sekundärquelle auf secondary stellen und Ausnahme-Sätze nachziehen
+- These auf der Seite wie in der Analyse als mögliche Lücke formulieren; Belegstufen-Definition und Zuordnung angleichen
+- Bewertung „Nutzen“ der Eurex-Erweiterung einschränken oder anders belegen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
 
 ---
@@ -452,7 +456,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C1 Disclaimer Anfang/Ende | ✓ | Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test |
 | C2 Keine Anlageempfehlung (MAR) | ✓ | Keine Kursziele, Einstiege oder Empfehlungen (Zweitprüfung 2026-10-11 gelesen); Empfehlungsformen geprüft (L62) |
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
-| C4 Neutralität / Interessenkonflikte | ✓ | Interessenkonflikte: keine (Herausgeber bestätigt); Kennzeichen je Anbieter in Matrix, Info-Box und Fazit, gemessen mit L27g, L85, L85b |
+| C4 Neutralität / Interessenkonflikte | ◐ | Gamma Cockpit trotz Herstellerquelle im Quantor-Fakt als Medienangabe gekennzeichnet; Quantor-Verdict nicht aus den Basisfakten abgeleitet (19. Zweitprüfung) |
 | C5 Marken beschreibend | ✓ | Markenhinweis gegen Marken-Inventar geprüft (L84) und in der Zweitprüfung vom 2026-10-11 vollständig abgeglichen |
 | C6 UWG-konforme Begriffe | ✓ | Begriffe neutral; Wettbewerberangaben vom Herausgeber am 2026-10-11 am Original geprüft |
 | C7 Ausgewogene Risikodarstellung | ✓ | Modellgrenzen, Latenz, Fehlsignale, Totalverlust und BaFin-Quote dargestellt (Zweitprüfung 2026-10-11) |
@@ -461,15 +465,15 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q1 Faktencheck K1–K9 vollständig | ◐ | Claim-Tabelle A01–A15; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61 |
 | Q2 Aktualität / Stichtag | ✓ | Aktualität am Stichtag vom Herausgeber am 2026-10-11 am Original geprüft |
 | Q3 Mathematische Konsistenz | ✓ | GEX 845 Mio. USD, 2.600 ES / 26.000 MES, Probe, Vanna und Charm nachgerechnet (Zweitprüfung 2026-10-11); Rechner rechnet gleich |
-| Q4 Provenienz je Fakt | ✓ | Provenienz je Fakt mit Belegstufe; Volltext für alle Belege außer der BaFin-Turbo-Studie (secondary, am Medienbericht); Vergleichszellen gebunden oder n. v.; gemessen mit L82, L82e, L12c |
+| Q4 Provenienz je Fakt | ◐ | FACT_CBOE_OPENCLOSE und FACT_VOLLAND_SPEC stehen auf fulltext trotz Sekundärquelle; Quantor-Fakt mit fulltext/„Abgleich am Original“ trotz Ableitung (19. Zweitprüfung) |
 | Q5 Quellenqualität | ✓ | Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen als Hauptbeleg nur bei Medienangaben; Abgleich am Original durch den Herausgeber |
 | Q6 Vollständigkeit | ◐ | Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen |
-| Q7 Widerspruchsfreiheit | ✓ | Eurex-GEX-Quantor aus den Anbieterfakten abgeleitet (2 von 6 bestimmbar, 4 n. v.); Ausgestaltung der Knock-outs: n. v. (durchgängig); Volltext-Sätze mit Ausnahme; gemessen mit L18b, L87, L82d |
+| Q7 Widerspruchsfreiheit | ◐ | Belegstufen-Definition widerspricht der Zuordnung; Seite „läge in einer Analyselücke“, Analyse „möglichen“; Messgrundlage der Tests nicht belegt (19. Zweitprüfung) |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
-| Q9 Keine Überzeichnung / Halluzination | ✓ | Einschränkungen als qualifier und überall sichtbar (L76d/L76e); Kostenausweis neutral; keine Prognose-Konfidenz bei Szenarien |
+| Q9 Keine Überzeichnung / Halluzination | ◐ | S11 „Nutzen hoch“ stützt sich allein auf einen Quantor, in dem nur ATAS selbst und ein Broker bestimmbar sind (19. Zweitprüfung) |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 16 × ✓ + 3 × ◐ = 17,5 von 19 Punkten = **92,1 %**.
+**Gesamtscore:** 12 × ✓ + 7 × ◐ = 15,5 von 19 Punkten = **81,6 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
