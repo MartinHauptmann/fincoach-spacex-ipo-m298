@@ -1,6 +1,6 @@
 ---
 name: fincoach-module-qa
-description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L81 mit automatischen Tests.
+description: Pflicht-Qualitätssicherung für FinCoach-AI-Module (HTML-Seiten mXXX.html, M-DBOM-JSON, Analysen, Prompts). Verwenden vor JEDER Veröffentlichung, jedem Artifact-Publish, jedem Commit an einer Modulseite und immer, wenn ein QA-Status, Score oder Styleguide-Check gesetzt oder berichtet wird. Enthält die Gates C1–C9, Q1–Q10, die Styleguide-Basis und den Fehlerkatalog L01–L83 mit automatischen Tests.
 ---
 
 # FinCoach-AI · Modul-QA
@@ -161,6 +161,13 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L19b:** Quellenstufe `vendor` nur für den Hersteller des beschriebenen Produkts; Rechtsrahmen nie mit vendor-Quelle.
 - **L81:** EINSCHÄTZUNG kennzeichnet Wertungen, nicht unbelegte Tatsachen. SCENARIO-Fließtext steht Satz für Satz im
   Konjunktiv.
+- **L82:** Jeder Fakt trägt `evidence` (snippet/fulltext/model). Seite und honest_disclosure erklären „belegt
+  (Snippet)“; solange Snippet-Belege bestehen, bleiben C3, Q2, Q4 und Q5 ◐.
+- **L26e:** Ein Offen-Punkt, der eine Sektion „Sxx“ nennt, trägt `data-source` mit den betroffenen Fakten.
+- **L27d:** Gebundene Glossar-Einträge enthalten nur Zahlen, Daten und Rechtsfolgen aus dem Claim.
+- **L83:** Kennzeichen zählen nur sichtbar; Zeitangaben brauchen eine Bindung; Matrix-Textzellen stehen im
+  Claim-Abschnitt ihres Anbieters. Wortlisten werden nicht weiter ausgebaut; Formulierungsvarianten deckt die
+  manuelle Zweitprüfung ab.
 - **L03:** Der QA-Score wird aus den Gate-Zellen berechnet (`data-qa-score`, `data-qa-points`). Freigabe nur, wenn
   alle C-Gates ✓ sind und der Score ≥ 90 % liegt; sonst ÜBERARBEITUNG.
 

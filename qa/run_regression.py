@@ -29,7 +29,7 @@ with tempfile.TemporaryDirectory() as tmp:
             print(f"[ANKER FEHLT] {c['name']}: {old[:50]!r}")
             miss += 1
             continue
-        if c.get("sync"):
+        if c.get("sync") or not c.get("nosync") and any(f in (page, f"provenance/{Path(page).stem}.dbom.json") for f, _, _ in c["edits"]):  # L82: Spiegel immer nachziehen
             subprocess.run(["python3", "qa/sync_module.py", page], cwd=d, capture_output=True)
         r = subprocess.run(["python3", "qa/check_module.py", page], cwd=d, capture_output=True, text=True)
         fails = [l for l in r.stdout.splitlines() if l.startswith("✗")]

@@ -22,6 +22,8 @@ VOID = {"br", "img", "input", "meta", "link", "hr", "source", "path", "rect", "l
 # L12: Angaben, die eine Provenienz brauchen
 FACT_PATTERN = re.compile(
     r"\d[\d.,]*\s?-?(?:%|Gbps|Mio\.|Mrd\.|€|\$|USD|US-\$|EUR\b|Kontrakte|Legs)"   # Zahl mit Einheit (L80: USD/EUR)
+    r"|\d[\d.,]*\s?-?(?:s\b|Sek\.|Sekunden\w*|Min\.|Minuten\w*|Std\.|Stunden\w*|ms\b)"   # L82: Zeitangaben
+    r"|\b(?:eine[rn]?|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|fünfzehn|zwanzig|dreißig|sechzig)(?: bis \w+)? (?:Sekunden|Minuten|Stunden)\b"
     r"|\b\d{2}\.\d{2}\.\d{4}\b"                                  # Datum
     r"|§\s?\d+|\bArt\.\s?\d+|\bBGBl\b|\b[IVX]+ [A-Z] \d+/\d+\b"  # Fundstelle / Aktenzeichen
 )
@@ -64,6 +66,18 @@ def element_inner(html, m):
         depth += -1 if n.group(1) else 1
         pos = n.end()
     return html[m.end():n.start()]
+
+
+HIDDEN = r'<(\w+)\b[^>]*(?:\bhidden\b|display\s*:\s*none|visibility\s*:\s*hidden|sr-only|aria-hidden="true")[^>]*>.*?</\1>'
+
+
+def visible_part(inner):
+    """L82: Kommentare und unsichtbare Elemente zählen nicht als Kennzeichen."""
+    inner = re.sub(r"<!--.*?-->", "", inner, flags=re.S)
+    prev = None
+    while prev != inner:
+        prev, inner = inner, re.sub(HIDDEN, " ", inner, flags=re.S | re.I)
+    return inner
 
 
 def report(rule, level, ok, msg):
@@ -484,8 +498,10 @@ def main():
         report("L27b Glossar-Badges", BLOCKER, not l27b and rend27, "; ".join(l27b[:4]) if l27b else ("Renderer ohne Badge" if not rend27 else "Glossar-Badges = schwächstes Verdict"))
         # L06b/L72 · Alleinstellungs-Aussagen nur mit Vergleichsbasis im selben Satz (auch K-Tabelle)
         l06b = []
-        ALLEIN = (r"Alleinstellung|einzigartig|\beinzig(?:e[rnsm]?)?\b|\bals einzige\w*|exklusiv\w*|\bnur (?:ATAS|wir|ein\w* (?:Anbieter|Werkzeug|Tool|Plattform))\b"
+        UNIQ_NOUN = r"(?:\S+ ){0,2}(?:Anbieter\w*|Werkzeug\w*|Tool\w*|Plattform\w*|Lösung\w*|Produkt\w*|Software|Wettbewerber\w*|Börse\w*|Dienst\w*|Indikator\w*|Suite|Feed\w*|Broker\w*)"
+        ALLEIN = (r"Alleinstellung|einzigartig|\beinzige[rnsm]? " + UNIQ_NOUN + r"|\beinzig (?:ATAS|bei|mit)\b|\bals einzige\w*|exklusiv\w*|\bnur (?:ATAS|wir|ein\w* (?:Anbieter|Werkzeug|Tool|Plattform))\b"
                   r"|\bkein(?:e[rn]?)? (?:andere[rn]? )?(?:Wettbewerber|Anbieter|Konkurrent)\w*|\bniemand sonst\b|\bsonst (?:niemand|keiner|kein Anbieter)\b")  # L72/L80
+        uniq_ok = {f["id"] for f in F if re.search(r"\bnur (?:an|bei|von|über) (?:der|dem|den)\b|\beinzig|\bkeiner\b", f["claim"], re.I)}  # L82: Alleinstellung, die der Claim selbst trägt
         js_strs = [m.group(1) for sc in re.findall(r"<script\b[^>]*>(.*?)</script>", html, re.S) for m in re.finditer(r'"((?:[^"\\]|\\.){12,})"|`([^`]{12,})`|\'((?:[^\'\\]|\\.){12,})\'', sc) if m.group(1)]
         js_strs += [m.group(2) or m.group(3) for sc in re.findall(r"<script\b[^>]*>(.*?)</script>", html, re.S) for m in re.finditer(r'"((?:[^"\\]|\\.){12,})"|`([^`]{12,})`|\'((?:[^\'\\]|\\.){12,})\'', sc) if not m.group(1)]
         for js in js_strs:  # L80: Glossar, Modale und andere JS-Texte ohne Bindung
@@ -496,9 +512,13 @@ def main():
         texts06 += [("KS", r, "FACT") for r in (re.findall(r'\["K\d+",.*?\]', js_ks.group(1)) if js_ks else [])]
         for sec, txt, src in texts06:
             for sent in re.split(r"(?<=[.;!?])\s", txt):
-                if re.search(ALLEIN, sent, re.I) and not (src and re.search(r"Vergleichsfeld|bestimmbar|n\. v\.", sent)):  # L80: „laut Matrix“ ist keine Vergleichsbasis
+                if re.search(ALLEIN, sent, re.I) and not (src and (re.search(r"Vergleichsfeld|bestimmbar|n\. v\.", sent) or set(src.split()) & uniq_ok)):  # L80/L82
                     l06b.append(f"{sec}: {sent.strip()[:40]}…")
-        for sent in sentences(re.sub(r'<section id="s-qa".*?</section>', " ", body_wo, flags=re.S)):  # L80: seitenweit satzweise (nicht nur Textknoten)
+        body06 = re.sub(r'<section id="s-qa".*?</section>', " ", body_wo, flags=re.S)
+        for m in list(re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', body06))[::-1]:
+            if set(m.group(2).split()) & uniq_ok:
+                body06 = body06[:m.end()] + re.sub(ALLEIN, "§claim§", element_inner(body06, m), flags=re.I) + body06[m.end() + len(element_inner(body06, m)):]
+        for sent in sentences(body06):  # L80: seitenweit satzweise (nicht nur Textknoten)
             if re.search(ALLEIN, sent, re.I) and not re.search(r"vergleichsfeld|bestimmbar|n\. v\.", sent):
                 l06b.append(f"Seite: {sent[:40]}…")
         report("L06b Alleinstellung mit Basis", BLOCKER, not l06b, "; ".join(l06b[:3]) if l06b else "Alleinstellungsaussagen mit Vergleichsbasis im selben Satz")
@@ -637,7 +657,12 @@ def main():
             segs = {h: " ".join(seg for i in tb.group(1).split() if i in facts for seg in facts[i]["claim"].split(";") if h and h.split()[0] in seg) for h in hdr}
             for row in re.findall(r"<tr>(.*?)</tr>", tb.group(2), re.S):
                 for j, cell in enumerate(re.findall(r"<td\b([^>]*)>(.*?)</td>", row, re.S)):
-                    if j and j < len(hdr) and "data-source" not in cell[0] and segs.get(hdr[j]):
+                    if j and j < len(hdr) and "data-source" not in cell[0] and segs.get(hdr[j]):  # L82/L76c: auch Textzellen
+                        ct = re.sub(r"n\. v\.|[✓–/+;,()]", " ", __import__("html").unescape(re.sub(r"<[^>]+>", " ", cell[1])))
+                        for w in re.findall(r"[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß-]{2,}", ct):
+                            if w.casefold() not in segs[hdr[j]].casefold() and w.casefold() not in ("und", "nur", "via", "inkl") \
+                                    and not (w.casefold() == "nein" and re.search(r"\bkeine?\b", segs[hdr[j]], re.I)):  # „nein“ = „keine …“ im Claim
+                                l76.append(f"Matrix {hdr[j]}: „{w}“ nicht im Claim-Abschnitt des Anbieters")
                         for num in re.findall(r"(?<![\w.,])\d+(?:[.,]\d+)*(?![\w])", re.sub(r"<[^>]+>", " ", cell[1])):
                             if num not in re.findall(r"(?<![\w.,])\d+(?:[.,]\d+)*(?![\w])", segs[hdr[j]]):
                                 l76.append(f"Matrix {hdr[j]}: {num} nicht im Claim-Abschnitt des Anbieters")
@@ -670,7 +695,7 @@ def main():
         l79 = []
         for m in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
             ids = set(m.group(2).split())
-            if ids and ids <= vend and not re.search(r">\s*VENDOR\s*<", re.sub(r"<!--.*?-->", "", element_inner(html, m), flags=re.S)):  # L80: Kommentar zählt nicht
+            if ids and ids <= vend and not re.search(r">\s*VENDOR\s*<", visible_part(element_inner(html, m))):  # L80/L82: Kommentar/unsichtbar zählt nicht
                 l79.append(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", element_inner(html, m))).strip()[:30])
         report("L79 VENDOR-Kennzeichen", BLOCKER, not l79, "ohne VENDOR: " + "; ".join(l79[:4]) if l79 else "alle Herstellerangaben gekennzeichnet")
         # L26c · Offen-Punkte zu Kontraktdaten binden die betroffenen Fakten; diese nennen den offenen Abgleich im caveat
@@ -687,8 +712,34 @@ def main():
         l19b = sorted({f"{f['id']} ← {sid}" for f in F if f["class"] == "REGULATORY_FRAMEWORK" for sid in [f["source_id"]] + f.get("supporting_sources", []) if stier.get(sid) == "vendor"})
         report("L19b Quellenstufe vendor", BLOCKER, not l19b, "vendor-Quelle stützt Rechtsrahmen: " + ", ".join(l19b[:4]) if l19b else "keine vendor-Quelle als Beleg für den Rechtsrahmen")
         # L26d · ein Fakt, dessen caveat oder keep_reason einen offenen Abgleich nennt, ist nicht CONFIRMED
-        l26d = [f["id"] for f in F if f["verdict"] == "CONFIRMED" and re.search(r"\boffen\b|gegenlesen|offen-punkt|zu prüfen|ungeprüft|nicht geprüft|noch prüfen", f.get("caveat", "") + " " + f.get("keep_reason", ""), re.I)]
+        l26d = [f["id"] for f in F if f["verdict"] == "CONFIRMED" and re.search(r"\boffen\b|gegenlesen|offen-punkt|zu prüfen|ungeprüft|nicht geprüft|noch prüfen|steht aus|ausstehend|unsicher|unklar|zweifel|vorläufig|zu verifizieren|noch nicht|pending|to be (?:verified|checked)|unverified|tbd\b", f.get("caveat", "") + " " + f.get("keep_reason", ""), re.I)]
         report("L26d CONFIRMED ohne offenen Abgleich", BLOCKER, not l26d, "CONFIRMED trotz offenem Abgleich im caveat: " + ", ".join(l26d) if l26d else "kein CONFIRMED-Fakt nennt einen offenen Abgleich")
+        # L82 · Belegstufe je Fakt: evidence ∈ {snippet, fulltext, model}; SCENARIO ⇔ model; Snippet-Belege halten C3/Q2/Q4/Q5 auf ◐
+        l82 = [f"{f['id']}: evidence „{f.get('evidence')}“" for f in F if f.get("evidence") not in ("snippet", "fulltext", "model")]
+        l82 += [f"{f['id']}: SCENARIO ⇔ model verletzt" for f in F if (f["verdict"] == "SCENARIO_PROJECTION") != (f.get("evidence") == "model")]
+        if any(f["verdict"] == "CONFIRMED" and f.get("evidence") == "snippet" for f in F):
+            gates = {g: c for c, g in re.findall(r'<td class="check-(\w+)"[^>]*data-gate="(\w+)"', html)}
+            l82 += [f"Gate {g} ✓ trotz Snippet-Belegen" for g in ("C3", "Q2", "Q4", "Q5") if gates.get(g) == "pass"]
+            l82 += [] if 'data-dbom-count="snippet"' in html else ["Seite zeigt die Zahl der Snippet-Belege nicht"]
+            l82 += [] if re.search(r"evidence", dbom.get("honest_disclosure", "")) else ["honest_disclosure ohne Definition der Belegstufe"]
+        report("L82 Belegstufe je Fakt", BLOCKER, not l82, "; ".join(l82[:4]) if l82 else "evidence je Fakt gesetzt, Snippet-Belege offen ausgewiesen")
+        # L26e · Offen-Punkt, der eine Sektion nennt, bindet deren Fakten (sonst gilt er als faktspezifisch ohne Bindung)
+        l26e = [re.sub(r"<[^>]+>", " ", li).strip()[:40] for li in re.findall(r"<li\b[^>]*data-open[^>]*>.*?</li>", html, re.S)
+                if re.search(r"\bS\d{2}\b", re.sub(r"<[^>]+>", " ", li)) and "data-source=" not in li.split(">", 1)[0]]
+        report("L26e Offen-Punkt mit Sektion gebunden", BLOCKER, not l26e, "ohne data-source: " + "; ".join(l26e[:3]) if l26e else "Offen-Punkte mit Sektionsbezug gebunden")
+        # L27d · Glossar-Einträge mit Fakt: Zahlen, Daten und Rechtsfolgen stehen im Claim
+        l27d = []
+        for r in (re.findall(r'^\s*(\[".*\])\s*,?\s*$', js_gl.group(1), re.M) if js_gl else []):
+            g = json.loads(r)
+            ids = [i for i in (g[4].split() if len(g) > 4 else []) if i in facts]
+            if not ids:
+                continue
+            gt = iso(re.sub(r"\\\(.*?\\\)|\bS\d{2}\b", " ", " ".join(g[1:4])))
+            hay = iso(" ".join(str(facts[i].get(k, "")) for i in ids for k in ("claim", "period", "caveat", "values", "basis")))
+            hn = set(re.findall(r"(?<![\w.,/])(?<!\d-)\d+(?:[.,]\d+)*(?:-\d{2}-\d{2})?(?![\w])", hay))
+            l27d += [f"{g[0]}: {n}" for n in re.findall(r"(?<![\w.,/])(?<!\d-)\d+(?:[.,]\d+)*(?:-\d{2}-\d{2})?(?![\w])", gt) if n not in hn]
+            l27d += [f"{g[0]}: „{w}“" for w in re.findall(r"\w*(?:schuldverschreibung|grenze|beschränk|rücktrag|vortrag|ausgeschlossen|bußgeld|pflicht)\w*", gt, re.I) if w.lower() not in hay.lower()]
+        report("L27d Glossar-Fakten im Claim", BLOCKER, not l27d, "nicht im Claim: " + "; ".join(l27d[:4]) if l27d else "Glossar-Angaben mit Fakt stehen im Claim")
         report("L26c Offen-Punkt bindet Fakten", BLOCKER, not l26c, "; ".join(l26c[:3]) if l26c else "Offen-Punkte zu Kontraktdaten gebunden (L26 greift)")
         # L64/L67 · nur geltendes Recht: normalisiert, inkl. JS-Inhalte, Attribute und Prompt
         OLD_LAW = (r"\ba\.\s?f\.|alte[nr]? fassung|\baufgehoben\b|aufhebung|altjahre|altf[aä]ll|offene[nr]? fälle|§\s?52 abs\.\s?28|bis zur abschaffung"
@@ -807,7 +858,7 @@ def main():
             ids = [i for i in m.group(2).split() if i in facts]
             if not ids or any(facts[i]["verdict"] == "CONFIRMED" for i in ids) or "data-open" in m.group(0):
                 continue
-            inner = re.sub(r"<!--.*?-->", "", element_inner(html, m), flags=re.S)  # L80: Kommentar ist kein Kennzeichen
+            inner = visible_part(element_inner(html, m))  # L80/L82: Kommentar oder unsichtbares Element ist kein Kennzeichen
             need = "|".join(BADGE[facts[i]["verdict"]] for i in ids)
             if not re.search(r">\s*(?:%s)\s*<" % need, inner):
                 nobadge.append(ids[0])

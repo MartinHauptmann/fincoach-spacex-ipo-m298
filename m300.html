@@ -627,11 +627,11 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <li data-gate="C8" data-source="FACT_PRIIPS_UWG FACT_ANGEMESSENHEIT" data-open>PRIIPs-/UWG-Bezüge und § 63 Abs. 10 WpHG am Original prüfen</li>
         <li data-gate="C9" data-open>Datenschutzerklärung korrigieren: sessionStorage, Stand-Datum, Log-Speicherdauer, Vorlagenhinweis</li>
         <li data-gate="Q4" data-open>Provenienz je Fakt nach dem Volltextabgleich der Primärquellen bestätigen (siehe C3, C8)</li>
-                <li data-gate="Q9" data-open>Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)</li>
+                <li data-gate="Q9" data-open data-source="FACT_NO_EUREX_GEX FACT_ROADMAP">Allaussagen (S11) und Fazit-Wertungen manuell gegenprüfen (L06b, L62)</li>
         <li data-gate="Q7" data-open>K-Verweise, Fazit-Bezug und Folgetexte manuell gegenprüfen</li>
         <li data-gate="Q1" data-open>Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen</li>
         <li data-gate="C5" data-open>Markenhinweis gegen alle genannten Marken (Seite, Tooltips, Quellenliste) unabhängig abgleichen</li>
-        <li data-gate="C6" data-open>Wettbewerberangaben (Matrix S09, Eurex-GEX) an den Anbieterseiten im Volltext belegen</li>
+        <li data-gate="C6" data-open data-source="FACT_COMPETITOR_MATRIX FACT_NO_EUREX_GEX">Wettbewerberangaben (Matrix S09, Eurex-GEX) an den Anbieterseiten im Volltext belegen</li>
         <li data-gate="Q6" data-open>Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen</li>
         <li data-gate="Q10" data-open>Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)</li>
       </ul>
@@ -795,7 +795,7 @@ const GLOSSAR=[
   ["Termingeschäft (steuerlich)","Geschäft, dessen Wert von einem anderen abhängt.","Options-, Futures- oder Swapgeschäft mit Differenzausgleich oder Lieferung; Einkünfte nach § 20 EStG.","Im Privatvermögen keine gesonderte Verlustverrechnungsbeschränkung (JStG 2024).","FACT_JSTG2024_REPEAL"],
   ["Knock-out-Zertifikat","Hebelpapier, das an einer Schwelle wertlos wird.","Hebelprodukt mit Knock-out-Barriere; Rechtsnatur hier n. v.","Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).","FACT_BAFIN_TURBO"],
   ["CCP","Zentrale Stelle zwischen Käufer und Verkäufer.","Central Counterparty, hier Eurex Clearing.","Ersetzt bilaterales Kontrahentenrisiko; Teilnehmer hinterlegen Sicherheiten (Margin).","FACT_CCP_ISSUER"],
-  ["PRIIPs-KID","Pflicht-Infoblatt zu Kosten und Risiken.","EU-Basisinformationsblatt (VO (EU) 1286/2014, Fundstelle ungeprüft).","Referenz für Kostenvergleiche verbriefter Derivate.","FACT_PRIIPS_UWG","UNGEPRÜFT"],
+  ["PRIIPs-KID","Infoblatt zu Kosten und Risiken, das offenzulegen ist.","EU-Basisinformationsblatt (VO (EU) 1286/2014, Fundstelle ungeprüft).","Referenz für Kostenvergleiche verbriefter Derivate.","FACT_PRIIPS_UWG","UNGEPRÜFT"],
   ["Quartalsverfall","Großer Verfallstag im März, Juni, September, Dezember.","Dritter Freitag der Quartalsmonate.","Umgangssprachlich „Hexensabbat“; OI-Verschiebungen davor relevant.","FACT_CONTRACT_SPECS"]
 ];
 function renderGlossar(){

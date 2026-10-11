@@ -961,6 +961,12 @@
       "event": "Dreizehnte Zweitprüfung (v1.10.4), Inhalt: Belegstufe evidence (snippet/fulltext/model) je Fakt und auf der Seite „belegt (Snippet)“; FACT_CCP_ISSUER getrennt (neu FACT_OS_ISSUER, Medienangabe); neue Herstellerfakten FACT_ATAS_MBO (Changelog 2026-08-04) und FACT_ATAS_FOOTPRINT; Matrix-Claim je Anbieter vollständig, „–“ durch n. v. ersetzt, Alleinstellung neu abgeleitet; ungebundene Zeitangaben gebunden bzw. gestrichen; Glossar Knock-out ohne Rechtsnatur; Vanna-Satz korrigiert; Standardverfälle präzisiert; Kostenausweis beidseitig; Offen-Punkt C3 als Rechtsprüfung; Marken ergänzt; C5 auf ◐; F5 wieder Negativkontrolle",
       "qa_score_pct": 63.2,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Strukturelle Tests ergänzt (L82 Belegstufe, L26e, L27d, L76c Matrix-Textzellen, unsichtbare Kennzeichen, Zeitangaben in L12, Varianten in L26d, L06b-Eingrenzung mit Claim-Ausnahme, automatischer Sync im Runner). Regression 150/150; unabhängiger Holdout r13 (52808f2) einmalig 33/34, Negativkontrollen 10/10; verbleibende Lücke: frei formulierter Zweifel im caveat (Wortliste, bewusst nicht erweitert)",
+      "qa_score_pct": 63.2,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
