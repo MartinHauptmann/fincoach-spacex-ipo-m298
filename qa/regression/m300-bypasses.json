@@ -2113,6 +2113,345 @@
      "Derivate / Market Microstructure</div>"
     ]
    ]
+  },
+  {
+   "name": "R18 G1 pauschal MEDIEN am Ende der Info-Box (Einzelkennzeichen entfernt)",
+   "expect": "L27g",
+   "edits": [
+    [
+     "m300.html",
+     "Charm <span class=\"dbom-class-badge\">MEDIEN</span>. Optionsdaten",
+     "Charm. Optionsdaten"
+    ],
+    [
+     "m300.html",
+     "SpotGamma (HIRO/TRACE) <span class=\"badge b-v\">VENDOR</span>, MenthorQ (EOD und alle 5 Min.) <span class=\"badge b-v\">VENDOR</span>, Volland (EOD bis alle 5 Min.) <span class=\"dbom-class-badge\">MEDIEN</span> sowie die IBKR TWS (Echtzeit, Abo) <span class=\"badge b-v\">VENDOR</span>.",
+     "SpotGamma (HIRO/TRACE), MenthorQ (EOD und alle 5 Min.), Volland (EOD bis alle 5 Min.) sowie die IBKR TWS (Echtzeit, Abo)."
+    ],
+    [
+     "m300.html",
+     "für Volland ist sie n. v.</div>",
+     "für Volland ist sie n. v. <span class=\"dbom-class-badge\">MEDIEN</span></div>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 G2 pauschal MEDIEN am Anfang, in verschachteltem Volland-Span",
+   "expect": "L27g",
+   "edits": [
+    [
+     "m300.html",
+     "FACT_CROSS_TRADING\">Ableitung aus der Matrix:",
+     "FACT_CROSS_TRADING\"><span data-source=\"FACT_VOLLAND_SPEC\"><span class=\"dbom-class-badge\">MEDIEN</span></span> Ableitung aus der Matrix:"
+    ]
+   ]
+  },
+  {
+   "name": "R18 G3 pauschal MEDIEN am Anfang mit title-Attribut",
+   "expect": "L27g",
+   "edits": [
+    [
+     "m300.html",
+     "FACT_CROSS_TRADING\">Ableitung aus der Matrix:",
+     "FACT_CROSS_TRADING\"><span class=\"dbom-class-badge\" title=\"Medienangabe\">MEDIEN</span> Ableitung aus der Matrix:"
+    ]
+   ]
+  },
+  {
+   "name": "R18 G4 pauschales Verdict-Wort im statischen Text",
+   "expect": "L27g|L27f",
+   "edits": [
+    [
+     "m300.html",
+     "FACT_CROSS_TRADING\">Ableitung aus der Matrix:",
+     "FACT_CROSS_TRADING\">Ableitung aus der Matrix (Medienangaben):"
+    ]
+   ]
+  },
+  {
+   "name": "R18 G5 pauschal MEDIEN, Segment nennt Volland nur beilaeufig",
+   "expect": "L27g",
+   "edits": [
+    [
+     "m300.html",
+     "FACT_CROSS_TRADING\">Ableitung aus der Matrix:",
+     "FACT_CROSS_TRADING\">Ableitung aus der Matrix (Quellen von ATAS bis Volland) <span class=\"dbom-class-badge\">MEDIEN</span>:"
+    ]
+   ]
+  },
+  {
+   "name": "R18 K1 Glossar-Stufe beschreibt Ausgestaltung, n. v. fuer anderes",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "\"Hebelprodukt mit Knock-out-Schwelle; Ausgestaltung hier n. v.\"",
+     "\"Hebelpapier, das an der Schwelle wertlos verfaellt (Basiswert n. v.).\""
+    ]
+   ]
+  },
+  {
+   "name": "R18 K2 Kleinschreibung knock-out in anderem Glossar-Eintrag",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "\"Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).\",\"FACT_BAFIN_TURBO\"]",
+     "\"Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).\",\"FACT_BAFIN_TURBO\"]"
+    ],
+    [
+     "m300.html",
+     "[\"Iceberg\",\"Große Order, von der nur ein Teil sichtbar ist.\"",
+     "[\"Iceberg\",\"Große Order, von der nur ein Teil sichtbar ist; knock-out-Papiere verfallen dagegen an der Schwelle wertlos.\""
+    ]
+   ]
+  },
+  {
+   "name": "R18 K3 Prosa in S10 beschreibt Knock-out-Ausgestaltung",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "<div class=\"dep-box text-xs text-slate-400\"><span data-source=\"FACT_BAFIN_STUDY\">",
+     "<div class=\"dep-box text-xs text-slate-400\"><p>Knock-outs verfallen beim Erreichen der Barriere wertlos; der Emittent legt Hebel und Schwelle fest.</p><span data-source=\"FACT_BAFIN_STUDY\">"
+    ]
+   ]
+  },
+  {
+   "name": "R18 K4 Tabellenzelle Knock-outs mit fremdem n. v.",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
+     "<td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar (Mindestgroesse n. v.)</td>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 K5 Kostenzeile: Knock-out-Aussage unter verbrieft-Ausnahme",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "<td data-source=\"FACT_PRIIPS_UWG\">Optionsscheine: PRIIPs-KID + MiFID-II-Kosten; Knock-outs: n. v.</td>",
+     "<td data-source=\"FACT_PRIIPS_UWG\">Optionsscheine: PRIIPs-KID + MiFID-II-Kosten; Knock-outs: Finanzierungskosten taeglich im Hebel verrechnet</td>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 K6 Spaltenkopf ohne Gegenstandswort",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "<th>Optionsscheine / Knock-outs</th>",
+     "<th>Optionsscheine / Hebelzertifikate</th>"
+    ],
+    [
+     "m300.html",
+     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
+     "<td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar</td>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 K7 REG-Modal Turbo mit Ausgestaltung",
+   "expect": "L87",
+   "edits": [
+    [
+     "m300.html",
+     "b:\"Die Allgemeinverfügung ist am 15.10.2025 ergangen",
+     "b:\"Knock-outs verfallen an der Barriere wertlos. Die Allgemeinverfügung ist am 15.10.2025 ergangen"
+    ]
+   ]
+  },
+  {
+   "name": "R18 D1 Synonym saemtliche Belege am Original geprueft",
+   "expect": "L82d|L82e",
+   "edits": [
+    [
+     "m300.html",
+     "der Herausgeber hat am 2026-10-11 alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht.",
+     "der Herausgeber hat am 2026-10-11 sämtliche Belege am Original geprüft."
+    ]
+   ]
+  },
+  {
+   "name": "R18 D2 Ausnahme durch beliebiges BaFin im Satz",
+   "expect": "L82d|L82e",
+   "edits": [
+    [
+     "m300.html",
+     "der Herausgeber hat am 2026-10-11 alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht.",
+     "der Herausgeber hat am 2026-10-11 alle Belege am Original abgeglichen, auch die BaFin-Allgemeinverfügung."
+    ]
+   ]
+  },
+  {
+   "name": "R18 D3 honest_disclosure jeder Beleg im Original",
+   "expect": "L82d|L82e",
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht",
+     "jeden Beleg im Original eingesehen"
+    ]
+   ]
+  },
+  {
+   "name": "R18 D4 Analyse alle Fakten am Original verifiziert",
+   "expect": "L82d|L82e",
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "Der Herausgeber hat am 2026-10-11 alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am\n> Medienbericht",
+     "Der Herausgeber hat am 2026-10-11 jede Quelle im Original gelesen"
+    ]
+   ]
+  },
+  {
+   "name": "R18 H1 SCENARIO mit title-Attribut an Modellannahme",
+   "expect": "L27h",
+   "edits": [
+    [
+     "m300.html",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\">MODELL</span>",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\" title=\"Szenario\">SCENARIO</span>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 H2 SCENARIO an Modellannahme plus Zweitbindung",
+   "expect": "L27h",
+   "edits": [
+    [
+     "m300.html",
+     "<div class=\"dep-box\" data-source=\"FACT_DEALER_CONVENTION\">\n      <h3 class=\"font-head font-bold text-white mb-1\">Gamma-Regime im Profil <span class=\"dbom-class-badge\">MODELL</span>",
+     "<div class=\"dep-box\" data-source=\"FACT_DEALER_CONVENTION FACT_ROADMAP\">\n      <h3 class=\"font-head font-bold text-white mb-1\">Gamma-Regime im Profil <span class=\"dbom-class-badge\">SCENARIO</span>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 H3 neues Kennzeichen PROGNOSE mit Style, nicht in Legende",
+   "expect": "L27h",
+   "edits": [
+    [
+     "m300.html",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\">MODELL</span>",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\">MODELL</span> <span class=\"dbom-class-badge\" style=\"margin-left:4px\">PROGNOSE</span>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 H4 Legende ohne MODELL, Wort nur verneint",
+   "expect": "L27h",
+   "edits": [
+    [
+     "m300.html",
+     "Modellannahmen <span class=\"dbom-class-badge\">MODELL</span>, Szenarien",
+     "Szenarien (kein MODELL-Kennzeichen)"
+    ]
+   ]
+  },
+  {
+   "name": "R18 E1 Entwurf nur als Kommentar im Footer",
+   "expect": "L03b",
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure<!-- Entwurf --></div>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 E2 Entwurf unsichtbar im Footer",
+   "expect": "L03b",
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure<span hidden>Entwurf</span></div>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 B1 Volland „nein“ in der Eurex-GEX-Zeile ohne Eurex-Aussage im Fakt",
+   "expect": "L18b|L12c|L76",
+   "edits": [
+    [
+     "m300.html",
+     "<td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">",
+     "<td>n. v.</td><td>n. v.</td><td>nein</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">"
+    ]
+   ]
+  },
+  {
+   "name": "R18 B1b Volland in basis.determinable_from ohne Eurex-Aussage",
+   "expect": "L18b|L18",
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"determinable_from\": {\n          \"ATAS\"",
+     "\"determinable_from\": {\n          \"Volland\": \"FACT_VOLLAND_SPEC\",\n          \"ATAS\""
+    ]
+   ]
+  },
+  {
+   "name": "R18 B2 BaFin-Studie wieder evidence fulltext",
+   "expect": "L82e",
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"evidence\": \"secondary\"",
+     "\"evidence\": \"fulltext\""
+    ]
+   ]
+  },
+  {
+   "name": "R18 B3 Optionsschein-Zelle „Größe“ ohne Bindung",
+   "expect": "L12c",
+   "edits": [
+    [
+     "m300.html",
+     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
+     "<td>Optionsscheine: frei über Bezugsverhältnis; Knock-outs: n. v.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 B2b Volltext-Satz ohne Ausnahme auf der Seite",
+   "expect": "L82e|L82d",
+   "edits": [
+    [
+     "m300.html",
+     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Derzeit sind alle Belege auf der Stufe „Volltext“."
+    ]
+   ]
+  },
+  {
+   "name": "R18 N1 Negativkontrolle: ATAS-Zelle umformuliert",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span>",
+     "nein (X-Ray deckt nur SPX ab) <span class=\"badge b-v\">VENDOR</span>"
+    ]
+   ]
+  },
+  {
+   "name": "R18 N2 Negativkontrolle: Volland-Zelle mit Zusatz n. v.",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "<td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">",
+     "<td>n. v.</td><td>n. v.</td><td>n. v. (Partnerseite ohne Angabe)</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">"
+    ]
+   ]
   }
  ]
 }

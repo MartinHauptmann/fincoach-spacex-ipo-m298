@@ -1,0 +1,443 @@
+{
+ "page": "m300.html",
+ "source": "Holdout r18, unabhängig geschrieben vor Teständerung",
+ "cases": [
+  {
+   "name": "H18-01 L27g: Info-Box S09 – Einzelkennzeichen der Intraday-Aufzählung durch ein MEDIEN am Satzende ersetzt (Volland steht davor)",
+   "expect": "L27g",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "SpotGamma (HIRO/TRACE) <span class=\"badge b-v\">VENDOR</span>, MenthorQ (EOD und alle 5 Min.) <span class=\"badge b-v\">VENDOR</span>, Volland (EOD bis alle 5 Min.) <span class=\"dbom-class-badge\">MEDIEN</span> sowie die IBKR TWS (Echtzeit, Abo) <span class=\"badge b-v\">VENDOR</span>.",
+     "SpotGamma (HIRO/TRACE), MenthorQ (EOD und alle 5 Min.), Volland (EOD bis alle 5 Min.) sowie die IBKR TWS (Echtzeit, Abo) <span class=\"dbom-class-badge\">MEDIEN</span>."
+    ]
+   ]
+  },
+  {
+   "name": "H18-02 L27g: Matrix-Caption pauschal „Herstellerangaben und Partnerseite“ mit einem MEDIEN-Kennzeichen",
+   "expect": "L27g",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Herstellerangaben (am Original geprüft) <span class=\"badge b-v\">VENDOR</span>; Volland über die Partnerseite ORATS <span class=\"dbom-class-badge\">MEDIEN</span> · „n. v.“",
+     "Herstellerangaben und Partnerseite ORATS (Volland), Stand 2026-10-05 <span class=\"dbom-class-badge\">MEDIEN</span> · „n. v.“"
+    ]
+   ]
+  },
+  {
+   "name": "H18-03 L27g: Text-Verdictwort „(Medienangaben)“ in der Fußnote unter der Matrix über alle fünf Wettbewerber",
+   "expect": "L27g",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Stand 2026-10-05, Herstellerangaben der Anbieter (Volland: Partnerseite, Medienangabe);",
+     "Stand 2026-10-05, Angaben der Anbieter SpotGamma, MenthorQ, Volland, Bookmap und TWS (Medienangaben);"
+    ]
+   ]
+  },
+  {
+   "name": "H18-04 L27g: verschachteltes UNGEPRÜFT-Kennzeichen (dbom-pill) hinter der MBO-n.-v.-Aufzählung gemischter Anbieter",
+   "expect": "L27g",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "für SpotGamma, MenthorQ, Volland und die TWS ist ein MBO-Werkzeug n. v.;",
+     "für SpotGamma, MenthorQ, Volland und die TWS ist ein MBO-Werkzeug n. v. <span class=\"dbom-pill\"><span class=\"dbom-class-badge\">UNGEPRÜFT</span></span>;"
+    ]
+   ]
+  },
+  {
+   "name": "H18-05 Negativkontrolle L27g: Fußnote S09 mit VENDOR bei den Herstellern und MEDIEN direkt bei Volland",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "Stand 2026-10-05, Herstellerangaben der Anbieter (Volland: Partnerseite, Medienangabe);",
+     "Stand 2026-10-05, Herstellerangaben der Anbieter <span class=\"badge b-v\">VENDOR</span>; Volland über die Partnerseite <span class=\"dbom-class-badge\">MEDIEN</span>;"
+    ]
+   ]
+  },
+  {
+   "name": "H18-06 L87: Glossar Knock-out-Zertifikat – Experten-Stufe beschreibt Barriere und Verfall ohne n. v.",
+   "expect": "L87",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "\"Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).\",\"FACT_BAFIN_TURBO\"]",
+     "\"Beim Long-Turbo liegt die Barriere über dem Basispreis; bei Berühren verfällt das Papier meist mit geringem Restwert. Für Turbos gilt eine BaFin-Allgemeinverfügung (Details in S10).\",\"FACT_BAFIN_TURBO\"]"
+    ]
+   ]
+  },
+  {
+   "name": "H18-07 L87: S10-Zelle Kontrahentenrisiko – „Turbos: ebenfalls Emittentenrisiko …“ statt „Knock-outs: n. v.“",
+   "expect": "L87",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Optionsscheine: Bonität des Emittenten <span class=\"dbom-class-badge\">MEDIEN</span>; Knock-outs: n. v.</td>",
+     "Optionsscheine: Bonität des Emittenten <span class=\"dbom-class-badge\">MEDIEN</span>; Turbos: ebenfalls Emittentenrisiko, Schwelle mit Gap-Risiko</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-08 L87: Modal BaFin/Turbo beschreibt Knock-out-Mechanik (FACT_BAFIN_TURBO trägt sie nicht)",
+   "expect": "L87",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "und verbietet Kaufanreize. Laut einem Medienbericht",
+     "und verbietet Kaufanreize. Turbo-Zertifikate werden beim Erreichen der Knock-out-Schwelle sofort fällig, oft mit einem geringen Restwert. Laut einem Medienbericht"
+    ]
+   ]
+  },
+  {
+   "name": "H18-09 L87: Analyse-Disclaimer „Knock-Out-Zertifikate“ (andere Schreibung) ausgestaltet statt n. v.",
+   "expect": "L87",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "Emittentenrisiko; für Knock-out-Zertifikate ist die Ausgestaltung hier nicht ausgewertet (n. v.), maßgeblich\nsind die Emissionsbedingungen.",
+     "Emittentenrisiko; Knock-Out-Zertifikate tragen es ebenso und verfallen bei Berühren der Barriere, maßgeblich\nsind die Emissionsbedingungen."
+    ]
+   ]
+  },
+  {
+   "name": "H18-10 Negativkontrolle L87: Kostenausweis „Knock-outs und Turbos: n. v.“",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "Optionsscheine: PRIIPs-KID + MiFID-II-Kosten; Knock-outs: n. v.</td>",
+     "Optionsscheine: PRIIPs-KID + MiFID-II-Kosten; Knock-outs und Turbos: n. v.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-11 L82d: Methodik-Box „sämtlich im Original abgeglichen“ ohne BaFin-Ausnahme",
+   "expect": "L82d|L82e",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "und vom Herausgeber am 2026-10-11 am Original abgeglichen, ausgenommen die BaFin-Turbo-Studie (am Medienbericht).",
+     "und vom Herausgeber am 2026-10-11 sämtlich im Original abgeglichen."
+    ]
+   ]
+  },
+  {
+   "name": "H18-12 L82d: Analyse-Quellenverzeichnis „jeder Beleg … im Volltext geprüft“ ohne Ausnahme",
+   "expect": "L82d|L82e",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "recherchiert über Suchtreffer und vom Herausgeber am 2026-10-11 am Original abgeglichen, die BaFin-Turbo-Studie am Medienbericht (siehe Methodischer Vorbehalt).",
+     "recherchiert über Suchtreffer; jeder Beleg wurde vom Herausgeber am 2026-10-11 im Volltext geprüft (siehe Methodischer Vorbehalt)."
+    ]
+   ]
+  },
+  {
+   "name": "H18-13 L82d: DBOM honest_disclosure – Satz „alle … Belegstufe fulltext“ ohne FACT_BAFIN_STUDY",
+   "expect": "L82d|L82e",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“, ausgenommen FACT_BAFIN_STUDY („secondary“).",
+     "seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“."
+    ]
+   ]
+  },
+  {
+   "name": "H18-14 L82d: Info-Box Hero „Derzeit tragen alle Belege die Stufe Volltext.“ (Ausnahme gestrichen)",
+   "expect": "L82d|L82e",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Derzeit tragen alle Belege die Stufe „Volltext“."
+    ]
+   ]
+  },
+  {
+   "name": "H18-15 L82e: FACT_BAFIN_STUDY evidence fulltext trotz scope „Studie selbst nicht eingesehen“",
+   "expect": "L82d|L82e",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"evidence\": \"secondary\",",
+     "\"evidence\": \"fulltext\","
+    ]
+   ]
+  },
+  {
+   "name": "H18-16 L82e: FACT_ISSUER_HEDGING scope auf Medienbericht geändert, evidence bleibt fulltext",
+   "expect": "L82d|L82e",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\",\n      \"evidence\": \"fulltext\",\n      \"verified\": {\n        \"by\": \"Herausgeber\",\n        \"date\": \"2026-10-11\",\n        \"scope\": \"Abgleich am Original\"",
+     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\",\n      \"evidence\": \"fulltext\",\n      \"verified\": {\n        \"by\": \"Herausgeber\",\n        \"date\": \"2026-10-11\",\n        \"scope\": \"Abgleich nur am Medienbericht (Primärquelle nicht eingesehen)\""
+    ]
+   ]
+  },
+  {
+   "name": "H18-17 Negativkontrolle L82d: Ausnahme vorangestellt („Bis auf die BaFin-Turbo-Studie …“)",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Bis auf die BaFin-Turbo-Studie (Stufe „Sekundär“) tragen derzeit alle Belege die Stufe „Volltext“."
+    ]
+   ]
+  },
+  {
+   "name": "H18-18 L27h: Legende ohne EINSCHÄTZUNG, Kennzeichen bleibt auf der Seite in Gebrauch",
+   "expect": "L27h",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<span class=\"dbom-class-badge\">SCENARIO</span> und wertende Einordnungen <span class=\"dbom-class-badge\">EINSCHÄTZUNG</span>. Schätzungen sind mit",
+     "<span class=\"dbom-class-badge\">SCENARIO</span>. Schätzungen sind mit"
+    ]
+   ]
+  },
+  {
+   "name": "H18-19 L27h: neues Kennzeichen HYPOTHESE in S08, nicht in der Legende",
+   "expect": "L27h",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Modellthese: Die Bewegung wird abgebremst.</p>",
+     "Modellthese: Die Bewegung wird abgebremst. <span class=\"dbom-class-badge\">HYPOTHESE</span></p>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-20 L27h: FACT_DEALER_CONVENTION in S02 mit SCENARIO (span mit title/data-Attributen)",
+   "expect": "L27h",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Dealer-Positionskonvention, <span class=\"dbom-class-badge\">MODELL</span></span>",
+     "Dealer-Positionskonvention, <span class=\"dbom-class-badge\" title=\"Modellannahme\" data-kind=\"model\">SCENARIO</span></span>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-21 L27h: S05-Box (data-source FACT_DEALER_CONVENTION) Überschrift mit SCENARIO, Attribut vor class",
+   "expect": "L27h",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Gamma-Regime im Profil <span class=\"dbom-class-badge\">MODELL</span>",
+     "Gamma-Regime im Profil <span data-note=\"Konvention\" class=\"dbom-class-badge\">SCENARIO</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-22 Negativkontrolle L27h: zusätzliches MODELL (in Legende) bei der Short-Gamma-These",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "Modellthese: Die Bewegung wird beschleunigt (Gamma-Squeeze).</p>",
+     "Modellthese: Die Bewegung wird beschleunigt (Gamma-Squeeze). <span class=\"dbom-class-badge\">MODELL</span></p>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-23 L03d: Footer „Überarbeitung“ statt „Entwurf“ (Navigation nennt Entwurf weiterhin)",
+   "expect": "L03b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure · Überarbeitung</div>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-24 L03d: „Entwurf“ im Footer nur als HTML-Kommentar",
+   "expect": "L03b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure<!-- · Entwurf --></div>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-25 L03d: „Entwurf“ im Footer mit hidden-Attribut",
+   "expect": "L03b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure <span hidden>· Entwurf</span></div>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-26 L03d: „Entwurf“ im Footer per style display:none",
+   "expect": "L03b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure <span style=\"display: none\">· Entwurf</span></div>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-27 Negativkontrolle L03d: „Entwurf“ im Footer sichtbar in eigenem farbigem span",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "Derivate / Market Microstructure · Entwurf</div>",
+     "Derivate / Market Microstructure · <span class=\"text-tngb-gold\">Entwurf</span></div>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-28 L18b: DBOM basis.determinable_from zählt TWS über FACT_IB_BAG (keine Eurex-Aussage)",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"IBKR TWS\": \"FACT_TWS_SPEC\"",
+     "\"IBKR TWS\": \"FACT_IB_BAG\""
+    ]
+   ]
+  },
+  {
+   "name": "H18-29 L18b: S11-Quantor nennt MenthorQ als bestimmbar (Anbieterfakt: Eurex-GEX n. v.)",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "keiner der zwei bestimmbaren Anbieter (ATAS, TWS) bietet",
+     "keiner der zwei bestimmbaren Anbieter (ATAS, MenthorQ) bietet"
+    ]
+   ]
+  },
+  {
+   "name": "H18-30 L18b: Matrixzeile Eurex-GEX – Volland „nein“ ohne Fakt mit Eurex-Aussage",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">",
+     "<td>n. v.</td><td>n. v.</td><td>nein</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">"
+    ]
+   ]
+  },
+  {
+   "name": "H18-31 L18b: Matrixzeile Eurex-GEX – Bookmap „nein (Greeks nur über Add-ons)“ an FACT_BOOKMAP_SPEC gebunden (nur ≠ Eurex-Aussage)",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">",
+     "<td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_BOOKMAP_SPEC\">nein (Greeks nur über Add-ons) <span class=\"badge b-v\">VENDOR</span></td><td data-source=\"FACT_TWS_SPEC\">"
+    ]
+   ]
+  },
+  {
+   "name": "H18-32 Negativkontrolle L18b: TWS-Zelle umformuliert, weiter an FACT_TWS_SPEC gebunden",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "nein (Eurex nur Rohdaten) <span class=\"badge b-v\">VENDOR</span>",
+     "nein (Eurex-Optionen nur als Rohdaten) <span class=\"badge b-v\">VENDOR</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-33 L12c: S10-Zelle „Größe“ Optionsscheine ausgestaltet ohne Fakt, nur teilweise n. v.",
+   "expect": "L12c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
+     "<td>Optionsscheine: kleine Stückelung über das Bezugsverhältnis; Knock-outs: n. v.</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-34 L12c: S10-Zelle Kostenausweis Eurex mit Inhalt statt n. v., ungebunden",
+   "expect": "L12c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>n. v. (hier nicht ausgewertet)</td>",
+     "<td>Gebührenverzeichnis der Eurex und Entgelte des Brokers</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-35 L12c: S10-Zelle Ausgestaltung Eurex verliert data-source (Fakt anderswo gebunden)",
+   "expect": "L12c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>Ausgestaltung</td><td data-source=\"FACT_CCP_ISSUER\">börsengehandelter Kontrakt</td>",
+     "<td>Ausgestaltung</td><td>börsengehandelter Kontrakt</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-36 L12c: neue S10-Zeile Handelsplatz, ungebunden, rechte Zelle nur teilweise n. v.",
+   "expect": "L12c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<td>Öffentliches OI je Strike</td><td>ja, täglich</td><td>n. v.</td></tr>",
+     "<td>Öffentliches OI je Strike</td><td>ja, täglich</td><td>n. v.</td></tr>\n          <tr><td>Handelsplatz</td><td>Terminbörse mit Market-Making</td><td>Börse oder außerbörslich beim Emittenten (Umfang n. v.)</td></tr>"
+    ]
+   ]
+  },
+  {
+   "name": "H18-37 Negativkontrolle L12c: neue S10-Zeile Spreads/Liquidität vollständig n. v.",
+   "expect": "NONE",
+   "edits": [
+    [
+     "m300.html",
+     "<td>Öffentliches OI je Strike</td><td>ja, täglich</td><td>n. v.</td></tr>",
+     "<td>Öffentliches OI je Strike</td><td>ja, täglich</td><td>n. v.</td></tr>\n          <tr><td>Spreads / Liquidität</td><td>n. v.</td><td>n. v.</td></tr>"
+    ]
+   ]
+  }
+ ]
+}
