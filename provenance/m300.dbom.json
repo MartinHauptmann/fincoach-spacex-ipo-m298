@@ -1272,6 +1272,12 @@
       "event": "Befunde der 17. Zweitprüfung umgesetzt: Kennzeichen je Anbieter (L27g), Legende und MODELL (L27h), Knock-outs n. v. in Glossar und S10 (L87, not_evaluated), BaFin-Ausnahme im Freigabeumfang (L82d), Entwurf an Status gebunden; C4 und Q7 auf ✓",
       "qa_score_pct": 92.1,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-11",
+      "event": "Achtzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): keine Freigabe; Q4 (BaFin-Studie evidence fulltext, ungebundene Optionsschein-Zelle) und Q7 (Eurex-GEX-Zeile Volland „nein“ trotz n. v.; Volltext-Satz vs. Ausnahme) auf ◐; 21 Umgehungen der neuen Tests",
+      "qa_score_pct": 86.8,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [

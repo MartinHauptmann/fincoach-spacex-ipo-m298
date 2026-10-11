@@ -438,6 +438,8 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 
 - Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen
 - Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen
+- Belegstufe der BaFin-Studie korrigieren; Optionsschein-Zelle „Größe“ (S10) binden oder n. v.
+- Matrixzeile Eurex-GEX aus den Anbieterfakten ableiten (Volland n. v., „intraday-fähig“); Volltext-Sätze mit Ausnahme
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
 
 ---
@@ -460,15 +462,15 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q1 Faktencheck K1–K9 vollständig | ◐ | Claim-Tabelle A01–A15; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61 |
 | Q2 Aktualität / Stichtag | ✓ | Aktualität am Stichtag vom Herausgeber am 2026-10-11 am Original geprüft |
 | Q3 Mathematische Konsistenz | ✓ | GEX 845 Mio. USD, 2.600 ES / 26.000 MES, Probe, Vanna und Charm nachgerechnet (Zweitprüfung 2026-10-11); Rechner rechnet gleich |
-| Q4 Provenienz je Fakt | ✓ | Provenienz je Fakt: alle Belege mit Belegstufe Volltext (evidence fulltext, L82) |
+| Q4 Provenienz je Fakt | ◐ | BaFin-Studie mit Belegstufe fulltext trotz Abgleich nur am Medienbericht; S10 „Größe“ Optionsscheine ohne Fakt-Bindung (18. Zweitprüfung) |
 | Q5 Quellenqualität | ✓ | Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen als Hauptbeleg nur bei Medienangaben; Abgleich am Original durch den Herausgeber |
 | Q6 Vollständigkeit | ◐ | Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen |
-| Q7 Widerspruchsfreiheit | ✓ | Knock-out-Ausgestaltung in allen Glossar-Stufen und Strukturzeilen als n. v. geführt (DBOM not_evaluated), gemessen mit L87 |
+| Q7 Widerspruchsfreiheit | ◐ | Matrixzeile Eurex-GEX: Volland „nein“ trotz „Umfang n. v.“, Zellen „nein“ statt „keine intraday-fähige“; „alle Belege Volltext“ widerspricht der BaFin-Ausnahme (18. Zweitprüfung) |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden |
 | Q9 Keine Überzeichnung / Halluzination | ✓ | Einschränkungen als qualifier und überall sichtbar (L76d/L76e); Kostenausweis neutral; keine Prognose-Konfidenz bei Szenarien |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 16 × ✓ + 3 × ◐ = 17,5 von 19 Punkten = **92,1 %**.
+**Gesamtscore:** 14 × ✓ + 5 × ◐ = 16,5 von 19 Punkten = **86,8 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
