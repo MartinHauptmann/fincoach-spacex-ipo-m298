@@ -14,3 +14,4 @@ npm-debug.log*
 
 # Lokale Entwürfe
 *.draft.html
+__pycache__/
