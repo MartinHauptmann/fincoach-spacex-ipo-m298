@@ -72,7 +72,8 @@
      "<div class=\"dbom-pill mt-1.5\"><span class=\"dbom-class-badge dc-vendor\">VENDOR</span><span class=\"dbom-conf\">",
      "<div class=\"dbom-pill mt-1.5\"><span class=\"sr-only\"><span class=\"dbom-class-badge dc-vendor\">VENDOR</span></span><span class=\"dbom-conf\">"
     ]
-   ]
+   ],
+   "known_limit": "Verstoß wird erkannt, aber von L79 statt L27 (KPI-Fakt ist seit v1.14.0 eine Herstellerangabe, Kennzeichen VENDOR) (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
   },
   {
    "name": "H13-07 L79: VENDOR-Kennzeichen X-Ray-Voraussetzung mit visibility:hidden",

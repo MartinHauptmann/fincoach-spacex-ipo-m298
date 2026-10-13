@@ -115,7 +115,8 @@
      "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
      "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>nein</td><td>n. v.</td>"
     ]
-   ]
+   ],
+   "known_limit": "Verstoß wird erkannt, aber von L18b statt L12c (Tabelle ist auf Tabellenebene gebunden) (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
   },
   {
    "name": "R19-06 L12c: Zelle beginnt mit „n. v.“, enthält danach eine ungebundene Tatsachenangabe",
@@ -127,7 +128,8 @@
      "<td>über Partnerplattformen</td><td>n. v.</td><td>ja</td>",
      "<td>über Partnerplattformen</td><td>n. v. (laut ORATS Ausführung über Partnerbroker)</td><td>ja</td>"
     ]
-   ]
+   ],
+   "known_limit": "Verstoß wird erkannt, aber von L76 statt L12c (Tabelle ist auf Tabellenebene gebunden) (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
   },
   {
    "name": "R19-07 L76: SpotGamma-Eurex-Zelle „nein“ an fremden Fakt FACT_ODAX_SPECS gebunden (L12c besteht formal)",
@@ -139,7 +141,8 @@
      "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
      "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td data-source=\"FACT_ODAX_SPECS\">nein</td><td>n. v.</td>"
     ]
-   ]
+   ],
+   "known_limit": "Verstoß wird erkannt, aber von L18b statt L76 (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
   },
   {
    "name": "R19-08 L27g: pauschales MEDIEN als <em class=dbom-class-badge> statt span am Ende der Intraday-Aufzählung",
@@ -175,7 +178,8 @@
      "Europäisches Zusatzangebot:",
      "Die Angaben zu SpotGamma und Bookmap sind unbestätigte Presseangaben. Europäisches Zusatzangebot:"
     ]
-   ]
+   ],
+   "known_limit": "Formulierungsvariante (Synonym „Presseangaben“); nur über Wortliste fangbar, Abdeckung durch Zweitprüfung (L50d) (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
   },
   {
    "name": "R19-11 L87: „Knockout-Zertifikate“ ohne Bindestrich mit Rechtsnatur in S10-Fließtext",
@@ -199,7 +203,8 @@
      "<p class=\"text-sm text-slate-300 leading-relaxed\">Emittenten sichern ihr Nettorisiko",
      "<p class=\"text-sm text-slate-300 leading-relaxed\">Knock-out-Zertifikate: n. v.; sie verfallen bei Erreichen der Barriere wertlos und sind Inhaberschuldverschreibungen. Emittenten sichern ihr Nettorisiko"
     ]
-   ]
+   ],
+   "known_limit": "Pronomen-Bezug nach „n. v.;“; semantisch, nicht per Regex fangbar, Abdeckung durch Zweitprüfung (L50d) (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
   },
   {
    "name": "R19-13 L87: Synonym „Mini-Futures“ (gleiche Produktklasse) mit Ausgestaltung",
@@ -211,7 +216,8 @@
      "<p class=\"text-sm text-slate-300 leading-relaxed\">Emittenten sichern ihr Nettorisiko",
      "<p class=\"text-sm text-slate-300 leading-relaxed\">Mini-Futures sind Inhaberschuldverschreibungen mit Stop-Loss-Barriere. Emittenten sichern ihr Nettorisiko"
     ]
-   ]
+   ],
+   "known_limit": "Synonym „Mini-Futures“ für den n. v.-Gegenstand; nur über Wortliste fangbar, Abdeckung durch Zweitprüfung (L50d) (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
   },
   {
    "name": "R19-14 L82d: Ausnahmewort verneint („BaFin-Studie: keine Ausnahme“)",
@@ -235,7 +241,8 @@
      "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“).",
      "Sämtliche Nachweise lagen dem Herausgeber im Original vor."
     ]
-   ]
+   ],
+   "known_limit": "Synonym „Nachweise“ statt „Belege“; nur über Wortliste fangbar, Abdeckung durch Zweitprüfung (L50d) (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
   },
   {
    "name": "R19-16 L82d: implizite Allaussage ohne Quantor („Der Herausgeber hat die Belege am Original abgeglichen.“)",
