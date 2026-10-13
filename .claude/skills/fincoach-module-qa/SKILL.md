@@ -204,6 +204,14 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   (`basis.determinable_from`, `basis.subject`). Sonst gilt n. v. – auch in Matrix, KPI, Fazit und Analyse.
 - **L82e:** Belegstufe `fulltext` nur bei Prüfung am Original; nur Medienbericht oder Studie nicht eingesehen ⇒ `secondary`.
 - **L12c:** Jede Datenzelle einer Vergleichstabelle bindet einen Fakt oder ist vollständig „n. v.“.
+- **L50d (Rolle der Tests):** Die Prüfskripte sind Rückfallschutz und Strukturprüfung (Bindung, Sichtbarkeit,
+  DBOM-Felder, Zählungen). Für inhaltliche Gates (C4 Neutralität, Q4 Provenienz, Q7 Widerspruchsfreiheit, Q9
+  Überzeichnung) ist ein grüner Test keine Messung: ✓ nur nach Zweitprüfung und Sichtprüfung des Herausgebers,
+  Tooltip nennt diese, nicht „gemessen mit L…“. Formulierungsvarianten, die nur eine Wortliste fangen könnte,
+  werden mit Zustimmung des Herausgebers als `known_limit` geführt, nie still entfernt.
+- **L18c:** Ein abgeleiteter Quantor trägt das Verdict seiner Basisfakten und die Belegstufe `derived`; Angaben
+  Dritter (z. B. ein Anbieter außerhalb des Vergleichsfelds) stehen in einem eigenen Fakt.
+- **L82f:** Hauptquelle der Stufe secondary ⇒ Belegstufe `secondary`.
 - **L50c (Testhärte):** Neue Tests prüfen Teilaussagen, alle Fundorte und sichtbaren Text, nicht nur die gemeldete
   Stelle. Vor jeder Teständerung schreibt ein eigener Agent einen Holdout, der zuerst committet wird; die
   Erstmessung nach der Härtung wird berichtet, auch wenn später nachgeschärft wird.

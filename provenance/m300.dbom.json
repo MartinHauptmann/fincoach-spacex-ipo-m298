@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.13.0",
+    "version": "1.14.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,22 +13,22 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 40,
-    "confirmed_primary": 31,
-    "media_report": 6,
+    "total": 41,
+    "confirmed_primary": 33,
+    "media_report": 5,
     "unverified": 0,
     "scenario_projection": 3,
-    "vendor_claim": 15,
+    "vendor_claim": 17,
     "by_class": {
       "MARKET_DATA": 7,
-      "MEDIA_REPORT": 6,
+      "MEDIA_REPORT": 5,
       "MODEL_ASSUMPTION": 1,
       "REGULATORY_FRAMEWORK": 9,
       "SCENARIO_PROJECTION": 2,
-      "VENDOR_CLAIM": 15
+      "VENDOR_CLAIM": 17
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht; seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“, ausgenommen FACT_BAFIN_STUDY („secondary“). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = nur ein Bericht über das Original geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
+  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original); der Quantor FACT_NO_EUREX_GEX ist aus zwei geprüften Herstellerangaben abgeleitet („derived“). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „derived“ = aus anderen geprüften Fakten abgeleitet; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -400,11 +400,11 @@
       "caveat": "Sekundärquelle.",
       "period": "Stand 2026-10-05",
       "keep_reason": "Tragend für die Einordnung der GEX-Prämisse (K3).",
-      "evidence": "fulltext",
+      "evidence": "secondary",
       "verified": {
         "by": "Herausgeber",
         "date": "2026-10-11",
-        "scope": "Abgleich am Original"
+        "scope": "Abgleich an der Sekundärquelle (MenthorQ-Erklärartikel), nicht an Cboe-Daten"
       }
     },
     {
@@ -522,11 +522,11 @@
       "caveat": "Keine Primärquelle zum Hedging über FDAX/ODAX gefunden.",
       "period": "Stand 2026-10-05",
       "keep_reason": "Tragend für K4 (Hedging-Spur von Optionsscheinen).",
-      "evidence": "fulltext",
+      "evidence": "secondary",
       "verified": {
         "by": "Herausgeber",
         "date": "2026-10-11",
-        "scope": "Abgleich am Original"
+        "scope": "Abgleich an der Sekundärquelle, nicht an Emittentenunterlagen"
       }
     },
     {
@@ -570,11 +570,11 @@
       "source_id": "SRC_VOLLAND",
       "caveat": "Partnerseite (ORATS), keine Herstellerseite von Volland; Felder ohne Angabe als n. v.",
       "period": "Stand 2026-10-05",
-      "evidence": "fulltext",
+      "evidence": "secondary",
       "verified": {
         "by": "Herausgeber",
         "date": "2026-10-11",
-        "scope": "Abgleich am Original"
+        "scope": "Abgleich an der Sekundärquelle (ORATS-Partnerseite), nicht an einer Herstellerseite"
       },
       "keep_reason": "Tragend für den Wettbewerbsvergleich (Modul 5, K6); nur über die Partnerseite zugänglich."
     },
@@ -612,15 +612,14 @@
     },
     {
       "id": "FACT_NO_EUREX_GEX",
-      "verdict": "MEDIA_REPORT",
-      "class": "MEDIA_REPORT",
-      "confidence": 0.6,
-      "claim": "Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v. Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta).",
-      "source_id": "SRC_GAMMACOCKPIT",
-      "caveat": "Quantor aus den Anbieterfakten abgeleitet (FACT_XRAY_1MIN_SPX, FACT_TWS_SPEC); die übrigen Anbieterfakten enthalten keine Eurex-Aussage. Gamma Cockpit laut Herstellerseite.",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.75,
+      "claim": "Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
+      "source_id": "SRC_ATAS_LEARN",
+      "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX und FACT_TWS_SPEC (Herstellerangaben, am Original geprüft); die übrigen Anbieterfakten enthalten keine Eurex-Aussage. Bestimmbar sind damit nur ATAS selbst und ein Broker; für die GEX-Spezialisten ist die Aussage n. v.",
       "period": "Stand 2026-10-05",
       "supporting_sources": [
-        "SRC_ATAS_LEARN",
         "SRC_IBKR"
       ],
       "basis": {
@@ -639,7 +638,23 @@
           "IBKR TWS": "FACT_TWS_SPEC"
         }
       },
-      "keep_reason": "Tragend für die strategische Einordnung (Fazit, Quantor mit Basis).",
+      "keep_reason": "Tragend für die strategische Einordnung (These, S11); Quantor mit Basis.",
+      "evidence": "derived",
+      "verified": {
+        "by": "Ableitung aus geprüften Fakten (nicht gesondert vom Herausgeber geprüft)",
+        "date": "2026-10-13",
+        "scope": "Ableitung aus FACT_XRAY_1MIN_SPX und FACT_TWS_SPEC"
+      }
+    },
+    {
+      "id": "FACT_GAMMACOCKPIT_SPEC",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.75,
+      "claim": "Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta).",
+      "source_id": "SRC_GAMMACOCKPIT",
+      "caveat": "Herstellerangabe; Produkt in Beta.",
+      "period": "Stand 2026-10-05",
       "evidence": "fulltext",
       "verified": {
         "by": "Herausgeber",
@@ -651,7 +666,8 @@
         "terms": [
           "Beta"
         ]
-      }
+      },
+      "keep_reason": "Einziges bekanntes DAX-GEX-Angebot außerhalb des Vergleichsfelds (Einordnung der These)."
     },
     {
       "id": "FACT_DEALER_CONVENTION",
@@ -740,11 +756,11 @@
       "caveat": "Muster-Produktinformation des Branchenverbands (Sekundärquelle); keine rechtliche Einordnung übernommen.",
       "period": "Stand am Stichtag 2026-10-05",
       "keep_reason": "Tragend für den Strukturvergleich in Modul 6 (Ausgabe durch den Emittenten und Emittentenrisiko von Optionsscheinen).",
-      "evidence": "fulltext",
+      "evidence": "secondary",
       "verified": {
         "by": "Herausgeber",
         "date": "2026-10-11",
-        "scope": "Abgleich am Original"
+        "scope": "Abgleich an der Sekundärquelle (Verbandsmuster), nicht an Emissionsbedingungen"
       }
     }
   ],
@@ -1301,6 +1317,12 @@
       "event": "Neunzehnte Zweitprüfung (Pflichtprüfung vor Freigabe): keine Freigabe; C4, Q4, Q7, Q9 auf ◐ (Verdict des Quantor-Fakts, Belegstufen bei Sekundärquellen, Modalität der These, Bewertung S11); 23 neue Umgehungen, 0 vom zuständigen Test erkannt, 4 Fehlalarme",
       "qa_score_pct": 81.6,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-13",
+      "event": "v1.14.0: Inhalte nach der 19. Zweitprüfung korrigiert (Gamma Cockpit eigener VENDOR-Fakt; Quantor CONFIRMED/derived; Medienangaben evidence secondary; S11 Nutzen offen; These „mögliche Analyselücke“). Rolle der Tests geändert (L50d): Regex-Tests als Rückfallschutz; C4, Q4, Q7, Q9 bleiben ◐ bis Zweitprüfung und Herausgeber bestätigen. Fehlalarme der 19. Prüfung behoben, strukturelle Lücken geschlossen; Formulierungsvarianten R19-10/12/13 als anerkannte Grenzen (Zustimmung des Herausgebers vom 2026-10-13)",
+      "qa_score_pct": 81.6,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -1541,7 +1563,7 @@
   ],
   "not_evaluated": [
     {
-      "subject": "Knock-out|Turbo",
+      "subject": "Knock-?out|Turbo",
       "note": "Ausgestaltung (Rechtsnatur, Größe, Kontrahentenrisiko) von Knock-out-Zertifikaten in diesem Modul nicht ausgewertet"
     }
   ]

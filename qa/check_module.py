@@ -68,7 +68,7 @@ def element_inner(html, m):
     return html[m.end():n.start()]
 
 
-HIDDEN = r'<(\w+)\b[^>]*(?:\bhidden\b|display\s*:\s*none|visibility\s*:\s*hidden|sr-only|aria-hidden="true")[^>]*>.*?</\1>'
+HIDDEN = r'<(\w+)\b[^>]*(?:\bhidden\b|display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?![.\d])|font-size\s*:\s*0(?![.\d])|sr-only|aria-hidden="true")[^>]*>.*?</\1>'
 
 
 def visible_part(inner):
@@ -573,7 +573,7 @@ def main():
         AUTH = ["BMF", "BFH", "BVerfG", "BaFin", "Eurex", "Cboe", "CME", "OPRA", "BGBl", "ESMA", "BSW", "DDV", "Deutsche Börse"]
         l66 = [a for a in AUTH if dh and re.search(r"\b" + re.escape(a) + r"\b", dh.group(1)) and norm_txt(a) not in srcs_txt]
         GENERIC = {"gesetzestexte", "herstellerdokumentation", "suchtreffer", "primärquelle", "primärquellen", "volltextabruf", "gesperrt", "medien", "medien-",
-                   "sekundärquellen", "medienangabe", "gekennzeichnet", "sowie", "überwiegend", "herausgeber", "original", "recherchiert", "bafin-turbo-studie", "medienbericht", "die", "der", "das", "und", "sind", "als", "auf", "über"}
+                   "sekundärquellen", "medienangabe", "gekennzeichnet", "sowie", "überwiegend", "herausgeber", "original", "recherchiert", "bafin-turbo-studie", "medienbericht", "primär-", "herstellerquellen", "medienangaben", "sekundärquelle", "die", "der", "das", "und", "sind", "als", "auf", "über"}
         if dh:  # L80: jedes groß geschriebene Wort ist generisch oder kommt in den Quellen vor
             l66 += [w for w in re.findall(r"\b[A-ZÄÖÜ][\wäöüß-]+", dh.group(1)) if w.casefold() not in GENERIC and w.casefold().rstrip("-") not in srcs_txt and w not in l66]
         report("L66 Datenherkunft = Quellen", BLOCKER, bool(dh) and not l66, "nicht in den Quellen: " + ", ".join(l66) if l66 else ("Datenherkunft durch Quellen gedeckt" if dh else "keine Datenherkunft"))
@@ -715,8 +715,8 @@ def main():
         # L26d · ein Fakt, dessen caveat oder keep_reason einen offenen Abgleich nennt, ist nicht CONFIRMED
         l26d = [f["id"] for f in F if f["verdict"] == "CONFIRMED" and re.search(r"\boffen\b|gegenlesen|offen-punkt|zu prüfen|ungeprüft|nicht geprüft|noch prüfen|steht aus|ausstehend|unsicher|unklar|zweifel|vorläufig|zu verifizieren|noch nicht|pending|to be (?:verified|checked)|unverified|tbd\b", f.get("caveat", "") + " " + f.get("keep_reason", ""), re.I)]
         report("L26d CONFIRMED ohne offenen Abgleich", BLOCKER, not l26d, "CONFIRMED trotz offenem Abgleich im caveat: " + ", ".join(l26d) if l26d else "kein CONFIRMED-Fakt nennt einen offenen Abgleich")
-        # L82 · Belegstufe je Fakt: evidence ∈ {snippet, fulltext, secondary, model}; SCENARIO ⇔ model; Snippet-Belege halten C3/Q2/Q4/Q5 auf ◐
-        l82 = [f"{f['id']}: evidence „{f.get('evidence')}“" for f in F if f.get("evidence") not in ("snippet", "fulltext", "secondary", "model")]
+        # L82 · Belegstufe je Fakt: evidence ∈ {snippet, fulltext, secondary, derived, model}; SCENARIO ⇔ model; Snippet-Belege halten C3/Q2/Q4/Q5 auf ◐
+        l82 = [f"{f['id']}: evidence „{f.get('evidence')}“" for f in F if f.get("evidence") not in ("snippet", "fulltext", "secondary", "derived", "model")]
         l82 += [f"{f['id']}: SCENARIO ⇔ model verletzt" for f in F if (f["verdict"] == "SCENARIO_PROJECTION") != (f.get("evidence") == "model")]
         if any(f["verdict"] == "CONFIRMED" and f.get("evidence") == "snippet" for f in F):
             gates = {g: c for c, g in re.findall(r'<td class="check-(\w+)"[^>]*data-gate="(\w+)"', html)}
@@ -845,7 +845,34 @@ def main():
         # MEDIEN/UNGEPRÜFT stehen in der Teilaussage (seit Satz-/Teilsatzbeginn bzw. vorigem Kennzeichen) des Fakts mit
         # diesem Verdict und nennen keinen Gegenstand anderen Verdicts; jede Teilaussage über einen Medien-Fakt trägt
         # ihr Kennzeichen (außer n. v.); ein Kennzeichen ohne eigene Aussage ist unzulässig. Attribute am span zählen nicht.
-        BADGE = re.compile(r'<span\b[^>]*\bclass="[^"]*\b(?:dbom-class-badge|badge b-\w+)\b[^"]*"[^>]*>\s*([A-ZÄÖÜ]+)\s*</span>')
+        class _BM:  # Kennzeichen als beliebiges Element (span, em, …), Text ohne inneres Markup, &nbsp;/&shy; aufgelöst
+            def __init__(s_, m_, t_):
+                s_.m, s_.t = m_, t_
+            def start(s_):
+                return s_.m.start()
+            def end(s_):
+                return s_.m.end()
+            def group(s_, k=0):
+                return s_.t if k else s_.m.group(0)
+
+        class _BadgeRx:
+            def __init__(s_, cls):
+                s_.rx = re.compile(r'<(\w+)\b[^>]*\bclass="[^"]*\b(?:%s)\b[^"]*"[^>]*>(.*?)</\1>' % cls, re.S)
+            def finditer(s_, src):
+                out = []
+                for m_ in s_.rx.finditer(src):
+                    t_ = __import__("html").unescape(re.sub(r"<[^>]+>", "", m_.group(2))).replace("\xad", "").replace("\xa0", " ").strip()
+                    if re.fullmatch(r"[A-ZÄÖÜ]+", t_):
+                        out.append(_BM(m_, t_))
+                return out
+            def findall(s_, src):
+                return [b.group(1) for b in s_.finditer(src)]
+            def search(s_, src):
+                return s_.finditer(src)
+            def sub(s_, rep_, src):
+                return s_.rx.sub(rep_, src)
+
+        BADGE = _BadgeRx(r"dbom-class-badge|badge b-\w+")
         VB = {"MEDIEN": "MEDIA_REPORT", "UNGEPRÜFT": "UNVERIFIED"}
         VW = {"medienangabe": "MEDIA_REPORT", "medienangaben": "MEDIA_REPORT", "ungeprüft": "UNVERIFIED"}
         SENT = re.compile(r"(?<=[.;:!?])\s+(?=[A-ZÄÖÜ„(])|;\s*|\s*[¶·]\s*")
@@ -858,7 +885,9 @@ def main():
         def _txt(x):  # Zellen-, Absatz- und Zeilengrenzen trennen Teilaussagen (¶)
             x = re.sub(r"</(?:td|th|li|p|caption|h[1-6])>|<br\s*/?>", " ¶ ", x)
             x = re.sub(r"\s+", " ", __import__("html").unescape(re.sub(r"<[^>]+>", " ", x))).replace("n. v.", "n.v.")
-            return re.sub(r"\([^()]*\)", lambda k: k.group(0).replace(";", ","), x)  # „;“ in Klammern trennt nicht
+            x = re.sub(r"\([^()]*\)", lambda k: k.group(0).replace(";", ","), x)  # „;“ in Klammern trennt nicht
+            i_ = x.rfind("(")
+            return x[:i_] + x[i_:].replace(";", ",") if i_ > x.rfind(")") else x  # auch in noch offener Klammer
 
         DS = re.compile(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>')
         l27g = []
@@ -879,10 +908,12 @@ def main():
             marks = [(b.start(), b.end(), VB.get(b.group(1))) for b in BADGE.finditer(inner)]  # jedes Kennzeichen beendet einen Abschnitt
             marks += [(w.start(), w.end(), VW[w.group(1).lower()]) for w in re.finditer(r"\b(Medienangaben?|ungeprüft)\b", inner, re.I)
                       if not re.search(r"<[^>]*$", inner[:w.start()])]
-            prev = 0
+            prev, lastseg, lastw = 0, "", False
             for a, e, verd in sorted(marks):
                 seg = SENT.split(_txt(inner[prev:a]))[-1]
-                prev = e
+                if not re.sub(r"[\W_]", "", seg) and prev and lastw:
+                    seg = lastseg  # Kennzeichen direkt nach Verdict-Wort: gleiche Teilaussage
+                lastseg, prev, lastw = seg, e, not inner[a:e].startswith("<")
                 if not verd or any(s0 <= a < e0 for s0, e0 in nested):
                     continue
                 own = set().union(*[_names(facts[i]["claim"]) for i in ids if facts[i]["verdict"] == verd])
@@ -909,18 +940,21 @@ def main():
                 owner.setdefault(f_["claim"].split()[0].strip("–,:"), set()).add(f_["verdict"])
         vh = visible_part(html)
         vh = re.sub(r"<(script|style|head)\b.*?</\1>", lambda x: " " * len(x.group(0)), vh, flags=re.S | re.I)
-        gmarks = [(b.start(), b.end(), VB.get(b.group(1))) for b in BADGE.finditer(vh)]
-        gmarks += [(w.start(), w.end(), VW[w.group(1).lower()]) for w in re.finditer(r"\b(Medienangaben?|ungeprüft)\b", vh, re.I) if not re.search(r"<[^>]*$", vh[:w.start()])]
+        gmarks = [(b.start(), b.end(), VB.get(b.group(1)), "b") for b in BADGE.finditer(vh)]
+        gmarks += [(w.start(), w.end(), VW[w.group(1).lower()], "w") for w in re.finditer(r"\b(Medienangaben?|ungeprüft)\b", vh, re.I) if not re.search(r"<[^>]*$", vh[:w.start()])]
         prev = 0
-        for a, e, verd in sorted(gmarks):
+        lastseg, lastkind = "", ""
+        for a, e, verd, kind in sorted(gmarks):
             blk_start = max(vh.rfind(t_, 0, a) for t_ in ("<p", "<li", "<td", "<th", "<caption", "<div", "<h"))
             seg = SENT.split(_txt(vh[max(prev, blk_start):a]))[-1]
-            prev = e
+            if not re.sub(r"[\W_]", "", seg) and prev > blk_start and lastkind == "w":
+                seg = lastseg  # Kennzeichen direkt nach Verdict-Wort: gleiche Teilaussage
+            lastseg, lastkind, prev = seg, kind, e
             if not verd:
                 continue
             allowed = " ".join(facts[i]["claim"] for i in _bound0(a) if facts[i]["verdict"] == verd)
             bad = [n for n, vs in owner.items() if verd not in vs and len(n) > 2 and re.search(r"(?<![\w-])" + re.escape(n) + r"(?![\w-])", seg) and n not in allowed]
-            if re.search(r"(?i)herstellerangabe", seg) and verd == "MEDIA_REPORT":
+            if kind == "b" and re.search(r"(?i)herstellerangabe", seg) and verd == "MEDIA_REPORT":
                 bad.append("Herstellerangabe")
             if bad:
                 l27g.append(f"{verd[:5]}-Kennzeichen über {', '.join(bad[:3])} („{seg[-30:]}“)")
@@ -928,7 +962,7 @@ def main():
         # L27h · Legende nennt jedes sichtbar verwendete Kennzeichen als Kennzeichen; Modellannahmen tragen MODELL, nie SCENARIO
         vis_html = visible_part(html)
         leg = re.search(r"Daten-Transparenz:</strong>(.*?)</div>", vis_html, re.S)
-        CBADGE = re.compile(r'<span\b[^>]*\bclass="[^"]*\b(?:dbom-class-badge|badge b-v)\b[^"]*"[^>]*>\s*([A-ZÄÖÜ]+)\s*</span>')  # Daten-Kennzeichen, nicht Schweregrade
+        CBADGE = _BadgeRx(r"dbom-class-badge|badge b-v")  # Daten-Kennzeichen, nicht Schweregrade
         used = set(CBADGE.findall(vis_html))
         legb = set(CBADGE.findall(leg.group(1))) if leg else set()
         l27h = [f"Legende ohne {u}" for u in sorted(used - legb - {"RAHMEN", "MARKT"})]
@@ -982,7 +1016,9 @@ def main():
                             and re.search(r"(?i)totalverlust|risiko|mechanik|hebelprodukt|hebelwirkung", u):
                         continue  # Risikohinweis über Produktklassen
                     rest = re.sub(r"^(?:\s*(?:,|und|oder|/)\s*" + SUBJ.pattern[4:] + r")*", "", u[h.end():], flags=re.I)  # „Knock-outs und Turbos: n. v.“
-                    if not re.match(r"[\s:,]*(?:hier\s+|ist\s+(?:die\s+)?(?:\w+\s+)?hier\s+)?(?:n\.v\.|nicht ausgewertet)", rest) and \
+                    if re.search(r"(?i)(?:studie|allgemeinverfügung|bericht|untersuchung)\s+(?:zu|über)\s+(?:den\s+)?$", pre):
+                        continue  # Gegenstand nur als Bezug einer Quelle („Studie zu Turbo-Zertifikaten“)
+                    if not re.match(r"[\s:,]*(?:(?:ist|sind)\s+(?:die\s+)?(?:\w+\s+){0,3}?)?(?:hier\s+)?(?:n\.v\.|nicht ausgewertet)", rest) and \
                        not re.search(r"(?i)ausgestaltung\s+(?:hier\s+)?(?:n\.v\.|nicht ausgewertet)", u):
                         return False
                 if about and not hits:
@@ -1033,10 +1069,12 @@ def main():
         def _exc(f):
             sc = f.get("verified", {}).get("scope", "")
             return bool(f.get("verified")) and ("Original" not in sc or re.search(r"(?i)nicht (?:im volltext )?eingesehen|medienbericht", sc + " " + f.get("caveat", "")))
-        exc = [f for f in F if _exc(f) and f["verdict"] != "SCENARIO_PROJECTION"]
+        exc = [f for f in F if _exc(f) and f["verdict"] != "SCENARIO_PROJECTION" and f.get("evidence") != "derived"]
         l82e = [f"{f['id']}: evidence fulltext bei Prüfumfang „{f['verified'].get('scope', '')[:30]}“" for f in exc if f.get("evidence") == "fulltext"]
+        # L82f · Hauptquelle der Stufe secondary ⇒ Belegstufe secondary (nicht fulltext)
+        l82e += [f"{f['id']}: Sekundärquelle, aber evidence {f.get('evidence')}" for f in F if stier.get(f["source_id"]) == "secondary" and f.get("evidence") not in ("secondary", "model")]
         # L82d · Ausnahmen im Prüfumfang stehen in jedem Satz, der Vollständigkeit am Original oder auf Stufe Volltext behauptet
-        UNIV = re.compile(r"(?i)\b(?:alle|sämtliche|jede[nrs]?|ausnahmslos|vollständig)\b[^.;]{0,80}?\b(?:Belege?|Quellen?|Fakten|Fakt|Angaben)\b[^.;]{0,80}?(?:(?:am|im) Original|Volltext|fulltext)"
+        UNIV = re.compile(r"(?i)\b(?:alle|sämtliche|jede[nrs]?|ausnahmslos|vollständig|die)\b[^.;]{0,80}?\b(?:Belege?|Quellen?|Fakten|Fakt|Angaben)\b[^.;]{0,80}?(?:(?:am|im) Original|Volltext|fulltext)"
                           r"|\b(?:sämtlich|vollständig|ausnahmslos|alles)\b[^.;]{0,30}?(?:am|im) Original"
                           r"|(?:(?:am|im) Original|Volltext|fulltext)[^.;]{0,40}?\b(?:alle|sämtliche|jede[nrs]?)\b[^.;]{0,40}?\b(?:Belege?|Quellen?|Fakten)\b")
         l82d = []
@@ -1048,11 +1086,18 @@ def main():
                         continue
                     for f in exc:
                         nm = f["claim"].split()[0].strip(":,")
-                        named = f["id"] in sent or all(p_ in sent for p_ in re.split(r"-", nm) if len(p_) > 2)
-                        if not (named and re.search(r"(?i)außer|ausgenommen|ausnahme|bis auf|nur am medienbericht|am medienbericht", sent)):
+                        named = f["id"] in sent or all(p_ in sent for p_ in re.split(r"-", nm) if len(p_) > 2) or \
+                            (f["verdict"] == "MEDIA_REPORT" and re.search(r"(?i)medienangabe|sekundärquelle", sent)) or \
+                            any(len(p_) > 4 and p_ in sent for p_ in re.split(r"[-:]", nm))  # Name, ID, Kategorie oder Namensteil
+                        if not (named and re.search(r"(?i)außer|ausgenommen|ausnahme|bis auf|nur am medienbericht|am medienbericht", sent)) or re.search(r"(?i)\bkeine? ausnahme", sent):
                             l82d.append(f"{name}: „{sent.strip()[:40]}“")
         report("L82d Ausnahmen im Freigabeumfang genannt", BLOCKER, not l82d, "; ".join(l82d[:3]) if l82d else "Ausnahmen des Prüfumfangs in jedem Vollständigkeitssatz genannt")
         report("L82e Belegstufe passt zum Prüfumfang", BLOCKER, not l82e, "; ".join(l82e[:3]) if l82e else f"{len(exc)} Fakt(e) mit eingeschränktem Prüfumfang, keiner mit evidence fulltext")
+        vendors = {f_["claim"].split()[0].strip("–,:") for f_ in F if f_["class"] == "VENDOR_CLAIM" or "VENDOR" in f_.get("class", "")} | {"ATAS", "IBKR", "TWS"}
+
+        def _is_cmp(hdr):  # Vergleichstabelle: Kopf „Merkmal/Kriterium“ oder mindestens zwei Anbieter in den Spaltenköpfen
+            return bool(hdr) and (hdr[0] in ("Merkmal", "Kriterium") or sum(any(w in vendors for w in h.split()) for h in hdr[1:]) >= 2)
+
         # L18b · Quantor-Basis aus Anbieterfakten: jeder als bestimmbar gezählte Anbieter hat einen Fakt mit Aussage zum Gegenstand
         l18b = []
         for f in F:
@@ -1071,19 +1116,36 @@ def main():
             # Text: in Klammern als bestimmbar genannte Anbieter stehen in determinable_from
             keys = " ".join(df)
             for name, txt in (("Seite", _txt(visible_part(html))), ("Analyse", md or "")):
-                for lst in re.findall(r"bestimmbar\w*[^().;]{0,60}\(([^)]*)\)", txt):
+                for lst in re.findall(r"bestimmbar\w*[^().;·]{0,60}\(([^)]*)\)", txt):
                     for v_ in re.split(r",\s*|\s+und\s+", lst):
                         v_ = v_.strip()
                         if v_ and re.match(r"[A-Z]", v_) and not any(w in keys for w in v_.split()):
                             l18b.append(f"{name}: „{v_}“ als bestimmbar genannt, nicht in determinable_from")
+            # Sätze mit „bestimmbar“: jeder nicht bestimmbare Anbieter steht in einem Abschnitt mit „n. v.“
+            for name, txt in (("Seite", _txt(visible_part(html))), ("Analyse", (md or "").replace("\n", " "))):
+                for sent in re.split(r"(?<=[.!?])\s+(?=[A-ZÄÖÜ„])", txt.replace("n. v.", "n.v.")):
+                    if "bestimmbar" not in sent:
+                        continue
+                    for v_ in b_.get("not_verifiable", []):
+                        for occ in re.finditer(r"(?<![\w-])" + re.escape(v_) + r"(?![\w-])", sent):
+                            chunk = re.split(r"[–;¶·]|(?<!n\.v)\.(?!\w)", sent[occ.start():])[0]
+                            if "n.v." not in chunk:
+                                l18b.append(f"{name}: {v_} im Bestimmbar-Satz ohne n. v. („{sent[max(0, occ.start() - 15):occ.start() + 20]}“)")
+            # Anbieterfakten in determinable_from: der Claim-Abschnitt zum Gegenstand trägt kein n. v.
+            for v_, fid in df.items():
+                if fid in facts:
+                    for seg_ in re.split(r"[·;]", facts[fid]["claim"]):
+                        if re.search(b_.get("subject", "$^"), seg_) and "n. v." in seg_:
+                            l18b.append(f"{f['id']}: {v_} als bestimmbar gezählt, aber {fid} sagt „{seg_.strip()[:30]}“")
             # Vergleichstabellen: Zeile zum Gegenstand (Merkmal trifft basis.subject): Ja/Nein-Zellen nur für bestimmbare Anbieter
             for tb in re.finditer(r"<table\b[^>]*>(.*?)</table>", html, re.S):
                 hdr = [_txt(h).replace("¶", "").strip() for h in re.findall(r"<th\b[^>]*>(.*?)</th>", tb.group(1), re.S)]
-                if not hdr or hdr[0] != "Merkmal":
+                if not _is_cmp(hdr):
                     continue
                 for row in re.findall(r"<tr\b[^>]*>(.*?)</tr>", tb.group(1), re.S):
                     cells = [_txt(c_).replace("¶", "").strip() for c_ in re.findall(r"<td\b[^>]*>(.*?)</td>", row, re.S)]
-                    if not cells or not re.search(b_.get("subject", "$^").split("|")[0], cells[0]):
+                    rowids = set(re.findall(r"FACT_[A-Z0-9_]+", row))
+                    if not cells or not (re.search(b_.get("subject", "$^").split("|")[0], cells[0]) or set(df.values()) <= rowids):
                         continue
                     for j, c_ in enumerate(cells[1:], 1):
                         if j < len(hdr) and not c_.startswith("n.v.") and not any(w in keys for w in hdr[j].split()):
@@ -1092,12 +1154,12 @@ def main():
         # L12c · Vergleichstabellen (erste Spalte „Merkmal“): jede Datenzelle ist an einen Fakt gebunden (td/tr/table) oder ganz n. v.
         l12c = []
         for tb in re.finditer(r"<table\b[^>]*>(.*?)</table>", html, re.S):
-            ths = re.findall(r"<th\b[^>]*>(.*?)</th>", tb.group(1), re.S)
-            if not ths or _txt(ths[0]).strip() != "Merkmal":
+            ths = [_txt(h).replace("¶", "").strip() for h in re.findall(r"<th\b[^>]*>(.*?)</th>", tb.group(1), re.S)]
+            if not _is_cmp(ths):
                 continue
             for row in re.finditer(r"<tr\b[^>]*>(.*?)</tr>", tb.group(1), re.S):
                 for j, cm in enumerate(re.finditer(r"<td\b[^>]*>(.*?)</td>", row.group(1), re.S)):
-                    if j and not _txt(cm.group(1)).strip().startswith("n.v.") and not _bound(tb.start(1) + row.start(1) + cm.start()):
+                    if j and _txt(cm.group(1)).replace("¶", "").strip(" .") != "n.v" and not _bound(tb.start(1) + row.start(1) + cm.start()):
                         l12c.append(f"„{_txt(cm.group(1))[:30]}“")
         report("L12c Vergleichszellen gebunden", BLOCKER, not l12c, "ungebunden: " + "; ".join(l12c[:4]) if l12c else "alle Datenzellen der Vergleichstabellen gebunden oder n. v.")
         report("L26c Offen-Punkt bindet Fakten", BLOCKER, not l26c, "; ".join(l26c[:3]) if l26c else "Offen-Punkte zu Kontraktdaten gebunden (L26 greift)")
@@ -1350,7 +1412,7 @@ def main():
         entw = re.findall(r"\bEntwurf\b", html) + (re.findall(r"\(Entwurf\)", md) if md else [])
         if st_db == "FREIGABE" and entw:
             l03.append("Status FREIGABE, aber „Entwurf“ steht noch")
-        if st_db != "FREIGABE" and not re.search(r"\bEntwurf\b", _txt(visible_part((re.search(r"<footer\b.*?</footer>", html, re.S) or [""])[0]))):  # L03d: sichtbar
+        if st_db != "FREIGABE" and not re.search(r"(?<!kein )(?<!keine )\bEntwurf\w*", _txt(visible_part((re.search(r"<footer\b.*?</footer>", html, re.S) or [""])[0]))):  # L03d: sichtbar
             l03.append("Footer ohne „Entwurf“ trotz Status " + st_db)
         if st_db == "FREIGABE" and badge != "FREIGABE":
             l03.append("Status FREIGABE, Regel ergibt ÜBERARBEITUNG")
