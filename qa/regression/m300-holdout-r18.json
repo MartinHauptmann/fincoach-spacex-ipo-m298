@@ -127,7 +127,7 @@
    "edits": [
     [
      "m300.html",
-     "und vom Herausgeber am 2026-10-11 am Original abgeglichen, ausgenommen die BaFin-Turbo-Studie (am Medienbericht).",
+     "und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle).",
      "und vom Herausgeber am 2026-10-11 sämtlich im Original abgeglichen."
     ]
    ]
@@ -139,7 +139,7 @@
    "edits": [
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "recherchiert über Suchtreffer und vom Herausgeber am 2026-10-11 am Original abgeglichen, die BaFin-Turbo-Studie am Medienbericht (siehe Methodischer Vorbehalt).",
+     "recherchiert über Suchtreffer und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle; siehe Methodischer Vorbehalt).",
      "recherchiert über Suchtreffer; jeder Beleg wurde vom Herausgeber am 2026-10-11 im Volltext geprüft (siehe Methodischer Vorbehalt)."
     ]
    ]
@@ -151,8 +151,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“, ausgenommen FACT_BAFIN_STUDY („secondary“).",
-     "seither tragen alle nicht szenariobasierten Fakten die Belegstufe „fulltext“."
+     ", die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original)",
+     ""
     ]
    ]
   },
@@ -163,7 +163,7 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“).",
      "Derzeit tragen alle Belege die Stufe „Volltext“."
     ]
    ]
@@ -187,7 +187,7 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\",\n      \"evidence\": \"fulltext\",\n      \"verified\": {\n        \"by\": \"Herausgeber\",\n        \"date\": \"2026-10-11\",\n        \"scope\": \"Abgleich am Original\"",
+     "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\",\n      \"evidence\": \"secondary\",\n      \"verified\": {\n        \"by\": \"Herausgeber\",\n        \"date\": \"2026-10-11\",\n        \"scope\": \"Abgleich an der Sekundärquelle, nicht an Emittentenunterlagen\"",
      "\"keep_reason\": \"Tragend für K4 (Hedging-Spur von Optionsscheinen).\",\n      \"evidence\": \"fulltext\",\n      \"verified\": {\n        \"by\": \"Herausgeber\",\n        \"date\": \"2026-10-11\",\n        \"scope\": \"Abgleich nur am Medienbericht (Primärquelle nicht eingesehen)\""
     ]
    ]
@@ -198,8 +198,8 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
-     "Bis auf die BaFin-Turbo-Studie (Stufe „Sekundär“) tragen derzeit alle Belege die Stufe „Volltext“."
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“).",
+     "Bis auf die fünf Medienangaben (Stufe „Sekundär“) und einen abgeleiteten Quantor (Stufe „Abgeleitet“) tragen derzeit alle Belege die Stufe „Volltext“."
     ]
    ]
   },
@@ -340,8 +340,8 @@
    "edits": [
     [
      "m300.html",
-     "keiner der zwei bestimmbaren Anbieter (ATAS, TWS) bietet",
-     "keiner der zwei bestimmbaren Anbieter (ATAS, MenthorQ) bietet"
+     "keiner der zwei bestimmbaren Anbieter (ATAS selbst, IBKR TWS) bietet",
+     "keiner der zwei bestimmbaren Anbieter (ATAS selbst, MenthorQ) bietet"
     ]
    ]
   },
@@ -387,8 +387,8 @@
    "edits": [
     [
      "m300.html",
-     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
-     "<td>Optionsscheine: kleine Stückelung über das Bezugsverhältnis; Knock-outs: n. v.</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: kleine Stückelung über das Bezugsverhältnis; Knock-outs: n. v.</td>"
     ]
    ]
   },
@@ -399,8 +399,8 @@
    "edits": [
     [
      "m300.html",
-     "<td>n. v. (hier nicht ausgewertet)</td>",
-     "<td>Gebührenverzeichnis der Eurex und Entgelte des Brokers</td>"
+     "<tr><td>Kostenausweis</td><td>n. v.</td>",
+     "<tr><td>Kostenausweis</td><td>Gebührenverzeichnis der Eurex und Entgelte des Brokers</td>"
     ]
    ]
   },

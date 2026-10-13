@@ -69,8 +69,8 @@
    "edits": [
     [
      "m300.html",
-     "<div class=\"dbom-pill mt-1.5\"><span class=\"dbom-class-badge\">MEDIEN</span><span class=\"dbom-conf\">",
-     "<div class=\"dbom-pill mt-1.5\"><span class=\"sr-only\"><span class=\"dbom-class-badge\">MEDIEN</span></span><span class=\"dbom-conf\">"
+     "<div class=\"dbom-pill mt-1.5\"><span class=\"dbom-class-badge dc-vendor\">VENDOR</span><span class=\"dbom-conf\">",
+     "<div class=\"dbom-pill mt-1.5\"><span class=\"sr-only\"><span class=\"dbom-class-badge dc-vendor\">VENDOR</span></span><span class=\"dbom-conf\">"
     ]
    ]
   },

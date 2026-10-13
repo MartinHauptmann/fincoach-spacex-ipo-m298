@@ -201,8 +201,8 @@
    "edits": [
     [
      "m300.html",
-     "Ob die Lücke über diese zwei hinaus besteht",
-     "Leider bleibt ATAS damit deutlich schwächer als die TWS. Ob die Lücke über diese zwei hinaus besteht"
+     "Für die GEX-Spezialisten ist damit offen, ob eine Lücke besteht",
+     "Leider bleibt ATAS damit deutlich schwächer als die TWS. Für die GEX-Spezialisten ist damit offen, ob eine Lücke besteht"
     ]
    ]
   },
@@ -333,7 +333,7 @@
    "edits": [
     [
      "prompts/m300-atas-options-xray-deep-dive-prompt.md",
-     "**Geändert:** 2026-10-11",
+     "**Geändert:** 2026-10-13",
      "**Geändert:** 2026-10-01"
     ]
    ]
@@ -609,7 +609,7 @@
    "edits": [
     [
      "m300.html",
-     "· 2026-10-11<br/>",
+     "· 2026-10-13<br/>",
      "· 2026-10-01<br/>"
     ]
    ],
@@ -910,8 +910,8 @@
    "edits": [
     [
      "m300.html",
-     "title=\"FACT_CBOE_OPENCLOSE und FACT_VOLLAND_SPEC stehen",
-     "title=\"Provenienz je Fakt nach der Zweitprüfung neu gefasst und ergänzt; FACT_CBOE_OPENCLOSE und FACT_VOLLAND_SPEC stehen"
+     "title=\"Medienangaben mit Belegstufe secondary",
+     "title=\"Provenienz je Fakt nach der Zweitprüfung neu gefasst und ergänzt; Medienangaben mit Belegstufe secondary"
     ]
    ]
   },
@@ -1150,7 +1150,7 @@
    "edits": [
     [
      "m300.html",
-     "Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer Analyselücke",
+     "Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer möglichen Analyselücke",
      "Eine Eurex-Erweiterung schließt die Analyselücke und verdrängt Optionsscheine"
     ]
    ]
@@ -1580,7 +1580,7 @@
    "edits": [
     [
      "m300.html",
-     "Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer Analyselücke",
+     "Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer möglichen Analyselücke",
      "Eine Eurex-Erweiterung schließt die Analyselücke und verdrängt Optionsscheine"
     ]
    ]
@@ -2076,8 +2076,8 @@
    "edits": [
     [
      "m300.html",
-     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
-     "<td>Optionsscheine: frei über Bezugsverhältnis</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: frei über Bezugsverhältnis</td>"
     ]
    ]
   },
@@ -2098,7 +2098,7 @@
    "edits": [
     [
      "m300.html",
-     "alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht.",
+     "jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original, die fünf Medienangaben an ihrer Sekundärquelle (ausgenommen vom Abgleich am Original).",
      "alle Belege am Original abgeglichen."
     ]
    ]
@@ -2223,8 +2223,8 @@
    "edits": [
     [
      "m300.html",
-     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
-     "<td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar (Mindestgroesse n. v.)</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar (Mindestgroesse n. v.)</td>"
     ]
    ]
   },
@@ -2250,8 +2250,8 @@
     ],
     [
      "m300.html",
-     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
-     "<td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar</td>"
     ]
    ]
   },
@@ -2272,7 +2272,7 @@
    "edits": [
     [
      "m300.html",
-     "der Herausgeber hat am 2026-10-11 alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht.",
+     "der Herausgeber hat am 2026-10-11 jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original, die fünf Medienangaben an ihrer Sekundärquelle (ausgenommen vom Abgleich am Original).",
      "der Herausgeber hat am 2026-10-11 sämtliche Belege am Original geprüft."
     ]
    ]
@@ -2283,7 +2283,7 @@
    "edits": [
     [
      "m300.html",
-     "der Herausgeber hat am 2026-10-11 alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht.",
+     "der Herausgeber hat am 2026-10-11 jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original, die fünf Medienangaben an ihrer Sekundärquelle (ausgenommen vom Abgleich am Original).",
      "der Herausgeber hat am 2026-10-11 alle Belege am Original abgeglichen, auch die BaFin-Allgemeinverfügung."
     ]
    ]
@@ -2294,7 +2294,7 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am Medienbericht",
+     "jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original)",
      "jeden Beleg im Original eingesehen"
     ]
    ]
@@ -2305,7 +2305,7 @@
    "edits": [
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "Der Herausgeber hat am 2026-10-11 alle Belege außer der BaFin-Turbo-Studie am Original abgeglichen, diese am\n> Medienbericht",
+     "Der Herausgeber hat am 2026-10-11 jeden Beleg an seiner Quelle abgeglichen: Primär- und\n> Herstellerquellen am Original (`evidence: fulltext`), ausgenommen die fünf Medienangaben, die an ihrer\n> Sekundärquelle geprüft sind (`evidence: secondary`)",
      "Der Herausgeber hat am 2026-10-11 jede Quelle im Original gelesen"
     ]
    ]
@@ -2415,8 +2415,8 @@
    "edits": [
     [
      "m300.html",
-     "<td>n. v. (Optionsscheine und Knock-outs hier nicht ausgewertet)</td>",
-     "<td>Optionsscheine: frei über Bezugsverhältnis; Knock-outs: n. v.</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: frei über Bezugsverhältnis; Knock-outs: n. v.</td>"
     ]
    ]
   },
@@ -2426,7 +2426,7 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die BaFin-Turbo-Studie (Stufe „Sekundär“).",
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“).",
      "Derzeit sind alle Belege auf der Stufe „Volltext“."
     ]
    ]
