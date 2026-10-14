@@ -1323,6 +1323,12 @@
       "event": "v1.14.0: Inhalte nach der 19. Zweitprüfung korrigiert (Gamma Cockpit eigener VENDOR-Fakt; Quantor CONFIRMED/derived; Medienangaben evidence secondary; S11 Nutzen offen; These „mögliche Analyselücke“). Rolle der Tests geändert (L50d): Regex-Tests als Rückfallschutz; C4, Q4, Q7, Q9 bleiben ◐ bis Zweitprüfung und Herausgeber bestätigen. Fehlalarme der 19. Prüfung behoben, strukturelle Lücken geschlossen; Formulierungsvarianten R19-10/12/13 als anerkannte Grenzen (Zustimmung des Herausgebers vom 2026-10-13)",
       "qa_score_pct": 81.6,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-14",
+      "event": "Vollständiger Lauf aller Compliance-, Fakten-, Quellen- und Qualitätschecks auf Wunsch des Herausgebers; zwanzigste Zweitprüfung: keine Freigabe; C4, Q4, Q7, Q9 nicht bestätigt, C6 auf ◐ (TWS-Angabe „Eurex-Optionen nur als Rohdaten“ zweifelhaft). Quellen-URLs aus der Prüfumgebung nicht abrufbar (Proxy 403)",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
