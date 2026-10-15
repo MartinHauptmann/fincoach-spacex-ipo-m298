@@ -573,7 +573,7 @@ def main():
         AUTH = ["BMF", "BFH", "BVerfG", "BaFin", "Eurex", "Cboe", "CME", "OPRA", "BGBl", "ESMA", "BSW", "DDV", "Deutsche Börse"]
         l66 = [a for a in AUTH if dh and re.search(r"\b" + re.escape(a) + r"\b", dh.group(1)) and norm_txt(a) not in srcs_txt]
         GENERIC = {"gesetzestexte", "herstellerdokumentation", "suchtreffer", "primärquelle", "primärquellen", "volltextabruf", "gesperrt", "medien", "medien-",
-                   "sekundärquellen", "medienangabe", "gekennzeichnet", "sowie", "überwiegend", "herausgeber", "original", "recherchiert", "bafin-turbo-studie", "medienbericht", "primär-", "herstellerquellen", "medienangaben", "sekundärquelle", "die", "der", "das", "und", "sind", "als", "auf", "über"}
+                   "sekundärquellen", "medienangabe", "gekennzeichnet", "sowie", "überwiegend", "herausgeber", "original", "recherchiert", "bafin-turbo-studie", "medienbericht", "primär-", "herstellerquellen", "medienangaben", "sekundärquelle", "quantor", "herstellerangaben", "die", "der", "das", "und", "sind", "als", "auf", "über"}
         if dh:  # L80: jedes groß geschriebene Wort ist generisch oder kommt in den Quellen vor
             l66 += [w for w in re.findall(r"\b[A-ZÄÖÜ][\wäöüß-]+", dh.group(1)) if w.casefold() not in GENERIC and w.casefold().rstrip("-") not in srcs_txt and w not in l66]
         report("L66 Datenherkunft = Quellen", BLOCKER, bool(dh) and not l66, "nicht in den Quellen: " + ", ".join(l66) if l66 else ("Datenherkunft durch Quellen gedeckt" if dh else "keine Datenherkunft"))

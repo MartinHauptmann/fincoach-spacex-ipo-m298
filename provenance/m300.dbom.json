@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.14.0",
+    "version": "1.14.1",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -18,14 +18,15 @@
     "media_report": 5,
     "unverified": 0,
     "scenario_projection": 3,
-    "vendor_claim": 17,
+    "vendor_claim": 16,
     "by_class": {
+      "DERIVED": 1,
       "MARKET_DATA": 7,
       "MEDIA_REPORT": 5,
       "MODEL_ASSUMPTION": 1,
       "REGULATORY_FRAMEWORK": 9,
       "SCENARIO_PROJECTION": 2,
-      "VENDOR_CLAIM": 17
+      "VENDOR_CLAIM": 16
     }
   },
   "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original); der Quantor FACT_NO_EUREX_GEX ist aus zwei geprüften Herstellerangaben abgeleitet („derived“). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „derived“ = aus anderen geprüften Fakten abgeleitet; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
@@ -613,7 +614,7 @@
     {
       "id": "FACT_NO_EUREX_GEX",
       "verdict": "CONFIRMED",
-      "class": "VENDOR_CLAIM",
+      "class": "DERIVED",
       "confidence": 0.75,
       "claim": "Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
       "source_id": "SRC_ATAS_LEARN",
@@ -667,7 +668,7 @@
           "Beta"
         ]
       },
-      "keep_reason": "Einziges bekanntes DAX-GEX-Angebot außerhalb des Vergleichsfelds (Einordnung der These)."
+      "keep_reason": "Bekanntes DAX-GEX-Angebot außerhalb des Vergleichsfelds (Einordnung der These); weitere Angebote außerhalb des Vergleichsfelds n. v."
     },
     {
       "id": "FACT_DEALER_CONVENTION",
@@ -1327,6 +1328,12 @@
     {
       "date": "2026-10-14",
       "event": "Vollständiger Lauf aller Compliance-, Fakten-, Quellen- und Qualitätschecks auf Wunsch des Herausgebers; zwanzigste Zweitprüfung: keine Freigabe; C4, Q4, Q7, Q9 nicht bestätigt, C6 auf ◐ (TWS-Angabe „Eurex-Optionen nur als Rohdaten“ zweifelhaft). Quellen-URLs aus der Prüfumgebung nicht abrufbar (Proxy 403)",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-14",
+      "event": "v1.14.1: Inhaltsbefunde der 20. Zweitprüfung umgesetzt (W1 MBO-Fazit nach n. v.-Maßstab inkl. Bookmap; W3 Quantor Klasse DERIVED, Kennzeichen ABGELEITET; H1 KPI-Rahmen; H2 Ausnahmeliste; H3 K3/K4 Einschätzung; H4 keep_reason; H7 Rechtsqualifikation S11 und Modal). C6 bleibt ◐ bis zum Abgleich der TWS-Angabe durch den Herausgeber; C4, Q4, Q7, Q9 bis zur Bestätigung",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }

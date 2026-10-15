@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.14.0 (Entwurf) |
+| Version | 1.14.1 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -88,9 +88,9 @@ Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifi
 
 **K2 · Hedging-Pflicht Market Maker.** Quelltext: Market Maker „gesetzlich gezwungen“, über das Orderbuch zu hedgen. Art. 17 Abs. 3 MiFID II bzw. § 80 Abs. 4 WpHG (Definition in Abs. 5) regeln Quotierungs- und Vertragspflichten. Delta-Hedging ist Risikomanagement und kann über viele Kanäle erfolgen. Belege: (`FACT_MM_NO_HEDGE_DUTY`, belegt, Konfidenz 0,85). **Ergebnis: ✗** (WESENTLICH)
 
-**K3 · GEX-Prämisse.** Quelltext: Dealer-Hedging als feste Mechanik. Die Positionskonvention ist eine Modellannahme. Beim SPX ist sie durch Teilnehmer-markierte Cboe-Daten besser fundiert, bleibt aber anfällig für Spreads, Overwriting und Intraday-Volumen. (Modellannahme; Cboe-Daten: Medienangabe) Belege: (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, keine Prognose-Konfidenz), (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6). **Ergebnis: ◐** (WESENTLICH)
+**K3 · GEX-Prämisse.** Quelltext: Dealer-Hedging als feste Mechanik. Die Positionskonvention ist eine Modellannahme. Beim SPX ist sie durch Teilnehmer-markierte Cboe-Daten besser fundiert, bleibt aber anfällig für Spreads, Overwriting und Intraday-Volumen. (Modellannahme; Cboe-Daten: Medienangabe; Anfälligkeit: Einschätzung) Belege: (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, keine Prognose-Konfidenz), (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6). **Ergebnis: ◐** (WESENTLICH)
 
-**K4 · Emittenten-Hedging.** Quelltext: „keine“ Hedging-Spuren im FDAX. Emittenten hedgen dynamisch, auch über Basiswert und Gegengeschäfte. Die Spur ist schwach und nicht zurechenbar, aber nicht null. (Medienangabe) Belege: (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6). **Ergebnis: ◐** (HINWEIS)
+**K4 · Emittenten-Hedging.** Quelltext: „keine“ Hedging-Spuren im FDAX. Emittenten hedgen dynamisch, auch über Basiswert und Gegengeschäfte. Die Spur ist schwach und nicht zurechenbar, aber nicht null. (Hedging: Medienangabe; Stärke der Spur: Einschätzung) Belege: (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6). **Ergebnis: ◐** (HINWEIS)
 
 **K5 · ATAS-Produktangaben.** Quelltext: 10 Indikatoren, CBOE/OptionsDepth, 60 s, nur SPX. Bestätigt durch Hilfe- und Lernseiten des Herstellers. Ergänzung: Optionen in ATAS derzeit nicht handelbar; Options Board/Strategy Analyzer als Beta. Belege: (`FACT_XRAY_10_IND`, belegt, Konfidenz 0,85), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8). **Ergebnis: ✓** (HINWEIS)
 
@@ -195,7 +195,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - X-Ray zeigt aus SPX-Optionsdaten abgeleitete Kennzahlen auf ES, MES und SPY an. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
 - Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events. (Einschätzung, gestützt auf (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7))
 - Für Optionen fehlt eine native Ausführung. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
-- Positionierung plus MBO (derzeit zur Erprobung, ATAS-Herstellerangabe) in einer Oberfläche ist laut Matrix ein Differenzierungsmerkmal (MBO-Werkzeug von SpotGamma, MenthorQ, Volland und TWS: n. v.). (Einschätzung, gestützt auf (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
+- Positionierung plus MBO in einer Oberfläche: für ATAS belegt (MBO-Bundle zur Erprobung); Bookmap hat MBO und Greeks nur über Add-ons; für SpotGamma, MenthorQ, Volland und TWS ist ein MBO-Werkzeug n. v. Ob die Kombination ein Differenzierungsmerkmal ist, bleibt damit offen. (Einschätzung, gestützt auf (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
 
 **◐ Relativiert**
 
@@ -333,7 +333,7 @@ Footprint-Daten (Modul 4).
 
 ## 5 · Quellenverzeichnis
 
-Abgerufen 2026-10-05 bis 2026-10-11, recherchiert über Suchtreffer und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle; siehe Methodischer Vorbehalt). Das
+Abgerufen 2026-10-05 bis 2026-10-11, recherchiert über Suchtreffer und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle) und den abgeleiteten Quantor `FACT_NO_EUREX_GEX` (siehe Methodischer Vorbehalt). Das
 Verzeichnis ist ein Auszug aus `provenance/m300.dbom.json` (Lehre L13/L14) und wird von dort erzeugt, nicht von
 Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 
@@ -388,7 +388,7 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.14.0,
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.14.1,
 41 Fakten, 45 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
@@ -426,7 +426,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_VOLLAND_SPEC` | MEDIA_REPORT | MEDIA_REPORT | 0,65 | Stand 2026-10-05 | Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.. |
 | `FACT_BOOKMAP_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung. |
 | `FACT_TWS_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung. |
-| `FACT_NO_EUREX_GEX` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v. |
+| `FACT_NO_EUREX_GEX` | CONFIRMED | DERIVED | 0,75 | Stand 2026-10-05 | Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v. |
 | `FACT_GAMMACOCKPIT_SPEC` | CONFIRMED | VENDOR_CLAIM | 0,75 | Stand 2026-10-05 | Gamma Cockpit (nicht im Vergleichsfeld) liefert DAX-GEX nur auf Tagesbasis (Beta). |
 | `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | – | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
 | `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
