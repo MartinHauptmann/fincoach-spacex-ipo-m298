@@ -127,7 +127,7 @@
    "edits": [
     [
      "m300.html",
-     "und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle).",
+     "und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle) und den abgeleiteten Quantor (aus zwei geprüften Herstellerangaben).",
      "und vom Herausgeber am 2026-10-11 sämtlich im Original abgeglichen."
     ]
    ]
@@ -139,7 +139,7 @@
    "edits": [
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "recherchiert über Suchtreffer und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle; siehe Methodischer Vorbehalt).",
+     "recherchiert über Suchtreffer und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle) und den abgeleiteten Quantor `FACT_NO_EUREX_GEX` (siehe Methodischer Vorbehalt).",
      "recherchiert über Suchtreffer; jeder Beleg wurde vom Herausgeber am 2026-10-11 im Volltext geprüft (siehe Methodischer Vorbehalt)."
     ]
    ]
