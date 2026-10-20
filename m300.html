@@ -68,6 +68,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   #live-audit-banner.warn{background:rgba(223,175,15,.10);border-left-color:#DFAF0F;}
   #live-audit-banner.err{background:rgba(230,57,154,.10);border-left-color:#E6399A;color:#E6399A;}
   #live-audit-banner code{color:#00CFFF;}
+  [data-publish="hidden"]{display:none!important;} /* in der Veröffentlichung ausgeblendet; Live-Audit läuft weiter */
   .dbom-pill{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.58rem;}
   .dbom-class-badge{padding:1px 6px;border-radius:4px;background:rgba(255,107,0,.16);color:#FF6B00;border:1px solid rgba(255,107,0,.35);}
   .dbom-class-badge.dc-primary{background:rgba(0,204,122,.16);color:#00CC7A;border-color:rgba(0,204,122,.35);}
@@ -145,8 +146,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <a href="#s12" data-dock="s12" title="Quellen & Glossar">12</a>
 </div>
 
-<!-- ===== Provenienz-Banner ===== -->
-<div class="px-4 pt-4 max-w-7xl mx-auto">
+<!-- ===== Provenienz-Banner (in der Veröffentlichung ausgeblendet) ===== -->
+<div class="px-4 pt-4 max-w-7xl mx-auto" data-publish="hidden">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
     <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.14.1</span>
     <span class="text-slate-300"><span data-dbom-count="total">41</span> Fakten · <span data-dbom-count="confirmed">33</span> belegt (davon <span data-dbom-count="fulltext">32</span> am Original geprüft, <span data-dbom-count="vendor">16</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
@@ -254,13 +255,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         </div>
       </div>
     </div>
-    <div class="info-box mb-8 text-sm text-slate-300 leading-relaxed">
+    <div class="info-box mb-8 text-sm text-slate-300 leading-relaxed" data-publish="hidden">
       <strong class="text-tngb-cyan">Daten-Transparenz:</strong> Die Recherche lief in einer Umgebung, die den direkten
       Abruf der meisten Primärquellen gesperrt hat. Die Recherche stützte sich auf Suchtreffer, die auf diese Quellen
-      verweisen; der Herausgeber hat am 2026-10-11 jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original, die fünf Medienangaben an ihrer Sekundärquelle (ausgenommen vom Abgleich am Original). Wie belastbar ein Fakt ist, zeigt sein Verdict: belegt, Medienangabe, ungeprüft oder Szenario. <strong>Belegstufe:</strong> „Snippet“ heißt, ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „Volltext“ heißt, die Aussage wurde am Original geprüft; „Sekundär“ heißt, geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „Abgeleitet“ heißt, die Aussage folgt aus anderen geprüften Fakten. Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“). Die Belegstufe je Fakt steht in der M-DBOM (Feld <code>evidence</code>). Herstellerangaben tragen das Kennzeichen <span class="dbom-class-badge dc-vendor">VENDOR</span>, aus geprüften Fakten abgeleitete Aussagen <span class="dbom-class-badge">ABGELEITET</span>, Medienangaben
-      <span class="dbom-class-badge">MEDIEN</span>, Modellannahmen <span class="dbom-class-badge">MODELL</span>, Szenarien
-      <span class="dbom-class-badge">SCENARIO</span> und wertende Einordnungen <span class="dbom-class-badge">EINSCHÄTZUNG</span>. Schätzungen sind mit
-      <span class="est-mark">EST</span> markiert.
+      verweisen; der Herausgeber hat am 2026-10-11 jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original, die fünf Medienangaben an ihrer Sekundärquelle (ausgenommen vom Abgleich am Original). Kennzeichen und Belegstufen: siehe S12.
     </div>
 
     <!-- KPIs -->
@@ -616,7 +614,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>Kontrast-Audit WCAG AA</td><td class="check-part" title="Styleguide-Tokens (Muted, Magenta, Lavender) unter 4,5:1 – Anzahl siehe Ausgabe qa/render_audit.cjs (L09, L15); Styleguide-Entscheidung M7 offen">◐</td></tr>
         <tr><td>CAT-Level (Einsteiger→Experte)</td><td class="check-pass">✓</td></tr>
         <tr><td>NavDock &amp; Sektions-Badges</td><td class="check-pass">✓</td></tr>
-        <tr><td>Provenienz- &amp; Live-Audit-Banner</td><td class="check-pass">✓</td></tr>
+        <tr><td>Live-Audit (läuft; Banner in der Veröffentlichung ausgeblendet)</td><td class="check-pass">✓</td></tr>
         <tr><td>EST-/SCENARIO-Markierung</td><td class="check-pass">✓</td></tr>
         <tr><td>Quellen-/Glossar-/Disclaimer-Sektion</td><td class="check-pass">✓</td></tr>
       </tbody></table>
@@ -648,6 +646,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <div class="dep-box"><div class="text-tngb-cyan font-semibold text-sm mb-1">Datenherkunft</div><p class="text-xs text-slate-400">Gesetzestexte, BaFin, Eurex, Cboe, CME, OPRA sowie Herstellerdokumentation, recherchiert über Suchtreffer auf die Primärquelle und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle) und den abgeleiteten Quantor (aus zwei geprüften Herstellerangaben). Medien- und Sekundärquellen sind als Medienangabe gekennzeichnet.</p></div>
     <div class="dep-box"><div class="text-tngb-emerald font-semibold text-sm mb-1">Konfidenz-Spannen</div><p class="text-xs text-slate-400">Aus der DBOM berechnet: Rechtsrahmen <span data-dbom-range="REGULATORY_FRAMEWORK">0,7–0,9</span>; Herstellerangaben <span data-dbom-range="VENDOR_CLAIM">0,7–0,85</span>; Marktdaten <span data-dbom-range="MARKET_DATA">0,7–0,85</span>; Klasse Medienbericht <span data-dbom-range="MEDIA_REPORT">0,6–0,7</span>. Modellannahmen und Szenarien tragen keine Prognose-Konfidenz.</p></div>
     <div class="dep-box"><div class="text-tngb-magenta font-semibold text-sm mb-1">Bekannte Schwächen</div><p class="text-xs text-slate-400">Die Berechnungslogik des Herstellers ist nicht offengelegt. Die Dealer-Positionsannahme ist nicht beobachtbar. Teilnehmer-markierte Eurex-Daten und eine veröffentlichte Validierungsstatistik für X-Ray wurden bei der Recherche nicht gefunden.</p></div>
+    <div class="dep-box md:col-span-3"><div class="text-tngb-gold font-semibold text-sm mb-1">Kennzeichen &amp; Belegstufen</div><p class="text-xs text-slate-400" data-qa="kennzeichen-legende">Wie belastbar ein Fakt ist, zeigt sein Verdict: belegt, Medienangabe, ungeprüft oder Szenario. <strong>Belegstufe:</strong> „Snippet“ heißt, ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „Volltext“ heißt, die Aussage wurde am Original geprüft; „Sekundär“ heißt, geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „Abgeleitet“ heißt, die Aussage folgt aus anderen geprüften Fakten. Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“). Die Belegstufe je Fakt steht in der M-DBOM (Feld <code>evidence</code>). Herstellerangaben tragen das Kennzeichen <span class="dbom-class-badge dc-vendor">VENDOR</span>, aus geprüften Fakten abgeleitete Aussagen <span class="dbom-class-badge">ABGELEITET</span>, Medienangaben <span class="dbom-class-badge">MEDIEN</span>, Modellannahmen <span class="dbom-class-badge">MODELL</span>, Szenarien <span class="dbom-class-badge">SCENARIO</span> und wertende Einordnungen <span class="dbom-class-badge">EINSCHÄTZUNG</span>. Schätzungen sind mit <span class="est-mark">EST</span> markiert. Alle Fakten mit Verdict, Belegstufe und Quelle: <a href="provenance/m300.dbom.json" class="text-tngb-cyan hover:underline">M-DBOM (JSON)</a>.</p></div>
   </div>
 
   <h3 class="font-head font-bold text-white mb-3">Glossar (folgt globalem Wissensniveau)</h3>

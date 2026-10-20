@@ -68,7 +68,7 @@ def element_inner(html, m):
     return html[m.end():n.start()]
 
 
-HIDDEN = r'<(\w+)\b[^>]*(?:\bhidden\b|display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?![.\d])|font-size\s*:\s*0(?![.\d])|sr-only|aria-hidden="true")[^>]*>.*?</\1>'
+HIDDEN = r'<(\w+)\b[^>]*(?:\bhidden\b|data-publish="hidden"|display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?![.\d])|font-size\s*:\s*0(?![.\d])|sr-only|aria-hidden="true")[^>]*>.*?</\1>'
 
 
 def visible_part(inner):
@@ -961,7 +961,7 @@ def main():
         report("L27g Kennzeichen je Gegenstand", BLOCKER, not l27g, "; ".join(l27g[:3]) if l27g else "Kennzeichen je Teilaussage, keine pauschalen Kennzeichen über gemischten Verdicts")
         # L27h · Legende nennt jedes sichtbar verwendete Kennzeichen als Kennzeichen; Modellannahmen tragen MODELL, nie SCENARIO
         vis_html = visible_part(html)
-        leg = re.search(r"Daten-Transparenz:</strong>(.*?)</div>", vis_html, re.S)
+        leg = re.search(r'data-qa="kennzeichen-legende"[^>]*>(.*?)</p>', vis_html, re.S)  # sichtbare Legende (S12)
         CBADGE = _BadgeRx(r"dbom-class-badge|badge b-v")  # Daten-Kennzeichen, nicht Schweregrade
         used = set(CBADGE.findall(vis_html))
         legb = set(CBADGE.findall(leg.group(1))) if leg else set()
