@@ -52,6 +52,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   .tab-btn.active-tab{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
   .lvl-content{display:none;} .lvl-content.active{display:block;}
   .lvl-box:not(:has(.lvl-content.active)){display:none;}
+  .lvl-content.lvl-inline.active{display:inline;}
   #cat-bar{position:sticky;top:var(--hdr-h,62px);z-index:40;background:var(--bg);padding-bottom:.5rem;}
   section[id]{scroll-margin-top:calc(var(--hdr-h,62px) + var(--cat-h,56px) + 8px);}
   .reg-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;font-size:.72rem;font-weight:600;text-decoration:none;border:1px solid;cursor:pointer;transition:transform .15s;}
@@ -173,7 +174,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span class="font-mono font-bold" style="color:#00CFFF;">CAT</span>
     <span class="text-tngb-muted hidden sm:inline">Cognitive Apprenticeship Track</span>
     <span class="text-slate-400 hidden sm:inline">·</span>
-    <span class="text-slate-300 hidden sm:inline">Wissensniveau global wählbar <span class="text-tngb-muted">(wirkt auf S02, Einordnungen in S05–S10 und Glossar)</span></span>
+    <span class="text-slate-300 hidden sm:inline">Wissensniveau global wählbar <span class="text-tngb-muted">(wirkt auf Hero, S02, Einordnungen in S05–S10 und Glossar)</span></span>
     <span id="cat-status" class="sr-only" aria-live="polite"></span>
     <span class="ml-auto flex items-center gap-1 flex-wrap">
       <button class="level-btn" data-lvl="einsteiger" aria-pressed="false">Einsteiger</button>
@@ -189,7 +190,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <div class="flex flex-wrap items-center gap-3 mb-4">
       <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S01 · HERO</span>
       <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">Options Analytics · Orderflow</span>
-      <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">Deep-Dive-Prime · Experte</span>
+      <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">Deep-Dive-Prime · <span class="lvl-content lvl-inline" data-lvlc="einsteiger">Einsteiger</span><span class="lvl-content lvl-inline" data-lvlc="fortgeschritten">Fortgeschritten</span><span class="lvl-content lvl-inline active" data-lvlc="experte">Experte</span></span>
     </div>
     <div class="grid lg:grid-cols-5 gap-8 items-center mb-6" data-qa="hero-grid">
     <div class="lg:col-span-3">
@@ -197,12 +198,12 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       Options X-Ray, Dealer-<span style="background:linear-gradient(135deg,#00CFFF 0%,#9933FF 55%,#E6399A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">Greeks</span> &amp; der DACH-Markt
     </h1>
     <p class="text-xl font-head font-semibold mb-3" style="color:#00CFFF;">
-      Was die GEX-/Charm-Analytik von ATAS leistet, wo ihre Modellgrenzen liegen und was Börsenoptionen und Optionsscheine im DACH-Raum unterscheidet
+      <span class="lvl-content lvl-inline" data-lvlc="einsteiger">Was ein Analysewerkzeug für Optionen zeigt, wo seine Annahmen enden und wie sich Börsenoptionen und Optionsscheine im DACH-Raum unterscheiden</span><span class="lvl-content lvl-inline" data-lvlc="fortgeschritten">Wie die GEX- und Charm-Analytik von ATAS Absicherungsflüsse schätzt, welche Modellgrenzen sie hat und was Eurex-Optionen von Optionsscheinen unterscheidet</span><span class="lvl-content lvl-inline active" data-lvlc="experte">Was die GEX-/Charm-Analytik von ATAS leistet, wo ihre Modellgrenzen liegen und was Börsenoptionen und Optionsscheine im DACH-Raum unterscheidet</span>
     </p>
     <p class="text-base text-slate-400 mb-2 leading-relaxed">
-      Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
+      <span class="lvl-content lvl-inline" data-lvlc="einsteiger">Wer Optionen verkauft, sichert sich oft mit Futures ab. Werkzeuge wie ATAS Options X-Ray versuchen zu zeigen, an welchen Kursmarken solche Absicherungen nötig werden könnten. Dieses Modul erklärt Schritt für Schritt, wie das funktioniert, wo die Annahmen enden und worin sich Börsenoptionen und Optionsscheine im DACH-Raum unterscheiden. Dazu prüfen wir neun Kernaussagen eines Fachtexts.</span><span class="lvl-content lvl-inline" data-lvlc="fortgeschritten">Händler, die Optionen verkaufen, sichern ihr Buch häufig über Futures ab. GEX-Modelle schätzen daraus, wo solche Absicherungsflüsse Kursbewegungen dämpfen oder verstärken könnten. Wir zeigen die Rechnung hinter Gamma, Vanna und Charm, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Optionen und Optionsscheine gegenüber und prüfen neun Kernaussagen des Ausgangstexts.</span><span class="lvl-content lvl-inline active" data-lvlc="experte">Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
-      Derivate gegenüber und prüfen neun Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.
+      Derivate gegenüber und prüfen neun Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.</span>
       <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">33</span> belegte Fakten, <span data-dbom-count="media">5</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
     </p>
     </div>

@@ -1342,6 +1342,12 @@
       "event": "v1.15.0: Einordnungen für Einsteiger und Fortgeschrittene in S05–S10 (über den globalen CAT-Schalter); Tatsachen an ihre Fakten gebunden, Modellmechanik im Konjunktiv mit MODELL, Knock-outs n. v.; Experten-Fassung = bestehender Inhalt. CAT-Leiste fixiert, S02-Tabs entfernt; M-DBOM-Banner, Live-Audit und Daten-Transparenz zur Veröffentlichung ausgeblendet (Legende in S12)",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-20",
+      "event": "Hero (Niveau-Badge, Unterzeile, Einleitung) in drei Fassungen über den globalen CAT-Schalter; Stichtag-Zeile, Beratungsausschluss, Steuerkasten und KPIs für alle Niveaus gleich",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
