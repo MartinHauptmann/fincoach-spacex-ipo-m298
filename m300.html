@@ -51,6 +51,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   .tab-btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s;}
   .tab-btn.active-tab{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
   .lvl-content{display:none;} .lvl-content.active{display:block;}
+  #cat-bar{position:sticky;top:var(--hdr-h,62px);z-index:40;background:var(--bg);padding-bottom:.5rem;}
+  section[id]{scroll-margin-top:calc(var(--hdr-h,62px) + var(--cat-h,56px) + 8px);}
   .reg-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;font-size:.72rem;font-weight:600;text-decoration:none;border:1px solid;cursor:pointer;transition:transform .15s;}
   .reg-tag:hover{transform:translateY(-1px);}
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem;}
@@ -164,17 +166,18 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   </div>
 </div>
 
-<!-- ===== CAT-Banner ===== -->
-<div class="px-4 pt-4 max-w-7xl mx-auto">
+<!-- ===== CAT-Banner (oben fixiert) ===== -->
+<div id="cat-bar" class="px-4 pt-2 sm:pt-4 max-w-7xl mx-auto">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
     <span class="font-mono font-bold" style="color:#00CFFF;">CAT</span>
-    <span class="text-tngb-muted">Cognitive Apprenticeship Track</span>
-    <span class="text-slate-400">·</span>
-    <span class="text-slate-300">Wissensniveau global wählbar</span>
+    <span class="text-tngb-muted hidden sm:inline">Cognitive Apprenticeship Track</span>
+    <span class="text-slate-400 hidden sm:inline">·</span>
+    <span class="text-slate-300 hidden sm:inline">Wissensniveau global wählbar <span class="text-tngb-muted">(wirkt auf S02-Grundlagen und Glossar)</span></span>
+    <span id="cat-status" class="sr-only" aria-live="polite"></span>
     <span class="ml-auto flex items-center gap-1 flex-wrap">
-      <button class="level-btn" data-lvl="einsteiger">Einsteiger</button>
-      <button class="level-btn" data-lvl="fortgeschritten">Fortgeschritten</button>
-      <button class="level-btn active-level" data-lvl="experte">Experte</button>
+      <button class="level-btn" data-lvl="einsteiger" aria-pressed="false">Einsteiger</button>
+      <button class="level-btn" data-lvl="fortgeschritten" aria-pressed="false">Fortgeschritten</button>
+      <button class="level-btn active-level" data-lvl="experte" aria-pressed="true">Experte</button>
     </span>
   </div>
 </div>
@@ -305,11 +308,6 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <div class="flex flex-wrap items-center gap-3 mb-6">
     <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S02</span>
     <h2 class="section-title">Grundlagen: Warum Optionen den Futures-Markt bewegen</h2>
-  </div>
-  <div class="flex gap-2 mb-6 flex-wrap" id="s02-tabs">
-    <button class="tab-btn" data-s02="einsteiger">Einsteiger</button>
-    <button class="tab-btn" data-s02="fortgeschritten">Fortgeschritten</button>
-    <button class="tab-btn active-tab" data-s02="experte">Experte</button>
   </div>
   <div class="dep-box">
     <div class="lvl-content" data-s02c="einsteiger">
@@ -701,17 +699,19 @@ const LVL_IDX={einsteiger:0,fortgeschritten:1,experte:2};
 let LEVEL='experte';
 function setLevel(l){
   LEVEL=l;
-  document.querySelectorAll('.level-btn[data-lvl]').forEach(x=>x.classList.toggle('active-level',x.dataset.lvl===LEVEL));
-  document.querySelectorAll('#s02-tabs .tab-btn').forEach(x=>x.classList.toggle('active-tab',x.dataset.s02===LEVEL));
+  document.querySelectorAll('.level-btn[data-lvl]').forEach(x=>{const on=x.dataset.lvl===LEVEL;x.classList.toggle('active-level',on);x.setAttribute('aria-pressed',on);});
   document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active',c.dataset.s02c===LEVEL));
   renderGlossar();
+  const st=document.getElementById('cat-status'); if(st) st.textContent='Wissensniveau: '+document.querySelector('.level-btn[data-lvl="'+LEVEL+'"]').textContent;
 }
 document.querySelectorAll('.level-btn[data-lvl]').forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.lvl)));
-document.querySelectorAll('#s02-tabs .tab-btn').forEach(b=>b.addEventListener('click',()=>{
-  const v=b.dataset.s02;
-  document.querySelectorAll('#s02-tabs .tab-btn').forEach(x=>x.classList.toggle('active-tab',x===b));
-  document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active',c.dataset.s02c===v));
-}));
+/* CAT-Leiste unter der Navigationsleiste fixieren: Höhen messen (auch bei Umbruch auf schmalen Geräten) */
+function fixBars(){
+  const nav=document.querySelector('nav.sticky'),cat=document.getElementById('cat-bar');
+  if(nav) document.documentElement.style.setProperty('--hdr-h',nav.offsetHeight+'px');
+  if(cat) document.documentElement.style.setProperty('--cat-h',cat.offsetHeight+'px');
+}
+fixBars(); window.addEventListener('resize',fixBars);
 
 /* ====== REG MODAL ====== */
 const REG={
