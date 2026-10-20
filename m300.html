@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.14.1 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.15.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -51,6 +51,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   .tab-btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s;}
   .tab-btn.active-tab{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
   .lvl-content{display:none;} .lvl-content.active{display:block;}
+  .lvl-box:not(:has(.lvl-content.active)){display:none;}
   #cat-bar{position:sticky;top:var(--hdr-h,62px);z-index:40;background:var(--bg);padding-bottom:.5rem;}
   section[id]{scroll-margin-top:calc(var(--hdr-h,62px) + var(--cat-h,56px) + 8px);}
   .reg-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;font-size:.72rem;font-weight:600;text-decoration:none;border:1px solid;cursor:pointer;transition:transform .15s;}
@@ -102,7 +103,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.14.1", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.15.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 41, "confirmed_primary": 33, "media_report": 5, "unverified": 0, "scenario_projection": 3, "vendor_claim": 16 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
@@ -151,7 +152,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner (in der Veröffentlichung ausgeblendet) ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto" data-publish="hidden">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.14.1</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.15.0</span>
     <span class="text-slate-300"><span data-dbom-count="total">41</span> Fakten · <span data-dbom-count="confirmed">33</span> belegt (davon <span data-dbom-count="fulltext">32</span> am Original geprüft, <span data-dbom-count="vendor">16</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -172,7 +173,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span class="font-mono font-bold" style="color:#00CFFF;">CAT</span>
     <span class="text-tngb-muted hidden sm:inline">Cognitive Apprenticeship Track</span>
     <span class="text-slate-400 hidden sm:inline">·</span>
-    <span class="text-slate-300 hidden sm:inline">Wissensniveau global wählbar <span class="text-tngb-muted">(wirkt auf S02-Grundlagen und Glossar)</span></span>
+    <span class="text-slate-300 hidden sm:inline">Wissensniveau global wählbar <span class="text-tngb-muted">(wirkt auf S02, Einordnungen in S05–S10 und Glossar)</span></span>
     <span id="cat-status" class="sr-only" aria-live="polite"></span>
     <span class="ml-auto flex items-center gap-1 flex-wrap">
       <button class="level-btn" data-lvl="einsteiger" aria-pressed="false">Einsteiger</button>
@@ -365,6 +366,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S05 · MODUL 1</span>
     <h2 class="section-title">Options X-Ray dekonstruiert: zehn Indikatoren, drei Funktionen</h2>
   </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Wer Optionen verkauft, sichert sich oft mit dem passenden Future ab. Options X-Ray versucht zu zeigen, an welchen Kursmarken solche Absicherungen nötig werden könnten. Die Anzeigen lassen sich nach drei Fragen ordnen: Wie ist die Lage? Wo sitzt der Absicherungsbedarf? Was ändert sich gerade? <span data-source="FACT_DEALER_CONVENTION">Die ganze Rechnung beruht auf einer Annahme darüber, wer welche Optionen hält; wäre sie falsch, stimmte auch die Landkarte nicht <span class="dbom-class-badge">MODELL</span>.</span> Wie der Hersteller genau rechnet, ist nicht offengelegt; die Formeln unten zeigen die fachübliche Rechnung.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> GEX schätzt je Strike, wie stark sich das Delta der Dealer bei einer Kursbewegung von einem Prozent ändern würde. <span data-source="FACT_DEALER_CONVENTION">Das Vorzeichen hängt an der angenommenen Dealer-Position: Bei positivem Netto-GEX würden Dealer gegen die Bewegung handeln und sie dämpfen, bei negativem mit ihr und sie verstärken; der Umschlagpunkt heißt GEX-Flip <span class="dbom-class-badge">MODELL</span>.</span> Vanna beschreibt die Delta-Änderung bei einer Änderung der impliziten Volatilität, Charm die Delta-Änderung durch Zeitablauf. Für den Future-Chart werden die Werte über die Kontrakt-Multiplikatoren in Future-Kontrakte umgerechnet.</div>
+  </div>
   <div class="grid md:grid-cols-3 gap-4 mb-8" data-source="FACT_XRAY_10_IND">
     <div class="dep-box border-t-4" style="border-top-color:#00CFFF;"><div class="text-xs font-mono text-tngb-cyan mb-1">REGIME</div><h3 class="font-head font-bold text-white mb-2">Wo stehen wir?</h3><p class="text-xs text-slate-400 mb-2">Market State · <dfn>Expected Move</dfn> (aus der impliziten Volatilität abgeleitete erwartete Schwankungsbreite) · Surface Profile <span class="badge b-v">VENDOR</span></p><p class="text-sm text-slate-300">Long- oder Short-Gamma-Umfeld und die von der impliziten Volatilität eingepreiste Bandbreite.</p></div>
     <div class="dep-box border-t-4" style="border-top-color:#9933FF;"><div class="text-xs font-mono" style="color:#9933FF;">LANDKARTE</div><h3 class="font-head font-bold text-white mb-2">Wo sitzt der Hedge-Bedarf?</h3><p class="text-xs text-slate-400 mb-2">GEX Heatmap · Charm Heatmap · Strike Heatmap · Strike Profile <span class="badge b-v">VENDOR</span></p><p class="text-sm text-slate-300">Exponierung je Strike und Verfall, übertragen in Preiszonen auf der Chartachse.</p></div>
@@ -398,6 +403,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">S06 · RECHNER</span>
     <h2 class="section-title">GEX- und ES-Äquivalent-Rechner</h2>
   </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Der Rechner zeigt an einem frei wählbaren Beispiel, wie viel Absicherung eine Kursbewegung rechnerisch auslösen würde. <span data-source="FACT_GEX_EXAMPLE">Die Voreinstellung wäre ein erfundenes Übungsbeispiel, keine Marktlage <span class="dbom-class-badge">SCENARIO</span>.</span> Ändern Sie etwa die Kursbewegung oder die angenommene Dealer-Position und beobachten Sie, wie sich die Absicherungsmenge verändert.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> Aus Indexstand, offenen Kontrakten, Gamma je Punkt und Multiplikator bildet der Rechner das Dollar-Gamma und rechnet die Delta-Änderung für die gewählte Kursbewegung in Standard- und Micro-Future-Kontrakte um. Das Vorzeichen folgt allein aus der gewählten Dealer-Position. <span data-source="FACT_GEX_EXAMPLE">Die Voreinstellung wäre ein hypothetisches Zahlenbeispiel <span class="dbom-class-badge">SCENARIO</span>.</span></div>
+  </div>
   <div class="grid lg:grid-cols-2 gap-6" data-source="FACT_GEX_EXAMPLE">
     <div class="dep-box">
       <p class="text-xs text-tngb-muted mb-4">Voreinstellung = Zahlenbeispiel der Analyse (hypothetisch). Werte frei änderbar. <span class="dbom-class-badge">SCENARIO</span></p>
@@ -421,6 +430,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <div class="flex flex-wrap items-center gap-3 mb-6">
     <span class="section-badge" style="background:rgba(153,51,255,0.15);color:#9933FF;">S07 · MODUL 2+3</span>
     <h2 class="section-title">Datenfeed, Latenz und Ausführung</h2>
+  </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Hier geht es um zwei verschiedene Dinge: wie aktuell die Optionsdaten sind und wie eine Order an den Markt kommt. Das sind zwei getrennte Wege. Die Landkarte wird in Abständen aktualisiert; bei wichtigen Wirtschaftsdaten kann sich die Lage zwischen zwei Aktualisierungen deutlich ändern.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> Analyse-Latenz (Alter des Snapshots) und Ausführung (Weg der Order) sind getrennt zu betrachten. Im Snapshot-Fenster rund um Makrodaten entstehen typische Fehler: verschobene Walls nach Volatilitätssprüngen, fehlende Hedges aus neuem Volumen und übersprungene kurze Durchbrüche. <span data-source="FACT_ATAS_NO_OPT_TRADING">Optionen selbst sind in ATAS derzeit nicht handelbar <span class="badge b-v">VENDOR</span>.</span></div>
   </div>
   <div class="grid md:grid-cols-3 gap-4 mb-6">
     <div class="dep-box" data-source="FACT_OPRA_CAPACITY"><div class="text-xs font-mono text-tngb-muted">OPRA · projizierte Spitzenlast je Stream</div><div class="text-2xl font-head font-bold text-tngb-magenta" data-source="FACT_OPRA_CAPACITY">37,3 Gbps</div><div class="text-xs text-slate-400" data-source="FACT_OPRA_CAPACITY">Projektion Sept. 2025: Spitzenlast je Stream im 1-ms-Fenster</div></div>
@@ -452,6 +465,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S08 · MODUL 4</span>
     <h2 class="section-title">Mikro-Makro-Synergien: Landkarte trifft Orderflow</h2>
   </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Diese Sektion verbindet zwei Blickwinkel: die Landkarte der Absicherungen und das, was im Orderbuch tatsächlich passiert. <span data-source="FACT_DEALER_CONVENTION">Die Landkarte würde nur Vermutungen liefern, wo der Kurs gebremst oder beschleunigt werden könnte; ob das einträte, würde erst das Handelsgeschehen zeigen <span class="dbom-class-badge">MODELL</span>.</span> Das ist Lernstoff zur Marktmechanik, keine Handelsempfehlung.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> <span data-source="FACT_DEALER_CONVENTION">Je Regime steht unten eine Modellthese mit Prüfsignalen im Orderflow: Im Long-Gamma-Umfeld würde Absicherung die Bewegung bremsen, im Short-Gamma-Umfeld würde sie die Bewegung verstärken, vor dem Verfall könnte der Zeitablauf (Charm) Absicherungsflüsse auslösen <span class="dbom-class-badge">MODELL</span>.</span> Jede These nennt ein Widerlegungssignal. Das Risiko einer Position bestimmen Positionsgröße und Stop-Disziplin, nicht Gamma-Levels.</div>
+  </div>
   <div class="caveat-box mb-6 text-sm text-slate-300"><strong class="text-tngb-magenta">Compliance-Hinweis:</strong> Generische, lehrhafte Beschreibung von Marktmechanik. Keine Kursziele, keine Einstiegsmarken, keine Richtungsaussage zu einem Instrument und keine Handelsempfehlung. Gamma-Levels sind Wahrscheinlichkeitszonen und keine Preisgarantien.</div>
   <div class="grid md:grid-cols-3 gap-4">
     <div class="dep-box border-l-4" style="border-color:#00CC7A;"><h3 class="font-head font-bold text-tngb-emerald mb-2">Long Gamma an der Wall</h3><p class="text-sm text-slate-300 mb-2">Modellthese: Die Bewegung wird abgebremst.</p><p class="text-xs text-slate-400"><strong>Bestätigung:</strong> Absorption im Footprint, nachgefüllte Icebergs im MBO.<br/><strong>Widerlegung:</strong> Sweep über mehrere Stufen ohne Rückkehr der Liquidität.</p></div>
@@ -466,6 +483,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <div class="flex flex-wrap items-center gap-3 mb-6">
     <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S09 · MODUL 5</span>
     <h2 class="section-title">Wettbewerbsmatrix (ohne Rangfolge)</h2>
+  </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Die Tabelle stellt Anbieter nebeneinander, die Optionsdaten oder Orderbuchdaten aufbereiten. Sie ist keine Rangliste. „n. v.“ bedeutet: In den ausgewerteten Quellen steht dazu nichts – das heißt nicht „nein“. Die Kennzeichen zeigen, ob eine Angabe vom Hersteller selbst oder aus einer anderen Quelle stammt.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> Lesehilfe: Die Zeilen trennen Datenbasis (Frequenz, Abdeckung), Kennzahlen (GEX, Vanna, Charm), Orderflow und Ausführung. Gleiche Quellenart bedeutet gleiche Kennzeichnung. <span data-source="FACT_NO_EUREX_GEX">Zu Eurex-GEX ist die Lage für vier der sechs Anbieter n. v.; daraus lässt sich keine Lücke im Markt ableiten <span class="dbom-class-badge">ABGELEITET</span>.</span></div>
   </div>
   <div class="dep-box table-wrap">
     <table data-source="FACT_SPOTGAMMA_SPEC FACT_MENTHORQ_SPEC FACT_VOLLAND_SPEC FACT_BOOKMAP_SPEC FACT_TWS_SPEC">
@@ -491,6 +512,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <div class="flex flex-wrap items-center gap-3 mb-6">
     <span class="section-badge" style="background:rgba(230,57,154,0.15);color:#E6399A;">S10 · MODUL 6</span>
     <h2 class="section-title">DACH: Eurex-Börsenoptionen vs. verbriefte Derivate</h2>
+  </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Im DACH-Raum gibt es zwei Wege zu Optionen. <span data-source="FACT_CCP_ISSUER">Bei Eurex-Optionen steht eine zentrale Gegenpartei zwischen Käufer und Verkäufer, und die Teilnehmer hinterlegen Sicherheiten.</span> <span data-source="FACT_OS_ISSUER">Optionsscheine gibt ein Emittent als Wertpapier aus; ihr Wert hängt auch davon ab, ob dieser zahlungsfähig bleibt <span class="dbom-class-badge">MEDIEN</span>.</span> Knock-out-Produkte: n. v.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> Die Tabelle vergleicht Ausgestaltung, Kontrahentenrisiko, Zugang, Kostenausweis und Steuer. <span data-source="FACT_EUREX_OI">Für GEX-Modelle zählt die Positionsbasis: Eurex veröffentlicht das Open Interest je Serie täglich.</span> <span data-source="FACT_ISSUER_HEDGING">Emittenten sichern ihr Nettorisiko laufend dynamisch ab <span class="dbom-class-badge">MEDIEN</span>;</span> <span data-source="FACT_EUREX_OI">eine strikebezogene Positionsbasis wie bei Eurex-Optionen fehlt Optionsscheinen damit <span class="dbom-class-badge">EINSCHÄTZUNG</span>.</span></div>
   </div>
   <div class="grid lg:grid-cols-5 gap-6">
     <div class="lg:col-span-3 dep-box table-wrap">
@@ -677,7 +702,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.14.1 · 2026-10-14<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.15.0 · 2026-10-20<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
@@ -701,6 +726,7 @@ function setLevel(l){
   LEVEL=l;
   document.querySelectorAll('.level-btn[data-lvl]').forEach(x=>{const on=x.dataset.lvl===LEVEL;x.classList.toggle('active-level',on);x.setAttribute('aria-pressed',on);});
   document.querySelectorAll('[data-s02c]').forEach(c=>c.classList.toggle('active',c.dataset.s02c===LEVEL));
+  document.querySelectorAll('[data-lvlc]').forEach(c=>c.classList.toggle('active',c.dataset.lvlc===LEVEL));
   renderGlossar();
   const st=document.getElementById('cat-status'); if(st) st.textContent='Wissensniveau: '+document.querySelector('.level-btn[data-lvl="'+LEVEL+'"]').textContent;
 }

@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.14.1",
+    "version": "1.15.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -1334,6 +1334,12 @@
     {
       "date": "2026-10-14",
       "event": "v1.14.1: Inhaltsbefunde der 20. Zweitprüfung umgesetzt (W1 MBO-Fazit nach n. v.-Maßstab inkl. Bookmap; W3 Quantor Klasse DERIVED, Kennzeichen ABGELEITET; H1 KPI-Rahmen; H2 Ausnahmeliste; H3 K3/K4 Einschätzung; H4 keep_reason; H7 Rechtsqualifikation S11 und Modal). C6 bleibt ◐ bis zum Abgleich der TWS-Angabe durch den Herausgeber; C4, Q4, Q7, Q9 bis zur Bestätigung",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-20",
+      "event": "v1.15.0: Einordnungen für Einsteiger und Fortgeschrittene in S05–S10 (über den globalen CAT-Schalter); Tatsachen an ihre Fakten gebunden, Modellmechanik im Konjunktiv mit MODELL, Knock-outs n. v.; Experten-Fassung = bestehender Inhalt. CAT-Leiste fixiert, S02-Tabs entfernt; M-DBOM-Banner, Live-Audit und Daten-Transparenz zur Veröffentlichung ausgeblendet (Legende in S12)",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }
