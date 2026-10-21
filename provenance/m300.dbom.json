@@ -1,0 +1,64 @@
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": {
+    "id": "M300",
+    "title": "SpaceX (SPCX) Q3 2026 — Deep-Dive-Aktienanalyse",
+    "version": "1.0.0",
+    "predecessor_version": null,
+    "stichtag": "2026-10-21",
+    "buildDate": "2026-10-21T00:00:00Z",
+    "related_modules": ["M298", "M299"],
+    "external_dbom": "provenance/m300.dbom.json"
+  },
+  "fact_summary": {
+    "total": 10,
+    "confirmed_primary": 9,
+    "scenario_projection": 1,
+    "by_class": {
+      "PRIMARY_OFFICIAL": 9,
+      "SCENARIO_PROJECTION": 1
+    }
+  },
+  "honest_disclosure": "PRIMAERQUELLE: Diese Analyse basiert auf der offiziellen Mitteilung 'SpaceX Reports Third Quarter 2026 Results' (Space Exploration Technologies Corp., Nasdaq: SPCX; Quartal zum 30.09.2026; Earnings-Call 20.10.2026). Die gemeldeten GAAP- und Non-GAAP-Kennzahlen sind unternehmensoffizielle, vom Nutzer als Quelle bereitgestellte Zahlen und werden als CONFIRMED/PRIMARY_OFFICIAL gefuehrt; sie wurden von FinCoach AI auf interne Konsistenz geprueft (54/54 Checks: Segmentsummen, YoY/QoQ, EBITDA-Reconciliations, EPS, Bilanzsumme, Cashflow), aber nicht gegen SEC-EDGAR gegengelesen. Adjusted EBITDA und Segment Adjusted EBITDA sind Non-GAAP-Kennzahlen. Jede Bewertungs-/Rating-/Kurszielaussage ist eine von FinCoach AI modellbasiert ABGELEITETE Einschaetzung (SCENARIO_PROJECTION) — keine Zahl des Unternehmens, keine externe Analystenmeinung und KEINE Anlageberatung. Der Report enthaelt KEINEN Aktienkurs/keine Marktreaktion; frühere Kursangaben (z. B. $148,50 aus dem Q3-Research v2.3.0) sind aelteren Datums und gesondert gekennzeichnet. Zukunftsgerichtete Aussagen gemaess Safe Harbor (Securities Act 27A / Exchange Act 21E).",
+  "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-10-21", "type": "initial", "summary": "Erstveroeffentlichung: Deep-Dive-Aktienanalyse der SpaceX-Q3-2026-Zahlen (Primaerquelle Earnings Release) mit Multi-Agenten-Faktencheck und 54 Konsistenzpruefungen." }
+  ],
+  "facts": [
+    { "id": "FACT_Q3_HEADLINE", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.95, "status": "company_reported",
+      "claim": "Q3 2026 (Quartal zum 30.09.2026): Umsatz $14.575 Mio. (+161% YoY von $5.576 Mio.), Income from operations $2.791 Mio., Net income $4.404 Mio. (Vorjahr Net loss $(1.054) Mio.), Adjusted EBITDA $8.809 Mio. (+306%), EPS verwaessert $0,35 / unverwaessert $0,37.",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell; Adjusted EBITDA ist Non-GAAP. Intern konsistent (FinCoach-Check), nicht SEC-EDGAR-gegengelesen." },
+    { "id": "FACT_Q3_PL", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.95, "status": "company_reported",
+      "claim": "Konsolidierte GuV Q3 2026: Cost of revenue $5.478 Mio., R&D $4.596 Mio., SG&A $1.707 Mio.; Zinsaufwand $(675) Mio., Zinsertrag $873 Mio.; Ergebnis vor Steuern $4.014 Mio., Steuerertrag $390 Mio. 9M 2026: Umsatz $27.083 Mio., Income from ops $705 Mio., Net loss $(413) Mio.",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell (unaudited). Q3 profitabel, 9M aber noch Nettoverlust." },
+    { "id": "FACT_Q3_SEGMENTS", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.95, "status": "company_reported",
+      "claim": "Segmentumsatz Q3 2026: Space $1.767 Mio., Connectivity $5.248 Mio., SI (Super Intelligence) $7.560 Mio. Income from ops: Space $(7) Mio., Connectivity $2.367 Mio., SI $431 Mio. Segment Adjusted EBITDA: Space $357 Mio., Connectivity $3.499 Mio., SI $4.953 Mio.",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell; 'SI' zuvor als 'Artificial Intelligence' berichtet." },
+    { "id": "FACT_Q3_SPACE", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.93, "status": "company_reported",
+      "claim": "Space Q3 2026: Umsatz $1.767 Mio. (+6% YoY, +84% QoQ); 35 Starts (12 Kunden, 23 intern); Mass to orbit 476 t; Starship Flight 14 (erster orbitaler, umsatzgenerierender Starship-Flug) lieferte 26 Starlink-V3-Satelliten (~10x Downlink vs. Falcon-9-Starlink-Start); NASA Nancy Grace Roman Space Telescope gestartet; Starbase, Louisiana angekuendigt (erster Start 2029).",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell; operative KPIs." },
+    { "id": "FACT_Q3_CONNECTIVITY", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.95, "status": "company_reported",
+      "claim": "Connectivity Q3 2026: Umsatz $5.248 Mio. (+69% YoY, +22% QoQ); Starlink-Consumer-Abonnenten 13,6 Mio. (+1,6 Mio. QoQ; 7,2 Mio. Vorjahr); Consumer-ARPU $69/Monat (+5% QoQ, Vorjahr $83); Consumer $3.121 Mio., Enterprise & Government $2.127 Mio.; >3.800 Flugzeuge mit Starlink; Income from ops $2.367 Mio. (+99% YoY), Adjusted EBITDA $3.499 Mio. (+82% YoY).",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell; ARPU YoY ruecklaeufig (Mix-Verschiebung in Entwicklungsmaerkte)." },
+    { "id": "FACT_Q3_SI", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.93, "status": "company_reported",
+      "claim": "SI (Super Intelligence) Q3 2026: Umsatz $7.560 Mio. (+830% YoY, +195% QoQ); Nameplate Compute 1,7 GW (Buildout COLOSSUS II); Advertising $538 Mio., SI-Solutions & Infrastructure $7.022 Mio.; Income from ops $431 Mio. (inkl. ~$1,2 Mrd. SBC aus Cursor-Akquisition); Adjusted EBITDA $4.953 Mio.; SI-Capex Q3 $16.444 Mio. (9M $39.995 Mio.); Grok-Modelle und Grok Bot.",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell; extreme Capex-/Compute-Investitionen, SBC-getriebenes GAAP-Ergebnis." },
+    { "id": "FACT_Q3_BALANCE", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.95, "status": "company_reported",
+      "claim": "Bilanz 30.09.2026: Total assets $254.045 Mio.; Cash & equivalents $51.294 Mio. + Marketable securities $38.561 Mio. (~$89,9 Mrd. Liquiditaet); Goodwill $48.423 Mio. (Cursor); Schulden & Finance Leases $38.844 Mio. ($2.698 kurz + $36.146 lang); Total liabilities $77.277 Mio.; Eigenkapital $176.768 Mio.",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell (unaudited); Eigenkapitalsprung durch IPO + Preferred-Wandlung + Cursor." },
+    { "id": "FACT_Q3_CASHFLOW", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.95, "status": "company_reported",
+      "claim": "Cashflow 9M 2026: Operativer Cashflow $13.097 Mio.; Capex (PP&E) $(48.069) Mio.; IPO-Erloes netto $85.675 Mio.; Aufnahme Fremdkapital brutto $51.834 Mio.; Cash am Periodenende $53.386 Mio.; 9M Net loss $(413) Mio.",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell; Investitionen deutlich ueber operativem Cashflow, finanziert aus IPO und Fremdkapital." },
+    { "id": "FACT_CORP_ACTIONS", "verdict": "CONFIRMED", "class": "PRIMARY_OFFICIAL", "confidence": 0.9, "status": "company_reported",
+      "claim": "Cursor-Merger abgeschlossen 14.08.2026 (implied equity value $60 Mrd., GAAP purchase consideration $42,5 Mrd.; Umsatzbeitrag seit Closing $608 Mio.). 800-MHz-Spektrum: Vereinbarung 08.10.2026 ueber bis zu 14 MHz gepaartes Spektrum, Abschluss erwartet H1 2027.",
+      "source_id": "SRC_SPACEX_Q3_2026_RELEASE", "caveat": "Unternehmensoffiziell; Spektrum-Transaktion steht unter regulatorischem Vorbehalt." },
+    { "id": "FACT_FINCOACH_Q3_ASSESSMENT", "verdict": "SCENARIO_PROJECTION", "class": "SCENARIO_PROJECTION", "confidence": 0.4, "status": "derived_opinion",
+      "claim": "FinCoach-ABGELEITETE Einschaetzung (keine Unternehmenszahl, keine Anlageberatung): Q3 markiert eine Profitabilitaets-Trendwende (Net-Marge ~30%, Adjusted-EBITDA-Marge ~60%, annualisierter Umsatz-Run-Rate ~$58 Mrd.), getragen vom SI-Umsatzsprung und starkem Connectivity-Cashflow; zentrale Unsicherheiten bleiben die extreme SI-Capex-Intensitaet (9M $40 Mrd.), der 9M-Nettoverlust, die SBC-/Verwaesserungseffekte aus dem Cursor-Deal und die Governance (Dual-Class).",
+      "source_id": "SRC_FINCOACH_MODEL", "caveat": "Modellbasierte, abgeleitete Meinung (DERIVED/SCENARIO); kein Kursziel, keine Kauf-/Verkaufsempfehlung, keine Anlageberatung." }
+  ],
+  "sources": [
+    { "id": "SRC_SPACEX_Q3_2026_RELEASE", "label": "SpaceX Reports Third Quarter 2026 Results — Space Exploration Technologies Corp. (Nasdaq: SPCX), Earnings Release, Quartal zum 30.09.2026, Call 20.10.2026 (nutzerbereitgestellte Primaerquelle)" },
+    { "id": "SRC_FINCOACH_MODEL", "label": "FinCoach AI — modellbasierte, abgeleitete Einschaetzung (didaktisch, keine Anlageberatung)" }
+  ]
+}

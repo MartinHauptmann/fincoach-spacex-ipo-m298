@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>M300 v1.0.0 · SpaceX (SPCX) Q3 2026 — Deep-Dive-Aktienanalyse · FinCoach AI</title>
+<meta name="description" content="FinCoach AI Deep-Dive-Aktienanalyse der SpaceX-Q3-2026-Quartalszahlen (Nasdaq: SPCX, Quartal zum 30.09.2026). Umsatz $14,6 Mrd. (+161% YoY), Net income $4,4 Mrd., Adjusted EBITDA $8,8 Mrd., EPS verwässert $0,35. Segmente Space/Connectivity/SI (Super Intelligence), Starlink 13,6 Mio. Abos, Nameplate Compute 1,7 GW, Bilanz & Cashflow, Risiken & Governance. Primärquelle = offizielle Earnings-Mitteilung; Multi-Agenten-Faktencheck (54 Konsistenzprüfungen). FinCoach-Einschätzung ist abgeleitet — keine Anlageberatung. Stichtag 2026-10-21."/>
+<link rel="stylesheet" href="fonts.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { tngb: { bg:'#0A0F1A', card:'#121A2E', cyan:'#00CFFF', emerald:'#00CC7A', magenta:'#E6399A', orange:'#FF6B00', lavender:'#9933FF', gold:'#DFAF0F', indigo:'#4472C4', coral:'#E040A0', muted:'#64748B', border:'#1E293B' } },
+  fontFamily: { sans:['Inter','system-ui','sans-serif'], head:['Space Grotesk','sans-serif'], mono:['JetBrains Mono','monospace'] }
+}}}
+</script>
+<style>
+  :root{ --bg:#0A0F1A; --card:#121A2E; --cyan:#00CFFF; --emerald:#00CC7A; --magenta:#E6399A; --orange:#FF6B00; --lavender:#9933FF; --gold:#DFAF0F; --indigo:#4472C4; --coral:#E040A0; --muted:#64748B; --border:#1E293B; }
+  *{box-sizing:border-box;}
+  html{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif;}
+  body{background:var(--bg);}
+  h1,h2,h3,h4,h5,h6{font-family:'Space Grotesk',sans-serif;}
+  code,pre,.mono{font-family:'JetBrains Mono',monospace;}
+  .glass{background:rgba(18,26,46,0.7);backdrop-filter:blur(16px);border:1px solid rgba(0,207,255,0.12);}
+  .scroll-fade{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+  .scroll-fade.visible{opacity:1;transform:none;}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#F1F5F9;margin-bottom:.35rem;}
+  .section-badge{font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:4px;}
+  .kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.35rem;position:relative;}
+  .kpi-card.scenario-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px dashed rgba(255,107,0,0.35);border-radius:inherit;}
+  .kpi-card.confirmed-kpi::before{content:'';position:absolute;inset:0;pointer-events:none;border:1px solid rgba(0,204,122,0.35);border-radius:inherit;}
+  .dep-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+  .caveat-box{background:rgba(230,57,154,0.07);border:1px solid rgba(230,57,154,0.35);border-radius:12px;padding:1rem 1.25rem;}
+  .est-mark{color:var(--gold);font-size:.62rem;font-weight:700;vertical-align:super;cursor:help;}
+  .src-mark{color:var(--emerald);font-size:.6rem;font-weight:700;vertical-align:super;cursor:help;}
+  table{width:100%;border-collapse:collapse;}
+  th{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:.5rem .7rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:bottom;}
+  td{padding:.5rem .7rem;font-size:.82rem;border-bottom:1px solid rgba(30,41,59,.6);vertical-align:top;}
+  td.num,th.num{text-align:right;font-family:'JetBrains Mono',monospace;}
+  tr:hover td{background:rgba(0,207,255,.04);}
+  tr.total-row td{border-top:1px solid var(--border);font-weight:700;color:#F1F5F9;}
+  .badge{display:inline-block;padding:1px 8px;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;}
+  .pos{color:#00CC7A;} .neg{color:#E6399A;}
+  .section-badge{display:inline-block;}
+  #live-audit-banner{background:rgba(0,204,122,.08);border-left:3px solid #00CC7A;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#94A3B8;display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  #live-audit-banner.warn{background:rgba(223,175,15,.10);border-left-color:#DFAF0F;}
+  #live-audit-banner.err{background:rgba(230,57,154,.10);border-left-color:#E6399A;color:#E6399A;}
+  #live-audit-banner code{color:#00CFFF;}
+  .dbom-pill{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.58rem;}
+  .dbom-class-badge{padding:1px 6px;border-radius:4px;background:rgba(255,107,0,.16);color:#FF6B00;border:1px solid rgba(255,107,0,.35);}
+  .dbom-class-badge.dc-primary{background:rgba(0,204,122,.16);color:#00CC7A;border-color:rgba(0,204,122,.35);}
+  .dbom-conf{color:#64748B;}
+  .check-pass{color:#00CC7A;font-weight:700;}
+  #navdock{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:6px;}
+  #navdock a{width:30px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:700;font-family:'JetBrains Mono',monospace;background:rgba(18,26,46,.85);border:1px solid var(--border);color:var(--muted);text-decoration:none;transition:all .18s;}
+  #navdock a:hover,#navdock a.active-dock{background:var(--cyan);color:#0A0F1A;border-color:var(--cyan);}
+  @media (max-width:1024px){#navdock{display:none;}}
+  ul.tick{list-style:none;padding:0;margin:0;}
+  ul.tick li{position:relative;padding-left:1.25rem;margin-bottom:.4rem;font-size:.85rem;line-height:1.55;color:#CBD5E1;}
+  ul.tick li::before{content:'▸';position:absolute;left:0;color:var(--cyan);}
+  [data-tooltip]{position:relative;cursor:help;border-bottom:1px dotted rgba(0,207,255,.5);}
+  .chart-box{position:relative;height:260px;}
+</style>
+
+<!-- ============ M-DBOM · JSON-LD ============ -->
+<script type="application/ld+json" id="module-provenance">
+{
+  "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
+  "$schema_id": "fincoach.m-dbom.v1",
+  "module": { "id": "M300", "title": "SpaceX (SPCX) Q3 2026 — Deep-Dive-Aktienanalyse", "version": "1.0.0", "stichtag": "2026-10-21", "related_modules": ["M298","M299"], "external_dbom": "provenance/m300.dbom.json", "predecessor_version": null },
+  "fact_summary": { "total": 10, "confirmed_primary": 9, "scenario_projection": 1 },
+  "honest_disclosure": "Primärquelle: offizielle Mitteilung 'SpaceX Reports Third Quarter 2026 Results' (Nasdaq: SPCX, Quartal zum 30.09.2026). Gemeldete GAAP-/Non-GAAP-Zahlen sind unternehmensoffiziell (CONFIRMED/PRIMARY_OFFICIAL), FinCoach-intern auf Konsistenz geprüft (54/54), aber nicht SEC-EDGAR-gegengelesen. Jede Bewertungs-/Rating-Aussage ist eine abgeleitete FinCoach-Einschätzung (SCENARIO) — keine Anlageberatung."
+}
+</script>
+</head>
+<body class="min-h-screen" style="background:#0A0F1A;">
+
+<!-- ===== NAV ===== -->
+<nav class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+  <a href="index.html" class="flex items-center gap-2">
+    <svg viewBox="0 0 100 100" fill="none" width="36" height="36">
+      <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+      <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+      <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+      <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+      <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+    </svg>
+    <div><div class="font-head font-bold text-white text-sm leading-tight">FinCoach AI</div><div class="text-xs leading-tight" style="color:#00CFFF;">by TheNextGenerationBanking.com</div></div>
+  </a>
+  <div class="flex items-center gap-2 flex-wrap">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">M300</span>
+    <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">Q3 2026 · Earnings</span>
+    <a href="modul.html" class="text-xs text-tngb-muted hover:text-white transition ml-2">M298</a>
+    <a href="m299.html" class="text-xs text-tngb-muted hover:text-white transition">M299</a>
+    <a href="index.html" class="text-xs text-tngb-muted hover:text-white transition">← Hauptseite</a>
+  </div>
+</nav>
+
+<!-- ===== NavDock ===== -->
+<div id="navdock" aria-label="Sektions-Navigation">
+  <a href="#s01" data-dock="s01" title="Hero / Headline">01</a>
+  <a href="#s02" data-dock="s02" title="Geschäftszahlen">02</a>
+  <a href="#s03" data-dock="s03" title="Segmentanalyse">03</a>
+  <a href="#s04" data-dock="s04" title="Bewertung & Einschätzung">04</a>
+  <a href="#s05" data-dock="s05" title="Bilanz & Cashflow">05</a>
+  <a href="#s06" data-dock="s06" title="Risiken & Governance">06</a>
+  <a href="#s07" data-dock="s07" title="Faktencheck">FC</a>
+  <a href="#s08" data-dock="s08" title="Compliance">CO</a>
+</div>
+
+<!-- ===== M-DBOM Provenienz-Banner ===== -->
+<div class="px-4 pt-4 max-w-7xl mx-auto">
+  <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #00CC7A;">
+    <span class="font-mono font-bold" style="color:#00CC7A;">M-DBOM v1 · Modul M300 v1.0.0</span>
+    <span class="text-slate-300">10 Fakten · 9 PRIMARY/confirmed · 1 abgeleitet (SCENARIO) · Primärquelle: SpaceX Q3-2026-Earnings-Release · Stichtag 2026-10-21</span>
+    <span class="ml-auto flex items-center gap-2">
+      <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
+      <a href="#s07" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,204,122,0.15);color:#00CC7A;border:1px solid rgba(0,204,122,0.4);">✓ Faktencheck</a>
+    </span>
+  </div>
+  <div id="live-audit-banner" class="mt-2 rounded-xl">
+    <span class="font-bold" style="color:#00CC7A;">● LIVE-AUDIT</span>
+    <span id="live-audit-status">prüft DBOM-Integrität …</span>
+    <span class="ml-auto" id="live-audit-meta"></span>
+  </div>
+</div>
+
+<!-- ===== S01 HERO ===== -->
+<section id="s01" class="px-4 pt-8 pb-10 max-w-7xl mx-auto">
+  <div class="scroll-fade">
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">DEEP DIVE · AKTIENANALYSE</span>
+      <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">PRIMÄRQUELLE · SEC/AD-HOC</span>
+      <span class="section-badge" style="background:rgba(100,116,139,0.15);color:#94A3B8;">Stichtag 2026-10-21</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-head font-extrabold text-white mb-3 leading-tight">
+      SpaceX <span style="background:linear-gradient(135deg,#00CFFF 0%,#00CC7A 60%,#DFAF0F 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">Q3 2026</span> — Deep-Dive-Aktienanalyse
+    </h1>
+    <p class="text-lg font-head font-semibold mb-3" style="color:#00CFFF;">
+      Space Exploration Technologies Corp. (Nasdaq: SPCX) · Quartal zum 30.09.2026 · Earnings-Call 20.10.2026
+    </p>
+    <p class="text-base text-slate-400 max-w-3xl mb-6 leading-relaxed">
+      Rekordquartal mit Profitabilitäts-Trendwende: <strong class="text-white">Umsatz $14,6 Mrd. (+161% YoY)</strong>, erstmals
+      klar positives Nettoergebnis von <strong class="text-tngb-emerald">$4,4 Mrd.</strong> und Adjusted EBITDA von
+      <strong class="text-white">$8,8 Mrd.</strong> — getragen vom Durchbruch des SI-Segments (Super Intelligence) und
+      starkem Connectivity-Cashflow. Diese Analyse beruht auf der offiziellen Quartalsmitteilung als
+      <strong class="text-tngb-emerald">Primärquelle</strong> und ist durchgängig faktengeprüft.
+    </p>
+
+    <!-- Daten-Transparenz-Box -->
+    <div class="dep-box mb-8 max-w-3xl" style="border-left:3px solid #00CC7A;">
+      <div class="flex items-start gap-3">
+        <span class="text-tngb-emerald text-lg leading-none mt-0.5">✓</span>
+        <div class="text-sm text-slate-300 leading-relaxed">
+          <strong class="text-tngb-emerald">Daten-Transparenz:</strong> Die Kennzahlen stammen aus der
+          unternehmensoffiziellen Mitteilung „SpaceX Reports Third Quarter 2026 Results" und werden als
+          <span class="dbom-class-badge dc-primary">PRIMARY</span> geführt <span class="src-mark" title="unternehmensoffizielle Primärquelle">SRC</span>.
+          FinCoach AI hat sie auf <strong>interne Konsistenz geprüft (54/54 Checks</strong> — Segmentsummen, YoY/QoQ,
+          EBITDA-Reconciliations, EPS, Bilanzsumme, Cashflow) und zusätzlich adversariell gegen die PDF gegengelesen;
+          eine SEC-EDGAR-Gegenprüfung erfolgte nicht. <strong>Adjusted EBITDA</strong> ist eine Non-GAAP-Kennzahl.
+          Jede Bewertungs-/Rating-Aussage ist eine von FinCoach <strong>abgeleitete</strong> Einschätzung
+          <span class="dbom-class-badge">SCENARIO</span> — <strong>keine Anlageberatung</strong>, kein Kursziel. Der Report
+          nennt <strong>keinen Aktienkurs</strong>. <strong class="text-tngb-cyan">Stichtag: 2026-10-21.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Headline-KPIs -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="kpi-card confirmed-kpi" data-source="FACT_Q3_HEADLINE" data-fact-class="PRIMARY_OFFICIAL" data-tooltip="Q3 2026 Umsatz $14.575 Mio., +161% YoY von $5.576 Mio. · Quelle: Earnings Release">
+        <div class="text-3xl font-head font-extrabold text-white">$14,6&nbsp;Mrd.</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Umsatz Q3 · <span class="pos">+161% YoY</span></div>
+        <div class="text-xs text-tngb-muted mt-1">Vorjahr $5,6 Mrd. · +87% QoQ</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRIMARY</span><span class="dbom-conf">Konf. 0.95</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi" data-source="FACT_Q3_HEADLINE" data-fact-class="PRIMARY_OFFICIAL" data-tooltip="Net income $4.404 Mio.; Vorjahr Net loss $(1.054) Mio. · Verbesserung +$5,5 Mrd.">
+        <div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">$4,4&nbsp;Mrd.</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Net Income Q3</div>
+        <div class="text-xs text-tngb-muted mt-1">Vorjahr −$1,1 Mrd. · Netto-Marge ~30%</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRIMARY</span><span class="dbom-conf">Konf. 0.95</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi" data-source="FACT_Q3_HEADLINE" data-fact-class="PRIMARY_OFFICIAL" data-tooltip="Adjusted EBITDA (Non-GAAP) $8.809 Mio., +306% YoY von $2.169 Mio.">
+        <div class="text-3xl font-head font-extrabold text-white">$8,8&nbsp;Mrd.</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Adj. EBITDA · <span class="pos">+306%</span></div>
+        <div class="text-xs text-tngb-muted mt-1">Non-GAAP · Marge ~60%</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRIMARY</span><span class="dbom-conf">Konf. 0.95</span></div>
+      </div>
+      <div class="kpi-card confirmed-kpi" data-source="FACT_Q3_HEADLINE" data-fact-class="PRIMARY_OFFICIAL" data-tooltip="EPS verwässert $0,35 / unverwässert $0,37; 9M aber noch $(0,15) verwässert">
+        <div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">$0,35</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">EPS Q3 (verwässert)</div>
+        <div class="text-xs text-tngb-muted mt-1">unverw. $0,37 · 9M noch −$0,15</div>
+        <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">PRIMARY</span><span class="dbom-conf">Konf. 0.95</span></div>
+      </div>
+    </div>
+    <p class="text-xs text-tngb-muted max-w-3xl">Kurz-These: Das SI-Segment skaliert explosiv (+830% YoY) und kippt das Konzernergebnis ins Positive; die Qualität des Quartals wird aber durch extreme KI-Capex, hohe Cursor-bedingte SBC und einen 9-Monats-Nettoverlust relativiert. Details in den Sektionen 02–06, Faktencheck in 07.</p>
+  </div>
+</section>
+
+<!-- ===== S02 GESCHÄFTSZAHLEN ===== -->
+<section id="s02" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(0,207,255,0.15);color:#00CFFF;">S02</span>
+    <h2 class="section-title">Geschäftszahlen im Detail</h2>
+  </div>
+  <p class="text-sm text-slate-400 mb-6 max-w-3xl">Konsolidierte Gewinn- und Verlustrechnung (unaudited). Alle Werte in Mio. USD, sofern nicht anders angegeben. <span class="dbom-class-badge dc-primary">PRIMARY</span> — Quelle: Earnings Release.</p>
+  <div class="grid lg:grid-cols-2 gap-6 items-start">
+    <div class="dep-box overflow-x-auto" data-source="FACT_Q3_PL" data-fact-class="PRIMARY_OFFICIAL">
+      <table>
+        <thead><tr><th>$ Mio.</th><th class="num">Q3 2026</th><th class="num">Q3 2025</th><th class="num">9M 2026</th><th class="num">9M 2025</th></tr></thead>
+        <tbody>
+          <tr><td>Umsatz</td><td class="num">14.575</td><td class="num">5.576</td><td class="num">27.083</td><td class="num">13.714</td></tr>
+          <tr><td>Umsatzkosten</td><td class="num">5.478</td><td class="num">2.705</td><td class="num">11.361</td><td class="num">6.949</td></tr>
+          <tr><td>F&amp;E</td><td class="num">4.596</td><td class="num">2.291</td><td class="num">11.658</td><td class="num">5.806</td></tr>
+          <tr><td>SG&amp;A</td><td class="num">1.707</td><td class="num">575</td><td class="num">3.365</td><td class="num">1.674</td></tr>
+          <tr class="total-row"><td>Operatives Ergebnis</td><td class="num pos">2.791</td><td class="num neg">(273)</td><td class="num pos">705</td><td class="num neg">(1.216)</td></tr>
+          <tr><td>Zinsaufwand</td><td class="num">(675)</td><td class="num">(514)</td><td class="num">(1.968)</td><td class="num">(1.372)</td></tr>
+          <tr><td>Zinsertrag</td><td class="num">873</td><td class="num">155</td><td class="num">1.426</td><td class="num">370</td></tr>
+          <tr><td>Übriges Ergebnis, netto</td><td class="num">1.025</td><td class="num">140</td><td class="num">(937)</td><td class="num">342</td></tr>
+          <tr><td>Ergebnis vor Steuern</td><td class="num">4.014</td><td class="num neg">(492)</td><td class="num neg">(774)</td><td class="num neg">(1.876)</td></tr>
+          <tr><td>Steuern (Ertrag)</td><td class="num">390</td><td class="num">(562)</td><td class="num">361</td><td class="num">(714)</td></tr>
+          <tr class="total-row"><td>Nettoergebnis</td><td class="num pos">4.404</td><td class="num neg">(1.054)</td><td class="num neg">(413)</td><td class="num neg">(2.590)</td></tr>
+          <tr><td>EPS verwässert</td><td class="num pos">$0,35</td><td class="num neg">$(0,36)</td><td class="num neg">$(0,15)</td><td class="num neg">$(0,89)</td></tr>
+          <tr><td>Adjusted EBITDA <span class="est-mark" title="Non-GAAP">¹</span></td><td class="num pos">8.809</td><td class="num">2.169</td><td class="num">13.474</td><td class="num">5.113</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-tngb-muted mt-2">¹ Non-GAAP; Überleitung zum Nettoergebnis in der Mitteilung. Q3 ist profitabel, die 9-Monats-Sicht bleibt wegen der Verluste im 1. Halbjahr (v. a. SI) ein Nettoverlust.</p>
+    </div>
+    <div class="space-y-5">
+      <div class="dep-box"><div class="text-xs text-tngb-muted mb-2 font-mono">Umsatz nach Segment — Q3 2025 vs. Q3 2026 ($ Mio.)</div><div class="chart-box"><canvas id="chartRev"></canvas></div></div>
+      <div class="grid grid-cols-3 gap-3">
+        <div class="dep-box text-center"><div class="text-xl font-head font-extrabold text-white">~19%</div><div class="text-xs text-tngb-muted mt-1">Operative Marge Q3 <span class="est-mark" title="abgeleitet: 2.791/14.575">D</span></div></div>
+        <div class="dep-box text-center"><div class="text-xl font-head font-extrabold" style="color:#00CC7A;">~30%</div><div class="text-xs text-tngb-muted mt-1">Netto-Marge Q3 <span class="est-mark" title="abgeleitet: 4.404/14.575">D</span></div></div>
+        <div class="dep-box text-center"><div class="text-xl font-head font-extrabold" style="color:#DFAF0F;">~60%</div><div class="text-xs text-tngb-muted mt-1">Adj.-EBITDA-Marge <span class="est-mark" title="abgeleitet: 8.809/14.575">D</span></div></div>
+      </div>
+      <p class="text-xs text-tngb-muted"><span class="est-mark" title="DERIVED">D</span> = von FinCoach abgeleitete Kennzahl (Division gemeldeter Werte), keine Unternehmensangabe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S03 SEGMENTANALYSE ===== -->
+<section id="s03" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">S03</span>
+    <h2 class="section-title">Segmentanalyse — Space · Connectivity · SI</h2>
+  </div>
+  <div class="grid lg:grid-cols-2 gap-6 mb-6 items-start">
+    <div class="dep-box overflow-x-auto" data-source="FACT_Q3_SEGMENTS" data-fact-class="PRIMARY_OFFICIAL">
+      <table>
+        <thead><tr><th>Segment Q3 2026</th><th class="num">Umsatz</th><th class="num">YoY</th><th class="num">Op. Ergebnis</th><th class="num">Adj. EBITDA</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Space</strong></td><td class="num">1.767</td><td class="num pos">+6%</td><td class="num neg">(7)</td><td class="num">357</td></tr>
+          <tr><td><strong>Connectivity</strong></td><td class="num">5.248</td><td class="num pos">+69%</td><td class="num pos">2.367</td><td class="num">3.499</td></tr>
+          <tr><td><strong>SI</strong> (Super Intelligence)</td><td class="num">7.560</td><td class="num pos">+830%</td><td class="num pos">431</td><td class="num">4.953</td></tr>
+          <tr class="total-row"><td>Konzern</td><td class="num">14.575</td><td class="num pos">+161%</td><td class="num pos">2.791</td><td class="num">8.809</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-tngb-muted mt-2">Umsatzmix Q3: SI ~52% · Connectivity ~36% · Space ~12% <span class="est-mark" title="abgeleitet">D</span>. SI ist binnen eines Jahres vom kleinsten zum größten Segment geworden.</p>
+    </div>
+    <div class="dep-box"><div class="text-xs text-tngb-muted mb-2 font-mono">Segment Adjusted EBITDA — Q3 2026 ($ Mio.)</div><div class="chart-box"><canvas id="chartEbitda"></canvas></div></div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="dep-box" data-source="FACT_Q3_SPACE" data-fact-class="PRIMARY_OFFICIAL" style="border-top:3px solid #00CFFF;">
+      <h3 class="font-head font-bold text-tngb-cyan mb-2">Space — $1,77 Mrd.</h3>
+      <ul class="tick">
+        <li>35 Starts (12 Kunden, 23 intern) · 476 t Nutzlast in den Orbit</li>
+        <li><strong>Starship Flight 14</strong>: erster orbitaler, umsatzgenerierender Flug → 26 Starlink-V3-Satelliten (~10× Downlink vs. Falcon 9)</li>
+        <li>NASA „Nancy Grace Roman Space Telescope" gestartet</li>
+        <li>Starbase, Louisiana angekündigt (erster Start 2029)</li>
+        <li>Op.-Ergebnis −$7 Mio. (R&amp;D-Vorlauf Starship); EBITDA $357 Mio.</li>
+      </ul>
+    </div>
+    <div class="dep-box" data-source="FACT_Q3_CONNECTIVITY" data-fact-class="PRIMARY_OFFICIAL" style="border-top:3px solid #00CC7A;">
+      <h3 class="font-head font-bold text-tngb-emerald mb-2">Connectivity — $5,25 Mrd.</h3>
+      <ul class="tick">
+        <li><strong>13,6 Mio.</strong> Starlink-Consumer-Abos (+1,6 Mio. QoQ; 7,2 Mio. Vorjahr)</li>
+        <li>Consumer-ARPU $69/Monat (+5% QoQ, aber <span class="neg">Vorjahr $83</span> — Mix-Shift)</li>
+        <li>Consumer $3,12 Mrd. · Enterprise &amp; Gov $2,13 Mrd. (+91% YoY)</li>
+        <li>&gt;3.800 Flugzeuge mit Starlink (Aviation)</li>
+        <li>Op.-Ergebnis +99% YoY auf $2,37 Mrd.; EBITDA $3,50 Mrd. (Cash-Cow)</li>
+      </ul>
+    </div>
+    <div class="dep-box" data-source="FACT_Q3_SI" data-fact-class="PRIMARY_OFFICIAL" style="border-top:3px solid #9933FF;">
+      <h3 class="font-head font-bold" style="color:#9933FF;">SI — $7,56 Mrd.</h3>
+      <ul class="tick">
+        <li>Umsatz <strong>+830% YoY</strong> / +195% QoQ (Cursor, Grok-Adoption, Cloud)</li>
+        <li>Nameplate Compute <strong>1,7 GW</strong> (Buildout COLOSSUS II)</li>
+        <li>Advertising $538 Mio. · SI-Solutions &amp; Infra $7,02 Mrd.</li>
+        <li>Op.-Ergebnis $431 Mio. (inkl. ~$1,2 Mrd. SBC aus Cursor-Deal); EBITDA $4,95 Mrd.</li>
+        <li class="neg">Capex Q3 $16,4 Mrd. · 9M $40,0 Mrd. — extreme Investitionsintensität</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S04 BEWERTUNG & FINCOACH-EINSCHÄTZUNG ===== -->
+<section id="s04" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(223,175,15,0.15);color:#DFAF0F;">S04</span>
+    <h2 class="section-title">Bewertung &amp; FinCoach-Einschätzung</h2>
+  </div>
+  <div class="grid lg:grid-cols-3 gap-5 mb-6">
+    <div class="dep-box"><div class="text-xs text-tngb-muted">Umsatz-Run-Rate (annualisiert) <span class="est-mark" title="abgeleitet: Q3 ×4">D</span></div><div class="text-2xl font-head font-extrabold text-white mt-1">~$58 Mrd.</div><div class="text-xs text-tngb-muted mt-1">aus Q3 ×4; 9M ist. $27,1 Mrd.</div></div>
+    <div class="dep-box"><div class="text-xs text-tngb-muted">Adj.-EBITDA-Run-Rate <span class="est-mark" title="abgeleitet: Q3 ×4">D</span></div><div class="text-2xl font-head font-extrabold" style="color:#DFAF0F;">~$35 Mrd.</div><div class="text-xs text-tngb-muted mt-1">aus Q3 ×4 (Non-GAAP)</div></div>
+    <div class="dep-box"><div class="text-xs text-tngb-muted">Liquidität (Cash + Wertpapiere)</div><div class="text-2xl font-head font-extrabold" style="color:#00CC7A;">~$89,9 Mrd.</div><div class="text-xs text-tngb-muted mt-1">finanziert v. a. aus IPO ($85,7 Mrd.)</div></div>
+  </div>
+
+  <div class="caveat-box mb-6" style="border-color:rgba(223,175,15,0.4);background:rgba(223,175,15,0.06);" data-source="FACT_FINCOACH_Q3_ASSESSMENT" data-fact-class="SCENARIO_PROJECTION">
+    <div class="flex items-start gap-3">
+      <span class="text-tngb-gold text-lg leading-none mt-0.5">◆</span>
+      <div class="text-sm text-slate-300 leading-relaxed">
+        <strong class="text-tngb-gold">FinCoach-Einschätzung</strong> <span class="dbom-class-badge">SCENARIO · DERIVED</span> — <strong>keine Anlageberatung, kein Kursziel, keine Kauf-/Verkaufsempfehlung.</strong>
+        Q3 2026 markiert eine <strong>fundamentale Profitabilitäts-Trendwende</strong>: Erstmals trägt das SI-Segment positiv zum Ergebnis bei,
+        Connectivity liefert verlässlich hohe Margen, und der Konzern erzielt ~30% Netto- und ~60% Adj.-EBITDA-Marge. Dem stehen gewichtige
+        <strong>Unsicherheiten</strong> gegenüber: die extreme SI-Capex-Intensität (9M $40 Mrd. vs. SI-Umsatz 9M $10,9 Mrd.), der
+        weiter bestehende <strong>9-Monats-Nettoverlust</strong> (−$0,4 Mrd.), hohe akquisitionsbedingte SBC/Verwässerung (Cursor) sowie
+        die Governance-Konzentration (Dual-Class). Die Aktien-Bewertung hängt damit fast vollständig an Tempo und Kapitaleffizienz der
+        SI-Monetarisierung. <strong>Hinweis:</strong> Die Mitteilung enthält keinen Aktienkurs; die frühere Kursangabe ($148,50, Rating „Halten",
+        aus dem Q3-Research in M298 v2.3.0 vom Sep 2026) ist <strong>älteren Datums</strong> und keine Reaktion auf diese Zahlen.
+      </div>
+    </div>
+  </div>
+  <p class="text-xs text-tngb-muted max-w-3xl">Methodik: Run-Rates sind einfache Annualisierungen (Q3 × 4) und berücksichtigen weder Saisonalität noch Guidance; die Mitteilung enthält keine explizite Umsatz-/Ergebnisprognose. Multiples lassen sich ohne Marktkapitalisierung (kein Kurs in der Quelle) nicht seriös bilden — daher bewusst nicht ausgewiesen.</p>
+</section>
+
+<!-- ===== S05 BILANZ & CASHFLOW ===== -->
+<section id="s05" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(68,114,196,0.18);color:#4472C4;">S05</span>
+    <h2 class="section-title">Bilanz &amp; Cashflow (9M 2026)</h2>
+  </div>
+  <div class="grid lg:grid-cols-2 gap-6 items-start">
+    <div class="dep-box overflow-x-auto" data-source="FACT_Q3_BALANCE" data-fact-class="PRIMARY_OFFICIAL">
+      <h3 class="font-head font-bold text-white mb-3 text-sm">Bilanz zum 30.09.2026 ($ Mio.)</h3>
+      <table>
+        <tbody>
+          <tr><td>Zahlungsmittel &amp; Äquivalente</td><td class="num">51.294</td></tr>
+          <tr><td>Marktgängige Wertpapiere</td><td class="num">38.561</td></tr>
+          <tr><td>Sachanlagen (PP&amp;E), netto</td><td class="num">89.483</td></tr>
+          <tr><td>Goodwill (v. a. Cursor)</td><td class="num">48.423</td></tr>
+          <tr class="total-row"><td>Bilanzsumme</td><td class="num">254.045</td></tr>
+          <tr><td>Schulden &amp; Finance Leases</td><td class="num">38.844</td></tr>
+          <tr><td>Verbindlichkeiten gesamt</td><td class="num">77.277</td></tr>
+          <tr class="total-row"><td>Eigenkapital</td><td class="num pos">176.768</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-tngb-muted mt-2">Liquidität ~$89,9 Mrd. (Cash + Wertpapiere) deutlich über der Verschuldung von $38,8 Mrd. → komfortable Nettoliquidität. Bilanzsprung ggü. 31.12.2025 ($92,1 Mrd.) v. a. durch IPO, Preferred-Wandlung und Cursor-Akquisition.</p>
+    </div>
+    <div class="space-y-5">
+      <div class="dep-box" data-source="FACT_Q3_CASHFLOW" data-fact-class="PRIMARY_OFFICIAL">
+        <h3 class="font-head font-bold text-white mb-3 text-sm">Cashflow 9M 2026 ($ Mio.)</h3>
+        <table>
+          <tbody>
+            <tr><td>Operativer Cashflow</td><td class="num pos">13.097</td></tr>
+            <tr><td>Investitionen (Capex, PP&amp;E)</td><td class="num neg">(48.069)</td></tr>
+            <tr><td>IPO-Erlös, netto</td><td class="num pos">85.675</td></tr>
+            <tr><td>Fremdkapital-Aufnahme (brutto)</td><td class="num">51.834</td></tr>
+            <tr class="total-row"><td>Zahlungsmittel Periodenende</td><td class="num">53.386</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="caveat-box">
+        <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">Kapitalintensität:</strong> Der Capex (9M $48 Mrd., davon SI $40 Mrd.) übersteigt den operativen Cashflow um das ~3,7-Fache. Der Ausbau der KI-Compute-Infrastruktur (COLOSSUS II) wird somit primär aus IPO-Erlös und Fremdkapital finanziert — ein zentraler Werthebel <em>und</em> Risikofaktor zugleich.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S06 RISIKEN & GOVERNANCE ===== -->
+<section id="s06" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(230,57,154,0.15);color:#E6399A;">S06</span>
+    <h2 class="section-title">Risiken &amp; Governance</h2>
+  </div>
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="dep-box" data-source="FACT_Q3_SI" data-fact-class="PRIMARY_OFFICIAL"><h3 class="font-head font-bold text-tngb-magenta mb-2">KI-Capex & Burn</h3><p class="text-sm text-slate-300 leading-relaxed">SI-Capex 9M $40 Mrd. bei SI-Umsatz 9M $10,9 Mrd. Das GAAP-Ergebnis des SI-Segments ist stark von Abschreibungen und SBC geprägt; die Monetarisierung muss der Infrastruktur erst folgen.</p></div>
+    <div class="dep-box" data-source="FACT_CORP_ACTIONS" data-fact-class="PRIMARY_OFFICIAL"><h3 class="font-head font-bold text-tngb-magenta mb-2">Cursor-Deal: SBC &amp; Verwässerung</h3><p class="text-sm text-slate-300 leading-relaxed">Implied Equity Value $60 Mrd., GAAP-Kaufpreis $42,5 Mrd., ~$23,4 Mrd. an Equity-Awards für Post-Closing-Services (künftige SBC). Q3 enthält bereits ~$1,2 Mrd. akquisitionsbedingte SBC. Goodwill springt auf $48,4 Mrd.</p></div>
+    <div class="dep-box"><h3 class="font-head font-bold text-tngb-magenta mb-2">Governance (Dual-Class)</h3><p class="text-sm text-slate-300 leading-relaxed">Mehrklassen-Aktienstruktur (Class A/B/C) mit konzentrierter Stimmrechtsmacht. Minderheitsaktionäre haben begrenzten Einfluss — ein in der Earnings-Mitteilung über die Aktienstruktur erkennbarer, strukturell fortbestehender Governance-Faktor.</p></div>
+    <div class="dep-box" data-source="FACT_Q3_CONNECTIVITY" data-fact-class="PRIMARY_OFFICIAL"><h3 class="font-head font-bold text-tngb-magenta mb-2">ARPU &amp; Mix · Regulatorik</h3><p class="text-sm text-slate-300 leading-relaxed">Consumer-ARPU YoY rückläufig ($83 → $69) durch Wachstum in Entwicklungsmärkten. Die 800-MHz-Spektrum-Vereinbarung (bis 14 MHz, Abschluss H1 2027) steht unter regulatorischem Vorbehalt.</p></div>
+  </div>
+  <div class="caveat-box mt-5">
+    <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-tngb-magenta">Ergebnisqualität:</strong> Das positive Q3-Nettoergebnis ($4,4 Mrd.) wird teils von Posten unterhalb des operativen Ergebnisses gestützt (Zinsertrag $0,9 Mrd., übriges Ergebnis +$1,0 Mrd., Steuerertrag $0,4 Mrd.). Auf 9-Monats-Sicht steht weiterhin ein Nettoverlust von −$0,4 Mrd. Qualität und Nachhaltigkeit der Profitabilität sollten über mehrere Quartale beobachtet werden.</p>
+  </div>
+</section>
+
+<!-- ===== S07 FAKTENCHECK & PROVENIENZ ===== -->
+<section id="s07" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">S07</span>
+    <h2 class="section-title">Faktencheck &amp; Provenienz</h2>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4 mb-6">
+    <div class="dep-box text-center" style="border-top:3px solid #00CC7A;"><div class="text-3xl font-head font-extrabold" style="color:#00CC7A;">54/54</div><div class="text-xs text-tngb-muted mt-1">Konsistenz-Checks bestanden</div></div>
+    <div class="dep-box text-center" style="border-top:3px solid #00CFFF;"><div class="text-3xl font-head font-extrabold" style="color:#00CFFF;">0</div><div class="text-xs text-tngb-muted mt-1">Abweichungen (adversariell geprüft)</div></div>
+    <div class="dep-box text-center" style="border-top:3px solid #DFAF0F;"><div class="text-3xl font-head font-extrabold" style="color:#DFAF0F;">9 + 1</div><div class="text-xs text-tngb-muted mt-1">PRIMARY-Fakten + 1 abgeleitet</div></div>
+  </div>
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-white mb-2 text-sm">Geprüfte Konsistenz (deterministisch)</h3>
+      <ul class="tick">
+        <li><span class="check-pass">✓</span> Segmentsummen = Konzern (Umsatz/Op./EBITDA/Capex, je Periode)</li>
+        <li><span class="check-pass">✓</span> YoY/QoQ-Wachstum (161%, 306%, 830%, 69%, 99%, 82%) nachgerechnet</li>
+        <li><span class="check-pass">✓</span> Segment-Adj.-EBITDA-Reconciliations (Space/Connectivity/SI)</li>
+        <li><span class="check-pass">✓</span> Net Income → Adjusted EBITDA Überleitung = 8.809</li>
+        <li><span class="check-pass">✓</span> EPS (basic $0,37 / diluted $0,35) aus Nettoergebnis/Aktienzahl</li>
+        <li><span class="check-pass">✓</span> Bilanz: Verbindlichkeiten + Eigenkapital = Bilanzsumme (254.045)</li>
+        <li><span class="check-pass">✓</span> Cashflow-Brücke: Anfangs- + Nettoveränderung = Endbestand</li>
+      </ul>
+    </div>
+    <div class="dep-box">
+      <h3 class="font-head font-bold text-white mb-2 text-sm">Provenienz-Klassifizierung</h3>
+      <ul class="tick">
+        <li><span class="dbom-class-badge dc-primary">PRIMARY</span> Gemeldete GAAP-/Non-GAAP-Zahlen → unternehmensoffiziell (Earnings Release), Konf. 0,90–0,95</li>
+        <li><span class="dbom-class-badge">SCENARIO</span> FinCoach-Einschätzung & Run-Rates → abgeleitet/Meinung, Konf. 0,40</li>
+        <li><span class="est-mark" title="DERIVED">D</span> Margen/Mix/Annualisierung → arithmetisch aus gemeldeten Werten abgeleitet</li>
+        <li><strong>Zwei Verifikationsebenen:</strong> (1) deterministische Nachrechnung in Python, (2) adversariell-unabhängiges PDF-Gegenlesen durch separaten Agenten</li>
+        <li><strong>Grenze:</strong> keine SEC-EDGAR-Gegenprüfung; „SI" war zuvor als „Artificial Intelligence" berichtet (Definitionswechsel laut Mitteilung)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="text-xs text-tngb-muted mt-4">Maschinenlesbare Herkunft je Kennzahl: <a href="provenance/m300.dbom.json" class="text-tngb-cyan hover:underline">provenance/m300.dbom.json</a> — jedes <span class="font-mono">data-source</span>-Attribut auf dieser Seite referenziert einen dort hinterlegten Fact (Live-Audit oben).</p>
+</section>
+
+<!-- ===== S08 COMPLIANCE ===== -->
+<section id="s08" class="px-4 py-12 max-w-7xl mx-auto scroll-fade">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="section-badge" style="background:rgba(100,116,139,0.18);color:#94A3B8;">S08</span>
+    <h2 class="section-title">Compliance &amp; rechtlicher Hinweis</h2>
+  </div>
+  <div class="dep-box mb-4">
+    <h3 class="font-head font-bold text-tngb-magenta mb-2">Keine Anlageberatung</h3>
+    <p class="text-sm text-slate-300 leading-relaxed">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken und stellt <strong>keine Anlageberatung, kein Angebot und keine Aufforderung</strong> zum Kauf oder Verkauf von Wertpapieren dar (RDG/StBerG/WpIG/FinDAG; MiFID-II-Wohlverhaltens-/Zielmarktregeln). Es enthält <strong>kein Kursziel und keine Kauf-/Verkaufsempfehlung</strong>. Die FinCoach-Einschätzung ist eine modellbasiert abgeleitete Meinung. Vergangene Entwicklungen sind kein Indikator für künftige. Für Anlageentscheidungen ist eine qualifizierte, unabhängige Beratung einzuholen.</p>
+  </div>
+  <div class="dep-box mb-4">
+    <h3 class="font-head font-bold text-tngb-cyan mb-2">Datenherkunft &amp; Non-GAAP</h3>
+    <p class="text-sm text-slate-300 leading-relaxed">Primärquelle ist die unternehmensoffizielle Mitteilung „SpaceX Reports Third Quarter 2026 Results" (Space Exploration Technologies Corp., Nasdaq: SPCX; Quartal zum 30.09.2026; vom Nutzer als Quelle bereitgestellt). Die Zahlen sind unaudited. <strong>Adjusted EBITDA</strong> und <strong>Segment Adjusted EBITDA</strong> sind Non-GAAP-Kennzahlen; sie sind nicht nach GAAP definiert, nicht mit Kennzahlen anderer Unternehmen vergleichbar und ersetzen keine GAAP-Größen. FinCoach AI hat die Zahlen auf interne Konsistenz geprüft, aber nicht unabhängig gegen SEC-EDGAR verifiziert.</p>
+  </div>
+  <div class="dep-box">
+    <h3 class="font-head font-bold text-tngb-muted mb-2">Zukunftsgerichtete Aussagen (Safe Harbor)</h3>
+    <p class="text-sm text-slate-300 leading-relaxed">Aussagen zu Starship, Starlink Mobile, SI-/Compute-Ausbau, Spektrum-Erwerb, Starbase Louisiana u. a. sind zukunftsgerichtet i. S. v. Section 27A Securities Act / 21E Exchange Act und unterliegen Risiken und Unsicherheiten; tatsächliche Ergebnisse können erheblich abweichen. „SpaceX", „Starlink", „Starship", „Grok", „Cursor", „Nasdaq" sind Marken der jeweiligen Rechteinhaber; ihre Nennung erfolgt rein beschreibend. DSGVO-/BaFin-/MiFID-II-Hinweise gemäß FinCoach-AI-Compliance. <strong class="text-tngb-cyan">Stichtag: 2026-10-21.</strong></p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<div class="px-4 max-w-7xl mx-auto">
+  <footer class="border-t border-tngb-border pt-8 mt-4 pb-10">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 100 100" fill="none" width="40" height="40">
+          <path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="#E6399A" fill-opacity="0.25"/><path d="M 6,95 L 6,53 A 8,8 0 0 1 22,53 L 22,95 Z" fill="none" stroke="#E6399A" stroke-width="2"/>
+          <path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="#00CFFF" fill-opacity="0.25"/><path d="M 26,95 L 26,35 A 8,8 0 0 1 42,35 L 42,95 Z" fill="none" stroke="#00CFFF" stroke-width="2"/>
+          <path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="#00CC7A" fill-opacity="0.25"/><path d="M 46,95 L 46,21 A 8,8 0 0 1 62,21 L 62,95 Z" fill="none" stroke="#00CC7A" stroke-width="2"/>
+          <path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="#FF6B00" fill-opacity="0.25"/><path d="M 66,95 L 66,10 A 8,8 0 0 1 82,10 L 82,95 Z" fill="none" stroke="#FF6B00" stroke-width="2"/>
+          <line x1="4" y1="95" x2="84" y2="95" stroke="#888" stroke-width="1" stroke-opacity="0.4"/>
+        </svg>
+        <div><div class="font-head font-bold text-white">FinCoach AI</div><a href="https://www.TheNextGenerationBanking.com" target="_blank" rel="noopener" class="text-sm font-mono" style="color:#00CFFF;">by TheNextGenerationBanking.com</a></div>
+      </div>
+      <div class="text-sm text-tngb-muted">
+        <a href="index.html" class="hover:text-white transition block mb-1">← Hauptseite</a>
+        <a href="modul.html" class="hover:text-tngb-cyan transition block mb-1">M298 · SpaceX-Analyse</a>
+        <a href="m299.html" class="hover:text-tngb-cyan transition block mb-1">M299 · IPO-Zuteilung</a>
+        <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
+      </div>
+      <div class="text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.0.0 · 2026-10-21<br/>SpaceX Q3 2026 · Equity Deep Dive</div></div>
+    </div>
+    <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking — FinCoach AI. Unternehmenszahlen aus offizieller Q3-2026-Mitteilung; FinCoach-Einschätzung abgeleitet. Keine Anlageberatung. Die nächste Generation Banking.</p>
+  </footer>
+</div>
+
+<script>
+/* ====== CHARTS ====== */
+const C={cyan:'#00CFFF',emerald:'#00CC7A',gold:'#DFAF0F',lavender:'#9933FF',orange:'#FF6B00',magenta:'#E6399A',muted:'#64748B'};
+const gridC='rgba(100,116,139,0.15)', tick='#94A3B8';
+function mk(id,cfg){const c=document.getElementById(id);if(c&&window.Chart)return new Chart(c,cfg);}
+const baseScales={y:{ticks:{color:tick},grid:{color:gridC}},x:{ticks:{color:tick},grid:{display:false}}};
+mk('chartRev',{type:'bar',data:{labels:['Space','Connectivity','SI'],datasets:[
+  {label:'Q3 2025',data:[1666,3097,813],backgroundColor:C.muted},
+  {label:'Q3 2026',data:[1767,5248,7560],backgroundColor:[C.cyan,C.emerald,C.lavender]}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tick,font:{size:10}}}},scales:baseScales}});
+mk('chartEbitda',{type:'bar',data:{labels:['Space','Connectivity','SI'],datasets:[{data:[357,3499,4953],backgroundColor:[C.cyan,C.emerald,C.lavender]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:baseScales}});
+
+/* ====== SCROLL-FADE + NAVDOCK ====== */
+const fadeObs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.06});
+document.querySelectorAll('.scroll-fade').forEach(el=>fadeObs.observe(el));
+const SECTIONS=['s01','s02','s03','s04','s05','s06','s07','s08'];
+const dockObs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const id=en.target.id;document.querySelectorAll('#navdock a').forEach(a=>a.classList.toggle('active-dock',a.dataset.dock===id));}}),{rootMargin:'-40% 0px -55% 0px'});
+SECTIONS.forEach(id=>{const el=document.getElementById(id);if(el)dockObs.observe(el);});
+
+/* ====== LIVE-DBOM-AUDIT ====== */
+(async function liveAudit(){
+  const banner=document.getElementById('live-audit-banner'),status=document.getElementById('live-audit-status'),meta=document.getElementById('live-audit-meta');
+  if(!banner||!status)return;
+  try{
+    const res=await fetch('provenance/m300.dbom.json',{cache:'no-cache'});
+    if(!res.ok)throw new Error('DBOM nicht erreichbar (HTTP '+res.status+')');
+    const dbom=await res.json();
+    const validIds=new Set((dbom.facts||[]).map(f=>f.id));
+    const refs=document.querySelectorAll('[data-source^="FACT_"]');
+    let missing=0;const missSet=new Set();
+    refs.forEach(el=>{const id=el.dataset.source;if(!validIds.has(id)){missing++;missSet.add(id);el.style.outline='2px dashed #E6399A';}});
+    const total=(dbom.facts||[]).length, conf=(dbom.facts||[]).filter(f=>f.verdict==='CONFIRMED').length, scen=(dbom.facts||[]).filter(f=>f.verdict==='SCENARIO_PROJECTION').length;
+    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · '+total+' Fakten ('+conf+' confirmed, '+scen+' scenario) · '+refs.length+' HTML-Referenzen geprüft';
+    if(missing===0){banner.classList.remove('warn','err');status.innerHTML='✓ DBOM-Integrität OK · alle '+refs.length+' data-source-Referenzen aufgelöst · Stichtag '+dbom.module.stichtag;}
+    else{banner.classList.add('err');status.innerHTML='✗ '+missing+' ungültige Referenz(en): <code>'+[...missSet].join(', ')+'</code>';}
+  }catch(err){banner.classList.add('warn');status.innerHTML='⚠ DBOM-Live-Lookup nicht möglich: '+err.message+' (offline?)';}
+})();
+</script>
+</body>
+</html>
