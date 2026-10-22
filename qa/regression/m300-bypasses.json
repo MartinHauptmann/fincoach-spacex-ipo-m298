@@ -333,8 +333,8 @@
    "edits": [
     [
      "prompts/m300-atas-options-xray-deep-dive-prompt.md",
-     "**Geändert:** 2026-10-20",
-     "**Geändert:** 2026-10-01"
+     "**Geändert:** ",
+     "**Geändert:** 2026-10-01 · "
     ]
    ]
   },
@@ -609,8 +609,8 @@
    "edits": [
     [
      "m300.html",
-     "· 2026-10-20<br/>",
-     "· 2026-10-01<br/>"
+     "<br/>Derivate / Market Microstructure",
+     "<br/>M300 · v1.0.0 · 2026-10-01<br/>Derivate / Market Microstructure"
     ]
    ],
    "nosync": true
