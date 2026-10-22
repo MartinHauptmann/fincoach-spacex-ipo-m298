@@ -1354,6 +1354,12 @@
       "event": "v1.16.0: Einordnungen für Einsteiger und Fortgeschrittene in S03, S04, S11 und im Fazit; S04 wörtlich nach FACT_JSTG2024_REPEAL und FACT_P15_KSTG, S11 im Konjunktiv mit SCENARIO, Fazit als Lesehilfe ohne neue Wertung",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-22",
+      "event": "Einundzwanzigste Zweitprüfung: keine Freigabe; Skripte grün; C4 inhaltlich bestätigt (✓ erst nach Sichtprüfung des Herausgebers); Q4, Q7, Q9 nicht bestätigt wegen der Niveau-Texte (W1 Hedging-Mechanik als Tatsache in S02/Hero/S05, W2 S05-Umrechnung im Indikativ, W3 Hero „wie ATAS schätzt“, W4 Lesehilfen mit unzutreffenden Meta-Aussagen); Styleguide-Zeile CAT-Level auf ◐",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
