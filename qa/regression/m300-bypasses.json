@@ -213,8 +213,8 @@
    "edits": [
     [
      "m300.html",
-     "nicht Gamma-Levels.</p>",
-     "nicht Gamma-Levels. Wir empfehlen, Gamma-Levels stets mit dem Footprint zu bestätigen.</p>"
+     "nicht von Gamma-Levels; ein Stop schützt nicht vor Kurslücken.</p>",
+     "nicht von Gamma-Levels; ein Stop schützt nicht vor Kurslücken. Wir empfehlen, Gamma-Levels stets mit dem Footprint zu bestätigen.</p>"
     ]
    ]
   },
