@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -1346,6 +1346,12 @@
     {
       "date": "2026-10-20",
       "event": "Hero (Niveau-Badge, Unterzeile, Einleitung) in drei Fassungen über den globalen CAT-Schalter; Stichtag-Zeile, Beratungsausschluss, Steuerkasten und KPIs für alle Niveaus gleich",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-22",
+      "event": "v1.16.0: Einordnungen für Einsteiger und Fortgeschrittene in S03, S04, S11 und im Fazit; S04 wörtlich nach FACT_JSTG2024_REPEAL und FACT_P15_KSTG, S11 im Konjunktiv mit SCENARIO, Fazit als Lesehilfe ohne neue Wertung",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }

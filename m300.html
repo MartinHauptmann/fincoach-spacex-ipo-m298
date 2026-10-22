@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.15.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.16.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -104,7 +104,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.15.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.16.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 41, "confirmed_primary": 33, "media_report": 5, "unverified": 0, "scenario_projection": 3, "vendor_claim": 16 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
@@ -153,7 +153,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner (in der Veröffentlichung ausgeblendet) ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto" data-publish="hidden">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.15.0</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.16.0</span>
     <span class="text-slate-300"><span data-dbom-count="total">41</span> Fakten · <span data-dbom-count="confirmed">33</span> belegt (davon <span data-dbom-count="fulltext">32</span> am Original geprüft, <span data-dbom-count="vendor">16</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -174,7 +174,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span class="font-mono font-bold" style="color:#00CFFF;">CAT</span>
     <span class="text-tngb-muted hidden sm:inline">Cognitive Apprenticeship Track</span>
     <span class="text-slate-400 hidden sm:inline">·</span>
-    <span class="text-slate-300 hidden sm:inline">Wissensniveau global wählbar <span class="text-tngb-muted">(wirkt auf Hero, S02, Einordnungen in S05–S10 und Glossar)</span></span>
+    <span class="text-slate-300 hidden sm:inline">Wissensniveau global wählbar <span class="text-tngb-muted">(wirkt auf Hero, S02, Einordnungen in S03–S11 und im Fazit sowie Glossar)</span></span>
     <span id="cat-status" class="sr-only" aria-live="polite"></span>
     <span class="ml-auto flex items-center gap-1 flex-wrap">
       <button class="level-btn" data-lvl="einsteiger" aria-pressed="false">Einsteiger</button>
@@ -333,6 +333,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span class="section-badge" style="background:rgba(230,57,154,0.15);color:#E6399A;">S03 · PHASE A</span>
     <h2 class="section-title">Faktencheck K1–K9: Was am Ausgangstext stimmt und was nicht</h2>
   </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Ein Fachtext über das Werkzeug enthält neun Kernaussagen. Jede Zeile der Tabelle stellt eine davon den Belegen gegenüber. Das Zeichen zeigt das Ergebnis: ✓ stimmt, ◐ stimmt nur mit Einschränkung, ✗ stimmt nicht. Ein Klick auf eine Zeile öffnet die Begründung.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> Jede Kernaussage wird gegen Primär- oder Herstellerquellen gelesen und erhält ein Ergebnis und eine Schwere. Die Schwere sagt, wie stark eine Abweichung die Schlussfolgerungen des Ausgangstexts trägt. ◐ heißt: im Kern zutreffend, aber unvollständig oder überzeichnet. Begründung und Fundstelle stehen in der aufklappbaren Zeile.</div>
+  </div>
   <p class="text-sm text-slate-400 mb-4">Zeile anklicken für Begründung und Fundstelle. Ergebnis: <span class="badge b-ok">✓ bestätigt</span> <span class="badge b-part">◐ präzisiert</span> <span class="badge b-no">✗ falsch</span></p>
   <div class="dep-box table-wrap">
     <table id="k-table">
@@ -347,6 +351,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <div class="flex flex-wrap items-center gap-3 mb-6">
     <span class="section-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00;">S04</span>
     <h2 class="section-title">Steuerlicher Rahmen für Termingeschäfte (Stichtag 2026-10-05)</h2>
+  </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> <span data-source="FACT_JSTG2024_REPEAL">Für Privatanleger gilt: Verluste aus Termingeschäften unterliegen keiner gesonderten Verlustverrechnungsbeschränkung; es gelten die allgemeinen Regeln für Einkünfte aus Kapitalvermögen. Börsengehandelte Optionen und Optionsscheine werden insoweit nicht unterschiedlich behandelt.</span> Für Kapitalgesellschaften gelten eigene Regeln (rechter Kasten). Das ist allgemeine Information, keine Steuerberatung.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> <span data-source="FACT_JSTG2024_REPEAL">Im Privatvermögen unterliegen Verluste aus Termingeschäften keiner gesonderten Verlustverrechnungsbeschränkung; es gelten die allgemeinen Regeln für Einkünfte aus Kapitalvermögen.</span> <span data-source="FACT_P15_KSTG">Bei Kapitalgesellschaften gilt § 15 Abs. 4 Satz 3 EStG (gesonderter Verlustkreis für Termingeschäfte) über § 8 Abs. 1 KStG; Satz 4 nennt Ausnahmen für Institute und Absicherungsgeschäfte.</span> Keine Steuerberatung; den Einzelfall beurteilt ein Steuerberater.</div>
   </div>
   <div class="grid md:grid-cols-2 gap-6">
     <div class="dep-box border-l-4" style="border-color:#E6399A;" data-source="FACT_JSTG2024_REPEAL">
@@ -555,6 +563,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <h2 class="section-title">Produkt-Roadmap: vier Erweiterungen im Check</h2>
     <span class="dbom-class-badge">SCENARIO</span>
   </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Diese Tabelle bewertet vier Ideen, wie das Werkzeug erweitert werden könnte; die Spalten zeigen Nutzen, Aufwand, Regulierung und Hauptrisiko je Idee. <span data-source="FACT_ROADMAP">Jede Idee wäre ein Vorschlag, kein angekündigtes Produkt und keine Prognose <span class="dbom-class-badge">SCENARIO</span>.</span></div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> Bewertet werden Nutzen, Daten und Kosten, Komplexität, Regulatorik und Hauptrisiko. <span data-source="FACT_ROADMAP">Bei der Eurex-Erweiterung bliebe der Nutzen offen, solange die Vergleichsbasis so klein wäre; ein automatisches Delta-Hedging würde aufsichtsrechtliche Fragen aufwerfen, die im Einzelfall zu klären wären <span class="dbom-class-badge">SCENARIO</span>.</span></div>
+  </div>
   <div class="dep-box table-wrap" data-source="FACT_ROADMAP">
     <p class="text-xs text-slate-400 mb-2"><span class="dbom-class-badge">SCENARIO</span> Bewertung von Vorschlägen, keine Prognose.</p>
     <table>
@@ -578,6 +590,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <div class="flex flex-wrap items-center gap-3 mb-6">
     <span class="section-badge" style="background:rgba(0,204,122,0.15);color:#00CC7A;">FZ · MODUL 8</span>
     <h2 class="section-title">Fazit: Was bleibt, was relativiert wird, was entfällt</h2>
+  </div>
+  <div class="lvl-box info-box mb-6 text-sm text-slate-300 leading-relaxed">
+    <div class="lvl-content" data-lvlc="einsteiger"><strong class="text-tngb-cyan">Einordnung · Einsteiger:</strong> Das Fazit sortiert die Kernaussagen in drei Gruppen: was Bestand hat (✓), was nur eingeschränkt gilt (◐) und was nicht zutrifft (✗). Darunter steht eine These zur Eurex-Erweiterung; sie ist keine Prognose.</div>
+    <div class="lvl-content" data-lvlc="fortgeschritten"><strong class="text-tngb-cyan">Einordnung · Fortgeschritten:</strong> Jeder Punkt ist gekennzeichnet: als Herstellerangabe, Medienangabe, Modellannahme oder Einschätzung. Die These unten verbindet den steuerlichen Befund aus S04 mit der offenen Frage, ob es bei Eurex-Optionen eine Analyselücke gibt.</div>
   </div>
   <div class="grid md:grid-cols-3 gap-4">
     <div class="dep-box border-t-4" style="border-top-color:#00CC7A;"><h3 class="font-head font-bold text-tngb-emerald mb-2">✓ Bleibt</h3><ul class="tick"><li data-source="FACT_XRAY_1MIN_SPX" data-assessment="fact">X-Ray zeigt aus SPX-Optionsdaten abgeleitete Kennzahlen auf ES, MES und <abbr title="SPDR S&amp;P 500 ETF (börsengehandelter Indexfonds)">SPY</abbr> an <span class="badge b-v">VENDOR</span>.</li><li data-source="FACT_XRAY_1MIN_SPX FACT_OPRA_CAPACITY">Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events <span class="dbom-class-badge">EINSCHÄTZUNG</span>.</li><li data-source="FACT_ATAS_NO_OPT_TRADING" data-assessment="fact">Für Optionen fehlt eine native Ausführung <span class="badge b-v">VENDOR</span>.</li><li data-source="FACT_SPOTGAMMA_SPEC FACT_MENTHORQ_SPEC FACT_VOLLAND_SPEC FACT_BOOKMAP_SPEC FACT_TWS_SPEC FACT_XRAY_1MIN_SPX FACT_ATAS_MBO">Positionierung plus MBO in einer Oberfläche: für ATAS belegt (MBO-Bundle zur Erprobung) <span class="badge b-v">VENDOR</span>; Bookmap hat MBO und Greeks nur über Add-ons <span class="badge b-v">VENDOR</span>; für SpotGamma, MenthorQ, Volland und TWS ist ein MBO-Werkzeug n. v. Ob die Kombination ein Differenzierungsmerkmal ist, bleibt damit offen <span class="dbom-class-badge">EINSCHÄTZUNG</span>.</li></ul></div>
@@ -703,7 +719,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.15.0 · 2026-10-20<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.16.0 · 2026-10-22<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
