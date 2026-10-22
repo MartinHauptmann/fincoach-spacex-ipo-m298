@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.16.0",
+    "version": "1.16.1",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -1358,6 +1358,12 @@
     {
       "date": "2026-10-22",
       "event": "Einundzwanzigste Zweitprüfung: keine Freigabe; Skripte grün; C4 inhaltlich bestätigt (✓ erst nach Sichtprüfung des Herausgebers); Q4, Q7, Q9 nicht bestätigt wegen der Niveau-Texte (W1 Hedging-Mechanik als Tatsache in S02/Hero/S05, W2 S05-Umrechnung im Indikativ, W3 Hero „wie ATAS schätzt“, W4 Lesehilfen mit unzutreffenden Meta-Aussagen); Styleguide-Zeile CAT-Level auf ◐",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-22",
+      "event": "v1.16.1: Befunde der 21. Zweitprüfung in den Niveau-Texten umgesetzt: Hedging-Mechanik auf allen Niveaus als Modell (Konjunktiv, MODELL, FACT_DEALER_CONVENTION); S02 Einsteiger/Fortgeschritten mit K2-Klarstellung, Cboe-Medienangabe und VENDOR wie die Experten-Fassung; Hero und S05 ohne Zuschreibung der Rechnung an ATAS, Basis-Vorbehalt ergänzt; Lesehilfen S03/Fazit/S04 sachlich korrigiert. Berichtigung früherer Vermerke: v1.15.0 „Modellmechanik im Konjunktiv“ galt nicht für S02/Hero, v1.16.0 „S04 wörtlich“ galt nicht für „Privatanleger“. Bedienung: Lesepunkt bleibt beim Umschalten stehen, Navigationsleiste mobil kompakter. Browser-Audit auf allen drei Niveaus grün",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }
