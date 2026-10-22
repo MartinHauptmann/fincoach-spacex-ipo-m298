@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="FinCoach AI">
+  <rect width="100" height="100" rx="20" fill="#0A0F1A"/>
+  <path d="M 12,90 L 12,56 A 7,7 0 0 1 26,56 L 26,90 Z" fill="#E6399A"/>
+  <path d="M 31,90 L 31,42 A 7,7 0 0 1 45,42 L 45,90 Z" fill="#00CFFF"/>
+  <path d="M 50,90 L 50,30 A 7,7 0 0 1 64,30 L 64,90 Z" fill="#00CC7A"/>
+  <path d="M 69,90 L 69,20 A 7,7 0 0 1 83,20 L 83,90 Z" fill="#FF6B00"/>
+</svg>
