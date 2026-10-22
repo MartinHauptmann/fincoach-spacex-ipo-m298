@@ -93,3 +93,33 @@ Jede Ebene teilt den Anteil der darüber weiter auf — kleine Quoten-Entscheidu
 _Illustrative Szenario-Werte mit transparenter Datenherkunft (M-DBOM). Keine Anlageberatung. Datenstand 2026-06-19._
 
 #IPO #SpaceX #Kapitalmarkt #Zuteilung #Allokation #Banking #Neobroker #TradeRepublic #FinCoachAI #TheNextGenerationBanking #Finanzbildung #ITAR
+
+---
+---
+
+# LinkedIn-Post 3 — SpaceX Q3 2026 Earnings (M300)
+
+> Grafik: `assets/linkedin-q3-m300.png` (1080×1350)
+
+---
+
+📊 **SpaceX hat die Q3-2026-Zahlen vorgelegt — hier die Fakten, nüchtern eingeordnet.**
+
+Space Exploration Technologies (NASDAQ: SPCX), Quartal zum 30.09.2026:
+
+• Umsatz **$14,6 Mrd.** (+161 % ggü. Vorjahr)
+• Nettoergebnis **$4,4 Mrd.** — erstmals positiv (Vorjahr −$1,1 Mrd.)
+• Adjusted EBITDA **$8,8 Mrd.** (Non-GAAP)
+• EPS (verwässert) **$0,35**
+
+Der Treiber ist das neue Segment **SI (Super Intelligence)**: +830 % ggü. Vorjahr — binnen zwölf Monaten vom kleinsten zum größten Umsatzbereich. Connectivity (Starlink, 13,6 Mio. Abonnenten) liefert verlässlich Cashflow; Space bleibt mit Starship im Investitionsmodus.
+
+**Die Einordnung — mit Vorbehalt:** Q3 markiert eine Trendwende zur Profitabilität. Auf 9-Monats-Sicht steht aber noch ein Nettoverlust (−$0,4 Mrd.), und die KI-Capex liegt bei rund $40 Mrd. (9M). Ob die Profitabilität trägt, zeigt sich über mehrere Quartale — nicht an einem einzelnen Rekordquartal.
+
+Wir haben die Zahlen nicht einfach übernommen, sondern gegen die **Primärquelle** geprüft: 54 interne Konsistenzchecks (Segmentsummen, EBITDA-Reconciliations, Bilanz, Cashflow) plus ein unabhängiges Gegenlesen. Gemeldete Werte sind als Primärquelle markiert, jede Einschätzung als abgeleitet — mit transparenter Provenienz (M-DBOM).
+
+Vollständige Deep-Dive-Analyse, kostenlos: 👉 nexus2learn.com/m300
+
+_Non-GAAP-Kennzahlen gekennzeichnet. Keine Anlage-, Steuer- oder Rechtsberatung. Stand 2026-10-21._
+
+#SpaceX #SPCX #Quartalszahlen #EquityResearch #Starlink #Kapitalmarkt #Finanzbildung #FinCoachAI #Nexus2Learn #Investing
