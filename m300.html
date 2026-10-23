@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.17.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.18.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -104,8 +104,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.17.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
-  "fact_summary": { "total": 42, "confirmed_primary": 33, "media_report": 5, "unverified": 0, "scenario_projection": 4, "vendor_claim": 16 },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.18.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "fact_summary": { "total": 44, "confirmed_primary": 35, "media_report": 5, "unverified": 0, "scenario_projection": 4, "vendor_claim": 17 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
 </script>
@@ -153,8 +153,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner (in der Veröffentlichung ausgeblendet) ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto" data-publish="hidden">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.17.0</span>
-    <span class="text-slate-300"><span data-dbom-count="total">42</span> Fakten · <span data-dbom-count="confirmed">33</span> belegt (davon <span data-dbom-count="fulltext">32</span> am Original geprüft, <span data-dbom-count="vendor">16</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.18.0</span>
+    <span class="text-slate-300"><span data-dbom-count="total">44</span> Fakten · <span data-dbom-count="confirmed">35</span> belegt (davon <span data-dbom-count="fulltext">33</span> am Original geprüft, <span data-dbom-count="vendor">17</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
       <a href="analysen/m300-atas-options-xray-deep-dive.md" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">↗ Volltext-Analyse</a>
@@ -204,7 +204,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <span class="lvl-content lvl-inline" data-lvlc="einsteiger">Eine Option ist das Recht, einen Basiswert zu einem festgelegten Preis zu kaufen (Call) oder zu verkaufen (Put). Wer Optionen verkauft, kann sein Kursrisiko mit Futures begrenzen, also mit börsengehandelten Terminkontrakten. <span data-source="FACT_DEALER_CONVENTION">Analysemodelle würden unterstellen, dass Optionsverkäufer sich so absichern <span class="dbom-class-badge">MODELL</span>.</span> <span data-source="FACT_XRAY_1MIN_SPX">ATAS Options X-Ray zeigt dazu Kennzahlen aus Optionsdaten auf den <abbr title="S&amp;P-500-Index">SPX</abbr> im Future-Chart <span class="badge b-v">VENDOR</span>.</span> Dieses Modul erklärt Schritt für Schritt, wie das funktioniert, wo die Annahmen enden und worin sich Börsenoptionen und Optionsscheine im DACH-Raum unterscheiden. Dazu prüfen wir neun ausgewählte Kernaussagen eines Fachtexts.</span><span class="lvl-content lvl-inline" data-lvlc="fortgeschritten"><span data-source="FACT_DEALER_CONVENTION">Nach GEX-Modellen würden Händler, die Optionen verkaufen, ihr Buch über Futures absichern; daraus schätzen die Modelle, wo solche Absicherungsflüsse Kursbewegungen dämpfen oder verstärken könnten <span class="dbom-class-badge">MODELL</span>.</span> Wir zeigen die fachübliche Referenzrechnung hinter Gamma, Vanna und Charm, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Optionen und Optionsscheine gegenüber und prüfen neun ausgewählte Kernaussagen des Ausgangstexts.</span><span class="lvl-content lvl-inline active" data-lvlc="experte">Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen neun ausgewählte Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.</span>
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">33</span> belegte Fakten, <span data-dbom-count="media">5</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">35</span> belegte Fakten, <span data-dbom-count="media">5</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -434,7 +434,45 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         </tbody>
       </table>
     </div>
-    <p class="text-xs text-slate-400 leading-relaxed"><strong>Was das Beispiel nicht zeigt:</strong> <span data-source="FACT_DEALER_CONVENTION">Würde ein Modell mit dem Open-Interest-Stand des Vortags rechnen, würden neue Positionen des laufenden Tages fehlen. Mit Kurs, Zeit und impliziter Volatilität würde sich das Gamma ändern und damit auch die Lage von Flip und Walls (Vanna, Charm). Weil jeder Anbieter eigene Annahmen über die Dealer-Position trifft, könnten Flip und Walls für denselben Tag je nach Anbieter verschieden ausfallen <span class="dbom-class-badge">MODELL</span>.</span></p>
+    <div class="dep-box mb-6 border-l-4" style="border-color:#DFAF0F;" data-qa="gex-real">
+      <h4 class="font-head font-bold text-white mb-1" data-source="FACT_GEXMETRIX_SPX">Echtes Beispiel: S&amp;P 500 (SPX) am 23.10.2026 <span class="badge b-v">VENDOR</span></h4>
+      <p class="text-xs text-tngb-muted mb-4"><span data-source="FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED">Momentaufnahme nach dem Stichtag des Moduls. Quelle: Dashboard GEX-Metrix, Zeitstempel 2026-10-23 05:28 <abbr title="Eastern Time, US-Ostküstenzeit">ET</abbr>, Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung <span class="badge b-v">VENDOR</span>.</span> Ein Screenshot des Herausgebers dient als Beleg; die Seite übernimmt die Werte, nicht das Bild.</p>
+      <div class="grid md:grid-cols-2 gap-6 items-start">
+        <svg viewBox="0 0 320 260" class="w-full" role="img" aria-labelledby="gexRealT gexRealD" style="max-height:280px">
+          <title id="gexRealT">Kursleiter SPX am 23.10.2026 nach GEX-Metrix</title>
+          <desc id="gexRealD">Von oben nach unten: GEX-Flip 7.861, Call Wall rund 7.800, Max Pain 7.725, Indexstand 7.663,43, Put Wall rund 7.650. Der Indexstand liegt unter dem Flip im Short-Gamma-Bereich und knapp über der Put Wall.</desc>
+          <rect x="72" y="20" width="180" height="28.6" fill="#00CC7A" fill-opacity="0.10"/>
+          <rect x="72" y="48.6" width="180" height="191.4" fill="#E6399A" fill-opacity="0.10"/>
+          <text x="248" y="36" text-anchor="end" fill="#00CC7A" font-size="13" font-family="JetBrains Mono, monospace">Long Gamma</text>
+          <text x="248" y="234" text-anchor="end" fill="#E6399A" font-size="13" font-family="JetBrains Mono, monospace">Short Gamma</text>
+          <line x1="72" x2="252" y1="48.6" y2="48.6" stroke="#00CFFF" stroke-width="2" stroke-dasharray="5 3"/><text x="68" y="52.6" text-anchor="end" fill="#00CFFF" font-size="13">GEX-Flip</text><text x="256" y="52.6" fill="#00CFFF" font-size="13" font-family="JetBrains Mono, monospace">7.861</text>
+          <line x1="72" x2="252" y1="93.3" y2="93.3" stroke="#DFAF0F" stroke-width="2"/><text x="68" y="97.3" text-anchor="end" fill="#DFAF0F" font-size="13">Call Wall</text><text x="256" y="97.3" fill="#DFAF0F" font-size="13" font-family="JetBrains Mono, monospace">≈7.800</text>
+          <line x1="72" x2="252" y1="148.3" y2="148.3" stroke="#9933FF" stroke-width="1.5" stroke-dasharray="2 3"/><text x="68" y="152.3" text-anchor="end" fill="#9933FF" font-size="13">Max Pain</text><text x="256" y="152.3" fill="#9933FF" font-size="13" font-family="JetBrains Mono, monospace">7.725</text>
+          <line x1="72" x2="252" y1="193.5" y2="193.5" stroke="#F8FAFC" stroke-width="2.5"/><text x="68" y="193.5" text-anchor="end" fill="#F8FAFC" font-size="13">Index</text><text x="256" y="191.5" fill="#F8FAFC" font-size="13" font-family="JetBrains Mono, monospace">7.663</text>
+          <line x1="72" x2="252" y1="203.3" y2="203.3" stroke="#DFAF0F" stroke-width="2"/><text x="68" y="217.3" text-anchor="end" fill="#DFAF0F" font-size="13">Put Wall</text><text x="256" y="217.3" fill="#DFAF0F" font-size="13" font-family="JetBrains Mono, monospace">≈7.650</text>
+        </svg>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left text-slate-300">
+            <thead class="text-xs text-tngb-muted"><tr><th class="py-2 pr-2">Kennzahl</th><th class="py-2">Wert · Herkunft</th></tr></thead>
+            <tbody>
+              <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_SPX"><td class="py-2 pr-2">Indexstand</td><td class="py-2"><span class="mono">7.663,43</span> <span class="badge b-v">VENDOR</span></td></tr>
+              <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_SPX"><td class="py-2 pr-2">GEX-Flip¹</td><td class="py-2"><span class="mono">7.861,0</span> <span class="badge b-v">VENDOR</span></td></tr>
+              <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_DERIVED"><td class="py-2 pr-2">Call Wall²</td><td class="py-2"><span class="mono">≈ 7.800</span> <span class="dbom-class-badge">ABGELEITET</span></td></tr>
+              <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_DERIVED"><td class="py-2 pr-2">Put Wall²</td><td class="py-2"><span class="mono">≈ 7.650</span> <span class="dbom-class-badge">ABGELEITET</span></td></tr>
+              <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_SPX"><td class="py-2 pr-2">Max Pain³</td><td class="py-2"><span class="mono">7.725</span> <span class="badge b-v">VENDOR</span></td></tr>
+              <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_SPX"><td class="py-2 pr-2">Call-/Put-Gamma⁴</td><td class="py-2"><span class="mono">61,56 / 112,13</span> <span class="badge b-v">VENDOR</span></td></tr>
+              <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_DERIVED"><td class="py-2 pr-2">Netto-Gamma⁴</td><td class="py-2"><span class="mono">−50,57</span> <span class="dbom-class-badge">ABGELEITET</span></td></tr>
+              <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_DERIVED"><td class="py-2 pr-2">Abstand zu Flip / Put Wall</td><td class="py-2"><span class="mono">−197,57 / +13,43</span> <span class="dbom-class-badge">ABGELEITET</span></td></tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-slate-400 leading-relaxed mt-2" data-source="FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED">¹ Beim Anbieter „Zero Gamma“. ² Längster Call- bzw. Put-Balken im Strike-Diagramm, abgelesen. ³ <dfn>Max Pain</dfn> (Strike, an dem die offenen Optionen zum Verfall zusammen am wenigsten wert wären). ⁴ In Mrd. USD je 1 % Kursbewegung; Netto = Call minus Put. Abstände in Indexpunkten.</p>
+        </div>
+      </div>
+      <p class="text-sm text-slate-300 leading-relaxed mt-4"><strong class="text-white">So ließe sich das lesen:</strong> <span data-source="FACT_DEALER_CONVENTION">Der Index läge deutlich unter dem GEX-Flip und damit im Short-Gamma-Bereich; Dealer würden nach dem Modell fallenden Kursen hinterherverkaufen. Zugleich stünde er nur knapp über der Put Wall, wo der Hedge-Druck am größten wäre und darunter nachließe. Die Call Wall läge zwar über dem Index, aber noch unter dem Flip: Ein Anstieg dorthin fände nach dem Modell weiter im Short-Gamma-Bereich statt, ohne die dämpfende Wirkung oberhalb des Flips <span class="dbom-class-badge">MODELL</span>.</span> Das entspricht den Punkten 3 und 4 im Zusammenspiel oben.</p>
+      <p class="text-sm text-slate-300 leading-relaxed mt-2" data-source="FACT_GEXMETRIX_SPX">Laut Verlaufsgrafik des Anbieters war das Gamma-Exposure bis zum 14.10.2026 positiv und danach überwiegend negativ; der Index fiel im selben Zeitraum von rund 7.800 auf 7.663,43 <span class="badge b-v">VENDOR</span>.</p>
+      <p class="text-xs text-slate-400 leading-relaxed mt-2"><span data-source="FACT_DEALER_CONVENTION">Ein Zeitpunkt, ein Anbieter, ein Modell: Andere Anbieter könnten für denselben Tag andere Marken ausweisen, und mit neuen Positionen würden sich die Werte verschieben <span class="dbom-class-badge">MODELL</span>.</span> Kein Handelssignal und keine Anlageberatung.</p>
+    </div>
+    <p class="text-xs text-slate-400 leading-relaxed"><strong>Was die Beispiele nicht zeigen:</strong> <span data-source="FACT_DEALER_CONVENTION">Würde ein Modell mit dem Open-Interest-Stand des Vortags rechnen, würden neue Positionen des laufenden Tages fehlen. Mit Kurs, Zeit und impliziter Volatilität würde sich das Gamma ändern und damit auch die Lage von Flip und Walls (Vanna, Charm). Weil jeder Anbieter eigene Annahmen über die Dealer-Position trifft, könnten Flip und Walls für denselben Tag je nach Anbieter verschieden ausfallen <span class="dbom-class-badge">MODELL</span>.</span></p>
   </div>
 </section>
 
@@ -730,7 +768,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   <div class="caveat-box mb-10">
     <h3 class="font-head font-bold text-tngb-magenta mb-2">Disclaimer: keine Anlage-, Rechts- oder Steuerberatung</h3>
     <p class="text-sm text-slate-300 leading-relaxed mb-2">Dieses Modul dient ausschließlich Bildungs- und Informationszwecken. Es stellt <strong>keine Anlageberatung, Anlagevermittlung oder Finanzportfolioverwaltung</strong> (WpIG/KWG/WpHG) dar. Es ist <strong>keine Rechtsdienstleistung</strong> (RDG) und <strong>keine Hilfeleistung in Steuersachen</strong> (StBerG). Es enthält keine Anlageempfehlung und keine Empfehlung einer Anlagestrategie im Sinne von Art. 3 Abs. 1 Nr. 34/35 MAR. Optionen, Futures, Optionsscheine und Knock-out-Zertifikate sind Hebelprodukte mit <strong>Totalverlustrisiko</strong>. Bei Futures und Stillhaltergeschäften sind Verluste über den Einsatz hinaus möglich. Diese Produkte sind nur für erfahrene Anleger geeignet, die Hebel- und Knock-out-Mechanik verstehen und Verluste bis zum Totalverlust tragen können. Optionsscheine tragen zusätzlich das Emittentenrisiko; für Knock-out-Zertifikate ist die Ausgestaltung hier nicht ausgewertet (n. v.), maßgeblich sind die Emissionsbedingungen. Modellausgaben und vergangene Muster sind kein verlässlicher Indikator für künftige Entwicklungen. Steuerliche Aussagen geben den recherchierten Rechtsstand zum <span class="font-mono text-tngb-cyan">2026-10-05</span> wieder. Für Ihre persönliche Situation wenden Sie sich an einen Steuerberater oder Rechtsanwalt.</p>
-    <p class="text-xs text-slate-400 leading-relaxed"><strong>Marken:</strong> ATAS, Options X-Ray, OptionsDepth, SpotGamma, HIRO, MenthorQ, Volland, Bookmap, Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, DAX, EURO STOXX 50, S&amp;P 500, Nasdaq-100, Gamma Cockpit, CME, E-mini, SPDR, SPY, SPXW, dxFeed, IQFeed, TRACE, IBKR, OptionTrader, Options Chain Suite, Options Board, Strategy Analyzer, MBO-Bundle, Ultra, EOBI, Extended Market Data Service, CMS, ideas, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer Inhaber; das gilt auch für weitere genannte Produkt- und Dienstbezeichnungen der jeweiligen Hersteller. Sie werden rein beschreibend genannt. Es besteht keine Verbindung zu den Inhabern. <strong>Interessenkonflikte:</strong> keine (Erklärung des Herausgebers vom 2026-10-11).</p>
+    <p class="text-xs text-slate-400 leading-relaxed"><strong>Marken:</strong> ATAS, Options X-Ray, OptionsDepth, SpotGamma, HIRO, MenthorQ, Volland, Bookmap, Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, DAX, EURO STOXX 50, S&amp;P 500, Nasdaq-100, Gamma Cockpit, GEX-Metrix, CME, E-mini, SPDR, SPY, SPXW, dxFeed, IQFeed, TRACE, IBKR, OptionTrader, Options Chain Suite, Options Board, Strategy Analyzer, MBO-Bundle, Ultra, EOBI, Extended Market Data Service, CMS, ideas, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer Inhaber; das gilt auch für weitere genannte Produkt- und Dienstbezeichnungen der jeweiligen Hersteller. Sie werden rein beschreibend genannt. Es besteht keine Verbindung zu den Inhabern. <strong>Interessenkonflikte:</strong> keine (Erklärung des Herausgebers vom 2026-10-11).</p>
   </div>
 
   <footer class="border-t border-tngb-border pt-8 mt-4">
@@ -751,7 +789,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.17.0 · 2026-10-23<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.18.0 · 2026-10-23<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>

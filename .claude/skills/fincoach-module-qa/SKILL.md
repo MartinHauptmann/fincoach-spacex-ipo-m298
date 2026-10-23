@@ -147,6 +147,9 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L77:** Fakt-IDs in DBOM-Freitexten (honest_disclosure, caveat, keep_reason) existieren.
 - **L78:** Bezugszeiträume (`period`) liegen am oder vor dem Stichtag; ein späterer Abruf wird als „abgerufen …“
   genannt. Der Abrufzeitraum in Freitexten umfasst den spätesten Abruf.
+- **L78b:** Eine datierte Momentaufnahme nach dem Stichtag (z. B. ein vom Herausgeber geliefertes Fallbeispiel) ist nur
+  zulässig mit `after_stichtag` (Begründung) im Fakt und dem sichtbaren Hinweis „nach dem Stichtag“ am gebundenen
+  Element. Der Stichtag des Moduls wird dafür nicht verschoben.
 - **L79:** Elemente, die nur an Herstellerangaben (VENDOR_CLAIM) gebunden sind, tragen das VENDOR-Kennzeichen.
 - **L65b/L68b:** Bereichsangaben „A01–Ann“ passen zur Claim-Tabelle; Tooltips und Offen-Liste beschreiben den
   Zielzustand, nicht den Bearbeitungsverlauf („entfernt“, „angeglichen“, „überarbeitet“, „nach dem Review“).

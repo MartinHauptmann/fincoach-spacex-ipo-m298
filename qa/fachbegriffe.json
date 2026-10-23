@@ -43,7 +43,8 @@
     "SPX",
     "NDX",
     "0DTE",
-    "SPY"
+    "SPY",
+    "ET"
   ],
   "known": [
     "AI",
@@ -168,7 +169,8 @@
     "Options Board",
     "Strategy Analyzer",
     "MBO-Bundle",
-    "CMS"
+    "CMS",
+    "GEX-Metrix"
   ],
   "_doc_marks": "L84: Marken-Inventar; jede hier geführte Marke, die auf der Seite oder in der DBOM vorkommt, muss im Markenhinweis stehen. Neue Marken hier ergänzen."
 }

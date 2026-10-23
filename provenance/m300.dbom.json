@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.17.0",
+    "version": "1.18.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,20 +13,20 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 42,
-    "confirmed_primary": 33,
+    "total": 44,
+    "confirmed_primary": 35,
     "media_report": 5,
     "unverified": 0,
     "scenario_projection": 4,
-    "vendor_claim": 16,
+    "vendor_claim": 17,
     "by_class": {
-      "DERIVED": 1,
+      "DERIVED": 2,
       "MARKET_DATA": 7,
       "MEDIA_REPORT": 5,
       "MODEL_ASSUMPTION": 1,
       "REGULATORY_FRAMEWORK": 9,
       "SCENARIO_PROJECTION": 3,
-      "VENDOR_CLAIM": 16
+      "VENDOR_CLAIM": 17
     }
   },
   "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original); der Quantor FACT_NO_EUREX_GEX ist aus zwei geprüften Herstellerangaben abgeleitet („derived“). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „derived“ = aus anderen geprüften Fakten abgeleitet; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
@@ -704,6 +704,35 @@
       "evidence": "model"
     },
     {
+      "id": "FACT_GEXMETRIX_SPX",
+      "verdict": "CONFIRMED",
+      "class": "VENDOR_CLAIM",
+      "confidence": 0.8,
+      "claim": "GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET: Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ; Index von rund 7.800 auf 7.663,43.",
+      "source_id": "SRC_GEXMETRIX",
+      "caveat": "Anbietermodell mit eigener Dealer-Annahme; ein Zeitpunkt; Werte anderer Anbieter können abweichen.",
+      "period": "2026-10-23 05:28 ET",
+      "evidence": "fulltext",
+      "verified": {
+        "by": "Herausgeber",
+        "date": "2026-10-23",
+        "scope": "Screenshot des Original-Dashboards, vom Herausgeber bereitgestellt; Werte aus dem Bild übernommen"
+      },
+      "after_stichtag": "Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag."
+    },
+    {
+      "id": "FACT_GEXMETRIX_DERIVED",
+      "verdict": "CONFIRMED",
+      "class": "DERIVED",
+      "confidence": 0.7,
+      "claim": "Aus FACT_GEXMETRIX_SPX abgeleitet: Call Wall ≈ 7.800 und Put Wall ≈ 7.650 (längster Call- bzw. Put-Balken im Strike-Diagramm, abgelesen); Netto-Gamma −50,57 Mrd. USD je 1 % (61,56 − 112,13); Abstand Index zum Flip −197,57 und zur Put Wall +13,43 Punkte.",
+      "source_id": "SRC_GEXMETRIX",
+      "caveat": "Walls aus Balkenlängen abgelesen, nicht vom Anbieter ausgewiesen; bei 7.800 und 7.750 sind die Call-Balken ähnlich lang.",
+      "period": "2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX)",
+      "evidence": "derived",
+      "after_stichtag": "Abgeleitet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag."
+    },
+    {
       "id": "FACT_ROADMAP",
       "verdict": "SCENARIO_PROJECTION",
       "class": "SCENARIO_PROJECTION",
@@ -1091,6 +1120,13 @@
       "tier": "secondary",
       "title": "Stiftung Warentest · Studie zu Turbo-Zertifikaten: Die meisten Anleger machen Verluste",
       "url": "https://www.test.de/Studie-zu-Turbo-Zertifikaten-Die-meisten-Anleger-machen-mit-Turbo-Zertifikaten-Verluste-6227752-0/"
+    },
+    {
+      "id": "SRC_GEXMETRIX",
+      "ref": "S59",
+      "tier": "vendor",
+      "title": "GEX-Metrix Dashboard · SPX (Screenshot des Herausgebers, 2026-10-23 05:28 ET; Beleg: provenance/evidence/m300-gexmetrix-spx-2026-10-23.png)",
+      "url": "https://www.gexmetrix.com/gex/spx"
     }
   ],
   "audit_trail": [
@@ -1393,6 +1429,12 @@
     {
       "date": "2026-10-23",
       "event": "v1.17.0: S05 um den Erklärblock „GEX-Flip, Call Wall und Put Wall“ ergänzt (Definitionen, Zusammenspiel in vier Schritten, Rechenbeispiel FACT_GEX_LEVELS_EXAMPLE mit Szenarien A–C, Grenzen des Beispiels); Diagramm „Gamma-Regime im Profil“ zeigt jetzt dasselbe hypothetische Profil mit markierten Walls, Flip und Indexstand (Anregung des Herausgebers). Ein aktuelles Marktbeispiel ist nicht enthalten: Anbieterwerte nur aus Suchtreffern, Quellseiten im Netz der Sitzung nicht abrufbar.",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-23",
+      "event": "v1.18.0: S05 um ein echtes, datiertes Beispiel ergänzt: GEX-Metrix-Dashboard SPX, Zeitstempel 2026-10-23 05:28 ET (Screenshot des Herausgebers, Beleg unter provenance/evidence/). Fakten FACT_GEXMETRIX_SPX (VENDOR_CLAIM) und FACT_GEXMETRIX_DERIVED (DERIVED: Walls abgelesen, Netto-Gamma, Abstände); Kursleiter-Grafik; Lesart im Konjunktiv mit MODELL. Neue Regel L78b: Momentaufnahme nach dem Stichtag nur mit Begründung (after_stichtag) und sichtbarem Hinweis am gebundenen Element.",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }
