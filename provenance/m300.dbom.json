@@ -1437,6 +1437,12 @@
       "event": "v1.18.0: S05 um ein echtes, datiertes Beispiel ergänzt: GEX-Metrix-Dashboard SPX, Zeitstempel 2026-10-23 05:28 ET (Screenshot des Herausgebers, Beleg unter provenance/evidence/). Fakten FACT_GEXMETRIX_SPX (VENDOR_CLAIM) und FACT_GEXMETRIX_DERIVED (DERIVED: Walls abgelesen, Netto-Gamma, Abstände); Kursleiter-Grafik; Lesart im Konjunktiv mit MODELL. Neue Regel L78b: Momentaufnahme nach dem Stichtag nur mit Begründung (after_stichtag) und sichtbarem Hinweis am gebundenen Element.",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-23",
+      "event": "23. Zweitprüfung zu v1.18.0: C5 und Q2 auf ◐ herabgestuft (Screenshot im veröffentlichten Verzeichnis; Freitexte zum Prüfzeitraum veraltet, L78b umgehbar); Befunde B-1 bis B-12 im QA-Bericht §48.",
+      "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [

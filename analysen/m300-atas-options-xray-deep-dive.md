@@ -449,6 +449,8 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Belegstufen der Medienangaben und des abgeleiteten Quantors durch Zweitprüfung und Herausgeber bestätigen lassen
 - Widerspruchsfreiheit von These und Belegstufen-Definition durch Zweitprüfung bestätigen lassen
 - Einschränkung der Bewertung „Nutzen“ der Eurex-Erweiterung durch Zweitprüfung bestätigen lassen
+- Screenshot-Beleg aus dem veröffentlichten Verzeichnis nehmen oder Nutzungsrechte dokumentieren
+- Prüf- und Recherchezeitraum in den Freitexten um die Momentaufnahme vom 2026-10-23 ergänzen; L78b eng fassen
 - Wortlaut der TWS-Herstellerangabe zu Eurex-Optionen am Original prüfen oder auf „keine marktweite GEX-Aggregation“ stützen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
 
@@ -464,13 +466,13 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C2 Keine Anlageempfehlung (MAR) | ✓ | Keine Kursziele, Einstiege oder Empfehlungen (Zweitprüfung 2026-10-11 gelesen); Empfehlungsformen geprüft (L62) |
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
 | C4 Neutralität / Interessenkonflikte | ◐ | Gamma Cockpit als eigener Herstellerfakt (VENDOR), Quantor-Verdict aus den Basisfakten abgeleitet (belegt); Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
-| C5 Marken beschreibend | ✓ | Markenhinweis gegen Marken-Inventar geprüft (L84) und in der Zweitprüfung vom 2026-10-11 vollständig abgeglichen |
+| C5 Marken beschreibend | ◐ | 23. Zweitprüfung: Screenshot des GEX-Metrix-Dashboards liegt im veröffentlichten Verzeichnis provenance/evidence/; Nutzungsrechte ungeklärt |
 | C6 UWG-konforme Begriffe | ◐ | Herstellerangabe zur IBKR TWS „Eurex-Optionen nur als Rohdaten“ von der Zweitprüfung als fachlich zweifelhaft eingestuft; Abgleich am Original durch den Herausgeber ausstehend (20. Zweitprüfung) |
 | C7 Ausgewogene Risikodarstellung | ✓ | Modellgrenzen, Latenz, Fehlsignale, Totalverlust und BaFin-Quote dargestellt (Zweitprüfung 2026-10-11) |
 | C8 Regulatorische Bezüge belegt | ✓ | § 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft |
 | C9 Datenschutz | ✓ | Datenschutzerklärung und Impressum vom Herausgeber freigegeben (2026-10-11); Speicherangaben = Messung an allen Modulseiten (L38); Modul ohne Drittanbieter-Abrufe und ohne Speicher (L20) |
 | Q1 Faktencheck K1–K9 vollständig | ◐ | Claim-Tabelle A01–A15; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61 |
-| Q2 Aktualität / Stichtag | ✓ | Aktualität am Stichtag vom Herausgeber am 2026-10-11 am Original geprüft |
+| Q2 Aktualität / Stichtag | ◐ | 23. Zweitprüfung: Freitexte zu Prüf- und Recherchezeitraum (2026-10-11) erfassen die Momentaufnahme vom 2026-10-23 nicht; Ausnahme L78b umgehbar |
 | Q3 Mathematische Konsistenz | ✓ | GEX 845 Mio. USD, 2.600 ES / 26.000 MES, Probe, Vanna und Charm nachgerechnet (Zweitprüfung 2026-10-11); Rechner rechnet gleich |
 | Q4 Provenienz je Fakt | ◐ | Medienangaben mit Belegstufe secondary, Quantor derived; Ausnahme-Sätze nennen die Kategorien; Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
 | Q5 Quellenqualität | ✓ | Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen als Hauptbeleg nur bei Medienangaben; Abgleich durch den Herausgeber am Original, bei Medienangaben an der Sekundärquelle |
@@ -480,7 +482,7 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | Q9 Keine Überzeichnung / Halluzination | ◐ | S11 Nutzen „offen“, Basis (ATAS selbst, ein Broker) offen genannt; Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
 | Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär) |
 
-**Gesamtscore:** 11 × ✓ + 8 × ◐ = 15 von 19 Punkten = **78,9 %**.
+**Gesamtscore:** 9 × ✓ + 10 × ◐ = 14 von 19 Punkten = **73,7 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ---
