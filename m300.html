@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.16.2 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.17.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -104,8 +104,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.16.2", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
-  "fact_summary": { "total": 41, "confirmed_primary": 33, "media_report": 5, "unverified": 0, "scenario_projection": 3, "vendor_claim": 16 },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.17.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "fact_summary": { "total": 42, "confirmed_primary": 33, "media_report": 5, "unverified": 0, "scenario_projection": 4, "vendor_claim": 16 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
 </script>
@@ -153,8 +153,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner (in der Veröffentlichung ausgeblendet) ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto" data-publish="hidden">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.16.2</span>
-    <span class="text-slate-300"><span data-dbom-count="total">41</span> Fakten · <span data-dbom-count="confirmed">33</span> belegt (davon <span data-dbom-count="fulltext">32</span> am Original geprüft, <span data-dbom-count="vendor">16</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.17.0</span>
+    <span class="text-slate-300"><span data-dbom-count="total">42</span> Fakten · <span data-dbom-count="confirmed">33</span> belegt (davon <span data-dbom-count="fulltext">32</span> am Original geprüft, <span data-dbom-count="vendor">16</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">0</span> ungeprüft · <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
       <a href="analysen/m300-atas-options-xray-deep-dive.md" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(153,51,255,0.15);color:#9933FF;border:1px solid rgba(153,51,255,0.4);">↗ Volltext-Analyse</a>
@@ -204,7 +204,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <span class="lvl-content lvl-inline" data-lvlc="einsteiger">Eine Option ist das Recht, einen Basiswert zu einem festgelegten Preis zu kaufen (Call) oder zu verkaufen (Put). Wer Optionen verkauft, kann sein Kursrisiko mit Futures begrenzen, also mit börsengehandelten Terminkontrakten. <span data-source="FACT_DEALER_CONVENTION">Analysemodelle würden unterstellen, dass Optionsverkäufer sich so absichern <span class="dbom-class-badge">MODELL</span>.</span> <span data-source="FACT_XRAY_1MIN_SPX">ATAS Options X-Ray zeigt dazu Kennzahlen aus Optionsdaten auf den <abbr title="S&amp;P-500-Index">SPX</abbr> im Future-Chart <span class="badge b-v">VENDOR</span>.</span> Dieses Modul erklärt Schritt für Schritt, wie das funktioniert, wo die Annahmen enden und worin sich Börsenoptionen und Optionsscheine im DACH-Raum unterscheiden. Dazu prüfen wir neun ausgewählte Kernaussagen eines Fachtexts.</span><span class="lvl-content lvl-inline" data-lvlc="fortgeschritten"><span data-source="FACT_DEALER_CONVENTION">Nach GEX-Modellen würden Händler, die Optionen verkaufen, ihr Buch über Futures absichern; daraus schätzen die Modelle, wo solche Absicherungsflüsse Kursbewegungen dämpfen oder verstärken könnten <span class="dbom-class-badge">MODELL</span>.</span> Wir zeigen die fachübliche Referenzrechnung hinter Gamma, Vanna und Charm, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Optionen und Optionsscheine gegenüber und prüfen neun ausgewählte Kernaussagen des Ausgangstexts.</span><span class="lvl-content lvl-inline active" data-lvlc="experte">Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen neun ausgewählte Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.</span>
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">33</span> belegte Fakten, <span data-dbom-count="media">5</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">3</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">33</span> belegte Fakten, <span data-dbom-count="media">5</span> Medienangaben, <span data-dbom-count="unverified">0</span> ungeprüft, <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -401,10 +401,40 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     </div>
     <div class="dep-box" data-source="FACT_DEALER_CONVENTION">
       <h3 class="font-head font-bold text-white mb-1">Gamma-Regime im Profil <span class="dbom-class-badge">MODELL</span></h3>
-      <p class="text-xs text-tngb-muted mb-3">Hypothetisches Netto-GEX-Profil über den Indexstand. Rein illustrativ, keine Marktdaten.</p>
-      <div style="height:260px;"><canvas id="chartRegime" role="img" aria-label="Hypothetisches Netto-GEX-Profil: negatives Netto-GEX unterhalb des GEX-Flips, positives darüber">Hypothetisches Netto-GEX-Profil, illustrativ.</canvas></div>
+      <p class="text-xs text-tngb-muted mb-3">Hypothetisches Netto-GEX-Profil zum Rechenbeispiel unten (gold umrandet: Call Wall und Put Wall; gestrichelt: GEX-Flip und angenommener Indexstand). Rein illustrativ, keine Marktdaten.</p>
+      <div style="height:260px;"><canvas id="chartRegime" role="img" aria-label="Hypothetisches Netto-GEX-Profil zum Rechenbeispiel unten: negatives Netto-GEX unterhalb des GEX-Flips mit dem tiefsten Balken an der Put Wall, positives darüber mit dem höchsten Balken an der Call Wall; gestrichelt der angenommene Indexstand">Hypothetisches Netto-GEX-Profil zum Rechenbeispiel unten, illustrativ.</canvas></div>
       <p class="text-sm text-slate-300 mt-3 leading-relaxed">Unter der angenommenen Positionskonvention würde das Hedging der Dealer oberhalb des <strong class="text-tngb-cyan">GEX-Flips</strong> die Bewegung dämpfen: Sie würden bei steigenden Kursen verkaufen und bei fallenden kaufen. Unterhalb würde es die Bewegung verstärken. In zweiter Ordnung träfe prozyklisches Hedging auf ein Orderbuch, aus dem Liquidität abgezogen würde. In dritter Ordnung könnte die höhere realisierte Volatilität die implizite Volatilität anheben und über Vanna erneut Hedge-Bedarf auslösen.</p>
     </div>
+  </div>
+  <div class="dep-box mt-8" id="gex-marken" data-qa="gex-marken">
+    <h3 class="font-head font-bold text-white mb-1">GEX-Flip, Call Wall und Put Wall: die drei Kursmarken der GEX-Landkarte <span class="dbom-class-badge">MODELL</span></h3>
+    <p class="text-xs text-tngb-muted mb-4" data-source="FACT_DEALER_CONVENTION">Flip und Walls wären Rechenergebnisse eines Modells mit angenommener Dealer-Position, keine beobachteten Orders und keine Preisgarantien <span class="dbom-class-badge">MODELL</span>.</p>
+    <div class="grid md:grid-cols-3 gap-4 mb-6">
+      <div class="dep-box border-t-4" style="border-top-color:#00CFFF;"><div class="text-xs font-mono text-tngb-cyan mb-1">Umschaltpunkt</div><h4 class="font-head font-bold text-white mb-2"><dfn>GEX-Flip</dfn> (Kursniveau, an dem das Netto-Gamma der Dealer sein Vorzeichen wechselt)</h4><p class="text-sm text-slate-300">Man summiert das Gamma aller Strikes für jeden denkbaren Indexstand und sucht den Stand, an dem die Summe von negativ nach positiv wechselt. <span data-source="FACT_DEALER_CONVENTION">Darüber lägen die Dealer nach dem Modell long Gamma, darunter short Gamma <span class="dbom-class-badge">MODELL</span>.</span></p><p class="text-xs text-slate-400 mt-2">Andere Namen: Zero Gamma, Gamma Flip, Gamma-Neutral-Level.</p></div>
+      <div class="dep-box border-t-4" style="border-top-color:#00CC7A;"><div class="text-xs font-mono text-tngb-emerald mb-1">Obere Marke</div><h4 class="font-head font-bold text-white mb-2"><dfn>Call Wall</dfn> (Strike mit der höchsten Call-Gamma-Konzentration)</h4><p class="text-sm text-slate-300">Hier sitzt das meiste Call-Gamma. <span data-source="FACT_DEALER_CONVENTION">Stiege der Kurs auf diese Marke zu, müssten Dealer nach dem Modell immer mehr Futures verkaufen, um neutral zu bleiben; die Marke würde deshalb als Widerstand gelesen <span class="dbom-class-badge">MODELL</span>.</span></p></div>
+      <div class="dep-box border-t-4" style="border-top-color:#E6399A;"><div class="text-xs font-mono text-tngb-magenta mb-1">Untere Marke</div><h4 class="font-head font-bold text-white mb-2"><dfn>Put Wall</dfn> (Strike mit der höchsten Put-Gamma-Konzentration)</h4><p class="text-sm text-slate-300">Hier sitzt das meiste Put-Gamma. <span data-source="FACT_DEALER_CONVENTION">Fiele der Kurs darauf zu, wäre der Absicherungsbedarf am größten; unterhalb nähme das Put-Gamma wieder ab und der Verkaufsdruck aus dem Hedging ließe nach. Die Marke würde deshalb als Unterstützung gelesen <span class="dbom-class-badge">MODELL</span>.</span></p></div>
+    </div>
+    <h4 class="font-head font-bold text-white mb-2">Das Zusammenspiel</h4>
+    <ol class="list-decimal pl-5 text-sm text-slate-300 leading-relaxed space-y-2 mb-6" data-source="FACT_DEALER_CONVENTION">
+      <li><strong class="text-tngb-emerald">Zwischen Flip und Call Wall</strong> würden Dealer Anstiege verkaufen und Rückgänge kaufen. Der Kurs könnte dadurch in einer Spanne pendeln; kurz vor einem großen Verfall spricht man vom „Pinning“ an einem Strike <span class="dbom-class-badge">MODELL</span>.</li>
+      <li><strong class="text-tngb-emerald">An der Call Wall</strong> wäre die dämpfende Gegenbewegung am stärksten. Wird sie überschritten, nähme das Call-Gamma darüber ab; die Dämpfung ließe nach, und kaufen Marktteilnehmer neue Calls darüber, könnte die Wall nach oben wandern <span class="dbom-class-badge">MODELL</span>.</li>
+      <li><strong class="text-tngb-cyan">Unter den Flip</strong> kippte das Regime: Dealer würden fallenden Kursen hinterherverkaufen und steigenden hinterherkaufen. Bewegungen könnten sich dadurch beschleunigen, typischerweise in Richtung Put Wall <span class="dbom-class-badge">MODELL</span>.</li>
+      <li><strong class="text-tngb-magenta">An der Put Wall</strong> wäre der Hedge-Druck am größten; darunter ließe er nach. Kommt dort aber neue Put-Nachfrage hinzu, könnte sich die Wall nach unten verschieben, und die Unterstützung entfiele <span class="dbom-class-badge">MODELL</span>.</li>
+    </ol>
+    <div class="info-box text-sm text-slate-300 leading-relaxed mb-4">
+      <strong class="text-tngb-cyan">Rechenbeispiel:</strong> <span data-source="FACT_GEX_LEVELS_EXAMPLE">Angenommen, der Index stünde bei 7.740 Punkten, der GEX-Flip läge bei 7.675, die Call Wall bei 7.800 und die Put Wall bei 7.600 <span class="dbom-class-badge">SCENARIO</span>.</span> Die Werte sind erfunden, keine Marktlage. Das Diagramm oben rechts zeigt dieses Profil.
+    </div>
+    <div class="overflow-x-auto mb-4" data-source="FACT_GEX_LEVELS_EXAMPLE">
+      <table class="w-full text-sm text-left text-slate-300">
+        <thead class="text-xs text-tngb-muted uppercase"><tr><th class="py-2 pr-3">Szenario</th><th class="py-2 pr-3">Bewegung</th><th class="py-2 pr-3">Regime nach dem Modell</th><th class="py-2">Modellhafte Dealer-Reaktion</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-slate-700"><td class="py-2 pr-3">A · Anstieg zur Call Wall</td><td class="py-2 pr-3 mono">7.740 → 7.790</td><td class="py-2 pr-3">Long Gamma</td><td class="py-2">Dealer würden in den Anstieg hinein Futures verkaufen; nahe 7.800 wäre die Gegenbewegung am stärksten <span class="dbom-class-badge">SCENARIO</span></td></tr>
+          <tr class="border-t border-slate-700"><td class="py-2 pr-3">B · Rückgang unter den Flip</td><td class="py-2 pr-3 mono">7.740 → 7.660</td><td class="py-2 pr-3">wechselt zu Short Gamma</td><td class="py-2">Bis 7.675 würden Dealer kaufen, darunter würden sie mitverkaufen; der Rückgang könnte sich beschleunigen <span class="dbom-class-badge">SCENARIO</span></td></tr>
+          <tr class="border-t border-slate-700"><td class="py-2 pr-3">C · Fall zur Put Wall</td><td class="py-2 pr-3 mono">7.660 → 7.600</td><td class="py-2 pr-3">Short Gamma</td><td class="py-2">Der Verkaufsdruck aus dem Hedging wäre nahe 7.600 am größten und ließe darunter nach; ohne neue Put-Nachfrage könnte sich der Kurs dort fangen <span class="dbom-class-badge">SCENARIO</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-slate-400 leading-relaxed"><strong>Was das Beispiel nicht zeigt:</strong> <span data-source="FACT_DEALER_CONVENTION">Würde ein Modell mit dem Open-Interest-Stand des Vortags rechnen, würden neue Positionen des laufenden Tages fehlen. Mit Kurs, Zeit und impliziter Volatilität würde sich das Gamma ändern und damit auch die Lage von Flip und Walls (Vanna, Charm). Weil jeder Anbieter eigene Annahmen über die Dealer-Position trifft, könnten Flip und Walls für denselben Tag je nach Anbieter verschieden ausfallen <span class="dbom-class-badge">MODELL</span>.</span></p>
   </div>
 </section>
 
@@ -721,7 +751,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.16.2 · 2026-10-23<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.17.0 · 2026-10-23<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
@@ -864,11 +894,14 @@ document.getElementById('sources').innerHTML='<div class="dep-box md:col-span-2 
 const C={cyan:'#00CFFF',emerald:'#00CC7A',gold:'#DFAF0F',lavender:'#9933FF',orange:'#FF6B00',magenta:'#E6399A',muted:'#64748B'};
 if(window.Chart){ Chart.defaults.color='#94A3B8'; } /* Styleguide-Diagrammtext */
 function mk(id,cfg){ const c=document.getElementById(id); if(c&&window.Chart) return new Chart(c,cfg); }
-// Hypothetisches Netto-GEX-Profil (illustrativ): Flip bei 6.450
-const px=[],gx=[];
-for(let p=6300;p<=6700;p+=25){ px.push(p.toLocaleString('de-DE')); gx.push(+((Math.tanh((p-6450)/90))*1.6 + (p===6600?0.9:0) + (p===6350?-0.7:0)).toFixed(2)); }
-mk('chartRegime',{type:'bar',data:{labels:px,datasets:[{label:'Netto-GEX (Mrd. USD je 1 %, hypothetisch)',data:gx,backgroundColor:gx.map(v=>v>=0?C.emerald:C.magenta)}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw>=0?'Long':'Short'} Gamma: ${c.raw.toLocaleString('de-DE')} Mrd. USD (hypothetisch)`}}},
+// Hypothetisches Netto-GEX-Profil (illustrativ, Rechenbeispiel S05): Put Wall 7.600, Flip 7.675, Call Wall 7.800, Index 7.740
+const px=[],gx=[],pv=[],LV={flip:7675,spot:7740,cw:7800,pw:7600};
+for(let p=7500;p<=7900;p+=25){ pv.push(p); px.push(p.toLocaleString('de-DE')); gx.push(+((Math.tanh((p-LV.flip)/90))*1.6 + (p===LV.cw?0.9:0) + (p===LV.pw?-0.7:0)).toFixed(2)); }
+const lvLines={id:'lvLines',afterDatasetsDraw(ch){const x=ch.scales.x,a=ch.chartArea,g=ch.ctx,step=x.getPixelForValue(1)-x.getPixelForValue(0);
+  const at=v=>x.getPixelForValue(0)+(v-pv[0])/25*step;
+  [[LV.flip,C.cyan,'Flip 7.675'],[LV.spot,'#F8FAFC','Index 7.740']].forEach(([v,c,l],i)=>{const X=at(v);g.save();g.strokeStyle=c;g.setLineDash([4,3]);g.beginPath();g.moveTo(X,a.top);g.lineTo(X,a.bottom);g.stroke();g.setLineDash([]);g.fillStyle=c;g.font='10px JetBrains Mono, monospace';g.textAlign=i?'left':'right';g.fillText(l,X+(i?4:-4),a.top+10+i*12);g.restore();});}};
+mk('chartRegime',{type:'bar',plugins:[lvLines],data:{labels:px,datasets:[{label:'Netto-GEX (Mrd. USD je 1 %, hypothetisch)',data:gx,backgroundColor:gx.map(v=>v>=0?C.emerald:C.magenta),borderColor:pv.map(p=>p===LV.cw||p===LV.pw?C.gold:'transparent'),borderWidth:2}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw>=0?'Long':'Short'} Gamma: ${c.raw.toLocaleString('de-DE')} Mrd. USD (hypothetisch)${pv[c.dataIndex]===LV.cw?' · Call Wall':pv[c.dataIndex]===LV.pw?' · Put Wall':''}`}}},
   scales:{x:{title:{display:true,text:'Indexstand (hypothetisch)',color:'#94A3B8',font:{size:10}},ticks:{color:'#94A3B8',font:{size:9},maxRotation:0,autoSkip:true,maxTicksLimit:9},grid:{display:false}},y:{title:{display:true,text:'Mrd. USD je 1 %',color:'#94A3B8',font:{size:10}},ticks:{color:'#94A3B8'},grid:{color:'rgba(100,116,139,0.15)'}}}}});
 
 /* ====== GEX-RECHNER ====== */

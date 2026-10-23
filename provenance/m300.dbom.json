@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.16.2",
+    "version": "1.17.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -13,11 +13,11 @@
     "release_status": "UEBERARBEITUNG"
   },
   "fact_summary": {
-    "total": 41,
+    "total": 42,
     "confirmed_primary": 33,
     "media_report": 5,
     "unverified": 0,
-    "scenario_projection": 3,
+    "scenario_projection": 4,
     "vendor_claim": 16,
     "by_class": {
       "DERIVED": 1,
@@ -25,7 +25,7 @@
       "MEDIA_REPORT": 5,
       "MODEL_ASSUMPTION": 1,
       "REGULATORY_FRAMEWORK": 9,
-      "SCENARIO_PROJECTION": 2,
+      "SCENARIO_PROJECTION": 3,
       "VENDOR_CLAIM": 16
     }
   },
@@ -689,6 +689,17 @@
       "claim": "Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES.",
       "source_id": "SRC_MODEL",
       "caveat": "Hypothetische Werte.",
+      "period": "–",
+      "evidence": "model"
+    },
+    {
+      "id": "FACT_GEX_LEVELS_EXAMPLE",
+      "verdict": "SCENARIO_PROJECTION",
+      "class": "SCENARIO_PROJECTION",
+      "confidence": null,
+      "claim": "Rechenbeispiel GEX-Marken: Index 7.740, GEX-Flip 7.675, Call Wall 7.800, Put Wall 7.600; Szenarien A (7.740 → 7.790), B (7.740 → 7.660) und C (7.660 → 7.600) mit modellhafter Dealer-Reaktion.",
+      "source_id": "SRC_MODEL",
+      "caveat": "Hypothetische Werte, keine Marktlage.",
       "period": "–",
       "evidence": "model"
     },
@@ -1376,6 +1387,12 @@
     {
       "date": "2026-10-23",
       "event": "v1.16.2: Befunde der 22. Zweitprüfung umgesetzt: S10 Optionsscheine-Positionsbasis n. v./offen statt „fehlt damit“ (N-1); Lesehilfen S03 und Fazit an den Seiteninhalt angepasst (N-2); S04 ohne Lageangabe; Hero ohne „in großem Umfang“, Options X-Ray mit VENDOR; EINSCHÄTZUNG nicht mehr am Rechtsfakt K2; S07/S08 als Modell; S11 Fakt (ABGELEITET) getrennt vom Szenario; Option und Dealer erklärt; „neun ausgewählte Kernaussagen“. „Wahrscheinlichkeitszonen“ auf Seite und im Prompt ersetzt durch „modellbasierte Zonen erhöhter Absicherungsaktivität“ (Herausgeber). Lesepunkt-Anker nur nach dem Einordnungskasten",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-23",
+      "event": "v1.17.0: S05 um den Erklärblock „GEX-Flip, Call Wall und Put Wall“ ergänzt (Definitionen, Zusammenspiel in vier Schritten, Rechenbeispiel FACT_GEX_LEVELS_EXAMPLE mit Szenarien A–C, Grenzen des Beispiels); Diagramm „Gamma-Regime im Profil“ zeigt jetzt dasselbe hypothetische Profil mit markierten Walls, Flip und Indexstand (Anregung des Herausgebers). Ein aktuelles Marktbeispiel ist nicht enthalten: Anbieterwerte nur aus Suchtreffern, Quellseiten im Netz der Sitzung nicht abrufbar.",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }
