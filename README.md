@@ -1,3 +1,26 @@
+> # ⛔ STILLGELEGT / DEPRECATED — Stand 2026-10-23
+>
+> **Dieses Repository ist stillgelegt und wird nicht mehr gepflegt.** Es war ein eigenständiges
+> **Staging-/Build-Repo** für die SpaceX-IPO-Analyse und ist **nicht** mit der Produktiv-Website
+> (www.nexus2learn.com, Cloudflare Pages) verbunden — von hier aus wird **nichts** veröffentlicht.
+>
+> ## Die Inhalte leben jetzt im produktiven Repo `MartinHauptmann/fincoach-ai`
+>
+> | Hier (Staging) | → Produktiv in `fincoach-ai` |
+> |---|---|
+> | `modul.html` (M298, SpaceX-Analyse) | **M298** `modul-m298-spacex-ipo-globaler-vergleich.html` (Q3-Update v2.1.0) |
+> | `m299.html` (IPO-Zuteilung) | **M517** `modul-m517-ipo-zuteilung-international.html` |
+> | `m300.html` (SpaceX Q3 Deep-Dive) | **M516** `modul-m516-spacex-q3-2026-aktienanalyse.html` |
+>
+> Portierung in **PR #53** (fincoach-ai). Das separate Modul **M518 · ATAS Options X-Ray** liegt in PR #54.
+> Nach dem Governance-Lauf + Merge sind die Module live unter www.nexus2learn.com.
+>
+> Die LinkedIn-Assets unter `assets/` bleiben hier als Archiv (nicht nach fincoach-ai portiert).
+>
+> **Bitte dieses Repo in den GitHub-Einstellungen archivieren (Read-only). Nicht von hier deployen.**
+
+---
+
 # SpaceX — Der Weg zum Billionen-IPO · Publishing-Paket (Modul M298)
 
 Eigenständig deploybare, statische Website (FinCoach AI · TheNextGenerationBanking) zur kritischen
