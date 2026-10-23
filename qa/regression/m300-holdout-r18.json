@@ -222,8 +222,8 @@
    "edits": [
     [
      "m300.html",
-     "Modellthese: Die Bewegung wird abgebremst.</p>",
-     "Modellthese: Die Bewegung wird abgebremst. <span class=\"dbom-class-badge\">HYPOTHESE</span></p>"
+     "Modellthese: Die Bewegung würde abgebremst <span class=\"dbom-class-badge\">MODELL</span>.</p>",
+     "Modellthese: Die Bewegung würde abgebremst <span class=\"dbom-class-badge\">MODELL</span>. <span class=\"dbom-class-badge\">HYPOTHESE</span></p>"
     ]
    ]
   },
@@ -257,8 +257,8 @@
    "edits": [
     [
      "m300.html",
-     "Modellthese: Die Bewegung wird beschleunigt (Gamma-Squeeze).</p>",
-     "Modellthese: Die Bewegung wird beschleunigt (Gamma-Squeeze). <span class=\"dbom-class-badge\">MODELL</span></p>"
+     "Modellthese: Die Bewegung würde beschleunigt (Gamma-Squeeze) <span class=\"dbom-class-badge\">MODELL</span>.</p>",
+     "Modellthese: Die Bewegung würde beschleunigt (Gamma-Squeeze) <span class=\"dbom-class-badge\">MODELL</span>. <span class=\"dbom-class-badge\">MODELL</span></p>"
     ]
    ]
   },
