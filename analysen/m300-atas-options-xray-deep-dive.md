@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.17.0 (Entwurf) |
+| Version | 1.18.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -382,14 +382,15 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 | S57 | Deutscher Derivate Verband · Muster-Produktinformation Call-Optionsschein | Sekundärquelle | `SRC_DDV_OS_MUSTER` | https://www.derivateverband.de/DE/MediaLibrary/Document/Muster/Call%20Optionsschein-d.pdf |
 | S58 | Stiftung Warentest · Studie zu Turbo-Zertifikaten: Die meisten Anleger machen Verluste | Sekundärquelle | `SRC_TESTDE_TURBO` | https://www.test.de/Studie-zu-Turbo-Zertifikaten-Die-meisten-Anleger-machen-mit-Turbo-Zertifikaten-Verluste-6227752-0/ |
 | S59 | ATAS · Footprint-Charts (Volumenanalyse) | Herstellerquelle | `SRC_ATAS_FOOTPRINT` | https://atas.net/volume-analysis/footprint-charts/ |
+| S59 | GEX-Metrix Dashboard · SPX (Screenshot des Herausgebers, 2026-10-23 05:28 ET; Beleg: provenance/evidence/m300-gexmetrix-spx-2026-10-23.png) | Herstellerquelle | `SRC_GEXMETRIX` | https://www.gexmetrix.com/gex/spx |
 
 ---
 
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.17.0,
-42 Fakten, 45 Quellen.
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.18.0,
+44 Fakten, 46 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
 |---|---|---|---|---|---|
@@ -431,6 +432,8 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | – | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
 | `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
 | `FACT_GEX_LEVELS_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Rechenbeispiel GEX-Marken: Index 7.740, GEX-Flip 7.675, Call Wall 7.800, Put Wall 7.600; Szenarien A (7.740 → 7.790), B (7.740 → 7.660) und C (7.660 → 7.600) mit modellhafter Dealer-Reaktion. |
+| `FACT_GEXMETRIX_SPX` | CONFIRMED | VENDOR_CLAIM | 0,8 | 2026-10-23 05:28 ET | GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET: Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ; Index von rund 7.800 auf 7.663,43. |
+| `FACT_GEXMETRIX_DERIVED` | CONFIRMED | DERIVED | 0,7 | 2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX) | Aus FACT_GEXMETRIX_SPX abgeleitet: Call Wall ≈ 7.800 und Put Wall ≈ 7.650 (längster Call- bzw. Put-Balken im Strike-Diagramm, abgelesen); Netto-Gamma −50,57 Mrd. USD je 1 % (61,56 − 112,13); Abstand Index zum Flip −197,57 und zur Put Wall +13,43 Punkte. |
 | `FACT_ROADMAP` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. |
 | `FACT_CONTRACT_SPECS` | CONFIRMED | MARKET_DATA | 0,8 | Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11) | Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Standardoptionen auf Indizes (Monats- und Quartalsverfälle): letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember). |
 | `FACT_CCP_ISSUER` | CONFIRMED | REGULATORY_FRAMEWORK | 0,8 | Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11) | Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). |

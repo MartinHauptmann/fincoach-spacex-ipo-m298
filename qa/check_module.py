@@ -674,7 +674,23 @@ def main():
         # L78 · Bezugszeitraum ≤ Stichtag; späterer Abruf ausdrücklich; Abrufzeitraum umfasst den spätesten Abruf
         st = dbom["module"].get("stichtag", "")
         l78, abruf = [], []
+        # L78b · ausdrückliche Momentaufnahme nach dem Stichtag: Begründung in after_stichtag (≥ 20 Zeichen) und auf der
+        # Seite ein gebundenes, sichtbares Element mit „nach dem Stichtag“; sonst gilt L78 unverändert
+        snap = set()
         for f in F:
+            if "after_stichtag" not in f:
+                continue
+            why = str(f.get("after_stichtag", "")).strip()
+            vis = [visible_part(element_inner(html, m)) for m in re.finditer(r'<(\w+)\b[^>]*data-source="[^"]*\b' + re.escape(f["id"]) + r'\b[^"]*"[^>]*>', html)]
+            if len(why) < 20:
+                l78.append(f"{f['id']}: after_stichtag ohne Begründung")
+            elif not any(re.search(r"nach dem Stichtag", norm_txt(v), re.I) for v in vis):
+                l78.append(f"{f['id']}: after_stichtag, aber Seite nennt „nach dem Stichtag“ nicht am gebundenen Element")
+            else:
+                snap.add(f["id"])
+        for f in F:
+            if f["id"] in snap:
+                continue
             for m in re.finditer(r"\d{4}-\d{2}-\d{2}", iso(f.get("period", ""))):
                 if re.search(r"\b(?:abgerufen|abruf)\b", iso(f["period"])[max(0, m.start() - 25):m.start()], re.I):  # L80: „abrufbar“ zählt nicht
                     abruf.append(m.group(0))

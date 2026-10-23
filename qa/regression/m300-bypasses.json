@@ -2452,6 +2452,54 @@
      "nein (Eurex-Optionen nur als Rohdaten) <span class=\"badge b-v\">VENDOR</span>"
     ]
    ]
+  },
+  {
+   "name": "L78b Momentaufnahme ohne sichtbaren Hinweis „nach dem Stichtag“",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Momentaufnahme nach dem Stichtag des Moduls. Quelle:",
+     "Momentaufnahme. Quelle:"
+    ]
+   ]
+  },
+  {
+   "name": "L78b after_stichtag ohne Begründung",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\"",
+     "\"after_stichtag\": \"Fallbeispiel\""
+    ]
+   ]
+  },
+  {
+   "name": "L78b Hinweis nur in verstecktem Element",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Momentaufnahme nach dem Stichtag des Moduls. Quelle:",
+     "<span hidden>nach dem Stichtag</span> Quelle:"
+    ]
+   ]
+  },
+  {
+   "name": "L78 Fakt nach Stichtag ohne after_stichtag (Ausnahme entfernt)",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23",
+     "\"note\": \"Vom Herausgeber am 2026-10-23"
+    ]
+   ]
   }
  ]
 }
