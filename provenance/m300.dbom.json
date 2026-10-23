@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.16.1",
+    "version": "1.16.2",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -1370,6 +1370,12 @@
     {
       "date": "2026-10-23",
       "event": "Zweiundzwanzigste Zweitprüfung: keine Freigabe; Skripte grün auf allen drei Niveaus; C4 inhaltlich bestätigt (✓ nach Sichtprüfung des Herausgebers); Q4, Q7, Q9 nicht bestätigt (N-1 S10 „fehlt Optionsscheinen damit“ widerspricht n. v.-Zelle; N-2 Meta-Aussagen S03/Fazit); Berichtigung QA-Bericht §43: Lesepunkt-Verschiebung auf dem Desktop auch in S04, S09, S10 und Fazit; S04 Einsteiger enthält weiter eine Lageangabe",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-23",
+      "event": "v1.16.2: Befunde der 22. Zweitprüfung umgesetzt: S10 Optionsscheine-Positionsbasis n. v./offen statt „fehlt damit“ (N-1); Lesehilfen S03 und Fazit an den Seiteninhalt angepasst (N-2); S04 ohne Lageangabe; Hero ohne „in großem Umfang“, Options X-Ray mit VENDOR; EINSCHÄTZUNG nicht mehr am Rechtsfakt K2; S07/S08 als Modell; S11 Fakt (ABGELEITET) getrennt vom Szenario; Option und Dealer erklärt; „neun ausgewählte Kernaussagen“. „Wahrscheinlichkeitszonen“ auf Seite und im Prompt ersetzt durch „modellbasierte Zonen erhöhter Absicherungsaktivität“ (Herausgeber). Lesepunkt-Anker nur nach dem Einordnungskasten",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }

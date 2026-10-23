@@ -183,7 +183,7 @@ Modul 4 · Mikro-Makro-Synergien im praktischen Trading
   COMPLIANCE-VORGABE: Setups nur generisch und lehrhaft beschreiben, ohne konkrete Kursziele,
   Einstiege oder Richtungsaussagen zu benannten Instrumenten. Jedes Setup enthält
   Invalidierungsbedingungen, Risikohinweise und den ausdrücklichen Hinweis, dass Gamma-Levels
-  Wahrscheinlichkeitszonen sind und keine Preisgarantien.
+  modellbasierte Zonen erhöhter Absicherungsaktivität sind und keine Preisgarantien.
 
 Modul 5 · Globaler Wettbewerbsvergleich
   Matrix ATAS · SpotGamma (HIRO) · MenthorQ · Volland · Bookmap · IBKR TWS mit den Spalten
