@@ -128,7 +128,7 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L64:** Nur geltendes Recht am Stichtag; frühere Rechtslagen, Übergangsregeln und überholte Grenzbeträge werden nicht
   dargestellt. Geprüft wird normalisiert (inkl. „a.F.“, Markup), in Seite samt JS und Attributen, Analyse, DBOM und
   Prompt (L67).
-- **L65:** K-Bereiche „K1–Kn“ und jeder Verweis „Kn“ passen zur Zahl der K-Zeilen, in Seite, Analyse und Prompt.
+- **L65:** K-Bereiche „K1–Kn“ und jeder Verweis „Kn“ passen zur Zahl der K-Zeilen, in Seite, Analyse und Prompt. Zahlangaben „n (ausgewählte) Kernaussagen“ gelten auch mit Adjektiv zwischen Zahl und Substantiv (L65c).
 - **L66:** Nach jeder Entfernung Folgetexte suchen: Titel, Attribute, Datenherkunft (nur Stellen aus den Quellen) und
   Fazit; jeder Fazit-Punkt unter „Relativiert“/„Entfällt“ nennt seinen Claim (`data-claim`).
 - **L68:** Eigenständigkeit gilt auch für JS-Strings und Links mit Anker (`m299.html#…`) und Wörter wie „Vorversion“.

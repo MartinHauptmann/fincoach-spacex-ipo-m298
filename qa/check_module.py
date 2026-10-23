@@ -560,8 +560,8 @@ def main():
             l65 += [f"{name}: K{n}" for n in set(re.findall(r"\bK(\d{1,2})\b", tn)) if int(n) > nk]
             l65 += [f"{name}: A01–A{n}" for n in re.findall(r"\bA0?1\s?[–-]\s?A?(\d+)", tn) if int(n) != ncl]  # L65b/L80: „A1–A20“
             l65 += [f"{name}: A{n}" for n in set(re.findall(r"\bA(\d{2})\b|\bCLAIM A(\d+)\b", tn)) for n in [n[0] or n[1]] if int(n) > ncl]  # L80: Einzelverweise
-            l65 += [f"{name}: „{x} {w}“" for x, w in re.findall(r"\b(\d+) (kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if int(x) != nk]  # L80: Ziffer
-            l65 += [f"{name}: „{w} {x}“" for w, x in re.findall(r"\b([a-zäöüß]+) (kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if w in ZW and ZW[w] != nk]  # L80: Zahlwörter
+            l65 += [f"{name}: „{x} {w}“" for x, w in re.findall(r"\b(\d+) (?:[a-zäöüß]+e )?(kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if int(x) != nk]  # L80: Ziffer
+            l65 += [f"{name}: „{w} {x}“" for w, x in re.findall(r"\b([a-zäöüß]+) (?:[a-zäöüß]+e )?(kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if w in ZW and ZW[w] != nk]  # L80: Zahlwörter; L65c: auch mit Adjektiv („zwölf ausgewählte“)
         if prm:
             pdefs = re.findall(r"^K(\d+)\s{1,2}[A-ZÄÖÜ]", prm[0].read_text(encoding="utf-8"), re.M)
             if len(pdefs) != nk:
