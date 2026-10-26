@@ -107,7 +107,8 @@ def main():
     cnt = {"total": fs["total"], "confirmed": fs["confirmed_primary"], "media": fs["media_report"], "unverified": fs["unverified"],
            "scenario": fs["scenario_projection"], "vendor": fs["vendor_claim"], "sources": len(d["sources"]),
            "snippet": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "snippet" for f in F),
-           "fulltext": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "fulltext" for f in F)}  # L82
+           "fulltext": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "fulltext" for f in F),  # L82
+           "screenshot": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "screenshot" for f in F)}  # L82g
     facts = {f["id"]: f for f in F}
 
     s = page.read_text(encoding="utf-8")

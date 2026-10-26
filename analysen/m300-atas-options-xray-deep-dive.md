@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.18.0 (Entwurf) |
+| Version | 1.19.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -23,10 +23,11 @@
 > **Methodischer Vorbehalt:** Die Recherche lief über eine Netzwerkumgebung, die den direkten Abruf der
 > meisten Primärquellen gesperrt hat, darunter gesetze-im-internet.de, recht.bund.de, eurex.com, atas.net und die Anbieterseiten.
 > Recherchiert wurde deshalb über Suchtreffer, die auf diese Primärquellen verweisen; die URLs stehen im
-> Quellenverzeichnis. Der Herausgeber hat am 2026-10-11 jeden Beleg an seiner Quelle abgeglichen: Primär- und
+> Quellenverzeichnis. Der Herausgeber hat am 2026-10-11 jeden bis dahin erfassten Beleg an seiner Quelle abgeglichen: Primär- und
 > Herstellerquellen am Original (`evidence: fulltext`), ausgenommen die fünf Medienangaben, die an ihrer
 > Sekundärquelle geprüft sind (`evidence: secondary`), und der Quantor `FACT_NO_EUREX_GEX`, der aus zwei geprüften
-> Herstellerangaben abgeleitet ist (`evidence: derived`).
+> Herstellerangaben abgeleitet ist (`evidence: derived`), ebenso ausgenommen die spätere GEX-Metrix-Momentaufnahme
+> vom 2026-10-23 (`FACT_GEXMETRIX_SPX`, `evidence: screenshot`), die auf einer Bildschirmkopie des Herausgebers beruht.
 
 > **Aufbau:** Diese Analyse ist eine faktgebundene Kurzfassung. Jede Angabe nennt die Fakt-ID ihres Belegs aus
 > `provenance/m300.dbom.json` mit Verdict und Konfidenz; Zitate des Quelltexts sind als solche gekennzeichnet.
@@ -382,15 +383,15 @@ Hand gepflegt. Die S-Nummern sind die Belegverweise in dieser Analyse.
 | S57 | Deutscher Derivate Verband · Muster-Produktinformation Call-Optionsschein | Sekundärquelle | `SRC_DDV_OS_MUSTER` | https://www.derivateverband.de/DE/MediaLibrary/Document/Muster/Call%20Optionsschein-d.pdf |
 | S58 | Stiftung Warentest · Studie zu Turbo-Zertifikaten: Die meisten Anleger machen Verluste | Sekundärquelle | `SRC_TESTDE_TURBO` | https://www.test.de/Studie-zu-Turbo-Zertifikaten-Die-meisten-Anleger-machen-mit-Turbo-Zertifikaten-Verluste-6227752-0/ |
 | S59 | ATAS · Footprint-Charts (Volumenanalyse) | Herstellerquelle | `SRC_ATAS_FOOTPRINT` | https://atas.net/volume-analysis/footprint-charts/ |
-| S59 | GEX-Metrix Dashboard · SPX (Screenshot des Herausgebers, 2026-10-23 05:28 ET; Beleg: provenance/evidence/m300-gexmetrix-spx-2026-10-23.png) | Herstellerquelle | `SRC_GEXMETRIX` | https://www.gexmetrix.com/gex/spx |
+| S59 | GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; nicht veröffentlicht, SHA-256 e4b56d890e706e8c…) | Herstellerquelle | `SRC_GEXMETRIX` | https://www.gexmetrix.com/gex/spx |
 
 ---
 
 ## 6 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse). Die
-Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.18.0,
-44 Fakten, 46 Quellen.
+Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Hand gepflegt. Stand: Modul v1.19.0,
+45 Fakten, 46 Quellen.
 
 | ID | Verdict | Klasse | Konf. | Bezugszeitraum | Claim |
 |---|---|---|---|---|---|
@@ -432,8 +433,9 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | `FACT_DEALER_CONVENTION` | SCENARIO_PROJECTION | MODEL_ASSUMPTION | – | – | GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (Kunden long Puts / short Calls). |
 | `FACT_GEX_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Zahlenbeispiel: S=6.500, OI=10.000, Γ=0,002 → GEX 845 Mio. USD je 1 % ≈ 2.600 ES. |
 | `FACT_GEX_LEVELS_EXAMPLE` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Rechenbeispiel GEX-Marken: Index 7.740, GEX-Flip 7.675, Call Wall 7.800, Put Wall 7.600; Szenarien A (7.740 → 7.790), B (7.740 → 7.660) und C (7.660 → 7.600) mit modellhafter Dealer-Reaktion. |
-| `FACT_GEXMETRIX_SPX` | CONFIRMED | VENDOR_CLAIM | 0,8 | 2026-10-23 05:28 ET | GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET: Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ; Index von rund 7.800 auf 7.663,43. |
-| `FACT_GEXMETRIX_DERIVED` | CONFIRMED | DERIVED | 0,7 | 2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX) | Aus FACT_GEXMETRIX_SPX abgeleitet: Call Wall ≈ 7.800 und Put Wall ≈ 7.650 (längster Call- bzw. Put-Balken im Strike-Diagramm, abgelesen); Netto-Gamma −50,57 Mrd. USD je 1 % (61,56 − 112,13); Abstand Index zum Flip −197,57 und zur Put Wall +13,43 Punkte. |
+| `FACT_GEXMETRIX_SPX` | CONFIRMED | VENDOR_CLAIM | 0,8 | 2026-10-23 05:28 ET | GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET (vor Handelsbeginn): Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ, letzter Punkt deutlich negativer als die Differenz der Kopfwerte; Index von rund 7.800 auf 7.663,43. |
+| `FACT_GEXMETRIX_DERIVED` | CONFIRMED | DERIVED | 0,7 | 2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX) | Aus FACT_GEXMETRIX_SPX berechnet: Differenz der Kopfwerte Call-Gamma minus Put-Gamma 61,56 − 112,13 = −50,57 Mrd. USD je 1 % (nicht der Netto-Wert des Anbieters); Abstand Index zum GEX-Flip 7.663,43 − 7.861,0 = −197,57 Punkte. |
+| `FACT_GEXMETRIX_WALLS_READ` | UNVERIFIED | DERIVED | 0,5 | 2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX) | Im angezeigten Strike-Bereich 7.625–7.850 der Bildschirmkopie ist der längste Call-Balken bei 7.800 und der längste Put-Balken bei 7.650; Strikes außerhalb des Ausschnitts sind nicht sichtbar, bei 7.800 und 7.750 sind die Call-Balken fast gleich lang. |
 | `FACT_ROADMAP` | SCENARIO_PROJECTION | SCENARIO_PROJECTION | – | – | Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. |
 | `FACT_CONTRACT_SPECS` | CONFIRMED | MARKET_DATA | 0,8 | Stichtag 2026-10-05 (Kontraktspezifikationen abgerufen 2026-10-11) | Kontraktdaten: Multiplikator SPX 100 USD je Indexpunkt, SPXW-Optionen mit Verfällen an jedem Wochentag (0DTE möglich; Cboe); E-mini S&P 500 50 USD und Micro E-mini 5 USD je Indexpunkt (CME); Eurex-Standardoptionen auf Indizes (Monats- und Quartalsverfälle): letzter Handelstag ist der dritte Freitag des Verfallsmonats (Quartalsverfall im März, Juni, September und Dezember). |
 | `FACT_CCP_ISSUER` | CONFIRMED | REGULATORY_FRAMEWORK | 0,8 | Stichtag 2026-10-05 (Quellen abgerufen 2026-10-11) | Börsengehandelte Eurex-Optionen werden über die Eurex Clearing AG als zentrale Gegenpartei abgewickelt (Zulassung nach EMIR durch die BaFin am 10.04.2014); die Teilnehmer hinterlegen Sicherheiten (Margin). |
@@ -449,8 +451,8 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 - Belegstufen der Medienangaben und des abgeleiteten Quantors durch Zweitprüfung und Herausgeber bestätigen lassen
 - Widerspruchsfreiheit von These und Belegstufen-Definition durch Zweitprüfung bestätigen lassen
 - Einschränkung der Bewertung „Nutzen“ der Eurex-Erweiterung durch Zweitprüfung bestätigen lassen
-- Screenshot-Beleg aus dem veröffentlichten Verzeichnis nehmen oder Nutzungsrechte dokumentieren
-- Prüf- und Recherchezeitraum in den Freitexten um die Momentaufnahme vom 2026-10-23 ergänzen; L78b eng fassen
+- Entfernung der Bildschirmkopie aus dem veröffentlichten Verzeichnis durch Zweitprüfung bestätigen lassen
+- Ergänzte Freitexte zum Prüfzeitraum und verschärfte Regel L78b durch Zweitprüfung bestätigen lassen
 - Wortlaut der TWS-Herstellerangabe zu Eurex-Optionen am Original prüfen oder auf „keine marktweite GEX-Aggregation“ stützen
 - Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)
 
@@ -466,13 +468,13 @@ Tabelle ist ein Auszug daraus und wird bei Änderungen neu erzeugt, nicht von Ha
 | C2 Keine Anlageempfehlung (MAR) | ✓ | Keine Kursziele, Einstiege oder Empfehlungen (Zweitprüfung 2026-10-11 gelesen); Empfehlungsformen geprüft (L62) |
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) |
 | C4 Neutralität / Interessenkonflikte | ◐ | Gamma Cockpit als eigener Herstellerfakt (VENDOR), Quantor-Verdict aus den Basisfakten abgeleitet (belegt); Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
-| C5 Marken beschreibend | ◐ | 23. Zweitprüfung: Screenshot des GEX-Metrix-Dashboards liegt im veröffentlichten Verzeichnis provenance/evidence/; Nutzungsrechte ungeklärt |
+| C5 Marken beschreibend | ◐ | 23. Zweitprüfung: Bildschirmkopie des GEX-Metrix-Dashboards nicht im veröffentlichten Verzeichnis; veröffentlicht sind nur die Werte, das Bild bewahrt der Herausgeber auf (SHA-256 in der M-DBOM); Bestätigung durch die nächste Zweitprüfung ausstehend |
 | C6 UWG-konforme Begriffe | ◐ | Herstellerangabe zur IBKR TWS „Eurex-Optionen nur als Rohdaten“ von der Zweitprüfung als fachlich zweifelhaft eingestuft; Abgleich am Original durch den Herausgeber ausstehend (20. Zweitprüfung) |
 | C7 Ausgewogene Risikodarstellung | ✓ | Modellgrenzen, Latenz, Fehlsignale, Totalverlust und BaFin-Quote dargestellt (Zweitprüfung 2026-10-11) |
 | C8 Regulatorische Bezüge belegt | ✓ | § 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft |
 | C9 Datenschutz | ✓ | Datenschutzerklärung und Impressum vom Herausgeber freigegeben (2026-10-11); Speicherangaben = Messung an allen Modulseiten (L38); Modul ohne Drittanbieter-Abrufe und ohne Speicher (L20) |
 | Q1 Faktencheck K1–K9 vollständig | ◐ | Claim-Tabelle A01–A15; A11 ohne Beleg ([N. V.]); Ergebnisse nach L61 |
-| Q2 Aktualität / Stichtag | ◐ | 23. Zweitprüfung: Freitexte zu Prüf- und Recherchezeitraum (2026-10-11) erfassen die Momentaufnahme vom 2026-10-23 nicht; Ausnahme L78b umgehbar |
+| Q2 Aktualität / Stichtag | ◐ | 23. Zweitprüfung: Freitexte nennen die Momentaufnahme vom 2026-10-23 und ihre Belegstufe; Regel L78b enger gefasst; Bestätigung durch die nächste Zweitprüfung ausstehend |
 | Q3 Mathematische Konsistenz | ✓ | GEX 845 Mio. USD, 2.600 ES / 26.000 MES, Probe, Vanna und Charm nachgerechnet (Zweitprüfung 2026-10-11); Rechner rechnet gleich |
 | Q4 Provenienz je Fakt | ◐ | Medienangaben mit Belegstufe secondary, Quantor derived; Ausnahme-Sätze nennen die Kategorien; Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
 | Q5 Quellenqualität | ✓ | Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen als Hauptbeleg nur bei Medienangaben; Abgleich durch den Herausgeber am Original, bei Medienangaben an der Sekundärquelle |

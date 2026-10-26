@@ -731,8 +731,12 @@ def main():
         # L26d · ein Fakt, dessen caveat oder keep_reason einen offenen Abgleich nennt, ist nicht CONFIRMED
         l26d = [f["id"] for f in F if f["verdict"] == "CONFIRMED" and re.search(r"\boffen\b|gegenlesen|offen-punkt|zu prüfen|ungeprüft|nicht geprüft|noch prüfen|steht aus|ausstehend|unsicher|unklar|zweifel|vorläufig|zu verifizieren|noch nicht|pending|to be (?:verified|checked)|unverified|tbd\b", f.get("caveat", "") + " " + f.get("keep_reason", ""), re.I)]
         report("L26d CONFIRMED ohne offenen Abgleich", BLOCKER, not l26d, "CONFIRMED trotz offenem Abgleich im caveat: " + ", ".join(l26d) if l26d else "kein CONFIRMED-Fakt nennt einen offenen Abgleich")
-        # L82 · Belegstufe je Fakt: evidence ∈ {snippet, fulltext, secondary, derived, model}; SCENARIO ⇔ model; Snippet-Belege halten C3/Q2/Q4/Q5 auf ◐
-        l82 = [f"{f['id']}: evidence „{f.get('evidence')}“" for f in F if f.get("evidence") not in ("snippet", "fulltext", "secondary", "derived", "model")]
+        # L82 · Belegstufe je Fakt: evidence ∈ {snippet, fulltext, secondary, derived, model, screenshot}; SCENARIO ⇔ model; Snippet-Belege halten C3/Q2/Q4/Q5 auf ◐
+        # L82g · „screenshot“ = datierte Bildschirmkopie des Originals (nicht Live-Original); nur mit verified.date und Hash der Bilddatei an der Quelle
+        l82 = [f"{f['id']}: evidence „{f.get('evidence')}“" for f in F if f.get("evidence") not in ("snippet", "fulltext", "secondary", "derived", "model", "screenshot")]
+        _srcs = {s["id"]: s for s in dbom.get("sources", [])}
+        l82 += [f"{f['id']}: screenshot ohne Datum oder Bild-Hash" for f in F if f.get("evidence") == "screenshot"
+                and not (re.search(r"\d{4}-\d{2}-\d{2}", f.get("period", "")) and re.fullmatch(r"[0-9a-f]{64}", _srcs.get(f["source_id"], {}).get("evidence_file_sha256", "")))]
         l82 += [f"{f['id']}: SCENARIO ⇔ model verletzt" for f in F if (f["verdict"] == "SCENARIO_PROJECTION") != (f.get("evidence") == "model")]
         if any(f["verdict"] == "CONFIRMED" and f.get("evidence") == "snippet" for f in F):
             gates = {g: c for c, g in re.findall(r'<td class="check-(\w+)"[^>]*data-gate="(\w+)"', html)}
@@ -1084,7 +1088,7 @@ def main():
         # L82e · Belegstufe passt zum Prüfumfang: „fulltext“ nur, wenn verified.scope ein Original ohne Einschränkung nennt
         def _exc(f):
             sc = f.get("verified", {}).get("scope", "")
-            return bool(f.get("verified")) and ("Original" not in sc or re.search(r"(?i)nicht (?:im volltext )?eingesehen|medienbericht", sc + " " + f.get("caveat", "")))
+            return f.get("evidence") == "screenshot" or bool(f.get("verified")) and ("Original" not in sc or re.search(r"(?i)nicht (?:im volltext )?eingesehen|medienbericht", sc + " " + f.get("caveat", "")))  # L82g: Bildschirmkopie ist kein Abgleich am Original
         exc = [f for f in F if _exc(f) and f["verdict"] != "SCENARIO_PROJECTION" and f.get("evidence") != "derived"]
         l82e = [f"{f['id']}: evidence fulltext bei Prüfumfang „{f['verified'].get('scope', '')[:30]}“" for f in exc if f.get("evidence") == "fulltext"]
         # L82f · Hauptquelle der Stufe secondary ⇒ Belegstufe secondary (nicht fulltext)
@@ -1097,7 +1101,7 @@ def main():
         if exc:
             tit = " ".join(re.findall(r'\btitle="([^"]*)"', html))
             for name, txt in (("Seite", _txt(visible_part(html)) + " " + tit), ("Analyse", (md or "").replace("\n> ", " ").replace("\n", " ")), ("honest_disclosure", dbom.get("honest_disclosure", ""))):
-                for sent in re.split(r"(?<=[.;])\s", txt.replace("n. v.", "n.v.")):
+                for sent in re.split(r"(?<=[.;])\s|\s*¶\s*", txt.replace("n. v.", "n.v.")):  # L82h: auch an Absatzgrenzen (Listen ohne Schlusspunkt)
                     if not UNIV.search(sent):
                         continue
                     for f in exc:
