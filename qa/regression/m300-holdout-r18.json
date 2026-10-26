@@ -163,7 +163,7 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“).",
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 mit seiner ungeprüften Wall-Ablesung (Stufe „Bildschirmkopie“).",
      "Derzeit tragen alle Belege die Stufe „Volltext“."
     ]
    ]
@@ -198,8 +198,8 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“).",
-     "Bis auf die fünf Medienangaben (Stufe „Sekundär“) und einen abgeleiteten Quantor (Stufe „Abgeleitet“) tragen derzeit alle Belege die Stufe „Volltext“."
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 mit seiner ungeprüften Wall-Ablesung (Stufe „Bildschirmkopie“).",
+     "Bis auf die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel (Stufe „Bildschirmkopie“) tragen derzeit alle Belege die Stufe „Volltext“."
     ]
    ]
   },

@@ -2294,7 +2294,7 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "jeden Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original)",
+     "jeden bis dahin erfassten Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original), ausgenommen auch die spätere GEX-Metrix-Momentaufnahme FACT_GEXMETRIX_SPX (Bildschirmkopie)",
      "jeden Beleg im Original eingesehen"
     ]
    ]
@@ -2305,7 +2305,7 @@
    "edits": [
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "Der Herausgeber hat am 2026-10-11 jeden Beleg an seiner Quelle abgeglichen: Primär- und\n> Herstellerquellen am Original (`evidence: fulltext`), ausgenommen die fünf Medienangaben, die an ihrer\n> Sekundärquelle geprüft sind (`evidence: secondary`)",
+     "Der Herausgeber hat am 2026-10-11 jeden bis dahin erfassten Beleg an seiner Quelle abgeglichen: Primär- und\n> Herstellerquellen am Original (`evidence: fulltext`), ausgenommen die fünf Medienangaben, die an ihrer\n> Sekundärquelle geprüft sind (`evidence: secondary`)",
      "Der Herausgeber hat am 2026-10-11 jede Quelle im Original gelesen"
     ]
    ]
@@ -2426,7 +2426,7 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“) und ein abgeleiteter Quantor (Stufe „Abgeleitet“).",
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 mit seiner ungeprüften Wall-Ablesung (Stufe „Bildschirmkopie“).",
      "Derzeit sind alle Belege auf der Stufe „Volltext“."
     ]
    ]
