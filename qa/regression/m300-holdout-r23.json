@@ -1,0 +1,299 @@
+{
+ "page": "m300.html",
+ "source": "Holdout r23, unabhängig geschrieben vor Teständerung (L50c)",
+ "cases": [
+  {
+   "name": "H23-01 L78: Hinweis verneint („Keine Momentaufnahme nach dem Stichtag“)",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\">Momentaufnahme nach dem Stichtag des Moduls.",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\">Keine Momentaufnahme nach dem Stichtag des Moduls."
+    ]
+   ]
+  },
+  {
+   "name": "H23-02 L78: Gegensinn: Phrase zitiert, Aussage aber „zum Stichtag erhoben“",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Momentaufnahme nach dem Stichtag des Moduls. Quelle: Dashboard GEX-Metrix",
+     "Momentaufnahme – entgegen dem Eindruck „nach dem Stichtag“ – zum Stichtag des Moduls erhoben. Quelle: Dashboard GEX-Metrix"
+    ]
+   ]
+  },
+  {
+   "name": "H23-03 L78: Füllbegründung im after_stichtag von FACT_GEXMETRIX_SPX (lang, ohne Inhalt)",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\"",
+     "\"after_stichtag\": \"Begründung siehe Modul. Begründung siehe Modul. Begründung siehe Modul.\""
+    ]
+   ]
+  },
+  {
+   "name": "H23-04 L78: Zusätzliche Hero-Bindung von FACT_GEXMETRIX_SPX ohne Hinweis",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Dazu prüfen wir neun ausgewählte Kernaussagen eines Fachtexts.",
+     "Dazu prüfen wir neun ausgewählte Kernaussagen eines Fachtexts. <span data-source=\"FACT_GEXMETRIX_SPX\">Ein echtes Beispiel zeigt den SPX bei einem Indexstand von 7.663,43 <span class=\"badge b-v\">VENDOR</span>.</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H23-05 L78: Bindung von FACT_GEXMETRIX_WALLS_READ in Szenario C (außerhalb des Blocks gex-real) ohne Hinweis",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "ohne neue Put-Nachfrage könnte sich der Kurs dort fangen <span class=\"dbom-class-badge\">SCENARIO</span></td></tr>",
+     "ohne neue Put-Nachfrage könnte sich der Kurs dort fangen <span class=\"dbom-class-badge\">SCENARIO</span> <span data-source=\"FACT_GEXMETRIX_WALLS_READ\">(im echten Beispiel: längster Put-Balken bei 7.650 <span class=\"dbom-class-badge\">UNGEPRÜFT</span>)</span></td></tr>"
+    ]
+   ]
+  },
+  {
+   "name": "H23-06 L78: Rechtsfakt FACT_MAR_RECO mit späterem period und after_stichtag samt sichtbarem Hinweis",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"claim\": \"Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten.\",\n      \"source_id\": \"SRC_DELVO_958\",\n      \"caveat\": \"\",\n      \"period\": \"Rechtsstand 2026-10-05\",",
+     "\"claim\": \"Art. 3 Abs. 1 Nr. 34/35 MAR definieren Anlageempfehlungen und Empfehlungen zu Anlagestrategien; die Delegierte VO (EU) 2016/958 regelt objektive Darstellung und Offenlegung von Interessenkonflikten.\",\n      \"source_id\": \"SRC_DELVO_958\",\n      \"caveat\": \"\",\n      \"period\": \"Rechtsstand 2026-10-20\",\n      \"after_stichtag\": \"Rechtsstand nach der am 2026-10-20 veröffentlichten Änderung als Momentaufnahme übernommen; die übrigen Fakten bleiben auf dem Stichtag.\","
+    ],
+    [
+     "m300.html",
+     "data-source=\"FACT_MAR_RECO\">MAR · Anlageempfehlung</button>",
+     "data-source=\"FACT_MAR_RECO\">MAR · Anlageempfehlung (Momentaufnahme nach dem Stichtag)</button>"
+    ]
+   ]
+  },
+  {
+   "name": "H23-07 L78: Hinweis in Hintergrundfarbe (#121A2E auf dep-box)",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\">Momentaufnahme nach dem Stichtag des Moduls.",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\"><span style=\"color:#121A2E\">Momentaufnahme nach dem Stichtag des Moduls.</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H23-08 L78: Hinweis offscreen positioniert",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\">Momentaufnahme nach dem Stichtag des Moduls.",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\"><span style=\"position:absolute;left:-9999px\">Momentaufnahme nach dem Stichtag des Moduls.</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H23-09 L78: Hinweis mit opacity:0",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\">Momentaufnahme nach dem Stichtag des Moduls.",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\"><span style=\"opacity:0\">Momentaufnahme nach dem Stichtag des Moduls.</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H23-10 L78: Hinweis in zugeklapptem <details>",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\">Momentaufnahme nach dem Stichtag des Moduls.",
+     "<span data-source=\"FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED FACT_GEXMETRIX_WALLS_READ\"><details><summary>Hinweis</summary>Momentaufnahme nach dem Stichtag des Moduls.</details>"
+    ]
+   ]
+  },
+  {
+   "name": "H23-11 L78: Momentaufnahme ohne Zeitstempel im period (FACT_GEXMETRIX_SPX)",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"period\": \"2026-10-23 05:28 ET\",",
+     "\"period\": \"Momentaufnahme des Herausgebers\","
+    ]
+   ]
+  },
+  {
+   "name": "H23-12 L78: Analyse ohne Kennzeichnung nach dem Stichtag („spätere“ gestrichen)",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "ebenso ausgenommen die spätere GEX-Metrix-Momentaufnahme",
+     "ebenso ausgenommen die GEX-Metrix-Momentaufnahme"
+    ]
+   ]
+  },
+  {
+   "name": "H23-13 L78: Vendor-Fakt FACT_ATAS_FOOTPRINT mit Datum nach dem Stichtag im Claim, ohne after_stichtag",
+   "expect": "L78",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"claim\": \"ATAS bietet Footprint-Charts (Cluster-Charts) auf Basis von Tick-Daten der Börse mit Darstellungen wie Volumen, Bid × Ask und Delta.\",",
+     "\"claim\": \"ATAS bietet Footprint-Charts (Cluster-Charts) auf Basis von Tick-Daten der Börse mit Darstellungen wie Volumen, Bid × Ask und Delta (Herstellerseite, Stand 2026-10-20).\","
+    ]
+   ]
+  },
+  {
+   "name": "H23-14 L65: Dativ mit Ziffer („den 12 ausgewählten Kernaussagen“)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Dazu prüfen wir neun ausgewählte Kernaussagen eines Fachtexts.",
+     "Dazu stellen wir den 12 ausgewählten Kernaussagen eines Fachtexts die Belege gegenüber."
+    ]
+   ]
+  },
+  {
+   "name": "H23-15 L65: Zwei Adjektive zwischen Zahlwort und Kernaussagen",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "prüfen neun ausgewählte Kernaussagen des Ausgangstexts.</span>",
+     "prüfen zehn ausgewählte zentrale Kernaussagen des Ausgangstexts.</span>"
+    ]
+   ]
+  },
+  {
+   "name": "H23-16 L65: Komma zwischen Adjektiven („11 zentrale, strittige Kernaussagen“)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "prüfen neun ausgewählte Kernaussagen des Ausgangstexts (K1–K9)",
+     "prüfen 11 zentrale, strittige Kernaussagen des Ausgangstexts (K1–K9)"
+    ]
+   ]
+  },
+  {
+   "name": "H23-17 L65: Zahlwort großgeschrieben am Satzanfang („Acht Kernaussagen …“)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Aus einem Fachtext über das Werkzeug wurden neun Kernaussagen ausgewählt.",
+     "Acht Kernaussagen wurden aus einem Fachtext über das Werkzeug ausgewählt."
+    ]
+   ]
+  },
+  {
+   "name": "H23-18 L65: Analyse-Überschrift mit Dativ-Zahlangabe („den zehn ausgewählten Kernaussagen“)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "## 2 · Phase A: Faktenprüfung K1–K9",
+     "## 2 · Phase A: Faktenprüfung zu den zehn ausgewählten Kernaussagen (K1–K9)"
+    ]
+   ]
+  },
+  {
+   "name": "H23-19 NONE: Hinweis eindeutig umformuliert (stammt aus der Zeit nach dem Stichtag)",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Momentaufnahme nach dem Stichtag des Moduls. Quelle: Dashboard GEX-Metrix",
+     "Diese Momentaufnahme stammt aus der Zeit nach dem Stichtag des Moduls (2026-10-05). Quelle: Dashboard GEX-Metrix"
+    ]
+   ]
+  },
+  {
+   "name": "H23-20 NONE: Analyse nennt die Momentaufnahme ausdrücklich nach dem Stichtag",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "ebenso ausgenommen die spätere GEX-Metrix-Momentaufnahme",
+     "ebenso ausgenommen die GEX-Metrix-Momentaufnahme nach dem Stichtag"
+    ]
+   ]
+  },
+  {
+   "name": "H23-21 NONE: after_stichtag von FACT_GEXMETRIX_SPX inhaltlich gleichwertig umformuliert",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\"",
+     "\"after_stichtag\": \"Fallbeispiel aus einer am 2026-10-23 vom Herausgeber erstellten Bildschirmkopie; der Modul-Stichtag 2026-10-05 gilt für alle übrigen Fakten unverändert.\""
+    ]
+   ]
+  },
+  {
+   "name": "H23-22 NONE: Andere Wortstellung, Zahl stimmt („die neun von uns ausgewählten Kernaussagen“)",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Dazu prüfen wir neun ausgewählte Kernaussagen eines Fachtexts.",
+     "Dazu prüfen wir die neun von uns ausgewählten Kernaussagen eines Fachtexts."
+    ]
+   ]
+  },
+  {
+   "name": "H23-23 NONE: Satzanfang großgeschrieben mit richtiger Zahl („Neun Kernaussagen …“)",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Aus einem Fachtext über das Werkzeug wurden neun Kernaussagen ausgewählt.",
+     "Neun Kernaussagen wurden aus einem Fachtext über das Werkzeug ausgewählt."
+    ]
+   ]
+  },
+  {
+   "name": "H23-24 NONE: Fremde Zahl im Satz vor richtiger Zahl („Aus 40 Absätzen … neun Kernaussagen“)",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "Aus einem Fachtext über das Werkzeug wurden neun Kernaussagen ausgewählt.",
+     "Aus 40 Absätzen eines Fachtexts über das Werkzeug wurden neun Kernaussagen ausgewählt."
+    ]
+   ]
+  }
+ ]
+}
