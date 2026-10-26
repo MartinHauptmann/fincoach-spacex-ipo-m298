@@ -2500,6 +2500,54 @@
      "\"note\": \"Vom Herausgeber am 2026-10-23"
     ]
    ]
+  },
+  {
+   "name": "L65c Zweitprüfung 23: „aus zwölf ausgewählten Kernaussagen“ (Dativ)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "prüfen neun ausgewählte Kernaussagen des Ausgangstexts (K1",
+     "prüfen wir aus zwölf ausgewählten Kernaussagen des Ausgangstexts (K1"
+    ]
+   ]
+  },
+  {
+   "name": "L65c Zweitprüfung 23: „zwölf sorgfältig ausgewählte“ (Adverb)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "prüfen neun ausgewählte Kernaussagen des Ausgangstexts (K1",
+     "prüfen zwölf sorgfältig ausgewählte Kernaussagen des Ausgangstexts (K1"
+    ]
+   ]
+  },
+  {
+   "name": "L65c Zweitprüfung 23: „zwölf zentrale, ausgewählte“ (Komma)",
+   "expect": "L65",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "prüfen neun ausgewählte Kernaussagen des Ausgangstexts (K1",
+     "prüfen zwölf zentrale, ausgewählte Kernaussagen des Ausgangstexts (K1"
+    ]
+   ]
+  },
+  {
+   "name": "L65c Negativkontrolle: „eine der neun ausgewählten Kernaussagen“",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "prüfen neun ausgewählte Kernaussagen des Ausgangstexts (K1",
+     "prüfen jede einzelne der neun ausgewählten Kernaussagen des Ausgangstexts (K1"
+    ]
+   ]
   }
  ]
 }

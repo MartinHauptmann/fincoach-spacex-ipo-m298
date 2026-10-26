@@ -1463,6 +1463,12 @@
       "event": "v1.19.0: Befunde der 23. Zweitprüfung inhaltlich umgesetzt: Walls nur im angezeigten Strike-Bereich 7.625–7.850 als ungeprüfte Ablesung (FACT_GEXMETRIX_WALLS_READ, UNVERIFIED) mit eingeschränkter Lesart (B-1/B-2); Freitexte (Daten-Transparenz, Datenherkunft, Legende, honest_disclosure, Analyse) nennen die Momentaufnahme vom 2026-10-23 als Ausnahme (B-3); Bildschirmkopie nicht mehr im veröffentlichten Verzeichnis, SHA-256 an der Quelle (B-4); Lageangabe ersetzt (B-7); Pinning erklärt, Kurzfassungen für Einsteiger und Fortgeschrittene (B-8); Indexstand vor Handelsbeginn (B-9); Differenz der Kopfwerte statt Netto (B-10); neue Belegstufe screenshot (B-11); Tooltips C5/Q2 (B-12). Tests: L82g (screenshot nur mit Datum und Bild-Hash, zählt als Ausnahme in L82d), L82h (Satztrennung an Absatzgrenzen).",
       "qa_score_pct": 73.7,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-26",
+      "event": "v1.19.0 Tests: L78b nach Holdout r23 verschärft (L78c), L65c erweitert, L76b (Modul-Stichtag in Momentaufnahme-Bindungen); Block gex-real mit data-snapshot, Hinweis am Offen-Punkt Q9. Holdout r23 einmalig vor der Teständerung 8/24, danach 24/24.",
+      "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [

@@ -128,7 +128,7 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L64:** Nur geltendes Recht am Stichtag; frühere Rechtslagen, Übergangsregeln und überholte Grenzbeträge werden nicht
   dargestellt. Geprüft wird normalisiert (inkl. „a.F.“, Markup), in Seite samt JS und Attributen, Analyse, DBOM und
   Prompt (L67).
-- **L65:** K-Bereiche „K1–Kn“ und jeder Verweis „Kn“ passen zur Zahl der K-Zeilen, in Seite, Analyse und Prompt. Zahlangaben „n (ausgewählte) Kernaussagen“ gelten auch mit Adjektiv zwischen Zahl und Substantiv (L65c).
+- **L65:** K-Bereiche „K1–Kn“ und jeder Verweis „Kn“ passen zur Zahl der K-Zeilen, in Seite, Analyse und Prompt. Zahlangaben „n (ausgewählte) Kernaussagen“ gelten auch mit bis zu drei Adjektiven oder Adverbien dazwischen, flektiert und mit Komma (L65c).
 - **L66:** Nach jeder Entfernung Folgetexte suchen: Titel, Attribute, Datenherkunft (nur Stellen aus den Quellen) und
   Fazit; jeder Fazit-Punkt unter „Relativiert“/„Entfällt“ nennt seinen Claim (`data-claim`).
 - **L68:** Eigenständigkeit gilt auch für JS-Strings und Links mit Anker (`m299.html#…`) und Wörter wie „Vorversion“.
@@ -150,6 +150,12 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L78b:** Eine datierte Momentaufnahme nach dem Stichtag (z. B. ein vom Herausgeber geliefertes Fallbeispiel) ist nur
   zulässig mit `after_stichtag` (Begründung) im Fakt und dem sichtbaren Hinweis „nach dem Stichtag“ am gebundenen
   Element. Der Stichtag des Moduls wird dafür nicht verschoben.
+  Verschärft (L78c): nur VENDOR_CLAIM, MARKET_DATA oder DERIVED mit Zeitstempel (Datum und Uhrzeit) im `period`; die
+  Begründung nennt Datum, Momentaufnahme/Fallbeispiel und Stichtag; jede Bindung liegt in einem Block mit
+  `data-snapshot`, der den Hinweis „Momentaufnahme nach dem Stichtag“ schlicht sichtbar trägt (kein `style`, kein
+  zugeklapptes `details`, nicht verneint, nicht zitiert), oder trägt ihn selbst; die Analyse kennzeichnet die
+  Momentaufnahme. Belegstufe einer Bildschirmkopie ist `screenshot` (L82g) mit SHA-256 der Bilddatei an der Quelle;
+  die Bilddatei selbst wird nicht veröffentlicht.
 - **L79:** Elemente, die nur an Herstellerangaben (VENDOR_CLAIM) gebunden sind, tragen das VENDOR-Kennzeichen.
 - **L65b/L68b:** Bereichsangaben „A01–Ann“ passen zur Claim-Tabelle; Tooltips und Offen-Liste beschreiben den
   Zielzustand, nicht den Bearbeitungsverlauf („entfernt“, „angeglichen“, „überarbeitet“, „nach dem Review“).

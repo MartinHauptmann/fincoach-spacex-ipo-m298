@@ -560,8 +560,8 @@ def main():
             l65 += [f"{name}: K{n}" for n in set(re.findall(r"\bK(\d{1,2})\b", tn)) if int(n) > nk]
             l65 += [f"{name}: A01–A{n}" for n in re.findall(r"\bA0?1\s?[–-]\s?A?(\d+)", tn) if int(n) != ncl]  # L65b/L80: „A1–A20“
             l65 += [f"{name}: A{n}" for n in set(re.findall(r"\bA(\d{2})\b|\bCLAIM A(\d+)\b", tn)) for n in [n[0] or n[1]] if int(n) > ncl]  # L80: Einzelverweise
-            l65 += [f"{name}: „{x} {w}“" for x, w in re.findall(r"\b(\d+) (?:[a-zäöüß]+e )?(kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if int(x) != nk]  # L80: Ziffer
-            l65 += [f"{name}: „{w} {x}“" for w, x in re.findall(r"\b([a-zäöüß]+) (?:[a-zäöüß]+e )?(kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if w in ZW and ZW[w] != nk]  # L80: Zahlwörter; L65c: auch mit Adjektiv („zwölf ausgewählte“)
+            l65 += [f"{name}: „{x} {w}“" for x, w in re.findall(r"\b(\d+) (?:(?!(?:der|die|das|den|dem|des|einer|eines|unserer|ihrer|seiner|dieser|jener|von|aus|zu|zur|zum|eine|einen|einem)\b)[a-zäöüß]+(?:e|en|er|es|ig|lich|isch|sam|haft|bar),? ){0,3}(kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if int(x) != nk]  # L80: Ziffer
+            l65 += [f"{name}: „{w} {x}“" for w, x in re.findall(r"\b([a-zäöüß]+) (?:(?!(?:der|die|das|den|dem|des|einer|eines|unserer|ihrer|seiner|dieser|jener|von|aus|zu|zur|zum|eine|einen|einem)\b)[a-zäöüß]+(?:e|en|er|es|ig|lich|isch|sam|haft|bar),? ){0,3}(kernaussagen|k-punkte|prüfpunkte des ausgangstexts)", norm_txt(txt)) if w in ZW and ZW[w] != nk]  # L80: Zahlwörter; L65c: bis zu drei Adjektive, auch flektiert und mit Komma („den zwölf ausgewählten“, „11 zentrale, strittige“)
         if prm:
             pdefs = re.findall(r"^K(\d+)\s{1,2}[A-ZÄÖÜ]", prm[0].read_text(encoding="utf-8"), re.M)
             if len(pdefs) != nk:
@@ -626,6 +626,8 @@ def main():
                 if n > 1:
                     txt = re.sub(r"\b%s\b" % w, str(n), txt, flags=re.I)
             hay = iso(" ".join(str(facts[i].get(k, "")) for i in ids for k in ("claim", "period", "caveat", "values", "basis")))
+            if any(facts[i].get("after_stichtag") for i in ids):  # L76b: Hinweis auf eine Momentaufnahme darf den Modul-Stichtag nennen
+                hay += " " + dbom["module"].get("stichtag", "")
             for w, n in ZW.items():  # Zahlwörter im Claim („zehn Indikatoren“) zählen als Ziffer
                 if n > 1 and re.search(r"\b%s\b" % w, hay, re.I):
                     hay += f" {n} "
@@ -674,18 +676,59 @@ def main():
         # L78 · Bezugszeitraum ≤ Stichtag; späterer Abruf ausdrücklich; Abrufzeitraum umfasst den spätesten Abruf
         st = dbom["module"].get("stichtag", "")
         l78, abruf = [], []
-        # L78b · ausdrückliche Momentaufnahme nach dem Stichtag: Begründung in after_stichtag (≥ 20 Zeichen) und auf der
-        # Seite ein gebundenes, sichtbares Element mit „nach dem Stichtag“; sonst gilt L78 unverändert
+        # L78b · ausdrückliche Momentaufnahme nach dem Stichtag (verschärft nach der 23. Zweitprüfung und Holdout r23):
+        # nur Marktdaten/Herstellerangaben/Ableitungen mit Zeitstempel (Datum + Uhrzeit) im period; Begründung mit Datum,
+        # Momentaufnahme/Bildschirmkopie/Fallbeispiel und Stichtag, ohne Füllwiederholung; jede Bindung liegt in einem
+        # Block mit data-snapshot oder trägt den Hinweis selbst; der Hinweis ist sichtbar (kein style, kein zugeklapptes
+        # details, keine Versteck-Klassen), nicht verneint, nicht zitiert; die Analyse kennzeichnet die Momentaufnahme
+        def _span(m):
+            depth, pos, pat = 1, m.end(), re.compile(r"<(/?)" + m.group(1) + r"\b[^>]*>")
+            while depth:
+                n_ = pat.search(html, pos)
+                if not n_:
+                    return m.start(), len(html)
+                depth += -1 if n_.group(1) else 1
+                pos = n_.end()
+            return m.start(), pos
+
+        def _plain(inner):  # Hinweis nur in schlichtem, sichtbarem Text
+            inner = visible_part(inner)
+            prev = None
+            while prev != inner:
+                prev = inner
+                inner = re.sub(r'<(\w+)\b[^>]*(?:\bstyle="[^"]*"|class="[^"]*\b(?:invisible|opacity-0|sr-only|hidden|absolute|fixed|text-transparent)\b[^"]*")[^>]*>.*?</\1>', " ", inner, flags=re.S)
+                inner = re.sub(r"<details\b(?![^>]*\bopen\b)[^>]*>.*?</details>", " ", inner, flags=re.S)
+            return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", inner))
+        HINT = re.compile(r"(?<![„\"])\bMomentaufnahme\b[^.;„“\"]{0,40}?\bnach dem Stichtag\b(?![“\"])")
+        NEG = re.compile(r"(?i)\b(?:kein\w*|nicht|ohne|entgegen|weder)\b[^.;]{0,25}$")
+
+        def _hint(txt):
+            return any(not NEG.search(txt[max(0, h.start() - 40):h.start()]) for h in HINT.finditer(txt))
+        sblocks = [(_span(m)[0], _span(m)[1], m.end()) for m in re.finditer(r"<(\w+)\b[^>]*\bdata-snapshot\b[^>]*>", html)]  # Start, Ende, Inhaltsbeginn
         snap = set()
         for f in F:
             if "after_stichtag" not in f:
                 continue
             why = str(f.get("after_stichtag", "")).strip()
-            vis = [visible_part(element_inner(html, m)) for m in re.finditer(r'<(\w+)\b[^>]*data-source="[^"]*\b' + re.escape(f["id"]) + r'\b[^"]*"[^>]*>', html)]
-            if len(why) < 20:
-                l78.append(f"{f['id']}: after_stichtag ohne Begründung")
-            elif not any(re.search(r"nach dem Stichtag", norm_txt(v), re.I) for v in vis):
-                l78.append(f"{f['id']}: after_stichtag, aber Seite nennt „nach dem Stichtag“ nicht am gebundenen Element")
+            words = re.findall(r"[A-Za-zÄÖÜäöüß]{3,}", why)
+            bad = []
+            if f["class"] not in ("VENDOR_CLAIM", "MARKET_DATA", "DERIVED"):
+                bad.append(f"Klasse {f['class']} nicht zulässig")
+            if not re.search(r"\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}", f.get("period", "")):
+                bad.append("period ohne Zeitstempel")
+            if len(why) < 40 or len(set(w.lower() for w in words)) < 0.6 * max(len(words), 1) or not re.search(r"\d{4}-\d{2}-\d{2}", why) \
+                    or not re.search(r"(?i)momentaufnahme|bildschirmkopie|fallbeispiel", why) or not re.search(r"(?i)stichtag", why):
+                bad.append("Begründung ohne Datum/Momentaufnahme/Stichtag oder Füllwiederholung")
+            for m in re.finditer(r'<(\w+)\b[^>]*data-source="[^"]*\b' + re.escape(f["id"]) + r'\b[^"]*"[^>]*>', html):
+                blk = next(((a, b, c) for a, b, c in sblocks if a <= m.start() < b), None)
+                scope = html[blk[2]:blk[1]] if blk else html[m.end():_span(m)[1]]  # Inhalt ohne das eigene Start-Tag
+                if not _hint(_plain(scope)):
+                    bad.append(f"Bindung ohne sichtbaren Hinweis „Momentaufnahme nach dem Stichtag“: „{_plain(html[m.start():_span(m)[1]]).strip()[:30]}“")
+            for para in re.split(r"\n\s*\n", re.sub(r"^\|.*$", "", md or "", flags=re.M)):
+                if f["id"] in para and not re.search(r"(?i)nach dem Stichtag|\bspätere\w*|nachträglich", para):
+                    bad.append("Analyse kennzeichnet die Momentaufnahme nicht")
+            if bad:
+                l78 += [f"{f['id']}: {b_}" for b_ in dict.fromkeys(bad)]
             else:
                 snap.add(f["id"])
         for f in F:
@@ -706,7 +749,7 @@ def main():
             for m in re.finditer(r"(?:abgerufen|recherche)\D{0,40}?\d{4}-\d{2}-\d{2}\s?(?:bis|–|-)\s?(\d{4}-\d{2}-\d{2})", iso(txt), re.I):  # L80: auch Gedankenstrich
                 if m.group(1) < late:
                     l78.append(f"{name}: Abruf bis {m.group(1)} < {late}")
-        report("L78 Stichtag und Abruf", BLOCKER, not l78, "; ".join(l78[:4]) if l78 else f"Bezugszeiträume ≤ {st}; Abruf bis {late} ausgewiesen")
+        report("L78 Stichtag und Abruf", BLOCKER, not l78, "; ".join(l78[:4]) if l78 else f"Bezugszeiträume ≤ {st}; Abruf bis {late} ausgewiesen" + (f"; Momentaufnahmen nach dem Stichtag (L78b): {', '.join(sorted(snap))}" if snap else ""))
         # L79 · nur an Herstellerangaben gebundene Elemente tragen das VENDOR-Kennzeichen
         vend = {f["id"] for f in F if f["class"] == "VENDOR_CLAIM"}
         l79 = []
