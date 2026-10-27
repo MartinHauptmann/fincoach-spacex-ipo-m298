@@ -4,13 +4,17 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.20.0",
+    "version": "1.21.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
     "external_dbom": "provenance/m300.dbom.json",
     "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md",
-    "release_status": "UEBERARBEITUNG"
+    "release_status": "UEBERARBEITUNG",
+    "research_period": {
+      "from": "2026-10-05",
+      "to": "2026-10-11"
+    }
   },
   "fact_summary": {
     "total": 45,
@@ -29,7 +33,7 @@
       "VENDOR_CLAIM": 17
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber jeden bis dahin erfassten Beleg an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original), ausgenommen auch die spätere GEX-Metrix-Momentaufnahme FACT_GEXMETRIX_SPX (Bildschirmkopie); der Quantor FACT_NO_EUREX_GEX ist aus zwei geprüften Herstellerangaben abgeleitet („derived“). Nachträglich kam am 2026-10-23 ein GEX-Fallbeispiel hinzu (Momentaufnahme nach dem Stichtag): FACT_GEXMETRIX_SPX beruht auf einer Bildschirmkopie des Herausgebers (Belegstufe „screenshot“, nicht am Live-Original geprüft), FACT_GEXMETRIX_DERIVED ist daraus berechnet („derived“), FACT_GEXMETRIX_WALLS_READ ist eine ungeprüfte Ablesung (UNVERIFIED). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „derived“ = aus anderen geprüften Fakten abgeleitet; „screenshot“ = an einer datierten Bildschirmkopie des Originals geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
+  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber jeden Beleg zum Stichtag an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original), ausgenommen auch die nach dem Stichtag hinzugekommene GEX-Metrix-Momentaufnahme FACT_GEXMETRIX_SPX (Bildschirmkopie); der Quantor FACT_NO_EUREX_GEX ist aus einer geprüften Herstellerangabe abgeleitet („derived“). Das GEX-Fallbeispiel vom 2026-10-23 ist eine Momentaufnahme nach dem Stichtag: FACT_GEXMETRIX_SPX beruht auf einer Bildschirmkopie des Herausgebers (Belegstufe „screenshot“, nicht am Live-Original geprüft), FACT_GEXMETRIX_DERIVED ist daraus berechnet („derived“), FACT_GEXMETRIX_WALLS_READ ist eine ungeprüfte Ablesung (UNVERIFIED). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „derived“ = aus anderen geprüften Fakten abgeleitet; „screenshot“ = an einer datierten Bildschirmkopie des Originals geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -616,35 +620,32 @@
       "verdict": "CONFIRMED",
       "class": "DERIVED",
       "confidence": 0.75,
-      "claim": "Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: aggregiertes Greek-Exposure nur für eigene Positionen, also keine marktweite Aggregation); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
+      "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet (ATAS: X-Ray nur SPX); für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
       "source_id": "SRC_ATAS_LEARN",
-      "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX und FACT_TWS_SPEC (Herstellerangaben, am Original geprüft); die übrigen Anbieterfakten enthalten keine Eurex-Aussage. Bestimmbar sind damit nur ATAS selbst und ein Broker; für die GEX-Spezialisten ist die Aussage n. v.",
+      "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX (Herstellerangabe, am Original geprüft); die übrigen Anbieterfakten enthalten keine Eurex-Aussage. Bestimmbar ist damit nur ATAS selbst; für die GEX-Spezialisten, Bookmap und die IBKR TWS ist die Aussage n. v.",
       "period": "Stand 2026-10-05",
-      "supporting_sources": [
-        "SRC_IBKR"
-      ],
       "basis": {
         "compared": 6,
-        "determinable": 2,
+        "determinable": 1,
         "positive": 0,
         "not_verifiable": [
           "SpotGamma",
           "MenthorQ",
           "Volland",
-          "Bookmap"
+          "Bookmap",
+          "IBKR TWS"
         ],
-        "subject": "Eurex|\\bnur SPX|nur für eigene Positionen",
+        "subject": "Eurex|\\bnur SPX",
         "determinable_from": {
-          "ATAS": "FACT_XRAY_1MIN_SPX",
-          "IBKR TWS": "FACT_TWS_SPEC"
+          "ATAS": "FACT_XRAY_1MIN_SPX"
         }
       },
       "keep_reason": "Tragend für die strategische Einordnung (These, S11); Quantor mit Basis.",
       "evidence": "derived",
       "verified": {
         "by": "Ableitung aus geprüften Fakten (nicht gesondert vom Herausgeber geprüft)",
-        "date": "2026-10-13",
-        "scope": "Ableitung aus FACT_XRAY_1MIN_SPX und FACT_TWS_SPEC"
+        "date": "2026-10-27",
+        "scope": "Ableitung aus FACT_XRAY_1MIN_SPX"
       }
     },
     {
@@ -716,7 +717,12 @@
       "verified": {
         "by": "Herausgeber",
         "date": "2026-10-23",
-        "scope": "Bildschirmkopie des Original-Dashboards, vom Herausgeber erstellt und aufbewahrt; Werte aus dem Bild übernommen"
+        "scope": "Bildschirmkopie des Original-Dashboards, vom Herausgeber erstellt und aufbewahrt; Werte aus dem Bild übernommen",
+        "rechecked": {
+          "by": "24. Zweitprüfung",
+          "date": "2026-10-27",
+          "scope": "Ergänzungen des Claims vom 2026-10-26 (vor Handelsbeginn, letzter Punkt der Verlaufsgrafik) an der Bildschirmkopie geprüft"
+        }
       },
       "after_stichtag": "Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag."
     },
@@ -1136,9 +1142,9 @@
     },
     {
       "id": "SRC_GEXMETRIX",
-      "ref": "S59",
+      "ref": "S60",
       "tier": "vendor",
-      "title": "GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; nicht veröffentlicht, SHA-256 e4b56d890e706e8c…)",
+      "title": "GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; Bild nicht auf der Seite und nicht im Repository, SHA-256 e4b56d890e706e8c…)",
       "url": "https://www.gexmetrix.com/gex/spx",
       "evidence_file_sha256": "e4b56d890e706e8c11b5e93c274999f7dcb60fb73000929949425499a146a725"
     }
@@ -1474,6 +1480,12 @@
       "date": "2026-10-27",
       "event": "v1.20.0: C6 – Teilaussage „Eurex-Optionen nur als Rohdaten“ aus FACT_TWS_SPEC und FACT_NO_EUREX_GEX entfernt (20. Zweitprüfung: fachlich zweifelhaft); TWS-Zelle und Quantor stützen sich auf „aggregiertes Greek-Exposure nur für eigene Positionen“. Q6 – Matrixzeilen Datenquelle, Preismodell, Zielgruppe, Stand (belegt oder n. v.), Validierungsverfahren Modul 2 und Modul-6-Zeilen Mindestgröße, Spreads/Preisstellung, Liquidität (n. v.). Keine neuen Tatsachen.",
       "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-27",
+      "event": "24. Zweitprüfung (v1.20.0): Q1 und Q6 bestätigt (✓); keine Freigabe. v1.21.0: Historie des Arbeitszweigs ohne Bildschirmkopie neu geschrieben (Entscheidung des Herausgebers); TWS bei Eurex-GEX n. v., Quantor nur ATAS selbst; Abgleichsdaten nur aus Prüfungen des Herausgebers; Quellenverzeichnis-Einleitung, Freitexte, S60, JSON-LD mit einem Provenienz-Tag; M-DBOM-Tabelle der Analyse entfernt; Tests L88, L84b, L14b, L82i; QA-Bericht §52.",
+      "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
     }
   ],

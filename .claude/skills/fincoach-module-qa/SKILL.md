@@ -128,6 +128,10 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
 - **L64:** Nur geltendes Recht am Stichtag; frühere Rechtslagen, Übergangsregeln und überholte Grenzbeträge werden nicht
   dargestellt. Geprüft wird normalisiert (inkl. „a.F.“, Markup), in Seite samt JS und Attributen, Analyse, DBOM und
   Prompt (L67).
+- **L88:** Belegdateien Dritter (Bildschirmkopien) nie committen (`provenance/evidence/` in `.gitignore`); nur Werte
+  und SHA-256 an der Quelle. **L53e:** Abgleichsdaten nur aus `verified.by = Herausgeber`. **L84b:** Marken-Hinweis
+  auch in der Analyse vollständig. **L14b:** Quellennummern eindeutig. **L82i:** Abgleichssätze mit „ausgenommen“ nennen
+  alle Ausnahmen.
 - **L65:** K-Bereiche „K1–Kn“ und jeder Verweis „Kn“ passen zur Zahl der K-Zeilen, in Seite, Analyse und Prompt. Zahlangaben „n (ausgewählte) Kernaussagen“ gelten auch mit bis zu drei Adjektiven oder Adverbien dazwischen, flektiert und mit Komma (L65c).
 - **L66:** Nach jeder Entfernung Folgetexte suchen: Titel, Attribute, Datenherkunft (nur Stellen aus den Quellen) und
   Fazit; jeder Fazit-Punkt unter „Relativiert“/„Entfällt“ nennt seinen Claim (`data-claim`).

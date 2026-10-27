@@ -271,8 +271,9 @@ def main():
         # L18 · Quantor-Nenner: Seite = DBOM-Basis = Analyse
         basis = {f["id"]: f["basis"] for f in F if "basis" in f}
         pg = [(int(a), int(b)) for a, b in re.findall(r">(\d+) von (\d+)<", html)]
-        words = {"zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6, "sieben": 7}
+        words = {"einen": 1, "einem": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6, "sieben": 7}
         an = {words[w] for w in re.findall(r"(?:keinem|keiner|alle) der (zwei|drei|vier|fünf|sechs|sieben)\b[^.]{0,80}?Anbieter", md)}
+        an |= {words[w] for w in re.findall(r"\bnur für (einen|zwei|drei|vier|fünf|sechs) bestimmbar", md)}  # L18c2: „nur für einen bestimmbar“
         det = {b["determinable"] for b in basis.values()}
         # L33: ein Abgleich besteht nie über eine leere Menge, wenn eine DBOM-Basis existiert
         ok18 = bool(det) and bool(pg) and (bool(an) or not md) and {n for _, n in pg} <= det and an <= det
@@ -725,7 +726,7 @@ def main():
                 if not _hint(_plain(scope)):
                     bad.append(f"Bindung ohne sichtbaren Hinweis „Momentaufnahme nach dem Stichtag“: „{_plain(html[m.start():_span(m)[1]]).strip()[:30]}“")
             for para in re.split(r"\n\s*\n", re.sub(r"^\|.*$", "", re.sub(r"```.*?```", "", md or "", flags=re.S), flags=re.M)):  # Tabellen und Codeblöcke (JSON-LD) ausgenommen
-                if f["id"] in para and not re.search(r"(?i)nach dem Stichtag|\bspätere\w*|nachträglich", para):
+                if f["id"] in para and not re.search(r"(?i)nach\s+dem\s+Stichtag|\bspätere\w*|nachträglich", para):  # Zeilenumbruch im Markdown zulässig
                     bad.append("Analyse kennzeichnet die Momentaufnahme nicht")
             if bad:
                 l78 += [f"{f['id']}: {b_}" for b_ in dict.fromkeys(bad)]
@@ -842,6 +843,22 @@ def main():
         corpus = html + " " + json.dumps(dbom, ensure_ascii=False)
         l84 = [mk for mk in marks if re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), corpus.replace(notice.group(0), "") if notice else corpus) and not (notice and re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), notice.group(1)))]
         report("L84 Markenhinweis vollständig", BLOCKER, bool(notice) and bool(marks) and not l84, "fehlt im Markenhinweis: " + ", ".join(l84[:6]) if l84 else (f"{len(marks)} Inventar-Marken geprüft" if notice else "kein Markenhinweis"))
+        # L84b · Markenhinweis der Analyse: jede Inventar-Marke der Analyse steht in ihrem Marken-Hinweis
+        if md:
+            mnote = re.search(r"\*\*Marken-Hinweis\.\*\*(.*?)(?:\n\n|\Z)", md, re.S)
+            mbody = md.replace(mnote.group(0), "") if mnote else md
+            l84b = [mk for mk in marks if re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), mbody) and not (mnote and re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), mnote.group(1).replace("\n", " ")))]
+            report("L84b Markenhinweis der Analyse", BLOCKER, bool(mnote) and not l84b, "fehlt im Marken-Hinweis der Analyse: " + ", ".join(l84b[:6]) if l84b else ("Marken-Hinweis der Analyse vollständig" if mnote else "kein Marken-Hinweis in der Analyse"))
+        # L14b · Quellennummern (ref) eindeutig
+        refs_ = [s_.get("ref") for s_ in dbom.get("sources", []) if s_.get("ref", "–") != "–"]
+        dup_ = sorted({r_ for r_ in refs_ if refs_.count(r_) > 1})
+        report("L14b Quellennummern eindeutig", BLOCKER, not dup_, "doppelt: " + ", ".join(dup_) if dup_ else f"{len(refs_)} Nummern eindeutig")
+        # L88 · Belegdateien Dritter (provenance/evidence/) nie in der Git-Historie (24. Zweitprüfung: öffentliches Repository)
+        import subprocess as _sp
+        _g = _sp.run(["git", "log", "--all", "--format=%h", "--", "provenance/evidence"], cwd=Path(page).resolve().parent, capture_output=True, text=True)
+        if _g.returncode == 0:
+            hits_ = _g.stdout.split()
+            report("L88 Belegdateien nicht in der Historie", BLOCKER, not hits_, "in Commits: " + ", ".join(hits_[:5]) if hits_ else "keine Belegdatei in einem Commit")
         # L82c · Freigabeumfang passt zum caveat; Mehrzahl von Berichten nur mit ≥ 2 Quellen
         l82c = []
         for f in F:
@@ -1139,7 +1156,8 @@ def main():
         # L82d · Ausnahmen im Prüfumfang stehen in jedem Satz, der Vollständigkeit am Original oder auf Stufe Volltext behauptet
         UNIV = re.compile(r"(?i)\b(?:alle|sämtliche|jede[nrs]?|ausnahmslos|vollständig|die)\b[^.;]{0,80}?\b(?:Belege?|Quellen?|Fakten|Fakt|Angaben)\b[^.;]{0,80}?(?:(?:am|im) Original|Volltext|fulltext)"
                           r"|\b(?:sämtlich|vollständig|ausnahmslos|alles)\b[^.;]{0,30}?(?:am|im) Original"
-                          r"|(?:(?:am|im) Original|Volltext|fulltext)[^.;]{0,40}?\b(?:alle|sämtliche|jede[nrs]?)\b[^.;]{0,40}?\b(?:Belege?|Quellen?|Fakten)\b")
+                          r"|(?:(?:am|im) Original|Volltext|fulltext)[^.;]{0,40}?\b(?:alle|sämtliche|jede[nrs]?)\b[^.;]{0,40}?\b(?:Belege?|Quellen?|Fakten)\b"
+                          r"|\babgeglichen\b[^.;]{0,160}?\bausgenommen\b")  # 24. ZP: Abgleichssatz mit Ausnahmeliste nennt alle Ausnahmen
         l82d = []
         if exc:
             tit = " ".join(re.findall(r'\btitle="([^"]*)"', html))
@@ -1182,7 +1200,7 @@ def main():
                 for lst in re.findall(r"bestimmbar\w*[^().;·]{0,60}\(([^)]*)\)", txt):
                     for v_ in re.split(r",\s*|\s+und\s+", lst):
                         v_ = v_.strip()
-                        if v_ and re.match(r"[A-Z]", v_) and not any(w in keys for w in v_.split()):
+                        if v_ and re.match(r"[A-Z]", v_) and not any(w.strip(":;,.") in keys for w in v_.split() if w.strip(":;,.")):  # „ATAS:“ = ATAS
                             l18b.append(f"{name}: „{v_}“ als bestimmbar genannt, nicht in determinable_from")
             # Sätze mit „bestimmbar“: jeder nicht bestimmbare Anbieter steht in einem Abschnitt mit „n. v.“
             for name, txt in (("Seite", _txt(visible_part(html))), ("Analyse", (md or "").replace("\n", " "))):
@@ -1208,9 +1226,13 @@ def main():
                 for row in re.findall(r"<tr\b[^>]*>(.*?)</tr>", tb.group(1), re.S):
                     cells = [_txt(c_).replace("¶", "").strip() for c_ in re.findall(r"<td\b[^>]*>(.*?)</td>", row, re.S)]
                     rowids = set(re.findall(r"FACT_[A-Z0-9_]+", row))
-                    if not cells or not (re.search(b_.get("subject", "$^").split("|")[0], cells[0]) or set(df.values()) <= rowids):
+                    full = bool(cells) and (re.search(b_.get("subject", "$^").split("|")[0], cells[0]) or len(set(df.values())) > 1 and set(df.values()) <= rowids)
+                    yn = bool(cells) and not full and set(df.values()) <= rowids  # L18b2: bei einem Basisfakt Ja/Nein-Zellen jeder gebundenen Zeile prüfen
+                    if not (full or yn):
                         continue
                     for j, c_ in enumerate(cells[1:], 1):
+                        if yn and not re.match(r"(?i)(?:ja|nein)\b", c_):
+                            continue
                         if j < len(hdr) and not c_.startswith("n.v.") and not any(w in keys for w in hdr[j].split()):
                             l18b.append(f"Zeile {cells[0][:15]}: {hdr[j]} „{c_[:15]}“ ohne Fakt mit Aussage zum Gegenstand")
         report("L18b Quantor-Basis aus Anbieterfakten", BLOCKER, not l18b, "; ".join(l18b[:3]) if l18b else "jede Quantor-Basis aus Anbieterfakten abgeleitet")

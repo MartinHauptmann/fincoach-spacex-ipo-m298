@@ -15,3 +15,6 @@ npm-debug.log*
 # Lokale Entwürfe
 *.draft.html
 __pycache__/
+
+# Belegdateien Dritter (Bildschirmkopien) nie committen – L88
+provenance/evidence/

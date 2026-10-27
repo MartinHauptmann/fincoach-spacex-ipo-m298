@@ -2560,6 +2560,78 @@
      "\"dateModified\": \"2026-10-27\""
     ]
    ]
+  },
+  {
+   "name": "24. ZP Umgehung b: TWS-Zelle „Eurex-Optionen nur als Rohdaten“ an FACT_TWS_SPEC gebunden",
+   "expect": "L76|L18b|L12c",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
+     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">nein (Eurex-Optionen nur als Rohdaten, keine Greeks) <span class=\"badge b-v\">VENDOR</span></td></tr>"
+    ]
+   ]
+  },
+  {
+   "name": "24. ZP: TWS-Zelle „nein“ ohne Bindung",
+   "expect": "L12c|L18b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
+     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>nein</td></tr>"
+    ]
+   ]
+  },
+  {
+   "name": "L84b: GEX-Metrix fehlt im Marken-Hinweis der Analyse",
+   "expect": "L84b",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "Gamma Cockpit, GEX-Metrix, CME,",
+     "Gamma Cockpit, CME,"
+    ]
+   ]
+  },
+  {
+   "name": "L14b: Quellennummer S59 doppelt vergeben",
+   "expect": "L14b",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"ref\": \"S60\"",
+     "\"ref\": \"S59\""
+    ]
+   ]
+  },
+  {
+   "name": "L82d (24. ZP): Abgleichssatz der Datenherkunft ohne GEX-Metrix-Ausnahme",
+   "expect": "L82d",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt;",
+     "den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray). Das GEX-Metrix Dashboard zum SPX vom 2026-10-23 stützt sich nur auf eine Bildschirmkopie des Herausgebers;"
+    ]
+   ]
+  },
+  {
+   "name": "24. ZP Befund 4: Abgleichsdatum im Quellenverzeichnis von Hand geändert",
+   "expect": "L53b",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "| `SRC_BGBL_JSTG2024` | abgeglichen 2026-10-11 |",
+     "| `SRC_BGBL_JSTG2024` | abgeglichen 2026-10-13 |"
+    ]
+   ]
   }
  ]
 }

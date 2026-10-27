@@ -54,7 +54,7 @@ def build_blocks(page_html, d):
         rows.append(f"| {c['id']} | Quelltext: {c['claim']} | {c['category']} | {RES[c['result']]} | {', '.join(flab(i) for i in fl) or '[N. V.]'} | {weakest} |")
     if not rows:
         raise ValueError("Claim-Tabelle leer (L53c/L33)")
-    out["CLAIMS"] = ("Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifizierbar. Die Aussagen in Spalte 2 "
+    out["CLAIMS"] = ("Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifiziert. Die Aussagen in Spalte 2 "
                      "zitieren den Quelltext (USER_PROVIDED) und sind keine Tatsachenbehauptungen dieser Analyse.\n\n"
                      "| ID | Aussage | Kategorie | Ergebnis | Belege | Schwächster Beleg |\n|---|---|---|---|---|---|\n" + "\n".join(rows) + "\n\n")
     ks_js = re.search(r"const KS=\[(.*?)\n\];", page_html, re.S)
@@ -94,11 +94,12 @@ def build_blocks(page_html, d):
     st = d["module"].get("stichtag", "")
     chk = {}
     for f in d["facts"]:
-        dt = f.get("verified", {}).get("date")
+        dt = f.get("verified", {}).get("date") if f.get("verified", {}).get("by") == "Herausgeber" else None  # 24. ZP: nur Abgleich durch den Herausgeber
         for sid in [f["source_id"]] + list(f.get("supporting_sources", [])):
             if dt:
                 chk[sid] = max(chk.get(sid, ""), dt)
-    rec = "Recherche 2026-10-05 bis 2026-10-11"
+    rp = d["module"]["research_period"]
+    rec = f"Recherche {rp['from']} bis {rp['to']}"
     parts = []
     for tier, lab in (("primary", "Primärquellen"), ("vendor", "Herstellerquellen"), ("secondary", "Sekundärquellen")):
         rows_s = sorted((x for x in d["sources"] if x.get("tier") == tier and x.get("ref", "–") != "–"), key=lambda x: int(x["ref"][1:]))
@@ -119,9 +120,10 @@ def build_blocks(page_html, d):
         return "CONFIRMED" if f["verdict"] == "CONFIRMED" else f["verdict"]
     ld = {"@context": "https://schema.org", "@type": "Dataset", "name": f"{d['module']['id']} · M-DBOM v1", "dateModified": st,
           "version": d["module"]["version"],
-          "facts": [{"id": f["id"], "claim": f["claim"], "provenance": prov(f), "verdict": f["verdict"], "class": f["class"],
-                     "evidence": f.get("evidence"), "confidence": f["confidence"], "source": srcs.get(f["source_id"], {}).get("url") or f["source_id"],
-                     "retrieved": f.get("verified", {}).get("date")} for f in d["facts"]]}
+          "facts": [{"id": f["id"], "claim": f["claim"], "provenance": prov(f), "confidence": f["confidence"],
+                     "source": srcs.get(f["source_id"], {}).get("url") or f["source_id"],
+                     "retrieved": f.get("verified", {}).get("date") if f.get("verified", {}).get("by") == "Herausgeber" else None,
+                     "x-m-dbom": {"verdict": f["verdict"], "class": f["class"], "evidence": f.get("evidence")}} for f in d["facts"]]}
     out["JSONLD"] = "```json\n" + json.dumps(ld, ensure_ascii=False, indent=1) + "\n```\n"
     return out
 
