@@ -1487,6 +1487,12 @@
       "event": "24. Zweitprüfung (v1.20.0): Q1 und Q6 bestätigt (✓); keine Freigabe. v1.21.0: Historie des Arbeitszweigs ohne Bildschirmkopie neu geschrieben (Entscheidung des Herausgebers); TWS bei Eurex-GEX n. v., Quantor nur ATAS selbst; Abgleichsdaten nur aus Prüfungen des Herausgebers; Quellenverzeichnis-Einleitung, Freitexte, S60, JSON-LD mit einem Provenienz-Tag; M-DBOM-Tabelle der Analyse entfernt; Tests L88, L84b, L14b, L82i; QA-Bericht §52.",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-27",
+      "event": "25. Zweitprüfung (v1.21.0): keine Freigabe, Score unverändert 78,9 %; Befunde 1–15 im QA-Bericht §53 (u. a. Bild über alte Commit-Kennung bei GitHub abrufbar, Bestimmbarkeitsmaßstab ATAS/TWS, „weist keine Walls aus“ unbelegt, L18b/L88 umgehbar).",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
