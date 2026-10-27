@@ -9,8 +9,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"determinable\": 2,",
-     "\"determinable\": 3,"
+     "\"determinable\": 1,",
+     "\"determinable\": 2,"
     ],
     [
      "provenance/m300.dbom.json",
@@ -19,8 +19,8 @@
     ],
     [
      "provenance/m300.dbom.json",
-     "\"IBKR TWS\": \"FACT_TWS_SPEC\"",
-     "\"IBKR TWS\": \"FACT_TWS_SPEC\",\n          \"MenthorQ\": \"FACT_MENTHORQ_SPEC\""
+     "\"ATAS\": \"FACT_XRAY_1MIN_SPX\"",
+     "\"ATAS\": \"FACT_XRAY_1MIN_SPX\",\n          \"MenthorQ\": \"FACT_MENTHORQ_SPEC\""
     ],
     [
      "m300.html",
@@ -29,38 +29,33 @@
     ],
     [
      "m300.html",
-     ">0 von 2<",
-     ">0 von 3<"
+     ">0 von 1<",
+     ">0 von 2<"
     ],
     [
      "m300.html",
-     "keiner der zwei bestimmbaren Anbieter (ATAS selbst, IBKR TWS) bietet intraday-fähige Eurex-GEX; für die GEX-Spezialisten (SpotGamma, MenthorQ, Volland) und Bookmap n. v.",
-     "keiner der drei bestimmbaren Anbieter (ATAS selbst, MenthorQ, IBKR TWS) bietet intraday-fähige Eurex-GEX; für SpotGamma, Volland und Bookmap n. v."
+     "ATAS selbst bietet keine intraday-fähige Eurex-GEX; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
+     "ATAS selbst und MenthorQ bieten keine intraday-fähige Eurex-GEX; für SpotGamma, Volland, Bookmap und die IBKR TWS n. v."
     ],
     [
      "m300.html",
-     "Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS selbst, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland,",
-     "Für ODAX und OESX bietet keiner der drei bestimmbaren von sechs verglichenen Anbietern (ATAS selbst, MenthorQ, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, Volland, Bookmap: n. v.)"
-    ],
-    [
-     "m300.html",
-     "Für die GEX-Spezialisten ist damit offen, ob eine Lücke besteht",
-     "Für die GEX-Spezialisten ist damit offen, ob eine Lücke besteht"
+     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX bieten, für ATAS selbst und MenthorQ; für SpotGamma, Volland, Bookmap und die IBKR TWS ist das n. v."
     ],
     [
      "provenance/m300.dbom.json",
-     "ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: aggregiertes Greek-Exposure nur für eigene Positionen, also keine marktweite Aggregation); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
-     "ist für drei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; MenthorQ: Eurex-GEX n. v.; IBKR TWS: aggregiertes Greek-Exposure nur für eigene Positionen, also keine marktweite Aggregation); für die übrigen drei (SpotGamma, Volland, Bookmap) n. v."
+     "ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet (ATAS: X-Ray nur SPX); für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
+     "ist nur für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; MenthorQ: Eurex-GEX n. v.); für die übrigen vier (SpotGamma, Volland, Bookmap, IBKR TWS) n. v."
     ],
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "Intraday-fähige Eurex-GEX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern\n  (ATAS selbst, IBKR TWS); für SpotGamma, MenthorQ, Volland und Bookmap ",
-     "Intraday-fähige Eurex-GEX bietet keiner der drei bestimmbaren von sechs verglichenen Anbietern\n  (ATAS selbst, MenthorQ, IBKR TWS); für SpotGamma, Volland und Bookmap ist das n. v."
+     "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige\n  Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Von sechs verglichenen Anbietern ist nur für zwei bestimmbar, dass sie keine intraday-fähige\n  Eurex-GEX bieten, für ATAS selbst und MenthorQ; für SpotGamma, Volland, Bookmap und die IBKR TWS ist das n. v."
     ],
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "(bisher nur\n  für zwei Anbieter bestimmbar)",
-     "(bisher nur\n  für drei Anbieter bestimmbar)"
+     "(bisher nur\n  für einen Anbieter bestimmbar)",
+     "(bisher nur\n  für zwei Anbieter bestimmbar)"
     ]
    ]
   },
@@ -83,8 +78,8 @@
    "edits": [
     [
      "m300.html",
-     "Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS selbst, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland,",
-     "Für ODAX und OESX bietet keiner der bestimmbaren Anbieter – ATAS, IBKR TWS und SpotGamma – intraday-fähige Eurex-GEX (MenthorQ, Volland, Bookmap: n. v.)"
+     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Für ODAX und OESX bietet keiner der bestimmbaren Anbieter – ATAS und SpotGamma – intraday-fähige Eurex-GEX (MenthorQ, Volland, Bookmap, IBKR TWS: n. v.)"
     ]
    ]
   },
@@ -95,7 +90,7 @@
    "edits": [
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "Intraday-fähige Eurex-GEX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern\n  (ATAS selbst, IBKR TWS); für SpotGamma, MenthorQ, Volland und Bookmap ",
+     "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige\n  Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
      "Intraday-fähige Eurex-GEX bietet keiner der Anbieter; bestimmbar sind ATAS, Bookmap und IBKR TWS;\n  für SpotGamma, MenthorQ und Volland ist das n. v."
     ]
    ]
@@ -226,7 +221,7 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 mit seiner ungeprüften Wall-Ablesung (Stufe „Bildschirmkopie“).",
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 (Stufe „Bildschirmkopie“; die daraus abgelesene Lage der Walls ist ungeprüft).",
      "Am Original abgeglichen sind alle Belege (BaFin-Studie: keine Ausnahme)."
     ]
    ]
@@ -238,7 +233,7 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 mit seiner ungeprüften Wall-Ablesung (Stufe „Bildschirmkopie“).",
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 (Stufe „Bildschirmkopie“; die daraus abgelesene Lage der Walls ist ungeprüft).",
      "Sämtliche Nachweise lagen dem Herausgeber im Original vor."
     ]
    ],
@@ -251,7 +246,7 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 mit seiner ungeprüften Wall-Ablesung (Stufe „Bildschirmkopie“).",
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 (Stufe „Bildschirmkopie“; die daraus abgelesene Lage der Walls ist ungeprüft).",
      "Der Herausgeber hat die Belege am Original abgeglichen."
     ]
    ]
@@ -374,8 +369,8 @@
    "edits": [
     [
      "m300.html",
-     "Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS selbst, IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland,",
-     "Für ODAX und OESX bietet keiner der zwei bestimmbaren von sechs verglichenen Anbietern (ATAS und IBKR TWS) intraday-fähige Eurex-GEX (SpotGamma, MenthorQ, Volland, Bookmap: n. v.)"
+     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar (ATAS), dass er keine intraday-fähige Eurex-GEX bietet; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v."
     ]
    ]
   },
@@ -386,7 +381,7 @@
    "edits": [
     [
      "m300.html",
-     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 mit seiner ungeprüften Wall-Ablesung (Stufe „Bildschirmkopie“).",
+     "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 (Stufe „Bildschirmkopie“; die daraus abgelesene Lage der Walls ist ungeprüft).",
      "Derzeit tragen alle Belege die Stufe „Volltext“, ausgenommen die Angaben aus Sekundärquellen (Stufe „Sekundär“), zwei abgeleitete Fakten (Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel (Stufe „Bildschirmkopie“)."
     ]
    ]
