@@ -251,8 +251,8 @@
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"Q1\" data-open>Claim A11",
-     "<li data-gate=\"Q1\" data-open>Hinweis in S12 ergänzen; Claim A11"
+     "<li data-gate=\"Q1\" data-open>Claim-Ergebnisse",
+     "<li data-gate=\"Q1\" data-open>Hinweis in S12 ergänzen; Claim-Ergebnisse"
     ]
    ]
   },
@@ -263,8 +263,8 @@
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"Q1\" data-open>Claim A11",
-     "<li data-gate=\"Q1\" data-open>Zu S04 und S07: Claim A11"
+     "<li data-gate=\"Q1\" data-open>Claim-Ergebnisse",
+     "<li data-gate=\"Q1\" data-open>Zu S04 und S07: Claim-Ergebnisse"
     ]
    ]
   },

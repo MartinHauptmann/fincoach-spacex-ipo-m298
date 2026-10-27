@@ -49,8 +49,8 @@
     ],
     [
      "provenance/m300.dbom.json",
-     "ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
-     "ist für drei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; MenthorQ: Eurex-GEX n. v.; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen drei (SpotGamma, Volland, Bookmap) n. v."
+     "ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: aggregiertes Greek-Exposure nur für eigene Positionen, also keine marktweite Aggregation); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
+     "ist für drei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; MenthorQ: Eurex-GEX n. v.; IBKR TWS: aggregiertes Greek-Exposure nur für eigene Positionen, also keine marktweite Aggregation); für die übrigen drei (SpotGamma, Volland, Bookmap) n. v."
     ],
     [
      "analysen/m300-atas-options-xray-deep-dive.md",

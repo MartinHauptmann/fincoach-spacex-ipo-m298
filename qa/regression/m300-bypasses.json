@@ -718,8 +718,8 @@
    "edits": [
     [
      "m300.html",
-     "Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen",
-     "Nach dem Review angeglichenen Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen"
+     "Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen",
+     "Nach dem Review angeglichenen Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen"
     ]
    ]
   },
@@ -2076,8 +2076,8 @@
    "edits": [
     [
      "m300.html",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: frei über Bezugsverhältnis</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: frei über Bezugsverhältnis</td>"
     ]
    ]
   },
@@ -2223,8 +2223,8 @@
    "edits": [
     [
      "m300.html",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar (Mindestgroesse n. v.)</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar (Mindestgroesse n. v.)</td>"
     ]
    ]
   },
@@ -2250,8 +2250,8 @@
     ],
     [
      "m300.html",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: n. v.; Knock-outs: Hebel frei waehlbar</td>"
     ]
    ]
   },
@@ -2415,8 +2415,8 @@
    "edits": [
     [
      "m300.html",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: frei über Bezugsverhältnis; Knock-outs: n. v.</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: frei über Bezugsverhältnis; Knock-outs: n. v.</td>"
     ]
    ]
   },
@@ -2448,8 +2448,8 @@
    "edits": [
     [
      "m300.html",
-     "nein (Eurex nur Rohdaten) <span class=\"badge b-v\">VENDOR</span>",
-     "nein (Eurex-Optionen nur als Rohdaten) <span class=\"badge b-v\">VENDOR</span>"
+     "nein (Greek-Exposure nur für eigene Positionen, keine marktweite Aggregation) <span class=\"badge b-v\">VENDOR</span>",
+     "nein (aggregiertes Greek-Exposure nur für eigene Positionen) <span class=\"badge b-v\">VENDOR</span>"
     ]
    ]
   },

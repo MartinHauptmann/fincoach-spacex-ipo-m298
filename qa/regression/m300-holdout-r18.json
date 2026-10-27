@@ -375,8 +375,8 @@
    "edits": [
     [
      "m300.html",
-     "nein (Eurex nur Rohdaten) <span class=\"badge b-v\">VENDOR</span>",
-     "nein (Eurex-Optionen nur als Rohdaten) <span class=\"badge b-v\">VENDOR</span>"
+     "nein (Greek-Exposure nur für eigene Positionen, keine marktweite Aggregation) <span class=\"badge b-v\">VENDOR</span>",
+     "nein (aggregiertes Greek-Exposure nur für eigene Positionen) <span class=\"badge b-v\">VENDOR</span>"
     ]
    ]
   },
@@ -387,8 +387,8 @@
    "edits": [
     [
      "m300.html",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
-     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS\">ODAX 5 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: kleine Stückelung über das Bezugsverhältnis; Knock-outs: n. v.</td>"
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>n. v.</td>",
+     "<tr><td>Größe</td><td data-source=\"FACT_ODAX_SPECS FACT_OESX_MULT\">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title=\"Micro-DAX-Optionen\">ODXS</abbr> gelistet</td><td>Optionsscheine: kleine Stückelung über das Bezugsverhältnis; Knock-outs: n. v.</td>"
     ]
    ]
   },
