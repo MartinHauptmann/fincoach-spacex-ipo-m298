@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.19.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.20.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -104,7 +104,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.19.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.20.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 45, "confirmed_primary": 35, "media_report": 5, "unverified": 1, "scenario_projection": 4, "vendor_claim": 17 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
@@ -153,7 +153,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner (in der Veröffentlichung ausgeblendet) ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto" data-publish="hidden">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.19.0</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.20.0</span>
     <span class="text-slate-300"><span data-dbom-count="total">45</span> Fakten · <span data-dbom-count="confirmed">35</span> belegt (davon <span data-dbom-count="fulltext">32</span> am Original geprüft, <span data-dbom-count="screenshot">1</span> an einer Bildschirmkopie, <span data-dbom-count="vendor">17</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">1</span> ungeprüft · <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -533,6 +533,11 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <ul class="tick"><li data-source="FACT_DEALER_CONVENTION">Walls könnten sich über Vanna (IV-Sprung) verschieben, obwohl sich das Open Interest nicht geändert hat <span class="dbom-class-badge">MODELL</span>.</li><li data-source="FACT_DEALER_CONVENTION">Neu eröffnetes Volumen könnte Hedges auslösen, die im letzten Snapshot fehlen <span class="dbom-class-badge">MODELL</span>.</li><li>Kurze Durchbrüche durch ein Level und zurück verschwinden zwischen zwei Snapshots (Aliasing).</li></ul>
     </div>
     <div class="dep-box">
+      <h3 class="font-head font-bold text-white mb-2">Validierung: wie sich die Anzeigen prüfen ließen</h3>
+      <p class="text-sm text-slate-300 leading-relaxed mb-2">Ein vom Hersteller veröffentlichtes Validierungsverfahren für Options X-Ray ist in den ausgewerteten Quellen n. v. Prüfen ließe sich die Landkarte methodisch in vier Schritten:</p>
+      <ul class="tick"><li>Die Open-Interest-Basis würde mit einer unabhängigen Open-Interest-Quelle desselben Tages abgeglichen.</li><li>Die angezeigten Gamma-Profile würden mit der Referenzrechnung aus S05 nachgerechnet.</li><li>Ein Backtest würde nur Daten verwenden, die zum jeweiligen Zeitpunkt verfügbar gewesen wären; so ließe sich ein <dfn>Look-ahead-Bias</dfn> (Verzerrung durch Daten, die damals noch nicht bekannt waren) vermeiden.</li><li>Er würde auch ausgelaufene Verfälle und Kontrakte einbeziehen; so ließe sich ein <dfn>Survivorship-Bias</dfn> (Verzerrung durch Auswahl nur der „überlebenden“ Fälle) vermeiden.</li></ul>
+    </div>
+    <div class="dep-box">
       <h3 class="font-head font-bold text-white mb-2">Ausführung: Futures ja, Optionen nein</h3>
       <table><tbody>
         <tr data-source="FACT_ATAS_CONNECTIONS"><td>Handelsanbindungen</td><td>Rithmic, CQG, Interactive Brokers (TWS) <span class="badge b-v">VENDOR</span></td></tr>
@@ -576,14 +581,17 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
   </div>
   <div class="dep-box table-wrap">
     <table data-source="FACT_SPOTGAMMA_SPEC FACT_MENTHORQ_SPEC FACT_VOLLAND_SPEC FACT_BOOKMAP_SPEC FACT_TWS_SPEC">
-      <caption class="text-left text-xs text-slate-400 pb-2" style="caption-side:top;">Herstellerangaben (am Original geprüft) <span class="badge b-v">VENDOR</span>; Volland über die Partnerseite ORATS <span class="dbom-class-badge">MEDIEN</span> · „n. v.“ = keine Angabe in den ausgewerteten Quellen</caption>
+      <caption class="text-left text-xs text-slate-400 pb-2" style="caption-side:top;">Herstellerangaben (am Original geprüft) <span class="badge b-v">VENDOR</span>; Volland über die Partnerseite ORATS <span class="dbom-class-badge">MEDIEN</span> · „n. v.“ = keine Angabe in den ausgewerteten Quellen · Stand: Stichtag des Moduls</caption>
       <thead><tr><th>Merkmal</th><th>ATAS</th><th>SpotGamma</th><th>MenthorQ</th><th>Volland <span class="dbom-class-badge">MEDIEN</span></th><th>Bookmap</th><th>IBKR TWS</th></tr></thead>
       <tbody>
+        <tr><td>Datenquelle Optionsdaten</td><td data-source="FACT_XRAY_1MIN_SPX">Cboe-1-Minuten-Feed, Analytik OptionsDepth <span class="badge b-v">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>keine nativen Optionsdaten</td><td>n. v.</td></tr>
+        <tr><td>Preismodell</td><td data-source="FACT_ATAS_MBO">MBO-Bundle zur Erprobung für Ultra-Nutzer; Preise n. v. <span class="badge b-v">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>Echtzeit-Optionsdaten (Abo)</td></tr>
+        <tr><td>Zielgruppe</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>
         <tr><td>Kernfokus</td><td data-source="FACT_ATAS_FOOTPRINT FACT_XRAY_10_IND">Footprint-Charts, Options X-Ray (GEX-/Charm-Heatmaps) <span class="badge b-v">VENDOR</span></td><td>Gamma-Levels, Research</td><td>Gamma-Levels, Modelle, Ausbildung</td><td>Notional-Greeks Dealer-Buch</td><td>Orderbuch-Heatmap, Ausführung</td><td>Broker, Portfoliorisiko</td></tr>
         <tr><td>Optionsdaten-Frequenz</td><td data-source="FACT_XRAY_1MIN_SPX">1 Min. <span class="badge b-v">VENDOR</span></td><td>HIRO/TRACE intraday; Levels vor Eröffnung</td><td>EOD + alle 5 Min.</td><td>EOD bis alle 5 Min.</td><td>keine nativen</td><td>Echtzeit (Abo)</td></tr>
         <tr><td>GEX / Vanna / Charm</td><td data-source="FACT_XRAY_10_IND">✓ / n. v. / ✓ <span class="badge b-v">VENDOR</span></td><td>✓ / Modell / n. v.</td><td>✓ / n. v. / n. v.</td><td>✓ / ✓ / ✓</td><td>nur Add-ons</td><td>aggregiert nur für eigene Positionen</td></tr>
         <tr><td>Abdeckung</td><td data-source="FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE">SPX intraday; ES, NQ, CL, GC (EOD) <span class="badge b-v">VENDOR</span></td><td>SPX, <abbr title="Nasdaq-100-Index">NDX</abbr>, ETFs, Einzelaktien</td><td>inkl. Futures-Optionen (Umfang n. v.)</td><td>Auswahl nach Notional (Umfang n. v.)</td><td>Futures, Aktien, Krypto</td><td>global inkl. ODAX/OESX</td></tr>
-        <tr><td>Eurex-GEX intraday</td><td data-source="FACT_XRAY_1MIN_SPX">nein (X-Ray nur SPX) <span class="badge b-v">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source="FACT_TWS_SPEC">nein (Eurex nur Rohdaten) <span class="badge b-v">VENDOR</span></td></tr>
+        <tr><td>Eurex-GEX intraday</td><td data-source="FACT_XRAY_1MIN_SPX">nein (X-Ray nur SPX) <span class="badge b-v">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source="FACT_TWS_SPEC">nein (Greek-Exposure nur für eigene Positionen, keine marktweite Aggregation) <span class="badge b-v">VENDOR</span></td></tr>
         <tr><td>Orderflow / MBO</td><td data-source="FACT_ATAS_FOOTPRINT FACT_ATAS_MBO">Footprint, MBO-Bundle (Erprobung für Ultra, Rithmic) <span class="badge b-v">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>Heatmap, MBO via Rithmic</td><td>n. v.</td></tr>
         <tr><td>Ausführung</td><td data-source="FACT_ATAS_NO_OPT_TRADING FACT_CROSS_TRADING">Futures ja, Optionen nein <span class="badge b-v">VENDOR</span></td><td>nein</td><td>über Partnerplattformen</td><td>n. v.</td><td>ja</td><td>ja</td></tr>
       </tbody>
@@ -611,7 +619,10 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tbody>
           <tr><td>Ausgestaltung</td><td data-source="FACT_CCP_ISSUER">börsengehandelter Kontrakt</td><td data-source="FACT_OS_ISSUER">Optionsscheine: vom Emittenten ausgegebenes Wertpapier <span class="dbom-class-badge">MEDIEN</span>; Knock-outs: n. v.</td></tr>
           <tr><td>Kontrahentenrisiko</td><td data-source="FACT_CCP_ISSUER">zentrale Gegenpartei Eurex Clearing mit <dfn>Margin</dfn> (Sicherheitsleistung der Teilnehmer)</td><td data-source="FACT_OS_ISSUER">Optionsscheine: Bonität des Emittenten <span class="dbom-class-badge">MEDIEN</span>; Knock-outs: n. v.</td></tr>
-          <tr><td>Größe</td><td data-source="FACT_ODAX_SPECS">ODAX 5 €/Pkt.; <abbr title="Micro-DAX-Optionen">ODXS</abbr> gelistet</td><td>n. v.</td></tr>
+          <tr><td>Größe</td><td data-source="FACT_ODAX_SPECS FACT_OESX_MULT">ODAX 5 €/Pkt., OESX 10 €/Pkt.; <abbr title="Micro-DAX-Optionen">ODXS</abbr> gelistet</td><td>n. v.</td></tr>
+          <tr><td>Mindestgröße</td><td>n. v.</td><td>n. v.</td></tr>
+          <tr><td>Spreads / Preisstellung</td><td>n. v.</td><td>n. v.</td></tr>
+          <tr><td>Liquidität</td><td>n. v.</td><td>n. v.</td></tr>
           <tr><td>Zugang Privatanleger</td><td data-source="FACT_ANGEMESSENHEIT">Angemessenheitsprüfung (§ 63 Abs. 10 WpHG)</td><td data-source="FACT_ANGEMESSENHEIT FACT_BAFIN_TURBO">Angemessenheitsprüfung (§ 63 Abs. 10 WpHG); Turbos seit 16.06.2026 zusätzlich mit Wissenstest + Risikohinweis</td></tr>
           <tr><td>Kostenausweis</td><td>n. v.</td><td data-source="FACT_PRIIPS_UWG">Optionsscheine: PRIIPs-KID + MiFID-II-Kosten; Knock-outs: n. v.</td></tr>
           <tr data-source="FACT_JSTG2024_REPEAL"><td>Steuer (<abbr title="Privatvermögen">PV</abbr>)</td><td>keine gesonderte Beschränkung</td><td>Optionsscheine: keine gesonderte Beschränkung; Knock-outs: n. v.</td></tr>
@@ -701,7 +712,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>C3 Steuer/Recht mit Primärquelle</td><td class="check-pass" data-gate="C3" title="Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext)">✓</td></tr>
         <tr><td>C4 Neutralität / Interessenkonflikte</td><td class="check-part" data-gate="C4" title="Gamma Cockpit als eigener Herstellerfakt (VENDOR), Quantor-Verdict aus den Basisfakten abgeleitet (belegt); Bestätigung durch Zweitprüfung und Herausgeber ausstehend">◐</td></tr>
         <tr><td>C5 Marken beschreibend</td><td class="check-part" data-gate="C5" title="23. Zweitprüfung: Bildschirmkopie des GEX-Metrix-Dashboards nicht im veröffentlichten Verzeichnis; veröffentlicht sind nur die Werte, das Bild bewahrt der Herausgeber auf (SHA-256 in der M-DBOM); Bestätigung durch die nächste Zweitprüfung ausstehend">◐</td></tr>
-        <tr><td>C6 UWG-konforme Begriffe</td><td class="check-part" data-gate="C6" title="Herstellerangabe zur IBKR TWS „Eurex-Optionen nur als Rohdaten“ von der Zweitprüfung als fachlich zweifelhaft eingestuft; Abgleich am Original durch den Herausgeber ausstehend (20. Zweitprüfung)">◐</td></tr>
+        <tr><td>C6 UWG-konforme Begriffe</td><td class="check-part" data-gate="C6" title="Die als fachlich zweifelhaft eingestufte Teilaussage zur IBKR TWS ist nicht mehr verwendet; Matrix und Quantor stützen sich auf „aggregiertes Greek-Exposure nur für eigene Positionen“ (am Original geprüft 2026-10-11); Bestätigung durch Zweitprüfung ausstehend">◐</td></tr>
         <tr><td>C7 Ausgewogene Risikodarstellung</td><td class="check-pass" data-gate="C7" title="Modellgrenzen, Latenz, Fehlsignale, Totalverlust und BaFin-Quote dargestellt (Zweitprüfung 2026-10-11)">✓</td></tr>
         <tr><td>C8 Regulatorische Bezüge belegt</td><td class="check-pass" data-gate="C8" title="§ 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft">✓</td></tr>
         <tr><td>C9 Datenschutz</td><td class="check-pass" data-gate="C9" title="Datenschutzerklärung und Impressum vom Herausgeber freigegeben (2026-10-11); Speicherangaben = Messung an allen Modulseiten (L38); Modul ohne Drittanbieter-Abrufe und ohne Speicher (L20)">✓</td></tr>
@@ -715,11 +726,11 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass" data-gate="Q3" title="GEX 845 Mio. USD, 2.600 ES / 26.000 MES, Probe, Vanna und Charm nachgerechnet (Zweitprüfung 2026-10-11); Rechner rechnet gleich">✓</td></tr>
         <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="Medienangaben mit Belegstufe secondary, Quantor derived; Ausnahme-Sätze nennen die Kategorien; Bestätigung durch Zweitprüfung und Herausgeber ausstehend">◐</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-pass" data-gate="Q5" title="Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen als Hauptbeleg nur bei Medienangaben; Abgleich durch den Herausgeber am Original, bei Medienangaben an der Sekundärquelle">✓</td></tr>
-        <tr><td>Q6 Vollständigkeit</td><td class="check-part" data-gate="Q6" title="Zweitprüfung: Matrix ohne Spalten Datenquelle, Preismodell, Zielgruppe, Stand; Modul 2 ohne Validierungsverfahren; Modul 6 ohne Spreads, Pricing, Liquidität, Mindestgrößen">◐</td></tr>
+        <tr><td>Q6 Vollständigkeit</td><td class="check-part" data-gate="Q6" title="Matrix enthält Datenquelle, Preismodell und Zielgruppe (belegt oder n. v.), der Stand aller Spalten steht in Kopf und Fuß der Tabelle; Modul 2 nennt Validierungsverfahren methodisch, ein Herstellerverfahren ist n. v.; Modul 6 enthält Mindestgröße, Spreads/Preisstellung und Liquidität (n. v.); Bestätigung durch Zweitprüfung ausstehend">◐</td></tr>
         <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="These auf Seite und in der Analyse als mögliche Lücke; Belegstufen-Definition und Zuordnung stimmen überein; Bestätigung durch Zweitprüfung und Herausgeber ausstehend">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="Zweitprüfung: alle 15 Pflichtbegriffe vorhanden">✓</td></tr>
         <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="S11 Nutzen „offen“, Basis (ATAS selbst, ein Broker) offen genannt; Bestätigung durch Zweitprüfung und Herausgeber ausstehend">◐</td></tr>
-        <tr><td>Q10 Formatvorgaben</td><td class="check-part" data-gate="Q10" title="Seite nach L41/L41b/L44 geprüft; Analyse weicht von der Ausgabestruktur des Prompts ab (M-DBOM als Tabelle statt JSON-LD, Quellen ohne Abrufdatum und ohne Trennung Primär/Sekundär)">◐</td></tr>
+        <tr><td>Q10 Formatvorgaben</td><td class="check-part" data-gate="Q10" title="Seite nach L41/L41b/L44 geprüft; Analyse mit Quellenverzeichnis nach Primär-, Hersteller- und Sekundärquellen samt Abruf/Abgleich und mit der M-DBOM als JSON-LD (aus der DBOM erzeugt, byte-genau geprüft); Bestätigung durch Zweitprüfung ausstehend">◐</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
       </tbody></table>
@@ -737,8 +748,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       </tbody></table>
       <h4 class="font-head font-bold text-white mt-5 mb-2 text-sm">Offen vor Freigabe</h4>
       <ul class="tick text-xs" id="open-list">
-        <li data-gate="Q1" data-open>Claim A11 (NDX/NQ-0DTE-Dynamik) belegen oder streichen; Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen</li>
-        <li data-gate="Q6" data-open>Matrix um Datenquelle, Preismodell, Zielgruppe und Stand ergänzen; Validierungsverfahren (Modul 2) und Spreads, Pricing, Liquidität, Mindestgrößen (Modul 6) belegt ergänzen oder als n. v. kennzeichnen</li>
+        <li data-gate="Q1" data-open>Claim-Ergebnisse nach L61 durch unabhängige Zweitprüfung bestätigen (A11 bleibt nach Q9 als [N. V.] gekennzeichnet)</li>
+        <li data-gate="Q6" data-open>Matrixzeilen Datenquelle, Preismodell, Zielgruppe und Standangabe der Tabelle, Validierungsverfahren in Modul 2 und Spreads, Liquidität, Mindestgröße in Modul 6 (belegt oder n. v.) durch Zweitprüfung bestätigen lassen</li>
         <li data-gate="C4" data-open>Kennzeichnung von Quantor und Gamma Cockpit durch Zweitprüfung und Herausgeber bestätigen lassen</li>
         <li data-gate="Q4" data-open>Belegstufen der Medienangaben und des abgeleiteten Quantors durch Zweitprüfung und Herausgeber bestätigen lassen</li>
         <li data-gate="Q7" data-open>Widerspruchsfreiheit von These und Belegstufen-Definition durch Zweitprüfung bestätigen lassen</li>
@@ -746,8 +757,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <li data-gate="Q9" data-open data-source="FACT_GEXMETRIX_WALLS_READ">Walls des ganzen SPX-Profils (außerhalb des Ausschnitts 7.625–7.850) an einer vollständigen Bildschirmkopie prüfen (Momentaufnahme nach dem Stichtag) <span class="dbom-class-badge">UNGEPRÜFT</span></li>
         <li data-gate="C5" data-open>Entfernung der Bildschirmkopie aus dem veröffentlichten Verzeichnis durch Zweitprüfung bestätigen lassen</li>
         <li data-gate="Q2" data-open>Ergänzte Freitexte zum Prüfzeitraum und verschärfte Regel L78b durch Zweitprüfung bestätigen lassen</li>
-        <li data-gate="C6" data-open>Wortlaut der TWS-Herstellerangabe zu Eurex-Optionen am Original prüfen oder auf „keine marktweite GEX-Aggregation“ stützen</li>
-        <li data-gate="Q10" data-open>Analyse an die Ausgabestruktur des Prompts angleichen (M-DBOM als JSON-LD, Quellen mit Abrufdatum, Primär/Sekundär getrennt)</li>
+        <li data-gate="C6" data-open>TWS-Angabe stützt sich nur noch auf die geprüfte Teilaussage „aggregiertes Greek-Exposure nur für eigene Positionen“; durch Zweitprüfung bestätigen lassen</li>
+        <li data-gate="Q10" data-open>Ausgabestruktur der Analyse (Quellen nach Stufe mit Abruf/Abgleich, M-DBOM als JSON-LD) durch Zweitprüfung bestätigen lassen</li>
       </ul>
     </div>
   </div>
@@ -799,7 +810,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.19.0 · 2026-10-26<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.20.0 · 2026-10-27<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>

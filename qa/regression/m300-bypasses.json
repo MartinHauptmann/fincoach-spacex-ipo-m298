@@ -2548,6 +2548,18 @@
      "prüfen jede einzelne der neun ausgewählten Kernaussagen des Ausgangstexts (K1"
     ]
    ]
+  },
+  {
+   "name": "L13d Handänderung im JSON-LD-Block der Analyse",
+   "expect": "L53b",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "\"dateModified\": \"2026-10-05\"",
+     "\"dateModified\": \"2026-10-27\""
+    ]
+   ]
   }
  ]
 }

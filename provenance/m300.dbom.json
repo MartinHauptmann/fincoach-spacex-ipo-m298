@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.19.0",
+    "version": "1.20.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -600,7 +600,7 @@
       "verdict": "CONFIRMED",
       "class": "VENDOR_CLAIM",
       "confidence": 0.75,
-      "claim": "IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Eurex-Optionen nur als Rohdaten · Orderflow/MBO n. v. · eigene Ausführung.",
+      "claim": "IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Orderflow/MBO n. v. · eigene Ausführung.",
       "source_id": "SRC_IBKR",
       "caveat": "Herstellerangabe; Felder ohne Angabe in den ausgewerteten Quellen als n. v.",
       "period": "Stand 2026-10-05",
@@ -616,7 +616,7 @@
       "verdict": "CONFIRMED",
       "class": "DERIVED",
       "confidence": 0.75,
-      "claim": "Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: Eurex-Optionen nur als Rohdaten); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
+      "claim": "Von sechs verglichenen Anbietern ist für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; IBKR TWS: aggregiertes Greek-Exposure nur für eigene Positionen, also keine marktweite Aggregation); für die übrigen vier (SpotGamma, MenthorQ, Volland, Bookmap) n. v.",
       "source_id": "SRC_ATAS_LEARN",
       "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX und FACT_TWS_SPEC (Herstellerangaben, am Original geprüft); die übrigen Anbieterfakten enthalten keine Eurex-Aussage. Bestimmbar sind damit nur ATAS selbst und ein Broker; für die GEX-Spezialisten ist die Aussage n. v.",
       "period": "Stand 2026-10-05",
@@ -633,7 +633,7 @@
           "Volland",
           "Bookmap"
         ],
-        "subject": "Eurex|\\bnur SPX",
+        "subject": "Eurex|\\bnur SPX|nur für eigene Positionen",
         "determinable_from": {
           "ATAS": "FACT_XRAY_1MIN_SPX",
           "IBKR TWS": "FACT_TWS_SPEC"
@@ -1467,6 +1467,12 @@
     {
       "date": "2026-10-26",
       "event": "v1.19.0 Tests: L78b nach Holdout r23 verschärft (L78c), L65c erweitert, L76b (Modul-Stichtag in Momentaufnahme-Bindungen); Block gex-real mit data-snapshot, Hinweis am Offen-Punkt Q9. Holdout r23 einmalig vor der Teständerung 8/24, danach 24/24.",
+      "qa_score_pct": 73.7,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-27",
+      "event": "v1.20.0: C6 – Teilaussage „Eurex-Optionen nur als Rohdaten“ aus FACT_TWS_SPEC und FACT_NO_EUREX_GEX entfernt (20. Zweitprüfung: fachlich zweifelhaft); TWS-Zelle und Quantor stützen sich auf „aggregiertes Greek-Exposure nur für eigene Positionen“. Q6 – Matrixzeilen Datenquelle, Preismodell, Zielgruppe, Stand (belegt oder n. v.), Validierungsverfahren Modul 2 und Modul-6-Zeilen Mindestgröße, Spreads/Preisstellung, Liquidität (n. v.). Keine neuen Tatsachen.",
       "qa_score_pct": 73.7,
       "release": "ÜBERARBEITUNG"
     }

@@ -724,7 +724,7 @@ def main():
                 scope = html[blk[2]:blk[1]] if blk else html[m.end():_span(m)[1]]  # Inhalt ohne das eigene Start-Tag
                 if not _hint(_plain(scope)):
                     bad.append(f"Bindung ohne sichtbaren Hinweis „Momentaufnahme nach dem Stichtag“: „{_plain(html[m.start():_span(m)[1]]).strip()[:30]}“")
-            for para in re.split(r"\n\s*\n", re.sub(r"^\|.*$", "", md or "", flags=re.M)):
+            for para in re.split(r"\n\s*\n", re.sub(r"^\|.*$", "", re.sub(r"```.*?```", "", md or "", flags=re.S), flags=re.M)):  # Tabellen und Codeblöcke (JSON-LD) ausgenommen
                 if f["id"] in para and not re.search(r"(?i)nach dem Stichtag|\bspätere\w*|nachträglich", para):
                     bad.append("Analyse kennzeichnet die Momentaufnahme nicht")
             if bad:
@@ -1271,7 +1271,7 @@ def main():
                     l48.append(f"{ids[-1]}: {m.group(1)} ≠ DBOM")
             report("L48 Analyse-Konfidenzen", BLOCKER, not l48, "; ".join(l48[:5]) if l48 else "alle Konfidenzen mit Fakt-ID und = DBOM")
             # L53 · Analyse = faktgebundene Kurzfassung: Sync-Blöcke vorhanden; Handtext mit Angaben nennt eine Fakt-ID
-            blocks = {b: re.search(r"<!-- sync:%s -->\n(.*?)<!-- /sync:%s -->" % (b, b), md, re.S) for b in ("CLAIMS", "K", "KORR", "MOD", "GLOSSAR")}
+            blocks = {b: re.search(r"<!-- sync:%s -->\n(.*?)<!-- /sync:%s -->" % (b, b), md, re.S) for b in ("CLAIMS", "K", "KORR", "MOD", "GLOSSAR", "QUELLEN", "JSONLD")}
             nk = len(re.findall(r'^\s*\["K\d+",', js_ks.group(1), re.M)) if js_ks else 0
             l53 = [f"Block {b} fehlt/leer" for b, m in blocks.items() if not m or not m.group(1).strip()]
             if blocks["K"] and len(re.findall(r"^\*\*K\d+ ·", blocks["K"].group(1), re.M)) != nk:
@@ -1407,7 +1407,8 @@ def main():
         page_k = {k: sym.get(r, "?") for k, r in re.findall(r'\["(K\d+)","[^"]*","[^"]*","(ok|part|no)"', html)}
         diff = [f"{k}: Seite {page_k.get(k)} ≠ Analyse {md_k.get(k)}" for k in sorted(set(md_k) | set(page_k), key=lambda x: int(x[1:])) if md_k.get(k) != page_k.get(k)]
         report("L13 Phase A Seite = Analyse", BLOCKER, not diff and bool(md_k), "; ".join(diff) if diff else f"{len(md_k)} Ergebnisse identisch")
-        lead = f"provenance/m{mod.group(1)}.dbom.json" in md and '"facts": [' not in md
+        _md_nold = re.sub(r"<!-- sync:JSONLD -->.*?<!-- /sync:JSONLD -->", "", md, flags=re.S)  # L13d: erzeugter, byte-geprüfter JSON-LD-Block (L53b) ist keine zweite DBOM
+        lead = f"provenance/m{mod.group(1)}.dbom.json" in md and '"facts": [' not in _md_nold
         report("L13b eine führende DBOM", BLOCKER, lead, "Analyse verweist auf externe DBOM" if lead else "Analyse führt eigene Faktenliste")
         if dbom:
             refs = {s.get("ref") for s in dbom["sources"]}

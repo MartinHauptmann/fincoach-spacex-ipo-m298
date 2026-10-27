@@ -90,6 +90,39 @@ def build_blocks(page_html, d):
     gl = [json.loads(r) for r in re.findall(r'^\s*(\[".*\])\s*,?\s*$', gl_js.group(1), re.M)] if gl_js else []
     out["GLOSSAR"] = "| Begriff | Definition (Fortgeschritten) | Einordnung (Experte) |\n|---|---|---|\n" + "".join(
         f"| {plain(g[0])} | {plain(g[2])} | {plain(g[3])}{' ' + ' '.join(flab(i) for i in g[4].split()) if len(g) > 4 else ''} |\n" for g in gl) + "\n"
+    # Q10/L13d: Quellenverzeichnis nach Stufe getrennt, mit Abruf/Abgleich aus den Prüfdaten der Fakten
+    st = d["module"].get("stichtag", "")
+    chk = {}
+    for f in d["facts"]:
+        dt = f.get("verified", {}).get("date")
+        for sid in [f["source_id"]] + list(f.get("supporting_sources", [])):
+            if dt:
+                chk[sid] = max(chk.get(sid, ""), dt)
+    rec = "Recherche 2026-10-05 bis 2026-10-11"
+    parts = []
+    for tier, lab in (("primary", "Primärquellen"), ("vendor", "Herstellerquellen"), ("secondary", "Sekundärquellen")):
+        rows_s = sorted((x for x in d["sources"] if x.get("tier") == tier and x.get("ref", "–") != "–"), key=lambda x: int(x["ref"][1:]))
+        if rows_s:
+            parts.append(f"### {lab}\n\n| Nr. | Quelle | DBOM-ID | Abruf / Abgleich | URL |\n|---|---|---|---|---|\n" + "".join(
+                f"| {x['ref']} | {x['title']} | `{x['id']}` | {('abgeglichen ' + chk[x['id']]) if x['id'] in chk else rec} | {x['url']} |\n" for x in rows_s))
+    out["QUELLEN"] = "\n".join(parts) + "\n"
+    # Q10/L13d: M-DBOM als JSON-LD (Schema des Prompts), aus der DBOM erzeugt; provenance nach Prompt-Schema,
+    # verdict/class/evidence unverändert aus der DBOM; retrieved = Datum des Abgleichs, sonst null
+    PROV = {"VENDOR_CLAIM": "VENDOR_CLAIM", "MEDIA_REPORT": "MEDIA_REPORT", "MODEL_ASSUMPTION": "MODEL_ASSUMPTION", "SCENARIO_PROJECTION": "SCENARIO_PROJECTION"}
+    srcs = {x["id"]: x for x in d["sources"]}
+
+    def prov(f):
+        if f["source_id"] == "SRC_USER_TEXT":
+            return "USER_PROVIDED"
+        if f["class"] in PROV:
+            return PROV[f["class"]]
+        return "CONFIRMED" if f["verdict"] == "CONFIRMED" else f["verdict"]
+    ld = {"@context": "https://schema.org", "@type": "Dataset", "name": f"{d['module']['id']} · M-DBOM v1", "dateModified": st,
+          "version": d["module"]["version"],
+          "facts": [{"id": f["id"], "claim": f["claim"], "provenance": prov(f), "verdict": f["verdict"], "class": f["class"],
+                     "evidence": f.get("evidence"), "confidence": f["confidence"], "source": srcs.get(f["source_id"], {}).get("url") or f["source_id"],
+                     "retrieved": f.get("verified", {}).get("date")} for f in d["facts"]]}
+    out["JSONLD"] = "```json\n" + json.dumps(ld, ensure_ascii=False, indent=1) + "\n```\n"
     return out
 
 
@@ -144,7 +177,6 @@ def main():
         md = mds[0].read_text(encoding="utf-8")
         rows = sorted((x for x in d["sources"] if x.get("ref", "–") != "–"), key=lambda x: int(x["ref"][1:]))
         tbl = "\n".join(f"| {x['ref']} | {x['title']} | {TIER.get(x['tier'], x['tier'])} | `{x['id']}` | {x['url']} |" for x in rows)
-        md = re.sub(r"(\| Nr\. \| Quelle \| Stufe \| DBOM-ID \| URL \|\n\|---\|---\|---\|---\|---\|\n)(?:\|.*\|\n)+", lambda m: m.group(1) + tbl + "\n", md)
         frows = "\n".join(f"| `{f['id']}` | {f['verdict']} | {f['class']} | {de(f['confidence']) if f['confidence'] is not None else '–'} | {f.get('period', '–')} | {f['claim']} |" for f in F)
         md = re.sub(r"(\| ID \| Verdict \| Klasse \| Konf\. \| Bezugszeitraum \| Claim \|\n\|---\|---\|---\|---\|---\|---\|\n)(?:\|.*\|\n)+", lambda m: m.group(1) + frows + "\n", md)
         md = re.sub(r"^\| Version \| [\d.]+", f"| Version | {d['module']['version']}", md, count=1, flags=re.M)  # L44
