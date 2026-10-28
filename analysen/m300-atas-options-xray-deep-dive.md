@@ -1042,7 +1042,7 @@ CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `prov
 | C8 Regulatorische Bezüge belegt | ✓ | § 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft · 24. Zweitprüfung 2026-10-27: ohne Befund |
 | C9 Datenschutz | ✓ | Datenschutzerklärung und Impressum vom Herausgeber freigegeben (2026-10-11); Speicherangaben = Messung an allen Modulseiten (L38); Modul ohne Drittanbieter-Abrufe und ohne Speicher (L20) · 24. Zweitprüfung 2026-10-27: Bildschirmkopie ohne Personendaten |
 | Q1 Faktencheck K1–K9 vollständig | ✓ | 24. Zweitprüfung 2026-10-27: A01–A15 und K1–K9 stimmen nach L61 überein; A11 als [N. V.] nach Q9 zulässig |
-| Q2 Aktualität / Stichtag | ◐ | Stichtag und Momentaufnahme gekennzeichnet; Ausnahmelisten in Daten-Transparenz, Datenherkunft, Legende, honest_disclosure und Analyse einheitlich (Medienangaben, Quantor, GEX-Metrix-Beispiel mit Differenzen und Wall-Ablesung); Bestätigung durch Zweitprüfung ausstehend |
+| Q2 Aktualität / Stichtag | ✓ | 26. Zweitprüfung 2026-10-28: alle Daten ≤ Stichtag, Momentaufnahme vom 2026-10-23 sichtbar gekennzeichnet, Ausnahmelisten der Transparenztexte einheitlich |
 | Q3 Mathematische Konsistenz | ✓ | GEX 845 Mio. USD, 2.600 ES / 26.000 MES, Probe, Vanna und Charm nachgerechnet (Zweitprüfung 2026-10-11); Rechner rechnet gleich · 24. Zweitprüfung 2026-10-27: GEX 845 Mio. USD, 2.600 ES / 26.000 MES und die Differenzen des echten Beispiels nachgerechnet |
 | Q4 Provenienz je Fakt | ◐ | Wall-Ablesung als Klasse READING (UNVERIFIED), Bildschirmkopie mit Konfidenz 0,75, Herausgeber-Prüfdaten nur aus publisher_checks; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend |
 | Q5 Quellenqualität | ✓ | Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen als Hauptbeleg nur bei Medienangaben; Abgleich durch den Herausgeber am Original, bei Medienangaben an der Sekundärquelle · 24. Zweitprüfung 2026-10-27: ohne Befund |
@@ -1050,9 +1050,9 @@ CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `prov
 | Q7 Widerspruchsfreiheit | ◐ | Ausnahmelisten einheitlich; Hero-Zählung getrennt nach am Original, abgeleitet, Bildschirmkopie; Zuordnung der JSON-LD-Tags in der Analyse erläutert; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden · 24. Zweitprüfung 2026-10-27: 15 Pflichtbegriffe im Glossar abgeglichen |
 | Q9 Keine Überzeichnung / Halluzination | ◐ | Aussage zu Walls auf die Bildschirmkopie begrenzt, Walls als ungeprüfte Ablesung, Hero-Kennzahl ohne Statistik-Eindruck; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend |
-| Q10 Formatvorgaben | ◐ | Analyse in der Reihenfolge des Prompts (Module 1–7, Modul 8 als Abschnitt 4, Glossar 5, Quellen 6, M-DBOM 7, Scorecard mit offenen Prüfpunkten 8), Quellen nach Stufe mit Herausgeber-Daten, JSON-LD mit einem Provenienz-Tag; Bestätigung durch Zweitprüfung ausstehend |
+| Q10 Formatvorgaben | ✓ | 26. Zweitprüfung 2026-10-28: Analyse in Reihenfolge und Abschnitten nach Prompt Abschnitt 7, Quellen nach Stufe, M-DBOM als JSON-LD |
 
-**Gesamtscore:** 11 × ✓ + 8 × ◐ = 15 von 19 Punkten = **78,9 %**.
+**Gesamtscore:** 13 × ✓ + 6 × ◐ = 16 von 19 Punkten = **84,2 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
 ### 8.2 · Offene Prüfpunkte vor Veröffentlichung
@@ -1063,9 +1063,7 @@ CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `prov
 - Einschränkung der Bewertung „Nutzen“ der Eurex-Erweiterung durch Zweitprüfung bestätigen lassen
 - Claim A11 (NDX/NQ-0DTE-Dynamik) bleibt als [N. V.] gekennzeichnet, bis eine Quelle vorliegt
 - Löschung des alten Commits 6465f29 mit der Bildschirmkopie beim GitHub-Support beantragen und den Abruf danach erneut prüfen
-- Ergänzte Freitexte zum Prüfzeitraum und verschärfte Regel L78b durch Zweitprüfung bestätigen lassen
 - Bestimmbarkeitsregel (Abdeckung je ausgewerteter GEX-Funktion) gilt für alle Anbieter gleich, TWS n. v., „keine Walls“ nur für die Bildschirmkopie; durch Zweitprüfung bestätigen lassen
-- Ausgabestruktur der Analyse (Quellen nach Stufe mit Abruf/Abgleich, M-DBOM als JSON-LD) durch Zweitprüfung bestätigen lassen
 
 ---
 

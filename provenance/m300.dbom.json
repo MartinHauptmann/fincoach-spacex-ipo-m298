@@ -1511,6 +1511,12 @@
       "event": "v1.22.0: Befunde 1–15 der 25. Zweitprüfung umgesetzt – Bildtexte ehrlich (in keinem Branch, über alte Commit-Kennung bei GitHub abrufbar, Löschung zu beantragen); einheitliche Bestimmbarkeitsregel (ATAS: Options X-Ray und Options Chain Suite, TWS n. v.); „keine Walls“ auf die Bildschirmkopie begrenzt; Ausnahmelisten einheitlich; Klasse READING; Konfidenz 0,75; Hero-Kennzahl „nur SPX“; Analyse nach Prompt-Reihenfolge, Prompt-Enum mit UNVERIFIED; Hero-Zählung und JSON-LD-Erläuterung; Markenhinweis mit SPX/NDX und Sammelsatz; publisher_checks. Tests: L18f, L76f, L88 (Hash aller Bilddateien, WARN ohne Git), L82d (Ausnahme-Namen, abgeleitete Fakten, ausgeblendete Texte), L84 (Entities), L53e.",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-28",
+      "event": "26. Zweitprüfung (v1.22.0): Q2 und Q10 bestätigt (✓); Score 16,0/19 = 84,2 %, keine Freigabe; Befunde B1–B14 im QA-Bericht §55 (u. a. Bestimmbarkeitsregel ATAS/SpotGamma ungleich, unbelegtes „nur“ zur Chain Suite, Offen-Punkt Q9 fehlt in der Analyse, L82d/L18f umgehbar).",
+      "qa_score_pct": 84.2,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [

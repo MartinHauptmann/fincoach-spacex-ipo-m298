@@ -204,7 +204,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <span class="lvl-content lvl-inline" data-lvlc="einsteiger">Eine Option ist das Recht, einen Basiswert zu einem festgelegten Preis zu kaufen (Call) oder zu verkaufen (Put). Wer Optionen verkauft, kann sein Kursrisiko mit Futures begrenzen, also mit börsengehandelten Terminkontrakten. <span data-source="FACT_DEALER_CONVENTION">Analysemodelle würden unterstellen, dass Optionsverkäufer sich so absichern <span class="dbom-class-badge">MODELL</span>.</span> <span data-source="FACT_XRAY_1MIN_SPX">ATAS Options X-Ray zeigt dazu Kennzahlen aus Optionsdaten auf den <abbr title="S&amp;P-500-Index">SPX</abbr> im Future-Chart <span class="badge b-v">VENDOR</span>.</span> Dieses Modul erklärt Schritt für Schritt, wie das funktioniert, wo die Annahmen enden und worin sich Börsenoptionen und Optionsscheine im DACH-Raum unterscheiden. Dazu prüfen wir neun ausgewählte Kernaussagen eines Fachtexts.</span><span class="lvl-content lvl-inline" data-lvlc="fortgeschritten"><span data-source="FACT_DEALER_CONVENTION">Nach GEX-Modellen würden Händler, die Optionen verkaufen, ihr Buch über Futures absichern; daraus schätzen die Modelle, wo solche Absicherungsflüsse Kursbewegungen dämpfen oder verstärken könnten <span class="dbom-class-badge">MODELL</span>.</span> Wir zeigen die fachübliche Referenzrechnung hinter Gamma, Vanna und Charm, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Optionen und Optionsscheine gegenüber und prüfen neun ausgewählte Kernaussagen des Ausgangstexts.</span><span class="lvl-content lvl-inline active" data-lvlc="experte">Ein Deep-Dive mit Faktencheck zu einem Fachtext über die ATAS Options X-Ray Suite. Wir zerlegen die Mathematik des
       Dealer-Hedgings, vergleichen Datenfeed, Ausführung und Wettbewerb, stellen Eurex-Börsenoptionen und verbriefte
       Derivate gegenüber und prüfen neun ausgewählte Kernaussagen des Ausgangstexts (K1–K9) gegen den Rechts- und Produktstand.</span>
-      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">35</span> belegte Fakten, <span data-dbom-count="media">5</span> Medienangaben, <span data-dbom-count="unverified">1</span> ungeprüft, <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>78,9</span> %).</span>
+      <span class="block mt-2 text-xs text-tngb-muted">Stichtag <span class="font-mono text-tngb-cyan">2026-10-05</span> · Provenienz nach M-DBOM v1 · <span data-dbom-count="confirmed">35</span> belegte Fakten, <span data-dbom-count="media">5</span> Medienangaben, <span data-dbom-count="unverified">1</span> ungeprüft, <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Freigabestatus: Überarbeitung (QA <span data-qa-score>84,2</span> %).</span>
     </p>
     </div>
     <div class="lg:col-span-2" data-qa="hero-graphic">
@@ -699,7 +699,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
     <span id="qa-pill"></span>
   </div>
   <div class="flex flex-wrap items-center gap-3 mb-6">
-    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>78,9</span> % · <span data-qa-points>15</span> / 19</span>
+    <span class="compliance-pill warn" id="qa-score-pill">Score <span data-qa-score>84,2</span> % · <span data-qa-points>16</span> / 19</span>
     <span class="compliance-pill warn">Freigabe: ÜBERARBEITUNG</span>
     <span class="text-xs text-tngb-muted">Regel: Freigabe nur, wenn alle C = ✓ und Score ≥ 90 %. Bewertung nach unabhängiger Zweitprüfung; ✓ nur mit Messung oder dokumentierter Einzelprüfung.</span>
   </div>
@@ -722,7 +722,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <h3 class="font-head font-bold text-tngb-cyan mb-3">② Datenqualität (Q1–Q10)</h3>
       <table><tbody>
         <tr><td>Q1 Faktencheck K1–K9 vollständig</td><td class="check-pass" data-gate="Q1" title="24. Zweitprüfung 2026-10-27: A01–A15 und K1–K9 stimmen nach L61 überein; A11 als [N. V.] nach Q9 zulässig">✓</td></tr>
-        <tr><td>Q2 Aktualität / Stichtag</td><td class="check-part" data-gate="Q2" title="Stichtag und Momentaufnahme gekennzeichnet; Ausnahmelisten in Daten-Transparenz, Datenherkunft, Legende, honest_disclosure und Analyse einheitlich (Medienangaben, Quantor, GEX-Metrix-Beispiel mit Differenzen und Wall-Ablesung); Bestätigung durch Zweitprüfung ausstehend">◐</td></tr>
+        <tr><td>Q2 Aktualität / Stichtag</td><td class="check-pass" data-gate="Q2" title="26. Zweitprüfung 2026-10-28: alle Daten ≤ Stichtag, Momentaufnahme vom 2026-10-23 sichtbar gekennzeichnet, Ausnahmelisten der Transparenztexte einheitlich">✓</td></tr>
         <tr><td>Q3 Mathematische Konsistenz</td><td class="check-pass" data-gate="Q3" title="GEX 845 Mio. USD, 2.600 ES / 26.000 MES, Probe, Vanna und Charm nachgerechnet (Zweitprüfung 2026-10-11); Rechner rechnet gleich · 24. Zweitprüfung 2026-10-27: GEX 845 Mio. USD, 2.600 ES / 26.000 MES und die Differenzen des echten Beispiels nachgerechnet">✓</td></tr>
         <tr><td>Q4 Provenienz je Fakt</td><td class="check-part" data-gate="Q4" title="Wall-Ablesung als Klasse READING (UNVERIFIED), Bildschirmkopie mit Konfidenz 0,75, Herausgeber-Prüfdaten nur aus publisher_checks; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend">◐</td></tr>
         <tr><td>Q5 Quellenqualität</td><td class="check-pass" data-gate="Q5" title="Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen als Hauptbeleg nur bei Medienangaben; Abgleich durch den Herausgeber am Original, bei Medienangaben an der Sekundärquelle · 24. Zweitprüfung 2026-10-27: ohne Befund">✓</td></tr>
@@ -730,7 +730,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <tr><td>Q7 Widerspruchsfreiheit</td><td class="check-part" data-gate="Q7" title="Ausnahmelisten einheitlich; Hero-Zählung getrennt nach am Original, abgeleitet, Bildschirmkopie; Zuordnung der JSON-LD-Tags in der Analyse erläutert; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend">◐</td></tr>
         <tr><td>Q8 Glossar</td><td class="check-pass" title="Zweitprüfung: alle 15 Pflichtbegriffe vorhanden · 24. Zweitprüfung 2026-10-27: 15 Pflichtbegriffe im Glossar abgeglichen">✓</td></tr>
         <tr><td>Q9 Keine Überzeichnung / Halluzination</td><td class="check-part" data-gate="Q9" title="Aussage zu Walls auf die Bildschirmkopie begrenzt, Walls als ungeprüfte Ablesung, Hero-Kennzahl ohne Statistik-Eindruck; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend">◐</td></tr>
-        <tr><td>Q10 Formatvorgaben</td><td class="check-part" data-gate="Q10" title="Analyse in der Reihenfolge des Prompts (Module 1–7, Modul 8 als Abschnitt 4, Glossar 5, Quellen 6, M-DBOM 7, Scorecard mit offenen Prüfpunkten 8), Quellen nach Stufe mit Herausgeber-Daten, JSON-LD mit einem Provenienz-Tag; Bestätigung durch Zweitprüfung ausstehend">◐</td></tr>
+        <tr><td>Q10 Formatvorgaben</td><td class="check-pass" data-gate="Q10" title="26. Zweitprüfung 2026-10-28: Analyse in Reihenfolge und Abschnitten nach Prompt Abschnitt 7, Quellen nach Stufe, M-DBOM als JSON-LD">✓</td></tr>
         <tr><td>Externe DBOM erreichbar</td><td id="qa-dbom" class="check-na">…</td></tr>
         <tr><td>Alle data-source aufgelöst</td><td id="qa-refs" class="check-na">…</td></tr>
       </tbody></table>
@@ -757,9 +757,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <li data-gate="Q9" data-open data-source="FACT_GEXMETRIX_WALLS_READ">Walls des ganzen SPX-Profils (außerhalb des Ausschnitts 7.625–7.850) an einer vollständigen Bildschirmkopie prüfen (Momentaufnahme nach dem Stichtag) <span class="dbom-class-badge">UNGEPRÜFT</span></li>
         <li data-gate="Q9" data-open>Claim A11 (NDX/NQ-0DTE-Dynamik) bleibt als [N. V.] gekennzeichnet, bis eine Quelle vorliegt</li>
         <li data-gate="C5" data-open>Löschung des alten Commits 6465f29 mit der Bildschirmkopie beim GitHub-Support beantragen und den Abruf danach erneut prüfen</li>
-        <li data-gate="Q2" data-open>Ergänzte Freitexte zum Prüfzeitraum und verschärfte Regel L78b durch Zweitprüfung bestätigen lassen</li>
         <li data-gate="C6" data-open>Bestimmbarkeitsregel (Abdeckung je ausgewerteter GEX-Funktion) gilt für alle Anbieter gleich, TWS n. v., „keine Walls“ nur für die Bildschirmkopie; durch Zweitprüfung bestätigen lassen</li>
-        <li data-gate="Q10" data-open>Ausgabestruktur der Analyse (Quellen nach Stufe mit Abruf/Abgleich, M-DBOM als JSON-LD) durch Zweitprüfung bestätigen lassen</li>
       </ul>
     </div>
   </div>
