@@ -85,16 +85,22 @@ def build_blocks(page_html, d):
             if not m["facts"]:
                 raise ValueError(f"Modul ohne Fakten: {m['title']} (L53c)")
             mods += "".join(f"- {plain(facts[i]['claim'])} {flab(i) if i in facts else flab(i)}\n" for i in m["facts"]) + "\n"
-    out["MOD"] = mods
+    i8 = mods.find("#### Modul 8 ·")  # Q10 (25. ZP): Modul 8 als eigener Abschnitt 4 nach Prompt Abschnitt 7
+    out["MOD"], out["FAZIT"] = (mods[:i8], mods[i8:]) if i8 >= 0 else (mods, "")
     gl_js = re.search(r"const GLOSSAR=\[(.*?)\n\];", page_html, re.S)
     gl = [json.loads(r) for r in re.findall(r'^\s*(\[".*\])\s*,?\s*$', gl_js.group(1), re.M)] if gl_js else []
     out["GLOSSAR"] = "| Begriff | Definition (Fortgeschritten) | Einordnung (Experte) |\n|---|---|---|\n" + "".join(
         f"| {plain(g[0])} | {plain(g[2])} | {plain(g[3])}{' ' + ' '.join(flab(i) for i in g[4].split()) if len(g) > 4 else ''} |\n" for g in gl) + "\n"
     # Q10/L13d: Quellenverzeichnis nach Stufe getrennt, mit Abruf/Abgleich aus den Prüfdaten der Fakten
     st = d["module"].get("stichtag", "")
+    pubd = {c["date"] for c in d.get("publisher_checks", [])}
+
+    def _pub(f):  # L53e (25. ZP): Datum nur, wenn by = Herausgeber, Datum in publisher_checks und keine Ableitung
+        v = f.get("verified", {})
+        return v.get("date") if v.get("by") == "Herausgeber" and v.get("date") in pubd and f.get("evidence") != "derived" else None
     chk = {}
     for f in d["facts"]:
-        dt = f.get("verified", {}).get("date") if f.get("verified", {}).get("by") == "Herausgeber" else None  # 24. ZP: nur Abgleich durch den Herausgeber
+        dt = _pub(f)  # L53e: nur dokumentierte Prüfungen des Herausgebers
         for sid in [f["source_id"]] + list(f.get("supporting_sources", [])):
             if dt:
                 chk[sid] = max(chk.get(sid, ""), dt)
@@ -122,7 +128,7 @@ def build_blocks(page_html, d):
           "version": d["module"]["version"],
           "facts": [{"id": f["id"], "claim": f["claim"], "provenance": prov(f), "confidence": f["confidence"],
                      "source": srcs.get(f["source_id"], {}).get("url") or f["source_id"],
-                     "retrieved": f.get("verified", {}).get("date") if f.get("verified", {}).get("by") == "Herausgeber" else None,
+                     "retrieved": _pub(f),
                      "x-m-dbom": {"verdict": f["verdict"], "class": f["class"], "evidence": f.get("evidence")}} for f in d["facts"]]}
     out["JSONLD"] = "```json\n" + json.dumps(ld, ensure_ascii=False, indent=1) + "\n```\n"
     return out
@@ -143,7 +149,8 @@ def main():
            "scenario": fs["scenario_projection"], "vendor": fs["vendor_claim"], "sources": len(d["sources"]),
            "snippet": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "snippet" for f in F),
            "fulltext": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "fulltext" for f in F),  # L82
-           "screenshot": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "screenshot" for f in F)}  # L82g
+           "screenshot": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "screenshot" for f in F),  # L82g
+           "derived": sum(f["verdict"] == "CONFIRMED" and f.get("evidence") == "derived" for f in F)}
     facts = {f["id"]: f for f in F}
 
     s = page.read_text(encoding="utf-8")
@@ -183,7 +190,7 @@ def main():
         md = re.sub(r"(\| ID \| Verdict \| Klasse \| Konf\. \| Bezugszeitraum \| Claim \|\n\|---\|---\|---\|---\|---\|---\|\n)(?:\|.*\|\n)+", lambda m: m.group(1) + frows + "\n", md)
         md = re.sub(r"^\| Version \| [\d.]+", f"| Version | {d['module']['version']}", md, count=1, flags=re.M)  # L44
         md = re.sub(r"Stand: Modul v[\d.]+,\n\d+ Fakten, \d+ Quellen\.", f"Stand: Modul v{d['module']['version']},\n{len(F)} Fakten, {len(d['sources'])} Quellen.", md)
-        md = re.sub(r"(## 7 · Offene Prüfpunkte vor Veröffentlichung\n\n)(?:- .*\n)+", lambda m: m.group(1) + "".join(f"- {t}\n" for t in open_items), md)
+        md = re.sub(r"(### 8\.2 · Offene Prüfpunkte vor Veröffentlichung\n\n)(?:- .*\n)+", lambda m: m.group(1) + "".join(f"- {t}\n" for t in open_items), md)
         # L53/L53b: erzeugte Blöcke (Claim-Tabelle, Phase A, Module, Glossar) – dieselbe Funktion nutzt check_module
         for name, content in build_blocks(s, d).items():
             md = re.sub(r"(<!-- sync:%s -->\n).*?(<!-- /sync:%s -->)" % (name, name), lambda m: m.group(1) + content + m.group(2), md, count=1, flags=re.S)
@@ -202,7 +209,7 @@ def main():
                 "| Gate | Status | Begründung |\n|---|---|---|\n%s\n\n"
                 "**Gesamtscore:** %d × ✓ + %d × ◐ = %s von %d Punkten = **%s %%**.\n**Freigabeempfehlung: %s.**\n") % (
                     mod, tbl8, n_ok, n_part, de(pts, 1) if pts % 1 else str(int(pts)), len(cells), de(pct, 1), rel)
-        md = re.sub(r"(## 8 · QA-Scorecard\n\n).*?(?=\n---\n)", lambda m: m.group(1) + sec8, md, count=1, flags=re.S)
+        md = re.sub(r"(## 8 · QA-Scorecard\n\n).*?(?=\n### 8\.2 · |\n---\n)", lambda m: m.group(1) + sec8, md, count=1, flags=re.S)
         mds[0].write_text(md, encoding="utf-8")
     # L74/L80: Änderungsdatum und Lehren-Bereich des Prompts aus audit_trail und LESSONS
     prm = sorted((page.parent / "prompts").glob(f"m{mod}-*.md"))

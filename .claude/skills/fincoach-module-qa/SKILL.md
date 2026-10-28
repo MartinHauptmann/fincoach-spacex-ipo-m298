@@ -132,6 +132,10 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   und SHA-256 an der Quelle. **L53e:** Abgleichsdaten nur aus `verified.by = Herausgeber`. **L84b:** Marken-Hinweis
   auch in der Analyse vollständig. **L14b:** Quellennummern eindeutig. **L82i:** Abgleichssätze mit „ausgenommen“ nennen
   alle Ausnahmen.
+- **L18f:** Jeder Quantor nennt in `basis.rule` seine Bestimmbarkeitsregel; sie gilt für alle Anbieter gleich, und
+  die Gegenstandszeile der Matrix trägt `data-quantor-row`. **L76f:** Ausschlussaussagen über Anbieter („bietet keine …“)
+  nur mit Gegenstand im Claim. **L82j:** Ausnahmen tragen `exception_label`; alle Transparenztexte (auch ausgeblendete)
+  nennen dieselbe Ausnahmeliste. **L53f:** Herausgeber-Prüfdaten nur aus `publisher_checks`.
 - **L65:** K-Bereiche „K1–Kn“ und jeder Verweis „Kn“ passen zur Zahl der K-Zeilen, in Seite, Analyse und Prompt. Zahlangaben „n (ausgewählte) Kernaussagen“ gelten auch mit bis zu drei Adjektiven oder Adverbien dazwischen, flektiert und mit Komma (L65c).
 - **L66:** Nach jeder Entfernung Folgetexte suchen: Titel, Attribute, Datenherkunft (nur Stellen aus den Quellen) und
   Fazit; jeder Fazit-Punkt unter „Relativiert“/„Entfällt“ nennt seinen Claim (`data-claim`).

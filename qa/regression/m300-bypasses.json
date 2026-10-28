@@ -2632,6 +2632,102 @@
      "| `SRC_BGBL_JSTG2024` | abgeglichen 2026-10-13 |"
     ]
    ]
+  },
+  {
+   "name": "25. ZP Umgehung G: Gegenstandszeile umbenannt, TWS-Zelle an FACT_TWS_SPEC",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>GEX für ODAX/OESX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">aggregiertes Greek-Exposure nur für eigene Positionen <span class=\"badge b-v\">VENDOR</span></td></tr>"
+    ]
+   ]
+  },
+  {
+   "name": "L18f: Markierung data-quantor-row entfernt",
+   "expect": "L18b",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\">",
+     "<tr>"
+    ]
+   ]
+  },
+  {
+   "name": "L76f: „Der Anbieter weist keine Walls aus“ (Ausschlussaussage ohne Claim)",
+   "expect": "L76f",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "² In der Bildschirmkopie (kostenlose Stufe, Split View) ist keine Wall ausgewiesen;",
+     "² Der Anbieter weist keine Walls aus;"
+    ]
+   ]
+  },
+  {
+   "name": "L76f (25. ZP): verschärfte Variante „auch in den Bezahlstufen“",
+   "expect": "L76f",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "² In der Bildschirmkopie (kostenlose Stufe, Split View) ist keine Wall ausgewiesen;",
+     "² Der Anbieter weist auch in den Bezahlstufen keine Walls aus;"
+    ]
+   ]
+  },
+  {
+   "name": "L82d (25. ZP): Daten-Transparenz ohne Quantor in der Ausnahmeliste",
+   "expect": "L82d",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "ebenso wie der abgeleitete Quantor (aus zwei geprüften Herstellerangaben) und das GEX-Metrix-Beispiel",
+     "ebenso wie das GEX-Metrix-Beispiel"
+    ]
+   ]
+  },
+  {
+   "name": "L82d (25. ZP): Analyse-Vorbehalt ohne Wall-Ablesung",
+   "expect": "L82d",
+   "sync": false,
+   "edits": [
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "mit daraus berechneten Differenzen (`FACT_GEXMETRIX_DERIVED`) und der ungeprüften Wall-Ablesung (`FACT_GEXMETRIX_WALLS_READ`).",
+     "mit daraus berechneten Differenzen (`FACT_GEXMETRIX_DERIVED`)."
+    ]
+   ]
+  },
+  {
+   "name": "L53e (25. ZP): Quantor als Herausgeber-Prüfung ausgegeben",
+   "expect": "L53e|L53b",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"by\": \"Ableitung aus geprüften Fakten (nicht gesondert vom Herausgeber geprüft)\",\n        \"date\": \"2026-10-27\",",
+     "\"by\": \"Herausgeber\",\n        \"date\": \"2026-10-27\","
+    ]
+   ]
+  },
+  {
+   "name": "L84 (25. ZP): SPX im Markenhinweis der Seite gestrichen",
+   "expect": "L84",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "S&amp;P 500, SPX, Nasdaq-100, NDX,",
+     "S&amp;P 500, Nasdaq-100, NDX,"
+    ]
+   ]
   }
  ]
 }

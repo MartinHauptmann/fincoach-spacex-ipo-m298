@@ -199,7 +199,7 @@
     [
      "m300.html",
      "Derzeit tragen die Herstellerangaben und Primärquellen die Stufe „Volltext“, ausgenommen die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Quantor und Differenzen des GEX-Metrix-Beispiels, Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel vom 2026-10-23 (Stufe „Bildschirmkopie“; die daraus abgelesene Lage der Walls ist ungeprüft).",
-     "Bis auf die fünf Medienangaben (Stufe „Sekundär“), zwei abgeleitete Fakten (Stufe „Abgeleitet“) und das GEX-Metrix-Beispiel (Stufe „Bildschirmkopie“) tragen derzeit alle Belege die Stufe „Volltext“."
+     "Bis auf die fünf Medienangaben (Stufe „Sekundär“), den Quantor und die Differenzen des GEX-Metrix-Beispiels (Stufe „Abgeleitet“) sowie das GEX-Metrix-Beispiel mit seiner Wall-Ablesung (Stufe „Bildschirmkopie“) tragen derzeit alle Belege die Stufe „Volltext“."
     ]
    ]
   },
@@ -376,7 +376,7 @@
     [
      "m300.html",
      "VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
-     "VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td><abbr title=\"nicht verfügbar\">n. v.</abbr></td></tr>"
+     "VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td> n. v. </td></tr>"
     ]
    ]
   },

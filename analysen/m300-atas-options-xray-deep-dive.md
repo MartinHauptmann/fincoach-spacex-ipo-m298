@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.21.0 (Entwurf) |
+| Version | 1.22.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -25,9 +25,10 @@
 > Recherchiert wurde deshalb über Suchtreffer, die auf diese Primärquellen verweisen; die URLs stehen im
 > Quellenverzeichnis. Der Herausgeber hat am 2026-10-11 jeden Beleg zum Stichtag an seiner Quelle abgeglichen: Primär- und
 > Herstellerquellen am Original (`evidence: fulltext`), ausgenommen die fünf Medienangaben, die an ihrer
-> Sekundärquelle geprüft sind (`evidence: secondary`), und der Quantor `FACT_NO_EUREX_GEX`, der aus einer geprüften
-> Herstellerangabe abgeleitet ist (`evidence: derived`), ebenso ausgenommen die spätere GEX-Metrix-Momentaufnahme
-> vom 2026-10-23 (`FACT_GEXMETRIX_SPX`, `evidence: screenshot`), die auf einer Bildschirmkopie des Herausgebers beruht.
+> Sekundärquelle geprüft sind (`evidence: secondary`), und der Quantor `FACT_NO_EUREX_GEX`, der aus zwei geprüften
+> Herstellerangaben abgeleitet ist (`evidence: derived`), ebenso ausgenommen die spätere GEX-Metrix-Momentaufnahme
+> vom 2026-10-23 (`FACT_GEXMETRIX_SPX`, `evidence: screenshot`), die auf einer Bildschirmkopie des Herausgebers beruht,
+> mit daraus berechneten Differenzen (`FACT_GEXMETRIX_DERIVED`) und der ungeprüften Wall-Ablesung (`FACT_GEXMETRIX_WALLS_READ`).
 
 > **Aufbau:** Diese Analyse ist eine faktgebundene Kurzfassung. Jede Angabe nennt die Fakt-ID ihres Belegs aus
 > `provenance/m300.dbom.json` mit Verdict und Konfidenz; Zitate des Quelltexts sind als solche gekennzeichnet.
@@ -48,8 +49,8 @@ Kernergebnisse; jede Aussage mit Fakt-ID:
   (`FACT_XRAY_10_IND`, `FACT_XRAY_1MIN_SPX`). Optionen sind in ATAS derzeit nicht handelbar (`FACT_ATAS_NO_OPT_TRADING`).
 - **Modell:** Das GEX-Vorzeichen beruht auf einer Annahme über die Dealer-Position (`FACT_DEALER_CONVENTION`,
   SCENARIO_PROJECTION, keine Prognose-Konfidenz).
-- **Wettbewerb:** Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige
-  Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v. (`FACT_NO_EUREX_GEX`, belegt, Konfidenz 0,75).
+- **Wettbewerb:** Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er in den ausgewerteten Funktionen
+  keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v. (`FACT_NO_EUREX_GEX`, belegt, Konfidenz 0,75).
 - **Einschätzung [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge in einer möglichen Analyselücke (bisher nur
   für einen Anbieter bestimmbar), nicht in einem Steuervorteil (`FACT_ROADMAP`, SCENARIO_PROJECTION, keine Prognose-Konfidenz). Das ist keine Prognose.
 
@@ -123,7 +124,7 @@ Legende: ✓ bestätigt · ◐ präzisiert · ✗ falsch · [N. V.] nicht verifi
 
 ---
 
-## 3 · Phase B: Module 1–8 (faktgebundene Kurzfassung)
+## 3 · Phase B: Module 1–7 (faktgebundene Kurzfassung)
 
 Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (aus dem Fazit der Modulseite) und sind als Einschätzung markiert.
 
@@ -167,7 +168,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.. (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65)
 - Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung. (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75)
 - IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Orderflow/MBO n. v. · eigene Ausführung. (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75)
-- Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet (ATAS: X-Ray nur SPX); für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v. (`FACT_NO_EUREX_GEX`, belegt, Konfidenz 0,75)
+- Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen deckt Options X-Ray nur SPX ab und die Options Chain Suite nur ES, NQ, CL und GC auf EOD-Basis; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v. (`FACT_NO_EUREX_GEX`, belegt, Konfidenz 0,75)
 
 #### Modul 6 · DACH-Marktspezifika und steuerlicher Rahmen
 
@@ -189,31 +190,9 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 
 - Vier Roadmap-Erweiterungen (Multi-Asset, Eurex, Multi-Leg, Warrant-Fair-Value) sind Vorschläge. (`FACT_ROADMAP`, SCENARIO_PROJECTION, keine Prognose-Konfidenz)
 
-#### Modul 8 · Fazit und Synthese [Einschätzung, aus dem Fazit der Modulseite]
-
-**✓ Bleibt**
-
-- X-Ray zeigt aus SPX-Optionsdaten abgeleitete Kennzahlen auf ES, MES und SPY an. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
-- Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events. (Einschätzung, gestützt auf (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7))
-- Für Optionen fehlt eine native Ausführung. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
-- Positionierung plus MBO in einer Oberfläche: für ATAS belegt (MBO-Bundle zur Erprobung); Bookmap hat MBO und Greeks nur über Add-ons; für SpotGamma, MenthorQ, Volland und TWS ist ein MBO-Werkzeug n. v. Ob die Kombination ein Differenzierungsmerkmal ist, bleibt damit offen. (Einschätzung, gestützt auf (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
-
-**◐ Relativiert**
-
-- Market Maker hedgen aus Kalkül, nicht aus gesetzlichem Zwang. (Einschätzung, gestützt auf (`FACT_MM_NO_HEDGE_DUTY`, belegt, Konfidenz 0,85))
-- GEX beruht auf einer Positionsannahme; beim SPX durch markierte Cboe-Daten besser, anderswo schwächer fundiert. (Einschätzung, gestützt auf (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, keine Prognose-Konfidenz), (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6))
-- Optionsscheine hinterlassen eine schwache, nicht zurechenbare Hedge-Spur, aber keine Nullspur. (Einschätzung, gestützt auf (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6))
-
-**✗ Entfällt**
-
-- Ein steuerlicher Nachteil börsengehandelter Optionen gegenüber Optionsscheinen im Privatvermögen. (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9)
-- „Keine Verlustbeschränkung“ für Kapitalgesellschaften. (`FACT_P15_KSTG`, belegt, Konfidenz 0,85)
-
-**Strategische These [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer möglichen Analyselücke. Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.. Für die GEX-Spezialisten ist damit offen, ob eine Lücke besteht; ob ATAS sie füllen kann, hängt von Datenlizenzen, Validierung und der offenen Kommunikation der schwächeren Positionsannahme ab. (`FACT_NO_EUREX_GEX`, belegt, Konfidenz 0,75) (`FACT_ROADMAP`, SCENARIO_PROJECTION, keine Prognose-Konfidenz)
-
 <!-- /sync:MOD -->
 
-### 3.9 Modellrechnung [MODELL]
+### 3.8 Modellrechnung [MODELL]
 
 Die Berechnungslogik der Indikatoren ist in den eingesehenen Herstellerquellen nicht dokumentiert (`FACT_XRAY_10_IND`). Die folgenden Formeln sind die
 fachübliche Referenzmodellierung und nicht die belegte Implementierung des Herstellers (`FACT_DEALER_CONVENTION`,
@@ -296,7 +275,36 @@ Footprint-Daten (Modul 4).
 
 ---
 
-## 4 · Glossar
+## 4 · Modul 8: Fazit und Synthese
+
+<!-- sync:FAZIT -->
+#### Modul 8 · Fazit und Synthese [Einschätzung, aus dem Fazit der Modulseite]
+
+**✓ Bleibt**
+
+- X-Ray zeigt aus SPX-Optionsdaten abgeleitete Kennzahlen auf ES, MES und SPY an. (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85)
+- Minuten-Snapshots lösen das Skalierungsproblem, kosten aber Aktualität bei Makro-Events. (Einschätzung, gestützt auf (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_OPRA_CAPACITY`, belegt, Konfidenz 0,7))
+- Für Optionen fehlt eine native Ausführung. (`FACT_ATAS_NO_OPT_TRADING`, belegt, Konfidenz 0,8)
+- Positionierung plus MBO in einer Oberfläche: für ATAS belegt (MBO-Bundle zur Erprobung); Bookmap hat MBO und Greeks nur über Add-ons; für SpotGamma, MenthorQ, Volland und TWS ist ein MBO-Werkzeug n. v. Ob die Kombination ein Differenzierungsmerkmal ist, bleibt damit offen. (Einschätzung, gestützt auf (`FACT_SPOTGAMMA_SPEC`, belegt, Konfidenz 0,75), (`FACT_MENTHORQ_SPEC`, belegt, Konfidenz 0,75), (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65), (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75), (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75), (`FACT_XRAY_1MIN_SPX`, belegt, Konfidenz 0,85), (`FACT_ATAS_MBO`, belegt, Konfidenz 0,8))
+
+**◐ Relativiert**
+
+- Market Maker hedgen aus Kalkül, nicht aus gesetzlichem Zwang. (Einschätzung, gestützt auf (`FACT_MM_NO_HEDGE_DUTY`, belegt, Konfidenz 0,85))
+- GEX beruht auf einer Positionsannahme; beim SPX durch markierte Cboe-Daten besser, anderswo schwächer fundiert. (Einschätzung, gestützt auf (`FACT_DEALER_CONVENTION`, SCENARIO_PROJECTION, keine Prognose-Konfidenz), (`FACT_CBOE_OPENCLOSE`, Medienangabe, Konfidenz 0,6))
+- Optionsscheine hinterlassen eine schwache, nicht zurechenbare Hedge-Spur, aber keine Nullspur. (Einschätzung, gestützt auf (`FACT_ISSUER_HEDGING`, Medienangabe, Konfidenz 0,6))
+
+**✗ Entfällt**
+
+- Ein steuerlicher Nachteil börsengehandelter Optionen gegenüber Optionsscheinen im Privatvermögen. (`FACT_JSTG2024_REPEAL`, belegt, Konfidenz 0,9)
+- „Keine Verlustbeschränkung“ für Kapitalgesellschaften. (`FACT_P15_KSTG`, belegt, Konfidenz 0,85)
+
+**Strategische These [SZENARIO]:** Der Wert einer Eurex-Erweiterung läge nicht in einem Steuervorteil, sondern in einer möglichen Analyselücke. Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er in den ausgewerteten Funktionen keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.. Für die GEX-Spezialisten ist damit offen, ob eine Lücke besteht; ob ATAS sie füllen kann, hängt von Datenlizenzen, Validierung und der offenen Kommunikation der schwächeren Positionsannahme ab. (`FACT_NO_EUREX_GEX`, belegt, Konfidenz 0,75) (`FACT_ROADMAP`, SCENARIO_PROJECTION, keine Prognose-Konfidenz)
+
+<!-- /sync:FAZIT -->
+
+---
+
+## 5 · Glossar
 
 <!-- sync:GLOSSAR -->
 | Begriff | Definition (Fortgeschritten) | Einordnung (Experte) |
@@ -332,12 +340,13 @@ Footprint-Daten (Modul 4).
 
 ---
 
-## 5 · Quellenverzeichnis
+## 6 · Quellenverzeichnis
 
 Recherchiert vom 2026-10-05 bis 2026-10-11 über Suchtreffer; der Herausgeber hat am 2026-10-11 Primär- und
 Herstellerquellen am Original abgeglichen, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den
 abgeleiteten Quantor `FACT_NO_EUREX_GEX` (siehe Methodischer Vorbehalt) und die GEX-Metrix-Momentaufnahme nach dem
-Stichtag vom 2026-10-23, die auf einer Bildschirmkopie des Herausgebers beruht (`FACT_GEXMETRIX_SPX`). Das Verzeichnis ist ein
+Stichtag vom 2026-10-23, die auf einer Bildschirmkopie des Herausgebers beruht (`FACT_GEXMETRIX_SPX`), mit daraus
+berechneten Differenzen und der ungeprüften Wall-Ablesung (`FACT_GEXMETRIX_WALLS_READ`). Das Verzeichnis ist ein
 Auszug aus `provenance/m300.dbom.json` (Lehre L13/L14) und wird von dort erzeugt, nicht von Hand gepflegt. Die
 S-Nummern sind die Belegverweise in dieser Analyse. „abgeglichen“ nennt das Datum, an dem der Herausgeber Fakten
 dieser Quelle zuletzt geprüft hat; sonst gilt der Recherchezeitraum.
@@ -387,7 +396,7 @@ dieser Quelle zuletzt geprüft hat; sonst gilt der Recherchezeitraum.
 | S28 | Gamma Cockpit (DAX-GEX, Beta) | `SRC_GAMMACOCKPIT` | abgeglichen 2026-10-11 | https://gammacockpit.com/ |
 | S49 | OptionsDepth (Abdeckung, API) | `SRC_OPTIONSDEPTH` | abgeglichen 2026-10-11 | https://optionsdepth.com/ |
 | S59 | ATAS · Footprint-Charts (Volumenanalyse) | `SRC_ATAS_FOOTPRINT` | abgeglichen 2026-10-11 | https://atas.net/volume-analysis/footprint-charts/ |
-| S60 | GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; Bild nicht auf der Seite und nicht im Repository, SHA-256 e4b56d890e706e8c…) | `SRC_GEXMETRIX` | abgeglichen 2026-10-23 | https://www.gexmetrix.com/gex/spx |
+| S60 | GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; Bild nicht auf der Seite und in keinem Branch des Repositorys, SHA-256 e4b56d890e706e8c…) | `SRC_GEXMETRIX` | abgeglichen 2026-10-23 | https://www.gexmetrix.com/gex/spx |
 
 ### Sekundärquellen
 
@@ -406,7 +415,7 @@ dieser Quelle zuletzt geprüft hat; sonst gilt der Recherchezeitraum.
 
 ---
 
-## 6 · M-DBOM (Data Bill of Materials)
+## 7 · M-DBOM (Data Bill of Materials)
 
 Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine DBOM für Seite und Analyse).
 
@@ -414,6 +423,9 @@ Führende Provenienzliste ist **`provenance/m300.dbom.json`** (Lehre L13: eine D
 Jeder Fakt trägt genau ein Provenienz-Tag (`provenance`, Schema des Prompts; UNVERIFIED nach Q4 für ungeprüfte
 Angaben). Die feinere Einordnung der M-DBOM (`verdict`, `class`, `evidence`) steht getrennt unter `x-m-dbom`.
 `retrieved` ist das Datum des Abgleichs durch den Herausgeber, sonst `null`.
+Die Zählung der Tags weicht bewusst von den Zählungen der Seite ab: Die Seite zählt „belegt“ nach dem Verdict
+CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `provenance` trennt dagegen Herstellerangaben
+(VENDOR_CLAIM) von den übrigen bestätigten Fakten (CONFIRMED).
 
 <!-- sync:JSONLD -->
 ```json
@@ -422,7 +434,7 @@ Angaben). Die feinere Einordnung der M-DBOM (`verdict`, `class`, `evidence`) ste
  "@type": "Dataset",
  "name": "M300 · M-DBOM v1",
  "dateModified": "2026-10-05",
- "version": "1.21.0",
+ "version": "1.22.0",
  "facts": [
   {
    "id": "FACT_JSTG2024_REPEAL",
@@ -855,7 +867,7 @@ Angaben). Die feinere Einordnung der M-DBOM (`verdict`, `class`, `evidence`) ste
   },
   {
    "id": "FACT_NO_EUREX_GEX",
-   "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet (ATAS: X-Ray nur SPX); für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
+   "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen deckt Options X-Ray nur SPX ab und die Options Chain Suite nur ES, NQ, CL und GC auf EOD-Basis; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
    "provenance": "CONFIRMED",
    "confidence": 0.75,
    "source": "https://learn.atas.net/options/",
@@ -922,7 +934,7 @@ Angaben). Die feinere Einordnung der M-DBOM (`verdict`, `class`, `evidence`) ste
    "id": "FACT_GEXMETRIX_SPX",
    "claim": "GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET (vor Handelsbeginn): Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ, letzter Punkt deutlich negativer als die Differenz der Kopfwerte; Index von rund 7.800 auf 7.663,43.",
    "provenance": "VENDOR_CLAIM",
-   "confidence": 0.8,
+   "confidence": 0.75,
    "source": "https://www.gexmetrix.com/gex/spx",
    "retrieved": "2026-10-23",
    "x-m-dbom": {
@@ -953,7 +965,7 @@ Angaben). Die feinere Einordnung der M-DBOM (`verdict`, `class`, `evidence`) ste
    "retrieved": null,
    "x-m-dbom": {
     "verdict": "UNVERIFIED",
-    "class": "DERIVED",
+    "class": "READING",
     "evidence": "screenshot"
    }
   },
@@ -1014,20 +1026,6 @@ Angaben). Die feinere Einordnung der M-DBOM (`verdict`, `class`, `evidence`) ste
 ```
 <!-- /sync:JSONLD -->
 
-## 7 · Offene Prüfpunkte vor Veröffentlichung
-
-- Kennzeichnung von Quantor und Gamma Cockpit durch Zweitprüfung und Herausgeber bestätigen lassen
-- Belegstufen der Medienangaben und des abgeleiteten Quantors durch Zweitprüfung und Herausgeber bestätigen lassen
-- Widerspruchsfreiheit von These und Belegstufen-Definition durch Zweitprüfung bestätigen lassen
-- Einschränkung der Bewertung „Nutzen“ der Eurex-Erweiterung durch Zweitprüfung bestätigen lassen
-- Claim A11 (NDX/NQ-0DTE-Dynamik) bleibt als [N. V.] gekennzeichnet, bis eine Quelle vorliegt
-- Entfernung der Bildschirmkopie aus dem veröffentlichten Verzeichnis durch Zweitprüfung bestätigen lassen
-- Ergänzte Freitexte zum Prüfzeitraum und verschärfte Regel L78b durch Zweitprüfung bestätigen lassen
-- TWS bei Eurex-GEX n. v., Quantor nur noch für ATAS selbst bestimmbar; durch Zweitprüfung bestätigen lassen
-- Ausgabestruktur der Analyse (Quellen nach Stufe mit Abruf/Abgleich, M-DBOM als JSON-LD) durch Zweitprüfung bestätigen lassen
-
----
-
 ## 8 · QA-Scorecard
 
 > **Automatisch erzeugt** aus den Gate-Zellen von `m300.html` (`qa/sync_module.py`, L49). Nicht von Hand ändern.
@@ -1037,25 +1035,37 @@ Angaben). Die feinere Einordnung der M-DBOM (`verdict`, `class`, `evidence`) ste
 | C1 Disclaimer Anfang/Ende | ✓ | Zweitprüfung: alle sechs Pflichtbestandteile in Hero, Schluss, Analyse Anfang/Ende gelesen; L42-Test · 24. Zweitprüfung 2026-10-27: Hero, Schluss und Analyse Anfang/Ende mit allen Pflichtbestandteilen |
 | C2 Keine Anlageempfehlung (MAR) | ✓ | Keine Kursziele, Einstiege oder Empfehlungen (Zweitprüfung 2026-10-11 gelesen); Empfehlungsformen geprüft (L62) · 24. Zweitprüfung 2026-10-27: auch das SPX-Beispiel vom 2026-10-23 im Konjunktiv, historisch, ohne Handelssignal |
 | C3 Steuer/Recht mit Primärquelle | ✓ | Steuer- und Rechtsaussagen vom Herausgeber am 2026-10-11 am Original geprüft (Gesetzesquellen im Volltext) · 24. Zweitprüfung 2026-10-27: Stichtag, Normzitate und Hinweis auf Steuerberater vorhanden |
-| C4 Neutralität / Interessenkonflikte | ◐ | Gamma Cockpit als eigener Herstellerfakt (VENDOR), Quantor-Verdict aus den Basisfakten abgeleitet (belegt); Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
-| C5 Marken beschreibend | ◐ | Bildschirmkopie des GEX-Metrix-Dashboards weder auf der Seite noch im Repository (auch nicht in der Historie des Arbeitszweigs; SHA-256 in der M-DBOM); Markenhinweis in Seite und Analyse mit GEX-Metrix; Bestätigung durch Zweitprüfung ausstehend |
-| C6 UWG-konforme Begriffe | ◐ | Keine Aussage mehr über Eurex-GEX der IBKR TWS (n. v.); der Quantor stützt sich nur auf die am Original geprüfte ATAS-Angabe „X-Ray nur SPX“; Bestätigung durch Zweitprüfung ausstehend |
+| C4 Neutralität / Interessenkonflikte | ◐ | Einheitliche Bestimmbarkeitsregel für alle Anbieter (Abdeckungsangabe je ausgewerteter GEX-Funktion, ATAS: Options X-Ray und Options Chain Suite); Hero-Kennzahl als Funktionsangabe „nur SPX“; Interessenkonflikte: keine. Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend |
+| C5 Marken beschreibend | ◐ | Bildschirmkopie des GEX-Metrix-Dashboards nicht auf der Seite und in keinem Branch des Repositorys; über die alte Commit-Kennung 6465f29 bei GitHub noch abrufbar, Löschung durch den Herausgeber zu beantragen; Markenhinweis in Seite und Analyse vollständig; Bestätigung durch Zweitprüfung ausstehend |
+| C6 UWG-konforme Begriffe | ◐ | Einheitliche Bestimmbarkeitsregel: Abdeckungsangabe je ausgewerteter GEX-Funktion (ATAS: Options X-Ray, Options Chain Suite); TWS ohne belegte GEX-Funktion n. v.; Aussage zu Walls auf die Bildschirmkopie begrenzt; Bestätigung durch Zweitprüfung ausstehend |
 | C7 Ausgewogene Risikodarstellung | ✓ | Modellgrenzen, Latenz, Fehlsignale, Totalverlust und BaFin-Quote dargestellt (Zweitprüfung 2026-10-11) · 24. Zweitprüfung 2026-10-27: Modellgrenzen auch beim echten Beispiel benannt |
 | C8 Regulatorische Bezüge belegt | ✓ | § 80 WpHG, PRIIPs/UWG und § 63 Abs. 10 WpHG vom Herausgeber am 2026-10-11 am Original geprüft · 24. Zweitprüfung 2026-10-27: ohne Befund |
 | C9 Datenschutz | ✓ | Datenschutzerklärung und Impressum vom Herausgeber freigegeben (2026-10-11); Speicherangaben = Messung an allen Modulseiten (L38); Modul ohne Drittanbieter-Abrufe und ohne Speicher (L20) · 24. Zweitprüfung 2026-10-27: Bildschirmkopie ohne Personendaten |
 | Q1 Faktencheck K1–K9 vollständig | ✓ | 24. Zweitprüfung 2026-10-27: A01–A15 und K1–K9 stimmen nach L61 überein; A11 als [N. V.] nach Q9 zulässig |
-| Q2 Aktualität / Stichtag | ◐ | 23. Zweitprüfung: Freitexte nennen die Momentaufnahme vom 2026-10-23 und ihre Belegstufe; Regel L78b enger gefasst; Bestätigung durch die nächste Zweitprüfung ausstehend |
+| Q2 Aktualität / Stichtag | ◐ | Stichtag und Momentaufnahme gekennzeichnet; Ausnahmelisten in Daten-Transparenz, Datenherkunft, Legende, honest_disclosure und Analyse einheitlich (Medienangaben, Quantor, GEX-Metrix-Beispiel mit Differenzen und Wall-Ablesung); Bestätigung durch Zweitprüfung ausstehend |
 | Q3 Mathematische Konsistenz | ✓ | GEX 845 Mio. USD, 2.600 ES / 26.000 MES, Probe, Vanna und Charm nachgerechnet (Zweitprüfung 2026-10-11); Rechner rechnet gleich · 24. Zweitprüfung 2026-10-27: GEX 845 Mio. USD, 2.600 ES / 26.000 MES und die Differenzen des echten Beispiels nachgerechnet |
-| Q4 Provenienz je Fakt | ◐ | Medienangaben mit Belegstufe secondary, Quantor derived; Ausnahme-Sätze nennen die Kategorien; Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
+| Q4 Provenienz je Fakt | ◐ | Wall-Ablesung als Klasse READING (UNVERIFIED), Bildschirmkopie mit Konfidenz 0,75, Herausgeber-Prüfdaten nur aus publisher_checks; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend |
 | Q5 Quellenqualität | ✓ | Rechtsrahmen-Fakten mit Primärquelle (L19c); Sekundärquellen als Hauptbeleg nur bei Medienangaben; Abgleich durch den Herausgeber am Original, bei Medienangaben an der Sekundärquelle · 24. Zweitprüfung 2026-10-27: ohne Befund |
 | Q6 Vollständigkeit | ✓ | 24. Zweitprüfung 2026-10-27: Matrix belegt oder n. v., Validierungsverfahren in S07 methodisch im Konjunktiv, Modul-6-Zeilen n. v. |
-| Q7 Widerspruchsfreiheit | ◐ | These auf Seite und in der Analyse als mögliche Lücke; Belegstufen-Definition und Zuordnung stimmen überein; Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
+| Q7 Widerspruchsfreiheit | ◐ | Ausnahmelisten einheitlich; Hero-Zählung getrennt nach am Original, abgeleitet, Bildschirmkopie; Zuordnung der JSON-LD-Tags in der Analyse erläutert; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend |
 | Q8 Glossar | ✓ | Zweitprüfung: alle 15 Pflichtbegriffe vorhanden · 24. Zweitprüfung 2026-10-27: 15 Pflichtbegriffe im Glossar abgeglichen |
-| Q9 Keine Überzeichnung / Halluzination | ◐ | S11 Nutzen „offen“, Basis (nur ATAS selbst bestimmbar) offen genannt; Bestätigung durch Zweitprüfung und Herausgeber ausstehend |
-| Q10 Formatvorgaben | ◐ | Seite nach L41/L41b/L44 geprüft; Analyse mit Quellenverzeichnis nach Primär-, Hersteller- und Sekundärquellen samt Abruf/Abgleich und mit der M-DBOM als JSON-LD (aus der DBOM erzeugt, byte-genau geprüft); Bestätigung durch Zweitprüfung ausstehend |
+| Q9 Keine Überzeichnung / Halluzination | ◐ | Aussage zu Walls auf die Bildschirmkopie begrenzt, Walls als ungeprüfte Ablesung, Hero-Kennzahl ohne Statistik-Eindruck; Bestätigung durch Zweitprüfung und Sichtprüfung des Herausgebers ausstehend |
+| Q10 Formatvorgaben | ◐ | Analyse in der Reihenfolge des Prompts (Module 1–7, Modul 8 als Abschnitt 4, Glossar 5, Quellen 6, M-DBOM 7, Scorecard mit offenen Prüfpunkten 8), Quellen nach Stufe mit Herausgeber-Daten, JSON-LD mit einem Provenienz-Tag; Bestätigung durch Zweitprüfung ausstehend |
 
 **Gesamtscore:** 11 × ✓ + 8 × ◐ = 15 von 19 Punkten = **78,9 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
+
+### 8.2 · Offene Prüfpunkte vor Veröffentlichung
+
+- Kennzeichnung von Quantor und Gamma Cockpit durch Zweitprüfung und Herausgeber bestätigen lassen
+- Belegstufen der Medienangaben und des abgeleiteten Quantors durch Zweitprüfung und Herausgeber bestätigen lassen
+- Widerspruchsfreiheit von These und Belegstufen-Definition durch Zweitprüfung bestätigen lassen
+- Einschränkung der Bewertung „Nutzen“ der Eurex-Erweiterung durch Zweitprüfung bestätigen lassen
+- Claim A11 (NDX/NQ-0DTE-Dynamik) bleibt als [N. V.] gekennzeichnet, bis eine Quelle vorliegt
+- Löschung des alten Commits 6465f29 mit der Bildschirmkopie beim GitHub-Support beantragen und den Abruf danach erneut prüfen
+- Ergänzte Freitexte zum Prüfzeitraum und verschärfte Regel L78b durch Zweitprüfung bestätigen lassen
+- Bestimmbarkeitsregel (Abdeckung je ausgewerteter GEX-Funktion) gilt für alle Anbieter gleich, TWS n. v., „keine Walls“ nur für die Bildschirmkopie; durch Zweitprüfung bestätigen lassen
+- Ausgabestruktur der Analyse (Quellen nach Stufe mit Abruf/Abgleich, M-DBOM als JSON-LD) durch Zweitprüfung bestätigen lassen
 
 ---
 
@@ -1076,9 +1086,10 @@ können sich ändern. Für Ihre persönliche Situation wenden Sie sich an einen 
 Alle Angaben ohne Gewähr.
 
 **Marken-Hinweis.** ATAS, Options X-Ray, OptionsDepth, SpotGamma, HIRO, MenthorQ, Volland, Bookmap,
-Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, DAX, EURO STOXX 50, S&P 500, Nasdaq-100,
+Interactive Brokers, TWS, Rithmic, CQG, Eurex, Cboe, VIX, OPRA, DAX, EURO STOXX 50, S&P 500, SPX, Nasdaq-100, NDX,
 Gamma Cockpit, GEX-Metrix, CME, E-mini, SPDR, SPY, SPXW, dxFeed, IQFeed, TRACE, IBKR, OptionTrader, Options Chain Suite, Options Board, Strategy Analyzer, MBO-Bundle, Ultra, EOBI, Extended Market Data Service, CMS, ideas, ORATS, Morgan Stanley, Sutor, Deutscher Derivate Verband (DDV), Stiftung Warentest und Deutsche Börse sind Marken oder Produktbezeichnungen ihrer jeweiligen Inhaber. Sie werden hier rein
-beschreibend genannt. Es besteht keine Verbindung zu den Inhabern und keine Billigung durch sie.
+beschreibend genannt; das gilt auch für weitere genannte Produkt-, Index- und Kontraktbezeichnungen (etwa NQ, ES, MES, ODAX,
+OESX, ODXS, OEXP, ODAP, FDAX, FESX). Es besteht keine Verbindung zu den Inhabern und keine Billigung durch sie.
 
 **Interessenkonflikte.** Es bestehen keine Interessenkonflikte, insbesondere keine Affiliate-, Partner- oder
 Vergütungsbeziehungen zu den genannten Anbietern (Erklärung des Herausgebers vom 2026-10-11).

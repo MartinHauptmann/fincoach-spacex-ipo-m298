@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.21.0",
+    "version": "1.22.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -24,16 +24,17 @@
     "scenario_projection": 4,
     "vendor_claim": 17,
     "by_class": {
-      "DERIVED": 3,
+      "DERIVED": 2,
       "MARKET_DATA": 7,
       "MEDIA_REPORT": 5,
       "MODEL_ASSUMPTION": 1,
+      "READING": 1,
       "REGULATORY_FRAMEWORK": 9,
       "SCENARIO_PROJECTION": 3,
       "VENDOR_CLAIM": 17
     }
   },
-  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber jeden Beleg zum Stichtag an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original), ausgenommen auch die nach dem Stichtag hinzugekommene GEX-Metrix-Momentaufnahme FACT_GEXMETRIX_SPX (Bildschirmkopie); der Quantor FACT_NO_EUREX_GEX ist aus einer geprüften Herstellerangabe abgeleitet („derived“). Das GEX-Fallbeispiel vom 2026-10-23 ist eine Momentaufnahme nach dem Stichtag: FACT_GEXMETRIX_SPX beruht auf einer Bildschirmkopie des Herausgebers (Belegstufe „screenshot“, nicht am Live-Original geprüft), FACT_GEXMETRIX_DERIVED ist daraus berechnet („derived“), FACT_GEXMETRIX_WALLS_READ ist eine ungeprüfte Ablesung (UNVERIFIED). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „derived“ = aus anderen geprüften Fakten abgeleitet; „screenshot“ = an einer datierten Bildschirmkopie des Originals geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
+  "honest_disclosure": "Die Recherche erfolgte vom 2026-10-05 bis 2026-10-11 in einer Umgebung, die den direkten Abruf der meisten Primärquellen gesperrt hat; recherchiert wurde deshalb über Suchtreffer, die auf Primär- oder Herstellerquellen verweisen. Am 2026-10-11 hat der Herausgeber jeden Beleg zum Stichtag an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original), ausgenommen auch der Quantor FACT_NO_EUREX_GEX, der aus zwei geprüften Herstellerangaben (Options X-Ray, Options Chain Suite) abgeleitet ist („derived“), und die nach dem Stichtag hinzugekommene GEX-Metrix-Momentaufnahme FACT_GEXMETRIX_SPX (Bildschirmkopie) mit den daraus berechneten Differenzen FACT_GEXMETRIX_DERIVED und der ungeprüften Wall-Ablesung FACT_GEXMETRIX_WALLS_READ. Das GEX-Fallbeispiel vom 2026-10-23 ist eine Momentaufnahme nach dem Stichtag: FACT_GEXMETRIX_SPX beruht auf einer Bildschirmkopie des Herausgebers (Belegstufe „screenshot“, nicht am Live-Original geprüft), FACT_GEXMETRIX_DERIVED ist daraus berechnet („derived“), FACT_GEXMETRIX_WALLS_READ ist eine ungeprüfte Ablesung (UNVERIFIED, Klasse READING). Einzelne Fakten beruhen auf dem Quelltext des Nutzers (FACT_ROADMAP) oder auf Modellannahmen. Die Belastbarkeit jedes Fakts zeigt sein Verdict. Belegstufe (Feld evidence): „snippet“ = ein Suchtreffer auf die Primär- oder Herstellerquelle trägt die Aussage; „fulltext“ = am Original geprüft; „secondary“ = geprüft wurde eine Quelle über das Original (Medienbericht, Partnerseite, Erklärartikel), nicht das Original selbst; „derived“ = aus anderen geprüften Fakten abgeleitet; „screenshot“ = an einer datierten Bildschirmkopie des Originals geprüft; „model“ = Modell oder Szenario. Der aktuelle QA-Score steht in der QA-Sektion der Seite und wird aus den Gate-Zellen berechnet.",
   "audit_trail_url": "provenance/m300.dbom.json#audit_trail",
   "facts": [
     {
@@ -620,9 +621,9 @@
       "verdict": "CONFIRMED",
       "class": "DERIVED",
       "confidence": 0.75,
-      "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet (ATAS: X-Ray nur SPX); für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
+      "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen deckt Options X-Ray nur SPX ab und die Options Chain Suite nur ES, NQ, CL und GC auf EOD-Basis; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
       "source_id": "SRC_ATAS_LEARN",
-      "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX (Herstellerangabe, am Original geprüft); die übrigen Anbieterfakten enthalten keine Eurex-Aussage. Bestimmbar ist damit nur ATAS selbst; für die GEX-Spezialisten, Bookmap und die IBKR TWS ist die Aussage n. v.",
+      "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE (Herstellerangaben, am Original geprüft). Regel für alle Anbieter: bestimmbar ist ein Anbieter, wenn für jede ausgewertete GEX-Funktion eine geprüfte Abdeckungsangabe Eurex ausschließt. Für die IBKR TWS ist keine GEX-Funktion mit Abdeckungsangabe belegt (FACT_TWS_SPEC nennt ein Greek-Exposure nur für eigene Positionen bei globaler Abdeckung inkl. ODAX/OESX); für SpotGamma, MenthorQ, Volland und Bookmap enthalten die Fakten keine Eurex-Aussage. Weitere ATAS-Funktionen sind nicht ausgewertet; die Aussage gilt nur für die beiden ausgewerteten.",
       "period": "Stand 2026-10-05",
       "basis": {
         "compared": 6,
@@ -635,10 +636,14 @@
           "Bookmap",
           "IBKR TWS"
         ],
-        "subject": "Eurex|\\bnur SPX",
+        "subject": "Eurex|\\bnur SPX|\\bdeckt\\b[^.]*\\bab\\b",
         "determinable_from": {
-          "ATAS": "FACT_XRAY_1MIN_SPX"
-        }
+          "ATAS": [
+            "FACT_XRAY_1MIN_SPX",
+            "FACT_CHAIN_SUITE"
+          ]
+        },
+        "rule": "Bestimmbar, wenn für jede ausgewertete GEX-Funktion eines Anbieters eine geprüfte Abdeckungsangabe Eurex ausschließt; sonst n. v."
       },
       "keep_reason": "Tragend für die strategische Einordnung (These, S11); Quantor mit Basis.",
       "evidence": "derived",
@@ -646,7 +651,11 @@
         "by": "Ableitung aus geprüften Fakten (nicht gesondert vom Herausgeber geprüft)",
         "date": "2026-10-27",
         "scope": "Ableitung aus FACT_XRAY_1MIN_SPX"
-      }
+      },
+      "supporting_sources": [
+        "SRC_ATAS_CHAIN"
+      ],
+      "exception_label": "Quantor"
     },
     {
       "id": "FACT_GAMMACOCKPIT_SPEC",
@@ -708,7 +717,7 @@
       "id": "FACT_GEXMETRIX_SPX",
       "verdict": "CONFIRMED",
       "class": "VENDOR_CLAIM",
-      "confidence": 0.8,
+      "confidence": 0.75,
       "claim": "GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET (vor Handelsbeginn): Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ, letzter Punkt deutlich negativer als die Differenz der Kopfwerte; Index von rund 7.800 auf 7.663,43.",
       "source_id": "SRC_GEXMETRIX",
       "caveat": "Anbietermodell mit eigener Dealer-Annahme; ein Zeitpunkt; Werte anderer Anbieter können abweichen.",
@@ -724,7 +733,8 @@
           "scope": "Ergänzungen des Claims vom 2026-10-26 (vor Handelsbeginn, letzter Punkt der Verlaufsgrafik) an der Bildschirmkopie geprüft"
         }
       },
-      "after_stichtag": "Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag."
+      "after_stichtag": "Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.",
+      "exception_label": "GEX-Metrix"
     },
     {
       "id": "FACT_GEXMETRIX_DERIVED",
@@ -733,15 +743,16 @@
       "confidence": 0.7,
       "claim": "Aus FACT_GEXMETRIX_SPX berechnet: Differenz der Kopfwerte Call-Gamma minus Put-Gamma 61,56 − 112,13 = −50,57 Mrd. USD je 1 % (nicht der Netto-Wert des Anbieters); Abstand Index zum GEX-Flip 7.663,43 − 7.861,0 = −197,57 Punkte.",
       "source_id": "SRC_GEXMETRIX",
-      "caveat": "Eigene Rechnung aus den Kopfwerten; der Anbieter weist einen Netto-Wert nur in der Verlaufsgrafik aus.",
+      "caveat": "Eigene Rechnung aus den Kopfwerten; einen Netto-Wert des Anbieters zeigt die Bildschirmkopie nur in der Verlaufsgrafik.",
       "period": "2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX)",
       "evidence": "derived",
-      "after_stichtag": "Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag."
+      "after_stichtag": "Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.",
+      "exception_label": "GEX-Metrix"
     },
     {
       "id": "FACT_GEXMETRIX_WALLS_READ",
       "verdict": "UNVERIFIED",
-      "class": "DERIVED",
+      "class": "READING",
       "confidence": 0.5,
       "claim": "Im angezeigten Strike-Bereich 7.625–7.850 der Bildschirmkopie ist der längste Call-Balken bei 7.800 und der längste Put-Balken bei 7.650; Strikes außerhalb des Ausschnitts sind nicht sichtbar, bei 7.800 und 7.750 sind die Call-Balken fast gleich lang.",
       "source_id": "SRC_GEXMETRIX",
@@ -749,7 +760,8 @@
       "keep_reason": "Bleibt als ungeprüfte Ablesung im Modul S05, weil sie das Zusammenspiel der Marken am echten Beispiel zeigt; Gate Q9 hält den Vorbehalt fest.",
       "period": "2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX)",
       "evidence": "screenshot",
-      "after_stichtag": "Ablesung aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag."
+      "after_stichtag": "Ablesung aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.",
+      "exception_label": "Wall|abgelesen"
     },
     {
       "id": "FACT_ROADMAP",
@@ -1144,7 +1156,7 @@
       "id": "SRC_GEXMETRIX",
       "ref": "S60",
       "tier": "vendor",
-      "title": "GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; Bild nicht auf der Seite und nicht im Repository, SHA-256 e4b56d890e706e8c…)",
+      "title": "GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; Bild nicht auf der Seite und in keinem Branch des Repositorys, SHA-256 e4b56d890e706e8c…)",
       "url": "https://www.gexmetrix.com/gex/spx",
       "evidence_file_sha256": "e4b56d890e706e8c11b5e93c274999f7dcb60fb73000929949425499a146a725"
     }
@@ -1493,6 +1505,12 @@
       "event": "25. Zweitprüfung (v1.21.0): keine Freigabe, Score unverändert 78,9 %; Befunde 1–15 im QA-Bericht §53 (u. a. Bild über alte Commit-Kennung bei GitHub abrufbar, Bestimmbarkeitsmaßstab ATAS/TWS, „weist keine Walls aus“ unbelegt, L18b/L88 umgehbar).",
       "qa_score_pct": 78.9,
       "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-10-28",
+      "event": "v1.22.0: Befunde 1–15 der 25. Zweitprüfung umgesetzt – Bildtexte ehrlich (in keinem Branch, über alte Commit-Kennung bei GitHub abrufbar, Löschung zu beantragen); einheitliche Bestimmbarkeitsregel (ATAS: Options X-Ray und Options Chain Suite, TWS n. v.); „keine Walls“ auf die Bildschirmkopie begrenzt; Ausnahmelisten einheitlich; Klasse READING; Konfidenz 0,75; Hero-Kennzahl „nur SPX“; Analyse nach Prompt-Reihenfolge, Prompt-Enum mit UNVERIFIED; Hero-Zählung und JSON-LD-Erläuterung; Markenhinweis mit SPX/NDX und Sammelsatz; publisher_checks. Tests: L18f, L76f, L88 (Hash aller Bilddateien, WARN ohne Git), L82d (Ausnahme-Namen, abgeleitete Fakten, ausgeblendete Texte), L84 (Entities), L53e.",
+      "qa_score_pct": 78.9,
+      "release": "ÜBERARBEITUNG"
     }
   ],
   "analysis_modules": [
@@ -1735,6 +1753,16 @@
     {
       "subject": "Knock-?out|Turbo",
       "note": "Ausgestaltung (Rechtsnatur, Größe, Kontrahentenrisiko) von Knock-out-Zertifikaten in diesem Modul nicht ausgewertet"
+    }
+  ],
+  "publisher_checks": [
+    {
+      "date": "2026-10-11",
+      "scope": "Abgleich der Belege zum Stichtag am Original bzw. an der Sekundärquelle"
+    },
+    {
+      "date": "2026-10-23",
+      "scope": "Bildschirmkopie des GEX-Metrix-Dashboards erstellt und Werte bereitgestellt"
     }
   ]
 }

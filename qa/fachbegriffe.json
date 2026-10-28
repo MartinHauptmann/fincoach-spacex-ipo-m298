@@ -124,7 +124,8 @@
     "CMS",
     "ABGELEITET",
     "EU",
-    "VO"
+    "VO",
+    "READING"
   ],
   "marks": [
     "ATAS",
@@ -170,7 +171,9 @@
     "Strategy Analyzer",
     "MBO-Bundle",
     "CMS",
-    "GEX-Metrix"
+    "GEX-Metrix",
+    "SPX",
+    "NDX"
   ],
   "_doc_marks": "L84: Marken-Inventar; jede hier geführte Marke, die auf der Seite oder in der DBOM vorkommt, muss im Markenhinweis stehen. Neue Marken hier ergänzen."
 }

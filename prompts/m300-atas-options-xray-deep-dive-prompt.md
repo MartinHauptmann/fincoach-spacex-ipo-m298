@@ -2,7 +2,7 @@
 
 **Thema:** ATAS Options X-Ray, Dealer-Hedging-Analytik, Eurex-Börsenoptionen vs. verbriefte Derivate im DACH-Raum
 und steuerliche Behandlung von Termingeschäften (§ 20 Abs. 6 EStG)
-**Prompt-Version:** 1.7.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-27 (Lehren L03–L88 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
+**Prompt-Version:** 1.7.0 · **Erstellt:** 2026-10-05 · **Geändert:** 2026-10-28 (Lehren L03–L88 aus `qa/LESSONS.md`) · **Status:** Entwurf, fachliche Freigabe ausstehend
 **Modul-ID:** M300 ist ein Platzhalter und kann frei angepasst werden
 
 ---
@@ -307,7 +307,7 @@ Q10 Formatvorgaben aus Abschnitt 4 eingehalten; jeder Fachbegriff wird beim erst
  7. M-DBOM (Data Bill of Materials) als JSON-LD-Block:
     {"@context":"https://schema.org","@type":"Dataset","name":"M300 · M-DBOM v1",
      "dateModified":"{{STICHTAG}}","facts":[{"id":"F01","claim":"…","provenance":"CONFIRMED|
-     VENDOR_CLAIM|MEDIA_REPORT|USER_PROVIDED|MODEL_ASSUMPTION|SCENARIO_PROJECTION",
+     VENDOR_CLAIM|MEDIA_REPORT|USER_PROVIDED|MODEL_ASSUMPTION|SCENARIO_PROJECTION|UNVERIFIED",
      "confidence":0.0,"source":"…","retrieved":"YYYY-MM-DD"}]}
  8. QA-Scorecard: Tabelle C1–C9 und Q1–Q10 mit Status ✓ / ◐ / ✗ und einer Zeile Begründung;
     Gesamtscore in % (✓ = 1, ◐ = 0,5, ✗ = 0); Freigabeempfehlung:

@@ -300,7 +300,7 @@ def main():
         # L43 · Analyse: Daten, Paragraphen und Aktenzeichen vor Abschnitt 5 stehen in einem DBOM-Fakt
         if md:
             hay_all = nz(" ".join(str(f.get(k, "")) for f in F for k in ("claim", "period", "caveat")))
-            body = re.split(r"\n## 5 · ", md)[0]
+            body = re.split(r"\n## 6 · ", md)[0]
             body = "\n" * body[:body.find("\n## 1 ")].count("\n") + body[body.find("\n## 1 "):]  # Titelblock (Version, Prompt) ausgenommen, Zeilen bleiben
             body = re.sub(r"\$\$.*?\$\$|\$[^$]+?\$", lambda m: "\n" * m.group(0).count("\n"), body, flags=re.S)  # Formeln (Modell) ausgenommen, Zeilen bleiben
             md_miss = []
@@ -335,7 +335,7 @@ def main():
         # L51 · Leitphrasen in der Analyse: Absatz/Zeile nennt den Fakt (normalisiert, L52b)
         l51 = []
         if md:
-            for para in re.split(r"\n\s*\n|\n(?=[-|] )", re.split(r"\n## 5 · ", md)[0]):
+            for para in re.split(r"\n\s*\n|\n(?=[-|] )", re.split(r"\n## 6 · ", md)[0]):
                 for f in F:
                     for mk in f.get("markers", []):
                         if norm_txt(mk) in norm_txt(re.sub(r"[*_`]", "", para)) and f["id"] not in para:
@@ -353,7 +353,7 @@ def main():
             if re.search(r"\b(belegt|bestätigt)\b", re.sub(r'"(?:ok|part|no)"', "", row)) and not any(facts.get(i, {}).get("verdict") == "CONFIRMED" for i in re.findall(r"FACT_[A-Z0-9_]+", row)):
                 l57.append(row[2:6].strip('",'))
         if md:
-            for para in re.split(r"\n\s*\n|\n(?=[-|] )", re.split(r"\n## 5 · ", md)[0]):
+            for para in re.split(r"\n\s*\n|\n(?=[-|] )", re.split(r"\n## 6 · ", md)[0]):
                 txt = re.sub(r"\(`FACT_[A-Z0-9_]+`, (?:belegt|Medienangabe|ungeprüft|SCENARIO_PROJECTION)[^)]*\)|Legende:[^\n]*|Schwächster Beleg|\| belegt \|", "", para)
                 if re.search(r"\b(belegt|bestätigt)\b", txt) and not any(facts.get(i, {}).get("verdict") == "CONFIRMED" for i in re.findall(r"FACT_[A-Z0-9_]+", para)):
                     l57.append("Analyse: " + re.sub(r"\s+", " ", txt)[:40] + "…")
@@ -713,7 +713,7 @@ def main():
             why = str(f.get("after_stichtag", "")).strip()
             words = re.findall(r"[A-Za-zÄÖÜäöüß]{3,}", why)
             bad = []
-            if f["class"] not in ("VENDOR_CLAIM", "MARKET_DATA", "DERIVED"):
+            if f["class"] not in ("VENDOR_CLAIM", "MARKET_DATA", "DERIVED", "READING"):  # READING: Ablesung aus einer datierten Bildschirmkopie
                 bad.append(f"Klasse {f['class']} nicht zulässig")
             if not re.search(r"\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}", f.get("period", "")):
                 bad.append("period ohne Zeitstempel")
@@ -838,9 +838,10 @@ def main():
                     l76d.append(f"{row[0]}/{i}: ohne {'/'.join(q['terms'])}")
         report("L76d Einschränkungen sichtbar", BLOCKER, not l76d, "; ".join(sorted(set(l76d))[:4]) if l76d else "Einschränkungen (Beta, Erprobung …) überall genannt")
         # L84 · jede Marke aus dem Inventar, die auf Seite, in Tooltips oder Quelltiteln vorkommt, steht im Markenhinweis
-        marks = json.loads((Path(__file__).parent / "fachbegriffe.json").read_text(encoding="utf-8")).get("marks", [])
-        notice = re.search(r"<strong>Marken:</strong>(.*?)</p>", html, re.S)
-        corpus = html + " " + json.dumps(dbom, ensure_ascii=False)
+        _ue = __import__("html").unescape  # 25. ZP: Entities („S&amp;P 500“) normalisieren
+        marks = [_ue(m_) for m_ in json.loads((Path(__file__).parent / "fachbegriffe.json").read_text(encoding="utf-8")).get("marks", [])]
+        notice = re.search(r"<strong>Marken:</strong>(.*?)</p>", _ue(html), re.S)
+        corpus = _ue(html) + " " + json.dumps(dbom, ensure_ascii=False)
         l84 = [mk for mk in marks if re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), corpus.replace(notice.group(0), "") if notice else corpus) and not (notice and re.search(r"(?<![\w-])%s(?![\w])" % re.escape(mk), notice.group(1)))]
         report("L84 Markenhinweis vollständig", BLOCKER, bool(notice) and bool(marks) and not l84, "fehlt im Markenhinweis: " + ", ".join(l84[:6]) if l84 else (f"{len(marks)} Inventar-Marken geprüft" if notice else "kein Markenhinweis"))
         # L84b · Markenhinweis der Analyse: jede Inventar-Marke der Analyse steht in ihrem Marken-Hinweis
@@ -853,12 +854,30 @@ def main():
         refs_ = [s_.get("ref") for s_ in dbom.get("sources", []) if s_.get("ref", "–") != "–"]
         dup_ = sorted({r_ for r_ in refs_ if refs_.count(r_) > 1})
         report("L14b Quellennummern eindeutig", BLOCKER, not dup_, "doppelt: " + ", ".join(dup_) if dup_ else f"{len(refs_)} Nummern eindeutig")
-        # L88 · Belegdateien Dritter (provenance/evidence/) nie in der Git-Historie (24. Zweitprüfung: öffentliches Repository)
+        # L88 · Belegdateien Dritter nie in der Git-Historie (24./25. Zweitprüfung: öffentliches Repository):
+        # jede Bilddatei aller Commits wird gehasht und mit evidence_file_sha256 der Quellen verglichen; Pfade mit
+        # Beleg-/Screenshot-Bezug sind ohnehin unzulässig. Ohne Git: WARN „nicht prüfbar“ statt stillem Grün (L33)
         import subprocess as _sp
-        _g = _sp.run(["git", "log", "--all", "--format=%h", "--", "provenance/evidence"], cwd=Path(page).resolve().parent, capture_output=True, text=True)
-        if _g.returncode == 0:
-            hits_ = _g.stdout.split()
-            report("L88 Belegdateien nicht in der Historie", BLOCKER, not hits_, "in Commits: " + ", ".join(hits_[:5]) if hits_ else "keine Belegdatei in einem Commit")
+        import hashlib as _hl
+        _root = Path(page).resolve().parent
+        _g = _sp.run(["git", "rev-list", "--all", "--objects"], cwd=_root, capture_output=True, text=True)
+        if _g.returncode != 0:
+            report("L88 Belegdateien nicht in der Historie", WARN, False, "nicht prüfbar (kein Git-Repository); Remote-Abruf über alte Commit-Kennungen manuell prüfen")
+        else:
+            ev_h = {s_.get("evidence_file_sha256") for s_ in dbom.get("sources", []) if s_.get("evidence_file_sha256")}
+            hits_ = []
+            for ln in _g.stdout.splitlines():
+                parts = ln.split(" ", 1)
+                if len(parts) == 2 and re.search(r"(?i)\.(png|jpe?g|webp|gif|pdf)$", parts[1]):
+                    blob = _sp.run(["git", "cat-file", "blob", parts[0]], cwd=_root, capture_output=True).stdout
+                    if _hl.sha256(blob).hexdigest() in ev_h or re.search(r"(?i)evidence|beleg|screenshot|bildschirm", parts[1]):
+                        hits_.append(parts[1])
+            report("L88 Belegdateien nicht in der Historie", BLOCKER, not hits_, "in der Historie: " + ", ".join(sorted(set(hits_))[:5]) if hits_ else f"{len(ev_h)} Beleg-Hash(es) in keinem Commit")
+        # L53e · Herausgeber-Prüfdaten nur aus dokumentierten Prüfungen (publisher_checks); Ableitungen nie als Herausgeber-Prüfung
+        pubd = {c_["date"] for c_ in dbom.get("publisher_checks", [])}
+        l53e = [f"{f['id']}: Herausgeber-Prüfung {f['verified'].get('date')} nicht in publisher_checks" for f in F if f.get("verified", {}).get("by") == "Herausgeber" and f["verified"].get("date") not in pubd]
+        l53e += [f"{f['id']}: Ableitung als Herausgeber-Prüfung" for f in F if f.get("evidence") == "derived" and f.get("verified", {}).get("by") == "Herausgeber"]
+        report("L53e Herausgeber-Prüfdaten dokumentiert", BLOCKER, bool(pubd) and not l53e, "; ".join(l53e[:3]) if l53e else (f"{len(pubd)} dokumentierte Prüfungen" if pubd else "publisher_checks fehlt"))
         # L82c · Freigabeumfang passt zum caveat; Mehrzahl von Berichten nur mit ≥ 2 Quellen
         l82c = []
         for f in F:
@@ -1148,8 +1167,8 @@ def main():
         # L82e · Belegstufe passt zum Prüfumfang: „fulltext“ nur, wenn verified.scope ein Original ohne Einschränkung nennt
         def _exc(f):
             sc = f.get("verified", {}).get("scope", "")
-            return f.get("evidence") == "screenshot" or bool(f.get("verified")) and ("Original" not in sc or re.search(r"(?i)nicht (?:im volltext )?eingesehen|medienbericht", sc + " " + f.get("caveat", "")))  # L82g: Bildschirmkopie ist kein Abgleich am Original
-        exc = [f for f in F if _exc(f) and f["verdict"] != "SCENARIO_PROJECTION" and f.get("evidence") != "derived"]
+            return f.get("evidence") in ("screenshot", "derived") or bool(f.get("verified")) and ("Original" not in sc or re.search(r"(?i)nicht (?:im volltext )?eingesehen|medienbericht", sc + " " + f.get("caveat", "")))  # L82g: Bildschirmkopie ist kein Abgleich am Original
+        exc = [f for f in F if _exc(f) and f["verdict"] != "SCENARIO_PROJECTION"]  # 25. ZP: auch abgeleitete Fakten sind Ausnahmen vom Abgleich am Original
         l82e = [f"{f['id']}: evidence fulltext bei Prüfumfang „{f['verified'].get('scope', '')[:30]}“" for f in exc if f.get("evidence") == "fulltext"]
         # L82f · Hauptquelle der Stufe secondary ⇒ Belegstufe secondary (nicht fulltext)
         l82e += [f"{f['id']}: Sekundärquelle, aber evidence {f.get('evidence')}" for f in F if stier.get(f["source_id"]) == "secondary" and f.get("evidence") not in ("secondary", "model")]
@@ -1161,20 +1180,38 @@ def main():
         l82d = []
         if exc:
             tit = " ".join(re.findall(r'\btitle="([^"]*)"', html))
-            for name, txt in (("Seite", _txt(visible_part(html)) + " " + tit), ("Analyse", (md or "").replace("\n> ", " ").replace("\n", " ")), ("honest_disclosure", dbom.get("honest_disclosure", ""))):
+            hid = " ¶ ".join(_txt(element_inner(html, m_)) for m_ in re.finditer(r'<(\w+)\b[^>]*data-publish="hidden"[^>]*>', html))  # 25. ZP: auch ausgeblendete Transparenztexte
+            for name, txt in (("Seite", _txt(visible_part(html)) + " " + tit), ("Seite (ausgeblendet)", hid), ("Analyse", (md or "").replace("\n> ", " ").replace("\n", " ")), ("honest_disclosure", dbom.get("honest_disclosure", ""))):
                 for sent in re.split(r"(?<=[.;])\s|\s*¶\s*", txt.replace("n. v.", "n.v.")):  # L82h: auch an Absatzgrenzen (Listen ohne Schlusspunkt)
                     if not UNIV.search(sent):
                         continue
                     for f in exc:
                         nm = f["claim"].split()[0].strip(":,")
-                        named = f["id"] in sent or all(p_ in sent for p_ in re.split(r"-", nm) if len(p_) > 2) or \
+                        parts_ = [p_ for p_ in re.split(r"-", nm) if len(p_) > 2]
+                        named = f["id"] in sent or (re.search(f["exception_label"], sent) if f.get("exception_label") else bool(parts_) and all(p_ in sent for p_ in parts_)) or \
                             (f["verdict"] == "MEDIA_REPORT" and re.search(r"(?i)medienangabe|sekundärquelle", sent)) or \
-                            any(len(p_) > 4 and p_ in sent for p_ in re.split(r"[-:]", nm))  # Name, ID, Kategorie oder Namensteil
+                            (not f.get("exception_label") and any(len(p_) > 4 and p_ in sent for p_ in re.split(r"[-:]", nm)))  # Name, ID, Kategorie oder Namensteil; 25. ZP: leere Namensmenge zählt nicht
                         if not (named and re.search(r"(?i)außer|ausgenommen|ausnahme|bis auf|nur am medienbericht|am medienbericht", sent)) or re.search(r"(?i)\bkeine? ausnahme", sent):
                             l82d.append(f"{name}: „{sent.strip()[:40]}“")
         report("L82d Ausnahmen im Freigabeumfang genannt", BLOCKER, not l82d, "; ".join(l82d[:3]) if l82d else "Ausnahmen des Prüfumfangs in jedem Vollständigkeitssatz genannt")
         report("L82e Belegstufe passt zum Prüfumfang", BLOCKER, not l82e, "; ".join(l82e[:3]) if l82e else f"{len(exc)} Fakt(e) mit eingeschränktem Prüfumfang, keiner mit evidence fulltext")
         vendors = {f_["claim"].split()[0].strip("–,:") for f_ in F if f_["class"] == "VENDOR_CLAIM" or "VENDOR" in f_.get("class", "")} | {"ATAS", "IBKR", "TWS"}
+        # L76f (25. ZP) · Ausschlussaussagen über Anbieter in gebundenen Elementen („Der Anbieter weist keine Walls aus“)
+        # stehen mit ihrem Gegenstand im Claim eines gebundenen Fakts
+        l76f = []
+        SUBJ_V = r"(?:[Dd]er Anbieter|[Dd]ie Anbieter|[Dd]er Hersteller|%s)" % "|".join(re.escape(v_) for v_ in sorted(vendors | {"GEX-Metrix"}, key=len, reverse=True) if len(v_) > 2)
+        EXCL = re.compile(SUBJ_V + r"[^.;]{0,40}?\b(?:weist|bietet|liefert|zeigt|hat|unterstützt|führt)\b[^.;]{0,45}?\b(?:kein\w*|nur|nicht)\b\s+(?:\w+\s+){0,2}?([A-ZÄÖÜ][\w-]+)")
+        for m_ in re.finditer(r'<(\w+)\b[^>]*data-source="([^"]+)"[^>]*>', html):
+            ids_ = [i_ for i_ in m_.group(2).split() if i_ in facts]
+            if not ids_:
+                continue
+            txt_ = _txt(visible_part(element_inner(html, m_)))
+            hay_ = " ".join(facts[i_]["claim"] for i_ in ids_)
+            for x_ in EXCL.finditer(txt_):
+                obj = x_.group(1).rstrip("s")
+                if obj[:5].lower() not in hay_.lower():
+                    l76f.append(f"{ids_[0]}: „{x_.group(0)[:50]}“")
+        report("L76f Ausschlussaussagen über Anbieter belegt", BLOCKER, not l76f, "; ".join(sorted(set(l76f))[:3]) if l76f else "keine unbelegte Ausschlussaussage über Anbieter")
 
         def _is_cmp(hdr):  # Vergleichstabelle: Kopf „Merkmal/Kriterium“ oder mindestens zwei Anbieter in den Spaltenköpfen
             return bool(hdr) and (hdr[0] in ("Merkmal", "Kriterium") or sum(any(w in vendors for w in h.split()) for h in hdr[1:]) >= 2)
@@ -1189,11 +1226,14 @@ def main():
             if df is None:
                 l18b.append(f"{f['id']}: basis ohne determinable_from")
                 continue
+            dfl = {v_: (x_ if isinstance(x_, list) else [x_]) for v_, x_ in df.items()}  # 25. ZP: mehrere Funktionsfakten je Anbieter
+            allf = set().union(*dfl.values()) if dfl else set()
             if len(df) != b_["determinable"] or b_["compared"] != b_["determinable"] + len(b_.get("not_verifiable", [])):
                 l18b.append(f"{f['id']}: Basis {b_['compared']}/{b_['determinable']} passt nicht zu {len(df)} bestimmbaren + {len(b_.get('not_verifiable', []))} n. v.")
-            for v_, fid in df.items():
-                if fid not in facts or not re.search(b_.get("subject", "$^"), facts[fid]["claim"]) or v_ in b_.get("not_verifiable", []):
-                    l18b.append(f"{f['id']}: {v_} ohne Aussage zum Gegenstand in {fid}")
+            for v_, fids in dfl.items():
+                for fid in fids:
+                    if fid not in facts or not re.search(b_.get("subject", "$^"), facts[fid]["claim"]) or v_ in b_.get("not_verifiable", []):
+                        l18b.append(f"{f['id']}: {v_} ohne Aussage zum Gegenstand in {fid}")
             # Text: in Klammern als bestimmbar genannte Anbieter stehen in determinable_from
             keys = " ".join(df)
             for name, txt in (("Seite", _txt(visible_part(html))), ("Analyse", md or "")):
@@ -1213,21 +1253,27 @@ def main():
                             if "n.v." not in chunk:
                                 l18b.append(f"{name}: {v_} im Bestimmbar-Satz ohne n. v. („{sent[max(0, occ.start() - 15):occ.start() + 20]}“)")
             # Anbieterfakten in determinable_from: der Claim-Abschnitt zum Gegenstand trägt kein n. v.
-            for v_, fid in df.items():
-                if fid in facts:
-                    for seg_ in re.split(r"[·;]", facts[fid]["claim"]):
-                        if re.search(b_.get("subject", "$^"), seg_) and "n. v." in seg_:
-                            l18b.append(f"{f['id']}: {v_} als bestimmbar gezählt, aber {fid} sagt „{seg_.strip()[:30]}“")
+            for v_, fids in dfl.items():
+                for fid in fids:
+                    if fid in facts:
+                        for seg_ in re.split(r"[·;]", facts[fid]["claim"]):
+                            if re.search(b_.get("subject", "$^"), seg_) and "n. v." in seg_:
+                                l18b.append(f"{f['id']}: {v_} als bestimmbar gezählt, aber {fid} sagt „{seg_.strip()[:30]}“")
+            # 25. ZP (L18f): die Gegenstandszeile jeder Vergleichstabelle ist strukturell markiert (data-quantor-row)
+            n_cmp = sum(_is_cmp([_txt(h).replace("¶", "").strip() for h in re.findall(r"<th\b[^>]*>(.*?)</th>", tb.group(1), re.S)]) for tb in re.finditer(r"<table\b[^>]*>(.*?)</table>", html, re.S))
+            n_mark = len(re.findall(r'data-quantor-row="%s"' % re.escape(f["id"]), html))
+            if n_cmp and n_mark != 1:
+                l18b.append(f"{f['id']}: {n_mark} Zeilen mit data-quantor-row statt genau einer")
             # Vergleichstabellen: Zeile zum Gegenstand (Merkmal trifft basis.subject): Ja/Nein-Zellen nur für bestimmbare Anbieter
             for tb in re.finditer(r"<table\b[^>]*>(.*?)</table>", html, re.S):
                 hdr = [_txt(h).replace("¶", "").strip() for h in re.findall(r"<th\b[^>]*>(.*?)</th>", tb.group(1), re.S)]
                 if not _is_cmp(hdr):
                     continue
-                for row in re.findall(r"<tr\b[^>]*>(.*?)</tr>", tb.group(1), re.S):
+                for rtag, row in re.findall(r"(<tr\b[^>]*>)(.*?)</tr>", tb.group(1), re.S):
                     cells = [_txt(c_).replace("¶", "").strip() for c_ in re.findall(r"<td\b[^>]*>(.*?)</td>", row, re.S)]
                     rowids = set(re.findall(r"FACT_[A-Z0-9_]+", row))
-                    full = bool(cells) and (re.search(b_.get("subject", "$^").split("|")[0], cells[0]) or len(set(df.values())) > 1 and set(df.values()) <= rowids)
-                    yn = bool(cells) and not full and set(df.values()) <= rowids  # L18b2: bei einem Basisfakt Ja/Nein-Zellen jeder gebundenen Zeile prüfen
+                    full = bool(cells) and (('data-quantor-row="%s"' % f["id"]) in rtag or re.search(b_.get("subject", "$^").split("|")[0], cells[0]))
+                    yn = bool(cells) and not full and bool(allf & rowids)  # L18b2: Ja/Nein-Zellen jeder an die Basis gebundenen Zeile
                     if not (full or yn):
                         continue
                     for j, c_ in enumerate(cells[1:], 1):
@@ -1271,7 +1317,7 @@ def main():
         # L47 · starke rechtliche Bewertung nur, wenn ein Claim sie wörtlich trägt
         claims_nz = nz(" ".join(f["claim"] for f in F))
         page_txt = re.sub(r"<[^>]+>", " ", re.sub(r"<style\b.*?</style>", "", html, flags=re.S))
-        md_body = re.split(r"\n## 5 · ", md)[0] if md else ""  # Quellenverzeichnis (Titel, URLs) ausgenommen
+        md_body = re.split(r"\n## 6 · ", md)[0] if md else ""  # Quellenverzeichnis (Titel, URLs) ausgenommen
         claims_cf = norm_txt(" ".join(f["claim"] for f in F))
         l47 = [m.group(0) for src in (page_txt, md_body) for m in re.finditer(STRONG, norm_txt(src)) if m.group(0) not in claims_cf]
         report("L47 Modalität = Claim", BLOCKER, not l47, "ohne Claim: " + ", ".join(sorted(set(l47))[:5]) if l47 else "keine stärkere Rechtsbewertung als im Claim")
@@ -1293,7 +1339,7 @@ def main():
                     l48.append(f"{ids[-1]}: {m.group(1)} ≠ DBOM")
             report("L48 Analyse-Konfidenzen", BLOCKER, not l48, "; ".join(l48[:5]) if l48 else "alle Konfidenzen mit Fakt-ID und = DBOM")
             # L53 · Analyse = faktgebundene Kurzfassung: Sync-Blöcke vorhanden; Handtext mit Angaben nennt eine Fakt-ID
-            blocks = {b: re.search(r"<!-- sync:%s -->\n(.*?)<!-- /sync:%s -->" % (b, b), md, re.S) for b in ("CLAIMS", "K", "KORR", "MOD", "GLOSSAR", "QUELLEN", "JSONLD")}
+            blocks = {b: re.search(r"<!-- sync:%s -->\n(.*?)<!-- /sync:%s -->" % (b, b), md, re.S) for b in ("CLAIMS", "K", "KORR", "MOD", "FAZIT", "GLOSSAR", "QUELLEN", "JSONLD")}
             nk = len(re.findall(r'^\s*\["K\d+",', js_ks.group(1), re.M)) if js_ks else 0
             l53 = [f"Block {b} fehlt/leer" for b, m in blocks.items() if not m or not m.group(1).strip()]
             if blocks["K"] and len(re.findall(r"^\*\*K\d+ ·", blocks["K"].group(1), re.M)) != nk:
@@ -1322,8 +1368,8 @@ def main():
             # L59 · Pflichtabschnitte der Ausgabestruktur (Prompt Abschnitt 7) und Executive Summary ≤ 250 Wörter
             REQ = {"0 Titelblock": r"^\| Version \|", "0 Kurz-Disclaimer": r"\*\*Disclaimer \(Kurzfassung\):\*\*", "1 Executive Summary": r"^## 1 · Executive Summary",
                    "2 Claim-Tabelle": r"Claim-Tabelle\n\n<!-- sync:CLAIMS -->", "2 K-Prüfprotokoll": r"Prüfprotokoll K1–K\d+", "2 Korrekturliste": r"Korrekturliste",
-                   "3 Module 1–7": r"#### Modul 1 ·[\s\S]*#### Modul 7 ·", "4 Modul 8": r"#### Modul 8 ·", "5 Glossar": r"^## 4 · Glossar",
-                   "6 Quellen": r"^## 5 · Quellenverzeichnis", "7 M-DBOM": r"^## 6 · M-DBOM", "8 Scorecard": r"^## 8 · QA-Scorecard", "9 Disclaimer": r"^## 9 · Disclaimer"}
+                   "3 Module 1–7": r"#### Modul 1 ·[\s\S]*#### Modul 7 ·", "4 Modul 8": r"^## 4 · Modul 8[\s\S]*#### Modul 8 ·", "5 Glossar": r"^## 5 · Glossar",
+                   "6 Quellen": r"^## 6 · Quellenverzeichnis", "7 M-DBOM": r"^## 7 · M-DBOM", "8 Scorecard": r"^## 8 · QA-Scorecard", "9 Disclaimer": r"^## 9 · Disclaimer"}
             l59 = [k for k, rx in REQ.items() if not re.search(rx, md, re.M)]
             es = re.search(r"## 1 · Executive Summary\n(.*?)\n---", md, re.S)
             words = len(re.findall(r"\w+", re.sub(r"`FACT_[A-Z0-9_]+`", "", es.group(1)))) if es else 0
@@ -1332,7 +1378,7 @@ def main():
             report("L59 Ausgabestruktur", BLOCKER, not l59, "fehlt: " + ", ".join(l59) if l59 else f"alle Pflichtabschnitte vorhanden, Executive Summary {words} Wörter")
             report("L53 Analyse faktgebunden", BLOCKER, not l53, "; ".join(l53[:3]) if l53 else f"Sync-Blöcke vollständig ({nk} K), Handtext mit Angaben faktgebunden")
             # L49 · Analyse-Scorecard = Seite (per Sync erzeugt)
-            m8 = re.search(r"## 8 · QA-Scorecard\n(.*?)\n---", md, re.S)
+            m8 = re.search(r"## 8 · QA-Scorecard\n(.*?)\n(?:### 8\.2 · |---)", md, re.S)
             sc = re.findall(r"= \*\*([\d,]+) %\*\*", m8.group(1)) if m8 else []
             pg = re.findall(r"data-qa-score>([\d,]+)<", html)
             sym = {"check-pass": "✓", "check-part": "◐", "check-fail": "✗"}
@@ -1475,7 +1521,7 @@ def main():
     # ---------- L34 · Offen-Liste Seite = Analyse
     if md:
         po = [re.sub(r"\s+", " ", t).strip() for t in re.findall(r"<li[^>]*data-open[^>]*>([^<]*)</li>", html)]
-        sec7 = re.search(r"## 7 · Offene Prüfpunkte vor Veröffentlichung\n\n((?:- .*\n)+)", md)
+        sec7 = re.search(r"### 8\.2 · Offene Prüfpunkte vor Veröffentlichung\n\n((?:- .*\n)+)", md)
         mo = [x[2:].strip() for x in sec7.group(1).splitlines()] if sec7 else []
         report("L34 Offen-Liste Seite = Analyse", BLOCKER, bool(po) and po == mo, f"{len(po)} Punkte identisch" if po == mo and po else f"Seite {len(po)} · Analyse {len(mo)} Punkte, abweichend")
 
