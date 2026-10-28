@@ -910,8 +910,8 @@
    "edits": [
     [
      "m300.html",
-     "title=\"Medienangaben mit Belegstufe secondary",
-     "title=\"Provenienz je Fakt nach der Zweitprüfung neu gefasst und ergänzt; Medienangaben mit Belegstufe secondary"
+     "title=\"Wall-Ablesung als Klasse READING",
+     "title=\"Provenienz je Fakt nach der Zweitprüfung neu gefasst und ergänzt; Wall-Ablesung als Klasse READING"
     ]
    ]
   },
@@ -2098,7 +2098,7 @@
    "edits": [
     [
      "m300.html",
-     "vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt; was daraus nur abgelesen statt angezeigt ist, ist ungeprüft.",
+     "vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray und Options Chain Suite) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt, samt dem, was daraus berechnet oder abgelesen ist; was daraus berechnet ist, ist abgeleitet, und was nur abgelesen statt angezeigt ist, ist ungeprüft.",
      "vom Herausgeber am 2026-10-11 alle Belege am Original abgeglichen."
     ]
    ]
@@ -2272,7 +2272,7 @@
    "edits": [
     [
      "m300.html",
-     "vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt; was daraus nur abgelesen statt angezeigt ist, ist ungeprüft.",
+     "vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray und Options Chain Suite) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt, samt dem, was daraus berechnet oder abgelesen ist; was daraus berechnet ist, ist abgeleitet, und was nur abgelesen statt angezeigt ist, ist ungeprüft.",
      "vom Herausgeber am 2026-10-11 sämtliche Belege am Original geprüft."
     ]
    ]
@@ -2283,7 +2283,7 @@
    "edits": [
     [
      "m300.html",
-     "vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt; was daraus nur abgelesen statt angezeigt ist, ist ungeprüft.",
+     "vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray und Options Chain Suite) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt, samt dem, was daraus berechnet oder abgelesen ist; was daraus berechnet ist, ist abgeleitet, und was nur abgelesen statt angezeigt ist, ist ungeprüft.",
      "vom Herausgeber am 2026-10-11 alle Belege am Original abgeglichen, auch die BaFin-Allgemeinverfügung."
     ]
    ]
@@ -2294,7 +2294,7 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "jeden Beleg zum Stichtag an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original), ausgenommen auch die nach dem Stichtag hinzugekommene GEX-Metrix-Momentaufnahme FACT_GEXMETRIX_SPX (Bildschirmkopie)",
+     "jeden Beleg zum Stichtag an seiner Quelle abgeglichen: Primär- und Herstellerquellen am Original (Belegstufe „fulltext“), die fünf Medienangaben an ihrer Sekundärquelle (Belegstufe „secondary“, ausgenommen vom Abgleich am Original), ausgenommen auch der Quantor FACT_NO_EUREX_GEX, der aus zwei geprüften Herstellerangaben (Options X-Ray, Options Chain Suite) abgeleitet ist („derived“), und die nach dem Stichtag hinzugekommene GEX-Metrix-Momentaufnahme FACT_GEXMETRIX_SPX (Bildschirmkopie) mit den daraus berechneten Differenzen FACT_GEXMETRIX_DERIVED und der ungeprüften Wall-Ablesung FACT_GEXMETRIX_WALLS_READ",
      "jeden Beleg im Original eingesehen"
     ]
    ]
@@ -2437,8 +2437,8 @@
    "edits": [
     [
      "m300.html",
-     "nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span>",
-     "nein (X-Ray deckt nur SPX ab) <span class=\"badge b-v\">VENDOR</span>"
+     "nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span>",
+     "nein (X-Ray deckt nur SPX ab, Chain Suite nur EOD) <span class=\"badge b-v\">VENDOR</span>"
     ]
    ]
   },
@@ -2568,8 +2568,8 @@
    "edits": [
     [
      "m300.html",
-     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
-     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">nein (Eurex-Optionen nur als Rohdaten, keine Greeks) <span class=\"badge b-v\">VENDOR</span></td></tr>"
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td data-source=\"FACT_TWS_SPEC\">nein (Eurex-Optionen nur als Rohdaten, keine Greeks) <span class=\"badge b-v\">VENDOR</span></td></tr>"
     ]
    ]
   },
@@ -2580,8 +2580,8 @@
    "edits": [
     [
      "m300.html",
-     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
-     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>nein</td></tr>"
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>nein</td></tr>"
     ]
    ]
   },
@@ -2616,7 +2616,7 @@
    "edits": [
     [
      "m300.html",
-     "den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt;",
+     "den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray und Options Chain Suite) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt, samt dem, was daraus berechnet oder abgelesen ist;",
      "den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray). Das GEX-Metrix Dashboard zum SPX vom 2026-10-23 stützt sich nur auf eine Bildschirmkopie des Herausgebers;"
     ]
    ]

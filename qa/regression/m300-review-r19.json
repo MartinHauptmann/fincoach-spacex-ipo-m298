@@ -19,13 +19,13 @@
     ],
     [
      "provenance/m300.dbom.json",
-     "\"ATAS\": \"FACT_XRAY_1MIN_SPX\"",
-     "\"ATAS\": \"FACT_XRAY_1MIN_SPX\",\n          \"MenthorQ\": \"FACT_MENTHORQ_SPEC\""
+     "\"ATAS\": [\n            \"FACT_XRAY_1MIN_SPX\",\n            \"FACT_CHAIN_SUITE\"\n          ]",
+     "\"ATAS\": [\n            \"FACT_XRAY_1MIN_SPX\",\n            \"FACT_CHAIN_SUITE\"\n          ],\n          \"MenthorQ\": \"FACT_MENTHORQ_SPEC\""
     ],
     [
      "m300.html",
-     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
-     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td data-source=\"FACT_MENTHORQ_SPEC\">nein <span class=\"badge b-v\">VENDOR</span></td>"
+     "<td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td data-source=\"FACT_MENTHORQ_SPEC\">nein <span class=\"badge b-v\">VENDOR</span></td>"
     ],
     [
      "m300.html",
@@ -34,22 +34,22 @@
     ],
     [
      "m300.html",
-     "ATAS selbst bietet keine intraday-fähige Eurex-GEX; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
+     "In den ausgewerteten ATAS-Funktionen gibt es keine intraday-fähige Eurex-GEX (Options X-Ray nur SPX, Options Chain Suite nur EOD); für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
      "ATAS selbst und MenthorQ bieten keine intraday-fähige Eurex-GEX; für SpotGamma, Volland, Bookmap und die IBKR TWS n. v."
     ],
     [
      "m300.html",
-     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er in den ausgewerteten Funktionen keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
      "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX bieten, für ATAS selbst und MenthorQ; für SpotGamma, Volland, Bookmap und die IBKR TWS ist das n. v."
     ],
     [
      "provenance/m300.dbom.json",
-     "ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet (ATAS: X-Ray nur SPX); für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
+     "ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen deckt Options X-Ray nur SPX ab und die Options Chain Suite nur ES, NQ, CL und GC auf EOD-Basis; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
      "ist nur für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; MenthorQ: Eurex-GEX n. v.); für die übrigen vier (SpotGamma, Volland, Bookmap, IBKR TWS) n. v."
     ],
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige\n  Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er in den ausgewerteten Funktionen\n  keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
      "Von sechs verglichenen Anbietern ist nur für zwei bestimmbar, dass sie keine intraday-fähige\n  Eurex-GEX bieten, für ATAS selbst und MenthorQ; für SpotGamma, Volland, Bookmap und die IBKR TWS ist das n. v."
     ],
     [
@@ -66,8 +66,8 @@
    "edits": [
     [
      "m300.html",
-     "<tr><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
-     "<tr><td>GEX für ODAX/OESX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td data-source=\"FACT_SPOTGAMMA_SPEC\">nein <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td>"
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
+     "<tr><td>GEX für ODAX/OESX intraday</td><td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td data-source=\"FACT_SPOTGAMMA_SPEC\">nein <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td>"
     ]
    ]
   },
@@ -78,7 +78,7 @@
    "edits": [
     [
      "m300.html",
-     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er in den ausgewerteten Funktionen keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
      "Für ODAX und OESX bietet keiner der bestimmbaren Anbieter – ATAS und SpotGamma – intraday-fähige Eurex-GEX (MenthorQ, Volland, Bookmap, IBKR TWS: n. v.)"
     ]
    ]
@@ -90,7 +90,7 @@
    "edits": [
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige\n  Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er in den ausgewerteten Funktionen\n  keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
      "Intraday-fähige Eurex-GEX bietet keiner der Anbieter; bestimmbar sind ATAS, Bookmap und IBKR TWS;\n  für SpotGamma, MenthorQ und Volland ist das n. v."
     ]
    ]
@@ -107,8 +107,8 @@
     ],
     [
      "m300.html",
-     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
-     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>nein</td><td>n. v.</td>"
+     "<td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>nein</td><td>n. v.</td>"
     ]
    ],
    "known_limit": "Verstoß wird erkannt, aber von L18b statt L12c (Tabelle ist auf Tabellenebene gebunden) (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
@@ -133,8 +133,8 @@
    "edits": [
     [
      "m300.html",
-     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
-     "<td data-source=\"FACT_XRAY_1MIN_SPX\">nein (X-Ray nur SPX) <span class=\"badge b-v\">VENDOR</span></td><td data-source=\"FACT_ODAX_SPECS\">nein</td><td>n. v.</td>"
+     "<td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td>",
+     "<td data-source=\"FACT_XRAY_1MIN_SPX FACT_CHAIN_SUITE\">nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td data-source=\"FACT_ODAX_SPECS\">nein</td><td>n. v.</td>"
     ]
    ],
    "known_limit": "Verstoß wird erkannt, aber von L18b statt L76 (vom Herausgeber am 2026-10-13 als Grenze anerkannt)"
@@ -369,7 +369,7 @@
    "edits": [
     [
      "m300.html",
-     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
+     "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar, dass er in den ausgewerteten Funktionen keine intraday-fähige Eurex-GEX bietet, für ATAS selbst; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v.",
      "Für ODAX und OESX ist von sechs verglichenen Anbietern nur für einen bestimmbar (ATAS), dass er keine intraday-fähige Eurex-GEX bietet; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS ist das n. v."
     ]
    ]

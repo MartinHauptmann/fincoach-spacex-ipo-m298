@@ -127,7 +127,7 @@
    "edits": [
     [
      "m300.html",
-     "und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt; was daraus nur abgelesen statt angezeigt ist, ist ungeprüft.",
+     "und vom Herausgeber am 2026-10-11 abgeglichen: Primär- und Herstellerquellen am Original, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray und Options Chain Suite) und das GEX-Metrix Dashboard zum SPX vom 2026-10-23, das sich nur auf eine Bildschirmkopie des Herausgebers stützt, samt dem, was daraus berechnet oder abgelesen ist; was daraus berechnet ist, ist abgeleitet, und was nur abgelesen statt angezeigt ist, ist ungeprüft.",
      "und vom Herausgeber am 2026-10-11 sämtlich im Original abgeglichen."
     ]
    ]
@@ -139,7 +139,7 @@
    "edits": [
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
-     "Recherchiert vom 2026-10-05 bis 2026-10-11 über Suchtreffer; der Herausgeber hat am 2026-10-11 Primär- und\nHerstellerquellen am Original abgeglichen, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den\nabgeleiteten Quantor `FACT_NO_EUREX_GEX` (siehe Methodischer Vorbehalt) und die GEX-Metrix-Momentaufnahme nach dem\nStichtag vom 2026-10-23, die auf einer Bildschirmkopie des Herausgebers beruht (`FACT_GEXMETRIX_SPX`).",
+     "Recherchiert vom 2026-10-05 bis 2026-10-11 über Suchtreffer; der Herausgeber hat am 2026-10-11 Primär- und\nHerstellerquellen am Original abgeglichen, ausgenommen die fünf Medienangaben (an ihrer Sekundärquelle), den\nabgeleiteten Quantor `FACT_NO_EUREX_GEX` (siehe Methodischer Vorbehalt) und die GEX-Metrix-Momentaufnahme nach dem\nStichtag vom 2026-10-23, die auf einer Bildschirmkopie des Herausgebers beruht (`FACT_GEXMETRIX_SPX`), mit daraus\nberechneten Differenzen und der ungeprüften Wall-Ablesung (`FACT_GEXMETRIX_WALLS_READ`).",
      "Recherchiert vom 2026-10-05 bis 2026-10-11 über Suchtreffer; jeder Beleg wurde vom Herausgeber am 2026-10-11 im Volltext geprüft (siehe Methodischer Vorbehalt)."
     ]
    ]
@@ -328,8 +328,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"ATAS\": \"FACT_XRAY_1MIN_SPX\"",
-     "\"ATAS\": \"FACT_XRAY_1MIN_SPX\",\n          \"IBKR TWS\": \"FACT_IB_BAG\""
+     "\"ATAS\": [\n            \"FACT_XRAY_1MIN_SPX\",\n            \"FACT_CHAIN_SUITE\"\n          ]",
+     "\"ATAS\": [\n            \"FACT_XRAY_1MIN_SPX\",\n            \"FACT_CHAIN_SUITE\"\n          ],\n          \"IBKR TWS\": \"FACT_IB_BAG\""
     ]
    ]
   },
@@ -340,7 +340,7 @@
    "edits": [
     [
      "m300.html",
-     "ATAS selbst bietet keine intraday-fähige Eurex-GEX; für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
+     "In den ausgewerteten ATAS-Funktionen gibt es keine intraday-fähige Eurex-GEX (Options X-Ray nur SPX, Options Chain Suite nur EOD); für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
      "keiner der bestimmbaren Anbieter (ATAS selbst, MenthorQ) bietet intraday-fähige Eurex-GEX; für SpotGamma, Volland, Bookmap und die IBKR TWS n. v."
     ]
    ]
