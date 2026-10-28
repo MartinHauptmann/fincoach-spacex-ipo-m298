@@ -359,8 +359,8 @@
    "edits": [
     [
      "m300.html",
-     "<li data-gate=\"Q10\" data-open>",
-     "<li data-gate=\"Q10\" data-open data-source=\"FACT_VOLLAND_SPEC\">(S10, S11) "
+     "<li data-gate=\"Q9\" data-open>Claim A11",
+     "<li data-gate=\"Q9\" data-open data-source=\"FACT_VOLLAND_SPEC\">(S10, S11) Claim A11"
     ]
    ]
   },
