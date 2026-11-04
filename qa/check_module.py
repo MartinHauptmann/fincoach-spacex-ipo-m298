@@ -872,7 +872,7 @@ def main():
                     blob = _sp.run(["git", "cat-file", "blob", parts[0]], cwd=_root, capture_output=True).stdout
                     if _hl.sha256(blob).hexdigest() in ev_h or re.search(r"(?i)evidence|beleg|screenshot|bildschirm", parts[1]):
                         hits_.append(parts[1])
-            report("L88 Belegdateien nicht in der Historie", BLOCKER, not hits_, "in der Historie: " + ", ".join(sorted(set(hits_))[:5]) if hits_ else f"{len(ev_h)} Beleg-Hash(es) in keinem Commit")
+            report("L88 Belegdateien nicht in der Historie", BLOCKER, not hits_, "in der Historie: " + ", ".join(sorted(set(hits_))[:5]) if hits_ else f"{len(ev_h)} Beleg-Hash(es) in keinem lokalen Commit; Abruf alter Commits beim Remote manuell prüfen")
         # L53e · Herausgeber-Prüfdaten nur aus dokumentierten Prüfungen (publisher_checks); Ableitungen nie als Herausgeber-Prüfung
         pubd = {c_["date"] for c_ in dbom.get("publisher_checks", [])}
         l53e = [f"{f['id']}: Herausgeber-Prüfung {f['verified'].get('date')} nicht in publisher_checks" for f in F if f.get("verified", {}).get("by") == "Herausgeber" and f["verified"].get("date") not in pubd]
@@ -1378,7 +1378,7 @@ def main():
             report("L59 Ausgabestruktur", BLOCKER, not l59, "fehlt: " + ", ".join(l59) if l59 else f"alle Pflichtabschnitte vorhanden, Executive Summary {words} Wörter")
             report("L53 Analyse faktgebunden", BLOCKER, not l53, "; ".join(l53[:3]) if l53 else f"Sync-Blöcke vollständig ({nk} K), Handtext mit Angaben faktgebunden")
             # L49 · Analyse-Scorecard = Seite (per Sync erzeugt)
-            m8 = re.search(r"## 8 · QA-Scorecard\n(.*?)\n(?:### 8\.2 · |---)", md, re.S)
+            m8 = re.search(r"## 8 · QA-Scorecard\n(.*?)\n(?:### Offene Prüfpunkte|---)", md, re.S)
             sc = re.findall(r"= \*\*([\d,]+) %\*\*", m8.group(1)) if m8 else []
             pg = re.findall(r"data-qa-score>([\d,]+)<", html)
             sym = {"check-pass": "✓", "check-part": "◐", "check-fail": "✗"}
@@ -1521,7 +1521,7 @@ def main():
     # ---------- L34 · Offen-Liste Seite = Analyse
     if md:
         po = [re.sub(r"\s+", " ", t).strip() for t in re.findall(r"<li[^>]*data-open[^>]*>([^<]*)</li>", html)]
-        sec7 = re.search(r"### 8\.2 · Offene Prüfpunkte vor Veröffentlichung\n\n((?:- .*\n)+)", md)
+        sec7 = re.search(r"### Offene Prüfpunkte vor Veröffentlichung\n\n((?:- .*\n)+)", md)
         mo = [x[2:].strip() for x in sec7.group(1).splitlines()] if sec7 else []
         report("L34 Offen-Liste Seite = Analyse", BLOCKER, bool(po) and po == mo, f"{len(po)} Punkte identisch" if po == mo and po else f"Seite {len(po)} · Analyse {len(mo)} Punkte, abweichend")
 

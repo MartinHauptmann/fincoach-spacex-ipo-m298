@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>M300 v1.22.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
+<title>M300 v1.23.0 · ATAS Options X-Ray, Dealer-Greeks &amp; Eurex vs. verbriefte Derivate · FinCoach AI</title>
 <meta name="description" content="FinCoach AI Deep-Dive M300: ATAS Options X-Ray (GEX, Charm), Modellrechnung in ES-Äquivalenten, Datenfeed und Ausführung, Wettbewerbsvergleich, Eurex-Börsenoptionen vs. Optionsscheine/Knock-outs im DACH-Raum und der steuerliche Rahmen für Termingeschäfte (Stand 05.10.2026). Mit Faktencheck K1–K9, M-DBOM-Provenienz und QA-Scorecard. Stichtag 2026-10-05. Keine Anlage-, Rechts- oder Steuerberatung."/>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="vendor/tailwind.css"/>
@@ -104,7 +104,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 {
   "@context": "https://www.thenextgenerationbanking.com/schemas/m-dbom/v1.json",
   "$schema_id": "fincoach.m-dbom.v1",
-  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.22.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
+  "module": { "id": "M300", "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht", "version": "1.23.0", "stichtag": "2026-10-05", "external_dbom": "provenance/m300.dbom.json", "analysis_source": "analysen/m300-atas-options-xray-deep-dive.md", "release_status": "UEBERARBEITUNG" },
   "fact_summary": { "total": 45, "confirmed_primary": 35, "media_report": 5, "unverified": 1, "scenario_projection": 4, "vendor_claim": 17 },
   "honest_disclosure": "Belastbarkeit je Fakt siehe Verdict in provenance/m300.dbom.json; QA-Score siehe QA-Sektion (aus Gate-Zellen berechnet)."
 }
@@ -153,7 +153,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
 <!-- ===== Provenienz-Banner (in der Veröffentlichung ausgeblendet) ===== -->
 <div class="px-4 pt-4 max-w-7xl mx-auto" data-publish="hidden">
   <div class="glass rounded-xl px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style="border-left:3px solid #DFAF0F;">
-    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.22.0</span>
+    <span class="font-mono font-bold" style="color:#DFAF0F;">M-DBOM v1 · Modul v1.23.0</span>
     <span class="text-slate-300"><span data-dbom-count="total">45</span> Fakten · <span data-dbom-count="confirmed">35</span> belegt (davon <span data-dbom-count="fulltext">32</span> am Original geprüft, <span data-dbom-count="derived">2</span> abgeleitet, <span data-dbom-count="screenshot">1</span> an einer Bildschirmkopie; darunter <span data-dbom-count="vendor">17</span> Herstellerangaben) · <span data-dbom-count="media">5</span> Medienangaben · <span data-dbom-count="unverified">1</span> ungeprüft · <span data-dbom-count="scenario">4</span> SCENARIO_PROJECTION · Stichtag 2026-10-05</span>
     <span class="ml-auto flex items-center gap-2 flex-wrap">
       <a href="provenance/m300.dbom.json" class="px-2 py-0.5 rounded mono font-semibold" style="background:rgba(0,207,255,0.15);color:#00CFFF;border:1px solid rgba(0,207,255,0.4);">{ } DBOM JSON</a>
@@ -287,8 +287,8 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge dc-primary">MARKT</span><span class="dbom-conf">Konf. <span data-dbom-conf="FACT_SPX_0DTE_59">0,85</span></span></div>
       </div>
       <div class="kpi-card confirmed-kpi" data-source="FACT_NO_EUREX_GEX FACT_GAMMACOCKPIT_SPEC">
-        <div class="text-2xl md:text-3xl font-head font-extrabold" style="color:#DFAF0F;">nur SPX</div>
-        <div class="text-sm font-semibold text-slate-300 mt-1">Optionsdaten von Options X-Ray (intraday)</div>
+        <div data-source="FACT_XRAY_1MIN_SPX"><div class="text-2xl md:text-3xl font-head font-extrabold" style="color:#DFAF0F;">nur SPX</div>
+        <div class="text-sm font-semibold text-slate-300 mt-1">Optionsdaten von Options X-Ray (intraday) <span class="badge b-v">VENDOR</span></div></div>
         <div class="text-xs text-tngb-muted mt-1">Eurex-GEX intraday in den ausgewerteten ATAS-Funktionen: nein (<span>0 von 1</span> bestimmbaren Anbietern); für fünf der sechs verglichenen Anbieter n. v. · <span data-source="FACT_GAMMACOCKPIT_SPEC">DAX-GEX nur auf Tagesbasis (Gamma Cockpit, Beta) <span class="badge b-v">VENDOR</span></span></div>
         <div class="dbom-pill mt-1.5"><span class="dbom-class-badge">ABGELEITET</span><span class="dbom-conf">Konf. <span data-dbom-conf="FACT_NO_EUREX_GEX">0,75</span></span></div>
       </div>
@@ -472,7 +472,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
               <tr class="border-t border-slate-700" data-source="FACT_GEXMETRIX_DERIVED"><td class="py-2 pr-2">Abstand Index zum Flip</td><td class="py-2"><span class="mono">−197,57</span> <span class="dbom-class-badge">ABGELEITET</span></td></tr>
             </tbody>
           </table>
-          <p class="text-xs text-slate-400 leading-relaxed mt-2" data-source="FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED">¹ Beim Anbieter „Zero Gamma“. <span data-source="FACT_GEXMETRIX_WALLS_READ">² In der Bildschirmkopie (kostenlose Stufe, Split View) ist keine Wall ausgewiesen; abgelesen ist der längste Call- bzw. Put-Balken im angezeigten Strike-Bereich 7.625–7.850. Strikes außerhalb des Ausschnitts zeigt die Bildschirmkopie nicht; bei 7.800 und 7.750 sind die Call-Balken fast gleich lang <span class="dbom-class-badge">UNGEPRÜFT</span>.</span> ³ <dfn>Max Pain</dfn> (Strike, an dem die offenen Optionen zum Verfall zusammen am wenigsten wert wären). ⁴ In Mrd. USD je 1 % Kursbewegung. ⁵ Eigene Differenz der Kopfwerte, nicht der Netto-Wert des Anbieters; dessen Verlaufsgrafik endet bei einem deutlich negativeren Wert. Abstand in Indexpunkten.</p>
+          <p class="text-xs text-slate-400 leading-relaxed mt-2" data-source="FACT_GEXMETRIX_SPX FACT_GEXMETRIX_DERIVED">¹ Beim Anbieter „Zero Gamma“. <span data-source="FACT_GEXMETRIX_WALLS_READ">² In der Bildschirmkopie (kostenlose Stufe, Ansicht „Split View“; Legende nur Call GEX, Put GEX, Max Pain, GEX Flip) ist keine Wall ausgewiesen; abgelesen ist der längste Call- bzw. Put-Balken im angezeigten Strike-Bereich 7.625–7.850. Strikes außerhalb des Ausschnitts zeigt die Bildschirmkopie nicht; bei 7.800 und 7.750 sind die Call-Balken fast gleich lang <span class="dbom-class-badge">UNGEPRÜFT</span>.</span> ³ <dfn>Max Pain</dfn> (Strike, an dem die offenen Optionen zum Verfall zusammen am wenigsten wert wären). ⁴ In Mrd. USD je 1 % Kursbewegung. ⁵ Eigene Differenz der Kopfwerte, nicht der Netto-Wert des Anbieters; dessen Verlaufsgrafik endet bei einem deutlich negativeren Wert. Abstand in Indexpunkten.</p>
         </div>
       </div>
       <p class="text-sm text-slate-300 leading-relaxed mt-4"><strong class="text-white">So ließe sich das lesen:</strong> <span data-source="FACT_DEALER_CONVENTION">Der Index läge deutlich unter dem GEX-Flip und damit im Short-Gamma-Bereich; Dealer würden nach dem Modell fallenden Kursen hinterherverkaufen. Wäre die längste Put-Konzentration im Ausschnitt auch die Put Wall des ganzen Profils, stünde der Index nur knapp darüber; dort wäre der Hedge-Druck am größten und ließe darunter nach. Die längste Call-Konzentration im Ausschnitt läge über dem Index, aber unter dem Flip: Ein Anstieg dorthin fände nach dem Modell weiter im Short-Gamma-Bereich statt, ohne die dämpfende Wirkung oberhalb des Flips <span class="dbom-class-badge">MODELL</span>.</span> Ob unterhalb von 7.625 oder oberhalb von 7.850 größere Konzentrationen liegen, ist offen; die Lesart steht unter diesem Vorbehalt. Sie folgt den Punkten 3 und 4 im Zusammenspiel.</p>
@@ -661,7 +661,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
       <thead><tr><th>Erweiterung</th><th>Nutzen</th><th>Daten / Kosten</th><th>Komplexität</th><th>Regulatorik</th><th>Hauptrisiko</th></tr></thead>
       <tbody>
         <tr><td><strong>Multi-Asset intraday</strong><br/><span class="text-xs text-tngb-muted">NDX/NQ, CL, GC, Single Stocks</span></td><td><span class="badge b-ok">hoch</span></td><td><span data-source="FACT_OPTIONSDEPTH_SCOPE">OptionsDepth deckt nur SPX/VIX ab <span class="badge b-v">VENDOR</span></span> → zweiter Datenpartner nötig</td><td><span class="badge b-part">mittel–hoch</span></td><td><span class="badge b-ok">gering</span></td><td>Datenabhängigkeit; schwächere Positionsdaten außerhalb der Cboe</td></tr>
-        <tr><td><strong>Eurex-X-Ray</strong><br/><span class="text-xs text-tngb-muted">ODAX/OESX, Quartalsverfall</span></td><td><span class="badge b-part">offen</span><br/><span class="text-xs text-slate-400" data-source="FACT_NO_EUREX_GEX">In den ausgewerteten ATAS-Funktionen gibt es keine intraday-fähige Eurex-GEX (Options X-Ray nur SPX, Options Chain Suite nur EOD); für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v. <span class="dbom-class-badge">ABGELEITET</span></span></td><td><span data-source="FACT_EUREX_OI">OI täglich je Serie</span></td><td><span class="badge b-no">hoch</span></td><td><span class="badge b-ok">gering</span></td><td>geringe 0DTE-Liquidität; schwächere Positionsannahme</td></tr>
+        <tr><td><strong>Eurex-X-Ray</strong><br/><span class="text-xs text-tngb-muted">ODAX/OESX, Quartalsverfall</span></td><td><span class="badge b-part">offen</span><br/><span class="text-xs text-slate-400" data-source="FACT_NO_EUREX_GEX">In den ausgewerteten ATAS-Funktionen gibt es keine intraday-fähige Eurex-GEX (Options X-Ray nur SPX, Options Chain Suite mit täglichem EOD-Snapshot); für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v. <span class="dbom-class-badge">ABGELEITET</span></span></td><td><span data-source="FACT_EUREX_OI">OI täglich je Serie</span></td><td><span class="badge b-no">hoch</span></td><td><span class="badge b-ok">gering</span></td><td>geringe 0DTE-Liquidität; schwächere Positionsannahme</td></tr>
         <tr><td><strong>Multi-Leg + Auto-Delta-Hedge</strong></td><td><span class="badge b-ok">sehr hoch</span></td><td>IB-API (BAG) vorhanden</td><td><span class="badge b-no">hoch</span></td><td><span class="badge b-no">hoch</span></td><td>Haftung, Fehlorders, Aufsichtsrecht</td></tr>
         <tr><td><strong>Warrant-Fair-Value-Tool</strong></td><td><span class="badge b-part">mittel</span></td><td>Emittentenquotes + Eurex-IV + Zins/Dividende</td><td><span class="badge b-part">mittel</span></td><td><span class="badge b-part">mittel (UWG)</span></td><td>Methodenstreit, Fehlinterpretation</td></tr>
       </tbody>
@@ -809,7 +809,7 @@ body{background:var(--bg);color:#E2E8F0;font-family:'Inter',system-ui,sans-serif
         <a href="impressum.html" class="hover:text-tngb-cyan transition block mb-1">Impressum</a>
         <a href="datenschutz.html" class="hover:text-tngb-cyan transition block">Datenschutz</a>
       </div>
-      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.22.0 · 2026-10-28<br/>Derivate / Market Microstructure · Entwurf</div></div>
+      <div class="md:text-right"><div class="inline-block dep-box text-xs font-mono text-tngb-muted">M300 · v1.23.0 · 2026-10-28<br/>Derivate / Market Microstructure · Entwurf</div></div>
     </div>
     <p class="text-xs text-tngb-muted mt-6 text-center">© 2026 TheNextGenerationBanking · FinCoach AI. Modelle und Roadmap sind Szenarien. Die nächste Generation Banking.</p>
   </footer>
@@ -1058,7 +1058,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
         return x.url?`<a class="dep-box block hover:border-tngb-cyan transition" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div class="dep-box">${inner}</div>`;}).join('')+
         `<a class="dep-box block hover:border-tngb-cyan transition md:col-span-2" href="analysen/m300-atas-options-xray-deep-dive.md"><div class="text-tngb-cyan font-semibold">Vollständiges Quellenverzeichnis der Analyse</div><div class="text-xs text-slate-400">Volltext-Analyse M300, Abschnitt 6</div></a>`;}
     const unbound=F.filter(f=>!document.querySelector('[data-source~="'+f.id+'"]')).map(f=>f.id);  // L45: Mehrfach-Bindungen
-    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · Schema <code>'+dbom.$schema_id+'</code> · '+cnt.total+' Fakten ('+cnt.confirmed+' belegt (davon '+cnt.fulltext+' am Original geprüft, '+cnt.snippet+' Snippet), '+cnt.media+' Medien, '+cnt.unverified+' ungeprüft, '+cnt.scenario+' scenario) · '+refs.length+' HTML-Referenzen geprüft'+(unbound.length?' · ⚠ ungebunden: '+unbound.join(', '):'');
+    meta.innerHTML='Modul <code>v'+dbom.module.version+'</code> · Schema <code>'+dbom.$schema_id+'</code> · '+cnt.total+' Fakten ('+cnt.confirmed+' belegt (davon '+cnt.fulltext+' am Original geprüft, '+cnt.derived+' abgeleitet, '+cnt.screenshot+' an einer Bildschirmkopie, '+cnt.snippet+' Snippet), '+cnt.media+' Medien, '+cnt.unverified+' ungeprüft, '+cnt.scenario+' scenario) · '+refs.length+' HTML-Referenzen geprüft'+(unbound.length?' · ⚠ ungebunden: '+unbound.join(', '):'');
     if(qaDbom){qaDbom.textContent='✓';qaDbom.className='check-pass';}
     if(missing===0){
       banner.classList.remove('err');banner.classList.add('warn');

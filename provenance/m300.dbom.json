@@ -4,7 +4,7 @@
   "module": {
     "id": "M300",
     "title": "ATAS Options X-Ray · Dealer-Greeks · Eurex vs. verbriefte Derivate · Termingeschäfte im Steuerrecht",
-    "version": "1.22.0",
+    "version": "1.23.0",
     "stichtag": "2026-10-05",
     "buildDate": "2026-10-05T00:00:00Z",
     "related_modules": [],
@@ -621,9 +621,9 @@
       "verdict": "CONFIRMED",
       "class": "DERIVED",
       "confidence": 0.75,
-      "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen deckt Options X-Ray nur SPX ab und die Options Chain Suite nur ES, NQ, CL und GC auf EOD-Basis; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
+      "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen liefert Options X-Ray nur SPX-Optionsdaten, und die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
       "source_id": "SRC_ATAS_LEARN",
-      "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE (Herstellerangaben, am Original geprüft). Regel für alle Anbieter: bestimmbar ist ein Anbieter, wenn für jede ausgewertete GEX-Funktion eine geprüfte Abdeckungsangabe Eurex ausschließt. Für die IBKR TWS ist keine GEX-Funktion mit Abdeckungsangabe belegt (FACT_TWS_SPEC nennt ein Greek-Exposure nur für eigene Positionen bei globaler Abdeckung inkl. ODAX/OESX); für SpotGamma, MenthorQ, Volland und Bookmap enthalten die Fakten keine Eurex-Aussage. Weitere ATAS-Funktionen sind nicht ausgewertet; die Aussage gilt nur für die beiden ausgewerteten.",
+      "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE (Herstellerangaben, am Original geprüft). Regel für alle Anbieter: bestimmbar ist ein Anbieter, wenn für jede ausgewertete GEX-Funktion eine geprüfte Angabe Eurex-Intraday-GEX ausschließt, entweder über eine ausdrücklich begrenzte Abdeckung („nur …“) oder über die Frequenz (EOD). Abdeckungslisten ohne „nur“ gelten nicht als abschließend. SpotGamma nennt eine solche Liste (SPX, NDX, ETFs, Einzelaktien) und bleibt deshalb n. v.; für die IBKR TWS ist keine GEX-Funktion belegt (FACT_TWS_SPEC: Greek-Exposure nur für eigene Positionen); für MenthorQ, Volland und Bookmap enthalten die Fakten keine Eurex-Aussage. Weitere ATAS-Funktionen sind nicht ausgewertet; die Aussage gilt nur für die beiden ausgewerteten.",
       "period": "Stand 2026-10-05",
       "basis": {
         "compared": 6,
@@ -636,21 +636,21 @@
           "Bookmap",
           "IBKR TWS"
         ],
-        "subject": "Eurex|\\bnur SPX|\\bdeckt\\b[^.]*\\bab\\b",
+        "subject": "Eurex|\\bnur SPX|\\bEOD\\b",
         "determinable_from": {
           "ATAS": [
             "FACT_XRAY_1MIN_SPX",
             "FACT_CHAIN_SUITE"
           ]
         },
-        "rule": "Bestimmbar, wenn für jede ausgewertete GEX-Funktion eines Anbieters eine geprüfte Abdeckungsangabe Eurex ausschließt; sonst n. v."
+        "rule": "Bestimmbar, wenn für jede ausgewertete GEX-Funktion eines Anbieters eine geprüfte Angabe Eurex-Intraday-GEX ausschließt: ausdrücklich begrenzte Abdeckung („nur …“) oder Frequenz EOD. Abdeckungslisten ohne „nur“ gelten nicht als abschließend; sonst n. v."
       },
       "keep_reason": "Tragend für die strategische Einordnung (These, S11); Quantor mit Basis.",
       "evidence": "derived",
       "verified": {
         "by": "Ableitung aus geprüften Fakten (nicht gesondert vom Herausgeber geprüft)",
-        "date": "2026-10-27",
-        "scope": "Ableitung aus FACT_XRAY_1MIN_SPX"
+        "date": "2026-11-04",
+        "scope": "Ableitung aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE"
       },
       "supporting_sources": [
         "SRC_ATAS_CHAIN"
@@ -718,7 +718,7 @@
       "verdict": "CONFIRMED",
       "class": "VENDOR_CLAIM",
       "confidence": 0.75,
-      "claim": "GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET (vor Handelsbeginn): Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ, letzter Punkt deutlich negativer als die Differenz der Kopfwerte; Index von rund 7.800 auf 7.663,43.",
+      "claim": "GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET (vor Handelsbeginn): Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Ansicht „Split View“; Legende des Strike-Diagramms nur Call GEX, Put GEX, Max Pain und GEX Flip, keine Wall ausgewiesen. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ, letzter Punkt deutlich negativer als die Differenz der Kopfwerte; Index von rund 7.800 auf 7.663,43.",
       "source_id": "SRC_GEXMETRIX",
       "caveat": "Anbietermodell mit eigener Dealer-Annahme; ein Zeitpunkt; Werte anderer Anbieter können abweichen.",
       "period": "2026-10-23 05:28 ET",
@@ -731,7 +731,14 @@
           "by": "24. Zweitprüfung",
           "date": "2026-10-27",
           "scope": "Ergänzungen des Claims vom 2026-10-26 (vor Handelsbeginn, letzter Punkt der Verlaufsgrafik) an der Bildschirmkopie geprüft"
-        }
+        },
+        "rechecked_more": [
+          {
+            "by": "Ergänzung aus der Bildschirmkopie",
+            "date": "2026-11-04",
+            "scope": "Ansicht und Legende des Strike-Diagramms am Bild abgelesen; Bestätigung durch die nächste Zweitprüfung"
+          }
+        ]
       },
       "after_stichtag": "Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.",
       "exception_label": "GEX-Metrix"
@@ -1764,10 +1771,12 @@
   "publisher_checks": [
     {
       "date": "2026-10-11",
+      "kind": "Abgleich",
       "scope": "Abgleich der Belege zum Stichtag am Original bzw. an der Sekundärquelle"
     },
     {
       "date": "2026-10-23",
+      "kind": "Erstellung",
       "scope": "Bildschirmkopie des GEX-Metrix-Dashboards erstellt und Werte bereitgestellt"
     }
   ]

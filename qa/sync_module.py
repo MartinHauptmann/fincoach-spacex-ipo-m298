@@ -94,6 +94,7 @@ def build_blocks(page_html, d):
     # Q10/L13d: Quellenverzeichnis nach Stufe getrennt, mit Abruf/Abgleich aus den Prüfdaten der Fakten
     st = d["module"].get("stichtag", "")
     pubd = {c["date"] for c in d.get("publisher_checks", [])}
+    kind = {c["date"]: c.get("kind", "Abgleich") for c in d.get("publisher_checks", [])}  # 26. ZP B9: Erstellung ≠ Abgleich
 
     def _pub(f):  # L53e (25. ZP): Datum nur, wenn by = Herausgeber, Datum in publisher_checks und keine Ableitung
         v = f.get("verified", {})
@@ -111,7 +112,7 @@ def build_blocks(page_html, d):
         rows_s = sorted((x for x in d["sources"] if x.get("tier") == tier and x.get("ref", "–") != "–"), key=lambda x: int(x["ref"][1:]))
         if rows_s:
             parts.append(f"### {lab}\n\n| Nr. | Quelle | DBOM-ID | Abruf / Abgleich | URL |\n|---|---|---|---|---|\n" + "".join(
-                f"| {x['ref']} | {x['title']} | `{x['id']}` | {('abgeglichen ' + chk[x['id']]) if x['id'] in chk else rec} | {x['url']} |\n" for x in rows_s))
+                f"| {x['ref']} | {x['title']} | `{x['id']}` | {((kind.get(chk[x['id']], 'Abgleich') == 'Erstellung' and 'erstellt ' or 'abgeglichen ') + chk[x['id']]) if x['id'] in chk else rec} | {x['url']} |\n" for x in rows_s))
     out["QUELLEN"] = "\n".join(parts) + "\n"
     # Q10/L13d: M-DBOM als JSON-LD (Schema des Prompts), aus der DBOM erzeugt; provenance nach Prompt-Schema,
     # verdict/class/evidence unverändert aus der DBOM; retrieved = Datum des Abgleichs, sonst null
@@ -190,7 +191,7 @@ def main():
         md = re.sub(r"(\| ID \| Verdict \| Klasse \| Konf\. \| Bezugszeitraum \| Claim \|\n\|---\|---\|---\|---\|---\|---\|\n)(?:\|.*\|\n)+", lambda m: m.group(1) + frows + "\n", md)
         md = re.sub(r"^\| Version \| [\d.]+", f"| Version | {d['module']['version']}", md, count=1, flags=re.M)  # L44
         md = re.sub(r"Stand: Modul v[\d.]+,\n\d+ Fakten, \d+ Quellen\.", f"Stand: Modul v{d['module']['version']},\n{len(F)} Fakten, {len(d['sources'])} Quellen.", md)
-        md = re.sub(r"(### 8\.2 · Offene Prüfpunkte vor Veröffentlichung\n\n)(?:- .*\n)+", lambda m: m.group(1) + "".join(f"- {t}\n" for t in open_items), md)
+        md = re.sub(r"(### Offene Prüfpunkte vor Veröffentlichung\n\n)(?:- .*\n)+", lambda m: m.group(1) + "".join(f"- {t}\n" for t in open_items), md)
         # L53/L53b: erzeugte Blöcke (Claim-Tabelle, Phase A, Module, Glossar) – dieselbe Funktion nutzt check_module
         for name, content in build_blocks(s, d).items():
             md = re.sub(r"(<!-- sync:%s -->\n).*?(<!-- /sync:%s -->)" % (name, name), lambda m: m.group(1) + content + m.group(2), md, count=1, flags=re.S)
@@ -209,7 +210,7 @@ def main():
                 "| Gate | Status | Begründung |\n|---|---|---|\n%s\n\n"
                 "**Gesamtscore:** %d × ✓ + %d × ◐ = %s von %d Punkten = **%s %%**.\n**Freigabeempfehlung: %s.**\n") % (
                     mod, tbl8, n_ok, n_part, de(pts, 1) if pts % 1 else str(int(pts)), len(cells), de(pct, 1), rel)
-        md = re.sub(r"(## 8 · QA-Scorecard\n\n).*?(?=\n### 8\.2 · |\n---\n)", lambda m: m.group(1) + sec8, md, count=1, flags=re.S)
+        md = re.sub(r"(## 8 · QA-Scorecard\n\n).*?(?=\n### Offene Prüfpunkte|\n---\n)", lambda m: m.group(1) + sec8, md, count=1, flags=re.S)
         mds[0].write_text(md, encoding="utf-8")
     # L74/L80: Änderungsdatum und Lehren-Bereich des Prompts aus audit_trail und LESSONS
     prm = sorted((page.parent / "prompts").glob(f"m{mod}-*.md"))

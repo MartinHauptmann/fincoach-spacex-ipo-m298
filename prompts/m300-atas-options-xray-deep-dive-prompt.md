@@ -307,7 +307,7 @@ Q10 Formatvorgaben aus Abschnitt 4 eingehalten; jeder Fachbegriff wird beim erst
  7. M-DBOM (Data Bill of Materials) als JSON-LD-Block:
     {"@context":"https://schema.org","@type":"Dataset","name":"M300 · M-DBOM v1",
      "dateModified":"{{STICHTAG}}","facts":[{"id":"F01","claim":"…","provenance":"CONFIRMED|
-     VENDOR_CLAIM|MEDIA_REPORT|USER_PROVIDED|MODEL_ASSUMPTION|SCENARIO_PROJECTION|UNVERIFIED",
+     VENDOR_CLAIM|MEDIA_REPORT|USER_PROVIDED|MODEL_ASSUMPTION|SCENARIO_PROJECTION|UNVERIFIED" (Ablesungen aus Bildschirmkopien: UNVERIFIED; feinere Klassen der M-DBOM einschließlich DERIVED und READING unter x-m-dbom),
      "confidence":0.0,"source":"…","retrieved":"YYYY-MM-DD"}]}
  8. QA-Scorecard: Tabelle C1–C9 und Q1–Q10 mit Status ✓ / ◐ / ✗ und einer Zeile Begründung;
     Gesamtscore in % (✓ = 1, ◐ = 0,5, ✗ = 0); Freigabeempfehlung:

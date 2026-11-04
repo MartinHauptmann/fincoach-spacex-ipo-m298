@@ -5,7 +5,7 @@
 | Feld | Wert |
 |---|---|
 | Modul | M300 (Platzhalter-ID) |
-| Version | 1.22.0 (Entwurf) |
+| Version | 1.23.0 (Entwurf) |
 | Stichtag | 2026-10-05 |
 | Zielstufe (CAT-Level) | Experte |
 | Grundlage | Prompt `prompts/m300-atas-options-xray-deep-dive-prompt.md` v1.7.0; Quelltext vom 2026-10-05 (USER_PROVIDED) |
@@ -168,7 +168,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 - Volland – Notional-Greeks Dealer-Buch · Optionsdaten EOD bis alle 5 Min. · Gamma, Vanna und Charm · Abdeckung Auswahl nach Notional (Umfang n. v.) · Orderflow/MBO n. v. · Ausführung n. v.. (`FACT_VOLLAND_SPEC`, Medienangabe, Konfidenz 0,65)
 - Bookmap – Orderbuch-Heatmap, Ausführung · keine nativen Optionsdaten · Greeks nur über Add-ons · Abdeckung Futures, Aktien, Krypto · Heatmap, MBO via Rithmic · eigene Ausführung. (`FACT_BOOKMAP_SPEC`, belegt, Konfidenz 0,75)
 - IBKR TWS – Broker, Portfoliorisiko · Echtzeit-Optionsdaten (Abo) · aggregiertes Greek-Exposure nur für eigene Positionen · Abdeckung global inkl. ODAX/OESX · Orderflow/MBO n. v. · eigene Ausführung. (`FACT_TWS_SPEC`, belegt, Konfidenz 0,75)
-- Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen deckt Options X-Ray nur SPX ab und die Options Chain Suite nur ES, NQ, CL und GC auf EOD-Basis; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v. (`FACT_NO_EUREX_GEX`, belegt, Konfidenz 0,75)
+- Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen liefert Options X-Ray nur SPX-Optionsdaten, und die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v. (`FACT_NO_EUREX_GEX`, belegt, Konfidenz 0,75)
 
 #### Modul 6 · DACH-Marktspezifika und steuerlicher Rahmen
 
@@ -192,7 +192,7 @@ Je Modul die gebundenen Fakten aus der DBOM. Wertungen stehen nur in Modul 8 (au
 
 <!-- /sync:MOD -->
 
-### 3.8 Modellrechnung [MODELL]
+#### Modellrechnung zu Modul 1 [MODELL]
 
 Die Berechnungslogik der Indikatoren ist in den eingesehenen Herstellerquellen nicht dokumentiert (`FACT_XRAY_10_IND`). Die folgenden Formeln sind die
 fachübliche Referenzmodellierung und nicht die belegte Implementierung des Herstellers (`FACT_DEALER_CONVENTION`,
@@ -349,7 +349,8 @@ Stichtag vom 2026-10-23, die auf einer Bildschirmkopie des Herausgebers beruht (
 berechneten Differenzen und der ungeprüften Wall-Ablesung (`FACT_GEXMETRIX_WALLS_READ`). Das Verzeichnis ist ein
 Auszug aus `provenance/m300.dbom.json` (Lehre L13/L14) und wird von dort erzeugt, nicht von Hand gepflegt. Die
 S-Nummern sind die Belegverweise in dieser Analyse. „abgeglichen“ nennt das Datum, an dem der Herausgeber Fakten
-dieser Quelle zuletzt geprüft hat; sonst gilt der Recherchezeitraum.
+dieser Quelle zuletzt geprüft hat, „erstellt“ das Datum einer vom Herausgeber erstellten Bildschirmkopie; sonst gilt
+der Recherchezeitraum.
 
 <!-- sync:QUELLEN -->
 ### Primärquellen
@@ -396,7 +397,7 @@ dieser Quelle zuletzt geprüft hat; sonst gilt der Recherchezeitraum.
 | S28 | Gamma Cockpit (DAX-GEX, Beta) | `SRC_GAMMACOCKPIT` | abgeglichen 2026-10-11 | https://gammacockpit.com/ |
 | S49 | OptionsDepth (Abdeckung, API) | `SRC_OPTIONSDEPTH` | abgeglichen 2026-10-11 | https://optionsdepth.com/ |
 | S59 | ATAS · Footprint-Charts (Volumenanalyse) | `SRC_ATAS_FOOTPRINT` | abgeglichen 2026-10-11 | https://atas.net/volume-analysis/footprint-charts/ |
-| S60 | GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; Bild nicht auf der Seite und in keinem Branch des Repositorys, SHA-256 e4b56d890e706e8c…) | `SRC_GEXMETRIX` | abgeglichen 2026-10-23 | https://www.gexmetrix.com/gex/spx |
+| S60 | GEX-Metrix Dashboard · SPX (Bildschirmkopie des Herausgebers, 2026-10-23 05:28 ET; Bild nicht auf der Seite und in keinem Branch des Repositorys, SHA-256 e4b56d890e706e8c…) | `SRC_GEXMETRIX` | erstellt 2026-10-23 | https://www.gexmetrix.com/gex/spx |
 
 ### Sekundärquellen
 
@@ -434,7 +435,7 @@ CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `prov
  "@type": "Dataset",
  "name": "M300 · M-DBOM v1",
  "dateModified": "2026-10-05",
- "version": "1.22.0",
+ "version": "1.23.0",
  "facts": [
   {
    "id": "FACT_JSTG2024_REPEAL",
@@ -867,7 +868,7 @@ CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `prov
   },
   {
    "id": "FACT_NO_EUREX_GEX",
-   "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen deckt Options X-Ray nur SPX ab und die Options Chain Suite nur ES, NQ, CL und GC auf EOD-Basis; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
+   "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen liefert Options X-Ray nur SPX-Optionsdaten, und die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
    "provenance": "CONFIRMED",
    "confidence": 0.75,
    "source": "https://learn.atas.net/options/",
@@ -932,7 +933,7 @@ CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `prov
   },
   {
    "id": "FACT_GEXMETRIX_SPX",
-   "claim": "GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET (vor Handelsbeginn): Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ, letzter Punkt deutlich negativer als die Differenz der Kopfwerte; Index von rund 7.800 auf 7.663,43.",
+   "claim": "GEX-Metrix (Intraday-Modell, Verfälle bis 2026-11-20, kostenlose Stufe mit 15 Minuten Verzögerung), Zeitstempel 2026-10-23 05:28 ET (vor Handelsbeginn): Indexstand 7.663,43; Zero Gamma (GEX-Flip) 7.861,0; Max Pain 7.725; Call-Gamma 61,56 und Put-Gamma 112,13 Mrd. USD je 1 %. Ansicht „Split View“; Legende des Strike-Diagramms nur Call GEX, Put GEX, Max Pain und GEX Flip, keine Wall ausgewiesen. Verlaufsgrafik: Gamma-Exposure bis 14.10.2026 positiv, danach überwiegend negativ, letzter Punkt deutlich negativer als die Differenz der Kopfwerte; Index von rund 7.800 auf 7.663,43.",
    "provenance": "VENDOR_CLAIM",
    "confidence": 0.75,
    "source": "https://www.gexmetrix.com/gex/spx",
@@ -1055,7 +1056,7 @@ CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `prov
 **Gesamtscore:** 13 × ✓ + 6 × ◐ = 16 von 19 Punkten = **84,2 %**.
 **Freigabeempfehlung: ÜBERARBEITUNG.**
 
-### 8.2 · Offene Prüfpunkte vor Veröffentlichung
+### Offene Prüfpunkte vor Veröffentlichung
 
 - Kennzeichnung von Quantor und Gamma Cockpit durch Zweitprüfung und Herausgeber bestätigen lassen
 - Belegstufen der Medienangaben und des abgeleiteten Quantors durch Zweitprüfung und Herausgeber bestätigen lassen

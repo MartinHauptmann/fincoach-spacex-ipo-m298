@@ -132,6 +132,10 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   und SHA-256 an der Quelle. **L53e:** Abgleichsdaten nur aus `verified.by = Herausgeber`. **L84b:** Marken-Hinweis
   auch in der Analyse vollständig. **L14b:** Quellennummern eindeutig. **L82i:** Abgleichssätze mit „ausgenommen“ nennen
   alle Ausnahmen.
+- **L05e:** Zulässige Klassen (`class`): REGULATORY_FRAMEWORK, MARKET_DATA, VENDOR_CLAIM, MEDIA_REPORT, DERIVED
+  (rechnerisch aus geprüften Fakten), READING (Ablesung aus einer datierten Bildschirmkopie, immer UNVERIFIED),
+  MODEL_ASSUMPTION, SCENARIO_PROJECTION. L78b (Momentaufnahme nach dem Stichtag) gilt für VENDOR_CLAIM, MARKET_DATA,
+  DERIVED und READING.
 - **L18f:** Jeder Quantor nennt in `basis.rule` seine Bestimmbarkeitsregel; sie gilt für alle Anbieter gleich, und
   die Gegenstandszeile der Matrix trägt `data-quantor-row`. **L76f:** Ausschlussaussagen über Anbieter („bietet keine …“)
   nur mit Gegenstand im Claim. **L82j:** Ausnahmen tragen `exception_label`; alle Transparenztexte (auch ausgeblendete)
