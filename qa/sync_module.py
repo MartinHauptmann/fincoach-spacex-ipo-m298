@@ -179,7 +179,7 @@ def main():
     s = re.sub(r"(<span data-qa-points>)[^<]*(</span>)", lambda m: m.group(1) + (de(pts, 1) if pts % 1 else str(int(pts))) + m.group(2), s)
     s = re.sub(r'(QA-Score )[\d,]+( %)', lambda m: m.group(1) + de(pct, 1) + m.group(2), s)
     page.write_text(s, encoding="utf-8")
-    open_items = re.findall(r"<li[^>]*data-open[^>]*>([^<]*)</li>", s)
+    open_items = [re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", t))).strip() for t in re.findall(r"<li[^>]*data-open[^>]*>(.*?)</li>", s, re.S)]  # 26. ZP B3: auch Punkte mit Badges
 
     # Analyse
     mds = sorted((page.parent / "analysen").glob(f"m{mod}-*deep-dive*.md"))

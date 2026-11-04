@@ -223,6 +223,10 @@ def main():
         report("L05c Verdict zulässig", BLOCKER, not badv, "unzulässig: " + ", ".join(badv) if badv else "alle zulässig")
         bad = [f["id"] for f in F if f["verdict"] == "CONFIRMED" and (f["class"] in ("MEDIA_REPORT", "MODEL_ASSUMPTION", "SCENARIO_PROJECTION") or f["confidence"] < 0.7)]
         report("L05 Verdict-Klasse", BLOCKER, not bad, "CONFIRMED trotz Medien/Modell/Konf.<0,7: " + ", ".join(bad) if bad else "konsistent")
+        # L05e (26. ZP) · Klassen nur aus der Liste des Skills; READING nur mit UNVERIFIED
+        CLS = {"REGULATORY_FRAMEWORK", "MARKET_DATA", "VENDOR_CLAIM", "MEDIA_REPORT", "DERIVED", "READING", "MODEL_ASSUMPTION", "SCENARIO_PROJECTION"}
+        l05e = [f"{f['id']}: Klasse {f['class']}" for f in F if f["class"] not in CLS] + [f"{f['id']}: READING mit {f['verdict']}" for f in F if f["class"] == "READING" and f["verdict"] != "UNVERIFIED"]
+        report("L05 Klasse zulässig (L05e)", BLOCKER, not l05e, "; ".join(l05e[:3]) if l05e else f"{len(F)} Fakten mit zulässiger Klasse")
         wrong_kpi = sorted({fid for fid, cls in t.refs if "confirmed-kpi" in cls and facts.get(fid, {}).get("verdict") != "CONFIRMED"})
         report("L05b KPI-Stil", BLOCKER, not wrong_kpi, "confirmed-kpi auf nicht bestätigtem Fakt: " + ", ".join(wrong_kpi) if wrong_kpi else "konsistent")
         noper = [f["id"] for f in F if f["verdict"] == "CONFIRMED" and not re.search(r"\b(19|20)\d\d\b", f.get("period", ""))]
@@ -877,6 +881,11 @@ def main():
         pubd = {c_["date"] for c_ in dbom.get("publisher_checks", [])}
         l53e = [f"{f['id']}: Herausgeber-Prüfung {f['verified'].get('date')} nicht in publisher_checks" for f in F if f.get("verified", {}).get("by") == "Herausgeber" and f["verified"].get("date") not in pubd]
         l53e += [f"{f['id']}: Ableitung als Herausgeber-Prüfung" for f in F if f.get("evidence") == "derived" and f.get("verified", {}).get("by") == "Herausgeber"]
+        l53f = [f"publisher_checks {c_.get('date')}: Art „{c_.get('kind')}“" for c_ in dbom.get("publisher_checks", []) if c_.get("kind") not in ("Abgleich", "Erstellung")]
+        if md:  # „abgeglichen D“ im Quellenverzeichnis nur mit Abgleich-Eintrag D
+            abg = {c_["date"] for c_ in dbom.get("publisher_checks", []) if c_.get("kind") == "Abgleich"}
+            l53f += [f"Quellenverzeichnis „abgeglichen {d_}“ ohne Abgleich-Eintrag" for d_ in sorted(set(re.findall(r"\| abgeglichen (\d{4}-\d{2}-\d{2}) \|", md))) if d_ not in abg]
+        report("L53 Herausgeber-Prüfungen nach Art (L53f)", BLOCKER, not l53f, "; ".join(l53f[:3]) if l53f else "Prüfarten zulässig, Abgleichsdaten belegt")
         report("L53e Herausgeber-Prüfdaten dokumentiert", BLOCKER, bool(pubd) and not l53e, "; ".join(l53e[:3]) if l53e else (f"{len(pubd)} dokumentierte Prüfungen" if pubd else "publisher_checks fehlt"))
         # L82c · Freigabeumfang passt zum caveat; Mehrzahl von Berichten nur mit ≥ 2 Quellen
         l82c = []
@@ -1168,7 +1177,15 @@ def main():
         def _exc(f):
             sc = f.get("verified", {}).get("scope", "")
             return f.get("evidence") in ("screenshot", "derived") or bool(f.get("verified")) and ("Original" not in sc or re.search(r"(?i)nicht (?:im volltext )?eingesehen|medienbericht", sc + " " + f.get("caveat", "")))  # L82g: Bildschirmkopie ist kein Abgleich am Original
-        exc = [f for f in F if _exc(f) and f["verdict"] != "SCENARIO_PROJECTION"]  # 25. ZP: auch abgeleitete Fakten sind Ausnahmen vom Abgleich am Original
+        exc = [f for f in F if _exc(f) and f["verdict"] != "SCENARIO_PROJECTION"]
+
+        def _labels(f):  # L82j (26. ZP): Literale, je ≥ 4 Zeichen, die im Fakt (claim, caveat, keep_reason) stehen
+            raw = f.get("exception_label")
+            labs = raw if isinstance(raw, list) else [raw]
+            ftxt = " ".join(str(f.get(k_, "")) for k_ in ("claim", "caveat", "keep_reason"))
+            return [l_ for l_ in labs if isinstance(l_, str) and len(l_) >= 4 and l_ in ftxt]
+        l82j = [f"{f['id']}: exception_label ungültig" for f in F if "exception_label" in f and not _labels(f)]
+        report("L82d exception_label gültig (L82j)", BLOCKER, not l82j, "; ".join(l82j[:3]) if l82j else "alle Ausnahme-Namen als Literal im Fakt")  # 25. ZP: auch abgeleitete Fakten sind Ausnahmen vom Abgleich am Original
         l82e = [f"{f['id']}: evidence fulltext bei Prüfumfang „{f['verified'].get('scope', '')[:30]}“" for f in exc if f.get("evidence") == "fulltext"]
         # L82f · Hauptquelle der Stufe secondary ⇒ Belegstufe secondary (nicht fulltext)
         l82e += [f"{f['id']}: Sekundärquelle, aber evidence {f.get('evidence')}" for f in F if stier.get(f["source_id"]) == "secondary" and f.get("evidence") not in ("secondary", "model")]
@@ -1188,7 +1205,7 @@ def main():
                     for f in exc:
                         nm = f["claim"].split()[0].strip(":,")
                         parts_ = [p_ for p_ in re.split(r"-", nm) if len(p_) > 2]
-                        named = f["id"] in sent or (re.search(f["exception_label"], sent) if f.get("exception_label") else bool(parts_) and all(p_ in sent for p_ in parts_)) or \
+                        named = f["id"] in sent or (any(l_ in sent for l_ in _labels(f)) if f.get("exception_label") else bool(parts_) and all(p_ in sent for p_ in parts_)) or \
                             (f["verdict"] == "MEDIA_REPORT" and re.search(r"(?i)medienangabe|sekundärquelle", sent)) or \
                             (not f.get("exception_label") and any(len(p_) > 4 and p_ in sent for p_ in re.split(r"[-:]", nm)))  # Name, ID, Kategorie oder Namensteil; 25. ZP: leere Namensmenge zählt nicht
                         if not (named and re.search(r"(?i)außer|ausgenommen|ausnahme|bis auf|nur am medienbericht|am medienbericht", sent)) or re.search(r"(?i)\bkeine? ausnahme", sent):
@@ -1232,7 +1249,7 @@ def main():
                 l18b.append(f"{f['id']}: Basis {b_['compared']}/{b_['determinable']} passt nicht zu {len(df)} bestimmbaren + {len(b_.get('not_verifiable', []))} n. v.")
             for v_, fids in dfl.items():
                 for fid in fids:
-                    if fid not in facts or not re.search(b_.get("subject", "$^"), facts[fid]["claim"]) or v_ in b_.get("not_verifiable", []):
+                    if fid not in facts or not (re.search(b_.get("subject", "$^"), facts[fid]["claim"]) or (b_.get("frequency_subject") and re.search(b_["frequency_subject"], facts[fid]["claim"]))) or v_ in b_.get("not_verifiable", []):
                         l18b.append(f"{f['id']}: {v_} ohne Aussage zum Gegenstand in {fid}")
             # Text: in Klammern als bestimmbar genannte Anbieter stehen in determinable_from
             keys = " ".join(df)
@@ -1264,6 +1281,18 @@ def main():
             n_mark = len(re.findall(r'data-quantor-row="%s"' % re.escape(f["id"]), html))
             if n_cmp and n_mark != 1:
                 l18b.append(f"{f['id']}: {n_mark} Zeilen mit data-quantor-row statt genau einer")
+            for tb in re.finditer(r"<table\b[^>]*>(.*?)</table>", html, re.S):  # L18f (26. ZP): Markierung nur in einer Vergleichstabelle
+                if ('data-quantor-row="%s"' % f["id"]) in tb.group(1) and not _is_cmp([_txt(h).replace("¶", "").strip() for h in re.findall(r"<th\b[^>]*>(.*?)</th>", tb.group(1), re.S)]):
+                    l18b.append(f"{f['id']}: data-quantor-row außerhalb einer Vergleichstabelle")
+            # L18g (26. ZP) · Gegenstand und Frequenz getrennt; Einschränkungen im Quantor-Claim stehen im Basisfakt
+            for alt_ in [a_ for a_ in b_.get("subject", "").split("|") if a_]:
+                if not re.fullmatch(r"(?:\\b)?(?:Eurex|ODAX|OESX|FDAX|FESX)|(?:\\b)?nur [A-Z][\w-]*", alt_):
+                    l18b.append(f"{f['id']}: basis.subject-Alternative „{alt_}“ ist kein Gegenstand (Frequenz gehört in frequency_subject)")
+            base_txt = [facts[x_]["claim"] for x_ in allf if x_ in facts]
+            for m_ in re.finditer(r"\b(nur|ausschließlich|allein)\s+(?:(?:für|auf|bei|in|mit|über)\s+)?([A-Z0-9][\w-]*)", f["claim"]):
+                head = re.split(r"[-–]", m_.group(2))[0]
+                if not any(re.search(r"\b%s\s+%s" % (m_.group(1), re.escape(head)), bt) for bt in base_txt):
+                    l18b.append(f"{f['id']}: „{m_.group(0)}“ steht in keinem Basisfakt (L18g)")
             # Vergleichstabellen: Zeile zum Gegenstand (Merkmal trifft basis.subject): Ja/Nein-Zellen nur für bestimmbare Anbieter
             for tb in re.finditer(r"<table\b[^>]*>(.*?)</table>", html, re.S):
                 hdr = [_txt(h).replace("¶", "").strip() for h in re.findall(r"<th\b[^>]*>(.*?)</th>", tb.group(1), re.S)]
@@ -1272,7 +1301,7 @@ def main():
                 for rtag, row in re.findall(r"(<tr\b[^>]*>)(.*?)</tr>", tb.group(1), re.S):
                     cells = [_txt(c_).replace("¶", "").strip() for c_ in re.findall(r"<td\b[^>]*>(.*?)</td>", row, re.S)]
                     rowids = set(re.findall(r"FACT_[A-Z0-9_]+", row))
-                    full = bool(cells) and (('data-quantor-row="%s"' % f["id"]) in rtag or re.search(b_.get("subject", "$^").split("|")[0], cells[0]))
+                    full = bool(cells) and (('data-quantor-row="%s"' % f["id"]) in rtag or re.search(r"Eurex|ODAX|OESX|FDAX|FESX", cells[0]))  # 26. ZP: jede Zeile zum Gegenstand
                     yn = bool(cells) and not full and bool(allf & rowids)  # L18b2: Ja/Nein-Zellen jeder an die Basis gebundenen Zeile
                     if not (full or yn):
                         continue
@@ -1281,6 +1310,14 @@ def main():
                             continue
                         if j < len(hdr) and not c_.startswith("n.v.") and not any(w in keys for w in hdr[j].split()):
                             l18b.append(f"Zeile {cells[0][:15]}: {hdr[j]} „{c_[:15]}“ ohne Fakt mit Aussage zum Gegenstand")
+        l18h = []
+        for f in F:  # L18h (26. ZP) · jeder Basisfakt steht im Prüfvermerk des Quantors
+            b_ = f.get("basis") or {}
+            for v_, x_ in (b_.get("determinable_from") or {}).items():
+                for fid in (x_ if isinstance(x_, list) else [x_]):
+                    if not re.search(r"(?<![\w])%s(?![\w])" % re.escape(fid), f.get("verified", {}).get("scope", "")):
+                        l18h.append(f"{f['id']}: {fid} nicht im verified.scope")
+        report("L18h Basisfakten im Prüfvermerk", BLOCKER, not l18h, "; ".join(l18h[:3]) if l18h else "alle Basisfakten im Prüfvermerk")
         report("L18b Quantor-Basis aus Anbieterfakten", BLOCKER, not l18b, "; ".join(l18b[:3]) if l18b else "jede Quantor-Basis aus Anbieterfakten abgeleitet")
         # L12c · Vergleichstabellen (erste Spalte „Merkmal“): jede Datenzelle ist an einen Fakt gebunden (td/tr/table) oder ganz n. v.
         l12c = []
@@ -1520,7 +1557,7 @@ def main():
         report("L32b KaTeX ≥ 0.16.10", BLOCKER, ver >= (0, 16, 10), "KaTeX " + ".".join(map(str, ver)))
     # ---------- L34 · Offen-Liste Seite = Analyse
     if md:
-        po = [re.sub(r"\s+", " ", t).strip() for t in re.findall(r"<li[^>]*data-open[^>]*>([^<]*)</li>", html)]
+        po = [re.sub(r"\s+", " ", __import__("html").unescape(re.sub(r"<[^>]+>", " ", t))).strip() for t in re.findall(r"<li[^>]*data-open[^>]*>(.*?)</li>", html, re.S)]  # L34b: auch Punkte mit innerem Markup
         sec7 = re.search(r"### Offene Prüfpunkte vor Veröffentlichung\n\n((?:- .*\n)+)", md)
         mo = [x[2:].strip() for x in sec7.group(1).splitlines()] if sec7 else []
         report("L34 Offen-Liste Seite = Analyse", BLOCKER, bool(po) and po == mo, f"{len(po)} Punkte identisch" if po == mo and po else f"Seite {len(po)} · Analyse {len(mo)} Punkte, abweichend")

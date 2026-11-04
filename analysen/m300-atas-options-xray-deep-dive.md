@@ -1062,6 +1062,7 @@ CONFIRMED (Primär-, Hersteller- und abgeleitete Fakten zusammen), das Tag `prov
 - Belegstufen der Medienangaben und des abgeleiteten Quantors durch Zweitprüfung und Herausgeber bestätigen lassen
 - Widerspruchsfreiheit von These und Belegstufen-Definition durch Zweitprüfung bestätigen lassen
 - Einschränkung der Bewertung „Nutzen“ der Eurex-Erweiterung durch Zweitprüfung bestätigen lassen
+- Walls des ganzen SPX-Profils (außerhalb des Ausschnitts 7.625–7.850) an einer vollständigen Bildschirmkopie prüfen (Momentaufnahme nach dem Stichtag) UNGEPRÜFT
 - Claim A11 (NDX/NQ-0DTE-Dynamik) bleibt als [N. V.] gekennzeichnet, bis eine Quelle vorliegt
 - Löschung des alten Commits 6465f29 mit der Bildschirmkopie beim GitHub-Support beantragen und den Abruf danach erneut prüfen
 - Bestimmbarkeitsregel (Abdeckung je ausgewerteter GEX-Funktion) gilt für alle Anbieter gleich, TWS n. v., „keine Walls“ nur für die Bildschirmkopie; durch Zweitprüfung bestätigen lassen

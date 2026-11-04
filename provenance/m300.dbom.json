@@ -623,7 +623,7 @@
       "confidence": 0.75,
       "claim": "Von sechs verglichenen Anbietern ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen liefert Options X-Ray nur SPX-Optionsdaten, und die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
       "source_id": "SRC_ATAS_LEARN",
-      "caveat": "Abgeleitet aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE (Herstellerangaben, am Original geprüft). Regel für alle Anbieter: bestimmbar ist ein Anbieter, wenn für jede ausgewertete GEX-Funktion eine geprüfte Angabe Eurex-Intraday-GEX ausschließt, entweder über eine ausdrücklich begrenzte Abdeckung („nur …“) oder über die Frequenz (EOD). Abdeckungslisten ohne „nur“ gelten nicht als abschließend. SpotGamma nennt eine solche Liste (SPX, NDX, ETFs, Einzelaktien) und bleibt deshalb n. v.; für die IBKR TWS ist keine GEX-Funktion belegt (FACT_TWS_SPEC: Greek-Exposure nur für eigene Positionen); für MenthorQ, Volland und Bookmap enthalten die Fakten keine Eurex-Aussage. Weitere ATAS-Funktionen sind nicht ausgewertet; die Aussage gilt nur für die beiden ausgewerteten.",
+      "caveat": "Quantor, abgeleitet aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE (Herstellerangaben, am Original geprüft). Regel für alle Anbieter: bestimmbar ist ein Anbieter, wenn für jede ausgewertete GEX-Funktion eine geprüfte Angabe Eurex-Intraday-GEX ausschließt, entweder über eine ausdrücklich begrenzte Abdeckung („nur …“) oder über die Frequenz (EOD). Abdeckungslisten ohne „nur“ gelten nicht als abschließend. SpotGamma nennt eine solche Liste (SPX, NDX, ETFs, Einzelaktien) und bleibt deshalb n. v.; für die IBKR TWS ist keine GEX-Funktion belegt (FACT_TWS_SPEC: Greek-Exposure nur für eigene Positionen); für MenthorQ, Volland und Bookmap enthalten die Fakten keine Eurex-Aussage. Weitere ATAS-Funktionen sind nicht ausgewertet; die Aussage gilt nur für die beiden ausgewerteten.",
       "period": "Stand 2026-10-05",
       "basis": {
         "compared": 6,
@@ -636,14 +636,15 @@
           "Bookmap",
           "IBKR TWS"
         ],
-        "subject": "Eurex|\\bnur SPX|\\bEOD\\b",
+        "subject": "Eurex|ODAX|OESX|\\bnur SPX",
         "determinable_from": {
           "ATAS": [
             "FACT_XRAY_1MIN_SPX",
             "FACT_CHAIN_SUITE"
           ]
         },
-        "rule": "Bestimmbar, wenn für jede ausgewertete GEX-Funktion eines Anbieters eine geprüfte Angabe Eurex-Intraday-GEX ausschließt: ausdrücklich begrenzte Abdeckung („nur …“) oder Frequenz EOD. Abdeckungslisten ohne „nur“ gelten nicht als abschließend; sonst n. v."
+        "rule": "Bestimmbar, wenn für jede ausgewertete GEX-Funktion eines Anbieters eine geprüfte Angabe Eurex-Intraday-GEX ausschließt: ausdrücklich begrenzte Abdeckung („nur …“) oder Frequenz EOD. Abdeckungslisten ohne „nur“ gelten nicht als abschließend; sonst n. v.",
+        "frequency_subject": "\\bEOD\\b"
       },
       "keep_reason": "Tragend für die strategische Einordnung (These, S11); Quantor mit Basis.",
       "evidence": "derived",
@@ -655,7 +656,9 @@
       "supporting_sources": [
         "SRC_ATAS_CHAIN"
       ],
-      "exception_label": "Quantor"
+      "exception_label": [
+        "Quantor"
+      ]
     },
     {
       "id": "FACT_GAMMACOCKPIT_SPEC",
@@ -741,7 +744,9 @@
         ]
       },
       "after_stichtag": "Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.",
-      "exception_label": "GEX-Metrix"
+      "exception_label": [
+        "GEX-Metrix"
+      ]
     },
     {
       "id": "FACT_GEXMETRIX_DERIVED",
@@ -750,11 +755,13 @@
       "confidence": 0.7,
       "claim": "Aus FACT_GEXMETRIX_SPX berechnet: Differenz der Kopfwerte Call-Gamma minus Put-Gamma 61,56 − 112,13 = −50,57 Mrd. USD je 1 % (nicht der Netto-Wert des Anbieters); Abstand Index zum GEX-Flip 7.663,43 − 7.861,0 = −197,57 Punkte.",
       "source_id": "SRC_GEXMETRIX",
-      "caveat": "Eigene Rechnung aus den Kopfwerten; einen Netto-Wert des Anbieters zeigt die Bildschirmkopie nur in der Verlaufsgrafik.",
+      "caveat": "Eigene Rechnung aus den Kopfwerten der GEX-Metrix-Bildschirmkopie; einen Netto-Wert des Anbieters zeigt die Bildschirmkopie nur in der Verlaufsgrafik.",
       "period": "2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX)",
       "evidence": "derived",
       "after_stichtag": "Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.",
-      "exception_label": "GEX-Metrix"
+      "exception_label": [
+        "GEX-Metrix"
+      ]
     },
     {
       "id": "FACT_GEXMETRIX_WALLS_READ",
@@ -763,12 +770,15 @@
       "confidence": 0.5,
       "claim": "Im angezeigten Strike-Bereich 7.625–7.850 der Bildschirmkopie ist der längste Call-Balken bei 7.800 und der längste Put-Balken bei 7.650; Strikes außerhalb des Ausschnitts sind nicht sichtbar, bei 7.800 und 7.750 sind die Call-Balken fast gleich lang.",
       "source_id": "SRC_GEXMETRIX",
-      "caveat": "Ablesung von Balkenlängen in einem Ausschnitt, keine Anbieterangabe und keine Rechnung; die Walls des ganzen Profils können außerhalb liegen.",
+      "caveat": "Wall-Ablesung: Balkenlängen in einem Ausschnitt abgelesen, keine Anbieterangabe und keine Rechnung; die Walls des ganzen Profils können außerhalb liegen.",
       "keep_reason": "Bleibt als ungeprüfte Ablesung im Modul S05, weil sie das Zusammenspiel der Marken am echten Beispiel zeigt; Gate Q9 hält den Vorbehalt fest.",
       "period": "2026-10-23 05:28 ET (wie FACT_GEXMETRIX_SPX)",
       "evidence": "screenshot",
       "after_stichtag": "Ablesung aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.",
-      "exception_label": "Wall|abgelesen"
+      "exception_label": [
+        "Wall-Ablesung",
+        "abgelesen"
+      ]
     },
     {
       "id": "FACT_ROADMAP",
@@ -1522,6 +1532,12 @@
     {
       "date": "2026-10-28",
       "event": "26. Zweitprüfung (v1.22.0): Q2 und Q10 bestätigt (✓); Score 16,0/19 = 84,2 %, keine Freigabe; Befunde B1–B14 im QA-Bericht §55 (u. a. Bestimmbarkeitsregel ATAS/SpotGamma ungleich, unbelegtes „nur“ zur Chain Suite, Offen-Punkt Q9 fehlt in der Analyse, L82d/L18f umgehbar).",
+      "qa_score_pct": 84.2,
+      "release": "ÜBERARBEITUNG"
+    },
+    {
+      "date": "2026-11-04",
+      "event": "v1.23.0: Befunde B1–B14 der 26. Zweitprüfung. Teil 1 (Inhalt): Bestimmbarkeit nach Variante (a), unbelegtes „nur“ entfernt, KPI-Bindung, Ansicht/Legende der Bildschirmkopie im Claim, publisher_checks mit Art, Klasse READING in Skill/Prompt, Live-Audit-Zählung, Nummerierung; Hero-Grafik assets/hero-m300.png. Teil 2 (Tests nach Holdout r26, Erstlauf 10/28, danach 28/28): L18f/L18g/L18h, L34b, L82j, L05e, L53f; basis.subject und frequency_subject getrennt; exception_label als Literale.",
       "qa_score_pct": 84.2,
       "release": "ÜBERARBEITUNG"
     }

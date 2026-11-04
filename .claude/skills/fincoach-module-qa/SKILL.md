@@ -132,6 +132,10 @@ einen Testlauf oder eine dokumentierte Einzelprüfung belegt ist, ist ◐.
   und SHA-256 an der Quelle. **L53e:** Abgleichsdaten nur aus `verified.by = Herausgeber`. **L84b:** Marken-Hinweis
   auch in der Analyse vollständig. **L14b:** Quellennummern eindeutig. **L82i:** Abgleichssätze mit „ausgenommen“ nennen
   alle Ausnahmen.
+- **L18g/L18h:** `basis.subject` nennt nur den Gegenstand (Eurex/ODAX/OESX/FDAX/FESX oder „nur <Basiswert>“), die
+  Frequenz steht in `frequency_subject`. Einschränkungen („nur“, „ausschließlich“, „allein“) im Quantor-Claim stehen im
+  Basisfakt. Jeder Basisfakt steht im `verified.scope` des Quantors. **L34b:** Offen-Punkte mit Markup zählen mit.
+  **L82j:** `exception_label` ist eine Liste von Literalen (je ≥ 4 Zeichen), die im Fakt stehen.
 - **L05e:** Zulässige Klassen (`class`): REGULATORY_FRAMEWORK, MARKET_DATA, VENDOR_CLAIM, MEDIA_REPORT, DERIVED
   (rechnerisch aus geprüften Fakten), READING (Ablesung aus einer datierten Bildschirmkopie, immer UNVERIFIED),
   MODEL_ASSUMPTION, SCENARIO_PROJECTION. L78b (Momentaufnahme nach dem Stichtag) gilt für VENDOR_CLAIM, MARKET_DATA,
