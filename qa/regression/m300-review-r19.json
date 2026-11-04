@@ -34,7 +34,7 @@
     ],
     [
      "m300.html",
-     "In den ausgewerteten ATAS-Funktionen gibt es keine intraday-fähige Eurex-GEX (Options X-Ray nur SPX, Options Chain Suite nur EOD); für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
+     "In den ausgewerteten ATAS-Funktionen gibt es keine intraday-fähige Eurex-GEX (Options X-Ray nur SPX, Options Chain Suite mit täglichem EOD-Snapshot); für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
      "ATAS selbst und MenthorQ bieten keine intraday-fähige Eurex-GEX; für SpotGamma, Volland, Bookmap und die IBKR TWS n. v."
     ],
     [
@@ -44,8 +44,8 @@
     ],
     [
      "provenance/m300.dbom.json",
-     "ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen deckt Options X-Ray nur SPX ab und die Options Chain Suite nur ES, NQ, CL und GC auf EOD-Basis; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
-     "ist nur für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten (ATAS: X-Ray nur SPX; MenthorQ: Eurex-GEX n. v.); für die übrigen vier (SpotGamma, Volland, Bookmap, IBKR TWS) n. v."
+     "ist nur für einen bestimmbar, dass er keine intraday-fähige Eurex-GEX anbietet: In den ausgewerteten ATAS-Funktionen liefert Options X-Ray nur SPX-Optionsdaten, und die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig; für die übrigen fünf (SpotGamma, MenthorQ, Volland, Bookmap, IBKR TWS) n. v.",
+     "ist nur für zwei bestimmbar, dass sie keine intraday-fähige Eurex-GEX anbieten: In den ausgewerteten ATAS-Funktionen liefert Options X-Ray nur SPX-Optionsdaten, und die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig; MenthorQ: Eurex-GEX n. v.; für die übrigen vier (SpotGamma, Volland, Bookmap, IBKR TWS) n. v."
     ],
     [
      "analysen/m300-atas-options-xray-deep-dive.md",

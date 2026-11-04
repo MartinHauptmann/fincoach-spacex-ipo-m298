@@ -2664,7 +2664,7 @@
    "edits": [
     [
      "m300.html",
-     "² In der Bildschirmkopie (kostenlose Stufe, Split View) ist keine Wall ausgewiesen;",
+     "² In der Bildschirmkopie (kostenlose Stufe, Ansicht „Split View“; Legende nur Call GEX, Put GEX, Max Pain, GEX Flip) ist keine Wall ausgewiesen;",
      "² Der Anbieter weist keine Walls aus;"
     ]
    ]
@@ -2676,7 +2676,7 @@
    "edits": [
     [
      "m300.html",
-     "² In der Bildschirmkopie (kostenlose Stufe, Split View) ist keine Wall ausgewiesen;",
+     "² In der Bildschirmkopie (kostenlose Stufe, Ansicht „Split View“; Legende nur Call GEX, Put GEX, Max Pain, GEX Flip) ist keine Wall ausgewiesen;",
      "² Der Anbieter weist auch in den Bezahlstufen keine Walls aus;"
     ]
    ]
@@ -2712,8 +2712,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"by\": \"Ableitung aus geprüften Fakten (nicht gesondert vom Herausgeber geprüft)\",\n        \"date\": \"2026-10-27\",",
-     "\"by\": \"Herausgeber\",\n        \"date\": \"2026-10-27\","
+     "\"by\": \"Ableitung aus geprüften Fakten (nicht gesondert vom Herausgeber geprüft)\",\n        \"date\": \"2026-11-04\",",
+     "\"by\": \"Herausgeber\",\n        \"date\": \"2026-11-04\","
     ]
    ]
   },

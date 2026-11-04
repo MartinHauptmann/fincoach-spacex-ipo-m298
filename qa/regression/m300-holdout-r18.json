@@ -340,7 +340,7 @@
    "edits": [
     [
      "m300.html",
-     "In den ausgewerteten ATAS-Funktionen gibt es keine intraday-fähige Eurex-GEX (Options X-Ray nur SPX, Options Chain Suite nur EOD); für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
+     "In den ausgewerteten ATAS-Funktionen gibt es keine intraday-fähige Eurex-GEX (Options X-Ray nur SPX, Options Chain Suite mit täglichem EOD-Snapshot); für SpotGamma, MenthorQ, Volland, Bookmap und die IBKR TWS n. v.",
      "keiner der bestimmbaren Anbieter (ATAS selbst, MenthorQ) bietet intraday-fähige Eurex-GEX; für SpotGamma, Volland, Bookmap und die IBKR TWS n. v."
     ]
    ]
