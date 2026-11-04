@@ -1,0 +1,397 @@
+{
+ "page": "m300.html",
+ "source": "Holdout r26, unabhängig geschrieben vor Teständerung (L50c)",
+ "cases": [
+  {
+   "name": "H26-01 L18g: Einschränkung „nur ES, NQ, CL und GC“ im Quantor-Claim, Basisfakt FACT_CHAIN_SUITE ohne „nur“",
+   "expect": "L18b|L18g",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig",
+     "die Options Chain Suite deckt nur ES, NQ, CL und GC ab und arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig"
+    ]
+   ]
+  },
+  {
+   "name": "H26-02 L18g: „ausschließlich“ statt „nur“ im Quantor-Claim zu FACT_CHAIN_SUITE",
+   "expect": "L18b|L18g",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "die Options Chain Suite arbeitet mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig",
+     "die Options Chain Suite arbeitet ausschließlich für ES, NQ, CL und GC mit dem täglichen Open-Interest-Snapshot (EOD), ist also nicht intraday-fähig"
+    ]
+   ]
+  },
+  {
+   "name": "H26-03 L18g: basis.subject ergebnisgeschneidert erweitert („deckt … ab“), Frequenz getrennt",
+   "expect": "L18b|L18g",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\",",
+     "\"subject\": \"Eurex|\\\\bnur SPX|deckt .* ab\", \"frequency_subject\": \"\\\\bEOD\\\\b\","
+    ]
+   ]
+  },
+  {
+   "name": "H26-04 L18g: Frequenz-Kriterium EOD bleibt in basis.subject (zusätzlich frequency_subject)",
+   "expect": "L18b|L18g",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\",",
+     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\", \"frequency_subject\": \"\\\\bEOD\\\\b\","
+    ]
+   ]
+  },
+  {
+   "name": "H26-05 L18b: SpotGamma über Abdeckungsliste ohne „nur“ als bestimmbar geführt",
+   "expect": "L18b|L18g|L18",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\",",
+     "\"subject\": \"Eurex|\\\\bnur SPX|Abdeckung SPX\", \"frequency_subject\": \"\\\\bEOD\\\\b\","
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"determinable\": 1,",
+     "\"determinable\": 2,"
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"not_verifiable\": [\n          \"SpotGamma\",\n",
+     "\"not_verifiable\": [\n"
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"FACT_CHAIN_SUITE\"\n          ]\n        },\n        \"rule\"",
+     "\"FACT_CHAIN_SUITE\"\n          ],\n          \"SpotGamma\": [\n            \"FACT_SPOTGAMMA_SPEC\"\n          ]\n        },\n        \"rule\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-06 L18b: Basisfakt FACT_ATAS_FOOTPRINT (trifft weder Gegenstand noch Frequenz) in determinable_from und scope",
+   "expect": "L18b|L18g|L18",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"FACT_CHAIN_SUITE\"\n          ]\n        },\n        \"rule\"",
+     "\"FACT_CHAIN_SUITE\",\n            \"FACT_ATAS_FOOTPRINT\"\n          ]\n        },\n        \"rule\""
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"scope\": \"Ableitung aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE\"",
+     "\"scope\": \"Ableitung aus FACT_XRAY_1MIN_SPX, FACT_CHAIN_SUITE und FACT_ATAS_FOOTPRINT\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-07 L18h: verified.scope des Quantors ohne FACT_CHAIN_SUITE (nur umschrieben)",
+   "expect": "L18h|L18",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"scope\": \"Ableitung aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE\"",
+     "\"scope\": \"Ableitung aus FACT_XRAY_1MIN_SPX und der Options Chain Suite\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-08 L18h: verified.scope nennt FACT_CHAIN_SUITE_V2 (Präfix-Treffer, falsche ID)",
+   "expect": "L18h|L18",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"scope\": \"Ableitung aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE\"",
+     "\"scope\": \"Ableitung aus FACT_XRAY_1MIN_SPX und FACT_CHAIN_SUITE_V2\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-09 L18f: Markierung in die Roadmap-Tabelle S11 verschoben, Eurex-Zeile in S09 umbenannt",
+   "expect": "L18b|L18f|L18",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td>",
+     "<tr><td>GEX intraday (Europa)</td>"
+    ],
+    [
+     "m300.html",
+     "<tr><td><strong>Eurex-X-Ray</strong>",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td><strong>Eurex-X-Ray</strong>"
+    ]
+   ]
+  },
+  {
+   "name": "H26-10 L18f: Zusatzzeile „ODAX-GEX intraday“ mit SpotGamma „nein“ (nicht bestimmbar)",
+   "expect": "L18b|L18f|L18",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
+     "nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>\n        <tr><td>ODAX-GEX intraday</td><td>n. v.</td><td>nein</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>"
+    ]
+   ]
+  },
+  {
+   "name": "H26-11 L18f: Zusatzzeile „FDAX-Optionen: GEX“ mit IBKR TWS „ja“",
+   "expect": "L18b|L18f|L18",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>",
+     "nein (X-Ray nur SPX, Chain Suite EOD) <span class=\"badge b-v\">VENDOR</span></td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td></tr>\n        <tr><td>FDAX-Optionen: GEX</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>n. v.</td><td>ja</td></tr>"
+    ]
+   ]
+  },
+  {
+   "name": "H26-12 L18f: data-quantor-row an der Gegenstandszeile entfernt",
+   "expect": "L18b|L18f|L18",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td>",
+     "<tr><td>Eurex-GEX intraday</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H26-13 L34b: neuer Offen-Punkt mit Badge nur auf der Seite",
+   "expect": "L34",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<li data-gate=\"C5\" data-open>",
+     "<li data-gate=\"Q4\" data-open>Belegstufe der Bildschirmkopie durch den Herausgeber bestätigen lassen <span class=\"dbom-class-badge\">ABGELEITET</span></li>\n        <li data-gate=\"C5\" data-open>"
+    ]
+   ]
+  },
+  {
+   "name": "H26-14 L34b: Badge in bestehenden Offen-Punkt A11 eingefügt, Analyse nicht nachgezogen",
+   "expect": "L34",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "bis eine Quelle vorliegt</li>",
+     "bis eine Quelle vorliegt <span class=\"dbom-class-badge\">N. V.</span></li>"
+    ]
+   ]
+  },
+  {
+   "name": "H26-15 L82j: exception_label „.“ am Quantor, Datenherkunft ohne Quantor",
+   "expect": "L82d|L82",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"exception_label\": \"Quantor\"",
+     "\"exception_label\": \".\""
+    ],
+    [
+     "m300.html",
+     "(an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray und Options Chain Suite) und das GEX-Metrix",
+     "(an ihrer Sekundärquelle) und das GEX-Metrix"
+    ]
+   ]
+  },
+  {
+   "name": "H26-16 L82j: exception_label „Gesetzestexte“ (nicht im Fakt, aber im Satz), Datenherkunft ohne Quantor",
+   "expect": "L82d|L82",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"exception_label\": \"Quantor\"",
+     "\"exception_label\": \"Gesetzestexte\""
+    ],
+    [
+     "m300.html",
+     "(an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray und Options Chain Suite) und das GEX-Metrix",
+     "(an ihrer Sekundärquelle) und das GEX-Metrix"
+    ]
+   ]
+  },
+  {
+   "name": "H26-17 L82j: exception_label „.*“ (Regex) an GEX-Metrix-Fakten, Daten-Transparenz ohne GEX-Metrix",
+   "expect": "L82d|L82",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \"GEX-Metrix\"",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \".*\""
+    ],
+    [
+     "provenance/m300.dbom.json",
+     "\"after_stichtag\": \"Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \"GEX-Metrix\"",
+     "\"after_stichtag\": \"Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \".*\""
+    ],
+    [
+     "m300.html",
+     "ebenso wie der abgeleitete Quantor (aus zwei geprüften Herstellerangaben) und das GEX-Metrix-Beispiel vom 2026-10-23, das auf einer Bildschirmkopie des Herausgebers beruht, mit daraus berechneten Differenzen und ungeprüfter Wall-Ablesung.",
+     "ebenso wie der abgeleitete Quantor (aus zwei geprüften Herstellerangaben) und die ungeprüfte Wall-Ablesung."
+    ]
+   ]
+  },
+  {
+   "name": "H26-18 L82j: exception_label „Quantor|a“ (Alternative unter 4 Zeichen), Quellenverzeichnis-Einleitung der Analyse ohne Quantor",
+   "expect": "L82d|L82",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"exception_label\": \"Quantor\"",
+     "\"exception_label\": \"Quantor|a\""
+    ],
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "Sekundärquelle), den\nabgeleiteten Quantor `FACT_NO_EUREX_GEX` (siehe Methodischer Vorbehalt) und die",
+     "Sekundärquelle) und die"
+    ]
+   ]
+  },
+  {
+   "name": "H26-19 L05e: READING mit Verdict CONFIRMED (FACT_GEXMETRIX_WALLS_READ)",
+   "expect": "L05",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"verdict\": \"UNVERIFIED\",\n      \"class\": \"READING\"",
+     "\"verdict\": \"CONFIRMED\",\n      \"class\": \"READING\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-20 L05e: unzulässige Klasse „VENDOR“ (FACT_SPOTGAMMA_SPEC)",
+   "expect": "L05",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"id\": \"FACT_SPOTGAMMA_SPEC\",\n      \"verdict\": \"CONFIRMED\",\n      \"class\": \"VENDOR_CLAIM\"",
+     "\"id\": \"FACT_SPOTGAMMA_SPEC\",\n      \"verdict\": \"CONFIRMED\",\n      \"class\": \"VENDOR\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-21 L53f: publisher_checks kind „Prüfung“ (nicht zulässig)",
+   "expect": "L53",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"kind\": \"Abgleich\"",
+     "\"kind\": \"Prüfung\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-22 L53f: Abgleich vom 2026-10-11 als „Erstellung“ geführt, Quellenverzeichnis „abgeglichen 2026-10-11“ ohne Abgleich-Eintrag",
+   "expect": "L53",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"kind\": \"Abgleich\"",
+     "\"kind\": \"Erstellung\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-23 NONE: Gegenstand und Frequenz sauber getrennt (subject Eurex/ODAX/OESX/nur SPX, frequency_subject EOD)",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\",",
+     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX\", \"frequency_subject\": \"\\\\bEOD\\\\b\","
+    ]
+   ]
+  },
+  {
+   "name": "H26-24 NONE: Gegenstandszeile umbenannt („Eurex-GEX innerhalb des Handelstags“), Markierung und Bewertung unverändert",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX intraday</td>",
+     "<tr data-quantor-row=\"FACT_NO_EUREX_GEX\"><td>Eurex-GEX innerhalb des Handelstags</td>"
+    ]
+   ]
+  },
+  {
+   "name": "H26-25 NONE: Offen-Punkt mit Badge auf der Seite und gleicher Punkt in der Analyse",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "<li data-gate=\"C5\" data-open>",
+     "<li data-gate=\"Q4\" data-open>Belegstufe der Bildschirmkopie durch den Herausgeber bestätigen lassen <span class=\"dbom-class-badge\">ABGELEITET</span></li>\n        <li data-gate=\"C5\" data-open>"
+    ],
+    [
+     "analysen/m300-atas-options-xray-deep-dive.md",
+     "- Löschung des alten Commits 6465f29",
+     "- Belegstufe der Bildschirmkopie durch den Herausgeber bestätigen lassen ABGELEITET\n- Löschung des alten Commits 6465f29"
+    ]
+   ]
+  },
+  {
+   "name": "H26-26 NONE: exception_label der Momentaufnahme sinnvoll gekürzt („Metrix“, steht im Claim)",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \"GEX-Metrix\"",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \"Metrix\""
+    ]
+   ]
+  },
+  {
+   "name": "H26-27 NONE: Datenherkunft umformuliert, Quantor bleibt genannt",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "m300.html",
+     "(an ihrer Sekundärquelle), den abgeleiteten Quantor (aus Herstellerangaben zu Options X-Ray und Options Chain Suite) und das GEX-Metrix",
+     "(an ihrer Sekundärquelle), den aus Herstellerangaben zu Options X-Ray und Options Chain Suite abgeleiteten Quantor und das GEX-Metrix"
+    ]
+   ]
+  },
+  {
+   "name": "H26-28 NONE: publisher_checks-Umfang des Abgleichs umformuliert, kind und Datum unverändert",
+   "expect": "NONE",
+   "sync": false,
+   "edits": [
+    [
+     "provenance/m300.dbom.json",
+     "\"scope\": \"Abgleich der Belege zum Stichtag am Original bzw. an der Sekundärquelle\"",
+     "\"scope\": \"Abgleich aller Belege zum Stichtag am Original, bei Medienangaben an der Sekundärquelle\""
+    ]
+   ]
+  }
+ ]
+}
