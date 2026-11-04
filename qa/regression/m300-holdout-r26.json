@@ -33,8 +33,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\",",
-     "\"subject\": \"Eurex|\\\\bnur SPX|deckt .* ab\", \"frequency_subject\": \"\\\\bEOD\\\\b\","
+     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX\",",
+     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX|deckt .* ab\","
     ]
    ]
   },
@@ -45,8 +45,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\",",
-     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\", \"frequency_subject\": \"\\\\bEOD\\\\b\","
+     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX\",",
+     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX|\\\\bEOD\\\\b\","
     ]
    ]
   },
@@ -57,8 +57,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\",",
-     "\"subject\": \"Eurex|\\\\bnur SPX|Abdeckung SPX\", \"frequency_subject\": \"\\\\bEOD\\\\b\","
+     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX\",",
+     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX|Abdeckung SPX\","
     ],
     [
      "provenance/m300.dbom.json",
@@ -181,7 +181,9 @@
      "<li data-gate=\"C5\" data-open>",
      "<li data-gate=\"Q4\" data-open>Belegstufe der Bildschirmkopie durch den Herausgeber bestätigen lassen <span class=\"dbom-class-badge\">ABGELEITET</span></li>\n        <li data-gate=\"C5\" data-open>"
     ]
-   ]
+   ],
+   "nosync": true,
+   "note": "nosync nach Absicht des Holdout-Autors („Analyse nicht nachziehen“); der Regressionslauf synchronisiert sonst automatisch (L80b-Anpassung, Erwartung unverändert)"
   },
   {
    "name": "H26-14 L34b: Badge in bestehenden Offen-Punkt A11 eingefügt, Analyse nicht nachgezogen",
@@ -193,7 +195,9 @@
      "bis eine Quelle vorliegt</li>",
      "bis eine Quelle vorliegt <span class=\"dbom-class-badge\">N. V.</span></li>"
     ]
-   ]
+   ],
+   "nosync": true,
+   "note": "nosync nach Absicht des Holdout-Autors („Analyse nicht nachziehen“); der Regressionslauf synchronisiert sonst automatisch (L80b-Anpassung, Erwartung unverändert)"
   },
   {
    "name": "H26-15 L82j: exception_label „.“ am Quantor, Datenherkunft ohne Quantor",
@@ -202,8 +206,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"exception_label\": \"Quantor\"",
-     "\"exception_label\": \".\""
+     "\"exception_label\": [\n        \"Quantor\"\n      ]",
+     "\"exception_label\": [\n        \".\"\n      ]"
     ],
     [
      "m300.html",
@@ -219,8 +223,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"exception_label\": \"Quantor\"",
-     "\"exception_label\": \"Gesetzestexte\""
+     "\"exception_label\": [\n        \"Quantor\"\n      ]",
+     "\"exception_label\": [\n        \"Gesetzestexte\"\n      ]"
     ],
     [
      "m300.html",
@@ -236,13 +240,13 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \"GEX-Metrix\"",
-     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \".*\""
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": [\n        \"GEX-Metrix\"\n      ]",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": [\n        \".*\"\n      ]"
     ],
     [
      "provenance/m300.dbom.json",
-     "\"after_stichtag\": \"Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \"GEX-Metrix\"",
-     "\"after_stichtag\": \"Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \".*\""
+     "\"after_stichtag\": \"Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": [\n        \"GEX-Metrix\"\n      ]",
+     "\"after_stichtag\": \"Berechnet aus der Momentaufnahme FACT_GEXMETRIX_SPX vom 2026-10-23; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": [\n        \".*\"\n      ]"
     ],
     [
      "m300.html",
@@ -258,8 +262,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"exception_label\": \"Quantor\"",
-     "\"exception_label\": \"Quantor|a\""
+     "\"exception_label\": [\n        \"Quantor\"\n      ]",
+     "\"exception_label\": [\n        \"Quantor|a\"\n      ]"
     ],
     [
      "analysen/m300-atas-options-xray-deep-dive.md",
@@ -314,7 +318,9 @@
      "\"kind\": \"Abgleich\"",
      "\"kind\": \"Erstellung\""
     ]
-   ]
+   ],
+   "nosync": true,
+   "note": "nosync nach Absicht des Holdout-Autors („Analyse nicht nachziehen“); der Regressionslauf synchronisiert sonst automatisch (L80b-Anpassung, Erwartung unverändert)"
   },
   {
    "name": "H26-23 NONE: Gegenstand und Frequenz sauber getrennt (subject Eurex/ODAX/OESX/nur SPX, frequency_subject EOD)",
@@ -323,8 +329,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"subject\": \"Eurex|\\\\bnur SPX|\\\\bEOD\\\\b\",",
-     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX\", \"frequency_subject\": \"\\\\bEOD\\\\b\","
+     "\"subject\": \"Eurex|ODAX|OESX|\\\\bnur SPX\",",
+     "\"subject\": \"Eurex|OESX|ODAX|\\\\bnur SPX\","
     ]
    ]
   },
@@ -364,8 +370,8 @@
    "edits": [
     [
      "provenance/m300.dbom.json",
-     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \"GEX-Metrix\"",
-     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": \"Metrix\""
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": [\n        \"GEX-Metrix\"\n      ]",
+     "\"after_stichtag\": \"Vom Herausgeber am 2026-10-23 bereitgestellte Momentaufnahme als Fallbeispiel; die übrigen Fakten bleiben auf dem Stichtag.\",\n      \"exception_label\": [\n        \"Metrix\"\n      ]"
     ]
    ]
   },
