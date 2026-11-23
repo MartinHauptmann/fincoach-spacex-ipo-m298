@@ -1,3 +1,13 @@
+> # ⛔ UMGEZOGEN — Stand 2026-11-23
+>
+> Die Arbeit an **ATAS Options X-Ray** (hier Codename **M300**, v1.23.0) liegt jetzt im produktiven Repo
+> `MartinHauptmann/fincoach-ai` als **M525** (`modul-m525-atas-options-xray.html`), samt Prüfsystem (`qa/`,
+> Skill `fincoach-module-qa`, Agent `fincoach-qa-reviewer`). Umzug mit `qa/umzug_nach_fincoach.py`.
+> **Hier nicht weiterarbeiten.** Neue Sitzungen mit `fincoach-ai` als Repository starten.
+> Dieses Repo ist seit 2026-10-23 stillgelegt (README auf `main`) und soll archiviert werden.
+
+---
+
 # SpaceX — Der Weg zum Billionen-IPO · Publishing-Paket (Modul M298)
 
 Eigenständig deploybare, statische Website (FinCoach AI · TheNextGenerationBanking) zur kritischen
